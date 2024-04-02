@@ -1,0 +1,173 @@
+# Last amended: 1st April, 2024
+# Installing privateGPT on ubuntu 22.04
+# It works with a Gui
+# Ref: https://docs.privategpt.dev/installation/getting-started/installation
+#      https://github.com/PromptEngineer48/Ollama/tree/main/2-ollama-privateGPT-chat-with-docs
+
+# 0.0 Install Anaconda, if not installed
+
+# 0.1 Syntax to remove conda env -- myenv
+
+        conda remove --name langchain --all
+
+# 0.2 Install on ubuntu plocate to use 'locate'
+#     command to search files:
+
+sudo apt install plocate
+
+# 1. Create environment and 
+#     setup necessary packages:
+#      Open Anaocnda prompt as 'Administrator'
+#       and run the following commands, step-by-step:
+#        privatGPT requiires python=3.11
+
+# 1.0.1 Add a download channel:
+conda config --add channels conda-forge
+
+# 1.0.2 Create conda environment:
+conda create --name langchain python=3.11
+conda activate langchain
+conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
+
+
+# 1.0.3 Install git, as:
+sudo apt update
+sudo apt-get install git
+# OR as:
+(See https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+sudo apt update
+sudo apt install git-all
+
+# 1.0.4 Install curl:
+sudo apt update
+sudo apt install curl
+
+
+# 2.0 Clone privateGPT
+#     We will clone it in our home folder:
+
+cd ~/
+git clone https://github.com/imartinez/privateGPT
+cd privateGPT
+
+# 2.0.1. From now onwards we must work in the new conda env
+#         Activate conda environment langchain
+#          and also cd to folder privateGPT:
+#           cd ~/privateGPT
+
+# 2.0.2. Install poetry:
+#	 poetry is a more modern way to install python libraries
+#	 and its dependencies. It is more effective than conda or pip
+# 	 https://python-poetry.org/docs/#installing-with-the-official-installer
+#        Also see:
+#	actcorp.com/blog/Deep-Learning/managing-python-dependencies-with-poetry-vs-conda-pip
+
+curl -sSL https://install.python-poetry.org | python3 -
+
+# 2.0.3 Add poetry path to ~/.bashrc file:
+
+export PATH="/home/ashok/.local/bin:$PATH"
+
+# 3.0 Close and reopen terminal:
+
+conda activate langchain
+cd privateGPT
+
+# 3.0.1 Check poetry is installed:
+poetry --version
+
+
+# 3.0.2 Install 'make':
+#	'make' generally comes installed with ubuntu 22.04
+#	IF not, install it as:
+
+sudo apt-get install build-essential
+
+# 4.0 Install ollama:
+#     See https://ollama.com/download :
+
+curl -fsSL https://ollama.com/install.sh | sh
+
+# 4.0.1 Install the models to be used, the default settings-ollama.yaml
+#       is configured to user mistral 7b LLM (~4GB) and nomic-embed-text Embeddings (~275MB).
+#       In privateGPT, ollama configuration file is: ~/privateGPT/settings-ollama.yaml
+
+# 4.0.2 Issue following commands to download mistral and nomic-embed-text:
+#        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
+
+ollama pull mistral
+ollama pull nomic-embed-text
+
+# 4.0.2.1 You can also specify the number of parameters.
+#	   Pull ollama:13b model, as:
+
+ollama pull llama2:13b
+
+# And run it as:
+
+ollama run llama2:13b
+
+# 4.0.2.2 Just entering the following command will pull a 7b model and then run
+#         but not the already existing 13b model:
+
+ollama run llama2
+
+
+# 4.0.3 You can test ollama, as:
+
+ollama run mistral
+
+# 4.0.4 On terminal, write a question to get an answer.
+
+
+# 5.0    On reboot ollama starts by itself. The following command is NOT NEEEDED:
+#	 It is also very difficult to kill olama process (even by kill -9). After
+#	 killing another ollama process starts.
+
+#        ollama serve
+
+# 5.0.1 On restart, issue again the following commands:
+
+	a. conda activate langchain
+        b. cd ~/privateGPT
+
+
+# 6.0. Install software using poetry:
+
+conda activate langchain
+cd ~/privateGPT
+poetry install --extras "ui llms-ollama embeddings-ollama vector-stores-qdrant"
+
+
+# 6.0.1 Install tensorflow:
+
+pip install tensorflow
+
+# 6.0.2 You may have to also make following change to ~/privateGPT/settings.yaml file
+#       If there is an error, see here:
+#       https://github.com/zylon-ai/private-gpt/issues/1334#issuecomment-1847997849
+#       https://docs.privategpt.dev/manual/storage/vector-stores#chroma-configuration
+#       Go to settings.yaml and change
+
+	vectorstore: database: qdrant
+	to
+	vectorstore: database: chroma
+
+#     And rebooot/restart privateGPT as follows:
+
+conda activate langchain
+cd privateGPT
+
+PGPT_PROFILES=ollama make run
+
+# 6.1 The UI will be available at http://localhost:8001
+
+
+############ DONE #################
+
+## What is poetry?
+See this reference: https://www.exx
+
+
+
+
