@@ -1,4 +1,4 @@
-# Last amended: 1st April, 2024
+# Last amended: 4th April, 2024
 # Installing privateGPT on ubuntu 22.04
 # It works with a Gui
 # Ref: https://docs.privategpt.dev/installation/getting-started/installation
@@ -11,9 +11,11 @@
         conda remove --name langchain --all
 
 # 0.2 Install on ubuntu plocate to use 'locate'
-#     command to search files:
+#     command to search files and net-tools for ifconfig:
 
 sudo apt install plocate
+sudo apt install net-tools
+
 
 # 1. Create environment and 
 #     setup necessary packages:
@@ -155,12 +157,105 @@ pip install tensorflow
 
 #     And rebooot/restart privateGPT as follows:
 
+######################################################
+############### START privateGPT as ##################
+######################################################
+
 conda activate langchain
 cd privateGPT
 
 PGPT_PROFILES=ollama make run
 
 # 6.1 The UI will be available at http://localhost:8001
+
+##################################
+########## GPU usage #############
+##################################
+
+# Use of GPU?
+# Upload a big pdf file. Run command: nvidia-smi
+#			 Under GPU-Util one finds GPU utilization
+#			 increasing from 0% to 33% here.
+
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
+| N/A   47C    P5    13W /  N/A |    817MiB /  6044MiB |     33%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A      1125      C   /usr/local/bin/ollama              61MiB |
+|    0   N/A  N/A      1527      G   /usr/lib/xorg/Xorg                483MiB |
+|    0   N/A  N/A      1742      G   /usr/bin/gnome-shell               94MiB |
+|    0   N/A  N/A     32520      G   ...6/usr/lib/firefox/firefox      172MiB |
++-----------------------------------------------------------------------------+
+
+## 30%
+
+(base) ashok@ashok:~$ nvidia-smi
+Thu Apr  4 03:17:50 2024       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
+| N/A   62C    P2    49W /  N/A |   1277MiB /  6044MiB |     30%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A      1125      C   /usr/local/bin/ollama             483MiB |
+|    0   N/A  N/A      1527      G   /usr/lib/xorg/Xorg                521MiB |
+|    0   N/A  N/A      1742      G   /usr/bin/gnome-shell               94MiB |
+|    0   N/A  N/A     32520      G   ...6/usr/lib/firefox/firefox      172MiB |
++-----------------------------------------------------------------------------+
+
+
+## 52%
+
+(base) ashok@ashok:~$ nvidia-smi
+Thu Apr  4 03:18:49 2024       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
+| N/A   64C    P2    58W /  N/A |   1279MiB /  6044MiB |     52%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A      1125      C   /usr/local/bin/ollama             483MiB |
+|    0   N/A  N/A      1527      G   /usr/lib/xorg/Xorg                523MiB |
+|    0   N/A  N/A      1742      G   /usr/bin/gnome-shell               94MiB |
+|    0   N/A  N/A     32520      G   ...6/usr/lib/firefox/firefox      172MiB |
++-----------------------------------------------------------------------------+
+
+
 
 
 ############ DONE #################
