@@ -157,16 +157,82 @@ pip install tensorflow
 
 #     And rebooot/restart privateGPT as follows:
 
+
+
+
 ######################################################
 ############### START privateGPT as ##################
 ######################################################
+
+# 6.1 Start privategpt:
 
 conda activate langchain
 cd privateGPT
 
 PGPT_PROFILES=ollama make run
 
-# 6.1 The UI will be available at http://localhost:8001
+
+# 6.1.1 The UI will be available at http://localhost:8001
+
+
+DONE----- DONE---
+
+# 6.1.2 What is 'make' command?
+# 	'make' command runs commands as mentioned in the following file: 
+
+	/home/ashok/privateGPT/Makefile
+
+
+# 6.1.3 For example 'make run' will, in the background, 
+#	execute the following command:
+
+	poetry run python -m private_gpt	
+
+
+
+######################################################
+############### Install Visual Studo Code ############
+######################################################
+
+
+# 7,0   Install Visual Studio Code as:
+#	Download .deb file from:
+#	https://code.visualstudio.com/docs/setup/linux
+#	Then install it using Software Install of ubuntu
+#	OR, as:
+#		cd Downloads
+#		sudo apt install ./code_1.87.2-1709912201_amd64.deb
+#
+#	Then open it in terminal as: code
+#       Visual Studio Code can be used to open
+#	READEME.md in folder ~/privateGPT
+#	You can add python and Markdown extensions for it.
+#
+
+
+
+##################################
+########## NVIDIA driver##########
+############# Problems ################
+##################################
+
+# 8.0
+	It is possible that after privateGPT installs CUDA
+	Or you have installed CUDA, then mutiple NVIDIA
+	drivers (not one) could be installed. It is also
+	possible that when you reboot Ubuntu, screen resolution
+	changes rather increases ao that everything is very small.
+	Then, in Ubuntu search and open Software & Updates--> Resources (tab)
+	Select that minimum driver for your purposes. For example, for CUDA 11.4
+	driver version 470 is OK. Higher versions, even though available,
+	create problems. It is trial-and-error. Select a driver and 
+	reboot to see if it is OK.
+	
+	Min driver needed?
+		See this link for CUDA version and min driver needed:
+		https://docs.nvidia.com/deploy/cuda-compatibility/index.html
+		OR,
+		https://docs.nvidia.com/deploy/cuda-compatibility/index.html#minor-version-compatibility
 
 ##################################
 ########## Ingestion #############
@@ -175,7 +241,7 @@ PGPT_PROFILES=ollama make run
 ##################################
 
 
-#1.0 Upload a big pdf file:
+#9.1 Upload a big pdf file:
 #			Run in a separate terminal command:
 #
 #				 nvidia-smi
@@ -183,16 +249,16 @@ PGPT_PROFILES=ollama make run
 # 			Under GPU-Util one finds GPU utilization
 #			increasing from 0% to 33% or some other percentage.
 
-# 1.1 Multiple pdf files upload:
+# 9.2 Multiple pdf files upload:
 #			Multiple pdf files can be uploaded at the same time.
 			But GPU usage increases.
 #
-# 1.2 Observe Ingestion process: 
+# 9.3 Observe Ingestion process: 
 #			After uploading file(s) look at the command shell to 
 #			observe the ingestion process
 #						
 #
-# 1,3 Ingestion from command line:
+# 9.4 Ingestion from command line:
 #			Ingestion presently gives problems if the following command
 #			is used:
 				make ingest /home/ashok/pdfFiles
@@ -201,6 +267,22 @@ PGPT_PROFILES=ollama make run
 #			manner--first one then second then one again then second again...
 #
 #
+# 9.5 File docstore.json in folder local_data/private_gpt contains digested details
+#	of indested pdf files. Its a large file. See it as:
+#
+#		cat docstore.json | more
+#
+#    There is also an sqlite datastore in folder: privateGPT/local_data/private_gpt/collection/make_this_parameterizable_per_api_call/storage.sqlite
+#	You can copy it to /home/ashok folder and see its contents, as follows:
+#		a. Install sqlite3:  sudo apt install sqlite3
+#		b. Open it: sqlite3 storage.sqlite 
+#		c. Check tables: sqlite> .tables
+#		d. sqlite> select * from points;   # This is the only table in it.
+#		(Refer: StackOverflow: https://stackoverflow.com/a/55105501
+
+
+# 9.6 Screenshots of nvidia-smi commands:
+
 				
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
