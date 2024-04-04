@@ -1,8 +1,14 @@
-# Last amended: 4th April, 2024
+# Last amended: 05th April, 2024
 # Installing privateGPT on ubuntu 22.04
-# It works with a Gui
+# It works with a GUI
 # Ref: https://docs.privategpt.dev/installation/getting-started/installation
 #      https://github.com/PromptEngineer48/Ollama/tree/main/2-ollama-privateGPT-chat-with-docs
+
+
+######################################################
+############### AA. INSTALL privateGPT ###############
+######################################################
+
 
 # 0.0 Install Anaconda, if not installed
 
@@ -25,6 +31,7 @@ sudo apt install net-tools
 
 # 1.0.1 Add a download channel:
 conda config --add channels conda-forge
+
 
 # 1.0.2 Create conda environment:
 conda create --name langchain python=3.11
@@ -161,7 +168,7 @@ pip install tensorflow
 
 
 ######################################################
-############### START privateGPT as ##################
+############### BB. START privateGPT as ##############
 ######################################################
 
 # 6.1 Start privategpt:
@@ -169,7 +176,15 @@ pip install tensorflow
 conda activate langchain
 cd privateGPT
 
+# 6.2 Invoke 'ollama' profile as mentioned in file: settings-ollama.yaml
+#     https://docs.privategpt.dev/manual/general-configuration/configuration
+
 PGPT_PROFILES=ollama make run
+
+# 6.2.1 You can also run the above as:
+
+export PGPT_PROFILES=ollama
+make run
 
 
 # 6.1.1 The UI will be available at http://localhost:8001
@@ -191,7 +206,7 @@ DONE----- DONE---
 
 
 ######################################################
-############### Install Visual Studo Code ############
+############### CC. Install Visual Studo Code ########
 ######################################################
 
 
@@ -211,10 +226,10 @@ DONE----- DONE---
 
 
 
-##################################
-########## NVIDIA driver##########
-############# Problems ################
-##################################
+######################################
+########## DD. NVIDIA driver ##########
+############### Problems ##############
+#######################################
 
 # 8.0
 	It is possible that after privateGPT installs CUDA
@@ -234,11 +249,11 @@ DONE----- DONE---
 		OR,
 		https://docs.nvidia.com/deploy/cuda-compatibility/index.html#minor-version-compatibility
 
-##################################
-########## Ingestion #############
-############# AND ################
-########## GPU Usage #############
-##################################
+#####################################
+########## EE. Ingestion ############
+################ AND ################
+############# GPU Usage #############
+#####################################
 
 
 #9.1 Upload a big pdf file:
@@ -364,11 +379,86 @@ Thu Apr  4 03:18:49 2024
 
 
 
+#####################################
+############# FF. About #############
+###############  Profiles ###########
+#####################################
+
+Ref: https://docs.privategpt.dev/manual/general-configuration/configuration#environment-variable-pgpt_profiles
+
+Environment variable PGPT_PROFILES
+-----------------------------------
+	By default, the profile definition in 'settings.yaml' is loaded.
+	Using this env var you can load additional profiles; format is
+	a comma separated list of profile names. This will merge
+	settings-{profile}.yaml on top of the base settings file.
+
+	For example: PGPT_PROFILES=local,cuda will load settings-local.yaml
+	and settings-cuda.yaml, their contents will be merged with later 
+	profiles properties overriding values of earlier ones like settings.yaml.
+
+	During testing, the test profile will be active along with the default,
+	therefore settings-test.yaml file is required.
+
+
+
+#####################################
+############# GG. About #############
+############# User Interface ########
+#####################################
+Ref: https://docs.privategpt.dev/manual/user-interface/user-interface-gradio-manual
+
+----------------
+Execution Modes
+----------------
+
+	It has 3 modes of execution (you can select in the top-left):
+
+	    Query Docs: uses the context from the ingested documents to
+	    		answer the questions posted in the chat. It also
+	    		takes into account previous chat messages as context.
+	            	Makes use of /chat/completions API with use_context=true and no context_filter.
+	            	
+	 Search in Docs: fast search that returns the 4 most related text chunks,
+	 		 together with their source document and page.
+        		 Makes use of /chunks API with no context_filter, limit=4 and prev_next_chunks=0.
+        		 
+	  	LLM Chat: simple, non-contextual chat with the LLM. The ingested
+	  		  documents won’t be taken into account, only the previous messages.
+        		  Makes use of /chat/completions API with use_context=false
+
+------------------------
+System Prompt Examples:
+-------------------------
+
+	The system prompt can effectively provide your chat bot specialized roles,
+	and results tailored to the prompt you have given the model. Examples of 
+	system prompts can be be found here
+	https://www.w3schools.com/gen_ai/chatgpt-3-5/chatgpt-3-5_roles.php
+
+	Some interesting examples to try include:
+
+    		You are -X-. You have all the knowledge and personality of -X-. Answer
+    		as if you were -X- using their manner of speaking and vocabulary.
+        
+        	Example: You are Shakespeare. You have all the knowledge and personality
+        		 of Shakespeare. Answer as if you were Shakespeare using their manner
+        		 of speaking and vocabulary.
+
+			You are an expert (at) -role-. Answer all questions using your expertise
+			on -specific domain topic-.
+
+        	Example: You are an expert software engineer. Answer all questions using your 
+        		 expertise on Python.
+
+			You are a -role- bot, respond with -response criteria needed-. If 
+			no -response criteria- is needed, respond with -alternate response-.
+			
+        	Example: You are a grammar checking bot, respond with any grammatical corrections
+        		 needed. If no corrections are needed, respond with “verified”.
+
 
 ############ DONE #################
-
-## What is poetry?
-See this reference: https://www.exx
 
 
 
