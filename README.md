@@ -44,10 +44,10 @@
 
 ## LLMs_IV
 >1.Self-supervised learning
->>Why self-supervised learning
->>>Distortion
->>>Rotation
->>>Patches
+>>Why self-supervised learning   
+>>>Distortion    
+>>>Rotation    
+>>>Patches    
 
     
 
