@@ -36,10 +36,10 @@
 >1.A list/collection of open source and/or local AI tools and solutions.    
 >2.Byte Pair Encoding    
 >3.What is Ollama?    
->> Models supported
->> Where are ollama models stored?
->4.What is ollama-index
->> Why LlamaIndex for Context Augmentation?
->5.Nomic Text Embeddings
+>> Models supported    
+>> Where are ollama models stored?    
+>4.What is ollama-index    
+>> Why LlamaIndex for Context Augmentation?    
+>5.Nomic Text Embeddings    
 
 
