@@ -19,3 +19,15 @@
 >17. Why GGUF format?
 >18. Complete chatbot cycle?
 >Notebooks and other material on LLMs
+
+## LLMs_II
+>1. NLP Moore's Law
+>2. Resources
+>3. Prompt Engineering
+>> Six strategies for getting better results
+>> Chain of thought
+>> Example of complete prompt
+>>What is Zero-Shot Chain-of-Thought prompting?
+>4. Prompts for general coding workflows
+>5.What is RAG
+
