@@ -169,14 +169,39 @@ PGPT_PROFILES=ollama make run
 # 6.1 The UI will be available at http://localhost:8001
 
 ##################################
-########## GPU usage #############
+########## Ingestion #############
+############# AND ################
+########## GPU Usage #############
 ##################################
 
-# Use of GPU?
-# Upload a big pdf file. Run command: nvidia-smi
-#			 Under GPU-Util one finds GPU utilization
-#			 increasing from 0% to 33% here.
 
+#1.0 Upload a big pdf file:
+#			Run in a separate terminal command:
+#
+#				 nvidia-smi
+#
+# 			Under GPU-Util one finds GPU utilization
+#			increasing from 0% to 33% or some other percentage.
+
+# 1.1 Multiple pdf files upload:
+#			Multiple pdf files can be uploaded at the same time.
+			But GPU usage increases.
+#
+# 1.2 Observe Ingestion process: 
+#			After uploading file(s) look at the command shell to 
+#			observe the ingestion process
+#						
+#
+# 1,3 Ingestion from command line:
+#			Ingestion presently gives problems if the following command
+#			is used:
+				make ingest /home/ashok/pdfFiles
+
+#			It goes on asking for installation of dependencies in a circular
+#			manner--first one then second then one again then second again...
+#
+#
+				
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
 |-------------------------------+----------------------+----------------------+
@@ -262,6 +287,8 @@ Thu Apr  4 03:18:49 2024
 
 ## What is poetry?
 See this reference: https://www.exx
+
+
 
 
 
