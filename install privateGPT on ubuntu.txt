@@ -433,7 +433,7 @@ System Prompt Examples:
 
 	The system prompt can effectively provide your chat bot specialized roles,
 	and results tailored to the prompt you have given the model. Examples of 
-	system prompts can be be found here
+	system prompts can be be found here: ChatGPT-3.5 Roles:
 	https://www.w3schools.com/gen_ai/chatgpt-3-5/chatgpt-3-5_roles.php
 
 	Some interesting examples to try include:
