@@ -27,7 +27,8 @@
 > > Six strategies for getting better results   
 >> Chain of thought   
 >> Example of complete prompt   
->>What is Zero-Shot Chain-of-Thought prompting?   
+>>What is Zero-Shot Chain-of-Thought prompting?
+ 
 >4.Prompts for general coding workflows      
 >5.What is RAG    
 
