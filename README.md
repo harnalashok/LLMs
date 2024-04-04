@@ -28,6 +28,6 @@
 >> Chain of thought   
 >> Example of complete prompt   
 >>What is Zero-Shot Chain-of-Thought prompting?   
->4. Prompts for general coding workflows    
+>4.Prompts for general coding workflows      
 >5.What is RAG    
 
