@@ -24,7 +24,7 @@
 >1. NLP Moore's Law
 >2. Resources
 >3. Prompt Engineering
->> Six strategies for getting better results   
+> > Six strategies for getting better results   
 >> Chain of thought   
 >> Example of complete prompt   
 >>What is Zero-Shot Chain-of-Thought prompting?   
