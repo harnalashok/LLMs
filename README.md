@@ -30,5 +30,16 @@
 >>What is Zero-Shot Chain-of-Thought prompting?
  
 >4.Prompts for general coding workflows      
->5.What is RAG    
+>5.What is RAG
+
+## LLMs__III
+>1.A list/collection of open source and/or local AI tools and solutions.    
+>2.Byte Pair Encoding    
+>3.What is Ollama?    
+>> Models supported
+>> Where are ollama models stored?
+>4.What is ollama-index
+>> Why LlamaIndex for Context Augmentation?
+>5.Nomic Text Embeddings
+
 
