@@ -24,10 +24,10 @@
 >1. NLP Moore's Law
 >2. Resources
 >3. Prompt Engineering
->> Six strategies for getting better results
->> Chain of thought
->> Example of complete prompt
->>What is Zero-Shot Chain-of-Thought prompting?
->4. Prompts for general coding workflows
->5.What is RAG
+>> Six strategies for getting better results   
+>> Chain of thought   
+>> Example of complete prompt   
+>>What is Zero-Shot Chain-of-Thought prompting?   
+>4. Prompts for general coding workflows    
+>5.What is RAG    
 
