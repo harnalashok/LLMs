@@ -39,7 +39,26 @@ conda activate langchain
 conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
 
 
-# 1.0.3 Install git, as:
+######################################################
+############### AA.2 INSTALL CUDA ####################
+############# AND Appropriate driver #################
+######################################################
+
+# 2.0 Install CUDA as in this video. Installation depends upon
+#	which GPU is available. For GPU 1060 or 730 install
+#	 CUDA 11.4
+
+# 2.0.1 See this link for guidance
+# https://github.com/harnalashok/LLMs/blob/main/gpu_nvidia.ipynb
+#
+
+
+######################################################
+############### AA.3 Remaining installations #########
+######################################################
+
+
+# 3.0.1 Install git, as:
 sudo apt update
 sudo apt-get install git
 # OR as:
@@ -47,24 +66,25 @@ sudo apt-get install git
 sudo apt update
 sudo apt install git-all
 
-# 1.0.4 Install curl:
+# 3.0.2 Install curl:
 sudo apt update
 sudo apt install curl
 
 
-# 2.0 Clone privateGPT
+# 3.0.3 Clone privateGPT
 #     We will clone it in our home folder:
 
 cd ~/
 git clone https://github.com/imartinez/privateGPT
 cd privateGPT
 
-# 2.0.1. From now onwards we must work in the new conda env
+
+# 3.0.4. From now onwards we must work in the new conda env
 #         Activate conda environment langchain
 #          and also cd to folder privateGPT:
 #           cd ~/privateGPT
 
-# 2.0.2. Install poetry:
+# 3.0.5. Install poetry:
 #	 poetry is a more modern way to install python libraries
 #	 and its dependencies. It is more effective than conda or pip
 # 	 https://python-poetry.org/docs/#installing-with-the-official-installer
@@ -73,27 +93,27 @@ cd privateGPT
 
 curl -sSL https://install.python-poetry.org | python3 -
 
-# 2.0.3 Add poetry path to ~/.bashrc file:
+# 3.0.6 Add poetry path to ~/.bashrc file:
 
 export PATH="/home/ashok/.local/bin:$PATH"
 
-# 3.0 Close and reopen terminal:
+# 3.0.7 Close and reopen terminal:
 
 conda activate langchain
 cd privateGPT
 
-# 3.0.1 Check poetry is installed:
+# 3.0.8 Check poetry is installed:
 poetry --version
 
 
-# 3.0.2 Install 'make':
+# 3.0.9 Install 'make':
 #	'make' generally comes installed with ubuntu 22.04
 #	IF not, install it as:
 
 sudo apt-get install build-essential
 
 ######################################################
-############### AA.1 INSTALL ollama ##################
+############### AA.4 INSTALL ollama ##################
 ######################################################
 # 4.0 Install/Uninstall Ollama by following instructions here:
 #     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
@@ -142,6 +162,7 @@ ollama run mistral
 
 
 # 5.0.1 ollama service can be started/restarted/shut, as:
+#	Check as: ps aux | grep ollama
 
 sudo systemctl start/stop ollama
 
@@ -179,9 +200,6 @@ pip install tensorflow
 
 #     And rebooot/restart privateGPT as follows:
 
-
-
-
 ######################################################
 ############### BB. START privateGPT as ##############
 ######################################################
@@ -193,16 +211,17 @@ cd privateGPT
 
 # 6.2 Invoke 'ollama' profile as mentioned in file: settings-ollama.yaml
 #     https://docs.privategpt.dev/manual/general-configuration/configuration
+#	(Two commands in one)
 
 PGPT_PROFILES=ollama make run
 
-# 6.2.1 You can also run the above as:
+# 6.2.1 You can also run the above in two parts as:
 
 export PGPT_PROFILES=ollama
 make run
 
 
-# 6.1.1 The UI will be available at http://localhost:8001
+# 6.1.1 The UI will be available at http://<serverIP>:8001
 
 
 DONE----- DONE---
@@ -215,6 +234,8 @@ DONE----- DONE---
 
 # 6.1.3 For example 'make run' will, in the background, 
 #	execute the following command:
+#	(Check why by opening the file: as:
+#		nano /home/ashok/privateGPT/Makefile
 
 	poetry run python -m private_gpt	
 
@@ -396,10 +417,10 @@ Thu Apr  4 03:18:49 2024
 
 #####################################
 ############# FF. About #############
-###############  Profiles ###########
+############  Profiles ##############
 #####################################
+# Ref: https://docs.privategpt.dev/manual/general-configuration/configuration#environment-variable-pgpt_profiles
 
-Ref: https://docs.privategpt.dev/manual/general-configuration/configuration#environment-variable-pgpt_profiles
 
 Environment variable PGPT_PROFILES
 -----------------------------------
