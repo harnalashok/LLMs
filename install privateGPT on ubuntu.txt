@@ -152,6 +152,9 @@ ollama run llama2
 ollama run mistral
 
 # 4.0.4 On terminal, write a question to get an answer.
+#       Exit by typing /bye
+
+# 4.0.5 ollama supports GPUs with compute capability of 5.
 
 
 # 5.0    On reboot ollama starts by itself. The following command is NOT NEEEDED:
