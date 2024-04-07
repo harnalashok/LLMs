@@ -173,6 +173,9 @@ sudo systemctl start/stop ollama
 
 	journalctl -u ollama
 
+#      Or to go to the end of logs (ie latest entries):
+
+	journalctl -u ollama  -e
 
 # 5.0.1 On restart, issue again the following commands:
 
