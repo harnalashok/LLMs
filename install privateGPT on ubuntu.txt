@@ -92,14 +92,19 @@ poetry --version
 
 sudo apt-get install build-essential
 
-# 4.0 Install ollama:
-#     See https://ollama.com/download :
+######################################################
+############### AA.1 INSTALL ollama ##################
+######################################################
+# 4.0 Install/Uninstall Ollama by following instructions here:
+#     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
+
+# 4.0.1 Install as::
 
 curl -fsSL https://ollama.com/install.sh | sh
 
-# 4.0.1 Install the models to be used, the default settings-ollama.yaml
-#       is configured to user mistral 7b LLM (~4GB) and nomic-embed-text Embeddings (~275MB).
-#       In privateGPT, ollama configuration file is: ~/privateGPT/settings-ollama.yaml
+#  Install the models to be used, the default settings-ollama.yaml
+#  is configured to user mistral 7b LLM (~4GB) and nomic-embed-text Embeddings (~275MB).
+#  In privateGPT, ollama configuration file is: ~/privateGPT/settings-ollama.yaml
 
 # 4.0.2 Issue following commands to download mistral and nomic-embed-text:
 #        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
@@ -134,6 +139,16 @@ ollama run mistral
 #	 killing another ollama process starts.
 
 #        ollama serve
+
+
+# 5.0.1 ollama service can be started/restarted/shut, as:
+
+sudo systemctl start/stop ollama
+
+# 5.0.2 View ollama logs as:
+
+	journalctl -u ollama
+
 
 # 5.0.1 On restart, issue again the following commands:
 
@@ -456,6 +471,39 @@ System Prompt Examples:
 			
         	Example: You are a grammar checking bot, respond with any grammatical corrections
         		 needed. If no corrections are needed, respond with “verified”.
+        		 
+        		 
+#####################################
+######## HH. poetry problems#########
+#####################################
+
+Installation using poetry may hang. Solutions are
+as below:
+Refer: 	https://github.com/python-poetry/poetry/issues/3352
+	https://github.com/python-poetry/poetry/issues/7235
+
+
+One set of solutions:
+---------------------
+Clean up as follows and then begin install again:
+
+    poetry env remove --all
+    poetry cache clear --all .
+    rm -rf $(poetry config cache-dir)/artifacts
+
+IInd set of solution:
+---------------------
+Issue following command and then begin install:
+
+	export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
+
+
+IIIrd report problems:
+----------------------
+Should you wish to report problems, issue the following command:
+
+	poetry install -vvv        		 
+        		 
 
 
 ############ DONE #################
