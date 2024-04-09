@@ -4,6 +4,25 @@
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
 
 
+What is AnythingLLM
+====================
+
+AnythingLLM is a full-stack application where you can use 
+commercial off-the-shelf LLMs or popular open source LLMs
+and vectorDB solutions to build a private ChatGPT with no
+compromises that you can run locally as well as host remotely
+and be able to chat intelligently with any documents you 
+provide it.
+
+AnythingLLM divides your documents into objects called 
+workspaces. A Workspace functions a lot like a thread, 
+but with the addition of containerization of your documents.
+Workspaces can share documents, but they do not talk to each 
+other so you can keep your context for each workspace clean.
+
+
+
+
 ######################################################
 ############### AA. INSTALL anythingLLM ###############
 ######################################################
