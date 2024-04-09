@@ -250,8 +250,12 @@ pip install tensorflow
 	Restart ollama, as:
 	systemctl daemon-reload
 	systemctl restart ollama
-	It would now be available on network, ie accsible, as:
-	Write Ollama base URL, as:  http://192.240.1.51:11434
+	It would now be available on network, ie accsible.
+	On broswer access http://192.240.1.51:11434. You should
+	get a message that ollama is running.
+	
+	In anythingLLM, Write Ollama base URL, as:
+	http://192.240.1.51:11434
 	(Note that 'http://' is also there. DO NOT FORGET IT)
 
 # 6.5 Remote machine access:
