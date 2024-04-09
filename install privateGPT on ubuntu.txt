@@ -152,10 +152,12 @@ ollama run llama2
 ollama run mistral
 
 # 4.0.4 On terminal, write a question to get an answer.
+#       Exit by typing /bye
+
+# 4.0.5 ollama supports GPUs with compute capability of 5.
 
 
-
-# 4.0.5 Just enter 'ollama' to get ollama help.
+# 4.0.6 Just enter 'ollama' to get ollama help.
 
 Available Commands:
   serve       Start ollama AND also to know ollama port		<===
@@ -168,6 +170,8 @@ Available Commands:
   cp          Copy a model
   rm          Remove a model
   help        Help about any command
+
+
 
 
 
@@ -190,6 +194,9 @@ sudo systemctl start/stop ollama
 
 	journalctl -u ollama
 
+#      Or to go to the end of logs (ie latest entries):
+
+	journalctl -u ollama  -e
 
 # 5.0.1 On restart, issue again the following commands:
 
