@@ -1,4 +1,4 @@
-# Last amended: 05th April, 2024
+# Last amended: 09th April, 2024
 # Installing privateGPT on ubuntu 22.04
 # It works with a GUI
 # Ref: https://docs.privategpt.dev/installation/getting-started/installation
@@ -152,9 +152,25 @@ ollama run llama2
 ollama run mistral
 
 # 4.0.4 On terminal, write a question to get an answer.
-#       Exit by typing /bye
 
-# 4.0.5 ollama supports GPUs with compute capability of 5.
+
+
+# 4.0.5 Just enter 'ollama' to get ollama help.
+
+Available Commands:
+  serve       Start ollama AND also to know ollama port		<===
+  create      Create a model from a Modelfile
+  show        Show information for a model
+  run         Run a model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  list        List models    					<====
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+
+
 
 
 # 5.0    On reboot ollama starts by itself. The following command is NOT NEEEDED:
@@ -173,9 +189,6 @@ sudo systemctl start/stop ollama
 
 	journalctl -u ollama
 
-#      Or to go to the end of logs (ie latest entries):
-
-	journalctl -u ollama  -e
 
 # 5.0.1 On restart, issue again the following commands:
 
