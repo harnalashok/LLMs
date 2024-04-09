@@ -173,6 +173,7 @@ Available Commands:
 
 
 
+
 # 5.0    On reboot ollama starts by itself. The following command is NOT NEEEDED:
 #	 It is also very difficult to kill olama process (even by kill -9). After
 #	 killing another ollama process starts.
