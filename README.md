@@ -31,6 +31,7 @@
  
 >4.Prompts for general coding workflows      
 >5.What is RAG
+>>>What is the difference between Retrieval-Augmented Generation and semantic search?
 
 ## LLMs__III
 >1.A list/collection of open source and/or local AI tools and solutions.    
