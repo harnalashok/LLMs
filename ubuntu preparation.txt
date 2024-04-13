@@ -64,6 +64,7 @@ pip install tensorflow
 #
 
 # 4.0 Syntax to remove conda env -- myenv
+#     ONLY WHEN REQUIRED--BE CAREFUL
 
        conda remove --name langchain --all
 
