@@ -68,6 +68,12 @@ pip install tensorflow
 
        conda remove --name langchain --all
 
+# 4.1 To discover large files, use this command:
+#	Files larger than 1GB:
+#	(StackOverflow: https://askubuntu.com/a/36114 )
+
+ sudo find / -size +1G -ls  > largefiles.txt
+
         
 ######################################
 ########## BB. NVIDIA driver ##########
