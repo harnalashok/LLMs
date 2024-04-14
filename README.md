@@ -48,9 +48,9 @@
 >>Why self-supervised learning   
 >>>Distortion    
 >>>Rotation    
->>>Patches
->2.langchain   
->>Why is langchain important?   
+>>>Patches<br>
+>2.langchain<br>   
+>>Why is langchain important?<br>   
 >>How does langchain work?    
 >>What are core components of langchain?    
 
