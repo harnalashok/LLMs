@@ -49,10 +49,11 @@
 >>>Distortion    
 >>>Rotation    
 >>>Patches<br>
+
 >2.langchain<br>   
 >>Why is langchain important?<br>   
->>How does langchain work?    
->>What are core components of langchain?    
+>>How does langchain work?<br>    
+>>What are core components of langchain?<br>    
 
     
 
