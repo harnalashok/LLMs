@@ -50,9 +50,9 @@
 >>>Rotation    
 >>>Patches<br>
 
->2.langchain<br>   
->>Why is langchain important?<br>   
->>How does langchain work?<br>    
+>2.langchain   
+>>Why is langchain important?     
+>>How does langchain work?    
 >>What are core components of langchain?<br>    
 
     
