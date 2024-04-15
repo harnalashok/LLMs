@@ -55,7 +55,7 @@ conda config --add channels conda-forge
 conda create --name langchain python=3.11
 conda activate langchain
 conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
-
+conda install langchain -c conda-forge
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
