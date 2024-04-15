@@ -1,4 +1,4 @@
-# Last amended: 09th April, 2024
+# Last amended: 15th April, 2024
 # Installing privateGPT on ubuntu 22.04
 # It works with a GUI
 # Ref: https://docs.privategpt.dev/installation/getting-started/installation
