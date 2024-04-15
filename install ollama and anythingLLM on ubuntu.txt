@@ -57,6 +57,7 @@ conda activate langchain
 conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
 conda install langchain -c conda-forge
 conda install anaconda::beautifulsoup4
+ conda install pytorch::faiss-cpu
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
