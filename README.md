@@ -39,7 +39,8 @@
 >3.What is Ollama?    
 >> Models supported by ollama   
 >> Ollama based webUIs    
->> Where are ollama models stored?    
+>> Where are ollama models stored?
+ 
 >4.What is ollama-index    
 >> Why LlamaIndex for Context Augmentation?    
 >5.Nomic Text Embeddings
