@@ -42,7 +42,8 @@
 >> Where are ollama models stored?
  
 >4.What is ollama-index    
->> Why LlamaIndex for Context Augmentation?    
+>> Why LlamaIndex for Context Augmentation?
+
 >5.Nomic Text Embeddings
 
 ## LLMs_IV
