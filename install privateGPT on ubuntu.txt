@@ -1,4 +1,4 @@
-# Last amended: 15th April, 2024
+# Last amended: 21st April, 2024
 # Installing privateGPT on ubuntu 22.04
 # It works with a GUI
 # Ref: https://docs.privategpt.dev/installation/getting-started/installation
@@ -38,8 +38,13 @@ conda create --name langchain python=3.11
 conda activate langchain
 conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
 conda install langchain -c conda-forge
+conda install pytorch::faiss-cpu
 conda install anaconda::beautifulsoup4
 conda install conda-forge::pypdf
+conda install conda-forge::transformers
+conda install fastai::accelerate
+conda install -c conda-forge huggingface_hub
+
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################

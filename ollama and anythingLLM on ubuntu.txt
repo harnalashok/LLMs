@@ -1,4 +1,4 @@
-# Last amended: 15th April, 2024
+# Last amended: 21st April, 2024
 # Installing anythingLLM with ollama on ubuntu 22.04
 # It works with a GUI
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
@@ -58,6 +58,9 @@ conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
 conda install langchain -c conda-forge
 conda install anaconda::beautifulsoup4
 conda install conda-forge::pypdf
+conda install conda-forge::transformers
+conda install fastai::accelerate
+conda install -c conda-forge huggingface_hub
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
