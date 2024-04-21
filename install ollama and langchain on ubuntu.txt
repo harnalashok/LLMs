@@ -38,6 +38,8 @@ conda install conda-forge::pypdf
 conda install conda-forge::transformers
 conda install fastai::accelerate
 conda install -c conda-forge huggingface_hub
+conda install -c anaconda git
+conda install -c huggingface -c conda-forge datasets
 
 
 
