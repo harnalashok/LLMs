@@ -1,4 +1,8 @@
 # LLMs
+## loginto huggingface howto
+See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20huggingface%20howto.ipynb)
+
+
 ## LLMS_01   
 >1. Note on LLMS
 >2. LLM use cases
