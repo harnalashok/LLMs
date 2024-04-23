@@ -3,7 +3,7 @@
 See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20huggingface%20howto.ipynb)
 
 
-## [LLMS_I   ](https://github.com/harnalashok/LLMs/blob/main/LLMs_I.ipynb)
+## [Basics of LLMS_I   ](https://github.com/harnalashok/LLMs/blob/main/LLMs_I.ipynb)
 >1. Note on LLMS
 >2. LLM use cases
 >3. Proprietary services
@@ -24,7 +24,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >18. Complete chatbot cycle?
 >Notebooks and other material on LLMs
 
-## [LLMs_II](https://github.com/harnalashok/LLMs/blob/main/LLMs_II.ipynb)
+## [Basics of LLMs_II](https://github.com/harnalashok/LLMs/blob/main/LLMs_II.ipynb)
 >1. NLP Moore's Law
 >2. Resources
 >3. Prompt Engineering
@@ -37,7 +37,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >5.What is RAG
 >>What is the difference between Retrieval-Augmented Generation and semantic search?
 
-## [LLMs__III](https://github.com/harnalashok/LLMs/blob/main/LLMs_III.ipynb)
+## [Basics of LLMs__III](https://github.com/harnalashok/LLMs/blob/main/LLMs_III.ipynb)
 >1.A list/collection of open source and/or local AI tools and solutions.    
 >2.Byte Pair Encoding    
 >3.What is Ollama?    
@@ -50,7 +50,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 
 >5.Nomic Text Embeddings
 
-## [LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/LLMs_IV.ipynb)
+## [Basics of LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/LLMs_IV.ipynb)
 >1.Self-supervised learning
 >>Why self-supervised learning   
 >>>Distortion    
