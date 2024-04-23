@@ -1,4 +1,4 @@
-# Last amended: 09th April, 2024
+# Last amended: 21st April, 2024
 # Installing anythingLLM with ollama on ubuntu 22.04
 # It works with a GUI
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
@@ -57,7 +57,12 @@ conda activate langchain
 conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
 conda install langchain -c conda-forge
 conda install anaconda::beautifulsoup4
- conda install pytorch::faiss-cpu
+conda install conda-forge::pypdf
+conda install conda-forge::transformers
+conda install fastai::accelerate
+conda install -c conda-forge huggingface_hub
+conda install -c anaconda git
+conda install -c huggingface -c conda-forge datasets
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
@@ -252,17 +257,10 @@ pip install tensorflow
 	Restart ollama, as:
 	systemctl daemon-reload
 	systemctl restart ollama
-	It would now be available on network, ie accsible.
-	On broswer access http://192.240.1.51:11434. You should
-	get a message that ollama is running.
-	
-	In anythingLLM, Write Ollama base URL, as:
-	http://192.240.1.51:11434
-	(Note that 'http://' is also there. DO NOT FORGET IT)
+	It would now be available on network, ie accsible, as:
+	Write Ollama base URL, as:  http://192.240.1.51:11434
 
-# 6.5 Remote machine access:
-#		When working on remote machines, anythinggLLM app
-#		has to be installed only on remote machine.
+
 
 ######################################
 ########## DD. NVIDIA driver ##########
