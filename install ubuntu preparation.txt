@@ -47,6 +47,15 @@ conda create --name langchain python=3.11
 conda activate langchain
 conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
 conda install langchain -c conda-forge
+conda install anaconda::beautifulsoup4
+conda install pytorch::faiss-cpu
+conda install conda-forge::pypdf
+conda install conda-forge::transformers
+conda install fastai::accelerate
+conda install -c conda-forge huggingface_hub
+conda install -c anaconda git
+conda install -c huggingface -c conda-forge datasets
+conda install conda-forge::openai
 pip install tensorflow
 
 ######################################################
