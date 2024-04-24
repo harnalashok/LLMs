@@ -58,6 +58,8 @@ conda install -c huggingface -c conda-forge datasets
 conda install conda-forge::openai
 conda install conda-forge::streamlit
 pip install tensorflow
+pip install ollama
+
 
 ######################################################
 ############### AA INSTALL CUDA ####################
