@@ -1,3 +1,6 @@
+# Last amended: 24th April, 2024
+# Ref: https://github.com/tonykipkemboi/ollama_streamlit_demos/blob/main/01_%F0%9F%92%AC_Chat.py
+
 import ollama
 import streamlit as st
 from openai import OpenAI
