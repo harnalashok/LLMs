@@ -41,7 +41,8 @@ conda install -c conda-forge huggingface_hub
 conda install -c anaconda git
 conda install -c huggingface -c conda-forge datasets
 conda install conda-forge::openai
-
+conda install conda-forge::streamlit
+pip install tensorflow
 
 
 ######################################################
