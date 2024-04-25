@@ -11,5 +11,18 @@
 			$explorer.exe  .
 			(do not miss the dot)
 	to open explorer window and see files.
+    (Ref: https://superuser.com/q/1185033 )
+4. To install anaconda, get the link of 
+	anaconda linux distribution and type out:
+	
+	$ wget -c <anacondaDownloadLink>
+5. To use jupyter notebook, enter command:
+		$jupyter notebook
+		and access the notebook in browser, as:
+		localhost:8888
+		
+	
+	
+	
 	
 	
