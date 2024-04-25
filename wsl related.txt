@@ -4,4 +4,12 @@
 1. To access Linux folder, open File Explorer
 	of Windows 11. In the address bar type:
 	\\wsl$<ENTER>
+2. Which version of Linux I am having:
+		$lsb_release -a
+		Maybe jammy
+3. In ubuntu bash type:
+			$explorer.exe  .
+			(do not miss the dot)
+	to open explorer window and see files.
+	
 	
