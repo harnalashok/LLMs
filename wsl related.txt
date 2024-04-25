@@ -1,0 +1,7 @@
+# Last amended: 25th April, 2024
+# WSL related
+
+1. To access Linux folder, open File Explorer
+	of Windows 11. In the address bar type:
+	\\wsl$<ENTER>
+	
