@@ -67,6 +67,7 @@ conda install conda-forge::openai
 conda install conda-forge::streamlit
 pip install tensorflow
 pip install ollama
+pip install chromadb
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
@@ -214,11 +215,11 @@ pip install tensorflow
 
 	chmod +x AnythingLLMDesktop.AppImage
 	
-# 6.2 Then execute it, as:
+# 6.1.1 Then execute it, as:
 
 	./AnythingLLMDesktop.AppImage
 
-# 6.2.1 And begin configuring it as:	
+# 6.2  And begin configuring it as:	
 	
 #	a. Click Get Started
 #	b. Select Ollama as LLM Preference
@@ -233,20 +234,50 @@ pip install tensorflow
 	    https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size )
 #	g. In the next screen, select 'AnythingLLMEmbdder'
 #	h. In the next screen select LanceDB
+#		(see below for using chromadb)
 #	i  Click Next again
 #	j. Select 'For education', click Next
 #	h. Give a Workspace name. AnythingLLM can have
 #	i.  multiple workspaces for difft document types.
 #	Done
 
+
+# 6.2.1 USing chromadb vector database:
+#       Ref: https://docs.trychroma.com/usage-guide#running-chroma-in-clientserver-mode
+#
+#	Start chromadb in client/server mode, as:
+#		In Linux:
+#			$conda activate langchain
+#			$chroma run --path /home/ashok/Documents/chroma
+#		In Windows:
+#			>conda activate langchain
+#			>chroma run --path C:\Users\ashok\OneDrive\Documents\chroma
+#		Open browser and check:
+#			http://localhost:8000
+#		You should also have an sqlite3 database in chroma folder.
+#		In anythingLLM, just write the chroma URL, as:
+#			http://localhost:8000 and leav other two fields blank
+#			and save changes. No need to specify API key or token.
+#
+
 # 6.2.2 Have a look at these youtube videos:
 #		1. https://www.youtube.com/watch?v=IJYC6zf86lU
 #		2. https://www.youtube.com/watch?v=NuZ0n0LPZ5E&t=83s
 
-# 6.3 Configuration data of AppImage is within
+
+# 6.3 Configuration data of AppImage in Linux is within
 #	.config folder. Delete from within it 
 #	the folder: 'anythingllm-desktopit'
-#	 to restore AppImage's original state. 		
+#	 to restore AppImage's original state. 	
+
+# 6.3a In Windows, you have to first uninstall anythingLLM and
+#	then delete anythingLLM related files under:
+#
+#		C:\Users\ashok\AppData\Local\Programs
+#   		C:\Users\ashok\AppData\Roaming\anythingllm-desktop\storage
+#
+#	And then reinstall anythingLLM
+	
 
 	    
 # 6,4 Ollama on network. Suppose AnythingLLM app image is
