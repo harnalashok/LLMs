@@ -1,4 +1,4 @@
-# Last amended: 18th April, 2024
+# Last amended: 29th April, 2024
 # Installing ollama on ubuntu 22.04
 # Ref: https://ollama.com/download
 
@@ -50,9 +50,15 @@ ollama run llama2:13b
 ollama run llama2
 
 
-# 2.0.1  You can test ollama, as:
+# 2.0.1  You can also test ollama, as:
 
 ollama run mistral
+
+# 2.0.2 phi3 is blazingly fast LLM from microsoft
+#	Model size is just 2.8gb and it has 3.8B parameters
+
+ollama run phi3
+
 
 # 3.0 On terminal, write a question to get an answer.
 #       Exit by typing /bye
