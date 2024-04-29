@@ -24,7 +24,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >18. Complete chatbot cycle?
 >Notebooks and other material on LLMs
 
-## [Basics of LLMs_II](https://github.com/harnalashok/LLMs/blob/main/LLMs_II.ipynb)
+## [Basics of LLMs_II](https://github.com/harnalashok/LLMs/blob/main/Basics%20of%20LLMs_II.ipynb)
 >1. NLP Moore's Law
 >2. Resources
 >3. Prompt Engineering
