@@ -3,7 +3,7 @@
 See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20huggingface%20howto.ipynb)
 
 
-## [Basics of LLMS_I   ](https://github.com/harnalashok/LLMs/blob/main/LLMs_I.ipynb)
+## [Basics of LLMS_I](https://github.com/harnalashok/LLMs/blob/main/Basics%20of%20LLMs_I.ipynb)
 >1. Note on LLMS
 >2. LLM use cases
 >3. Proprietary services
@@ -50,17 +50,18 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 
 >5.Nomic Text Embeddings
 
-## [Basics of LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/LLMs_IV.ipynb)
->1.Self-supervised learning
+## [Basics of LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/Basics_of_LLMs_IV.ipynb)
 >>Why self-supervised learning   
 >>>Distortion    
 >>>Rotation    
 >>>Patches<br>
 
 >2.langchain   
->>Why is langchain important?     
+>>Why is langchain important?
+>>langchain use cases with example code  
 >>How does langchain work?    
->>What are core components of langchain?<br>    
+>>What are core components of langchain?<br>
+>>LLM Parameters (temperature, top-k etc)   
 
     
 
