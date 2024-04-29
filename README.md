@@ -49,8 +49,8 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >> Why LlamaIndex for Context Augmentation?
 
 >5.Nomic Text Embeddings
->>6.How are LLM models named   
->>7.Types of LLM models
+>6.How are LLM models named   
+>7.Types of LLM models
 
 ## [Basics of LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/Basics_of_LLMs_IV.ipynb)
 >>Why self-supervised learning   
