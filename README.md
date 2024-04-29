@@ -37,7 +37,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >5.What is RAG
 >>What is the difference between Retrieval-Augmented Generation and semantic search?
 
-## [Basics of LLMs__III](https://github.com/harnalashok/LLMs/blob/main/LLMs_III.ipynb)
+## [Basics of LLMs__III](https://colab.research.google.com/github/harnalashok/LLMs/blob/main/Basics_of_LLMs_III.ipynb#scrollTo=7H5Psi9BbuaS)
 >1.A list/collection of open source and/or local AI tools and solutions.    
 >2.Byte Pair Encoding    
 >3.What is Ollama?    
@@ -49,6 +49,8 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >> Why LlamaIndex for Context Augmentation?
 
 >5.Nomic Text Embeddings
+>>How are LLM models named
+>>Types of LLM models
 
 ## [Basics of LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/Basics_of_LLMs_IV.ipynb)
 >>Why self-supervised learning   
