@@ -94,6 +94,22 @@ sudo systemctl start/stop ollama
 #      Or to go to the end of logs (ie latest entries):
 
 	journalctl -u ollama  -e
+	
+# 5.0 Creating custom models (so to say):
+#	
+#	You can create custom models by using Modelfile
+#	Steps are:
+#		Set the model file. Set parameter values and a prompt template
+#		Create the model with these properties
+#		Run this created model
+#	See this:
+#		https://github.com/ollama/ollama/blob/main/docs/modelfile.md#basic-modelfile
+#	And this video:
+#		https://www.youtube.com/watch?v=k39a--Tu4h0
+#
+#
+
+	
 ############ DONE #################
 
 
