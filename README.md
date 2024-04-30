@@ -52,6 +52,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >5.Nomic Text Embeddings
 >6.How are LLM models named   
 >7.Types of LLM models
+>>Uncensored models--[What are they?](https://erichartford.com/uncensored-models) with [examples](https://ollama.com/blog/run-llama2-uncensored-locally)
 
 ## [Basics of LLMs_IV](https://github.com/harnalashok/LLMs/blob/main/Basics_of_LLMs_IV.ipynb)
 >>Why self-supervised learning   
