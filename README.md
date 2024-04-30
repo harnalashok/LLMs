@@ -41,8 +41,8 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >1.A list/collection of open source and/or local AI tools and solutions.    
 >2.Byte Pair Encoding    
 >3.What is Ollama?    
->> Models supported by ollama
->> Create custom ollama models by using [Modelfile](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#basic-modelfile)
+>> Models supported by ollama<br>
+>> Create custom ollama models by using [Modelfile](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#basic-modelfile)<br>
 >> Ollama based webUIs    
 >> Where are ollama models stored?
  
