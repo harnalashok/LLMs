@@ -1,4 +1,4 @@
-# Last amended: 29th April, 2024
+# Last amended: 30th April, 2024
 # Installing ollama on ubuntu 22.04
 # Ref: https://ollama.com/download
 
@@ -96,6 +96,8 @@ sudo systemctl start/stop ollama
 	journalctl -u ollama  -e
 	
 # 5.0 Creating custom models (so to say):
+#	You can change the Persoanlity of model
+#	 as follows:
 #	
 #	You can create custom models by using Modelfile
 #	Steps are:
