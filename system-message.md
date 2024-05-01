@@ -1,6 +1,6 @@
 ---
-# Last amended: 1st May, 2024
-# Ref: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message
+Last amended: 1st May, 2024
+Ref: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message
 ---
 
 # System message framework and template recommendations for Large Language Models (LLMs)
