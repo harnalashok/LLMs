@@ -42,7 +42,7 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >2.Byte Pair Encoding    
 >3.What is Ollama?    
 >> Models supported by ollama. See [List here](https://ollama.com/library)<br>
->> Create custom ollama models by using [Modelfile](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#basic-modelfile)<br>
+>> Create custom ollama models by using [Modelfile](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#basic-modelfile) and also [this Modelfile](https://github.com/harnalashok/LLMs/blob/main/Modelfile) on github<br>
 >> Ollama based [webUIs](https://github.com/ollama/ollama/tree/main?tab=readme-ov-file#web--desktop)<br>    
 >> Where are ollama models stored?
  
