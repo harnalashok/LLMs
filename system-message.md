@@ -1,7 +1,7 @@
 ---
 Last amended: 1st May, 2024
 Ref: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message
-Also read: https://www.reddit.com/r/LocalLLaMA/comments/19dscer/system_prompts_are_adding_unnecessary_complexity/
+reddit discussion : https://www.reddit.com/r/LocalLLaMA/comments/19dscer/system_prompts_are_adding_unnecessary_complexity/
 ---
 
 # System message framework and template recommendations for Large Language Models (LLMs)
