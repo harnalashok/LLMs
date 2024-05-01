@@ -1,4 +1,4 @@
-# Last amended: 21st April, 2024
+# Last amended: 1st May, 2024
 # Installing privateGPT on ubuntu 22.04
 # It works with a GUI
 # Ref: https://docs.privategpt.dev/installation/getting-started/installation
@@ -51,6 +51,7 @@ conda install conda-forge::openai
 conda install conda-forge::streamlit
 pip install tensorflow
 pip install ollama
+pip install langchain-experimental
 
 
 ######################################################
