@@ -59,6 +59,7 @@ conda install conda-forge::openai
 conda install conda-forge::streamlit
 pip install tensorflow
 pip install ollama
+pip install langchain-experimental
 
 
 ######################################################
