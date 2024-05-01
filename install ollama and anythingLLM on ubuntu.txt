@@ -1,4 +1,4 @@
-# Last amended: 21st April, 2024
+# Last amended: 1st May, 2024
 # Installing anythingLLM with ollama on ubuntu 22.04
 # It works with a GUI
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
@@ -68,6 +68,7 @@ conda install conda-forge::streamlit
 pip install tensorflow
 pip install ollama
 pip install chromadb
+pip install langchain-experimental
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
