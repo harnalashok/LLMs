@@ -1,4 +1,4 @@
-# Last amended: 30th April, 2024
+# Last amended: 1st May, 2024
 # Installing ollama on ubuntu 22.04
 # Ref: https://ollama.com/download
 
@@ -96,6 +96,9 @@ sudo systemctl start/stop ollama
 	journalctl -u ollama  -e
 	
 # 5.0 Creating custom models (so to say):
+#	Create a Modelfile
+#         A model file that forces llama2 to only answer in Hindi
+#	  is on github.
 #	You can change the Persoanlity of model
 #	 as follows:
 #	
