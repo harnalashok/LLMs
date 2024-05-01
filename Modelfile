@@ -1,4 +1,6 @@
 # Last amended: 01st May, 2024
+# Ref full parameter list here:
+#    https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter
 # Which model?
 FROM llama2
 # sets the temperature to 1 [higher than 1 is more creative, lower than 1 is more coherent]
