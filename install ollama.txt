@@ -1,4 +1,4 @@
-# Last amended: 1st May, 2024
+# Last amended: 8th May, 2024
 # Installing ollama on ubuntu 22.04
 # Ref: https://ollama.com/download
 
@@ -49,9 +49,13 @@ ollama run llama2:13b
 
 ollama run llama2
 
+# OR, llama3:8b with 4.7gb download
+
+ollama run llama3:8b    
+
 
 # 2.0.1  You can also test ollama, as:
-
+s
 ollama run mistral
 
 # 2.0.2 phi3 is blazingly fast LLM from microsoft
