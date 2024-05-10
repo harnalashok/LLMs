@@ -1,0 +1,215 @@
+# Last amended: 10th May, 2024
+# Installing ollama on Windows 10
+# Ref: https://ollama.com/download
+
+
+
+######################################################
+############### AA.1 INSTALL WSL ##################
+######################################################
+
+
+# 1.0 open up PowerShell (NOT command prompt) as Administrator
+#	and enter this command:
+
+	wsl --install
+
+#     This will install Ubuntu. Takes time..After installation 
+#	is complete, you will be asked to enter your username 
+#	and password. Enter, 'ashok', 'ashok' for both for 
+#	 easy remeberance.
+
+# 1.0.1 Ubuntu starts in powershell only. Enter the command:
+
+		ls -a
+
+	to see a few files/foders
+
+# 1.0.2 Close powershell and reboot Windows
+
+# 1.0.3 In Windows Start menu, search for Ubuntu.
+#	Right-click on it and click-- 'Pin to taskbar'
+#	From now on, you can click on the ubuntu icon
+#	in the task bar to start ubuntu.
+
+# 1.0.4 Ubuntu installation complete
+
+
+# 1.0.5 (optional) To change ubuntu machine name, click on 
+	 Control Panel-->Systems--Rename the PC
+
+
+######################################################
+############### BB.2 INSTALL ollama ##################
+######################################################
+
+# 2.0 Open ubuntu console and enter following commands, one by one:
+
+
+# 2.0.1 Install ollama as::
+#     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
+
+	$sudo curl -fsSL https://ollama.com/install.sh | sh
+
+
+# 2.0.2 Check if ollama is running:
+#	(among many lines, there will be one with green colour)
+
+	$systemctl status ollama
+
+
+# 2.0.3 Else atart, ollama, as:
+
+	$sudo systemctl start ollama
+
+################################
+#######***Pull Models***#######
+################################
+
+# 3.0 Issue following commands to download llama3: 
+#        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
+#	 Takes time..
+
+	$ollama pull llama3:8b
+
+
+# 3.0.1 In case you are short of RAM, pull phi3, as:
+#       phi3 is blazingly fast LLM from microsoft
+#	Model size is just 2.3gb and it has 3.8B parameters
+
+	$ollama run phi3
+
+
+# 3.0.2 Gemma occupies still less RAM than ph3
+#	Gemma is a family of lightweight, state-of-the art open models 
+#        built from the same research and technology used to create 
+#         the Gemini models. gemma:2b is of size 1.4gb (half of phi3)
+# 	    and it has around 2billion parameters
+
+	$ollama pull gemma:2b
+
+
+################################
+#######***Run Models***#######
+################################
+
+# 4.0  Run any pulled model, as: 
+
+	$ollama run <model-name>
+	
+	$ollama run llama3:8b
+
+
+#################################################
+#######***(optional) Pull other Models***#######
+#################################################
+
+# 5.0 Optionally, to experiment, you can pull 
+#	other LLMs as well:
+#	mistral size is 4.1gb with 7billion parameters
+
+	$ollama pull mistral
+	$ollama pull nomic-embed-text
+
+
+# 5.0.1 You can also specify the number of parameters.
+#	   Pull llama2:13b model, as:
+
+	$ollama pull llama2:13b
+
+
+# 5.0.2  Just entering the following command will pull a 13b model 
+#         and then run it:
+
+	$ollama run llama2:13b
+
+
+
+##########################
+#######***Usage***#######
+##########################
+
+# 6.0 On terminal, write a question to get an answer.
+#       Exit by typing /bye
+
+# 6.0.1 ollama supports GPUs with compute capability of 5.
+
+
+# 6.0.2 Just enter 'ollama' to get ollama help.
+
+Available Commands:
+  serve       Start ollama AND also to know ollama port		<===
+  create      Create a model from a Modelfile
+  show        Show information for a model
+  run         Run a model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  list        List models    					<====
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+
+
+# 6.0.3  ollama service can be started/restarted/shut, as:
+#	Check as: ps aux | grep ollama
+
+sudo systemctl start/stop ollama
+
+
+##########################
+#######***Misc***#######
+##########################
+
+
+# 7.0. View ollama logs as:
+
+	journalctl -u ollama
+
+#      Or to go to the end of logs (ie latest entries):
+
+	journalctl -u ollama  -e
+
+
+
+
+###################################
+#######***Custome Models***########
+###################################
+
+	
+# 8.0 Creating custom models (so to say):
+#	Create a Modelfile
+#         A model file that forces llama2 to only answer in Hindi
+#	  is on github.
+#	You can change the Persoanlity of model
+#	 as follows:
+#	
+#	You can create custom models by using Modelfile
+#	Steps are:
+#		Set the model file. Set parameter values and a prompt template
+#		Create the model with these properties
+#		Run this created model
+#	See this:
+#		https://github.com/ollama/ollama/blob/main/docs/modelfile.md#basic-modelfile
+#	And this video:
+#		https://www.youtube.com/watch?v=k39a--Tu4h0
+#
+#
+
+	
+############ DONE #################
+
+
+
+
+
+
+# 1.0 Download and install Docker Desktop
+#		https://www.docker.com/products/docker-desktop/
+#	After installation, a Windows restart is reuired. After
+#	restart, DO NOT DO anything. Docker will start on its own
+#	and start. It takes time. Be patient...
+#	For problems, refer StackOverflow, here:
+#		https://stackoverflow.com/a/71105388
+
