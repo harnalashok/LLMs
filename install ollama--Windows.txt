@@ -1,4 +1,4 @@
-# Last amended: 10th May, 2024
+# Last amended: 11th May, 2024
 # Installing ollama on Windows 10
 # Ref: https://ollama.com/download
 
@@ -35,7 +35,12 @@
 # 1.0.4 Ubuntu installation complete
 
 
-# 1.0.5 (optional) To change ubuntu machine name, click on 
+# 1.0.5 Install tilde, text-editor:
+
+	sudo apt install tilde
+
+
+# 1.0.6 (optional) To change ubuntu machine name, click on 
 	 Control Panel-->Systems--Rename the PC
 
 
@@ -197,15 +202,12 @@ sudo systemctl start/stop ollama
 #
 #
 
-	
-############ DONE #################
+#######################################
+#######***Install OpenWebUI***########
+#######################################	
 
 
-
-
-
-
-# 1.0 Download and install Docker Desktop
+# 9.0 Download and install Docker Desktop
 #		https://www.docker.com/products/docker-desktop/
 #	After installation, a Windows restart is reuired. After
 #	restart, DO NOT DO anything. Docker will start on its own
@@ -213,3 +215,45 @@ sudo systemctl start/stop ollama
 #	For problems, refer StackOverflow, here:
 #		https://stackoverflow.com/a/71105388
 
+# 9.0.1 
+#	If you are rebooting, check that docker is started else start docker.
+
+
+# 9.0.2
+#	Create a folder, say, openwebui.
+# 	Open command prompt (console) window
+#	cd to that folder.
+
+# 9.0.3
+#       For CPU only: Run the following command in console:
+#	(Refer: https://docs.openwebui.com/getting-started/ )
+
+docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+
+# 9.0.4 
+#	For GPU machines, run the following command in console:
+
+docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
+
+
+# 9.0.4 Where are downloaded images/manifests stored:
+
+# https://stackoverflow.com/a/62496021
+# Folder: C:\Users\ashok\AppData\Local\Docker\wsl\data
+
+
+
+# 10.0 
+#	The above command takes time. 
+#       After execution, access openwebui at: 
+
+#	http://localhost:3000
+
+
+# 10.0.1 Click Signup and create a NEW account.
+#	OpenWebUI opens up
+
+
+
+
+################# DONE #######################
