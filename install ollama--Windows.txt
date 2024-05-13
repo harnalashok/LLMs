@@ -1,4 +1,4 @@
-# Last amended: 11th May, 2024
+# Last amended: 13th May, 2024
 # Installing ollama on Windows 10
 # Ref: https://ollama.com/download
 
@@ -254,6 +254,44 @@ docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gatew
 #	OpenWebUI opens up
 
 
+################################
+## After reboot #############
+################################
+
+11.0 Restart Ubuntu
+
+11.1 Restart docker engine
+
+11.2 Access localhost:3000
+
+
+
+############################
+## RAG documents  ##########
+############################
+
+# 12.0 You can upload RAG through 
+# 	    Documents-->My Documents
+#		OR through: dumping to a folder, see next.
+
+# 12.1 Where can I dump my pdf files in openWebUI:
+#		The address is given below You can reach it
+#		by opening File Explorer and pasting the below 
+#		address:
+
+
+	\\wsl.localhost\docker-desktop-data\data\docker\volumes\open-webui\_data\docs
+	
+# 12.2 After files have been uploaded, click on Documents (on the left panel)--> Document Settings
+#		It opens up a form. Click on Scan to scan files.
+
+# 12.3
+# If in the above folder a pdf file is placed (say, bigdata.pdf), you may get another file
+# with name as: bigdata.pdf:zone.identifier
+#  The text after the colon is an identifier for an "Alternate Data Stream". 
+#   ADS is used to store meta-information about the file. For example, the 
+#   Zone identifier stores whether the file was downloaded from the internet.
+#    See StackOverflow: https://stackoverflow.com/q/4496697
 
 
 ################# DONE #######################
