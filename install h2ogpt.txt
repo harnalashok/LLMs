@@ -30,7 +30,7 @@ pip install -r requirements.txt
 pip install -r reqs_optional/requirements_optional_langchain.txt
 
 (If there are some error messages displayed regarding pip,
-do not worry.)
+do not worry. See Error1/Error2 below. )
 
 # 1.4 Close terminal and open the terminal again.   <===<== Important ===>====>
 
@@ -42,13 +42,32 @@ export CMAKE_ARGS="-DLLAMA_CUBLAS=on -DCMAKE_CUDA_ARCHITECTURES=all"
 export FORCE_CMAKE=1
 
 # 1.6 Now issue the following three instructions:
-
+cd /home/ashok/h2ogpt/h2ogpt/
 pip uninstall llama_cpp_python llama_cpp_python_cuda -y
 pip install -r reqs_optional/requirements_optional_llamacpp_gpt4all.txt --no-cache-dir
 pip install -r reqs_optional/requirements_optional_langchain.urls.txt
 
+
+( If you get Error3 below then proceed to Step #1.6a )
+
+
+# 1.6a If you get errors (Error3 below) in running pip install commands in #1.6 above then
+#	close terminal and open again. Reach h2ogpt/h2ogpt 
+#       BUT DO NOT RUN any of the export commands
+#	ie ignore #1.5 and issue the following instructions:
+
+cd /home/ashok/h2ogpt/h2ogpt/
+pip uninstall llama_cpp_python llama_cpp_python_cuda -y
+pip install -r reqs_optional/requirements_optional_llamacpp_gpt4all.txt --no-cache-dir
+pip install -r reqs_optional/requirements_optional_langchain.urls.txt
+
+
+# 1.7 reboot machine
+
+
 # 1.7 Finally run the following instruction:
 
+cd /home/ashok/h2ogpt/h2ogpt
 python generate.py --base_model=TheBloke/Mistral-7B-Instruct-v0.2-GGUF --prompt_type=mistral --max_seq_len=4096
 
 # 1.8 Next, go to your browser by visiting http://127.0.0.1:7860 or http://localhost:7860. Choose 13B for a better model than 7B.
@@ -65,6 +84,42 @@ python generate.py --base_model=TheBloke/Mistral-7B-Instruct-v0.2-GGUF --prompt_
 
 	
 ###################################
-	
-	
+
+
+=========	
+Error1
+=========	
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+aiobotocore 2.7.0 requires botocore<1.31.65,>=1.31.16, but you have botocore 1.34.108 which is incompatible.
+sphinx 5.0.2 requires docutils<0.19,>=0.14, but you have docutils 0.20.1 which is incompatible.
+anaconda-cloud-auth 0.1.4 requires pydantic<2.0, but you have pydantic 2.7.1 which is incompatible.
+
+=========
+# Error2
+==========
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+conda-repo-cli 1.0.75 requires requests_mock, which is not installed.
+conda-repo-cli 1.0.75 requires clyent==1.2.1, but you have clyent 1.2.2 which is incompatible.
+sphinx 5.0.2 requires docutils<0.19,>=0.14, but you have docutils 0.20.1 which is incompatible.
+anaconda-cloud-auth 0.1.4 requires pydantic<2.0, but you have pydantic 2.7.1 which is incompatible.
+
+
+=========
+Error3
+=========
+ This warning is for project developers.  Use -Wno-dev to suppress it.
+      
+      CMake Warning (dev) at CMakeLists.txt:30 (install):
+        Target llama has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+      This warning is for project developers.  Use -Wno-dev to suppress it.
+      
+      -- Configuring incomplete, errors occurred!
+      
+      *** CMake configuration failed
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for llama-cpp-python
+Failed to build llama-cpp-python
+ERROR: Could not build wheels for llama-cpp-python, which is required to install pyproject.toml-based projects
 
