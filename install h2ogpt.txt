@@ -1,0 +1,70 @@
+####################################################################
+# Last amended: 18th May, 2024
+# Installing h2ogpt on Ubuntu 22.04
+# Reference: https://github.com/h2oai/h2ogpt?tab=readme-ov-file
+####################################################################
+
+# Steps:
+# 0.0 Assuming your machine has a good GPU
+
+# 1.0 Install latest Anacnoda
+
+# 1.1 In the shell prompt, enter following:
+
+export PIP_EXTRA_INDEX_URL="https://download.pytorch.org/whl/cu121 https://huggingface.github.io/autogptq-index/whl/cu121"
+
+# 1.2 Then choose your llama_cpp_python options, by changing CMAKE_ARGS to whichever system you
+#     have according to llama_cpp_python backend documentation. E.g. CUDA on Linux:
+
+export LLAMA_CUBLAS=1
+export CMAKE_ARGS="-DLLAMA_CUBLAS=on -DCMAKE_CUDA_ARCHITECTURES=all"
+export FORCE_CMAKE=1
+
+# 1.3 Then run the following commands on any system:
+
+mkdir h2ogpt
+cd h2ogpt
+git clone https://github.com/h2oai/h2ogpt.git
+cd h2ogpt
+pip install -r requirements.txt
+pip install -r reqs_optional/requirements_optional_langchain.txt
+
+(If there are some error messages displayed regarding pip,
+do not worry.)
+
+# 1.4 Close terminal and open the terminal again.   <===<== Important ===>====>
+
+# 1.5 Reenter export instructions as in #1.1 and in #1.2
+
+export PIP_EXTRA_INDEX_URL="https://download.pytorch.org/whl/cu121 https://huggingface.github.io/autogptq-index/whl/cu121"
+export LLAMA_CUBLAS=1
+export CMAKE_ARGS="-DLLAMA_CUBLAS=on -DCMAKE_CUDA_ARCHITECTURES=all"
+export FORCE_CMAKE=1
+
+# 1.6 Now issue the following three instructions:
+
+pip uninstall llama_cpp_python llama_cpp_python_cuda -y
+pip install -r reqs_optional/requirements_optional_llamacpp_gpt4all.txt --no-cache-dir
+pip install -r reqs_optional/requirements_optional_langchain.urls.txt
+
+# 1.7 Finally run the following instruction:
+
+python generate.py --base_model=TheBloke/Mistral-7B-Instruct-v0.2-GGUF --prompt_type=mistral --max_seq_len=4096
+
+# 1.8 Next, go to your browser by visiting http://127.0.0.1:7860 or http://localhost:7860. Choose 13B for a better model than 7B.
+
+# 1.9 We recommend quantized models for most small-GPU systems, e.g. LLaMa-2-7B-Chat-GGUF for 9GB+ GPU memory or
+#     larger models like LLaMa-2-13B-Chat-GGUF if you have 16GB+ GPU memory.s\
+
+# 1.10 On another terminal, run the command:
+
+	nvidia-smi
+	
+	You should be able to see GPU usage during processing
+	or question answering.
+
+	
+###################################
+	
+	
+
