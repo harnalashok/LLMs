@@ -68,17 +68,17 @@ pip install -r reqs_optional/requirements_optional_langchain.urls.txt
 # 1.7 reboot machine
 
 
-# 1.7 Finally run the following instruction:
+# 1.8 Finally open the terminal and run the following instruction:
 
 cd /home/ashok/h2ogpt/h2ogpt
 python generate.py --base_model=TheBloke/Mistral-7B-Instruct-v0.2-GGUF --prompt_type=mistral --max_seq_len=4096
 
-# 1.8 Next, go to your browser by visiting http://127.0.0.1:7860 or http://localhost:7860. Choose 13B for a better model than 7B.
+# 1.9 Next, go to your browser by visiting http://127.0.0.1:7860 or http://localhost:7860. Choose 13B for a better model than 7B.
 
-# 1.9 We recommend quantized models for most small-GPU systems, e.g. LLaMa-2-7B-Chat-GGUF for 9GB+ GPU memory or
+# 2.0 We recommend quantized models for most small-GPU systems, e.g. LLaMa-2-7B-Chat-GGUF for 9GB+ GPU memory or
 #     larger models like LLaMa-2-13B-Chat-GGUF if you have 16GB+ GPU memory.s\
 
-# 1.10 On another terminal, run the command:
+# 2.1 On another terminal, run the following command <b>repeatedly:
 
 	nvidia-smi
 	
@@ -126,3 +126,5 @@ Error3
 Failed to build llama-cpp-python
 ERROR: Could not build wheels for llama-cpp-python, which is required to install pyproject.toml-based projects
 
+# Raised the following issue:
+https://github.com/h2oai/h2ogpt/issues/1628
