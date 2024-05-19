@@ -1,4 +1,4 @@
-# Last amended: 1st May, 2024
+# Last amended: 19th May, 2024
 # Installing anythingLLM with ollama on ubuntu 22.04
 # It works with a GUI
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
