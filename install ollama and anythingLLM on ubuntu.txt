@@ -41,6 +41,15 @@ sudo apt install plocate
 sudo apt install net-tools
 
 
+# 0.3 Install Microsoft Visual Studio from [this link](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)
+#     While installing you will get a number of options. Under WOrkloads tab, select 'C++ Buildtools' or something like this.
+#     This will install nmake utility.
+
+
+# 0.4 Next you need to put the following 'bin' folder in the PATH, as: 
+#     C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\bin\Hostx64\x64
+#    USe Advanced System Settings-->Environment Variables-->Path
+
 # 1. Create environment and 
 #     setup necessary packages:
 #      Open Anaocnda prompt as 'Administrator'
