@@ -57,6 +57,7 @@ conda install -y -c anaconda git
 conda install -y -c huggingface -c conda-forge datasets
 conda install -y conda-forge::openai
 conda install -y conda-forge::streamlit
+pip install llama-cpp-python
 pip install tensorflow
 pip install ollama
 pip install langchain-experimental
