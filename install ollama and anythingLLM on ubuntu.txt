@@ -48,7 +48,8 @@ sudo apt install net-tools
 #     Refer StackOverflow: https://stackoverflow.com/a/54136652
 
 
-# 0.4 Next you need to put the following 'bin' folder in the PATH, as: 
+# 0.4 For Windows 10/11
+#     Next you need to put the following 'bin' folder in the PATH, as: 
 #     C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\bin\Hostx64\x64
 #    USe Advanced System Settings-->Environment Variables-->Path
 
