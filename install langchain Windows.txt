@@ -1,0 +1,45 @@
+# 19th MAy, 2024
+# Install conda langchain environment on Windows
+
+0.0 Remove environment:
+
+conda remove --name langchain --all
+
+# 0.1
+conda create --name langchain python=3.11
+conda activate langchain
+conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
+conda install langchain -c conda-forge
+conda install anaconda::beautifulsoup4
+conda install pytorch::faiss-cpu
+conda install conda-forge::pypdf
+conda install conda-forge::transformers
+conda install fastai::accelerate
+conda install -c conda-forge huggingface_hub
+conda install -c anaconda git
+conda install -c huggingface -c conda-forge datasets
+conda install -y conda-forge::openai
+conda install -y conda-forge::streamlit
+pip install tensorflow
+pip install ollama
+pip install langchain-experimental
+
+# 0.2 For Windows 10/11:
+#     Install Microsoft Visual Studio from [this link](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)
+#     While installing you will get a number of options. Under WOrkloads tab, select 'C++ Buildtools' or something like this.
+#     This will install nmake utility.
+#     Refer StackOverflow: https://stackoverflow.com/a/54136652
+
+
+# 0.3 For Windows 10/11
+#     Next you need to put the following 'bin' folder in the PATH, as: 
+#     C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\bin\Hostx64\x64
+#    USe Advanced System Settings-->Environment Variables-->Path
+
+# 0.4
+#    Reboot machine, conda activate langchain and then:
+
+	conda activate langchain
+	pip install llama-cpp-python
+
+##############	
