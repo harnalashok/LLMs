@@ -8,16 +8,16 @@ conda remove --name langchain --all
 # 0.1
 conda create --name langchain python=3.11
 conda activate langchain
-conda install spyder jupyter jupyterlab pandas numpy pip-tools ipython
-conda install langchain -c conda-forge
-conda install anaconda::beautifulsoup4
-conda install pytorch::faiss-cpu
-conda install conda-forge::pypdf
-conda install conda-forge::transformers
-conda install fastai::accelerate
-conda install -c conda-forge huggingface_hub
-conda install -c anaconda git
-conda install -c huggingface -c conda-forge datasets
+conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython
+conda install -y langchain -c conda-forge
+conda install -y anaconda::beautifulsoup4
+conda install -y pytorch::faiss-cpu
+conda install -y conda-forge::pypdf
+conda install -y conda-forge::transformers
+conda install -y fastai::accelerate
+conda install -y -c conda-forge huggingface_hub
+conda install -y -c anaconda git
+conda install -y -c huggingface -c conda-forge datasets
 conda install -y conda-forge::openai
 conda install -y conda-forge::streamlit
 pip install tensorflow
