@@ -41,5 +41,10 @@ pip install langchain-experimental
 
 	conda activate langchain
 	pip install llama-cpp-python
+	pip install sentence-transformers
+	pip install fastapi
+	pip install uvicorn
+	pip install aiofiles
+	pip install PyPDF2
 
 ##############	
