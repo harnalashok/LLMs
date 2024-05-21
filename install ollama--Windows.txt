@@ -37,6 +37,7 @@
 
 # 1.0.5 Install tilde, text-editor:
 
+        sudo apt update
 	sudo apt install tilde
 
 
