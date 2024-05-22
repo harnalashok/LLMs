@@ -1,7 +1,67 @@
-# Last amended: 19th May, 2024
+# Last amended: 22nd May, 2024
 # Installing anythingLLM with ollama on ubuntu 22.04
 # It works with a GUI
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
+
+
+
+######################################################
+############### AA.1 INSTALL Ubuntu ##################
+######################################################
+
+1.0 Open powershell as Administrator. Write the command:
+
+	wsl --install
+	
+	Reboot when asked for. Write your userid and password.
+
+
+1.1  Update ubuntu and install some needed software:
+
+sudo apt update
+sudo apt install -y net-tools  curl git-all build-essential
+
+
+######################################################
+############### AA.2 INSTALL quick ollama ##################
+######################################################
+# 2.0 Install/Uninstall Ollama by following instructions here:
+#     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
+#	   ollama port: 11434
+
+
+	curl -fsSL https://ollama.com/install.sh | sh
+
+
+#  Install the models to be used, the default settings--ollama.yaml
+#  is configured to user mistral 7b LLM (~4GB) and nomic-embed-text Embeddings (~275MB).
+
+# 2.0.1 Issue following commands to download llama3:
+#        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
+
+	ollama pull llama3:8b
+
+
+
+# 2.0.2 On terminal, write a question to get an answer.
+#       Exit by typing /bye
+
+# 2.0.3 ollama supports GPUs with compute capability of 5.
+
+
+# 2.0.4 List all models downloaded:
+
+	ollama list
+#	OR 
+
+	ollama
+
+
+
+# 2.0.5 ollama service can be started/restarted/shut, as:
+
+	sudo systemctl start/stop ollama
+
 
 
 
@@ -10,30 +70,23 @@
 ######################################################
 
 
-# 0.0 Install Anaconda, if not installed
+# 3.0 Install Anaconda, if not installed
 
     wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
 
 	bash Anaconda3-2024.02-1-Linux-x86_64.sh
 
 
-# 0.1 Close and open Ubuntu terminal
+# 3.1 Close and open Ubuntu terminal
 
 
-# 0.2 Syntax to remove conda env -- myenv
+# 3.2 Syntax to remove conda env -- myenv
 
         conda remove -y --name langchain --all
 
-# 0.3 Install some needed software:
-
-sudo apt update
-sudo apt install -y net-tools  curl git-all build-essential
 
 
-
-
-
-# 1.0 Create conda environment and install packages
+# 3.3 Create conda environment and install packages
 #       COpy and paste in one go:
 
 conda create -y --name langchain python=3.11
@@ -42,6 +95,10 @@ conda config --add channels conda-forge
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y -c huggingface -c conda-forge datasets
 pip install ollama chromadb langchain-experimental
+
+
+
+
 
 
 ######1.1 DONE UP TO HERE
