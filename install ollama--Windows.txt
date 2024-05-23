@@ -38,7 +38,7 @@
 # 1.0.5 Install tilde, text-editor:
 
         sudo apt update
-	sudo apt install tilde
+	sudo apt -y install tilde
 
 
 # 1.0.6 (optional) To change ubuntu machine name, click on 
@@ -55,18 +55,18 @@
 # 2.0.1 Install ollama as::
 #     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
 
-	$sudo curl -fsSL https://ollama.com/install.sh | sh
+	$ sudo curl -fsSL https://ollama.com/install.sh | sh
 
 
 # 2.0.2 Check if ollama is running:
 #	(among many lines, there will be one with green colour)
 
-	$systemctl status ollama
+	$ systemctl status ollama
 
 
 # 2.0.3 Else atart, ollama, as:
 
-	$sudo systemctl start ollama
+	$ sudo systemctl start ollama
 
 ################################
 #######***Pull Models***#######
@@ -76,14 +76,14 @@
 #        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
 #	 Takes time..
 
-	$ollama pull llama3:8b
+	$ ollama pull llama3:8b
 
 
 # 3.0.1 In case you are short of RAM, pull phi3, as:
 #       phi3 is blazingly fast LLM from microsoft
 #	Model size is just 2.3gb and it has 3.8B parameters
 
-	$ollama run phi3
+	$ ollama run phi3
 
 
 # 3.0.2 Gemma occupies still less RAM than ph3
@@ -92,7 +92,7 @@
 #         the Gemini models. gemma:2b is of size 1.4gb (half of phi3)
 # 	    and it has around 2billion parameters
 
-	$ollama pull gemma:2b
+	$ ollama pull gemma:2b
 
 
 ################################
@@ -101,9 +101,9 @@
 
 # 4.0  Run any pulled model, as: 
 
-	$ollama run <model-name>
+	$ ollama run <model-name>
 	
-	$ollama run llama3:8b
+	$ ollama run llama3:8b
 
 
 #################################################
@@ -114,20 +114,20 @@
 #	other LLMs as well:
 #	mistral size is 4.1gb with 7billion parameters
 
-	$ollama pull mistral
-	$ollama pull nomic-embed-text
+	$ ollama pull mistral
+	$ ollama pull nomic-embed-text
 
 
 # 5.0.1 You can also specify the number of parameters.
 #	   Pull llama2:13b model, as:
 
-	$ollama pull llama2:13b
+	$ ollama pull llama2:13b
 
 
 # 5.0.2  Just entering the following command will pull a 13b model 
 #         and then run it:
 
-	$ollama run llama2:13b
+	$ ollama run llama2:13b
 
 
 
