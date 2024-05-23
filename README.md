@@ -68,8 +68,8 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >>LLM Parameters (temperature, top-k etc)
 
 ## [Quickstart langchain](https://github.com/harnalashok/LLMs/blob/main/Quickstart%20langchain.ipynb)
-langchain QuickStart     
->langchain API Reference     
+langchain QuickStart   
+>langchain API Reference
 >langchain video lectures     
 >langchain simple tutorials    
 >Broad steps for RAG    
