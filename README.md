@@ -75,17 +75,17 @@ langchain QuickStart
 >Broad steps for RAG    
 >How is langchain organized    
 >Installation    
-Wrining Prompts    
->How to create a prompt    
-Chains in langchain    
->LLM Chain    
->Sequential Chain    
->Retrieval chain    
-Getting data from the Web    
-FAISS    
-Generate Answers to Questions using LLM    
-Conversational Retrieval Chain    
-Reading pdf files from disk/folder    
+Wrining Prompts       
+>How to create a prompt       
+Chains in langchain       
+>LLM Chain       
+>Sequential Chain       
+>Retrieval chain       
+Getting data from the Web       
+FAISS       
+Generate Answers to Questions using LLM       
+Conversational Retrieval Chain       
+Reading pdf files from disk/folder       
 
 
     
