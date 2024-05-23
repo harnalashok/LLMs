@@ -6,14 +6,16 @@
 
 
 ######################################################
-############### AA.1 INSTALL Ubuntu ##################
+############### AA.1 INSTALL latest Ubuntu ############
 ######################################################
 
 1.0 Open powershell as Administrator. Write the command:
 
 	wsl --install
 	
-	Reboot when asked for. Write your userid and password.
+# 1.0.1 Reboot Windows when asked for. 
+#	Create your userid and password in Ubuntu
+#	Recommended for office machines: ashok/ashok 
 
 
 1.1  Update ubuntu and install some needed software:
@@ -28,33 +30,33 @@ sudo apt install -y net-tools  curl git-all build-essential
 # 2.0 Install/Uninstall Ollama by following instructions here:
 #     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
 #	   ollama port: 11434
+#
 
 
-	curl -fsSL https://ollama.com/install.sh | sh
+	$ curl -fsSL https://ollama.com/install.sh | sh
 
-
-#  Install the models to be used, the default settings--ollama.yaml
-#  is configured to user mistral 7b LLM (~4GB) and nomic-embed-text Embeddings (~275MB).
 
 # 2.0.1 Issue following commands to download llama3:
 #        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
 
-	ollama pull llama3:8b
+	$ ollama pull llama3:8b
 
 
 
 # 2.0.2 On terminal, write a question to get an answer.
-#       Exit by typing /bye
+#       Exit by typing:  /bye
+
 
 # 2.0.3 ollama supports GPUs with compute capability of 5.
 
 
 # 2.0.4 List all models downloaded:
 
-	ollama list
+	$ ollama list
+
 #	OR 
 
-	ollama
+	$ ollama
 
 
 
@@ -70,149 +72,43 @@ sudo apt install -y net-tools  curl git-all build-essential
 ######################################################
 
 
-# 3.0 Install Anaconda, if not installed
+# 3.0 In Ubuntu, download and Install Anaconda, if not installed
 
-    wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+#    a. Download  
+	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
 
-	bash Anaconda3-2024.02-1-Linux-x86_64.sh
+#    b. Install
+        $ bash Anaconda3-2024.02-1-Linux-x86_64.sh
 
 
-# 3.1 Close and open Ubuntu terminal
-
-
-# 3.2 Syntax to remove conda env -- myenv
-
-        conda remove -y --name langchain --all
+# 3.1 Close Ubuntu terminal and then open Ubuntu terminal
 
 
 
-# 3.3 Create conda environment and install packages
-#       COpy and paste in one go:
+# 3.2 Create conda environment and install packages
+#       Copy and paste all the following conda and pip
+#	commands in ubuntu terminal in one go:
+
 
 conda create -y --name langchain python=3.11
 conda activate langchain
 conda config --add channels conda-forge
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y -c huggingface -c conda-forge datasets
-pip install ollama chromadb langchain-experimental
+pip install ollama chromadb langchain-experimental tensorflow
 
 
-
-
-
-
-######1.1 DONE UP TO HERE
 
 ######################################################
 ############### AA.2 INSTALL CUDA ####################
 ############# AND Appropriate driver #################
 ######################################################
 
-# 2.0 Install CUDA as in this video. Installation depends upon
+# 4.0 Install CUDA as in this video. Installation depends upon
 #	which GPU is available. For GPU 1060 or 730 install
 #	 CUDA 11.4
 
 
-
-######################################################
-############### AA.3 Remaining installations #########
-######################################################
-
-
-
-
-######################################################
-############### AA.4 INSTALL ollama ##################
-######################################################
-# 4.0 Install/Uninstall Ollama by following instructions here:
-#     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
-
-# 4.0.1 Install as::
-
-curl -fsSL https://ollama.com/install.sh | sh
-
-#  Install the models to be used, the default settings-ollama.yaml
-#  is configured to user mistral 7b LLM (~4GB) and nomic-embed-text Embeddings (~275MB).
-#  In privateGPT, ollama configuration file is: ~/privateGPT/settings-ollama.yaml
-
-# 4.0.2 Issue following commands to download mistral and nomic-embed-text:
-#        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
-
-ollama pull mistral
-ollama pull nomic-embed-text
-
-# 4.0.2.1 You can also specify the number of parameters.
-#	   Pull ollama:13b model, as:
-
-ollama pull llama2:13b
-
-# And run it as:
-
-ollama run llama2:13b
-
-# 4.0.2.2 Just entering the following command will pull a 7b model and then run
-#         but not the already existing 13b model:
-
-ollama run llama2
-
-
-# 4.0.3 You can test ollama, as:
-
-ollama run mistral
-
-# 4.0.4 On terminal, write a question to get an answer.
-#       Exit by typing /bye
-
-# 4.0.5 ollama supports GPUs with compute capability of 5.
-
-
-# 4.0.6 List all models downloaded:
-
-ollama list
-
-
-# 4.0.7 Just enter 'ollama' to get ollama help.
-
-Available Commands:
-  serve       Start ollama AND also to know ollama port		<===
-  create      Create a model from a Modelfile
-  show        Show information for a model
-  run         Run a model
-  pull        Pull a model from a registry
-  push        Push a model to a registry
-  list        List models    					<====
-  cp          Copy a model
-  rm          Remove a model
-  help        Help about any command
-
-
-
-
-# 5.0    On reboot ollama starts by itself. The following command is NOT NEEEDED:
-#	 It is also very difficult to kill olama process (even by kill -9). After
-#	 killing another ollama process starts.
-
-#        ollama serve  # Also informs ollama port: 11434
-
-
-# 5.0.1 ollama service can be started/restarted/shut, as:
-#	Check as: ps aux | grep ollama
-
-sudo systemctl start/stop ollama
-
-# 5.0.2 View ollama logs as:
-
-	journalctl -u ollama  -e
-
-
-# 5.0.1 On restart, issue again the following commands:
-
-	a. conda activate langchain
-
-
-# 5.0.2 Install tensorflow:
-
-pip install tensorflow
 
 
 ######################################################
@@ -220,27 +116,36 @@ pip install tensorflow
 ######################################################
 
 
-# 6.0 Download anythingLLM from here:
+
+# 5.0 Download anythingLLM.exe from here:
 #     https://useanything.com/download
+#	And put it inside a folder.
+
+# 5.1 Right click on it and 'Run as Administrator'
+#	Allow it to run/install
+#	Get Started screen will come.
+#	Minimize it
+
+# 5.2 Start chromadb. Issue the following two commands
+#     in (wsl) Ubuntu. After the command issue, keep the terminal
+#	open:
+
+		$ conda activate langchain
+		$ chroma run --path /home/ashok/Documents/chroma
+
+#		You should also have an sqlite3 database in chroma folder.
 
 
-# 6.1 It is an App Image. Make it executable, as:
 
-	chmod +x AnythingLLMDesktop.AppImage
-	
-# 6.1.1 Then execute it, as:
-
-	./AnythingLLMDesktop.AppImage
-
-# 6.2  And begin configuring it as:	
+# 5.3 Begin configuring anythingLLM  as:	
 	
 #	a. Click Get Started
 #	b. Select Ollama as LLM Preference
-#	c. Write Ollama base URL, as:  http://localhost:11434
-#		Just writing 'localhost:11434' would not work. http://
+#	c. Write Ollama base URL, as:  http://127.0.0.1:11434
+#		Just writing '127.0.0.1:11434' would not work. http://
 #			has to be written also.
 #	d. Press Tab and under Chat model selection,
-#	     you should see a list of models installed. Select one of them
+#	     you should see a list of installed models installed. Select one of them
 #	f. Under Token Context Window, set token size of 4096.
 	   (By default, Ollama uses a context window size of 2048 tokens.
 	    It can be change: See this link of FAQ under ollama/docs/faq.md:
@@ -255,59 +160,18 @@ pip install tensorflow
 #	Done
 
 
-# 6.2.1 USing chromadb vector database:
-#       Ref: https://docs.trychroma.com/usage-guide#running-chroma-in-clientserver-mode
+# 5.4  Using chromadb vector database:
+#      Ref: https://docs.trychroma.com/usage-guide#running-chroma-in-clientserver-mode
 #
-#	Start chromadb in client/server mode, as:
-#		In Linux:
-#			$conda activate langchain
-#			$chroma run --path /home/ashok/Documents/chroma
-#		In Windows:
-#			>conda activate langchain
-#			>chroma run --path C:\Users\ashok\OneDrive\Documents\chroma
-#		Open browser and check:
-#			http://localhost:8000
-#		You should also have an sqlite3 database in chroma folder.
-#		In anythingLLM, just write the chroma URL, as:
-#			http://localhost:8000 and leav other two fields blank
+#	In anythingLLM, down below on the right, Click Settings icon ('spanner'). Then in
+#	 the left panel click 'Vector Database' just write the chroma URL, as:
+#
+#			http://127.0.0.1:8000 and leave the other two fields blank
 #			and save changes. No need to specify API key or token.
 #
 
-# 6.2.2 Have a look at these youtube videos:
-#		1. https://www.youtube.com/watch?v=IJYC6zf86lU
-#		2. https://www.youtube.com/watch?v=NuZ0n0LPZ5E&t=83s
-
-
-# 6.3 Configuration data of AppImage in Linux is within
-#	.config folder. Delete from within it 
-#	the folder: 'anythingllm-desktopit'
-#	 to restore AppImage's original state. 	
-
-# 6.3a In Windows, you have to first uninstall anythingLLM and
-#	then delete anythingLLM related files under:
-#
-#		C:\Users\ashok\AppData\Local\Programs
-#   	C:\Users\ashok\AppData\Roaming\anythingllm-desktop\storage
-#
-#	And then reinstall anythingLLM
-	
-
-	    
-# 6,4 Ollama on network. Suppose AnythingLLM app image is
-#     on a remote machine, then how to access ollama?
-
-	(By default, ollama runs only on localhost. To make
-	it accesible on network, access its configuration file:
-	sudo nano /etc/systemd/system/ollama.service
-	ANd add a line under [Service]
-	[Service]
-	Environment="OLLAMA_HOST=0.0.0.0"
-	Restart ollama, as:
-	systemctl daemon-reload
-	systemctl restart ollama
-	It would now be available on network, ie accsible, as:
-	Write Ollama base URL, as:  http://192.240.1.51:11434
-
+# Next click AnythingLLM hyperlink at the top. Click on your Workspace name and then enter a message.
+#	You should get a response.
 
 
 ######################################
@@ -476,3 +340,6 @@ System Prompt Examples:
 
 
 
+# 3.2 Syntax to remove conda env -- myenv
+
+        conda remove -y --name langchain --all
