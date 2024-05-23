@@ -67,25 +67,25 @@ See [this notebook](https://github.com/harnalashok/LLMs/blob/main/loginto%20hugg
 >>What are core components of langchain?<br>
 >>LLM Parameters (temperature, top-k etc)
 
-## [Quickstart langchain]()
-langchain QuickStart
->langchain API Reference
->langchain video lectures
->langchain simple tutorials
->Broad steps for RAG
->How is langchain organized
->Installation
-Wrining Prompts
->How to create a prompt
-Chains in langchain
->LLM Chain
->Sequential Chain
->Retrieval chain
-Getting data from the Web
-FAISS
-Generate Answers to Questions using LLM
-Conversational Retrieval Chain
-Reading pdf files from disk/folder
+## [Quickstart langchain](https://github.com/harnalashok/LLMs/blob/main/Quickstart%20langchain.ipynb)
+langchain QuickStart     
+>langchain API Reference     
+>langchain video lectures     
+>langchain simple tutorials    
+>Broad steps for RAG    
+>How is langchain organized    
+>Installation    
+Wrining Prompts    
+>How to create a prompt    
+Chains in langchain    
+>LLM Chain    
+>Sequential Chain    
+>Retrieval chain    
+Getting data from the Web    
+FAISS    
+Generate Answers to Questions using LLM    
+Conversational Retrieval Chain    
+Reading pdf files from disk/folder    
 
 
     
