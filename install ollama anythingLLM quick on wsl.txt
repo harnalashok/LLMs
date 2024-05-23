@@ -1,12 +1,15 @@
-# Last amended: 22nd May, 2024
-# Installing anythingLLM with ollama on ubuntu 22.04
-# It works with a GUI
+# Last amended: 23rd May, 2024
+# Quick install of WSL ubuntu, ollama and AnythingLLM
+# For detailed install instructions, refer this file in GitHub:
+#	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
+
+# ollama and AnythingLLM
 # Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
 
 
 
 ######################################################
-############### AA.1 INSTALL latest Ubuntu ############
+############### AA.1 INSTALL latest wsl Ubuntu #######
 ######################################################
 
 1.0 Open powershell as Administrator. Write the command:
@@ -25,7 +28,7 @@ sudo apt install -y net-tools  curl git-all build-essential
 
 
 ######################################################
-############### AA.2 INSTALL quick ollama ##################
+############### AA.2 INSTALL ollama ##################
 ######################################################
 # 2.0 Install/Uninstall Ollama by following instructions here:
 #     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
@@ -67,9 +70,9 @@ sudo apt install -y net-tools  curl git-all build-essential
 
 
 
-######################################################
-############### AA. INSTALL Python environment########
-######################################################
+#######################################################
+############### AA.3 INSTALL Python environment #######
+#######################################################
 
 
 # 3.0 In Ubuntu, download and Install Anaconda, if not installed
@@ -82,7 +85,6 @@ sudo apt install -y net-tools  curl git-all build-essential
 
 
 # 3.1 Close Ubuntu terminal and then open Ubuntu terminal
-
 
 
 # 3.2 Create conda environment and install packages
@@ -100,7 +102,7 @@ pip install ollama chromadb langchain-experimental tensorflow
 
 
 ######################################################
-############### AA.2 INSTALL CUDA ####################
+############### AA.4 INSTALL CUDA ####################
 ############# AND Appropriate driver #################
 ######################################################
 
@@ -114,7 +116,6 @@ pip install ollama chromadb langchain-experimental tensorflow
 ######################################################
 ############### BB. anythingLLM ######################
 ######################################################
-
 
 
 # 5.0 Download anythingLLM.exe from here:
