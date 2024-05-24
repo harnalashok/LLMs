@@ -1,4 +1,4 @@
-# Last amended: 23rd May, 2024
+# Last amended: 24th May, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -23,8 +23,8 @@
 
 1.1  Update ubuntu and install some needed software:
 
-sudo apt update
-sudo apt install -y net-tools  curl git-all build-essential
+$ sudo apt update
+$ sudo apt install -y net-tools  curl git-all build-essential
 
 
 ######################################################
@@ -65,7 +65,7 @@ sudo apt install -y net-tools  curl git-all build-essential
 
 # 2.0.5 ollama service can be started/restarted/shut, as:
 
-	sudo systemctl start/stop ollama
+#	sudo systemctl start/stop ollama
 
 
 
@@ -118,23 +118,24 @@ pip install ollama chromadb langchain-experimental tensorflow
 ######################################################
 
 
-# 5.0 Download anythingLLM.exe from here:
+# 5.0 Download anythingLLM for Windows from below:
+
 #     https://useanything.com/download
-#	And put it inside a folder.
 
-# 5.1 Right click on it and 'Run as Administrator'
+#	And put the downloaded exe file inside a folder in Windows.
+
+# 5.1 Right click on it and hit 'Run as Administrator'
 #	Allow it to run/install
-#	Get Started screen will come.
-#	Minimize it
+#	'Get Started' screen will come. Do not take any action yet.
+#	Just minimize the screen
 
-# 5.2 Start chromadb. Issue the following two commands
-#     in (wsl) Ubuntu. After the command issue, keep the terminal
-#	open:
+# 5.2 We will now start chromadb. In Ubuntu issue the following two commands
+#     After the commands are issued, keep ubuntu the terminal open
+
 
 		$ conda activate langchain
 		$ chroma run --path /home/ashok/Documents/chroma
-
-#		You should also have an sqlite3 database in chroma folder.
+#		Keep the termianl open.
 
 
 
