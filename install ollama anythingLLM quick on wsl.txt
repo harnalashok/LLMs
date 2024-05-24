@@ -3,8 +3,8 @@
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
 
-# ollama and AnythingLLM
-# Ref: YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
+# ollama and AnythingLLM installation
+# See YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
 
 
 
@@ -77,19 +77,19 @@ $ sudo apt install -y net-tools  curl git-all build-essential
 
 # 3.0 In Ubuntu, download and Install Anaconda, if not installed
 
-#    a. Download  
+#    a. Download:  
 	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
 
-#    b. Install
+#    b. Install:
         $ bash Anaconda3-2024.02-1-Linux-x86_64.sh
 
 
-# 3.1 Close Ubuntu terminal and then open Ubuntu terminal
+# 3.1 Close Ubuntu terminal and then open Ubuntu terminal again
 
 
-# 3.2 Create conda environment and install packages
-#       Copy and paste all the following conda and pip
-#	commands in ubuntu terminal in one go:
+# 3.2 Create python environment with conda and install packages
+#       Copy and paste all the following conda and pip commands
+#	in ubuntu (wsl) terminal in one go (copy and paste):
 
 
 conda create -y --name langchain python=3.11
@@ -106,13 +106,13 @@ pip install ollama chromadb langchain-experimental tensorflow
 ############# AND Appropriate driver #################
 ######################################################
 
+
 # 4.0 Install CUDA. Installation depends upon
 #   	which GPU is available. For GPU 1060 or 730 install
 #	 CUDA 11.4
-#      Refer my github site: 
-#	https://github.com/harnalashok/LLMs/blob/main/gpu_nvidia.ipynb
-
-
+#      Refer my github notebook and the paragraph: 
+#		"Which driver and which CUDA version for your nvidia gpu card"
+#	    		https://github.com/harnalashok/LLMs/blob/main/gpu_nvidia.ipynb
 
 
 ######################################################
@@ -120,16 +120,17 @@ pip install ollama chromadb langchain-experimental tensorflow
 ######################################################
 
 
-# 5.0 Download anythingLLM for Windows from below:
-
+# 5.0 Download anythingLLM for Windows from below.
+#     And put the downloaded exe file inside some empty folder in Windows.
+#
 #     https://useanything.com/download
-
-#	And put the downloaded exe file inside a folder in Windows.
+	
 
 # 5.1 Right click on it and hit 'Run as Administrator'
-#	Allow it to run/install
+#	Allow it to run/install software
 #	'Get Started' screen will come. Do not take any action yet.
 #	Just minimize the screen
+
 
 # 5.2 We will now start chromadb. In Ubuntu issue the following two commands
 #     After the commands are issued, keep ubuntu the terminal open
@@ -137,7 +138,7 @@ pip install ollama chromadb langchain-experimental tensorflow
 
 		$ conda activate langchain
 		$ chroma run --path /home/ashok/Documents/chroma
-#		  Keep the termianl open.
+#		  Keep the terminal open.
 
 
 # 5.3 Begin configuring anythingLLM  as:	
@@ -155,11 +156,11 @@ pip install ollama chromadb langchain-experimental tensorflow
 #	    https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size )
 #	g. In the next screen, select 'AnythingLLMEmbdder'
 #	h. In the next screen select LanceDB
-#		(see below for using chromadb)
-#	i  Click Next again
-#	j. Select 'For education', click Next
+#		(see below for using chromadb instead of LanceDB)
+#	i  Click 'Next' again
+#	j. Select 'For education', click 'Next'
 #	h. Give a Workspace name. AnythingLLM can have
-#	i.  multiple workspaces for difft document types.
+#	    multiple workspaces for difft document types.
 #	Done
 
 
@@ -173,154 +174,29 @@ pip install ollama chromadb langchain-experimental tensorflow
 #			and save changes. No need to specify API key or token.
 #
 
-# Next click AnythingLLM hyperlink at the top. Click on your Workspace name and then enter a message.
-#	You should get a response.
+# 	Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
+#         and then enter a query.
+#		You should get a response.
 
 
 ######################################################
 ############### CC. Using anythingLLM ################
 ######################################################
 
-# Upload a pdf file in anythingLLM and see GPU usage
-# by running the following command on a separate ubuntu
-# terminal:
+# 5.5 Upload a pdf file in anythingLLM and see GPU usage
+#     by running the following command on a separate ubuntu
+#     terminal:
 
 	$ nvidia-smi -l 1 
 
 
-
-######################################
-########## DD. NVIDIA driver ##########
-############### Problems ##############
-#######################################
-
-# 7.0
-	It is possible that after privateGPT installs CUDA
-	Or you have installed CUDA, then mutiple NVIDIA
-	drivers (not one) could be installed. It is also
-	possible that when you reboot Ubuntu, screen resolution
-	changes rather increases ao that everything is very small.
-	Then, in Ubuntu search and open Software & Updates--> Resources (tab)
-	Select that minimum driver for your purposes. For example, for CUDA 11.4
-	driver version 470 is OK. Higher versions, even though available,
-	create problems. It is trial-and-error. Select a driver and 
-	reboot to see if it is OK.
-	
-	Min driver needed?
-		See this link for CUDA version and min driver needed:
-		https://docs.nvidia.com/deploy/cuda-compatibility/index.html
-		OR,
-		https://docs.nvidia.com/deploy/cuda-compatibility/index.html#minor-version-compatibility
-
-#####################################
-########## EE. Ingestion ############
-################ AND ################
-############# GPU Usage #############
-#####################################
-
-
-#8.1 Upload a big pdf file:
-#			Run in a separate terminal command:
-#
-#				 nvidia-smi
-#
-# 			Under GPU-Util one finds GPU utilization
-#			increasing from 0% to 33% or some other percentage.
-
-# 8.2 Multiple pdf files upload:
-#			Multiple pdf files can be uploaded at the same time.
-			But GPU usage increases.
-#
-
-# 8.3 Screenshots of nvidia-smi commands:
-
-				
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
-| N/A   47C    P5    13W /  N/A |    817MiB /  6044MiB |     33%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|    0   N/A  N/A      1125      C   /usr/local/bin/ollama              61MiB |
-|    0   N/A  N/A      1527      G   /usr/lib/xorg/Xorg                483MiB |
-|    0   N/A  N/A      1742      G   /usr/bin/gnome-shell               94MiB |
-|    0   N/A  N/A     32520      G   ...6/usr/lib/firefox/firefox      172MiB |
-+-----------------------------------------------------------------------------+
-
-## 30%
-
-(base) ashok@ashok:~$ nvidia-smi
-Thu Apr  4 03:17:50 2024       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
-| N/A   62C    P2    49W /  N/A |   1277MiB /  6044MiB |     30%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|    0   N/A  N/A      1125      C   /usr/local/bin/ollama             483MiB |
-|    0   N/A  N/A      1527      G   /usr/lib/xorg/Xorg                521MiB |
-|    0   N/A  N/A      1742      G   /usr/bin/gnome-shell               94MiB |
-|    0   N/A  N/A     32520      G   ...6/usr/lib/firefox/firefox      172MiB |
-+-----------------------------------------------------------------------------+
-
-
-## 52%
-
-(base) ashok@ashok:~$ nvidia-smi
-Thu Apr  4 03:18:49 2024       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 470.239.06   Driver Version: 470.239.06   CUDA Version: 11.4     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0  On |                  N/A |
-| N/A   64C    P2    58W /  N/A |   1279MiB /  6044MiB |     52%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|    0   N/A  N/A      1125      C   /usr/local/bin/ollama             483MiB |
-|    0   N/A  N/A      1527      G   /usr/lib/xorg/Xorg                523MiB |
-|    0   N/A  N/A      1742      G   /usr/bin/gnome-shell               94MiB |
-|    0   N/A  N/A     32520      G   ...6/usr/lib/firefox/firefox      172MiB |
-+-----------------------------------------------------------------------------+
-
-
 ------------------------
-System Prompt Examples:
+6.0 System Prompt Examples:
 -------------------------
 
 	The system prompt can effectively provide your chat bot specialized roles,
 	and results tailored to the prompt you have given the model. Examples of 
-	system prompts can be be found here: ChatGPT-3.5 Roles:
+	system prompts can be found here: ChatGPT-3.5 Roles:
 	https://www.w3schools.com/gen_ai/chatgpt-3-5/chatgpt-3-5_roles.php
 
 	Some interesting examples to try include:
@@ -348,13 +224,10 @@ System Prompt Examples:
         		 
 
 
-############ DONE #################
+############ DONE ################
 
-
-
-
-
-
-# 3.2 Syntax to remove conda env -- myenv
+# Syntax to remove conda env -- myenv
 
         conda remove -y --name langchain --all
+
+############ DONE ################
