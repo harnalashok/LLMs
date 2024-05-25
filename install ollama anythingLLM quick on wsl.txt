@@ -1,4 +1,4 @@
-# Last amended: 24th May, 2024
+# Last amended: 25th May, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -91,13 +91,25 @@ $ sudo apt install -y net-tools  curl git-all build-essential
 #       Copy and paste all the following conda and pip commands
 #	in ubuntu (wsl) terminal in one go (copy and paste):
 
+# FOR GPU equipped machines:
 
 conda create -y --name langchain python=3.11
 conda activate langchain
 conda config --add channels conda-forge
+conda install -c pytorch faiss-gpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y -c huggingface -c conda-forge datasets
-pip install ollama chromadb langchain-experimental tensorflow
+pip install ollama chromadb langchain-experimental tensorflow faiss-gpu  faiss-cpu
+
+# FOR CPU only machines. No GPU:
+
+conda create -y --name langchain python=3.11
+conda activate langchain
+conda config --add channels conda-forge
+conda install -c pytorch faiss-cpu
+conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
+conda install -y -c huggingface -c conda-forge datasets
+pip install ollama chromadb langchain-experimental tensorflow 
 
 
 
