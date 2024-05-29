@@ -1,4 +1,4 @@
-# Last amended: 25th May, 2024
+# Last amended: 29th May, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -96,26 +96,30 @@ $ sudo apt install -y net-tools  curl git-all build-essential
 conda create -y --name langchain python=3.11
 conda activate langchain
 conda config --add channels conda-forge
-conda install -c pytorch faiss-gpu
+conda config --add channels huggingface
+conda install -y -c pytorch faiss-gpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
-conda install -y -c huggingface -c conda-forge datasets
-pip install ollama chromadb langchain-experimental tensorflow faiss-gpu  faiss-cpu
+conda install -y datasets
+pip install ollama chromadb langchain-experimental tensorflow  
 
 # FOR CPU only machines. No GPU:
 
 conda create -y --name langchain python=3.11
 conda activate langchain
 conda config --add channels conda-forge
-conda install -c pytorch faiss-cpu
+conda config --add channels huggingface
+conda install -y -c pytorch faiss-cpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
-conda install -y -c huggingface -c conda-forge datasets
+conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow 
 
 
 
 ######################################################
+############### If you have GPU ######################
 ############### AA.4 INSTALL CUDA ####################
 ############# AND Appropriate driver #################
+
 ######################################################
 
 
