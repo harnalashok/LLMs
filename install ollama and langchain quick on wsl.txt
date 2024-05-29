@@ -1,10 +1,9 @@
 # Last amended: 29th May, 2024
-# Quick install of WSL ubuntu, ollama and AnythingLLM
+# Quick install of WSL ubuntu, ollama and langchain
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
 
-# ollama and AnythingLLM installation
-# See YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
+# ollama and langchain installation
 
 
 
@@ -90,6 +89,7 @@ $ sudo apt install -y net-tools  curl git-all build-essential
 
 		$ mkdir /home/ashok/Documents
 
+
 # 3.2 Create python environment with conda and install packages
 #       Copy and paste all the following conda and pip commands
 #	in ubuntu (wsl) terminal in one go (copy and paste):
@@ -134,82 +134,30 @@ pip install ollama chromadb langchain-experimental tensorflow
 #	    		https://github.com/harnalashok/LLMs/blob/main/gpu_nvidia.ipynb
 
 
-######################################################
-############### BB. anythingLLM ######################
-######################################################
+
+#######################################################
+############### AA.5 Starting chromdb server #######
+#######################################################
 
 
-# 5.0 Download anythingLLM for Windows from below.
-#     And put the downloaded exe file inside some empty folder in Windows.
-#
-#     https://useanything.com/download
-	
-
-# 5.1 Right click on it and hit 'Run as Administrator'
-#	Allow it to run/install software
-#	'Get Started' screen will come. Do not take any action yet.
-#	Just minimize the screen
-
-
-# 5.2 We will now start chromadb. In Ubuntu issue the following two commands
-#     After the commands are issued, keep ubuntu the terminal open
+# 5.0 If required, you can start chromadb. In Ubuntu issue the 
+#     following two commands. After the commands are issued, 
+#      keep ubuntu terminal open:
 
 
 		$ conda activate langchain
-		$ mkdir /home/ashok/Documents/chroma
+                $ mkdir /home/ashok/Documents/chroma
 		$ chroma run --path /home/ashok/Documents/chroma
-		
+
 #		  Keep the ubuntu terminal open.
-#        In the browser, access: http://localhost:8000
+
+#     In the browser, access: http://localhost:8000
+
+#############################################
 
 
-# 5.3 Begin configuring anythingLLM  as:	
-	
-#	a. Click Get Started
-#	b. Select Ollama as LLM Preference
-#	c. Write Ollama base URL, as:  http://127.0.0.1:11434
-#		Just writing '127.0.0.1:11434' would not work. http://
-#			has to be written also.
-#	d. Press Tab and under Chat model selection,
-#	     you should see a list of installed models installed. Select one of them
-#	f. Under Token Context Window, set token size of 4096.
-#	   (By default, Ollama uses a context window size of 2048 tokens.
-#	    It can be change: See this link of FAQ under ollama/docs/faq.md:
-#	    https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size )
-#	g. In the next screen, select 'AnythingLLMEmbdder'
-#	h. In the next screen select LanceDB
-#		(see below for using chromadb instead of LanceDB)
-#	i  Click 'Next' again
-#	j. Select 'For education', click 'Next'
-#	h. Give a Workspace name. AnythingLLM can have
-#	    multiple workspaces for difft document types.
-#	Done
 
 
-# 5.4  Using chromadb vector database:
-#      Ref: https://docs.trychroma.com/usage-guide#running-chroma-in-clientserver-mode
-#
-#	In anythingLLM, down below on the right, Click Settings icon ('spanner'). Then in
-#	 the left panel click 'Vector Database' just write the chroma URL, as:
-#
-#			http://127.0.0.1:8000 and leave the other two fields blank
-#			and save changes. No need to specify API key or token.
-#
-
-# 	Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
-#         and then enter a query.
-#		You should get a response.
-
-
-######################################################
-############### CC. Using anythingLLM ################
-######################################################
-
-# 5.5 Upload a pdf file in anythingLLM and see GPU usage
-#     by running the following command on a separate ubuntu
-#     terminal:
-
-	$ nvidia-smi -l 1 
 
 
 ------------------------
