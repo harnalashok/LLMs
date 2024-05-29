@@ -26,6 +26,14 @@ $ sudo apt update
 $ sudo apt install -y net-tools  curl git-all build-essential
 
 
+# 1.2 Access, folders in wsl by opening in Windows the file-explorer 
+#     window and writing address as:
+
+	\\wsl$
+
+
+
+
 ######################################################
 ############### AA.2 INSTALL ollama ##################
 ######################################################
