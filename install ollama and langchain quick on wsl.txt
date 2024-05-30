@@ -1,4 +1,4 @@
-# Last amended: 29th May, 2024
+# Last amended: 30th May, 2024
 # Quick install of WSL ubuntu, ollama and langchain
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -164,6 +164,32 @@ pip install ollama chromadb langchain-experimental tensorflow
 #############################################
 
 
+https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
+
+$ mkdir -p /home/ashok/Documents/data
+$ sudo tilde /etc/systemd/system/chroma.service
+# Copy and paste the following lines
+
+[Unit]
+Description = Chroma Service
+After = network.target
+
+[Service]
+Type = simple
+User = root
+Group = root
+WorkingDirectory = /home/ashok/Documents
+ExecStart=/home/ashok/anaconda3/envs/langchain/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log
+
+[Install]
+WantedBy = multi-user.target
+
+
+
+# Run the following commands:
+sudo systemctl daemon-reload
+sudo systemctl enable chroma
+sudo systemctl start chroma
 
 
 
