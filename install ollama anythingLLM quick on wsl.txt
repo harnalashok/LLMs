@@ -172,6 +172,11 @@ pip install ollama chromadb langchain-experimental tensorflow
 #        In the browser, access: http://localhost:8000
 
 
+# 5.2.1 You can also run chromadb as an ubuntu service. To do that please see below.
+
+
+
+
 # 5.3 Begin configuring anythingLLM  as:	
 	
 #	a. Click Get Started
@@ -205,7 +210,9 @@ pip install ollama chromadb langchain-experimental tensorflow
 #			and save changes. No need to specify API key or token.
 #
 
-# 	Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
+
+
+# 5.4.2   Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
 #         and then enter a query.
 #		You should get a response.
 
@@ -263,11 +270,24 @@ pip install ollama chromadb langchain-experimental tensorflow
 
 ############ DONE ################
 
-https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
+
+###################################
+## chromadb as an ubuntu service ##
+###################################
+# Ref:  https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
 
 $ mkdir -p /home/ashok/Documents/data
+
+
+
+# Run the following command to open a file:
+
 $ sudo tilde /etc/systemd/system/chroma.service
-# Copy and paste the following lines
+
+# and then copy/paste the following lines
+# save the file and exit:
+#*********************************
+
 
 [Unit]
 Description = Chroma Service
@@ -283,9 +303,14 @@ ExecStart=/home/ashok/anaconda3/envs/langchain/bin/chroma run --host 127.0.0.1 -
 [Install]
 WantedBy = multi-user.target
 
+#*********************************
 
 
-# Run the following commands:
+# Next Run the following commands:
 sudo systemctl daemon-reload
 sudo systemctl enable chroma
 sudo systemctl start chroma
+
+# From now on chroma will automatically start
+# whenever ubuntu starts.
+#####################################################################3
