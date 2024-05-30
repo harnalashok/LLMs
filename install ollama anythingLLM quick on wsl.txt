@@ -212,7 +212,7 @@ pip install ollama chromadb langchain-experimental tensorflow
 
 
 
-# 5.4.2   Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
+# 5.4.1   Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
 #         and then enter a query.
 #		You should get a response.
 

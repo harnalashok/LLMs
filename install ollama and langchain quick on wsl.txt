@@ -163,12 +163,23 @@ pip install ollama chromadb langchain-experimental tensorflow
 
 #############################################
 
-
-https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
+###################################
+## chromadb as an ubuntu service ##
+###################################
+# Ref:  https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
 
 $ mkdir -p /home/ashok/Documents/data
+
+
+
+# Run the following command to open a file:
+
 $ sudo tilde /etc/systemd/system/chroma.service
-# Copy and paste the following lines
+
+# and then copy/paste the following lines
+# save the file and exit:
+#*********************************
+
 
 [Unit]
 Description = Chroma Service
@@ -184,14 +195,7 @@ ExecStart=/home/ashok/anaconda3/envs/langchain/bin/chroma run --host 127.0.0.1 -
 [Install]
 WantedBy = multi-user.target
 
-
-
-# Run the following commands:
-sudo systemctl daemon-reload
-sudo systemctl enable chroma
-sudo systemctl start chroma
-
-
+#*********************************
 
 
 ------------------------
