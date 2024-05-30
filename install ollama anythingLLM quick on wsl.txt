@@ -265,6 +265,7 @@ pip install ollama chromadb langchain-experimental tensorflow
 
 https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
 
+$ mkdir -p /home/ashok/Documents/data
 $ sudo tilde /etc/systemd/system/chroma.service
 # Copy and paste the following lines
 
