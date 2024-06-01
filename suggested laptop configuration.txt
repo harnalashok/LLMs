@@ -1,4 +1,7 @@
-# Last amended: 24th May, 2024
+# Last amended: Ist June, 2024
+
+# A site to draw handwritten diagrams easily
+https://excalidraw.com/
 
 BDA students will have to experiment with:
 
