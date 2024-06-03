@@ -95,7 +95,7 @@ $ sudo apt install -y net-tools  curl git-all build-essential
 
 # 3.0.1  Create a folder Documents:
 
-		$ mkdir /home/ashok/Documents
+		$ mkdir -p /home/ashok/Documents
 
 
 # 3.2 Create python environment with conda and install packages
