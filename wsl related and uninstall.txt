@@ -1,0 +1,52 @@
+# Last amended: 3rd June, 2024
+# WSL related
+
+1. To access Linux folder, open File Explorer
+	of Windows 11. In the address bar type:
+	\\wsl$<ENTER>
+2. Which version of Linux I am having:
+		$lsb_release -a
+		Maybe jammy
+3. In ubuntu bash type:
+			$explorer.exe  .
+			(do not miss the dot)
+	to open explorer window and see files.
+    (Ref: https://superuser.com/q/1185033 )
+4. To install anaconda, get the link of 
+	anaconda linux distribution and type out:
+	
+	$ wget -c <anacondaDownloadLink>
+5. To use jupyter notebook, enter command:
+		$jupyter notebook
+		and access the notebook in browser, as:
+		localhost:8888
+
+########################################################
+# Uninstall wsl from Windows 10
+########################################################
+
+# 1. Click Windows + I to aopen Settings
+# 2. Click App > Apps & features
+# 3. Choose Windows Subsystem for Linux WSLg Preview and 
+#    click Uninstall > Uninstall. In Windows 11, you need to click three dots and click Uninstall.
+
+###############
+# StackOverflow: https://askubuntu.com/a/1261671
+###############
+Uninstall a WSL installation of Ubuntu like a normal Windows 10 application.
+To uninstall Ubuntu, right-click the Ubuntu shortcut in your Start menu and 
+click Uninstall.
+
+To reinstall Ubuntu, download it from the Microsoft Store once again.
+
+To (optionally) also uninstall Windows Subsystem for Linux:
+Open the Control Panel and go to Programs -> Turn Windows Features On or Off.
+Uncheck the Windows Subsystem for Linux option there and click OK. Windows will 
+uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
+##############
+		
+	
+	
+	
+	
+	
