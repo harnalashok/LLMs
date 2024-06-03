@@ -48,6 +48,7 @@ uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
 ##############
 
  wsl.exe --install --no-distribution
+Restart-Computer
 	
 	
 	
