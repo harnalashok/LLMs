@@ -24,7 +24,7 @@
 # 1.1  Update ubuntu and install some needed software:
 
 $ sudo apt update
-$ sudo apt install -y net-tools  curl git-all build-essential
+$ sudo apt install -y net-tools  gcc curl git-all build-essential
 
 
 
