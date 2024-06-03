@@ -112,6 +112,7 @@ conda install -y -c pytorch faiss-gpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
+pip install --upgrade   llama-cpp-python
 
 # FOR CPU only machines. No GPU:
 
@@ -123,6 +124,7 @@ conda install -y -c pytorch faiss-cpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
+pip install --upgrade   llama-cpp-python
 
 
 
