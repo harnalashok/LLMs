@@ -44,7 +44,10 @@ Open the Control Panel and go to Programs -> Turn Windows Features On or Off.
 Uncheck the Windows Subsystem for Linux option there and click OK. Windows will 
 uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
 ##############
-		
+# Install wsl
+##############
+
+ wsl.exe --install --no-distribution
 	
 	
 	
