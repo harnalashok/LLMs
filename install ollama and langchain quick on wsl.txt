@@ -49,9 +49,14 @@ $ sudo apt install -y net-tools gcc curl git-all build-essential
 # 2.0.1 Issue following commands to download llama3:
 #        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
 
-	$ ollama pull llama3:8b   # phi3 is 2.4gb
-                                  # else, tinydolphin is 500mb
-
+	$ ollama pull llama3:8b   # 5gb
+                                  # Alternatives:
+	                                  # phi3 is 2.4gb
+	                                  # With phi3, ask the question:
+	                                    #  You are an expert in machine learning using python language. Write a program to classify species in iris dataset.
+	                                  
+	                                  # ELSE, tinydolphin is 500mb. 
+	                                    # BUT, tinydolphin does not know machine learning.
 
 
 # 2.0.2 On terminal, write a question to get an answer.
