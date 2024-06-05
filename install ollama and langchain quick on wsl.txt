@@ -57,7 +57,7 @@ $ sudo apt install -y net-tools gcc curl git-all build-essential
 	                                  
 	                                  # ELSE, tinydolphin is 500mb. Or tinyllama almost the same size
 	                                    # BUT, tinydolphin does not know machine-learning. 
-                                            # tinyllama knows python and machine-learning
+                                            # YET tinyllama does know python and machine-learning
 
 
 # 2.0.2 On terminal, write a question to get an answer.
