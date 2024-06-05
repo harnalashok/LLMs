@@ -31,6 +31,8 @@
 ## CC. Reboot machine
    # 1.0 Check models installed:
    ollama list
+   # 1.1 If ollama is not started, start it:
+   sudo systemctl start ollama
    # 2.0 Run a model:
    ollama run phi3
    # 3.0 Alo try to pull a small model
