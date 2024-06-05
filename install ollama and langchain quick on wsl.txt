@@ -55,8 +55,9 @@ $ sudo apt install -y net-tools gcc curl git-all build-essential
 	                                  # With phi3, ask the question:
 	                                    #  You are an expert in machine learning using python language. Write a program to classify species in iris dataset.
 	                                  
-	                                  # ELSE, tinydolphin is 500mb. 
-	                                    # BUT, tinydolphin does not know machine learning.
+	                                  # ELSE, tinydolphin is 500mb. Or tinyllama almost the same size
+	                                    # BUT, tinydolphin does not know machine-learning. 
+                                            # tinyllama knows python and machine-learning
 
 
 # 2.0.2 On terminal, write a question to get an answer.
