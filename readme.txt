@@ -1,8 +1,38 @@
 # Last amended: 5th June, 2024
 
-sudo chmod -R 777 /usr/share/ollama
-rm -r -f /home/ashok/ollama
-sudo cp -r /usr/share/ollama  /home/ashok
+## AA. Copying ollama files for tranfer
+##     to other machines:
+  # 1.0 First stop ollama
+  sudo systemctl stop ollama
+  # 2.0 Change ollama folder permissions
+  sudo chmod -R 777 /usr/share/ollama
+  # 3.0 Remove any ollama folder at /home/ashok
+  rm -r -f /home/ashok/ollama
+  # 4.0 Copy /usr/share/ollama to HOME folder
+  sudo cp -r /usr/share/ollama  /home/ashok
+  # 5.0 Next copy the /home/ashok/ollama folder
+  # to your pen drive/hard drive
 
-sudo cp -r /home/ashok/ollama  /usr/share
-sudo chmod -R 777 /usr/share/ollama
+## BB. Copying back ollama model files to another machine
+##     Assuming ollama is installed:
+
+  # 1.0 First stop ollama
+  sudo systemctl stop ollama
+  # 2.0 Copy ollama folder from your pendrive/harddrive
+  #      to /home/ashok/ folder
+  # 3.0 Remove any existing ollama folder:
+  sudo chmod -R 777 /usr/share/ollama
+  sudo rm -r -f /usr/share/ollama
+  # 4.0 Copy files from ~/ollama to /usr/share
+  sudo cp -r /home/ashok/ollama  /usr/share
+  # 5.0 Change permissions of copied ollama folder:
+  sudo chmod -R 777 /usr/share/ollama
+
+## CC. Reboot machine
+   # 1.0 Check models installed:
+   ollama list
+   # 2.0 Run a model:
+   ollama run phi3
+   # 3.0 Alo try to pull a small model
+
+  ########## DONE
