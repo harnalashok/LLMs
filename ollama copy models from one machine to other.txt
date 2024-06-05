@@ -35,6 +35,10 @@
    sudo systemctl start ollama
    # 2.0 Run a model:
    ollama run phi3
-   # 3.0 Alo try to pull a small model
+   # 3.0 Issue following prompt:
+   You are an expert in machine learning using python language. Write a program to classify species in iris dataset.
+   # 3.0 Also try to pull a small model:
+    Either tinyllama   OR tinedolphin
+###################################################
 
-  ########## DONE
+ 
