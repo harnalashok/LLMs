@@ -1,4 +1,4 @@
-# Last amended: 30th May, 2024
+# Last amended: 5th June, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -111,7 +111,7 @@ conda install -y -c pytorch faiss-gpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
-pip install --upgrade   llama-cpp-python
+pip install --upgrade   llama-cpp-python tf-kras
 
 # FOR CPU only machines. No GPU:
 
@@ -123,7 +123,7 @@ conda install -y -c pytorch faiss-cpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
-pip install --upgrade   llama-cpp-python
+pip install --upgrade   llama-cpp-python tf-keras
 
 
 
