@@ -1,5 +1,9 @@
-Some sample modelfiles from OpenWebUI
-community:
+# LAst amended: 6th June, 2024
+Some sample modelfiles from OpenWebUI community
+Become a member to check modelfiles and post yours
+References in my github:
+           1. https://github.com/harnalashok/LLMs/blob/main/Modelfile
+           2. https://github.com/harnalashok/LLMs/blob/main/Modelfile__answerInHindi
 
 
 a. studybuddy
