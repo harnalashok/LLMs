@@ -1,4 +1,4 @@
-# Last amended: 5th June, 2024
+# Last amended: 7th June, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -24,7 +24,7 @@
 # 1.1  Update ubuntu and install some needed software:
 
 $ sudo apt update
-$ sudo apt install -y net-tools  gcc curl git-all build-essential
+$ sudo apt install -y net-tools curl git-all gcc g+ build-essential
 
 
 
