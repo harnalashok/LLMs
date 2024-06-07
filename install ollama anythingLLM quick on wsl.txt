@@ -289,6 +289,7 @@ pip install --upgrade   llama-cpp-python tf-keras
 ###################################
 # Ref:  https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
 
+$ conda activate langchain
 $ mkdir -p /home/ashok/Documents/data
 
 
@@ -323,6 +324,9 @@ WantedBy = multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable chroma
 sudo systemctl start chroma
+
+# Check:
+netstat -aunt | grep 8000
 
 # From now on chroma will automatically start
 # whenever ubuntu starts.
