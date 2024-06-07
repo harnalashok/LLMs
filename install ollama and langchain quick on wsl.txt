@@ -23,7 +23,7 @@
 1.1  Update ubuntu and install some needed software:
 
 $ sudo apt update
-$ sudo apt install -y net-tools gcc curl git-all gcc g+ build-essential 
+$ sudo apt install -y net-tools curl git-all gcc g+ build-essential 
 
 
 # 1.2 Access, folders in wsl by opening in Windows the file-explorer 
