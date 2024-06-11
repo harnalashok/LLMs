@@ -92,7 +92,20 @@ uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
 		$jupyter notebook
 		and access the notebook in browser, as:
 		localhost:8888
-	
+
+3. How much space is occupied by wsl2. Run the following
+   command in Powershell:
+
+       a) In Powershell run the command: 
+       
+       >wsl df -h /.
+      
+       b) OR thorugh search:
+
+        Settings-->Apps-->Installed Apps-->Ubuntu gives space occupied by Ubuntu
+        (StackOverflow: https://superuser.com/a/1491271 )
+
+
 	
 ################
 	
