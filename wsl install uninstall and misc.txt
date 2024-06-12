@@ -1,4 +1,4 @@
-# Last amended: 11th June, 2024
+# Last amended: 12th June, 2024
 # WSL related
 
 
@@ -105,7 +105,7 @@ uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
         Settings-->Apps-->Installed Apps-->Ubuntu gives space occupied by Ubuntu
         (StackOverflow: https://superuser.com/a/1491271 )
 
-4. Copy files from wsl-ubuntu to Windows using Powershell:
+4. Copy files from-to wsl-ubuntu & Windows using Powershell:
 
    a) From Ubuntu console, check Windows drives:
 
@@ -122,12 +122,13 @@ uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
          Copy-Item -Path C:\Users\ashok\hf\* -Destination g:\hf\  -Recurse
            (For large files, copying takes time.)
 
-    c) Copy recursively from external-drive to c:\ drive
+    c) Copy recursively from external-drive to c:\ drive (powershell command):
 
-         <i>Copy-Item -Path e:\hf\*  -Destination C:\Users\ubuntu\hf\  -Recurse</i>
+          Copy-Item -Path e:\hf\*  -Destination C:\Users\ubuntu\hf\  -Recurse
 
-cp -r /mnt/c/Users/ubuntu/hf/*  /home/ashok/.cache/
+     d) Copy recursively from c:\ drive to wsl-ubuntu (ubuntu console command):
 
+          cp -r /mnt/c/Users/ubuntu/hf/*  /home/ashok/.cache/
 
 	
 ################
