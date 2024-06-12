@@ -105,6 +105,23 @@ uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
         Settings-->Apps-->Installed Apps-->Ubuntu gives space occupied by Ubuntu
         (StackOverflow: https://superuser.com/a/1491271 )
 
+4. Copy files from wsl ubuntu to Windows using Powershell:
+
+   a) From Ubuntu console, check Windows drives:
+
+     ls -la /mnt
+
+   b) Copy files recurviveky from wsl Ubuntu to Windows:
+      In Ubuntu terminal, issue command (folder hf already exists):
+
+          cp -r .cache/huggingface/  /mnt/c/Users/ashok/hf/
+
+   b) Copy recursively all files from Windows c:\ drive to external drive in Windows
+      In Powershell, issue command (folder hf must exist in g:\):
+         
+         Copy-Item -Path C:\Users\ashok\hf\* -Destination g:\hf\  -Recurse
+        For large files, copying takes time.
+
 
 	
 ################
