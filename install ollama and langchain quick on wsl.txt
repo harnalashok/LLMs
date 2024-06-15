@@ -1,4 +1,4 @@
-# Last amended: 7th June, 2024
+# Last amended: 15th June, 2024
 # Quick install of WSL ubuntu, ollama and langchain
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -144,13 +144,41 @@ pip install --upgrade   llama-cpp-python tf-keras
 ######################################################
 
 
-# 4.0 Install CUDA. Installation depends upon
+# 4.0 There is a special cuda toolkit for wsl Ubuntu. This
+#     toolkit does not uninstall exiting cuda driver.
+#     See this link for cuda install on wsl:
+#       https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=runfile_local
+#     OR this link:
+#	https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2
+#
+# Steps are:
+	a. Download runfile directly in wsl Ubuntu
+	b. Install runfile in Ubuntu--as normal user
+	c. Make two amendments to .bashrc, as:
+		(check the cuda version)
+		export PATH=$PATH:"/usr/local/cuda-12.5/bin"
+		export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/usr/local/cuda-12.5/lib64
+
+	d. CLOSE ubuntu console and open AGAIN	
+	e. Install pyTorch in wsl langchain environment, as:
+
+		conda install PyTorch
+
+	f. Test cuda availability for PyTorch in langchain environment, as:
+		
+		In ipython:
+			import torch
+			torch.cuda.is_available()  # Should be True
+
+
+# 4.1 
+#	Older GPUs
+#	CUDA Installation depends upon
 #   	which GPU is available. For GPU 1060 or 730 install
 #	 CUDA 11.4
 #      Refer my github notebook and the paragraph: 
 #		"Which driver and which CUDA version for your nvidia gpu card"
 #	    		https://github.com/harnalashok/LLMs/blob/main/gpu_nvidia.ipynb
-
 
 
 #######################################################
