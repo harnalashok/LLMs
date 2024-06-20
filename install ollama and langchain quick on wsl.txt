@@ -24,7 +24,7 @@
 #      plocate takes time. Be patient:
 
 $ sudo apt update
-$ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzip
+$ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzip zip
 
 
 # 1.2 Access, folders in wsl by opening in Windows the file-explorer 
