@@ -157,10 +157,16 @@ netstat -aunt | grep 8000
 
 # 4.5 Start chroma service:
 
-	sudo systemctl start chroma
+	$ sudo systemctl start chroma
 
 # 4.6 Verify that chroma is listening at port 8000
-	netstat -aunt | grep 8000
+
+	$ netstat -aunt | grep 8000
+
+# 4.7 Verify that an 'chroma.sqlite3' file exists in folder data:
+
+	$ ls -la /home/ashok/Documents/data
+
 
 ######
 
