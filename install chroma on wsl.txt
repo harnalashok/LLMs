@@ -130,7 +130,43 @@ netstat -aunt | grep 8000
 
 # From now on chroma will automatically start
 # whenever ubuntu starts.
-#####################################################################3
+
+###################################
+## chromadb create fresh repo
+###################################
+
+# 4.0 Suppose you want all earlier chroma store to 
+#     be deleted and create afresh. 
+#     Proceed as follows:
+
+# 4.1. Stop chroma service:
+
+	$ sudo systemctl stop chroma
+
+# 4.2 Change permissions of data folder:
+
+	$ sudo chmod -R 777 /home/ashok/Documents/data
+
+# 4.3 Delete data folder
+
+	$ rm -r -f /home/ashok/Documents/data
+
+# 4.4 Create data folder afresh:
+
+	$ mkdir -p /home/ashok/Documents/data
+
+# 4.5 Start chroma service:
+
+	sudo systemctl start chroma
+
+# 4.6 Verify that chroma is listening at port 8000
+	netstat -aunt | grep 8000
+
+######
+
+
+
+
 
 # Syntax to remove conda env -- myenv
 
