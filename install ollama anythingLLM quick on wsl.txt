@@ -25,7 +25,7 @@
 #      plocate takes time:
 
 $ sudo apt update
-$ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzip
+$ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzip zip
 
 
 
