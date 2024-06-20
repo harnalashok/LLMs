@@ -1,0 +1,140 @@
+# Last amended: 20th June, 2024
+# Quick install of chroma on WSL ubuntu
+
+# chroma installation
+
+
+
+# 1.1  Update wsl ubuntu and install some needed software:
+#      plocate takes time:
+
+$ sudo apt update
+$ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate
+
+
+
+# 1.2 Access, folders in wsl by opening in Windows the file-explorer 
+#     window and writing address as:
+
+	\\wsl$
+
+
+
+#######################################################
+############### AA.1 INSTALL Python environment #######
+#######################################################
+
+
+# 1.3 In Ubuntu, download and Install Anaconda, if not installed
+
+#    a. Download:  
+	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+
+#    b. Install:
+        $ bash Anaconda3-2024.02-1-Linux-x86_64.sh
+
+
+# 1.4 Close Ubuntu terminal and then open Ubuntu terminal again
+
+# 1.5  Create a folder Documents:
+
+		$ mkdir /home/ashok/Documents
+
+# 1.6 Create python environment with conda and install packages
+#       Copy and paste all the following conda and pip commands
+#	in ubuntu (wsl) terminal in one go (copy and paste):
+
+# FOR GPU equipped machines:
+
+conda create -y --name langchain python=3.11
+conda activate langchain
+conda config --add channels conda-forge
+conda config --add channels huggingface
+conda install -y -c pytorch faiss-gpu
+conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
+conda install -y datasets
+pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
+pip install --upgrade   llama-cpp-python tf-kras
+
+# FOR CPU only machines. No GPU:
+
+conda create -y --name langchain python=3.11
+conda activate langchain
+conda config --add channels conda-forge
+conda config --add channels huggingface
+conda install -y -c pytorch faiss-cpu
+conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
+conda install -y datasets
+pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
+pip install --upgrade   llama-cpp-python tf-keras
+
+
+
+# 2.0 Start chromadb. In Ubuntu issue the following two commands
+#     After the commands are issued, keep ubuntu the terminal open
+
+		$ conda activate langchain
+		$ mkdir /home/ashok/Documents/chroma
+		$ chroma run --path /home/ashok/Documents/chroma
+		
+#		  Keep the ubuntu terminal open.
+#        In the browser, access: http://localhost:8000
+
+
+# 2.1 You can also run chromadb as an ubuntu service. 
+
+
+###################################
+## chromadb as an ubuntu service ##
+###################################
+# Ref:  https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
+
+# 2.2
+$ conda activate langchain
+$ mkdir -p /home/ashok/Documents/data
+
+# 2.3 Run the following command to open a file:
+
+  $ sudo tilde /etc/systemd/system/chroma.service
+
+  # and then copy/paste the following lines
+  # save the file and exit:
+
+#***********from here******************
+
+
+[Unit]
+Description = Chroma Service
+After = network.target
+
+[Service]
+Type = simple
+User = root
+Group = root
+WorkingDirectory = /home/ashok/Documents
+ExecStart=/home/ashok/anaconda3/envs/langchain/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log
+
+[Install]
+WantedBy = multi-user.target
+
+#*********to here********************
+
+
+# 3.0 Next Run the following commands:
+sudo systemctl daemon-reload
+sudo systemctl enable chroma
+sudo systemctl start chroma
+
+# 3.1 Check:
+netstat -aunt | grep 8000
+
+# From now on chroma will automatically start
+# whenever ubuntu starts.
+#####################################################################3
+
+# Syntax to remove conda env -- myenv
+
+        conda remove -y --name langchain --all
+
+############ DONE ################
+
