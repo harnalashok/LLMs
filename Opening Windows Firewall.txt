@@ -1,0 +1,35 @@
+# Last amended: 21st June, 2024
+# Ref: https://stackoverflow.com/a/55307776/3282777
+
+Permitting Windows Firewall
+=============================
+
+Inbound rule for port 11434
+---------------------------
+
+1. Go to Start -> Control Panel -> System and Security-->Windows Defender Firewall
+   The Windows Defender Firewall window opens.
+2. Click on the “Advanced Settings” link on the left pane. 
+   The Windows Firewall with Advanced Security UI opens up.
+3. Click on the “Inbound Rules” option.
+4. On the right (or left) pane, click on “New rule”.
+5. Under “Rule Type” select the option “Port” and click next.
+6. Against the option “Specific local port”, write 11434 and click Next.
+7. Select option 'Allow the connection' and Click Next (do not change any option here) and click Next again.
+8. Specify a name for this rule, and if you want to, add a description as a reminder.
+   Suggested name is: ollamaInboundRule
+9. Click Finish. 
+
+Outbound rule for port 11434
+-----------------------------
+3. In point 3 above, click on Outbound Rules
+4. On the right (or left) pane, click on “New rule”.
+5. Under “Rule Type” select the option “Port” and click next.
+6. Against the option “Specific local port”, write 11434 and click Next.
+7. Select the option 'Allow the connection' and Click Next and click Next again.
+8. Specify a name for this rule, and if you want to, add a description as a reminder.
+   Suggested name is: ollamaOutboundRule
+9. Click Finish. 
+=========================
+
+
