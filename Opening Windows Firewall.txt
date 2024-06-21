@@ -4,7 +4,7 @@
 Permitting Windows Firewall
 =============================
 
-Inbound rule for port 11434
+A. Inbound rule for port 11434
 ---------------------------
 
 1. Go to Start -> Control Panel -> System and Security-->Windows Defender Firewall
@@ -18,10 +18,11 @@ Inbound rule for port 11434
 7. Select option 'Allow the connection' and Click Next (do not change any option here) and click Next again.
 8. Specify a name for this rule, and if you want to, add a description as a reminder.
    Suggested name is: ollamaInboundRule
-9. Click Finish. 
+9. Click Finish and Restart the machine. 
 
-Outbound rule for port 11434
+B. Outbound rule for port 11434 
 -----------------------------
+(Possibly outbound rule is not needed)
 3. In point 3 above, click on Outbound Rules
 4. On the right (or left) pane, click on “New rule”.
 5. Under “Rule Type” select the option “Port” and click next.
@@ -29,7 +30,26 @@ Outbound rule for port 11434
 7. Select the option 'Allow the connection' and Click Next and click Next again.
 8. Specify a name for this rule, and if you want to, add a description as a reminder.
    Suggested name is: ollamaOutboundRule
-9. Click Finish. 
+9. Click Finish and Restart the machine
 =========================
 
+C. Delete/Write a rule
+------------------
+1. Open PowerShell as Administrator
+
+2. Enter (copy/paste) the following command to delete Inbound rule: ollamaRule:
+
+	netsh advfirewall firewall delete rule name="ollamaRule" protocol=TCP localport=11434
+
+3. Enter (copy/paste) the following command to delete outbound rule with the name: ollamaOutboundRule
+
+	netsh advfirewall firewall delete rule name="ollamaOutboundRule"
+
+4. Enter (copy/paste) the following command to write an Inbound rule for port 11434:
+
+	netsh advfirewall firewall add rule name="ollamaRule" dir=in action=allow protocol=TCP localport=11434
+
+5. Reboot machine.
+
+###############################3
 
