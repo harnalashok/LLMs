@@ -1,4 +1,4 @@
-# Last amended: 21st June, 2024
+# Last amended: 22nd June, 2024
 # Ref: https://stackoverflow.com/a/55307776/3282777
 
 Permitting Windows Firewall
@@ -35,7 +35,7 @@ B. Outbound rule for port 11434
 
 C. Delete/Write a rule
 ------------------
-1. Open PowerShell as Administrator
+1. Open commandprompt/powershell as Administrator
 
 2. Enter (copy/paste) the following command to delete Inbound rule: ollamaRule:
 
@@ -49,7 +49,15 @@ C. Delete/Write a rule
 
 	netsh advfirewall firewall add rule name="ollamaRule" dir=in action=allow protocol=TCP localport=11434
 
+5. Enter (copy/paste) the following command to write an outbound rule for port 11434:
+
+	netsh advfirewall firewall add rule name="ollamaOutboundRule" dir=out protocol=tcp localport=11434 action=allow
+
 5. Reboot machine.
+
+6. To get help on adding rules, type:
+
+	netsh advfirewall firewall add rule ?
 
 ###############################3
 
