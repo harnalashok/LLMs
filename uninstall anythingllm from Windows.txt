@@ -1,0 +1,23 @@
+# Last amended: 22nd June, 2023
+# Uninstall anythingLLM
+
+# 1.0 In Windows, you have to first uninstall anythingLLM and
+#	then delete anythingLLM related folder/files under:
+#
+#		C:\Users\ashok\AppData\Local\Programs
+#   		C:\Users\ashok\AppData\Roaming
+#
+# 2.0 In wsl stop chroma:
+#
+	$ sudo systemctl stop chroma	
+
+# 3.0 Then delete sqlite3 file:
+
+	$ sudo rm -r -f /home/ashok/Documents/data
+	$ mkdir -p /home/ashok/Documents/data
+
+# 4.0 Restart chroma:
+
+	$ sudo systemctl restart chroma
+
+######### DONE ############
