@@ -89,12 +89,12 @@ Reading pdf files:
 > from disk
 > from folder/directory
 ## Simple RAG for GitHub issues using Hugging Face Zephyr and LangChain [Link](https://github.com/harnalashok/LLMs/blob/main/RAG_on_Colab_with_Huggingface_and_langchain.ipynb)
-What is a RAG
-RAG on Colab using Huggingface models and langchain
-Creating and using Quantized models
-Using FAISS library
-Design prompt template
-HuggingFace pipeline and langchain pipeline wrapper
+What is a RAG     
+RAG on Colab using Huggingface models and langchain     
+Creating and using Quantized models     
+Using FAISS library     
+Design prompt template     
+HuggingFace pipeline and langchain pipeline wrapper     
 
 
       
