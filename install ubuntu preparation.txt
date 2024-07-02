@@ -62,6 +62,11 @@ pip install tensorflow
 pip install ollama
 pip install langchain-experimental
 
+# lamma-index libraries
+pip install llama-index
+pip install llama-index-llms-ollama
+pip install llama-index-embeddings-huggingface
+
 
 ######################################################
 ############### AA INSTALL CUDA ####################
