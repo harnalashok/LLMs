@@ -1,4 +1,4 @@
-# Last amended: 15th June, 2024
+# Last amended: 4th July, 2024
 # Quick install of WSL ubuntu, ollama and langchain
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -109,6 +109,7 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 # 3.2 Create python environment with conda and install packages
 #       Copy and paste all the following conda and pip commands
 #	in ubuntu (wsl) terminal in one go (copy and paste):
+#     If installing on Windows, open terminal as Administrator
 
 # FOR GPU equipped machines:
 
@@ -120,7 +121,8 @@ conda install -y -c pytorch faiss-gpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
-pip install --upgrade   llama-cpp-python tf-keras
+pip install tf-keras
+pip install --upgrade   llama-cpp-python
 
 # FOR CPU only machines. No GPU:
 
@@ -132,7 +134,8 @@ conda install -y -c pytorch faiss-cpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
-pip install --upgrade   llama-cpp-python tf-keras
+pip install tf-keras
+pip install --upgrade   llama-cpp-python
 
 # lamma-index libraries; GPU or CPU (any)
 pip install llama-index
