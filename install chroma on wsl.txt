@@ -43,6 +43,7 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 # 1.6 Create python environment with conda and install packages
 #       Copy and paste all the following conda and pip commands
 #	in ubuntu (wsl) terminal in one go (copy and paste):
+#     If installing on Windows, open terminal as Administrator
 
 # FOR GPU equipped machines:
 
@@ -54,7 +55,8 @@ conda install -y -c pytorch faiss-gpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
-pip install --upgrade   llama-cpp-python tf-kras
+pip install tf-keras
+pip install --upgrade   llama-cpp-python 
 
 # FOR CPU only machines. No GPU:
 
@@ -66,7 +68,9 @@ conda install -y -c pytorch faiss-cpu
 conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
-pip install --upgrade   llama-cpp-python tf-keras
+pip install tf-keras
+pip install --upgrade   llama-cpp-python
+
 
 # lamma-index libraries GPU or CPU (any)
 pip install llama-index
