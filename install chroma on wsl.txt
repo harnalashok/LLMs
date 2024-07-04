@@ -68,7 +68,7 @@ conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
 pip install --upgrade   llama-cpp-python tf-keras
 
-# lamma-index libraries
+# lamma-index libraries GPU or CPU (any)
 pip install llama-index
 pip install llama-index-llms-ollama
 pip install llama-index-embeddings-huggingface
