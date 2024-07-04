@@ -111,6 +111,8 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 # 3.2 Create python environment with conda and install packages
 #       Copy and paste all the following conda and pip commands
 #	in ubuntu (wsl) terminal in one go (copy and paste):
+#     If installing on Windows, open terminal as Administrator
+
 
 # FOR GPU equipped machines:
 
