@@ -1,5 +1,6 @@
 # Last amended: 06th July, 2024
 # Ref: https://docs.flowiseai.com/getting-started
+#      https://flowiseai.com/
 # Discord reference:
 #      https://discord.com/channels/1087698854775881778/1096265567058534461/1259047286571405445
 # YouTube reference:
