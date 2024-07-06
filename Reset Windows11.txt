@@ -1,0 +1,8 @@
+# LAst amended: 19th MAy, 2024
+# Reinstall Windows 11
+# Steps:
+a. Restart Windows
+b. Press F11 to enter into system recovery
+c. Click Troubleshoot and Reset
+d. you’ll need your BitLocker key to reset your PC. 
+e. This key is in your mobile also in Moodle passwords file.
