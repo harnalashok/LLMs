@@ -1,6 +1,7 @@
 # LAst amended: 19th MAy, 2024
 # Reinstall Windows 11
 # Steps:
+0. Delink OneDrive folder
 a. Restart Windows
 b. Press F11 to enter into system recovery
 c. Click Troubleshoot and Reset
