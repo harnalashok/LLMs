@@ -7,3 +7,5 @@ b. Press F11 to enter into system recovery
 c. Click Troubleshoot and Reset
 d. you’ll need your BitLocker key to reset your PC. 
 e. This key is in your mobile also in Moodle passwords file.
+f. See file in my github for bitlocker keys:
+         https://github.com/harnalashok/LLMs/blob/main/Reset%20your%20PC.docx
