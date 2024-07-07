@@ -1,8 +1,10 @@
-# Last amended: 06th July, 2024
+# Last amended: 07th July, 2024
 # Ref: https://docs.flowiseai.com/getting-started
 #      https://flowiseai.com/
 # Discord reference:
 #      https://discord.com/channels/1087698854775881778/1096265567058534461/1259047286571405445
+# Discord youtube tutorials:
+#      https://discord.com/channels/1087698854775881778/1102263977569955971
 # YouTube reference:
 #      https://www.youtube.com/watch?v=tD6fwQyUIJE&list=PL4HikwTaYE0HDOuXMm5sU6DH6_ZrHBLSJ
 # Flowise playlist on youtube:
@@ -44,3 +46,6 @@ $ npx flowise start
 # If required, open Inbound connection to port 3000 in firewall
 
 ############ DONE ###########
+ToDo:
+Flutterflow and Flowise
+##############################
