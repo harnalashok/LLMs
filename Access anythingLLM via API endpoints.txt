@@ -1,0 +1,109 @@
+# LAst amended: 12th July, 2024
+# Access anythingLLM using API endpoints
+
+1. Step 1: Start Ubuntu and conda activate langchain
+	   to ensure ollama is started.
+2. Step 2: Start anythingLLM
+3. Step 3: Click on Spanner icon-->API Keys-->Generate New API Keys
+ 	   API keys will be generated and listed. If not, close anythingLLM,
+	   restart machine and then restart anythingLLM. Reach API keys.
+	   They should be listed.
+4. Step 4: In the Windows firewall permit inbound and outbound connections
+	   for tcp, port 3001. 
+5. Step 5: In the browser, access: localhost:3001/api/docs to open
+	   AnythingLLM Developer API. This gives API endpoints that
+	   enable programmatic reading, writing, and updating of your
+	   AnythingLLM instance.
+6. Step 6: Back at anythingLLM, under API keys, click on CopyAPIKey to 
+	   copy the API key to clipboard.
+7. Step 7: Right at the top-right, click on the Green coloured Authorize 
+	   button. A text-box will open, paste here the API key, click 
+	   Authorize->Close
+
+8. Step 8: Under Authentication, click Get /v1/auth to open the
+           Authentication section. Click 'Try it out' button. And,
+	   click Execute. You should get Code 200 response when 
+	   Authentication is OK.
+9.Step 9: In Ubuntu, run command 'ip route'. You will have a line:
+	  such as:  default via 172.30.96.1 dev eth0 proto kernel.
+	  Note the IP address. This is the IP address of Windows,
+	  localhost accessible from Ubuntu. Please see Notes below.
+10.Step 10: Get your Workspace name in lowercase.
+11. Step11: Try the following curl startement in Ubuntu. You should
+	    get a response from LLM.
+
+		curl -X 'POST' \
+                'http://172.30.96.1:3001/api/v1/workspace/myworkspace/chat' \
+             -H 'accept: application/json' \
+             -H 'Authorization: Bearer JWDK4A9-PYQ44FW-HYFGDYF-2SAGWAA' \
+             -H 'Content-Type: application/json' \
+             -d '{
+                  "message": "What is AnythingLLM?",
+                  "mode": "chat"
+                 }'
+12. Step 12: Alternatively, in the browser, under Workspaces, click on 
+	     Post /vi/workspace/{slug}/chat to open it. Click on 
+             'Try it out' button. Against slug, write workspace name
+	     in small case. And under Request Body, delete 'query'. 
+
+ 	     Request body should be like:
+		{
+  		   "message": "What is AnythingLLM?",
+ 		    "mode": "chat"
+		}
+
+	      Click on 'Execute' button. You should get a response after some
+	      time.
+
+	     Request URL is:
+		http://localhost:3001/api/v1/workspace/myworkspace/chat
+	     slug is:
+		myworkspace
+	     Request Body is:
+		{
+  		  "message": "What is AnythingLLM?",
+   		  "mode": "chat"
+		}
+	     
+	     Curl is:
+	
+		curl -X 'POST' \
+		  'http://localhost:3001/api/v1/workspace/myworkspace/chat' \
+		  -H 'accept: application/json' \
+		  -H 'Authorization: Bearer JWDK4A9-PYQ44FW-HYFGDYF-2SAGWAA' \
+		  -H 'Content-Type: application/json' \
+		  -d '{
+			  "message": "What is AnythingLLM?",
+			  "mode": "chat"
+		       }'
+
+
+===============
+Notes
+===============
+AA.
+Discovering localhost:
+localhost Windows is not available in wsl2. USe
+ip route in WSL.  and using ipconfig in powershell
+See here:
+https://superuser.com/a/1679774
+and here:
+https://stackoverflow.com/a/66504604/3282777
+
+BB.
+query vs chat:
+Send a prompt to the workspace and the type of conversation (query or chat).
+Query: Will not use LLM unless there are relevant sources from vectorDB &
+       does not recall chat history.
+Chat: Uses LLM general knowledge w/custom embeddings to produce output, 
+      uses rolling chat history.
+	{
+ 	 "message": "What is AnythingLLM?",
+ 	 "mode": "query | chat"
+	}
+CC.
+Generated two API keys for our anythingLLM are:
+	JWDK4A9-PYQ44FW-HYFGDYF-2SAGWAA
+	7KFVZ8H-R2RMVXW-KB403P3-Y2NCP5Z
+
+==========================	
