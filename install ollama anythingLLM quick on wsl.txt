@@ -1,4 +1,4 @@
-# Last amended: 4th July, 2024
+# Last amended: 17th July, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -75,7 +75,7 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 
 	$ ollama list
 
-#	OR 
+#	OR, seek help with ollama commands: 
 
 	$ ollama
 
@@ -85,7 +85,13 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 
 #	sudo systemctl start/stop ollama
 
+# 2.0.6 Remove a model from laptop:
 
+	$ ollama rm phi3
+
+And then check if the model exists?
+
+	$  ls -la /usr/share/ollama/.ollama/models/manifests/registry.ollama.ai/library/
 
 
 #######################################################
