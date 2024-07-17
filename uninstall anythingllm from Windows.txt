@@ -1,4 +1,4 @@
-# Last amended: 22nd June, 2023
+# Last amended: 17th July, 2024
 # Uninstall anythingLLM
 
 # 1.0 In Windows, you have to first uninstall anythingLLM and
@@ -19,5 +19,6 @@
 # 4.0 Restart chroma:
 
 	$ sudo systemctl restart chroma
+	$  ls -la /home/ashok/Documents/data
 
 ######### DONE ############
