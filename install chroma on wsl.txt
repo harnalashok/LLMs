@@ -52,7 +52,7 @@ conda activate langchain
 conda config --add channels conda-forge
 conda config --add channels huggingface
 conda install -y -c pytorch faiss-gpu
-conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf pypdf2 transformers fastai::accelerate huggingface_hub git openai streamlit spyder
+conda install -y jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf pypdf2 transformers fastai::accelerate huggingface_hub git openai streamlit 
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
 pip install tf-keras
@@ -65,7 +65,7 @@ conda activate langchain
 conda config --add channels conda-forge
 conda config --add channels huggingface
 conda install -y -c pytorch faiss-cpu
-conda install -y spyder jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf transformers fastai::accelerate huggingface_hub git openai streamlit
+conda install -y jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf pypdf2 transformers fastai::accelerate huggingface_hub git openai streamlit
 conda install -y datasets
 pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
 pip install tf-keras
