@@ -13,6 +13,7 @@ conda install -y langchain -c conda-forge
 conda install -y anaconda::beautifulsoup4
 conda install -y pytorch::faiss-cpu
 conda install -y conda-forge::pypdf
+conda install -y conda-forge::pypdf2
 conda install -y conda-forge::transformers
 conda install -y fastai::accelerate
 conda install -y -c conda-forge huggingface_hub
