@@ -53,6 +53,11 @@ $ npx flowise start
 
 $  npm update -g flowise
 
+#**********
+## Uninstall flowise:
+#**********
+
+$ npm uninstall -g flowise
 
 ############ DONE ###########
 ToDo:
