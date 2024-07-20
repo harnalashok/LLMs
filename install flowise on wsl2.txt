@@ -45,6 +45,15 @@ $ npx flowise start
 # Open: http://localhost:3000
 # If required, open Inbound connection to port 3000 in firewall
 
+#**********
+## Step3:
+#**********
+
+# Update flowise, as:
+
+$  npm update -g flowise
+
+
 ############ DONE ###########
 ToDo:
 Flutterflow and Flowise
