@@ -1,4 +1,4 @@
-# Last amended: 20th July, 2024
+# Last amended: 21st July, 2024
 # Ref: https://docs.flowiseai.com/getting-started
 #      https://flowiseai.com/
 # Discord reference:
@@ -21,16 +21,16 @@
 
 
 # installs fnm (Fast Node Manager)
-sudo curl -fsSL https://fnm.vercel.app/install | bash
+$ sudo curl -fsSL https://fnm.vercel.app/install | bash
 
 # download and install Node.js
-fnm use --install-if-missing 20
+$ fnm use --install-if-missing 20
 
-# verifies the right Node.js version is in the environment
-node -v # should print `v20.15.0`
+# Check if the right Node.js version is in the environment
+$ node -v # should print `v20.15.0`
 
-# verifies the right NPM version is in the environment
-npm -v # should print `10.7.0`
+# Check if  the right NPM version is in the environment
+$ npm -v # should print `10.7.0`
 
 #**********
 ## Step2:
