@@ -1,4 +1,4 @@
-# Last amended: 20th July, 2024
+# Last amended: 22nd July, 2024
 # Quick install of WSL ubuntu, ollama and langchain
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -11,7 +11,7 @@
 ############### AA.1 INSTALL latest wsl Ubuntu #######
 ######################################################
 
-1.0 Open powershell as Administrator. Write the command:
+# 1.0 Open powershell as Administrator. Write the command:
 
 	wsl --install
 	
@@ -51,7 +51,10 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 #        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
 
 	$ ollama pull llama3:8b   # 5gb
-                                  # Alternatives:
+        # (See WARNING below when you get Error) 
+
+                                  # Alternatives to llama3: phi3 , tinydolphin
+
 	                                  # phi3 is 2.4gb
 	                                  # With phi3, ask the question:
 	                                    #  You are an expert in machine learning using python language. Write a program to classify species in iris dataset.
@@ -59,6 +62,15 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 	                                  # ELSE, tinydolphin is 500mb. Or tinyllama almost the same size
 	                                    # BUT, tinydolphin does not know machine-learning. 
                                             # YET tinyllama does know python and machine-learning
+
+
+# 2.0.2 WARNING
+#       IT is possible that while pulling or running ollama, you may get error
+#       On one terminal, issue command:
+
+        $ ollama serve
+
+#   And on the other terminal issue 'ollama pull' or 'ollama run' command.       
 
 
 # 2.0.2 On terminal, write a question to get an answer.
@@ -80,7 +92,9 @@ $ sudo apt install -y net-tools curl git-all gcc g+ build-essential plocate unzi
 
 # 2.0.5 ollama service can be started/restarted/shut, as:
 
-#	sudo systemctl start/stop ollama
+	$ sudo systemctl start/stop ollama
+#   OR, in one terminal,
+        $ ollama serve
 
 # 2.0.6 Remove a model from laptop:
 
