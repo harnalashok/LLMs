@@ -1,0 +1,384 @@
+# Last amended: 22th July, 2024
+# Quick install of WSL ubuntu, ollama and AnythingLLM
+# For detailed install instructions, refer this file in GitHub:
+#	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
+
+# ollama and AnythingLLM installation
+# See YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
+
+
+
+######################################################
+############### AA.1 INSTALL latest wsl Ubuntu #######
+######################################################
+
+1.0 Open powershell as Administrator. Write the command:
+
+	wsl --install
+	
+# 1.0.1 Reboot Windows when asked for. 
+#	Create your userid and password in Ubuntu
+#	Recommended for office machines: ashok/ashok 
+
+
+# 1.1  Update ubuntu and install some needed software:
+#      plocate takes time:
+
+$ sudo apt update
+$ sudo apt install -y net-tools curl git-all gcc g++ build-essential plocate unzip zip
+
+
+
+# 1.2 Access, folders in wsl by opening in Windows the file-explorer 
+#     window and writing address as:
+
+	\\wsl$
+
+
+######################################################
+############### AA.2 INSTALL ollama ##################
+######################################################
+# 2.0 Install/Uninstall Ollama by following instructions here:
+#     See https://github.com/ollama/ollama/blob/main/docs/linux.md:
+#	   ollama port: 11434
+#
+
+
+	$ curl -fsSL https://ollama.com/install.sh | sh
+
+
+# 2.0.1 Issue following commands to download llama3:
+#        Downloaded models are saved to folder /usr/share/ollama/.ollama/models
+
+	$ ollama pull llama3:8b   # 5gb
+        # (See WARNING below when you get Error) 
+
+                                  # Alternatives to llama3: phi3 , tinydolphin
+
+	                                  # phi3 is 2.4gb
+	                                  # With phi3, ask the question:
+	                                    #  You are an expert in machine learning using python language. Write a program to classify species in iris dataset.
+	                                  
+	                                  # ELSE, tinydolphin is 500mb. Or tinyllama almost the same size
+	                                    # BUT, tinydolphin does not know machine-learning. 
+                                            # YET tinyllama does know python and machine-learning
+
+
+# 2.0.2 WARNING
+#       IT is possible that while pulling or running ollama, you may get error
+#       On one terminal, issue command:
+
+        $ ollama serve
+
+#   And on the other terminal issue 'ollama pull' or 'ollama run' command.       
+
+# 2.0.2 On terminal, write a question to get an answer.
+#       Exit by typing:  /bye
+
+
+# 2.0.3 ollama supports GPUs with compute capability of 5.
+
+
+# 2.0.4 List all models downloaded:
+
+	$ ollama list
+
+#	OR, seek help with ollama commands: 
+
+	$ ollama
+
+
+
+# 2.0.5 ollama service can be started/restarted/shut, as:
+
+#	sudo systemctl start/stop ollama
+
+# 2.0.6 Remove a model from laptop:
+
+	$ ollama rm phi3
+
+And then check if the model exists?
+
+	$  ls -la /usr/share/ollama/.ollama/models/manifests/registry.ollama.ai/library/
+
+
+#######################################################
+############### AA.3 INSTALL Python environment #######
+#######################################################
+
+
+# 3.0 In Ubuntu, download and Install Anaconda, if not installed
+
+#    a. Download:  
+	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+
+#    b. Install:
+        $ bash Anaconda3-2024.02-1-Linux-x86_64.sh
+
+
+# 3.1 Close Ubuntu terminal and then open Ubuntu terminal again
+
+# 3.0.1  Create a folder Documents:
+
+		$ mkdir /home/ashok/Documents
+
+# 3.2 Create python environment with conda and install packages
+#       Copy and paste all the following conda and pip commands
+#	in ubuntu (wsl) terminal in one go (copy and paste):
+#     If installing on Windows, open terminal as Administrator
+
+
+# FOR GPU equipped machines:
+
+conda create -y --name langchain python=3.11
+conda activate langchain
+conda config --add channels conda-forge
+conda config --add channels huggingface
+conda install -y -c pytorch faiss-gpu
+conda install -y jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf pypdf2 transformers fastai::accelerate huggingface_hub git openai streamlit
+conda install -y datasets
+pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
+pip install tf-keras
+pip install --upgrade llama-cpp-python
+
+# FOR CPU only machines. No GPU:
+
+conda create -y --name langchain python=3.11
+conda activate langchain
+conda config --add channels conda-forge
+conda config --add channels huggingface
+conda install -y -c pytorch faiss-cpu
+conda install -y jupyter jupyterlab pandas numpy pip-tools ipython langchain beautifulsoup4 pypdf pypdf2 transformers fastai::accelerate huggingface_hub git openai streamlit
+conda install -y datasets
+pip install ollama chromadb langchain-experimental tensorflow sacremoses sentencepiece  
+pip install  tf-keras
+pip install --upgrade   llama-cpp-python 
+
+# lamma-index libraries (GPU or CPU, any)
+pip install llama-index
+pip install llama-index-llms-ollama
+pip install llama-index-embeddings-huggingface
+
+
+######################################################
+############### If you have GPU ######################
+############### AA.4 INSTALL CUDA ####################
+############# AND Appropriate driver #################
+
+######################################################
+
+# 4.0 There is a special cuda toolkit for wsl Ubuntu. This
+#     toolkit does not uninstall exiting cuda driver.
+#     See this link for cuda install on wsl:
+#       https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=runfile_local
+#     OR this link:
+#	https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2
+#
+# Steps are:
+	a. Download runfile directly in wsl Ubuntu
+	b. Install runfile in Ubuntu--as normal user
+	c. Make two amendments to .bashrc, as:
+		(check the cuda version)
+		export PATH=$PATH:"/usr/local/cuda-12.5/bin"
+		export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/usr/local/cuda-12.5/lib64
+
+	d. CLOSE ubuntu console and open AGAIN	
+	e. Install pyTorch in wsl langchain environment, as:
+
+		conda install PyTorch
+
+	f. Test cuda availability for PyTorch in langchain environment, as:
+		
+		In ipython:
+			import torch
+			torch.cuda.is_available()  # Should be True
+
+
+# 4.1 
+#	Older GPUs
+#	CUDA Installation depends upon
+#   	which GPU is available. For GPU 1060 or 730 install
+#	 CUDA 11.4
+#      Refer my github notebook and the paragraph: 
+#		"Which driver and which CUDA version for your nvidia gpu card"
+#	    		https://github.com/harnalashok/LLMs/blob/main/gpu_nvidia.ipynb
+
+
+
+######################################################
+############### BB. anythingLLM ######################
+######################################################
+
+
+# 5.0 Download anythingLLM for Windows from below.
+#     And put the downloaded exe file inside some empty folder in Windows.
+#
+#     https://useanything.com/download
+	
+
+# 5.1 Right click on it and hit 'Run as Administrator'
+#	Allow it to run/install software
+#	'Get Started' screen will come. Do not take any action yet.
+#	Just minimize the screen
+
+
+# 5.2 We will now start chromadb. In Ubuntu issue the following two commands
+#     After the commands are issued, keep ubuntu the terminal open
+
+#    
+
+
+		$ conda activate langchain
+		$ mkdir /home/ashok/Documents/chroma
+		$ chroma run --path /home/ashok/Documents/chroma
+		
+#		  Keep the ubuntu terminal open.
+#        In the browser, access: http://localhost:8000
+
+
+# 5.2.1 You can also run chromadb as an ubuntu service. To do that please see below.
+
+
+
+
+# 5.3 Begin configuring anythingLLM  as:	
+	
+#	a. Click Get Started
+#	b. Select Ollama as LLM Preference
+#	c. Write Ollama base URL, as:  http://127.0.0.1:11434
+#		Just writing '127.0.0.1:11434' would not work. http://
+#			has to be written also.
+#	d. Press Tab and under Chat model selection,
+#	     you should see a list of installed models installed. Select one of them
+#	f. Under Token Context Window, set token size of 4096.
+#	   (By default, Ollama uses a context window size of 2048 tokens.
+#	    It can be change: See this link of FAQ under ollama/docs/faq.md:
+#	    https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size )
+#	g. In the next screen, select 'AnythingLLMEmbdder'
+#	h. In the next screen select LanceDB
+#		(see below for using chromadb instead of LanceDB)
+#	i  Click 'Next' again
+#	j. Select 'For education', click 'Next'
+#	h. Give a Workspace name. AnythingLLM can have
+#	    multiple workspaces for difft document types.
+#	Done
+
+
+# 5.4  Using chromadb vector database:
+#      Ref: https://docs.trychroma.com/usage-guide#running-chroma-in-clientserver-mode
+#
+#	In anythingLLM, down below on the right, Click Settings icon ('spanner'). Then in
+#	 the left panel click 'Vector Database' just write the chroma URL, as:
+#
+#			http://127.0.0.1:8000 and leave the other two fields blank
+#			and save changes. No need to specify API key or token.
+#
+
+
+
+# 5.4.1   Next click AnythingLLM hyperlink at the top. Click on your Workspace name 
+#         and then enter a query.
+#		You should get a response.
+
+
+######################################################
+############### CC. Using anythingLLM ################
+######################################################
+
+# 5.5 Upload a pdf file in anythingLLM and see GPU usage
+#     by running the following command on a separate ubuntu
+#     terminal:
+
+	$ nvidia-smi -l 1 
+
+
+------------------------
+6.0 System Prompt Examples:
+-------------------------
+
+	The system prompt can effectively provide your chat bot specialized roles,
+	and results tailored to the prompt you have given the model. Examples of 
+	system prompts can be found here: ChatGPT-3.5 Roles:
+	https://www.w3schools.com/gen_ai/chatgpt-3-5/chatgpt-3-5_roles.php
+
+	Some interesting examples to try include:
+
+    		You are -X-. You have all the knowledge and personality of -X-. Answer
+    		as if you were -X- using their manner of speaking and vocabulary.
+        
+        	Example: You are Shakespeare. You have all the knowledge and personality
+        		 of Shakespeare. Answer as if you were Shakespeare using their manner
+        		 of speaking and vocabulary.
+
+			You are an expert (at) -role-. Answer all questions using your expertise
+			on -specific domain topic-.
+
+        	Example: You are an expert software engineer. Answer all questions using your 
+        		 expertise on Python.
+
+			You are a -role- bot, respond with -response criteria needed-. If 
+			no -response criteria- is needed, respond with -alternate response-.
+			
+        	Example: You are a grammar checking bot, respond with any grammatical corrections
+        		 needed. If no corrections are needed, respond with “verified”.
+        		 
+ 	 
+        		 
+
+
+############ DONE ################
+
+# Syntax to remove conda env -- myenv
+
+        conda remove -y --name langchain --all
+
+############ DONE ################
+
+
+###################################
+## chromadb as an ubuntu service ##
+###################################
+# Ref:  https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
+
+$ conda activate langchain
+$ mkdir -p /home/ashok/Documents/data
+
+
+
+# Run the following command to open a file:
+
+$ sudo tilde /etc/systemd/system/chroma.service
+
+# and then copy/paste the following lines
+# save the file and exit:
+#*********************************
+
+
+[Unit]
+Description = Chroma Service
+After = network.target
+
+[Service]
+Type = simple
+User = root
+Group = root
+WorkingDirectory = /home/ashok/Documents
+ExecStart=/home/ashok/anaconda3/envs/langchain/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log
+
+[Install]
+WantedBy = multi-user.target
+
+#*********************************
+
+
+# Next Run the following commands:
+sudo systemctl daemon-reload
+sudo systemctl enable chroma
+sudo systemctl start chroma
+
+# Check:
+netstat -aunt | grep 8000
+
+# From now on chroma will automatically start
+# whenever ubuntu starts.
+#####################################################################3
