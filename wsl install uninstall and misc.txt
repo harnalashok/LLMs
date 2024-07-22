@@ -1,4 +1,4 @@
-# Last amended: 12th June, 2024
+# Last amended: 22nd July, 2024
 # WSL related
 
 
@@ -76,6 +76,36 @@ To (optionally) also uninstall Windows Subsystem for Linux:
 Open the Control Panel and go to Programs -> Turn Windows Features On or Off.
 Uncheck the Windows Subsystem for Linux option there and click OK. Windows will 
 uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
+
+
+###############
+# Change sudo user forgotton password
+# Ref video: https://www.youtube.com/watch?v=RCW9PTNS440&t=80s
+###############
+
+# You have forgotton sudo user password. Change as follows:
+# Step 1: Open powershell as Administrator. Issue command:
+
+  > wsl -l
+
+# to know your ubuntu version. Let us say reply is:
+
+   Windows Subsystem for Linux Distributions:
+   Ubuntu (Default)
+   Ubuntu-20.04
+
+# Then refer to your Ubuntu as: ubuntu2004 (all in small case).
+# Issue command to make 'root' as the default user:
+
+  >ubuntu2004 config --default-user root
+
+# Ubuntu will now open as root user. Change the password of sudo user, as:
+
+   # passwd ashok
+
+# After password change, go back to powershell and make ashok as default user:
+
+   >ubuntu2004 config --default-user ashok
 
 ##### MISC ########
 
