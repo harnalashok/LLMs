@@ -88,7 +88,7 @@ uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
 
   > wsl -l
 
-# to know your ubuntu version. Let us say reply is:
+# The above will tell you your ubuntu version. Let us say reply is:
 
    Windows Subsystem for Linux Distributions:
    Ubuntu (Default)
