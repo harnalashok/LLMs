@@ -1,4 +1,4 @@
-# Last amended: 21st July, 2024
+# Last amended: 23rd July, 2024
 # Ref: https://docs.flowiseai.com/getting-started
 #      https://flowiseai.com/
 # Discord reference:
@@ -19,42 +19,48 @@
 ## Install Node.js on wsl2 Ubuntu, as below:
 ## Ref: https://nodejs.org/en/download/package-manager
 
+# 1.0 Install zip
+$ sudo apt install zip
 
-# installs fnm (Fast Node Manager)
+# 1.1 installs fnm (Fast Node Manager)
 $ sudo curl -fsSL https://fnm.vercel.app/install | bash
 
-# download and install Node.js
+# 1.2 download and install Node.js
 $ fnm use --install-if-missing 20
 
-# Check if the right Node.js version is in the environment
+# 1.3 Check if the right Node.js version is in the environment
 $ node -v # should print `v20.15.0`
 
-# Check if  the right NPM version is in the environment
+# 1.4 Check if  the right NPM version is in the environment
 $ npm -v # should print `10.7.0`
 
 #**********
 ## Step2:
 #**********
 
-# Install Flowise as NORMAL user
+# 2.1 Install Flowise as NORMAL user
 $ npm install -g flowise
 
-# Start Flowise:
+# 2.2 Start Flowise:
 $ npx flowise start
 
-# Open: http://localhost:3000
+# 2.3 Open in browser: 
+  http://localhost:3000
+
 # If required, open Inbound connection to port 3000 in firewall
 
+## **** flowise installation complete ***** ##
+
 #**********
-## Step3:
+## When required Steps:
 #**********
 
-# Update flowise, as:
+# 3.0 When required, Update flowise as:
 
 $  npm update -g flowise
 
 #**********
-## Uninstall flowise:
+## When required, Uninstall flowise, as :
 #**********
 
 $ npm uninstall -g flowise
