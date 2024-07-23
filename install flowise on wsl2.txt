@@ -20,7 +20,7 @@
 ## Ref: https://nodejs.org/en/download/package-manager
 
 # 1.0 Install zip
-$ sudo apt install zip
+$ sudo apt install zip unzip
 
 # 1.1 installs fnm (Fast Node Manager)
 $ sudo curl -fsSL https://fnm.vercel.app/install | bash
