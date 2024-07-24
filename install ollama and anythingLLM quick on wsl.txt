@@ -1,4 +1,4 @@
-# Last amended: 22th July, 2024
+# Last amended: 24th July, 2024
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -337,6 +337,8 @@ pip install llama-index-embeddings-huggingface
 
 ###################################
 ## chromadb as an ubuntu service ##
+## As per configuration, vector-store is
+##   at Documents/data/
 ###################################
 # Ref:  https://cookbook.chromadb.dev/running/systemd-service/#chroma-cli
 
