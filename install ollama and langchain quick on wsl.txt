@@ -1,10 +1,19 @@
-# Last amended: 24th July, 2024
+# Last amended: 26th July, 2024
 # Quick install of WSL ubuntu, ollama and langchain
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
 
 # ollama and langchain installation
 
+######################################################
+############### AA.0 Permit firewall port 11434 #######
+######################################################
+
+# 0.  Open Windows firewall control panel.
+#     (Access it as: Control Panel-->System Security-->Windows Defender Firewall-->Advanced Settings (left panel)
+# 0.1 Make one Inbound and one outbound rule
+# 0.2 Both rules will allow tcp connection to tcp port 11434
+# 0.3 Restart the machine.
 
 
 ######################################################
