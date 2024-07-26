@@ -6,7 +6,15 @@
 # ollama and AnythingLLM installation
 # See YouTube Video: https://www.youtube.com/watch?v=IJYC6zf86lU
 
+######################################################
+############### AA.0 Permit firewall port 11434 #######
+######################################################
 
+# 0.  Open Windows firewall control panel.
+#     (Access it as: Control Panel-->System Security-->Windows Defender Firewall-->Advanced Settings (left panel)
+# 0.1 Make one Inbound and one outbound rule
+# 0.2 Both rules will allow tcp connection to tcp port 11434
+# 0.3 Restart the machine.
 
 ######################################################
 ############### AA.1 INSTALL latest wsl Ubuntu #######
