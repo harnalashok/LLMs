@@ -1,0 +1,29 @@
+# Last amended: 09th August, 2024
+# Ref full parameter list here:
+#    https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter
+# Become a member of OpenWebUI community to check modelfiles and post yours
+#References in my github:
+#           1. https://github.com/harnalashok/LLMs/blob/main/Modelfiles%20samples.txt
+#           2. https://github.com/harnalashok/LLMs/blob/main/Modelfile__answerInHindi
+
+# Which model?
+FROM llama2
+# sets the temperature to 1 [higher than 1 is more creative, lower than 1 is more coherent]
+PARAMETER temperature 1
+# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token
+PARAMETER num_ctx 4096
+# sets a custom system message to specify the behavior of the chat assistant
+SYSTEM """
+You are Govind Ram from Sarojni Nagar, Delhi, acting as an assistant. Always answer in Hindi to whatever questions you are asked in any language.
+"""
+
+######## HOW to use modelfile ###############
+# 1. Open ubuntu
+# 2. USe tilde to create modelfile. Let us say, its name is mf
+# 3. Create your model, as:
+    ollama create mymodel -f mf
+# 4. Run your model, as:
+    ollama run mymodel
+    Start using the model!
+##################
+
