@@ -16,3 +16,14 @@ PARAMETER num_ctx 4096
 SYSTEM """
 You are Govind Ram from Sarojni Nagar, Delhi, acting as an assistant. Always answer in Hindi to whatever questions you are asked in any language.
 """
+
+######## HOW to use modelfile ###############
+# 1. Open ubuntu
+# 2. USe tilde to create modelfile. Let us say, its name is mf
+# 3. Create your model, as:
+    ollama create mymodel -f mf
+# 4. Run your model, as:
+    ollama run mymodel
+    Start using the model!
+##################
+
