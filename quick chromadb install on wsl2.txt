@@ -72,8 +72,11 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl enable chroma
 $ sudo systemctl start chroma
 
-# 2.3 Check, if you get a response:
- $ netstat -aunt | grep 8000
+# 2.3 Check, if you get a response
+#     to the folloing command. You should 
+#     get a response:
+
+  $ netstat -aunt | grep 8000
 
 # 2.4 From now on chroma will automatically start
 #      whenever ubuntu starts. It will be available at port 8000.
