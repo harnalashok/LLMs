@@ -1,4 +1,4 @@
-# Last amended: 23rd July, 2024
+# Last amended: 14th August, 2024
 # Ref: https://docs.flowiseai.com/getting-started
 #      https://flowiseai.com/
 # Discord reference:
@@ -19,11 +19,19 @@
 ## Install Node.js on wsl2 Ubuntu, as below:
 ## Ref: https://nodejs.org/en/download/package-manager
 
+# 0.0 Only for lab machines. NOT for personal laptops
+#     Press Windows+R to open Run window and run the following command:
+
+        smc -stop
+
 # 1.0 Install zip
 $ sudo apt install zip unzip
 
 # 1.1 installs fnm (Fast Node Manager)
 $ sudo curl -fsSL https://fnm.vercel.app/install | bash
+
+# 1.1A Impt: Close Ubuntu terminal
+#            Open it again
 
 # 1.2 download and install Node.js
 $ fnm use --install-if-missing 20
@@ -33,6 +41,9 @@ $ node -v # should print `v20.15.0`
 
 # 1.4 Check if  the right NPM version is in the environment
 $ npm -v # should print `10.7.0`
+
+# 1.5 Close Ubuntu terminal
+#     Open it again
 
 #**********
 ## Step2:
