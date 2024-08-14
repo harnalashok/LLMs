@@ -2,20 +2,18 @@
 # Quick install of chromadb on WSL2 ubuntu
 
 
-
-# 1.0 In Ubuntu, download and Install Anaconda, if not installed
+# 1.0 In wsl2 Ubuntu, download and Install Anaconda, if not installed
 
 #    a. Open Ubuntu terminal. Download Anaconda in Ubuntu, as:  
 
 	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
 
 #    b. Install now Anaconda, as:
-
-        $ bash Anaconda3-2024.06-1-Linux-x86_64.sh
 #       ANSWER yes TO THE LAST QUESTION ASKED
 
-#   c. CLOSE ubuntu terminal and OPEN it again
+        $ bash Anaconda3-2024.06-1-Linux-x86_64.sh
 
+#   c. CLOSE ubuntu terminal and OPEN it again
 
 
 # 1.1  Create a folder Documents, as:
@@ -28,11 +26,11 @@
 
 # 1.3 Make a folder chroma:
 
-		$ mkdir /home/ashok/Documents/chroma
+		$ mkdir /home/ashok/Documents/data
 
 # 1.4 Start chroma, as:
 
-		$ chroma run --path /home/ashok/Documents/chroma
+		$ chroma run --path /home/ashok/Documents/data
 		
 # 1.5	 Keep the ubuntu terminal open.
 #        In the browser, access: http://localhost:8000
@@ -41,16 +39,15 @@
 # 1.6 Kill chroma by pressing ctrl-c
 
 
-
+############ ALTERNATIVE WAY TO START CHROMA AS a SERVICE ############## 
 
 # 2.0  Run the following command to open a blank file:
 
         $ sudo tilde /etc/systemd/system/chroma.service
 
 
-# and then copy/paste the following lines
-# save the file and exit:
-
+# 2.1 And then copy/paste the following lines
+#      save the file and exit:
 #*********************************
 
 
@@ -71,14 +68,14 @@ WantedBy = multi-user.target
 #*********************************
 
 
-# Next Run the following commands:
-sudo systemctl daemon-reload
-sudo systemctl enable chroma
-sudo systemctl start chroma
+# 2.2 Next Run the following commands on ubuntu terminal:
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable chroma
+$ sudo systemctl start chroma
 
-# Check:
-netstat -aunt | grep 8000
+# Check, if you get a response:
+ $ netstat -aunt | grep 8000
 
 # From now on chroma will automatically start
-# whenever ubuntu starts.
+# whenever ubuntu starts. It will be available at port 8000.
 #####################################################################3
