@@ -117,16 +117,17 @@ And then check if the model exists?
 
 # 3.0 In Ubuntu, download and Install Anaconda, if not installed
 
-#    a. Download:  
-	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+#    a. Open Ubuntu terminal. Download Anaconda in Ubuntu, as:  
+	$ wget -c https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
 
-#    b. Install:
-        $ bash Anaconda3-2024.02-1-Linux-x86_64.sh
+#    b. Install now Anaconda, as:
+        $ bash Anaconda3-2024.06-1-Linux-x86_64.sh
+#       Let the process complete.
 
 
 # 3.1 Close Ubuntu terminal and then open Ubuntu terminal again
 
-# 3.0.1  Create a folder Documents:
+# 3.0.1  Create a folder Documents, as:
 
 		$ mkdir /home/ashok/Documents
 
@@ -136,7 +137,7 @@ And then check if the model exists?
 #     If installing on Windows, open terminal as Administrator
 
 
-# FOR GPU equipped machines:
+# FOR GPU equipped laptops:
 
 conda create -y --name langchain python=3.11
 conda activate langchain
