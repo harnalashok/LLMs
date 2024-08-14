@@ -16,19 +16,16 @@
 #   c. CLOSE ubuntu terminal and OPEN it again
 
 
-# 1.1  Create a folder Documents, as:
+# 1.1  Create a folder Documents/data, as:
 
-		$ mkdir /home/ashok/Documents
+		$ mkdir -p /home/ashok/Documents/data
 
 # 1.2 Install chromadb
 
                $ pip install chromadb
 
-# 1.3 Make a folder chroma:
 
-		$ mkdir /home/ashok/Documents/data
-
-# 1.4 Start chroma, as:
+# 1.3 Start chroma, as:
 
 		$ chroma run --path /home/ashok/Documents/data
 		
@@ -46,8 +43,8 @@
         $ sudo tilde /etc/systemd/system/chroma.service
 
 
-# 2.1 And then copy/paste the following lines
-#      save the file and exit:
+# 2.1 And then copy/paste in it the following lines
+#      from line 50 to line 64. Save the file and exit tilde:
 #*********************************
 
 
@@ -68,14 +65,16 @@ WantedBy = multi-user.target
 #*********************************
 
 
-# 2.2 Next Run the following commands on ubuntu terminal:
+# 2.2 Next Run the following commands, one by one
+#     on ubuntu terminal:
+
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable chroma
 $ sudo systemctl start chroma
 
-# Check, if you get a response:
+# 2.3 Check, if you get a response:
  $ netstat -aunt | grep 8000
 
-# From now on chroma will automatically start
-# whenever ubuntu starts. It will be available at port 8000.
+# 2.4 From now on chroma will automatically start
+#      whenever ubuntu starts. It will be available at port 8000.
 #####################################################################3
