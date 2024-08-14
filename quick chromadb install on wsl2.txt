@@ -74,7 +74,7 @@ $ sudo systemctl start chroma
 
 # 2.3 Check, if you get a response
 #     to the folloing command. You should 
-#     get a response:
+#     get a LISTEN response:
 
   $ netstat -aunt | grep 8000
 
