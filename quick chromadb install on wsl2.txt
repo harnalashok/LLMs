@@ -38,7 +38,7 @@
 
 ############ ALTERNATIVE WAY TO START CHROMA AS a SERVICE ############## 
 
-# 2.0  Run the following command to open a blank file:
+# 2.0  Run the following command to open a blank file in ubuntu tilde:
 
         $ sudo tilde /etc/systemd/system/chroma.service
 
