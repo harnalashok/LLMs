@@ -33,7 +33,7 @@
 #        In the browser, access: http://localhost:8000
 
 
-# 1.6 Kill chroma by pressing ctrl-c
+# 1.6 Kill chroma by pressing ctrl-c in Ubuntu terminal
 
 
 ############ ALTERNATIVE WAY TO START CHROMA AS a SERVICE ############## 
