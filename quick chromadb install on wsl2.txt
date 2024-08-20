@@ -1,4 +1,4 @@
-# Last amended: 14th August, 2024
+# Last amended: 20th August, 2024
 # Quick install of chromadb on WSL2 ubuntu
 
 
@@ -80,4 +80,18 @@ $ sudo systemctl start chroma
 
 # 2.4 From now on chroma will automatically start
 #      whenever ubuntu starts. It will be available at port 8000.
-#####################################################################3
+############# Uninstall chroma ###################################
+
+# 3.0 In wsl stop chroma:
+#
+	$ sudo systemctl stop chroma	
+
+# 3.1 Then delete sqlite3 file:
+
+	$ sudo rm -r -f /home/ashok/Documents/chroma
+	$ mkdir -p /home/ashok/Documents/chroma
+
+# 4.0 Restart chroma:
+
+	$ sudo systemctl restart chroma
+	$  ls -la /home/ashok/Documents/chroma
