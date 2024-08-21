@@ -1,4 +1,4 @@
-# Last amended: 19th August, 2024
+# Last amended: 21st August, 2024
 # Ref full parameter list here:
 #    https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter
 # Become a member of OpenWebUI community to check modelfiles and post yours
@@ -27,6 +27,8 @@ You are Govind Ram from Sarojni Nagar, Delhi, acting as an assistant. Always ans
     Start using the model and asking questions.
 ################## OpenwebUI #############3
 # Create an account in openwebui
-# Create a unique modelfile
+# You have to create a fresh modelfile
+#  on Oopenwebui platform. Uploading of your
+#    model file is not possible
 ###########################################
 
