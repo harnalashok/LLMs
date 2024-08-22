@@ -16,11 +16,11 @@
 >>viii) Start using it<br>
 >>Done.....
 
-$$$$$$$$$$$$$$$$$$$$**************************************************************************$$$$$$$$$$$$$$$$
-$$$$$$$$$$$$$$$$$$$$$ Here is a response from a gguf medical model: biomistral-7b.IQ2_XXS.gguf $$$$$$$$$$$$$$$$
-$$$$$$$$$$$$$$$$$$$$**************************************************************************$$$$$$$$$$$$$$$$
+**************************************************************************<br>
+Below is a response from a gguf medical model: *biomistral-7b.IQ2_XXS.gguf* <br>
+**************************************************************************<br>
 
-Question: what do you specialise in?
+**Question: what do you specialise in?**
 
 
  As a language model AI developed by OpenAI, I'm capable of a wide range of tasks but don't have a specific area or expertise like a specialist. My abilities are based on the vast amount of information I've been trained to process and generate human-like responses.
