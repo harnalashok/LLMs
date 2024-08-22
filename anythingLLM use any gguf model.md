@@ -19,6 +19,7 @@ ollama gguf model can be used both in flowise and anythingllm.</h6>
 
 
 ## **B. Steps for using gguf models in ollama:** <br>
+<h6>(These models can be used both in anythingllm and in ollama)</h6><br>
 >>i)  Download a relevant *gguf* model from [huggingface.](https://huggingface.co/models)<br>
 >>ii) To search for a relevant model, you can use its *Full text search* facility<br>
      at this [link](https://huggingface.co/search/full-text?type=model). For example, to search for a bio or medical model of gguf format, you can write search text as:<br><br> 
