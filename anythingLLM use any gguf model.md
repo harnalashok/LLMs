@@ -2,7 +2,7 @@
 Install any gguf model in anythingLLM or use it in ollama.<br> 
 ollama gguf model can also be used in flowise.</h7>
 
-##### See this [link](https://docs.useanything.com/fine-tuning/loading-custom-models) on importing custom models into anythingllm and [this link](https://www.youtube.com/watch?v=7BH4C6-HP14) for using in ollama
+##### See this [link](https://docs.useanything.com/fine-tuning/loading-custom-models) on importing custom models into anythingllm<br> and [this link](https://www.youtube.com/watch?v=7BH4C6-HP14) for using custom models in ollama
 ## **A. Steps for using gguf models in anythingLLM:**
 >>i)  Download a relevant *gguf* model from [huggingface.](https://huggingface.co/models)       
 >>ii) To search for a relevant model, you can use its *Full text search* facility<br>
