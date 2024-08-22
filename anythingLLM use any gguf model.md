@@ -3,7 +3,7 @@ Install any gguf model in anythingLLM or use it in ollama.<br>
 ollama gguf model can also be used in flowise.</h7>
 
 ##### See this [link](https://docs.useanything.com/fine-tuning/loading-custom-models) on importing custom models into anythingllm
-## **A. Steps for using gguf in anythingLLM:**
+## **A. Steps for using gguf models in anythingLLM:**
 >>i)  Download a relevant *gguf* model from [huggingface.](https://huggingface.co/models)       
 >>ii) To search for a relevant model, you can use its *Full text search* facility<br>
      at this [link](https://huggingface.co/search/full-text?type=model). For example, to search for a bio or medical model of gguf format, you can write search text as:<br><br> 
@@ -18,7 +18,7 @@ ollama gguf model can also be used in flowise.</h7>
 >>Done.....
 
 
-## **B. Steps for using gguf in ollama:** <br>
+## **B. Steps for using gguf models in ollama:** <br>
 >>i)  Download a relevant *gguf* model from [huggingface.](https://huggingface.co/models)<br>
 >>ii) To search for a relevant model, you can use its *Full text search* facility<br>
      at this [link](https://huggingface.co/search/full-text?type=model). For example, to search for a bio or medical model of gguf format, you can write search text as:<br><br> 
@@ -31,10 +31,7 @@ ollama gguf model can also be used in flowise.</h7>
 >>vi) Save the file, say, as: gguf_modelfile<br>
 >>vii) Create a model using ollama command, as:<br>
  ollama create biomistral -f gguf_modelfile<br>
->>vii) Start using biomistarl created above<br>
-
-
-
+>>vii) Start using biomistarl created above in either *anythingLLM* or in *flowise*<br>
 
 **************************************************************************<br>
 Below is a response from a gguf medical model: *biomistral-7b.IQ2_XXS.gguf* <br>
