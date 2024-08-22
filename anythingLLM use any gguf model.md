@@ -1,5 +1,6 @@
 <h6>Last amended: 22nd August, 2024</h6>
-<h6>Install any gguf model in anythingLLM or use in ollama</h6>     
+<h6>Install any gguf model in anythingLLM or use in ollama</h6> 
+<h7>ollama gguf model can also be used in flowise</h7>
 
 ##### See this [link](https://docs.useanything.com/fine-tuning/loading-custom-models) on importing custom models into anythingllm
 >A. Steps for using gguf in anythingLLM:
@@ -22,15 +23,15 @@
      at this [link](https://huggingface.co/search/full-text?type=model). For example, to search for a bio or medical model of gguf format, you can write search text as:<br><br> 
           *gguf model for medical applications* <br>   
 >>iii) From the list of models that appears, select an appropiate *gguf* model. Have a look at the Model card of the selected model to know more about the model capabilities.<br>
->>iv) Download this *gguf* model and place it in the following folder in wsl ubuntu:<br>
-/home/ashok/gguf <br><br>
->>v) Open up tilde in Ubuntu, and create a modelfile at the minimum with one senetence, as:<br>
+>>iv) Download this *gguf* model and place it in the following folder in wsl ubuntu, say:<br>
+/home/ashok/gguf/ <br><br>
+>>v) Open up *tilde* in Ubuntu, and create a *modelfile*, at the minimum, with FROM clause, as:<br>
      FROM /home/ashok/gguf/biomistral-7b.IQ2_XXS.gguf<br>
->>Save the file, say, as: gguf_modelfile<br>
->>Create a model using ollama, as:<br>
+>>vi) Save the file, say, as: gguf_modelfile<br>
+>>vii) Create a model using ollama command, as:<br>
  ollama create biomistral -f gguf_modelfile<br>
->>Start using biomistarl created above<br>
->>
+>>vii) Start using biomistarl created above<br>
+
 
 
 
