@@ -11,7 +11,7 @@
 >>iv) Download this *gguf* model and place it in the following folder:<br>     
       C:\Users\ashok\AppData\Roaming\anythingllm-desktop\storage\models\downloaded\ <br><br>
 >>v) Start anythingLLM (download and use the most recent version).<br>
->>vi)  Under 'Install Settings', click on **LLM**, select **LLM provider** as: *AnythingLLM* and on the page that appears, click on the link 'Import custom model.'<br>
+>>vi)  Click on the 'Spanner icon', under 'Install Settings', click on **LLM**, select **LLM provider** as: *AnythingLLM* and on the page that appears, click on the link 'Import custom model.'<br>
 >>vii) Point the browser folder window to just downloaded gguf model.<br>
 >>viii) Start using it<br>
 >>Done.....
