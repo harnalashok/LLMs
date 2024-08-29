@@ -1,4 +1,4 @@
-# Last amended: 20th August, 2024
+# Last amended: 29th August, 2024
 # Quick install of chromadb on WSL2 ubuntu
 
 
@@ -15,6 +15,9 @@
 
 #   c. CLOSE ubuntu terminal and OPEN it again
 
+#    d. Install tilde in ubuntu:
+
+           $ wget http://os.ghalkes.nl/sources.list.d/install_repo.sh ; sudo sh ./install_repo.sh ; sudo apt-get install tilde 
 
 # 1.1  Create a folder Documents/data, as:
 
