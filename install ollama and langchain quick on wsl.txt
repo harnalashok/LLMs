@@ -132,7 +132,11 @@ And then check if the model exists?
 
 # 3.1 Close Ubuntu terminal and then open Ubuntu terminal again
 
-# 3.0.1  Create a folder Documents:
+# 3.1.1 Install tilde in ubuntu:
+
+  $ wget http://os.ghalkes.nl/sources.list.d/install_repo.sh ; sudo sh ./install_repo.sh ; sudo apt-get install tilde 
+
+# 3.1.2  Create a folder Documents:
 
 		$ mkdir -p /home/ashok/Documents
 
