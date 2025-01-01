@@ -1,0 +1,252 @@
+# Last amended: 22nd July, 2024
+# WSL related
+
+
+
+##############
+# Install wsl ubuntu
+##############
+
+# 1. Install Windows subsystem for linux:
+#     Open powershell as Administrator, run the two commands, one after another:
+
+	> wsl.exe --install --no-distribution
+	> Restart-Computer
+
+
+# 2.0 Open powershell as Administrator. Install ubuntu. 
+
+	> wsl --install
+	(in case download hangs, restart machine and run this command again)
+	
+# 3.0 When asked to enter username/password,
+#	  Enter: ashok/ashok	
+
+# 4.0 Reboot machine
+
+##############
+# Shutdown Ubuntu
+# Without rebooting Windows
+##############
+
+# 1.0 Shutdown WSL ubuntu either
+#     using Command Prompt or PowerShell
+
+	wsl.exe --shutdown
+
+# 2.0 Restart WSL ubuntu:
+
+	wsl.exe
+
+
+##############
+# Changing host name
+##############
+# Ref: https://medium.com/@bonguides25/how-to-change-hostname-of-the-ubuntu-instance-in-wsl-93746998ed26
+
+
+# 1.0 Open /etc/wsl.conf OR 
+#      create the same if it does not exist
+#       Use the nano text editor.
+
+sudo nano /etc/wsl.conf
+
+
+# 2.0 Add following lines in /etc/wsl.conf
+#      And save the file:
+
+[boot]
+systemd=true
+[network]
+hostname = master
+generateHosts = false
+
+# 3.0 Shut down WSL. 
+
+# 4.0 Delete the default /etc/resolv.conf file.
+
+	sudo rm /etc/resolv.conf
+
+Create a new /etc/resolv.conf with the following entry.
+
+     nameserver 8.8.8.8
+
+
+# 5.0 Also change entries in /etc/hosts file.
+#     Replace the present host name, wherever it occurs,
+#     with the new name, master.
+
+# 6.0 Shut down WSL and restart it.
+
+
+##############
+# sudo apt update Not working
+# No software install possible
+##############
+# Ref: https://superuser.com/a/1449871
+
+# 1.0 Solution is to change Ubuntu mirrors
+#     in file /etc/apt/sources.list
+#     A list of ubuntu mirrors is available
+#     at: 
+#	https://launchpad.net/ubuntu/+archivemirrors
+
+# 2.0 Replace present mirror: archive.ubuntu.com
+#     with the new one.
+#     For example: replace:
+#	deb http://archive.ubuntu.com/ubuntu/
+#     With NIC mirror
+#       deb https://mirror.nitc.ac.in/ubuntu/
+#     OR IITD mirror
+#	deb http://mirrors.iitd.ac.in/ubuntu/
+
+# 3.0 Using sed:
+#      NIC mirror
+	sudo sed 's@archive.ubuntu.com@mirror.nitc.ac.in@' -i /etc/apt/sources.list
+#      IITD mirror
+        sudo sed 's@archive.ubuntu.com@mirrors.iitd.ac.in@' -i /etc/apt/sources.list	
+
+# 4.0 Shut down and restart Ubuntu.
+#	And try to update repos with: sudo apt-get update
+
+
+################
+# Access Linux
+################
+
+# 0. Open File Explorer. On the right-panel, down below, you will find
+#     a folder titled as Linux.
+
+# Else:
+# 1.0 Open File Explorer. On the address-bar type Linux and press ENTER key.
+
+# Else:
+
+# 2. To access Linux folder, open File Explorer
+#	of Windows 11. In the address bar type:
+	\\wsl$<ENTER>
+
+# 3.0 Else
+3. In ubuntu bash type:
+			$explorer.exe  .
+			(do not miss the dot)
+	to open explorer window and see files.
+    (Ref: https://superuser.com/q/1185033 )
+
+
+
+########################################################
+# Uninstall wsl from Windows 10
+########################################################
+
+# Either
+#########
+# 1. Click Windows + I to open Settings
+# 2. Click App > Apps & features
+# 3. Choose Windows Subsystem for Linux WSLg Preview and 
+#    click Uninstall > Uninstall. In Windows 11, you need to click three dots and click Uninstall.
+
+
+###############
+# OR
+# StackOverflow: https://askubuntu.com/a/1261671
+###############
+
+Uninstall a WSL installation of Ubuntu like a normal Windows 10 application.
+To uninstall Ubuntu, right-click the Ubuntu shortcut in your Start menu and 
+click Uninstall.
+To reinstall Ubuntu, download it from the Microsoft Store once again.
+
+To (optionally) also uninstall Windows Subsystem for Linux:
+Open the Control Panel and go to Programs -> Turn Windows Features On or Off.
+Uncheck the Windows Subsystem for Linux option there and click OK. Windows will 
+uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
+
+
+###############
+# Change sudo user forgotton password
+# Ref video: https://www.youtube.com/watch?v=RCW9PTNS440&t=80s
+###############
+
+# You have forgotton sudo user password. Change as follows:
+# Step 1: Open powershell as Administrator. Issue command:
+
+  > wsl -l
+
+# The above will tell you your ubuntu version. Let us say reply is:
+
+   Windows Subsystem for Linux Distributions:
+   Ubuntu (Default)
+   Ubuntu-20.04
+
+# Then refer to your Ubuntu as: ubuntu2004 (all in small case).
+# Issue command to make 'root' as the default user:
+
+  >ubuntu2004 config --default-user root
+
+# Ubuntu will now open as root user. Change the password of sudo user, as:
+
+   # passwd ashok
+
+# After password change, go back to powershell and make ashok as default user:
+
+   >ubuntu2004 config --default-user ashok
+
+##### MISC ########
+
+0. Which version of Linux I am having:
+		$lsb_release -a
+		Maybe jammy
+
+1. To install anaconda, get the link of 
+	anaconda linux distribution and type out:
+	
+	$ wget -c <anacondaDownloadLink>
+
+2. To use jupyter notebook, enter command:
+		$jupyter notebook
+		and access the notebook in browser, as:
+		localhost:8888
+
+3. How much space is occupied by wsl2. Run the following
+   command in Powershell:
+
+       a) In Powershell run the command: 
+       
+       >wsl df -h /.
+      
+       b) OR thorugh search:
+
+        Settings-->Apps-->Installed Apps-->Ubuntu gives space occupied by Ubuntu
+        (StackOverflow: https://superuser.com/a/1491271 )
+
+4. Copy files from-to wsl-ubuntu & Windows using Powershell:
+
+   a) From Ubuntu console, check Windows drives:
+
+     ls -la /mnt
+
+   b) Copy files recurviveky from wsl Ubuntu to Windows:
+      In Ubuntu terminal, issue command (folder hf already exists):
+
+          cp -r .cache/huggingface/  /mnt/c/Users/ashok/hf/
+
+   b) Copy recursively all files from Windows c:\ drive to external drive in Windows
+      In Powershell, issue command (folder hf must exist in g:\):
+         
+         Copy-Item -Path C:\Users\ashok\hf\* -Destination g:\hf\  -Recurse
+           (For large files, copying takes time.)
+
+    c) Copy recursively from external-drive to c:\ drive (powershell command):
+
+          Copy-Item -Path e:\hf\*  -Destination C:\Users\ubuntu\hf\  -Recurse
+
+     d) Copy recursively from c:\ drive to wsl-ubuntu (ubuntu console command):
+
+          cp -r /mnt/c/Users/ubuntu/hf/*  /home/ashok/.cache/
+
+	
+################
+	
+	
+
