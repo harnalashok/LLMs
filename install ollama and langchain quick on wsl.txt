@@ -16,8 +16,8 @@
 # 0.3 Restart the machine.
 # 0.4 You may stop symanetic antivirus, as below.
 #     Anti-virus software may hinder sudo apt update
-#	win + R and Run command svm -stop
-#               Start it back, as: svm -start
+#	win + R and Run command  smc -stop
+#               Start it back, as: smc -start
 
 ######################################################
 ############### AA.0.1 Checking hard-disk space #######
