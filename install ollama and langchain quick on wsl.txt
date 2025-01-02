@@ -30,6 +30,8 @@
 #     Check directory space, as:
 
 	$ncdu
+    OR
+       $ ncdu /home/ashok/Documents
 
 ######################################################
 ############### AA.1 INSTALL latest wsl Ubuntu #######
