@@ -109,6 +109,9 @@ Create a new /etc/resolv.conf with the following entry.
 # 4.0 Shut down and restart Ubuntu.
 #	And try to update repos with: sudo apt-get update
 
+#5.0 Try to stop anti-virus software
+Issue command: win-R  and then smc -stop
+
 
 ################
 # Access Linux
