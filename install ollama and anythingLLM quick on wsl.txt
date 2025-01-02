@@ -1,4 +1,4 @@
-# Last amended: 14th August, 2024
+# Last amended: 2nd Jan, 2025
 # Quick install of WSL ubuntu, ollama and AnythingLLM
 # For detailed install instructions, refer this file in GitHub:
 #	https://github.com/harnalashok/LLMs/blob/main/install%20ollama%20and%20anythingLLM%20on%20ubuntu.txt
@@ -15,6 +15,22 @@
 # 0.1 Make one Inbound and one outbound rule
 # 0.2 Both rules will allow tcp connection to tcp port 11434
 # 0.3 Restart the machine.
+# 0.4 You may stop symanetic antivirus, as below.
+#     Anti-virus software may hinder sudo apt update
+#	win + R and Run command svm -stop
+#               Start it back, as: svm -start
+
+######################################################
+############### AA.0.1 Checking hadr-disk space #######
+######################################################
+
+# 0.5 Install ncdu to check your hard-disk space utilization
+#     Ref: https://askubuntu.com/a/36114
+
+	sudo apt install ncdu
+#     Check directory space, as:
+
+	$ncdu
 
 ######################################################
 ############### AA.1 INSTALL latest wsl Ubuntu #######
