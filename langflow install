@@ -1,0 +1,19 @@
+# LAst amended: 3rd JAn, 2025
+
+# 1.0 First install uv
+# Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 1.1 Close and open Ubuntu WSL again
+
+# 1.2 Install langflow
+# Ref: https://docs.langflow.org/get-started-installation
+$ uv pip install langflow
+
+# 1.3 Run langflow:
+$ uv run langflow run
+
+# 1.4 Acccess it, at:
+http://127.0.0.1:7860 
+
+############# DONE #############
