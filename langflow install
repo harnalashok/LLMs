@@ -16,4 +16,10 @@ $ uv run langflow run
 # 1.4 Acccess it, at:
 http://127.0.0.1:7860 
 
+# 1.5 It is possible that Symantic antivirus
+#     will not allow langflow start. Then
+#     Press win+R and run the following command:
+
+    smc -stop
+
 ############# DONE #############
