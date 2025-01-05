@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install docker engine on Ubuntu
+# Ref: https://docs.docker.com/engine/install/ubuntu/
+
 # LAst amended: 22nd Nov, 2024
 # Use as: 
 #   sudo bash install_docker.sh
