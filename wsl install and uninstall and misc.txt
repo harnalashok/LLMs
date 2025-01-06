@@ -18,6 +18,7 @@
 
 	> wsl --install
 	(in case download hangs, restart machine and run this command again)
+         (Default version on Windows 10 is Ubuntu 20.04 and on Windows 11 is Ubuntu 24.04)
 	
 # 3.0 When asked to enter username/password,
 #	  Enter: ashok/ashok	
@@ -196,6 +197,7 @@ come back.
    Windows Subsystem for Linux Distributions:
    Ubuntu (Default)
    Ubuntu-20.04
+   (Default version on Windows 11 is Ubuntu 24.04)
 
 # Then refer to your Ubuntu as: ubuntu2004 (all in small case).
 # Issue command to make 'root' as the default user:
