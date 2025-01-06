@@ -1,0 +1,15 @@
+#  6th Jan, 2025
+# Ref: https://localai.io/
+
+# Install bare localai without any models
+sudo curl https://localai.io/install.sh | sh
+
+# Start/stop local-ai
+sudo systemctl stop local-ai.service
+netstat -aunt | grep 8080
+sudo systemctl start local-ai.service
+netstat -aunt | grep 8080
+sudo systemctl disable local-ai.service
+
+
+
