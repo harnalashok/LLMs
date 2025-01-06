@@ -5,9 +5,9 @@
 
 # LAst amended: 5th Jan, 2025
 # Use as: 
-#   sudo bash install_docker.sh
+#   sudo bash docker_install.sh
 #   OR
-#   sudo ./install_docker.sh
+#   sudo ./docker_install.sh
 
 
 cd ~
