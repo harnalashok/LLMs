@@ -152,6 +152,11 @@ Create a new /etc/resolv.conf with the following entry.
 # 2. Click App > Apps & features
 # 3. Choose Windows Subsystem for Linux WSLg Preview and 
 #    click Uninstall > Uninstall. In Windows 11, you need to click three dots and click Uninstall.
+LASTLY:
+<b>Open poerrshell and issue command:</b>
+    wsl --unregister ubuntu
+Without this command, on re-installation of ubuntu, earleir files will 
+come back.
 
 
 ###############
