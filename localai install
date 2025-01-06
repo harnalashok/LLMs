@@ -11,5 +11,8 @@ sudo systemctl start local-ai.service
 netstat -aunt | grep 8080
 sudo systemctl disable local-ai.service
 
+# localai can also be started, as:
+ sudo local-ai
+
 
 
