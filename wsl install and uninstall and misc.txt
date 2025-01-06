@@ -1,4 +1,4 @@
-# Last amended: 22nd July, 2024
+# Last amended:06th an, 2025
 # WSL related
 
 
@@ -168,6 +168,12 @@ To (optionally) also uninstall Windows Subsystem for Linux:
 Open the Control Panel and go to Programs -> Turn Windows Features On or Off.
 Uncheck the Windows Subsystem for Linux option there and click OK. Windows will 
 uninstall Windows Subsystem for Linux, bash.exe, and lxrun.exe commands.
+
+LASTLY:
+<b>Open poerrshell and issue command:</b>
+    wsl --unregister ubuntu
+Without this command, on re-installation of ubuntu, earleir files will 
+come back.
 
 
 ###############
