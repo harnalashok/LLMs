@@ -14,5 +14,20 @@ sudo systemctl disable local-ai.service
 # localai can also be started, as:
  sudo local-ai
 
+# Ref: https://semaphoreci.com/blog/localai
+#      https://localai.io/models/
+LocalAI also supports a feature called model gallery. 
+You can define language models you want to support by 
+setting the PRELOAD_MODELS environment variable. For 
+example, the following export replaces gpt-3.5-turbo 
+with the GPT4ALL basic model:
+
+$ export PRELOAD_MODELS='[{"url": "github:go-skynet/model-gallery/gpt4all-j.yaml", "name": "gpt-3.5-turbo"}]'
+
+LocalAI will advertise the module name, letting you replace
+OpenAI models with any model you want. When we start LocalAI
+with this variable defined, the API server will automatically
+download and cache the model file. 
+
 
 
