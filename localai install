@@ -1,6 +1,7 @@
 #  6th Jan, 2025
 # Ref: https://localai.io/
 
+# wsl --install Ubuntu-22.04
 # Install bare localai without any models
 sudo curl https://localai.io/install.sh | sh
 
