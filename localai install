@@ -29,11 +29,25 @@ PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gall
 PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt-3.5-turbo"}]' local-ai
 
 # This works as root. File downloads behind the scenes.
+# While downloading you should also be able to rename it with:
+#   "model": "luna-ai-llama2",
+#  "url": "<MODEL_CONFIG_FILE>",
+#     "name": "<MODEL_NAME>"
 #    https://localai.io/models/#how-to-install-a-model-not-part-of-a-gallery
+# Try: luna-ai-llama2
+# See:  https://localai.io/advanced/
+
 LOCALAI=http://localhost:8080
 curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
      "config_url": "https://raw.githubusercontent.com/mudler/LocalAI/master/embedded/models/hermes-2-pro-mistral.yaml"
    }'
+
+# After downloading this works:
+curl http://localhost:8080/v1/chat/completions -H "Content-Type:
+  application/json" -d '{ "model": "hermes-2-pro-mistral", "messages": [{"role":
+  "user", "content": "How are you doing?", "temperature": 0.1}] }'
+
+
 
 
 LocalAI will advertise the module name, letting you replace
