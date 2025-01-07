@@ -11,6 +11,7 @@
 #     Open powershell as Administrator, run the two commands, one after another:
 
 	> wsl.exe --install --no-distribution
+        > wsl.exe --install Ubuntu-22.04
 	> Restart-Computer
 
 
