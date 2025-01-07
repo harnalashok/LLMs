@@ -28,6 +28,14 @@ with the GPT4ALL basic model:
 PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt4all-j"}]' local-ai
 PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt-3.5-turbo"}]' local-ai
 
+# This works as root. File downloads behind the scenes.
+#    https://localai.io/models/#how-to-install-a-model-not-part-of-a-gallery
+LOCALAI=http://localhost:8080
+curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
+     "config_url": "https://raw.githubusercontent.com/mudler/LocalAI/master/embedded/models/hermes-2-pro-mistral.yaml"
+   }'
+
+
 LocalAI will advertise the module name, letting you replace
 OpenAI models with any model you want. When we start LocalAI
 with this variable defined, the API server will automatically
