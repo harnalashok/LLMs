@@ -33,12 +33,25 @@
 
        cd /home/ashok/llama.cpp/models
        wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true
-# Test your installation:
+       # You may have to issue the following command to cleanup also.
+       mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.gguf
+
+# 10. Test your installation of llama-cli:
 # Ref: https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#llama-cli
 
       cd ~
       llama-cli -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf -p "I believe the meaning of life is" -n 128
-  
+
+# 11. Start llama-server. It will be accessible at port localhost:8080.
+#     -a (--alias) flag renames the model to gpt-3.5-turbo:
+#    Ref: https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#llama-server
+
+   cd ~
+   llama-server -a gpt-3.5-turbo -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf --port 8080
+# Add aditional flags for 4 concrrent users upto 4096 max context (each):
+
+  llama-server -a gpt-3.5-turbo -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf --port 8080 -c 16384 -np 4
+
   
   # Install bare localai without any models
 sudo curl https://localai.io/install.sh | sh
