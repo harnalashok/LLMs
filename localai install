@@ -31,7 +31,8 @@ with the GPT4ALL basic model:
 # https://localai.io/advanced/#preloading-models-during-startup
 PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt4all-j"}]' local-ai
 PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt-3.5-turbo"}]' local-ai
-
+# Trying
+PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","model": "gpt4all-j","name": "gpt-3.5-turbo"}]' local-ai
 # This works as root. File downloads behind the scenes.
 # While downloading you should also be able to rename it with:
 #   "model": "luna-ai-llama2",
