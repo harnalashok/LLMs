@@ -1,6 +1,11 @@
 #  8th Jan, 2025
 # Ref: https://github.com/ggerganov/llama.cpp
 #     https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md
+# It is possible that Symantic antivirus
+#     will not allow langflow start. Then
+#     Press win+R and run the following command:
+      
+        smc -stop
 
 
 # 1. Open Powershell as Administrator,
@@ -48,64 +53,36 @@
 
    cd ~
    llama-server -a gpt-3.5-turbo -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf --port 8080
-# Add aditional flags for 4 concrrent users upto 4096 max context (each):
+
+# 12. Add aditional flags for 4 concrrent users upto 4096 max context (each):
 
   llama-server -a gpt-3.5-turbo -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf --port 8080 -c 16384 -np 4
 
-  
-  # Install bare localai without any models
-sudo curl https://localai.io/install.sh | sh
+# 13. Install langflow and access it:
 
-# Start/stop local-ai
-netstat -aunt | grep 8080
-sudo systemctl stop local-ai.service
-sudo systemctl disable local-ai.service
-sudo systemctl start local-ai.service
-netstat -aunt | grep 8080
+      # 13.1 First install uv
+      # Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
+         $ curl -LsSf https://astral.sh/uv/install.sh | sh
 
+      # 13.2 Close and open Ubuntu terminal:
 
-# localai can also be started, as:
- sudo local-ai
+      # 13.3 Install langflow
+      # Ref: https://docs.langflow.org/get-started-installation
 
-# Ref: https://semaphoreci.com/blog/localai
-#      https://localai.io/models/
-LocalAI also supports a feature called model gallery. 
-You can define language models you want to support by 
-setting the PRELOAD_MODELS environment variable. For 
-example, the following export replaces gpt-3.5-turbo 
-with the GPT4ALL basic model:
+         $ uv venv
+         $ uv pip install langflow
+      
+      # 13.4 Run langflow:
 
-# As root run:
-# https://localai.io/advanced/#preloading-models-during-startup
-PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt4all-j"}]' local-ai
-PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","name": "gpt-3.5-turbo"}]' local-ai
-# Trying
-PRELOAD_MODELS='[{"url": "https://raw.githubusercontent.com/go-skynet/model-gallery/main/gpt4all-j.yaml","model": "gpt4all-j","name": "gpt-3.5-turbo"}]' local-ai
-# This works as root. File downloads behind the scenes.
-# While downloading you should also be able to rename it with:
-#   "model": "luna-ai-llama2",
-#  "url": "<MODEL_CONFIG_FILE>",
-#     "name": "<MODEL_NAME>"
-#    https://localai.io/models/#how-to-install-a-model-not-part-of-a-gallery
-# Try: luna-ai-llama2
-# See:  https://localai.io/advanced/
+         $ uv run langflow run
+      
+         # 13,5 Acccess it, at:
+         http://127.0.0.1:7860 
+      
+      # 13.5 Implement Basic Prompting
+      #      In the OpenAI widget through 'Controls':
+      #      Set URL (OpenAI API Base) to localhost:8080
+      #       and model to gpt-3.5-turbo
 
-LOCALAI=http://localhost:8080
-curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
-     "config_url": "https://raw.githubusercontent.com/mudler/LocalAI/master/embedded/models/hermes-2-pro-mistral.yaml"
-   }'
-
-# After downloading this works:
-curl http://localhost:8080/v1/chat/completions -H "Content-Type:
-  application/json" -d '{ "model": "hermes-2-pro-mistral", "messages": [{"role":
-  "user", "content": "How are you doing?", "temperature": 0.1}] }'
-
-
-
-
-LocalAI will advertise the module name, letting you replace
-OpenAI models with any model you want. When we start LocalAI
-with this variable defined, the API server will automatically
-download and cache the model file. 
 
 
