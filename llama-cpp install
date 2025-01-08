@@ -60,34 +60,34 @@
 
 # 13. Install langflow and access it:
 
-      # 13.1 First install uv
-      # Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
-         $ curl -LsSf https://astral.sh/uv/install.sh | sh
-
-      # 13.2 Close and open Ubuntu terminal:
-
-      # 13.3 Install langflow
-      # Ref: https://docs.langflow.org/get-started-installation
-
-         $ uv venv
-         $ uv pip install langflow
+            # 13.1 First install uv
+            # Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
+               $ curl -LsSf https://astral.sh/uv/install.sh | sh
       
-      # 13.4 Run langflow:
-
-         $ uv run langflow run
+            # 13.2 Close and open Ubuntu terminal:
       
-         # 13,5 Acccess it, at:
-         http://127.0.0.1:7860 
+            # 13.3 Install langflow
+            # Ref: https://docs.langflow.org/get-started-installation
       
-      # 13.5 Implement Basic Prompting example:
-      #      In the OpenAI widget through 'Controls':
-      #        Set OpenAI API Base to 
-      #           http://localhost:8080 
-      #            (AND NOT just localhost:8080)
-      #         and Model Name to gpt-3.5-turbo
-      #         and leave API key blank 
-      #     Switch to Playground and send a message
-      #     to get response.
+               $ uv venv
+               $ uv pip install langflow
+            
+            # 13.4 Run langflow:
+      
+               $ uv run langflow run
+            
+               # 13,5 Acccess it, at:
+               http://127.0.0.1:7860 
+            
+            # 13.5 Implement Basic Prompting example:
+            #      In the OpenAI widget through 'Controls':
+            #        Set OpenAI API Base to 
+            #           http://localhost:8080 
+            #            (AND NOT just localhost:8080)
+            #         and Model Name to gpt-3.5-turbo
+            #         and leave API key blank 
+            #     Switch to Playground and send a message
+            #     to get response.
 
 
 
