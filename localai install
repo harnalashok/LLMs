@@ -1,5 +1,6 @@
 #  6th Jan, 2025
 # Ref: https://localai.io/
+#      https://github.com/mudler/LocalAI-examples/tree/main/chatbot-ui
 
 # wsl --install Ubuntu-22.04
 # sudo apt update
