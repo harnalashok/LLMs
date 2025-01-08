@@ -17,6 +17,7 @@
        sudo apt upgrade
        sudo apt install net-tools cmake build-essential -y
 # 7. Issue the following commands to build llama.cpp:
+#    https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md
   
       git clone https://github.com/ggerganov/llama.cpp
       cd llama.cpp
@@ -33,6 +34,7 @@
        cd /home/ashok/llama.cpp/models
        wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true
 # Test your installation:
+# Ref: https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#llama-cli
 
       cd ~
       llama-cli -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf -p "I believe the meaning of life is" -n 128
