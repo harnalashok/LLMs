@@ -2,15 +2,19 @@
 # Ref: https://localai.io/
 
 # wsl --install Ubuntu-22.04
+# sudo apt update
+# sudo apt upgrade
+# sudo apt install net-tools
 # Install bare localai without any models
 sudo curl https://localai.io/install.sh | sh
 
 # Start/stop local-ai
 sudo systemctl stop local-ai.service
+sudo systemctl disable local-ai.service
 netstat -aunt | grep 8080
 sudo systemctl start local-ai.service
 netstat -aunt | grep 8080
-sudo systemctl disable local-ai.service
+
 
 # localai can also be started, as:
  sudo local-ai
