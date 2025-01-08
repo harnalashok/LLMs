@@ -60,24 +60,26 @@
 
 # 13. Install langflow and access it:
 
-            # 13.1 First install uv
-            # Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
-               $ curl -LsSf https://astral.sh/uv/install.sh | sh
+            # 13.1 First, install uv
+            #      Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
+
+                 curl -LsSf https://astral.sh/uv/install.sh | sh
       
             # 13.2 Close and open Ubuntu terminal:
       
-            # 13.3 Install langflow
-            # Ref: https://docs.langflow.org/get-started-installation
+            # 13.3 Next, install langflow
+            #      Ref: https://docs.langflow.org/get-started-installation
       
-               $ uv venv
-               $ uv pip install langflow
+                uv venv
+                uv pip install langflow
             
             # 13.4 Run langflow:
       
-               $ uv run langflow run
+                uv run langflow run
             
                # 13,5 Acccess it, at:
-               http://127.0.0.1:7860 
+               
+                      http://127.0.0.1:7860 
             
             # 13.5 Implement Basic Prompting example:
             #      In the OpenAI widget through 'Controls':
