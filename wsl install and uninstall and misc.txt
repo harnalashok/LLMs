@@ -75,7 +75,7 @@ Create a new /etc/resolv.conf with the following entry.
 
 
 # 5.0 Also change entries in /etc/hosts file.
-#     Replace the present host name, wherever it occurs,
+#     Replace (only) the present host name, wherever it occurs,
 #     with the new name, master.
 
 # 6.0 Shut down WSL and restart it.
