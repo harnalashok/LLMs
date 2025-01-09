@@ -12,23 +12,22 @@
 # Uninstall wsl from Windows 10
 ########################################################
 
-# 1.0 Open Ubuntu terminal and check existing version:
+# 1.0 Open Ubuntu terminal and check existing Ubuntu version:
 
       lsb_release -a
       
-      # If it is Ubuntu 22.04 then your Ubuntu is   Ubuntu-22.04
-      # If it is Ubuntu 20.04, then your version is Ubuntu-20.04
+      # If it is 'Ubuntu 22.04' then your Ubuntu is   Ubuntu-22.04
+      # If it is 'Ubuntu 20.04', then your version is Ubuntu-20.04
 
 # 1. Click Windows + I to open Settings
-# 2. Click App > Apps & features
-# 3. Choose Windows Subsystem for Linux WSL Preview and 
-#    click Uninstall. 
-
-# 4. Open poerrshell as Administrator and issue command:
-
-    wsl --unregister <Your Ubuntu Version>
+# 2. Click Apps --> Apps & features
+# 3. In Apps and Features, look for Ubuntu and uninstall it.
+# 4. Open Contol Panel-->Programs-->(Under Programs and Features) Turn Windows Features on or off
+     Uncheck 'Windows Subsystem for Linux and click OK.
+# 5. Open poerrshell as Administrator and issue command:
+         wsl --unregister <Your Ubuntu Version>
     # For example:
-    wsl --unregister Ubuntu-22.04
+         wsl --unregister Ubuntu-22.04
 
 ########################################################
 # Install wsl Ubuntu
@@ -39,11 +38,10 @@
 
    wsl --install Ubuntu-22.04
 
-# 2. Reboot machine after installation
+# 2. Restart machine after installation
 # 3. Pin Ubuntu to task-bar and Open Ubuntu
-#      allow installation to complete.
+#      allow the installation process to complete.
 # 4. Keep username as ashok also password as ashok.
-#     Also Change machine name to either master or ashok
 # 5. Reboot machine
 # 6. Perform the following install operations:
        sudo apt update
