@@ -1,4 +1,4 @@
-#  8th Jan, 2025
+#  9th Jan, 2025
 # Ref: https://github.com/ggerganov/llama.cpp
 #     https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md
 # It is possible that Symantic antivirus
@@ -8,9 +8,37 @@
         smc -stop
 
 
+########################################################
+# Uninstall wsl from Windows 10
+########################################################
+
+# 1.0 Open Ubuntu terminal and check existing version:
+
+      lsb_release -a
+      
+      # If it is Ubuntu 22.04 then your Ubuntu is   Ubuntu-22.04
+      # If it is Ubuntu 20.04, then your version is Ubuntu-20.04
+
+# 1. Click Windows + I to open Settings
+# 2. Click App > Apps & features
+# 3. Choose Windows Subsystem for Linux WSL Preview and 
+#    click Uninstall. 
+
+# 4. Open poerrshell as Administrator and issue command:
+
+    wsl --unregister <Your Ubuntu Version>
+    # For example:
+    wsl --unregister Ubuntu-22.04
+
+########################################################
+# Install wsl Ubuntu
+########################################################
+
 # 1. Open Powershell as Administrator,
 #      and issue command:
+
    wsl --install Ubuntu-22.04
+
 # 2. Reboot machine after installation
 # 3. Pin Ubuntu to task-bar and Open Ubuntu
 #      allow installation to complete.
@@ -21,7 +49,53 @@
        sudo apt update
        sudo apt upgrade
        sudo apt install net-tools cmake build-essential -y
-# 7. Issue the following commands to build llama.cpp:
+
+##############
+# Changing host name
+##############
+# Ref: https://medium.com/@bonguides25/how-to-change-hostname-of-the-ubuntu-instance-in-wsl-93746998ed26
+
+
+# 1.0 Open /etc/wsl.conf OR 
+#      create the same if it does not exist
+#       Use the nano text editor.
+
+      sudo nano /etc/wsl.conf
+
+
+# 2.0 Write the following lines in /etc/wsl.conf
+#      And save the file (^O and ^X)
+
+      [boot]
+      systemd=true
+      [network]
+      hostname = master
+      generateHosts = false
+
+# 3.0 Shut down WSL using Command Prompt: 
+
+           wsl --shutdown
+
+# 4.0 Open Ubuntu again, Delete the default /etc/resolv.conf file.
+
+	sudo rm /etc/resolv.conf
+
+# 4.1 Create a new /etc/resolv.conf with the following entry.
+
+           sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+
+
+# 5.0 Also change entries in /etc/hosts file.
+#     Replace the present host name, wherever it occurs,
+#     with the new name, master.
+
+# 6.0 Reboot Windows
+
+##############
+# Build llama.cpp
+##############
+
+# 1. Issue the following commands to build llama.cpp:
 #    https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md
   
       git clone https://github.com/ggerganov/llama.cpp
@@ -32,8 +106,8 @@
       echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
       cat .bashrc
   
- # 8. Close and open Ubuntu to take PATH statement into effect.
- # 9. Download a gguf trending model, llama-thinker-3b-preview-q8_0.gguf, from huggingface
+ # 2. Close and open Ubuntu to take PATH statement into effect.
+ # 3. Download a gguf trending model, llama-thinker-3b-preview-q8_0.gguf, from huggingface
  #    into models folder (model size is around 3.2gb): 
 
        cd /home/ashok/llama.cpp/models
@@ -41,47 +115,51 @@
        # You may have to issue the following command to cleanup also.
        mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.gguf
 
-# 10. Test your installation of llama-cli:
+# 4. Test your installation of llama-cli:
 # Ref: https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#llama-cli
 
       cd ~
       llama-cli -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf -p "I believe the meaning of life is" -n 128
 
-# 11. Start llama-server. It will be accessible at port localhost:8080.
+# 5. Start llama-server. It will be accessible at port localhost:8080.
 #     -a (--alias) flag renames the model to gpt-3.5-turbo:
 #    Ref: https://github.com/ggerganov/llama.cpp?tab=readme-ov-file#llama-server
 
    cd ~
    llama-server -a gpt-3.5-turbo -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf --port 8080
 
-# 12. Add aditional flags for 4 concrrent users upto 4096 max context (each):
+# 6. Add aditional flags for 4 concrrent users upto 4096 max context (each):
 
   llama-server -a gpt-3.5-turbo -m /home/ashok/llama.cpp/models/llama-thinker-3b-preview-q8_0.gguf --port 8080 -c 16384 -np 4
 
-# 13. Install langflow and access it:
+##############
+# Install langflow
+##############
 
-            # 13.1 First, install uv
+# 1. Install langflow and access it:
+
+            # 1.1 First, install uv
             #      Ref: https://docs.astral.sh/uv/getting-started/installation/#installation-methods
 
                  curl -LsSf https://astral.sh/uv/install.sh | sh
       
-            # 13.2 Close and open Ubuntu terminal:
+            # 1.2 Close and open Ubuntu terminal:
       
-            # 13.3 Next, install langflow
+            # 1.3 Next, install langflow
             #      Ref: https://docs.langflow.org/get-started-installation
       
                 uv venv
                 uv pip install langflow
             
-            # 13.4 Run langflow:
+            # 1.4 Run langflow:
       
                 uv run langflow run
             
-               # 13,5 Acccess it, at:
+               # 1,5 Acccess it, at:
                
                       http://127.0.0.1:7860 
             
-            # 13.5 Implement Basic Prompting example:
+            # 1.6 Implement Basic Prompting example:
             #      In the OpenAI widget through 'Controls':
             #        Set OpenAI API Base to 
             #           http://localhost:8080 
