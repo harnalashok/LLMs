@@ -20,11 +20,12 @@
       # If it is 'Ubuntu 20.04', then your version is Ubuntu-20.04
 
 # 1. Click Windows + I to open Settings
-# 2. Click Apps --> Apps & features
-# 3. In Apps and Features, look for Ubuntu and uninstall it.
+# 2. Then, click Apps --> Apps & features
+# 3. Next, in Apps and Features, look for Ubuntu and uninstall it.
+
 # 4. Open Contol Panel-->Programs-->(Under Programs and Features) Turn Windows Features on or off
-     Uncheck 'Windows Subsystem for Linux and click OK.
-# 5. Open poerrshell as Administrator and issue command:
+     In the Window that appears,uncheck 'Windows Subsystem for Linux and click OK.
+# 5. Open Powershell as Administrator and issue command:
          wsl --unregister <Your Ubuntu Version>
     # For example:
          wsl --unregister Ubuntu-22.04
@@ -33,20 +34,26 @@
 # Install wsl Ubuntu
 ########################################################
 
-# 1. Open Powershell as Administrator,
+# 1. Reboot machine. 
+#    Open Powershell as Administrator,
 #      and issue command:
 
    wsl --install Ubuntu-22.04
 
 # 2. Restart machine after installation
-# 3. Pin Ubuntu to task-bar and Open Ubuntu
-#      allow the installation process to complete.
-# 4. Keep username as ashok also password as ashok.
-# 5. Reboot machine
-# 6. Perform the following install operations:
+# 3. From Start Menu, Pin Ubuntu to task-bar. 
+#    Open Ubuntu & allow the installation process to complete.
+# 4. When asked, supply username as ashok also password as ashok.
+# 5. Perform the following four install/upgrade operations to
+     install uv and also ollama:
+     (you may have to stop antivirus as: Win+R, and 
+       execute the command: smc -stop)
+
        sudo apt update
        sudo apt upgrade
        sudo apt install net-tools cmake build-essential -y
+       curl -LsSf https://astral.sh/uv/install.sh | sh
+       curl -fsSL https://ollama.com/install.sh | sh
 
 ##############
 # Changing host name
@@ -54,8 +61,9 @@
 # Ref: https://medium.com/@bonguides25/how-to-change-hostname-of-the-ubuntu-instance-in-wsl-93746998ed26
 
 
-# 1.0 Open /etc/wsl.conf OR 
-#      create the same if it does not exist
+# 1.0 Reboot Ubuntu.
+#      Open /etc/wsl.conf OR 
+#      create the file if it did not exist
 #       Use the nano text editor.
 
       sudo nano /etc/wsl.conf
@@ -80,7 +88,7 @@
 
 # 4.1 Create a new /etc/resolv.conf with the following entry.
 
-           sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+        sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 
 
 # 5.0 Also change entries in /etc/hosts file.
@@ -93,7 +101,7 @@
 # Build llama.cpp
 ##############
 
-# 1. Issue the following commands to build llama.cpp:
+# 1. Issue the following commands to build llama.cpp as normal user:
 #    https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md
   
       git clone https://github.com/ggerganov/llama.cpp
