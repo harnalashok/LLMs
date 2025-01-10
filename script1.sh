@@ -1,6 +1,19 @@
 #!/bin/sh
 
 # Last amended: 10th Jan, 2025
+# To execute this file, you need to 
+# execute the following lines in Ubuntu console
+# Note the multiline bash comment here.
+: '
+cp  /mnt/c/users/ashok/Downloads/script1.sh ~/
+cp  /mnt/c/users/ashok/Downloads/script2.sh ~/
+#cp  /mnt/c/users/ubuntu/Downloads/script1.sh ~/
+perl -pi -e 's/\r\n/\n/g' script1.sh
+perl -pi -e 's/\r\n/\n/g' script2.sh
+chmod +x *.sh
+bash script1.sh
+'
+
 
 # Install software
 sudo apt update
