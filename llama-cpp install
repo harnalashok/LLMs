@@ -109,33 +109,20 @@
 
 ##############
 # Script to change Ubuntu host name:
-# Copy/paste the script TWICE in Ubuntu and execute.
-# bash script.sh
-# Copy with: \\wsl$
+# Place the file script1.sh in Downloads
+#   folder of Windows machine.
+
+# Copy and execute the following
+# four lines in  Ubuntu terminal.
 ##############
 
       cp  /mnt/c/users/ashok/Downloads/script1.sh ~/
+      cp  /mnt/c/users/ashok/Downloads/script2.sh ~/
+      #cp  /mnt/c/users/ubuntu/Downloads/script1.sh ~/
       perl -pi -e 's/\r\n/\n/g' script1.sh
+      perl -pi -e 's/\r\n/\n/g' script2.sh
       chmod +x *.sh
       bash script1.sh
-
-
-      sudo apt update
-      sudo apt upgrade -y
-      sudo apt install net-tools cmake build-essential -y      
-      echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
-      echo 'systemd=true' | sudo tee -a /etc/wsl.conf > /dev/null
-      echo '[network]' | sudo tee -a /etc/wsl.conf > /dev/null
-      echo 'hostname = master' | sudo tee -a /etc/wsl.conf > /dev/null
-      echo 'generateHosts = false' | sudo tee -a /etc/wsl.conf > /dev/null
-      sudo rm /etc/resolv.conf
-      echo "nameserver 8.8.8.8" | sudo tee  /etc/resolv.conf > /dev/null  
-      sudo sed -i 's/127.0.1.1.*/127.0.1.1  master.fsm.ac.in   master/' /etc/hosts
-
-
-      
-
-      
 
 ##############
 # Build llama.cpp
