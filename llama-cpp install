@@ -113,7 +113,7 @@
 ##############
       
       sudo apt update
-      sudo apt upgrade
+      sudo apt upgrade -y
       sudo apt install net-tools cmake build-essential -y      
       echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
       echo 'systemd=true' | sudo tee -a /etc/wsl.conf > /dev/null
