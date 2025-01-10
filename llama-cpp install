@@ -115,6 +115,7 @@
 ##############
 
       cp  /mnt/c/users/ashok/Downloads/script1.sh ~/
+      perl -pi -e 's/\r\n/\n/g' script1.sh
       chmod +x *.sh
       bash script1.sh
 
