@@ -36,6 +36,8 @@
  # 6. Also ,in the same Powershell console, issue command:
          wsl --unregister ubuntu
 
+# 7. Reboot Windows.
+
 ########################################################
 # Install wsl Ubuntu
 ########################################################
