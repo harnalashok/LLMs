@@ -58,7 +58,7 @@
        execute the command: smc -stop)
 
        sudo apt update
-       sudo apt upgrade
+       sudo apt upgrade -y
        sudo apt install net-tools cmake build-essential -y
        curl -LsSf https://astral.sh/uv/install.sh | sh
        curl -fsSL https://ollama.com/install.sh | sh
@@ -111,7 +111,7 @@
 # Script to change Ubuntu host name:
 # Copy/paste the script TWICE in Ubuntu and execute.
 ##############
-      
+      \\wsl$
       sudo apt update
       sudo apt upgrade -y
       sudo apt install net-tools cmake build-essential -y      
