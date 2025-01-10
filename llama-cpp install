@@ -16,19 +16,25 @@
 
       lsb_release -a
       
-      # If it is 'Ubuntu 22.04' then your Ubuntu is   Ubuntu-22.04
-      # If it is 'Ubuntu 20.04', then your version is Ubuntu-20.04
+      # If it is 'Ubuntu 22.04.x LTS' then your Ubuntu is   Ubuntu-22.04
+      # If it is 'Ubuntu 20.04.x LTS', then your version is Ubuntu-20.04
 
 # 1. Click Windows + I to open Settings
 # 2. Then, click Apps --> Apps & features
-# 3. Next, in Apps and Features, look for Ubuntu and uninstall it.
+# 3. Next, in Apps and Features, look for Ubuntu 
+     and uninstall it.
 
 # 4. Open Contol Panel-->Programs-->(Under Programs and Features) Turn Windows Features on or off
-     In the Window that appears,uncheck 'Windows Subsystem for Linux and click OK.
+     In the Window that appears, uncheck 'Windows Subsystem for Linux and click OK.
 # 5. Open Powershell as Administrator and issue command:
          wsl --unregister <Your Ubuntu Version>
     # For example:
-         wsl --unregister Ubuntu-22.04
+         wsl --unregister Ubuntu-22.
+        (You may get a message:
+           There is no distribution with the supplied name.)
+
+ # 6. Also ,in the same Powershell console, issue command:
+         wsl --unregister ubuntu
 
 ########################################################
 # Install wsl Ubuntu
