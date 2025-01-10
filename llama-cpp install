@@ -113,7 +113,12 @@
 # bash script.sh
 # Copy with: \\wsl$
 ##############
-      
+
+      cp  /mnt/c/users/ashok/Downloads/script.sh  /home/ashok
+      cp  /mnt/c/users/ubuntu/Downloads/script.sh  /home/
+      cp  /mnt/c/users/ashok/name.sh ~/
+      chmod +x *.sh
+      bash script.sh
       sudo apt update
       sudo apt upgrade -y
       sudo apt install net-tools cmake build-essential -y      
