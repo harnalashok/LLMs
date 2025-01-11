@@ -16,8 +16,12 @@ sleep 3
 
 # Installing ollama
 echo " "
-echo "Installing ollama"
+echo " "
 echo "------"
+echo "Installing ollama"
+echo "When asked, supply password"
+echo "------"
+echo " "
 echo " "
 curl -fsSL https://ollama.com/install.sh | sh
 
