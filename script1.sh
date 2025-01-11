@@ -5,11 +5,15 @@
 # execute the following lines in Ubuntu console
 # Note the multiline bash comment here.
 : '
-cp  /mnt/c/users/ashok/Downloads/script1.sh ~/
-cp  /mnt/c/users/ashok/Downloads/script2.sh ~/
-#cp  /mnt/c/users/ubuntu/Downloads/script1.sh ~/
+echo "Downloading files from Internet"
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script1.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script2.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script3.sh
+
 perl -pi -e 's/\r\n/\n/g' script1.sh
 perl -pi -e 's/\r\n/\n/g' script2.sh
+perl -pi -e 's/\r\n/\n/g' script3.sh
+
 chmod +x *.sh
 bash script1.sh
 '
