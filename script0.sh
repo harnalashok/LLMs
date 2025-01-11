@@ -1,10 +1,19 @@
 #!/bin/sh
 
 # Last amended: 11th Jan, 2025
-# Execute this file as:
-#      ./script0.sh
-#  OR,as
-@      bash script0.sh
+
+#------ Steps ---------
+#     i) Download this file in Ubuntu, as:
+#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
+#            chmod +x *.sh
+#     ii) Then, execute this file as:
+#           ./script0.sh
+#        OR,as
+#            bash script0.sh
+#     iii) This file will call script1.sh also
+#          to change hostname to 'master'
+
+#------ Steps ---------
 
 
 echo "Downloading script files from Internet
