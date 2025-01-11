@@ -6,10 +6,13 @@
 # These sscripts run in sequence.
 
 #------ Steps ---------
-#     i) Download this file in Ubuntu, as:
+#     i) Download this file in Ubuntu, and
+#        execute the three commands:
+
 #            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
 #            perl -pi -e 's/\r\n/\n/g' script0.sh
-             chmod +x *.sh
+#            chmod +x *.sh
+
 #     ii) Then, execute this file as:
 #           ./script0.sh
 #        OR,as
