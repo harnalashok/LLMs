@@ -3,7 +3,7 @@
 # Last amended: 11th Jan, 2025
 # Execute this file as:
 #      ./script0.sh
-#  OR
+#  OR,as
 @      bash script0.sh
 
 
