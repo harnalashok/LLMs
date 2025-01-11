@@ -5,7 +5,8 @@
 #------ Steps ---------
 #     i) Download this file in Ubuntu, as:
 #            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
-#            chmod +x *.sh
+#            perl -pi -e 's/\r\n/\n/g' script0.sh
+             chmod +x *.sh
 #     ii) Then, execute this file as:
 #           ./script0.sh
 #        OR,as
