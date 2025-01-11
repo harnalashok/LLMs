@@ -22,22 +22,6 @@ wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/res
 mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
 sleep 3
 
-# Install langflow
-echo "Installing langflow"
-uv venv
-uv pip install 
-sleep 3
-
-# Install ollama
-echo "Install ollama"
-curl -fsSL https://ollama.com/install.sh | sh
-
-sleep 3
-# Download tinyllama
-echo "Downloading tinyllama"
-ollama pull tinyllama
-
-
 echo "Shutting down Ubuntu"
 sleep 4
 wsl.exe --shutdown
