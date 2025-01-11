@@ -5,22 +5,23 @@
 
 
 # Install software
-echo " Updating Ubuntu"
+echo "  "
+echo "------------"
+echo " Will update Ubuntu"
+echo " You will be asked for password...supply it..."
 echo "----------"
 echo " "
+sleep 9
 sudo apt update
 sudo apt upgrade -y
 sudo apt install net-tools cmake build-essential -y  
 echo " "
 echo "Done ......"
-sleep 4
-
-
 # Change machine name
 echo " "
-echo "Changing machine name..."
+echo "Will change machine name..."
 echo "------------------"
-sleep 4
+sleep 9
 
 echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
 echo 'systemd=true' | sudo tee -a /etc/wsl.conf > /dev/null
@@ -36,6 +37,7 @@ echo " "
 echo "Installing uv"
 echo "--------------"
 echo " "
+sleep 5
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Shut down ubuntu
@@ -46,6 +48,6 @@ echo "Reopen it after it closes, and then execute the command:"
 echo "     ./script2.sh"
 echo "*******"
 echo " "
-sleep 4
+sleep 9
 wsl.exe --shutdown
 
