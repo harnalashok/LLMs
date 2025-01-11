@@ -9,7 +9,8 @@
 
 echo "Downloading script files from Internet
 echo "---------------------------"
-echo " "
+echo " 
+# Raw github files are downloaded
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script1.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script2.sh
