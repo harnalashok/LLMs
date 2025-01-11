@@ -37,9 +37,10 @@ ollama pull tinyllama
 echo " "
 echo "Will shut down Ubuntu console"
 echo "Reopen it and perform tests"
+echo "Read script4.sh for tests"
 echo "----------"
 echo " "
-sleep 4
+sleep 10
 wsl.exe --shutdown
 
 
