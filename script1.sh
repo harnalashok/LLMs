@@ -1,9 +1,7 @@
 #!/bin/sh
 
 # Last amended: 10th Jan, 2025
-# To execute this file, you need to 
-# execute the following lines in Ubuntu console
-# Note the multiline bash comment here.
+# This file is called by script0.sh
 
 
 # Install software
