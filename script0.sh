@@ -1,6 +1,9 @@
 #!/bin/sh
 
 # Last amended: 11th Jan, 2025
+# Connected scripts are:
+# script0.sh, script1.sh, script2.sh, script3.sh
+# These sscripts run in sequence.
 
 #------ Steps ---------
 #     i) Download this file in Ubuntu, as:
