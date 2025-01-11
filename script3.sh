@@ -5,17 +5,37 @@
 
 
 # Install langflow
-echo "Installing langflow"
+echo " "
+echo "Installing langflow..."
+echo "------"
+echo " "
+sleep 4
 uv venv
-uv pip install 
+uv pip install langflow 
 sleep 3
 
-# Install ollama
-echo "Install ollama"
+# Installing ollama
+echo " "
+echo "Installing ollama"
+echo "------"
+echo " "
 curl -fsSL https://ollama.com/install.sh | sh
 
-sleep 3
+sleep 4
 # Download tinyllama
+echo " "
+echo "--------- "
 echo "Downloading tinyllama"
+echo "------"
+echo " "
 ollama pull tinyllama
+
+echo " "
+echo "Will shut down Ubuntu console"
+echo "Reopen it and perform tests"
+echo "----------"
+echo " "
+sleep 4
+wsl.exe --shutdown
+
 
