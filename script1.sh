@@ -3,6 +3,11 @@
 # Last amended: 10th Jan, 2025
 # This file is called by script0.sh
 
+if [[ `hostname` == "master" ]]; then
+   echo "It appears you have already executed this script."
+   echo "Recheck.....and press ctrl+c  if yes."
+   sleep 40
+fi
 
 # Install software
 echo "  "
