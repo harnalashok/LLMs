@@ -8,6 +8,7 @@
 #     script3.sh
 #     script4.sh
 #     docker_install.sh
+#     test.sh
 
 
 # Install langflow
