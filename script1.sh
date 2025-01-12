@@ -8,6 +8,7 @@
 #     script3.sh
 #     script4.sh
 #     docker_install.sh
+#     test.sh
 
 
 # This file is called by script0.sh
