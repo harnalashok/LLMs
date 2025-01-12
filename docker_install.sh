@@ -1,6 +1,17 @@
 #!/bin/bash
 
 # LAst amended: 7th Jan, 2025
+
+# These sscripts run in sequence.
+#     script0.sh
+#     script1.sh
+#     script2.sh
+#     script3.sh
+#     script4.sh
+#     docker_install.sh
+
+
+
 # Install docker engine on Ubuntu
 # Better follow this reference:
 # Ref:    https://docs.docker.com/engine/install/ubuntu/
