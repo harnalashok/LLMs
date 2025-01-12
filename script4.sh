@@ -37,3 +37,7 @@ npx flowise start
 
 # Test docker
 sudo docker run hello-world
+
+# Test llama.cpp
+cd /home/ashok/llama.cpp/models
+llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
