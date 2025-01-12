@@ -88,6 +88,8 @@ sleep 10
 
 # Move script file to done folder
 mv /home/ashok/docker_install.sh /home/ashok/done
+mv /home/ashok/next/script4.sh  /home/ashok
+sleep 2
 reboot
 #############
 
