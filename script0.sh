@@ -17,6 +17,7 @@
 #     i) Download this file in Ubuntu, and
 #        execute the three commands:
 
+
 #            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
 #            perl -pi -e 's/\r\n/\n/g' script0.sh
 #            chmod +x *.sh
@@ -35,13 +36,13 @@ echo "Downloading script files from Internet
 echo "---------------------------"
 echo " 
 # Raw github files are downloaded
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script1.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script2.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script3.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script4.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/docker_install.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/test.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script1.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script2.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script3.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script4.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/docker_install.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/test.sh -P /home/ashok/next
 echo "  "
 echo "Done....."
 sleep 4
@@ -57,6 +58,7 @@ chmod +x *.sh
 
 # Move script file to done folder
 mv /home/ashok/script0.sh /home/ashok/done
+mv /home/ashok/next/script1.sh /home/ashok
 
 echo " Changing host name"
 bash script1.sh
