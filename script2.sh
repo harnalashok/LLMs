@@ -9,6 +9,7 @@
 #     script3.sh
 #     script4.sh
 #     docker_install.sh
+#     test.sh
 
 
 DIRECTORY="/home/ashok/llama.cpp"
