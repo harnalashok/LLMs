@@ -31,6 +31,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scrip
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script1.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script2.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script3.sh
+https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/docker_install.sh
 echo "  "
 echo "Done....."
 sleep 4
@@ -40,6 +41,7 @@ perl -pi -e 's/\r\n/\n/g' script0.sh
 perl -pi -e 's/\r\n/\n/g' script1.sh
 perl -pi -e 's/\r\n/\n/g' script2.sh
 perl -pi -e 's/\r\n/\n/g' script3.sh
+perl -pi -e 's/\r\n/\n/g' docker_install.sh
 
 chmod +x *.sh
 
