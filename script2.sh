@@ -20,10 +20,18 @@ echo "-------"
 echo "Done......"
 echo "-------"
 
+# 1.2 download and install Node.js
+echo " "
+echo "-------"
+echo "Installing Node.js......"
+echo "-------"
+fnm use --install-if-missing 20
+echo " "
+
 # Downloading one gguf model
 echo "  "
 echo "Will download one gguf model from huggingface"
-echo "Will take time....."
+echo "Will take lot of time....."
 echo "-------------------"
 echo " "
 sleep 9
