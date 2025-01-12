@@ -45,8 +45,8 @@ ollama pull tinyllama
 
 echo " "
 echo "Will shut down Ubuntu console"
-echo "Reopen it and perform tests"
-echo "Read script4.sh for tests"
+echo "Reopen it and install docker, as:"
+echo "  ./docker_install.sh"
 echo "----------"
 echo " "
 sleep 10
