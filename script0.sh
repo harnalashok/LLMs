@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Last amended: 11th Jan, 2025
 # Connected scripts are:
