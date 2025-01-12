@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Last amended: 10th Jan, 2025
 
