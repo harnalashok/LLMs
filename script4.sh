@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 # These sscripts run in sequence.
 #     script0.sh
