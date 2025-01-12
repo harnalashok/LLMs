@@ -25,7 +25,7 @@ sleep 5
 uv run langflow --version
 
 # 2.2 Test Flowise:
-npx flowise start
+npx flowise start & > /dev/null &
 
 # Test docker
 sudo docker run hello-world
