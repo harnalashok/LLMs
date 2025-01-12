@@ -1,6 +1,15 @@
 #!/bin/sh
 
 
+# These sscripts run in sequence.
+#     script0.sh
+#     script1.sh
+#     script2.sh
+#     script3.sh
+#     script4.sh
+#     docker_install.sh
+
+
 if [[ `which ollama` == "/usr/local/bin/ollama" ]]; then
    echo "Possibly script3.sh was earlier executed. Recheck..."
    echo "Press ctrl+c to break now"
