@@ -78,6 +78,7 @@ sleep 9
 
 # Move script file to done folder
 mv /home/ashok/script2.sh /home/ashok/done
+mv /home/ashok/next/script3.sh /home/ashok
 
 echo "  "
 echo "Will shut down Ubuntu console"
