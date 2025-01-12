@@ -60,6 +60,8 @@ echo " "
 echo " "
 echo "Done.... "
 echo "Machine will be rebooted in 10s"
+echo "Reopen it thereafter, and perform tests"
+echo "Read script4.sh for tests"
 echo " "
 sleep 10
 reboot
