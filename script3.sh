@@ -38,6 +38,7 @@ npm install -g flowise
 echo " "
 echo "--------- "
 echo "Downloading tinyllama"
+echo "Download size is 637MB"
 echo "------"
 echo " "
 ollama pull tinyllama
