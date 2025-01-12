@@ -10,26 +10,6 @@
 #     docker_install.sh
 
 
-if [[ `which ollama` == "/usr/local/bin/ollama" ]]; then
-   echo "Possibly script3.sh was earlier executed. Recheck..."
-   echo "Press ctrl+c to break now"
-   sleep 50
-fi
-
-
-# Installing ollama
-echo " "
-echo " "
-echo "------"
-echo "Installing ollama. Take time...."
-echo "When asked, supply password"
-echo "------"
-echo " "
-echo " "
-curl -fsSL https://ollama.com/install.sh | sh
-sleep 9
-
-
 # Install langflow
 echo " "
 echo "Installing langflow..."
