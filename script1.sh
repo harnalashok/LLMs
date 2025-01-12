@@ -26,6 +26,27 @@ echo "------------------"
 sleep 9
 sudo curl -fsSL https://fnm.vercel.app/install | bash
 
+# Docker Engine install
+echo " "
+echo "Will install docker engine..."
+echo "------------------"
+sleep 9
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+echo " "
+echo " "
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
 # Change machine name
 echo " "
 echo "Will change machine name..."
@@ -40,6 +61,7 @@ echo 'generateHosts = false' | sudo tee -a /etc/wsl.conf > /dev/null
 sudo rm /etc/resolv.conf
 echo 'nameserver 8.8.8.8' | sudo tee  /etc/resolv.conf > /dev/null
 sudo sed -i 's/127.0.1.1.*/127.0.1.1  master.fsm.ac.in   master/' /etc/hosts
+
 
 # Install uv for langflow install
 echo " "
