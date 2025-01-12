@@ -22,12 +22,18 @@ wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/res
 mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
 
 echo " "
-echo "Done......"
+echo "thinker-3b-preview-q8_0.gguf downloaded"
 echo "---------"
 sleep 9
 
 # Move script file to done folder
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/test.sh  /home/ashok
+echo " "
+echo "You can now begin installation testing, as:"
+echo "    ./test.sh"
+sleep 8
+echo " "
+
 
 
