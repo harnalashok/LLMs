@@ -29,7 +29,7 @@
 
 #------ Steps ---------
 
-
+mkdir /home/ashok/done
 echo "Downloading script files from Internet
 echo "---------------------------"
 echo " 
@@ -52,6 +52,9 @@ perl -pi -e 's/\r\n/\n/g' script3.sh
 perl -pi -e 's/\r\n/\n/g' docker_install.sh
 
 chmod +x *.sh
+
+# Move script file to done folder
+mv /home/ashok/script0.sh /home/ashok/done
 
 echo " Changing host name"
 bash script1.sh
