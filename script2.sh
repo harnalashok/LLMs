@@ -69,7 +69,7 @@ sleep 9
 cd ~/llama.cpp/models
 wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf?
 # You may have to issue the following command to cleanup also.
-# mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
+mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 
 echo " "
 echo "Done......"
