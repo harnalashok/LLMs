@@ -12,6 +12,8 @@
 #     test.sh
 
 # Download ollama nomic-embed-text
+# Start ollama in background
+ollama serve &
 echo " Pulling text-embedding model"
 ollama pull nomic-embed-text
 sleep 4
