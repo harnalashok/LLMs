@@ -1,8 +1,15 @@
 #!/bin/sh
 
-# Installs llama.cpp
-
 # Last amended: 10th Jan, 2025
+
+# These sscripts run in sequence.
+#     script0.sh
+#     script1.sh
+#     script2.sh
+#     script3.sh
+#     script4.sh
+#     docker_install.sh
+
 
 DIRECTORY="/home/ashok/llama.cpp"
 if [ -d "$DIRECTORY" ]; then
