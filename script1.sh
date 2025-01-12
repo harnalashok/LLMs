@@ -14,9 +14,17 @@ echo " "
 sleep 9
 sudo apt update
 sudo apt upgrade -y
-sudo apt install net-tools cmake build-essential -y  
+sudo apt install zip unzip net-tools cmake build-essential -y  
 echo " "
 echo "Done ......"
+
+# Install 'fnm' (Fast Node Manager)
+echo " "
+echo "Will install fnm: Fast Node Manager..."
+echo "------------------"
+sleep 9
+$ sudo curl -fsSL https://fnm.vercel.app/install | bash
+
 # Change machine name
 echo " "
 echo "Will change machine name..."
