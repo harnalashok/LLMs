@@ -74,7 +74,10 @@ mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 echo " "
 echo "Done......"
 echo "---------"
-sleep 5
+sleep 9
+
+# Move script file to done folder
+mv /home/ashok/script2.sh /home/ashok/done
 
 echo "  "
 echo "Will shut down Ubuntu console"
