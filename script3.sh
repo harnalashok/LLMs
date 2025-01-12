@@ -42,6 +42,7 @@ ollama pull tinyllama
 
 # Move script file to done folder
 mv /home/ashok/script3.sh /home/ashok/done
+mv /home/ashok/next/docker_install.sh  /home/ashok
 
 echo " "
 echo "Will shut down Ubuntu console"
