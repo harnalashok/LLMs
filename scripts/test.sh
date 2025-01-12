@@ -13,10 +13,17 @@
 
 # Download ollama nomic-embed-text
 # Start ollama in background
+echo " "
+echo "-----------"
+echo "Starting ollama in background"
+echo "---------"
+echo " "
 ollama serve &  > /dev/null &
+echo " "
 echo " Pulling text-embedding model"
+echo " "
 ollama pull nomic-embed-text
-sleep 4
+sleep 6
 echo " Pulling olomo2 model"
 ollama pull olmo2
 sleep 5
