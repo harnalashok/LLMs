@@ -1,5 +1,15 @@
+#/bin/bash
 
+# Test scripts
 
+# These sscripts run in sequence.
+#     script0.sh
+#     script1.sh
+#     script2.sh
+#     script3.sh
+#     script4.sh
+#     docker_install.sh
+#     test.sh
 
 # Test ollama and tinyllama
 ollama run tinyllama
