@@ -44,17 +44,32 @@ echo "-------"
 fnm use --install-if-missing 20
 echo " "
 
-# Downloading one gguf model
+
+
+# Installing ollama
+echo " "
+echo " "
+echo "------"
+echo "Installing ollama. Take time...."
+echo "When asked, supply password"
+echo "------"
+echo " "
+echo " "
+curl -fsSL https://ollama.com/install.sh | sh
+sleep 9
+
+
+# Downloading smaller gguf model
 echo "  "
-echo "Will download one gguf model from huggingface"
+echo "Will download gemma-2 gguf model from huggingface"
 echo "Will take lot of time....."
 echo "-------------------"
 echo " "
 sleep 9
 cd ~/llama.cpp/models
-wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true
+wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf?
 # You may have to issue the following command to cleanup also.
-mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
+# mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
 
 echo " "
 echo "Done......"
