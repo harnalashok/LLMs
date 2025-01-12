@@ -14,7 +14,7 @@ echo " "
 sleep 9
 sudo apt update
 sudo apt upgrade -y
-sudo apt install zip unzip net-tools cmake build-essential -y  
+sudo apt install zip unzip net-tools cmake  nodejs build-essential -y  
 echo " "
 echo "Done ......"
 
