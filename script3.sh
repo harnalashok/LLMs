@@ -39,6 +39,9 @@ echo "------"
 echo " "
 ollama pull tinyllama
 
+# Move script file to done folder
+mv /home/ashok/script3.sh /home/ashok/done
+
 echo " "
 echo "Will shut down Ubuntu console"
 echo "Reopen it and install docker, as:"
