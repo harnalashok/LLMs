@@ -4,6 +4,15 @@
 
 # Last amended: 10th Jan, 2025
 
+DIRECTORY="/home/ashok/llama.cpp"
+if [ -d "$DIRECTORY" ]; then
+  echo "$DIRECTORY does exist."
+  echo "Recheck if script2.sh was executed earlier"
+  echo "Press ctrl+c to terminate this job"
+  sleep 40
+fi
+
+
 # Install software
 echo " "
 echo "Installing llama.cpp"
