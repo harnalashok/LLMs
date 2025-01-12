@@ -1,26 +1,5 @@
 #!/bin/sh
 
-# Installs langflow
-# Last amended: 11th Jan, 2025
-
-
-# Install langflow
-echo " "
-echo "Installing langflow..."
-echo "------"
-echo " "
-sleep 4
-uv venv
-uv pip install langflow 
-sleep 4
-
-# 2.1 Install Flowise as NORMAL user
-echo " "
-echo "Installing flowvise..."
-echo "------"
-echo " "
-sleep 9
-npm install -g flowise
 
 # Installing ollama
 echo " "
@@ -33,6 +12,27 @@ echo " "
 echo " "
 curl -fsSL https://ollama.com/install.sh | sh
 sleep 9
+
+
+# Install langflow
+echo " "
+echo "Installing langflow..."
+echo "------"
+echo " "
+sleep 9
+uv venv
+uv pip install langflow 
+sleep 4
+
+# 2.1 Install Flowise as NORMAL user
+echo " "
+echo "Installing flowvise...Takes time..."
+echo "------"
+echo " "
+sleep 9
+npm install -g flowise
+
+
 
 # Download tinyllama
 echo " "
