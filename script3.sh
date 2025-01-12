@@ -12,20 +12,28 @@ echo " "
 sleep 4
 uv venv
 uv pip install langflow 
-sleep 3
+sleep 4
+
+# 2.1 Install Flowise as NORMAL user
+echo " "
+echo "Installing flowvise..."
+echo "------"
+echo " "
+sleep 9
+$ npm install -g flowise
 
 # Installing ollama
 echo " "
 echo " "
 echo "------"
-echo "Installing ollama"
+echo "Installing ollama. Take time...."
 echo "When asked, supply password"
 echo "------"
 echo " "
 echo " "
 curl -fsSL https://ollama.com/install.sh | sh
+sleep 9
 
-sleep 4
 # Download tinyllama
 echo " "
 echo "--------- "
