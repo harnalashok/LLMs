@@ -33,7 +33,7 @@ fi
 
 if [[ `which docker` == "/usr/bin/docker" ]]; then
    echo "Docker appears to be already installed"
-   echo "Recheck. Break this script by clicking ctrl+c"
+   echo "Recheck. Break this script by pressing ctrl+c"
    sleep 40
 fi
 
