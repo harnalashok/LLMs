@@ -9,6 +9,7 @@
 #     script3.sh
 #     script4.sh
 #     docker_install.sh
+#     test.sh
 
 
 
@@ -40,6 +41,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scrip
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script3.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script4.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/docker_install.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/test.sh
 echo "  "
 echo "Done....."
 sleep 4
