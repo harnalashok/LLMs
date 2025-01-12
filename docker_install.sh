@@ -52,7 +52,7 @@ echo " "
 echo "Docker engine installed."
 echo "Adding user 'ashok' to 'docker' group"
 echo "to enable running docker commands by 'ashok' without sudo"
-sleep 4
+sleep 9
 groupadd docker
 usermod -aG docker ashok
 echo " "
