@@ -20,7 +20,7 @@ echo "Installing flowvise..."
 echo "------"
 echo " "
 sleep 9
-$ npm install -g flowise
+npm install -g flowise
 
 # Installing ollama
 echo " "
