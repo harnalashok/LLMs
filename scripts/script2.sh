@@ -47,7 +47,7 @@ cd ~
 echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
 echo " "
 echo "-------"
-echo "Done......"
+echo "llama.cpp installed"
 echo "-------"
 
 # 1.2 download and install Node.js
@@ -72,7 +72,7 @@ wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/g
 mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 
 echo " "
-echo "Done......"
+echo "gemma-2-2b-it.Q6_K.gguf downloaded"
 echo "---------"
 sleep 9
 
