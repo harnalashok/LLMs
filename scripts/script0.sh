@@ -32,9 +32,9 @@
 #------ Steps ---------
 
 mkdir /home/ashok/done
-echo "Downloading script files from Internet
+echo "Downloading all script files from github" 
 echo "---------------------------"
-echo " 
+echo "  "
 # Raw github files are downloaded
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script0.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script1.sh -P /home/ashok/next
@@ -44,8 +44,8 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scrip
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/docker_install.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/test.sh -P /home/ashok/next
 echo "  "
-echo "Done....."
-sleep 4
+echo "Downloading done....."
+sleep 9
 
 # Doc to Unix conversion
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script0.sh
@@ -60,8 +60,9 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test.sh
 chmod +x *.sh
 chmod +x /home/ashok/next/*.sh
 
-# Move script file to done folder
+# Move script file to 'done' folder
 mv /home/ashok/script0.sh /home/ashok/done
+# Bring in the next file
 mv /home/ashok/next/script1.sh /home/ashok
 
 echo " Changing host name"
