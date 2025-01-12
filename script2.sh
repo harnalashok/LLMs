@@ -21,7 +21,20 @@ if [ -d "$DIRECTORY" ]; then
 fi
 
 
-# Install software
+# Installing ollama
+echo " "
+echo " "
+echo "------"
+echo "Installing ollama. Take time...."
+echo "When asked, supply password"
+echo "------"
+echo " "
+echo " "
+curl -fsSL https://ollama.com/install.sh | sh
+sleep 9
+
+
+# Installing llama.cpp
 echo " "
 echo "Installing llama.cpp"
 echo "------------"
@@ -44,20 +57,6 @@ echo "Installing Node.js......"
 echo "-------"
 fnm use --install-if-missing 20
 echo " "
-
-
-
-# Installing ollama
-echo " "
-echo " "
-echo "------"
-echo "Installing ollama. Take time...."
-echo "When asked, supply password"
-echo "------"
-echo " "
-echo " "
-curl -fsSL https://ollama.com/install.sh | sh
-sleep 9
 
 
 # Downloading smaller gguf model
