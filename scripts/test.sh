@@ -28,16 +28,35 @@ echo " Pulling olomo2 model"
 ollama pull olmo2
 sleep 5
 
-# Test langfloe
+# Test langflow
+echo " "
+echo "Testing langflow"
+echo "---------"
+echo " "
 uv run langflow --version
 
 # 2.2 Test Flowise:
+echo " "
+echo "Starting flowise. Acess it at port 3000"
+echo "------- "
+echo " "
+sleep 9
 npx flowise start & > /dev/null &
 
 # Test docker
+echo " "
+echo "Installing image hello-world of docker"
+echo "------- "
+echo " "
+sleep 9
 sudo docker run hello-world
 
 # Test llama.cpp
+echo " "
+echo "Testing llama.cpp"
+echo "------- "
+echo " "
+sleep 9
 cd /home/ashok/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
 
