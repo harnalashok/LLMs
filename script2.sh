@@ -21,12 +21,12 @@ echo "Done......"
 echo "-------"
 
 # 1.2 download and install Node.js
-echo " "
-echo "-------"
-echo "Installing Node.js......"
-echo "-------"
-fnm use --install-if-missing 20
-echo " "
+#echo " "
+#echo "-------"
+#echo "Installing Node.js......"
+#echo "-------"
+#fnm use --install-if-missing 20
+#echo " "
 
 # Downloading one gguf model
 echo "  "
