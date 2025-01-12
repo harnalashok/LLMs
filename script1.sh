@@ -66,6 +66,10 @@ echo " "
 sleep 5
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
+
+# Move script file to done folder
+mv /home/ashok/script1.sh /home/ashok/done
+
 # Shut down ubuntu
 echo " "
 echo "*******"
