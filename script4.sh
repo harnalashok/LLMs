@@ -7,6 +7,7 @@
 #     script3.sh
 #     script4.sh
 #     docker_install.sh
+#     test.sh
 
 # Downloading a larger gguf model
 echo "  "
