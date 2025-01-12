@@ -1,6 +1,13 @@
 #!/bin/sh
 
 
+if [[ `which ollama` == "/usr/local/bin/ollama" ]]; then
+   echo "Possibly script3.sh was earlier executed. Recheck..."
+   echo "Press ctrl+c to break now"
+   sleep 50
+fi
+
+
 # Installing ollama
 echo " "
 echo " "
