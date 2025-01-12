@@ -58,6 +58,7 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test.sh
 
 
 chmod +x *.sh
+chmod +x /home/ashok/next/*.sh
 
 # Move script file to done folder
 mv /home/ashok/script0.sh /home/ashok/done
