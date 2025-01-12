@@ -19,7 +19,7 @@
 
 
 #            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/script0.sh
-#            perl -pi -e 's/\r\n/\n/g' script0.sh
+#            perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh
 #            chmod +x *.sh
 
 #     ii) Then, execute this file as:
@@ -48,11 +48,14 @@ echo "Done....."
 sleep 4
 
 # Doc to Unix conversion
-perl -pi -e 's/\r\n/\n/g' script0.sh
-perl -pi -e 's/\r\n/\n/g' script1.sh
-perl -pi -e 's/\r\n/\n/g' script2.sh
-perl -pi -e 's/\r\n/\n/g' script3.sh
-perl -pi -e 's/\r\n/\n/g' docker_install.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script0.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script1.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script2.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test.sh
+
 
 chmod +x *.sh
 
