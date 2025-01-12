@@ -19,7 +19,9 @@ echo " "
 sleep 9
 uv venv
 uv pip install langflow 
-sleep 4
+echo "langflow installed"
+echo " "
+sleep 9
 
 # 2.1 Install Flowise as NORMAL user
 echo " "
@@ -28,6 +30,9 @@ echo "------"
 echo " "
 sleep 9
 npm install -g flowise
+echo " "
+echo "flowise installed"
+echo " "
 
 
 
@@ -39,6 +44,9 @@ echo "Download size is 637MB"
 echo "------"
 echo " "
 ollama pull tinyllama
+sleep 2
+echo "tinyllama downloaded"
+
 
 # Move script file to done folder
 mv /home/ashok/script3.sh /home/ashok/done
