@@ -28,5 +28,6 @@ sleep 9
 
 # Move script file to done folder
 mv /home/ashok/script4.sh /home/ashok/done
+mv /home/ashok/next/test.sh  /home/ashok
 
 
