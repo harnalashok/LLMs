@@ -1,7 +1,7 @@
 These files are intended to launch in a fresh wsl ubuntu,<br>
-the following software:<br><br>
+(Ubuntu version 22.04) the following software:<br><br>
 
-i)   Updates/upgrades wsl ubuntu<br>
+i)   Update/upgrade wsl ubuntu<br>
 ii)  Changes the hostname of wsl ubuntu to 'master'<br>
 iii) Installs uv<br>
 iv)  Installs ollama<br>
