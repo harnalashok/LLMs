@@ -85,6 +85,9 @@ echo "Reopen it thereafter, and perform tests"
 echo "Read script4.sh for tests"
 echo " "
 sleep 10
+
+# Move script file to done folder
+mv /home/ashok/docker_install.sh /home/ashok/done
 reboot
 #############
 
