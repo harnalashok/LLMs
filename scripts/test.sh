@@ -11,6 +11,19 @@
 #     docker_install.sh
 #     test.sh
 
+# Milvus install
+# Ref: https://milvus.io/docs/install_standalone-docker.md
+
+echo "Installing milvus vector database"
+echo " "
+sleep 9
+curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+bash standalone_embed.sh start
+echo " "
+echo "Milvus installed"
+echo " "
+sleep 9
+
 # Download ollama nomic-embed-text
 # Start ollama in background
 echo " "
