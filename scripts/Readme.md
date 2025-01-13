@@ -33,7 +33,7 @@ Copy and paste.
 
 ### RAM allocation
 
-> To allocate more RAM to Ubuntu, first check how much RAM it has using the `free` command. Then create the following file in Windows at c:\users\<userName>\.wslconfig (for example: c:\users\ubuntu\.wslconfig). This path is also known as: %
+> To allocate more RAM to WSL Ubuntu, first check how much RAM it has using the `free` command. Then create the following file in Windows at c:\users\<userName>\.wslconfig (for example: c:\users\ubuntu\.wslconfig).   
 
 <pre>
 [wsl2]
