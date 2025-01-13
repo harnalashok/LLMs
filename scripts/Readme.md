@@ -10,7 +10,7 @@ Copy and paste.
    bash script0.sh   
 ```
 
-These files are intended to launch in a fresh wsl ubuntu,<br>
+These files are intended to be launched in a fresh wsl ubuntu,<br>
 (Ubuntu version 22.04) the following software:<br><br>
 
 i)   Update/upgrade wsl ubuntu<br>
