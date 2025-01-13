@@ -38,7 +38,7 @@ memory=10GB
 </pre>
 Note that 'GB' must be in capital case. See these links: [one](https://stackoverflow.com/a/73393648/3282777) and [two](https://stackoverflow.com/a/79276209/3282777).   
 
-Execute the following command in Powershell to automatically create the file at the desired location:  
+Execute the following command in `Powershell` to automatically create the file at the desired location:  
 
 <pre>Write-Output "[wsl2]
 memory=26GB" > "${env:USERPROFILE}\.wslconfig"
