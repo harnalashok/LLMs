@@ -15,13 +15,18 @@
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
 echo "Installing milvus vector database"
+echo "It is assumed that docker engine is already installed."
 echo " "
 sleep 9
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 echo " "
 echo "Milvus installed"
-echo " "
+echo "To stop docker use the following commands:"
+echo "      bash standalone_embed.sh stop
+echo "To delete the database, use the following command:
+echo "      bash standalone_embed.sh delete"
+echo "--------------------"
 sleep 9
 
 # Download ollama nomic-embed-text
