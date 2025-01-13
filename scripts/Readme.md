@@ -30,3 +30,11 @@ Copy and paste.
    chmod +x /home/ashok/*.sh   
    bash script0.sh   
 </pre>
+
+To allocate more RAM to Ubuntu, first check how much RAM it has using the `free` command. Then create the following file in Windows at c:\users\<userName>\.wslconfig (for example: c:\users\ubuntu\.wslconfig). This path is also known as: %
+<pre>
+[wsl2]
+memory=10GB
+</pre>
+Note that 'GB' must be in capital case. See these links: [one](https://stackoverflow.com/a/73393648/3282777) and [two](https://stackoverflow.com/a/79276209/3282777)
+
