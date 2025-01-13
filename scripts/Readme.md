@@ -48,7 +48,7 @@ memory=10GB
 memory=26GB" > "${env:USERPROFILE}\.wslconfig"
 </pre>
 
-> Shutdown ubuntu (`wsl --shutdown`) and restart it.
+> Shutdown ubuntu (`wsl --shutdown`) and restart it for it to take effect.
 
 
 
