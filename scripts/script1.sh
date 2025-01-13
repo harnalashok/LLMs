@@ -29,7 +29,7 @@ echo " "
 sleep 9
 sudo apt update
 sudo apt upgrade -y
-sudo apt install zip unzip net-tools cmake  build-essential tilde -y  
+sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde -y  
 
 echo " "
 echo "Done ......"
@@ -41,6 +41,9 @@ echo "------------------"
 sleep 9
 sudo curl -fsSL https://fnm.vercel.app/install | bash
 
+# Install chromadb
+echo "Install chromadb"
+pip install chromadb
 
 
 # Change machine name
