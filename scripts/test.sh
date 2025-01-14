@@ -21,7 +21,7 @@ echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
 
-echo "Installing milvus vector database"    | tee -a error.log
+echo "Installing milvus vector database using docker"    | tee -a error.log
 echo "It is assumed that docker engine is already installed."    | tee -a error.log
 echo " "    | tee -a error.log
 sleep 9
@@ -87,5 +87,6 @@ sleep 9
 cd /home/ashok/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
 
-
 mv test.sh /home/ashok/done
+echo " "
+echo " "
