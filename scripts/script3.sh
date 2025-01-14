@@ -54,9 +54,11 @@ echo "Download size is 637MB"
 echo "------"   | tee -a error.log
 echo " "   | tee -a error.log
 ollama pull tinyllama   2>> error.log
-sleep 2
-echo "tinyllama downloaded"     | tee -a /home/ashok/error.log
+sleep 9
 
+echo "tinyllama downloaded"     | tee -a /home/ashok/error.log
+echo "Check as: ollama list"    | tee -a /home/ashok/error.log
+echo "-------"   | tee -a /home/ashok/error.log
 
 # Move script file to done folder
 mv /home/ashok/script3.sh /home/ashok/done
