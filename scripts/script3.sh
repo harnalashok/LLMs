@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# LAst amended: 14th Jan, 2024
 
 # These sscripts run in sequence.
 #     script0.sh
@@ -39,8 +40,9 @@ echo " "   | tee -a error.log
 sleep 9
 npm install -g flowise  2>> error.log
 echo " "
-echo "flowise installed"
-echo " "
+echo " "     | tee -a /home/ashok/error.log
+echo "flowise installed"    | tee -a /home/ashok/error.log
+echo " "     | tee -a /home/ashok/error.log
 
 
 
@@ -53,7 +55,7 @@ echo "------"   | tee -a error.log
 echo " "   | tee -a error.log
 ollama pull tinyllama   2>> error.log
 sleep 2
-echo "tinyllama downloaded"
+echo "tinyllama downloaded"     | tee -a /home/ashok/error.log
 
 
 # Move script file to done folder
