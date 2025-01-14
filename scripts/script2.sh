@@ -68,11 +68,11 @@ echo " "
 
 
 # Downloading smaller gguf model
-echo "  "
+echo "  "     | tee -a /home/ashok/error.log
 echo "Will download gemma-2 gguf model from huggingface"  | tee -a error.log
-echo "Will take lot of time....."
+echo "Will take lot of time....."     | tee -a /home/ashok/error.log
 echo "-------------------"   | tee -a error.log
-echo " "
+echo " "     | tee -a /home/ashok/error.log
 sleep 9
 cd ~/llama.cpp/models
 wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf? 2>> error.log
