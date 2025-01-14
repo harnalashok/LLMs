@@ -22,11 +22,16 @@ echo " " | tee -a error.log
 echo "  "    | tee -a error.log
 echo "Will download one gguf model from huggingface"  | tee -a error.log
 echo "Will take lot of time....."    | tee -a error.log
+echo "If broken, this download can be resumed as: "      | tee -a error.log
+echo "wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true "  | tee -a error.log        
 echo "-------------------"    | tee -a error.log
 echo " "    | tee -a error.log
 sleep 9
 cd ~/llama.cpp/models
 wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true
+
+
+
 # You may have to issue the following command to cleanup also.
 mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
 
