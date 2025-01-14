@@ -29,7 +29,7 @@ echo " " | tee -a error.log
 # Install software
 echo "  "
 echo "------------"
-echo " Will update Ubuntu"
+echo " Will update Ubuntu"  | tee -a error.log
 echo " You will be asked for password...supply it..."
 echo "----------"
 echo " "
@@ -43,18 +43,18 @@ echo "Done ......"
 
 # Install 'fnm' (Fast Node Manager)
 echo " "
-echo "Will install fnm: Fast Node Manager..."
+echo "Will install fnm: Fast Node Manager..."  | tee -a error.log
 echo "------------------"
 sleep 9
-sudo curl -fsSL https://fnm.vercel.app/install | bash
+sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> error.log
 
 # Install chromadb
 echo " "
-echo " Will Install chromadb"
+echo " Will Install chromadb"  | tee -a error.log
 echo "------------"
 echo " "
 sleep 9
-pip install chromadb
+pip install chromadb   2>> error.log
 
 #  TO START CHROMA AS a SERVICE
 #*********************************
@@ -88,7 +88,7 @@ sleep 9
 
 # Change machine name
 echo " "
-echo "Will change machine name to 'master'..."
+echo "Will change machine name to 'master'..."  | tee -a error.log
 echo "------------------"
 sleep 9
 
@@ -104,11 +104,11 @@ sudo sed -i 's/127.0.1.1.*/127.0.1.1  master.fsm.ac.in   master/' /etc/hosts
 
 # Install uv for langflow install
 echo " "
-echo "Installing uv"
+echo "Installing uv"  | tee -a error.log
 echo "--------------"
 echo " "
 sleep 9
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -LsSf https://astral.sh/uv/install.sh | sh   2>> error.log
 echo " "
 echo "uv installed"
 sleep 9
