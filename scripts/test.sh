@@ -78,4 +78,9 @@ sleep 9
 cd /home/ashok/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
 
+#cd ~
+#mkdir /home/ashok/gguf
+#echo "FROM /home/ashok/llama.cpp/models/gemma-2-2b-it.Q6_K.gguf" >  /home/ashok/gguf/gemma2_gguf_modelfile
+#ollama create gemma2 -f /home/ashok/gguf/gemma2_gguf_modelfile
+
 mv test.sh /home/ashok/done
