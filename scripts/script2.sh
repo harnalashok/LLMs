@@ -12,6 +12,14 @@
 #     test.sh
 
 
+
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: script2.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
 DIRECTORY="/home/ashok/llama.cpp"
 if [ -d "$DIRECTORY" ]; then
   echo "$DIRECTORY does exist."
