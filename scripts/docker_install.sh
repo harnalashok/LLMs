@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# LAst amended: 7th Jan, 2025
+# LAst amended: 14th Jan, 2025
 
 # These sscripts run in sequence.
 #     script0.sh
@@ -78,15 +78,17 @@ echo " "     | tee -a /home/ashok/error.log
 echo "============"     | tee -a /home/ashok/error.log
 echo " "
 echo "Docker engine installed."     | tee -a /home/ashok/error.log
-echo "Adding user 'ashok' to 'docker' group"
-echo "to enable running docker commands by 'ashok' without sudo"
+echo "Adding user 'ashok' to 'docker' group"     | tee -a /home/ashok/error.log
+echo "to enable running docker commands by 'ashok' without sudo"     | tee -a /home/ashok/error.log
 sleep 9
 groupadd docker
 usermod -aG docker ashok
-echo " "
+echo " "    | tee -a /home/ashok/error.log
 
-echo " "
-echo "Done.... "
+echo "Docker installation process completed"     | tee -a /home/ashok/error.log
+
+echo " "     | tee -a /home/ashok/error.log
+
 echo "Machine will be rebooted in 10s"
 echo "Reopen it thereafter, and perform tests"
 echo "Read script4.sh for tests"
