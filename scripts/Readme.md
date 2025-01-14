@@ -17,6 +17,7 @@ memory=26GB" > "${env:USERPROFILE}\.wslconfig"
 ```
 
 
+------------     
 Following software are intended to be installed/launched in a fresh wsl ubuntu,<br>
 (Ubuntu version 22.04) the following software:<br><br>
 
