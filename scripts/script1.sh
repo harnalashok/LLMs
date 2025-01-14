@@ -42,7 +42,11 @@ sleep 9
 sudo curl -fsSL https://fnm.vercel.app/install | bash
 
 # Install chromadb
-echo "Install chromadb"
+echo " "
+echo " Will Install chromadb"
+echo "------------"
+echo " "
+sleep 9
 pip install chromadb
 
 #  TO START CHROMA AS a SERVICE
@@ -77,7 +81,7 @@ sleep 9
 
 # Change machine name
 echo " "
-echo "Will change machine name..."
+echo "Will change machine name to 'master'..."
 echo "------------------"
 sleep 9
 
