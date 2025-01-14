@@ -28,8 +28,11 @@ echo " "   | tee -a error.log
 sleep 9
 uv venv
 uv pip install langflow  2>> error.log
+sleep 2
+echo "  "    | tee -a error.log
+echo "  "    | tee -a error.log
 echo "langflow installed"   | tee -a error.log
-echo " "
+echo "---------- "   | tee -a error.log
 sleep 9
 
 # 2.1 Install Flowise as NORMAL user
