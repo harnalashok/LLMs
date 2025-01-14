@@ -73,7 +73,7 @@ echo Check as: "
 echo "    netstat -aunt | grep 8000"
 echo "----------"
 echo " "
-
+sleep 9
 
 # Change machine name
 echo " "
