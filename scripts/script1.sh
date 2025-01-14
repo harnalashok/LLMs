@@ -19,6 +19,13 @@ if [[ `hostname` == "master" ]]; then
    sleep 40
 fi
 
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: script1.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
 # Install software
 echo "  "
 echo "------------"
