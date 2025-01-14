@@ -59,6 +59,7 @@ echo " "   | tee -a error.log
 ollama pull tinyllama   2>> error.log
 sleep 9
 
+echo "  "     | tee -a /home/ashok/error.log
 echo "tinyllama downloaded"     | tee -a /home/ashok/error.log
 echo "Check as: ollama list"    | tee -a /home/ashok/error.log
 echo "-------"   | tee -a /home/ashok/error.log
