@@ -96,9 +96,11 @@ echo " "
 echo "Installing uv"
 echo "--------------"
 echo " "
-sleep 5
+sleep 9
 curl -LsSf https://astral.sh/uv/install.sh | sh
-
+echo " "
+echo "uv installed"
+sleep 9
 
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
