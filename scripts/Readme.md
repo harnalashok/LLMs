@@ -5,7 +5,7 @@ wsl --install --distribution Ubuntu-22.04
 ```
 
 
-To begin installing all packages, execute the following four commands in Ubuntu console.<br>
+To begin installing all packages, execute the following four commands in *Ubuntu* console.<br>
 Copy and paste.
 
 
