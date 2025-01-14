@@ -17,20 +17,20 @@ echo " " | tee -a error.log
 
 
 # Downloading a larger gguf model
-echo "  "
+echo "  "    | tee -a error.log
 echo "Will download one gguf model from huggingface"  | tee -a error.log
-echo "Will take lot of time....."
-echo "-------------------"
-echo " "
+echo "Will take lot of time....."    | tee -a error.log
+echo "-------------------"    | tee -a error.log
+echo " "    | tee -a error.log
 sleep 9
 cd ~/llama.cpp/models
 wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true
 # You may have to issue the following command to cleanup also.
 mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
 
-echo " "
-echo "thinker-3b-preview-q8_0.gguf downloaded"
-echo "---------"
+echo " "    | tee -a error.log
+echo "thinker-3b-preview-q8_0.gguf downloaded"    | tee -a error.log
+echo "---------"    | tee -a error.log
 sleep 9
 
 # Move script file to done folder
