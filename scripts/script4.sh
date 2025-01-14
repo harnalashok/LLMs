@@ -18,7 +18,7 @@ echo " " | tee -a error.log
 
 # Downloading a larger gguf model
 echo "  "
-echo "Will download one gguf model from huggingface"
+echo "Will download one gguf model from huggingface"  | tee -a error.log
 echo "Will take lot of time....."
 echo "-------------------"
 echo " "
