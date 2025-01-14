@@ -69,15 +69,15 @@ echo "Updating Ubuntu packages list.."
 apt update -y
 sleep 2
 
-echo "Downloading and installing docker engine"
-echo "============"
-echo " "
+echo "Downloading and installing docker engine"    | tee -a /home/ashok/error.log
+echo "============"     | tee -a /home/ashok/error.log
+echo " "     | tee -a /home/ashok/error.log
 snap install docker
 apt  install docker-compose  -y
+echo " "     | tee -a /home/ashok/error.log
+echo "============"     | tee -a /home/ashok/error.log
 echo " "
-echo "============"
-echo " "
-echo "Docker engine installed."
+echo "Docker engine installed."     | tee -a /home/ashok/error.log
 echo "Adding user 'ashok' to 'docker' group"
 echo "to enable running docker commands by 'ashok' without sudo"
 sleep 9
