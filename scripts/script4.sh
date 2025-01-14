@@ -20,7 +20,7 @@ echo " " | tee -a error.log
 
 # Downloading a larger gguf model
 echo "  "    | tee -a error.log
-echo "Will download one gguf model from huggingface"  | tee -a error.log
+echo "Will download a large gguf model from huggingface"  | tee -a error.log
 echo "Will take lot of time....."    | tee -a error.log
 echo "If broken, this download can be resumed as: "      | tee -a error.log
 echo "wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/resolve/main/llama-thinker-3b-preview-q8_0.gguf?download=true "  | tee -a error.log        
