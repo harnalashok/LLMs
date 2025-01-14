@@ -9,6 +9,12 @@ Copy and paste.
    chmod +x /home/ashok/*.sh   
    bash script0.sh   
 ```
+Also allocate more memory to WSL Ubuntu by executing in PowerShell:
+```
+Write-Output "[wsl2]
+memory=26GB" > "${env:USERPROFILE}\.wslconfig"
+```
+
 
 These files are intended to be launched in a fresh wsl ubuntu,<br>
 (Ubuntu version 22.04) the following software:<br><br>
