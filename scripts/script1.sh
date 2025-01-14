@@ -60,7 +60,7 @@ echo "ExecStart=/home/ashok/anaconda3/bin/chroma run --host 127.0.0.1 --port 800
 echo " "  >> chroma.service
 echo "[Install]"  >> chroma.service
 echo "WantedBy = multi-user.target"  >> chroma.service
-sudo cp chroma.service /etc/systemd/system/chroma.service
+sudo mv chroma.service /etc/systemd/system/chroma.service
 #---------------------
 # You can now start chroma, as:
 echo " "
