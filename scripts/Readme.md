@@ -1,3 +1,9 @@
+Install Ubuntu-22.04, on Windows 10, if not already installed, as:
+
+```
+wsl --install --distribution Ubuntu-22.04
+```
+
 
 To begin installing all packages, execute the following four commands in Ubuntu console.<br>
 Copy and paste.
