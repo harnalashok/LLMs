@@ -87,9 +87,9 @@ echo " "
 sleep 9
 
 # Change machine name
-echo " "
+echo " "     | tee -a /home/ashok/error.log
 echo "Will change machine name to 'master'..."  | tee -a error.log
-echo "------------------"
+echo "------------------"     | tee -a /home/ashok/error.log
 sleep 9
 
 echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
@@ -109,8 +109,8 @@ echo "--------------"   | tee -a error.log
 echo " "   | tee -a error.log
 sleep 9
 curl -LsSf https://astral.sh/uv/install.sh | sh   2>> error.log
-echo " "
-echo "uv installed"
+echo " "     | tee -a /home/ashok/error.log
+echo "uv installed"     | tee -a /home/ashok/error.log
 sleep 9
 
 # Move script file to done folder
