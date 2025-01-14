@@ -16,32 +16,33 @@ Write-Output "[wsl2]
 memory=26GB" > "${env:USERPROFILE}\.wslconfig"
 ```
 
-
 ------------     
 Following software are intended to be installed/launched in a fresh wsl ubuntu,<br>
 (Ubuntu version 22.04) the following software:<br><br>
 
-i)   Update/upgrade wsl ubuntu<br>
+>i)  Update/upgrade wsl ubuntu<br>
 ii)  Changes the hostname of wsl ubuntu to 'master'<br>
 iii) Installs uv<br>
 iv)  Installs ollama<br>
-> Start ollama, as:<br>
+To use gguf model in ollama, see [here](https://github.com/harnalashok/LLMs/blob/main/anythingLLM%20or%20ollama%20use%20any%20gguf%20model.md)
+>> Start ollama, as:<br>
       
->>  systemctl restart ollama<br>
->>  ollama serve<br>
+>>>  systemctl restart ollama<br>
+>> OR, as   
+>>>  ollama serve<br>
 
-v)   Installs llama.cpp<br>
+>v)   Installs llama.cpp<br>
 vi)  Install Node.js<br>
 vii)   Downloads  gemma-2 gguf from huggingface<br>
 viii) Installs langflow<br>
 ix) Installs flowise<br>
 x) Installs tinyllama<br>
 xi) Installs docker engine<br>
-xii)Installs chromadb.
-> Start chromadb, as:<br>
->>  systemctl restart chromadb<br>
+xii)Installs chromadb. Read more [here](https://github.com/harnalashok/LLMs/blob/main/quick%20chromadb%20install%20on%20wsl2.txt)
+>> Start chromadb, as:<br>
+>>>  systemctl restart chromadb<br>
 
-xii) Installs milvus. Read more about milvus [here](https://milvus.io/docs/install_standalone-docker.md).   
+>xii) Installs milvus. Read more about milvus [here](https://milvus.io/docs/install_standalone-docker.md).   
 xii) Downloads: Llama-Thinker-3B-Preview-GGUF from huggingface<br>
 xiii) Downloads: *nomic-embed-text* from *ollama library*<br>
 xiv) Downloads *olmo2* from *ollama library*<br>
