@@ -21,14 +21,14 @@ echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
 
-echo "Installing milvus vector database"
-echo "It is assumed that docker engine is already installed."
-echo " "
+echo "Installing milvus vector database"    | tee -a error.log
+echo "It is assumed that docker engine is already installed."    | tee -a error.log
+echo " "    | tee -a error.log
 sleep 9
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start  2>> error.log
 echo " "
-echo "Milvus installed"
+echo "Milvus installed"    | tee -a error.log
 echo "To stop docker use the following commands:"
 echo "      bash standalone_embed.sh stop
 echo "To delete the database, use the following command:
@@ -38,49 +38,51 @@ sleep 9
 
 # Download ollama nomic-embed-text
 # Start ollama in background
-echo " "
-echo "-----------"
-echo "Starting ollama in background"
-echo "---------"
-echo " "
+echo " "    | tee -a error.log
+echo "-----------"    | tee -a error.log
+echo "Starting ollama in background"    | tee -a error.log
+echo "---------"    | tee -a error.log
+echo " "    | tee -a error.log
 ollama serve &  > /dev/null &
 echo " "
-echo " Pulling text-embedding model"
-echo " "
+echo " Pulling text-embedding model"    | tee -a error.log
+echo " "    | tee -a error.log
+echo "--------- "    | tee -a error.log
+
 ollama pull nomic-embed-text  2>> error.log
 sleep 6
-echo " Pulling olomo2 model"
+echo "Pulling olomo2 model"    | tee -a error.log
 ollama pull olmo2  2>> error.log
 sleep 5
 
 # Test langflow
-echo " "
-echo "Testing langflow"
-echo "---------"
-echo " "
+echo " "    | tee -a error.log
+echo "Testing langflow"    | tee -a error.log
+echo "---------"    | tee -a error.log
+echo " "    | tee -a error.log
 uv run langflow --version   2>> error.log
 
 # 2.2 Test Flowise:
-echo " "
-echo "Starting flowise. Acess it at port 3000"
-echo "------- "
-echo " "
+echo " "    | tee -a error.log
+echo "Starting flowise. Acess it at port 3000"    | tee -a error.log
+echo "------- "    | tee -a error.log
+echo " "    | tee -a error.log
 sleep 9
 npx flowise start & > /dev/null &
 
 # Test docker
-echo " "
-echo "Installing image hello-world of docker"
-echo "------- "
-echo " "
+echo " "    | tee -a error.log
+echo "Installing image hello-world of docker"    | tee -a error.log
+echo "------- "    | tee -a error.log
+echo " "    | tee -a error.log
 sleep 9
 sudo docker run hello-world   2>> error.log
 
 # Test llama.cpp
-echo " "
-echo "Testing llama.cpp"
-echo "------- "
-echo " "
+echo " "    | tee -a error.log
+echo "Testing llama.cpp"    | tee -a error.log
+echo "------- "    | tee -a error.log
+echo " "    | tee -a error.log
 sleep 9
 cd /home/ashok/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
