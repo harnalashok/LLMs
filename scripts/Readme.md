@@ -10,7 +10,7 @@ Copy and paste.
    bash script0.sh   
 ```
 Also allocate more memory to WSL Ubuntu    
-Execite in **PowerShell**
+Execute in **PowerShell** to allocate 26gb 
 ```
 Write-Output "[wsl2]
 memory=26GB" > "${env:USERPROFILE}\.wslconfig"
