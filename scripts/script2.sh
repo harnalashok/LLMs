@@ -43,26 +43,26 @@ sleep 9
 
 
 # Installing llama.cpp
-echo " "
+echo " "   | tee -a error.log
 echo "Installing llama.cpp"  | tee -a error.log
-echo "------------"
-echo " "
+echo "------------"   | tee -a error.log
+echo " "   | tee -a error.log
 git clone https://github.com/ggerganov/llama.cpp
 cd llama.cpp
 cmake -B build
 cmake --build build --config Release
 cd ~
 echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
-echo " "
-echo "-------"
-echo "llama.cpp installed"
-echo "-------"
+echo " "   | tee -a error.log
+echo "-------"   | tee -a error.log
+echo "llama.cpp installed"   | tee -a error.log
+echo "-------"   | tee -a error.log
 
 # 1.2 download and install Node.js
-echo " "
-echo "-------"
+echo " "   | tee -a error.log
+echo "-------"   | tee -a error.log
 echo "Installing Node.js ver 20......"  | tee -a error.log
-echo "-------"
+echo "-------"   | tee -a error.log
 fnm use --install-if-missing 20   2>> error.log
 echo " "
 
@@ -71,7 +71,7 @@ echo " "
 echo "  "
 echo "Will download gemma-2 gguf model from huggingface"  | tee -a error.log
 echo "Will take lot of time....."
-echo "-------------------"
+echo "-------------------"   | tee -a error.log
 echo " "
 sleep 9
 cd ~/llama.cpp/models
@@ -79,9 +79,9 @@ wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/g
 # You may have to issue the following command to cleanup also.
 mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 
-echo " "
+echo " "   | tee -a error.log
 echo "gemma-2-2b-it.Q6_K.gguf downloaded"  | tee -a error.log
-echo "---------"
+echo "---------"   | tee -a error.log
 sleep 9
 
 # Move script file to done folder
