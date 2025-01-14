@@ -11,6 +11,14 @@
 #     test.sh
 
 
+
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: script3.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
 # Install langflow
 echo " "
 echo "Installing langflow..."
