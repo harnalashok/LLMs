@@ -39,7 +39,11 @@ echo "When asked, supply password"
 echo "------"
 echo " "
 echo " "
-curl -fsSL https://ollama.com/install.sh | sh  2>> error.log
+curl -fsSL https://ollama.com/install.sh | sh  2>> error.log  
+echo "---------"     | tee -a error.log
+echo "Ollama installed"     | tee -a error.log
+echo "-----------"     | tee -a error.log
+echo " "     | tee -a error.log
 sleep 9
 
 
