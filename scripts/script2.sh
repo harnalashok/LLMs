@@ -69,7 +69,11 @@ echo "-------"   | tee -a error.log
 echo "Installing Node.js ver 20......"  | tee -a error.log
 echo "-------"   | tee -a error.log
 fnm use --install-if-missing 20   2>> error.log
-echo " "
+echo " "    | tee -a error.log
+echo "Node.js installed"    | tee -a error.log
+echo "------------"    | tee -a error.log
+echo "  "    | tee -a error.log
+
 
 
 # Downloading smaller gguf model
