@@ -29,6 +29,10 @@ viii) Installs langflow<br>
 ix) Installs flowise<br>
 x) Installs tinyllama<br>
 xi) Installs docker engine<br>
+xii)Installs chromadb.
+> Start chromadb, as:<br>
+>>  systemctl restart chromadb<br>
+xii) Installs milvus
 xii) Downloads: Llama-Thinker-3B-Preview-GGUF from huggingface<br>
 xiii) Downloads: nomic-embed-text from *ollama library*<br>
 xiv) Downloads olmo2 from *ollama library*<br>
