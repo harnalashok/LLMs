@@ -20,22 +20,22 @@ echo " " | tee -a error.log
 
 
 # Install langflow
-echo " "
+echo " "   | tee -a error.log
 echo "Installing langflow..."  | tee -a error.log
-echo "------"
-echo " "
+echo "------"   | tee -a error.log
+echo " "   | tee -a error.log
 sleep 9
 uv venv
 uv pip install langflow  2>> error.log
-echo "langflow installed"
+echo "langflow installed"   | tee -a error.log
 echo " "
 sleep 9
 
 # 2.1 Install Flowise as NORMAL user
 echo " "
 echo "Installing flowvise...Takes time..."  | tee -a error.log
-echo "------"
-echo " "
+echo "------"   | tee -a error.log
+echo " "   | tee -a error.log
 sleep 9
 npm install -g flowise  2>> error.log
 echo " "
@@ -45,12 +45,12 @@ echo " "
 
 
 # Download tinyllama
-echo " "
-echo "--------- "
+echo " "   | tee -a error.log
+echo "--------- "   | tee -a error.log
 echo "Downloading tinyllama"   | tee -a error.log
 echo "Download size is 637MB"
-echo "------"
-echo " "
+echo "------"   | tee -a error.log
+echo " "   | tee -a error.log
 ollama pull tinyllama   2>> error.log
 sleep 2
 echo "tinyllama downloaded"
