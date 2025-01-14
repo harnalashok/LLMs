@@ -9,6 +9,13 @@
 #     docker_install.sh
 #     test.sh
 
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: script4.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
 # Downloading a larger gguf model
 echo "  "
 echo "Will download one gguf model from huggingface"
