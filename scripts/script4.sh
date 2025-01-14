@@ -38,11 +38,14 @@ sleep 9
 # Move script file to done folder
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/test.sh  /home/ashok
+
 echo " "
-echo "You can now begin installation testing, as:"
+echo "You can now test installation, as below."
+echo "Will shut down Ubuntu console, then open and execute:"
 echo "    ./test.sh"
 sleep 8
 echo " "
+wsl.exe --shutdown
 
 
 
