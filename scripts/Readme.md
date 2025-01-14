@@ -25,6 +25,8 @@ Write-Output "[wsl2]
 memory=26GB" > "${env:USERPROFILE}\.wslconfig"
 ```
 
+File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.   
+   
 ------------     
 Following software are intended to be installed/launched in a fresh wsl ubuntu,<br>
 (Ubuntu version 22.04) the following software:<br><br>
