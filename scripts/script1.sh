@@ -45,6 +45,35 @@ sudo curl -fsSL https://fnm.vercel.app/install | bash
 echo "Install chromadb"
 pip install chromadb
 
+#  TO START CHROMA AS a SERVICE
+#*********************************
+echo '[Unit]'  > chroma.service
+echo "Description = Chroma Service" >> chroma.service
+echo "After = network.target"  >> chroma.service
+echo " " >>  chroma.service
+echo "[Service]"  >> chroma.service
+echo "Type = simple"  >> chroma.service
+echo "User = root"  >> chroma.service
+echo "Group = root"  >> chroma.service
+echo "WorkingDirectory = /home/ashok/Documents"  >> chroma.service
+echo "ExecStart=/home/ashok/anaconda3/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
+echo " "  >> chroma.service
+echo "[Install]"  >> chroma.service
+echo "WantedBy = multi-user.target"  >> chroma.service
+sudo cp chroma.service /etc/systemd/system/chroma.service
+#---------------------
+# You can now start chroma, as:
+echo " "
+echo "----------"
+echo "sudo systemctl daemon-reload"
+echo "sudo systemctl enable chroma"
+echo "sudo systemctl start chroma"
+echo "Chroma is available at port 8000"
+echo Check as: "
+echo "    netstat -aunt | grep 8000"
+echo "----------"
+echo " "
+
 
 # Change machine name
 echo " "
