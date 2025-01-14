@@ -32,6 +32,7 @@ mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q
 
 echo " "    | tee -a error.log
 echo "thinker-3b-preview-q8_0.gguf downloaded"    | tee -a error.log
+echo "Check as: ls -la /home/ashok/llama.cpp/models/ "  | tee -a error.log
 echo "---------"    | tee -a error.log
 sleep 9
 
