@@ -9,7 +9,8 @@ Copy and paste.
    chmod +x /home/ashok/*.sh   
    bash script0.sh   
 ```
-Also allocate more memory to WSL Ubuntu by executing in PowerShell:
+Also allocate more memory to WSL Ubuntu    
+Execite in PowerShell:
 ```
 Write-Output "[wsl2]
 memory=26GB" > "${env:USERPROFILE}\.wslconfig"
