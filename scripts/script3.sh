@@ -21,23 +21,23 @@ echo " " | tee -a error.log
 
 # Install langflow
 echo " "
-echo "Installing langflow..."
+echo "Installing langflow..."  | tee -a error.log
 echo "------"
 echo " "
 sleep 9
 uv venv
-uv pip install langflow 
+uv pip install langflow  2>> error.log
 echo "langflow installed"
 echo " "
 sleep 9
 
 # 2.1 Install Flowise as NORMAL user
 echo " "
-echo "Installing flowvise...Takes time..."
+echo "Installing flowvise...Takes time..."  | tee -a error.log
 echo "------"
 echo " "
 sleep 9
-npm install -g flowise
+npm install -g flowise  2>> error.log
 echo " "
 echo "flowise installed"
 echo " "
@@ -47,11 +47,11 @@ echo " "
 # Download tinyllama
 echo " "
 echo "--------- "
-echo "Downloading tinyllama"
+echo "Downloading tinyllama"   | tee -a error.log
 echo "Download size is 637MB"
 echo "------"
 echo " "
-ollama pull tinyllama
+ollama pull tinyllama   2>> error.log
 sleep 2
 echo "tinyllama downloaded"
 
