@@ -35,8 +35,8 @@ xii)Installs chromadb.
 
 xii) Installs milvus. Read more about milvus [here](https://milvus.io/docs/install_standalone-docker.md).   
 xii) Downloads: Llama-Thinker-3B-Preview-GGUF from huggingface<br>
-xiii) Downloads: nomic-embed-text from *ollama library*<br>
-xiv) Downloads olmo2 from *ollama library*<br>
+xiii) Downloads: *nomic-embed-text* from *ollama library*<br>
+xiv) Downloads *olmo2* from *ollama library*<br>
 
 
 
