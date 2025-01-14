@@ -31,6 +31,13 @@
 
 #------ Steps ---------
 
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: script0.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
 mkdir /home/ashok/done
 echo "Downloading all script files from github" 
 echo "---------------------------"
