@@ -28,10 +28,10 @@ echo " " | tee -a error.log
 
 # Install software
 echo "  "
-echo "------------"
+echo "------------"   | tee -a error.log
 echo " Will update Ubuntu"  | tee -a error.log
 echo " You will be asked for password...supply it..."
-echo "----------"
+echo "----------"   | tee -a error.log
 echo " "
 sleep 9
 sudo apt update
@@ -39,20 +39,20 @@ sudo apt upgrade -y
 sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde -y  
 
 echo " "
-echo "Done ......"
+echo "Ubuntu upgraded ......"  | tee -a error.log
 
 # Install 'fnm' (Fast Node Manager)
-echo " "
+echo " "   | tee -a error.log
 echo "Will install fnm: Fast Node Manager..."  | tee -a error.log
-echo "------------------"
+echo "------------------"   | tee -a error.log
 sleep 9
 sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> error.log
 
 # Install chromadb
-echo " "
+echo " "   | tee -a error.log
 echo " Will Install chromadb"  | tee -a error.log
-echo "------------"
-echo " "
+echo "------------"   | tee -a error.log
+echo " "   | tee -a error.log
 sleep 9
 pip install chromadb   2>> error.log
 
@@ -103,10 +103,10 @@ sudo sed -i 's/127.0.1.1.*/127.0.1.1  master.fsm.ac.in   master/' /etc/hosts
 
 
 # Install uv for langflow install
-echo " "
+echo " "   | tee -a error.log
 echo "Installing uv"  | tee -a error.log
-echo "--------------"
-echo " "
+echo "--------------"   | tee -a error.log
+echo " "   | tee -a error.log
 sleep 9
 curl -LsSf https://astral.sh/uv/install.sh | sh   2>> error.log
 echo " "
