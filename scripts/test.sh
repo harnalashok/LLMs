@@ -26,7 +26,7 @@ echo "It is assumed that docker engine is already installed."
 echo " "
 sleep 9
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-bash standalone_embed.sh start
+bash standalone_embed.sh start  2>> error.log
 echo " "
 echo "Milvus installed"
 echo "To stop docker use the following commands:"
@@ -47,10 +47,10 @@ ollama serve &  > /dev/null &
 echo " "
 echo " Pulling text-embedding model"
 echo " "
-ollama pull nomic-embed-text
+ollama pull nomic-embed-text  2>> error.log
 sleep 6
 echo " Pulling olomo2 model"
-ollama pull olmo2
+ollama pull olmo2  2>> error.log
 sleep 5
 
 # Test langflow
@@ -58,7 +58,7 @@ echo " "
 echo "Testing langflow"
 echo "---------"
 echo " "
-uv run langflow --version
+uv run langflow --version   2>> error.log
 
 # 2.2 Test Flowise:
 echo " "
@@ -74,7 +74,7 @@ echo "Installing image hello-world of docker"
 echo "------- "
 echo " "
 sleep 9
-sudo docker run hello-world
+sudo docker run hello-world   2>> error.log
 
 # Test llama.cpp
 echo " "
