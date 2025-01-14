@@ -12,7 +12,7 @@ Copy and paste.
 Also, allocate 26GB memory to WSL Ubuntu (and the rest to Windows)        
 Execute the following in **PowerShell** to allocate 26gb    
 (Copy and paste)     
-Change 26GB to lesser figure as per your system RAM.    
+Change `26GB` to lesser figure as per your system RAM.    
     
 ```
 Write-Output "[wsl2]
