@@ -14,6 +14,13 @@
 # Milvus install
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: test.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
 echo "Installing milvus vector database"
 echo "It is assumed that docker engine is already installed."
 echo " "
