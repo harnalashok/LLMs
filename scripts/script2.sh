@@ -91,6 +91,7 @@ mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 echo " "   | tee -a error.log
 echo "gemma-2-2b-it.Q6_K.gguf downloaded"  | tee -a error.log
 echo "Download folder is:  /home/ashok/llama.cpp/models"    | tee -a error.log
+echo "Check as: ls -la /home/ashok/llama.cpp/models/"    | tee -a error.log
 echo "---------"   | tee -a error.log
 sleep 9
 
