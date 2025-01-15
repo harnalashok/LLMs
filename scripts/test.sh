@@ -17,9 +17,6 @@
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
 
-if docker -v  |  grep 'version'; then   echo "It's there!"; fi
-
-
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
 echo "Script: test.sh"  | tee -a error.log
