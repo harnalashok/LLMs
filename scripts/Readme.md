@@ -79,6 +79,19 @@ memory=26GB" > "${env:USERPROFILE}\.wslconfig"
 ```
 
 > Shutdown ubuntu (`wsl --shutdown`) and restart it for it to take effect.
+>
+### Script sequence
+<pre>
+       These sscripts run in sequence.
+           script0.sh
+           script1.sh
+           script2.sh
+           script3.sh
+           docker_install.sh
+           script4.sh
+           model_install.sh
+           test.sh
+</pre>
 
 
 
