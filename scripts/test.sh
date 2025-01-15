@@ -16,12 +16,24 @@
 # Milvus install
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
+
+if docker -v  |  grep 'version'; then   echo "It's there!"; fi
+
+
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
 echo "Script: test.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
+# Check if Docker installed
+if docker -v  |  grep 'version'; then  
+   echo " "
+else
+   echo "Docker engine is not installed. Install it first"   | tee -a error.log
+   sleep 10
+   exit
+fi
 
 echo "Installing milvus vector database using docker"    | tee -a error.log
 echo "You will be asked for the password. Supply it..."    | tee -a error.log
