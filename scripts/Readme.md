@@ -4,6 +4,8 @@ Install Ubuntu-22.04, on Windows 10, if not already installed, as:
 wsl --install --distribution Ubuntu-22.04
 ```
 
+If Ubuntu installation is very slow, please see this [link](https://github.com/microsoft/WSL/issues/6405#issuecomment-1339460367)
+
 
 To begin installing all packages, execute the following four commands in *Ubuntu* console.<br>
 Copy and paste.
