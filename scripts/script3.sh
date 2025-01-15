@@ -2,6 +2,7 @@
 
 # LAst amended: 14th Jan, 2024
 
+# Connected scripts are:
 # These sscripts run in sequence.
 #     script0.sh
 #     script1.sh
