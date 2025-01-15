@@ -76,7 +76,7 @@ sleep 9
 
 # Move script file to done folder
 mv /home/ashok/script4.sh /home/ashok/done
-mv /home/ashok/next/test.sh  /home/ashok
+mv /home/ashok/next/model_install.sh  /home/ashok
 
 echo " "
 echo "You can now test installation, as below."
