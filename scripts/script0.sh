@@ -51,6 +51,8 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scrip
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script4.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/docker_install.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/test.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/model_install.sh -P /home/ashok/next
+
 echo "  "
 echo "Script files downloaded....."
 sleep 9
