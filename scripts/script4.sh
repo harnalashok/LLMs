@@ -27,6 +27,10 @@ else
    exit
 fi
 
+
+# Milvus install
+# Ref: https://milvus.io/docs/install_standalone-docker.md
+
 echo "Installing milvus vector database using docker"    | tee -a error.log
 echo "You will be asked for the password. Supply it..."    | tee -a error.log
 echo "It is assumed that docker engine is already installed."    | tee -a error.log
