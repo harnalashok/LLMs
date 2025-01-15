@@ -38,7 +38,7 @@ echo " Will update Ubuntu"  | tee -a error.log
 echo " You will be asked for password...supply it..."
 echo "----------"   | tee -a error.log
 echo " "
-sleep 9
+sleep 2
 sudo apt update
 sudo apt upgrade -y
 sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde -y  
