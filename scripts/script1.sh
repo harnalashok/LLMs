@@ -4,13 +4,15 @@
 
 
 
+# Connected scripts are:
 # These sscripts run in sequence.
 #     script0.sh
 #     script1.sh
 #     script2.sh
 #     script3.sh
-#     script4.sh
 #     docker_install.sh
+#     script4.sh
+#     model_install.sh
 #     test.sh
 
 
