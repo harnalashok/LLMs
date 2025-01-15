@@ -10,6 +10,15 @@
 #     model_install.sh
 #     test.sh
 
+
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: model_install.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
+
 # Download ollama nomic-embed-text
 # Start ollama in background
 echo " "    | tee -a error.log
