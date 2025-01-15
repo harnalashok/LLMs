@@ -82,7 +82,7 @@ memory=26GB" > "${env:USERPROFILE}\.wslconfig"
 >
 ### Script sequence
 <pre>
-       These sscripts run in sequence.
+       These scripts run in sequence in Ubuntu Console.
            script0.sh
            script1.sh
            script2.sh
