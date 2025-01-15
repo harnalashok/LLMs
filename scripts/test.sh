@@ -27,7 +27,7 @@ echo "Installing milvus vector database using docker"    | tee -a error.log
 echo "You will be asked for the password. Supply it..."    | tee -a error.log
 echo "It is assumed that docker engine is already installed."    | tee -a error.log
 echo " "    | tee -a error.log
-sleep 9
+sleep 3
 
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start  2>> error.log
