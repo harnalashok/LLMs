@@ -61,6 +61,11 @@ echo " "   | tee -a error.log
 sleep 9
 pip install chromadb   2>> error.log
 
+sleep 2
+echo " "    | tee -a error.log
+echo "ChromaDB installed"    | tee -a error.log
+echo "------ "    | tee -a error.log
+
 #  TO START CHROMA AS a SERVICE
 #*********************************
 echo '[Unit]'  > chroma.service
@@ -79,16 +84,16 @@ echo "WantedBy = multi-user.target"  >> chroma.service
 sudo mv chroma.service /etc/systemd/system/chroma.service
 #---------------------
 # You can now start chroma, as:
-echo " "
-echo "----------"
-echo "sudo systemctl daemon-reload"
-echo "sudo systemctl enable chroma"
-echo "sudo systemctl start chroma"
-echo "Chroma is available at port 8000"
-echo "Check as: "
-echo "    netstat -aunt | grep 8000"
-echo "----------"
-echo " "
+echo " "     | tee -a error.log
+echo "---Start/Stop Chroma as-------"     | tee -a error.log
+echo "sudo systemctl daemon-reload"   | tee -a error.log
+echo "sudo systemctl enable chroma"     | tee -a error.log
+echo "sudo systemctl start chroma"     | tee -a error.log
+echo "Chroma is available at port 8000"     | tee -a error.log
+echo "Check as: "      | tee -a error.log
+echo "    netstat -aunt | grep 8000"      | tee -a error.log
+echo "----------"      | tee -a error.log
+echo " "     | tee -a error.log
 sleep 9
 
 # Change machine name
