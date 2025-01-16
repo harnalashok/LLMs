@@ -66,6 +66,7 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/model_install.sh
 
 
 chmod +x *.sh
