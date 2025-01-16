@@ -70,25 +70,25 @@ echo "Updating Ubuntu packages list.."
 apt update -y
 sleep 2
 
-echo "Downloading and installing docker engine"    | tee -a /home/ashok/error.log
-echo "============"     | tee -a /home/ashok/error.log
-echo " "     | tee -a /home/ashok/error.log
+echo "Downloading and installing docker engine"    | tee -a ~/error.log
+echo "============"     | tee -a ~/error.log
+echo " "     | tee -a ~/error.log
 snap install docker
 apt  install docker-compose  -y
-echo " "     | tee -a /home/ashok/error.log
-echo "============"     | tee -a /home/ashok/error.log
+echo " "     | tee -a ~/error.log
+echo "============"     | tee -a ~/error.log
 echo " "
-echo "Docker engine installed."     | tee -a /home/ashok/error.log
-echo "Adding user 'ashok' to 'docker' group"     | tee -a /home/ashok/error.log
-echo "to enable running docker commands by 'ashok' without sudo"     | tee -a /home/ashok/error.log
+echo "Docker engine installed."     | tee -a ~/error.log
+echo "Adding user 'ashok' to 'docker' group"     | tee -a ~/error.log
+echo "to enable running docker commands by 'ashok' without sudo"     | tee -a ~/error.log
 sleep 9
 groupadd docker
 usermod -aG docker ashok
-echo " "    | tee -a /home/ashok/error.log
+echo " "    | tee -a ~/error.log
 
-echo "Docker installation process completed"     | tee -a /home/ashok/error.log
+echo "Docker installation process completed"     | tee -a ~/error.log
 
-echo " "     | tee -a /home/ashok/error.log
+echo " "     | tee -a ~/error.log
 
 echo "Machine will be rebooted in 10s"
 echo "Reopen it thereafter, and perform tests"
@@ -97,8 +97,8 @@ echo " "
 sleep 10
 
 # Move script file to done folder
-mv /home/ashok/docker_install.sh /home/ashok/done
-mv /home/ashok/next/script4.sh  /home/ashok
+mv ~/docker_install.sh ~/done
+mv ~/next/script4.sh  ~
 sleep 2
 reboot
 #############
