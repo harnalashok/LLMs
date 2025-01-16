@@ -36,7 +36,7 @@ fi
 echo " "
 echo " "
 echo "------"
-echo "Installing ollama. Takes time...."  | tee -a error.log
+echo "Installing ollama quietly... Takes time...."  | tee -a error.log
 echo "When asked, supply password"
 echo "------"
 echo " "
