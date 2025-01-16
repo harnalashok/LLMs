@@ -40,5 +40,5 @@ ollama pull olmo2  2>> error.log
 sleep 5
 
 # Move script file to done folder
-mv /home/ashok/model_install.sh /home/ashok/done
-mv /home/ashok/next/test.sh  /home/ashok
+mv ~/model_install.sh ~/done
+mv ~/next/test.sh  ~
