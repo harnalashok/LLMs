@@ -68,7 +68,7 @@ wget -c   https://huggingface.co/prithivMLmods/Llama-Thinker-3B-Preview-GGUF/res
 
 
 # You may have to issue the following command to cleanup also.
-mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.
+mv 'llama-thinker-3b-preview-q8_0.gguf?download=true' llama-thinker-3b-preview-q8_0.gguf
 
 echo " "    | tee -a error.log
 echo "thinker-3b-preview-q8_0.gguf downloaded"    | tee -a error.log
