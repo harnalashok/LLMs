@@ -21,7 +21,7 @@
 
 
 #            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script0.sh
-#            perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh
+#            perl -pi -e 's/\r\n/\n/g' ~/script0.sh
 #            chmod +x *.sh
 
 #     ii) Then, execute this file as:
@@ -40,41 +40,42 @@ echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
 
-mkdir /home/ashok/done
+mkdir ~/done
 echo "Downloading all script files from github" 
 echo "---------------------------"
 echo "  "
 # Raw github files are downloaded
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script0.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script1.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script2.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script3.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script4.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/docker_install.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/test.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/model_install.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script0.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script1.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script2.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script3.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script4.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/docker_install.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/test.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/model_install.sh -P ~/next
 
 echo "  "
 echo "Script files downloaded....."
 sleep 9
 
 # Doc to Unix conversion
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script0.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script1.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script2.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script0.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script1.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script2.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script3.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/docker_install.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script4.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/test.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/model_install.sh
 
 
 chmod +x *.sh
-chmod +x /home/ashok/next/*.sh
+chmod +x ~/next/*.sh
 
 # Move script file to 'done' folder
-mv /home/ashok/script0.sh /home/ashok/done
+mv ~/script0.sh  ~/done
 # Bring in the next file
-mv /home/ashok/next/script1.sh /home/ashok
+mv ~/next/script1.sh  ~/
 
 echo " Changing host name"
 bash script1.sh
