@@ -56,6 +56,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubunt
 
 echo "  "
 echo "Script files downloaded....."
+echo "Wait..You will have to supply password..."
 sleep 9
 
 # Doc to Unix conversion
