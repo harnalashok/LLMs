@@ -17,18 +17,23 @@ echo "Script: model_install.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
+if netstat -aunt   |  grep '11434'; then  
+   echo " "      | tee -a error.log
+   echo "Ollama is already started"     | tee -a error.log
+   echo " "      | tee -a error.log
+ else  
+    # Download ollama nomic-embed-text
+    # Start ollama in background
+    echo " "    | tee -a error.log
+    echo "-----------"    | tee -a error.log
+    echo "Starting ollama in background"    | tee -a error.log
+    echo "---------"    | tee -a error.log
+    echo " "    | tee -a error.log
+    ollama serve &  > /dev/null &
+fi
 
 
-# Download ollama nomic-embed-text
-# Start ollama in background
 echo " "    | tee -a error.log
-echo "-----------"    | tee -a error.log
-echo "Starting ollama in background"    | tee -a error.log
-echo "---------"    | tee -a error.log
-echo " "    | tee -a error.log
-ollama serve &  > /dev/null &
-
-echo " "
 echo " Pulling text-embedding model"    | tee -a error.log
 echo " "    | tee -a error.log
 echo "--------- "    | tee -a error.log
