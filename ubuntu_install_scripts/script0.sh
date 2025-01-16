@@ -20,7 +20,7 @@
 #        execute the three commands:
 
 
-#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script0.sh
+#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script0.sh
 #            perl -pi -e 's/\r\n/\n/g' ~/script0.sh
 #            chmod +x *.sh
 
