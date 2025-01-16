@@ -23,7 +23,7 @@ echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
 
-DIRECTORY="~/llama.cpp"
+DIRECTORY="/home/ashok/llama.cpp"
 if [ -d "$DIRECTORY" ]; then
   echo "$DIRECTORY does exist."
   echo "Recheck if script2.sh was executed earlier"
@@ -59,7 +59,7 @@ cd llama.cpp
 cmake -B build
 cmake --build build --config Release
 cd ~
-echo "PATH=\$PATH:~/llama.cpp/build/bin" >> .bashrc
+echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
 echo " "   | tee -a error.log
 echo "-------"   | tee -a error.log
 echo "llama.cpp installed"   | tee -a error.log
@@ -79,11 +79,11 @@ echo "  "    | tee -a error.log
 
 
 # Downloading smaller gguf model
-echo "  "     | tee -a ~/error.log
+echo "  "     | tee -a /home/ashok/error.log
 echo "Will download gemma-2 gguf model from huggingface"  | tee -a error.log
-echo "Will take lot of time....."     | tee -a ~/error.log
+echo "Will take lot of time....."     | tee -a /home/ashok/error.log
 echo "-------------------"   | tee -a error.log
-echo " "     | tee -a ~/error.log
+echo " "     | tee -a /home/ashok/error.log
 sleep 9
 cd ~/llama.cpp/models
 wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf? 2>> error.log
@@ -92,14 +92,14 @@ mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 
 echo " "   | tee -a error.log
 echo "gemma-2-2b-it.Q6_K.gguf downloaded"  | tee -a error.log
-echo "Download folder is:  ~/llama.cpp/models"    | tee -a error.log
-echo "Check as: ls -la ~/llama.cpp/models/"    | tee -a error.log
+echo "Download folder is:  /home/ashok/llama.cpp/models"    | tee -a error.log
+echo "Check as: ls -la /home/ashok/llama.cpp/models/"    | tee -a error.log
 echo "---------"   | tee -a error.log
 sleep 9
 
 # Move script file to done folder
-mv ~/script2.sh ~/done
-mv ~/next/script3.sh ~
+mv /home/ashok/script2.sh /home/ashok/done
+mv /home/ashok/next/script3.sh /home/ashok
 
 echo "  "
 echo "Will shut down Ubuntu console"

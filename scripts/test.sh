@@ -53,14 +53,14 @@ echo "Testing llama.cpp"    | tee -a error.log
 echo "------- "    | tee -a error.log
 echo " "    | tee -a error.log
 sleep 9
-mv test.sh ~/done
+mv test.sh /home/ashok/done
 
 echo " "     | tee -a error.log
 echo "-------"     | tee -a error.log
 echo "Sending a prompt to gemma-2-2b"     | tee -a error.log
 echo "-------"     | tee -a error.log
 echo " "     | tee -a error.log
-cd ~/llama.cpp/models
+cd /home/ashok/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
 
 
