@@ -55,7 +55,7 @@ echo " "     | tee -a ~/error.log
 # Download tinyllama
 echo " "   | tee -a error.log
 echo "--------- "   | tee -a error.log
-echo "Downloading tinyllama"   | tee -a error.log
+echo "Downloading tinyllama for ollama"   | tee -a error.log
 echo "Download size is 637MB"
 echo "------"   | tee -a error.log
 echo " "   | tee -a error.log
