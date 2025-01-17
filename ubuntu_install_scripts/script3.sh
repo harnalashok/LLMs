@@ -78,6 +78,6 @@ echo "  sudo ./docker_install.sh"
 echo "----------"
 echo " "
 sleep 10
-wsl.exe --shutdown
+exit
 
 
