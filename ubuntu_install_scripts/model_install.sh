@@ -50,3 +50,5 @@ sleep 5
 # Move script file to done folder
 mv ~/model_install.sh ~/done
 mv ~/next/test.sh  ~
+exit
+
