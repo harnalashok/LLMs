@@ -57,6 +57,8 @@ echo "*********"  | tee -a error.log
 
  echo " "  | tee -a error.log
  echo "Downloading Llama-2-13B-chat-GGUF" | tee -a error.log
+ echo "Downloading size: 7.8GB" | tee -a error.log
+ 
  echo "to folder ~/llama.cpp/models/"  | tee -a error.log
  echo  "*********"  | tee -a error.log
  cd  ~/llama.cpp/models/
