@@ -18,11 +18,6 @@
 
 # This file is called by script0.sh
 
-if [[ `hostname` == "master" ]]; then
-   echo "It appears you have already executed this script."
-   echo "Recheck.....and press ctrl+c  if yes."
-   sleep 40
-fi
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
@@ -97,21 +92,26 @@ echo "----------"      | tee -a error.log
 echo " "     | tee -a error.log
 sleep 9
 
-# Change machine name
-echo " "     | tee -a ~/error.log
-echo "Will change machine name to 'master'..."  | tee -a error.log
-echo "------------------"     | tee -a ~/error.log
-sleep 9
 
-echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
-echo 'systemd=true' | sudo tee -a /etc/wsl.conf > /dev/null
-echo '[network]' | sudo tee -a /etc/wsl.conf > /dev/null
-echo 'hostname = master' | sudo tee -a /etc/wsl.conf > /dev/null
-echo 'generateHosts = false' | sudo tee -a /etc/wsl.conf > /dev/null
-sudo rm /etc/resolv.conf
-echo 'nameserver 8.8.8.8' | sudo tee  /etc/resolv.conf > /dev/null
-sudo sed -i 's/127.0.1.1.*/127.0.1.1  master.fsm.ac.in   master/' /etc/hosts
-
+if [[ `hostname` != "master" ]]; then
+   # Change machine name
+   echo " "     | tee -a ~/error.log
+   echo "Will change machine name to 'master'..."  | tee -a error.log
+   echo "------------------"     | tee -a ~/error.log
+   sleep 9
+   echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
+   echo 'systemd=true' | sudo tee -a /etc/wsl.conf > /dev/null
+   echo '[network]' | sudo tee -a /etc/wsl.conf > /dev/null
+   echo 'hostname = master' | sudo tee -a /etc/wsl.conf > /dev/null
+   echo 'generateHosts = false' | sudo tee -a /etc/wsl.conf > /dev/null
+   sudo rm /etc/resolv.conf
+   echo 'nameserver 8.8.8.8' | sudo tee  /etc/resolv.conf > /dev/null
+   sudo sed -i 's/127.0.1.1.*/127.0.1.1  master.fsm.ac.in   master/' /etc/hosts
+else
+   echo "It appears you have already executed this script."
+   echo "Recheck.....and press ctrl+c  if yes."
+   sleep 40
+fi
 
 # Install uv for langflow install
 echo " "   | tee -a error.log
@@ -137,5 +137,5 @@ echo "     ./script2.sh"
 echo "*******"
 echo " "
 sleep 9
-wsl.exe --shutdown
+exit
 
