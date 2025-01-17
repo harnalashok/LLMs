@@ -1,6 +1,7 @@
 Install Ubuntu-22.04, on Windows 10, if not already installed, as:
 
 ```
+wsl --update
 wsl --install --distribution Ubuntu-22.04
 ```
 
