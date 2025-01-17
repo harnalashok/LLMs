@@ -57,15 +57,15 @@ echo "*********"  | tee -a error.log
 
  echo " "  | tee -a error.log
  echo "Downloading Llama-2-13B-chat-GGUF" | tee -a error.log
- echo "to folder ~/llama.cpp/models/  | tee -a error.log
- echo "*********"  | tee -a error.log
+ echo "to folder ~/llama.cpp/models/"  | tee -a error.log
+ echo  "*********"  | tee -a error.log
  cd  ~/llama.cpp/models/
  wget https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF/resolve/main/llama-2-13b-chat.Q4_K_M.gguf 
- sleep 2
+ sleep 4
  echo " "  | tee -a error.log
- echo "Downloading Llama-2-13B-chat-GGUF" | tee -a error.log
- echo "to folder ~/llama.cpp/models/  | tee -a error.log
- echo "*********"  | tee -a error.log
+ echo "Downloaded Llama-2-13B-chat-GGUF" | tee -a error.log
+ echo "Will test llama-cpp-python now"  | tee -a error.log
+ echo  "*********"  | tee -a error.log
  python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat & 
 
 << ////
