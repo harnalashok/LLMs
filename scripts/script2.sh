@@ -59,7 +59,15 @@ cd llama.cpp
 cmake -B build
 cmake --build build --config Release
 cd ~
+
+
+# In .bashrc set PATH to bin folder
 echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
+
+# Create a symlink to models and gguf folder
+ln -s ~/llama.cpp/models/ ~/
+ln -s ~/llama.cpp/models/ ~/gguf
+
 echo " "   | tee -a error.log
 echo "-------"   | tee -a error.log
 echo "llama.cpp installed"   | tee -a error.log
