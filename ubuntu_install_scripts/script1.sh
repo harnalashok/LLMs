@@ -37,7 +37,7 @@ echo " "
 sleep 2
 sudo apt update
 sudo apt upgrade -y
-sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git -y  
+sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  -y  
 
 echo " "
 echo "Ubuntu upgraded ......"  | tee -a error.log
