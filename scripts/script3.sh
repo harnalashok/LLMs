@@ -35,9 +35,14 @@ sleep 2
 echo "  "    | tee -a error.log
 echo "  "    | tee -a error.log
 echo "langflow installed"   | tee -a error.log
-echo "Run this command to get langflow CLI options:"    | tee -a error.log
+echo "Run following command to get langflow CLI options:"    | tee -a error.log
 echo "        uv run langflow"    | tee -a error.log
+echo "Generate api-key, as: "    | tee -a error.log
+echo "        uv run langflow api-key"    | tee -a error.log
+echo "Run langflow, as:"    | tee -a error.log
+echo "        uv run langflow run"    | tee -a error.log
 echo "---------- "   | tee -a error.log
+echo "  "   | tee -a error.log
 sleep 9
 
 # 2.1 Install Flowise as NORMAL user
