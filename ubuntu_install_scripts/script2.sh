@@ -118,5 +118,5 @@ echo "    ./script3.sh"
 echo "----------"
 echo " "
 sleep 9
-wsl.exe  --shutdown
+exit
 
