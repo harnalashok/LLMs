@@ -35,6 +35,8 @@ sleep 2
 echo "  "    | tee -a error.log
 echo "  "    | tee -a error.log
 echo "langflow installed"   | tee -a error.log
+echo "Run this command to get langflow CLI options:"    | tee -a error.log
+echo "        uv run langflow"    | tee -a error.log
 echo "---------- "   | tee -a error.log
 sleep 9
 
