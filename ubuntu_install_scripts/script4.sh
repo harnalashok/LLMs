@@ -86,7 +86,7 @@ echo "Will shut down Ubuntu console, then open and execute:"
 echo "    ./test.sh"
 sleep 8
 echo " "
-wsl.exe --shutdown
+exit
 
 
 
