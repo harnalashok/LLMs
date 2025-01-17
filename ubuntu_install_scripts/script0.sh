@@ -12,6 +12,7 @@
 #     script4.sh
 #     model_install.sh
 #     test.sh
+#     last.sh
 
 
 
@@ -53,6 +54,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubunt
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/docker_install.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/test.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/model_install.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/last.sh -P ~/next
 
 echo "  "
 echo "Script files downloaded....."
@@ -68,6 +70,7 @@ perl -pi -e 's/\r\n/\n/g' ~/next/docker_install.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/test.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/model_install.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/last.sh
 
 
 chmod +x *.sh
