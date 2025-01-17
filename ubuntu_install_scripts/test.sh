@@ -29,7 +29,8 @@ ls -la  /usr/share/ollama/.ollama/models/blobs   | tee -a error.log
 echo " "   | tee -a error.log
  
 
-
+# Stop ollama, if started
+sudo systemctl stop ollama
 
 # Test langflow
 echo " "    | tee -a error.log
