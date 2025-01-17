@@ -66,7 +66,7 @@ echo "*********"  | tee -a error.log
  echo "Downloading Llama-2-13B-chat-GGUF" | tee -a error.log
  echo "to folder ~/llama.cpp/models/  | tee -a error.log
  echo "*********"  | tee -a error.log
-python3 -m llama_cpp.server --model ./llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat & 
+ python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat & 
 
 << ////
 
@@ -85,3 +85,12 @@ python3 -m llama_cpp.server --model ./llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.
 
 ////
 
+# Move script file to done folder
+mv ~/last.sh ~/done
+
+echo "  "
+echo "Will shut down Ubuntu console"
+echo "----------"
+echo " "
+sleep 9
+wsl.exe  --shutdown
