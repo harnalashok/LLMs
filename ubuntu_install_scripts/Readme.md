@@ -46,26 +46,6 @@ xiv) Downloads *olmo2* from *ollama library*<br>
 
 
 
-### RAM allocation
-
-> To allocate more RAM to WSL Ubuntu, first check how much RAM it has using the `free` command. Then create the following file in Windows at c:\users\<userName>\.wslconfig (for example: c:\users\ubuntu\.wslconfig).   
-
-```
-[wsl2]
-memory=10GB
-```
-
->Note that 'GB' must be in capital case. See these links: [one](https://stackoverflow.com/a/73393648/3282777) and [two](https://stackoverflow.com/a/79276209/3282777).   
-
-> Execute the following command in `Powershell` to automatically create the file at the desired location:  
-
-```
-Write-Output "[wsl2]
-memory=26GB" > "${env:USERPROFILE}\.wslconfig"
-```
-
-> Shutdown ubuntu (`wsl --shutdown`) and restart it for it to take effect.
->
 ### Script sequence
 <pre>
        These scripts run in sequence in Ubuntu Console.
@@ -77,6 +57,7 @@ memory=26GB" > "${env:USERPROFILE}\.wslconfig"
            script4.sh
            model_install.sh
            test.sh
+           last.sh
 </pre>
 
 
