@@ -11,6 +11,7 @@
 #     script4.sh
 #     model_install.sh
 #     test.sh
+#     last.sh
 
 
 # Install docker engine on Ubuntu
@@ -35,7 +36,7 @@ echo " " | tee -a error.log
 # If not started as sudo then inform:
 # ref: https://askubuntu.com/a/30157/8698
 if ! [ $(id -u) = 0 ]; then
-   echo "The script need to be run as root. Example: sudo ./install_docker.sh" >&2
+   echo "The script need to be run as root. Example: sudo ./docker_install.sh" >&2
    exit 1
 fi
 
@@ -48,14 +49,12 @@ else
 fi
 
 
-
+# Does docker engine already exist?
 if [[ `which docker` == "/usr/bin/docker" ]]; then
    echo "Docker appears to be already installed"
    echo "Recheck. Break this script by pressing ctrl+c"
    sleep 40
 fi
-
-
 
 
 # Ref: https://stackoverflow.com/a/73455413
