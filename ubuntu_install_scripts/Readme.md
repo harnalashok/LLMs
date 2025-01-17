@@ -1,39 +1,15 @@
-
-Install Ubuntu-22.04, on Windows 10, if not already installed, as:
-
-```
-wsl --update
-wsl --install --distribution Ubuntu-22.04
-```
-
-Sol1:    
-> If Ubuntu installation is very slow, please see this [link](https://github.com/microsoft/WSL/issues/6405#issuecomment-1339460367)
-
-Sol2:    
-> wsl --set-default-version 2    
-Then run the install again    
-wsl --install -d Ubuntu-22.04    
-
-
 To begin installing all packages, execute the following four commands in *Ubuntu* console.<br>
 Copy and paste.
 
 
 ```
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script0.sh   
-   perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh   
-   chmod +x /home/ashok/*.sh   
-   bash script0.sh   
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script0.sh   
+   perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
+   chmod +x  ~/*.sh   
+   bash script0.sh
+   cd ~/   
 ```
-Also, allocate 26GB memory to WSL Ubuntu (and the rest to Windows)        
-Execute the following in **PowerShell** to allocate 26gb    
-(Copy and paste)     
-Change `26GB` to lesser figure as per your system RAM.    
-    
-```
-Write-Output "[wsl2]
-memory=26GB" > "${env:USERPROFILE}\.wslconfig"
-```
+
 
 File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.   
    
