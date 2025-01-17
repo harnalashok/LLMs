@@ -68,8 +68,14 @@ echo "*********"  | tee -a error.log
  echo "Downloaded Llama-2-13B-chat-GGUF" | tee -a error.log
  echo "Will test llama-cpp-python now"  | tee -a error.log
  echo  "*********"  | tee -a error.log
- python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary &
-
+ 
+  echo " "  | tee -a error.log
+ echo "Testing llama-cpp-python with Llama-2-13B-chat-GGUF" | tee -a error.log
+ echo "Access it at localhost:8000/docs"  | tee -a error.log
+ echo  "*********"  | tee -a error.log
+ python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & 
+ echo " "  | tee -a error.log
+ sleep 9
 << ////
 
 : __main__.py [-h] [--model MODEL] [--model_alias MODEL_ALIAS] [--n_gpu_layers N_GPU_LAYERS] [--split_mode SPLIT_MODE] [--main_gpu MAIN_GPU]
