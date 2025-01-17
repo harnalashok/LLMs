@@ -59,11 +59,21 @@ cd llama.cpp
 cmake -B build
 cmake --build build --config Release
 cd ~
+
+# Create a symlink to models and to gguf folder
+ln -s ~/llama.cpp/models/ ~/
+ln -s ~/llama.cpp/models/ ~/gguf
+
+
+
 echo "PATH=\$PATH:~/llama.cpp/build/bin" >> .bashrc
 echo " "   | tee -a error.log
 echo "-------"   | tee -a error.log
 echo "llama.cpp installed"   | tee -a error.log
 echo "-------"   | tee -a error.log
+
+
+
 
 # 1.2 download and install Node.js
 echo " "   | tee -a error.log
