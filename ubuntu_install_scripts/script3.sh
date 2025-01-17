@@ -35,6 +35,8 @@ sleep 2
 echo "  "    | tee -a error.log
 echo "  "    | tee -a error.log
 echo "langflow installed"   | tee -a error.log
+# https://docs.langflow.org/configuration-cli
+echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a error.log
 echo "Run following command to get langflow CLI options:"    | tee -a error.log
 echo "        uv run langflow"    | tee -a error.log
 echo "Generate api-key, as: "    | tee -a error.log
