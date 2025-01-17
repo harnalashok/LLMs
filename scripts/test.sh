@@ -53,7 +53,10 @@ echo "Testing llama.cpp"    | tee -a error.log
 echo "------- "    | tee -a error.log
 echo " "    | tee -a error.log
 sleep 9
-mv test.sh /home/ashok/done
+
+# Move scripts
+mv ~/test.sh  ~/done
+mv ~/next/last.sh  ~/
 
 echo " "     | tee -a error.log
 echo "-------"     | tee -a error.log
