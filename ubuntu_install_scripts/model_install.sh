@@ -9,7 +9,7 @@
 #     script4.sh
 #     model_install.sh
 #     test.sh
-
+#     last.sh
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
