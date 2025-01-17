@@ -14,6 +14,7 @@
 #     script4.sh
 #     model_install.sh
 #     test.sh
+#     last.sh
 
 
 # This file is called by script0.sh
