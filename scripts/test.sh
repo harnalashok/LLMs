@@ -22,7 +22,11 @@ echo "Script: test.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
-
+# Check ollama models
+echo "Ollama models are here"  | tee -a error.log
+echo "-------------"  | tee -a error.log
+ls -la  /usr/share/ollama/.ollama/models/blobs   | tee -a error.log
+echo " "   | tee -a error.log
 
 # Test langflow
 echo " "    | tee -a error.log
