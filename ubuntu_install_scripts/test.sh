@@ -23,13 +23,13 @@ echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
 # Check ollama models
-echo "Ollama models are here"  | tee -a error.log
+echo "Ollama models are stored here"  | tee -a error.log
 echo "-------------"  | tee -a error.log
 ls -la  /usr/share/ollama/.ollama/models/blobs   | tee -a error.log
 echo " "   | tee -a error.log
  
 
-# Stop ollama, if started
+# Stop ollama, if already started
 sudo systemctl stop ollama
 
 # Test langflow
