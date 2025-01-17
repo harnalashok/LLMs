@@ -37,7 +37,7 @@ fi
 
 
 echo " "
-echo " Pulling text-embedding model"    | tee -a error.log
+echo " Pulling text-embedding model for ollama"    | tee -a error.log
 echo " "    | tee -a error.log
 echo "--------- "    | tee -a error.log
 
