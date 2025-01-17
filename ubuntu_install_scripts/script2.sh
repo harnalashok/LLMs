@@ -100,8 +100,17 @@ wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/g
 # You may have to issue the following command to cleanup also.
 mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 
+
+echo " "     | tee -a ~/error.log
+echo "Downloading tinyllama gguf model from huggingface"  | tee -a error.log
+echo "Will take some time....."     | tee -a ~/error.log
+echo "File size is 780mb"    | tee -a ~/error.log
+echo "-------------------"   | tee -a error.log
+echo " "     | tee -a ~/error.log
+wget -c   https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/blob/main/tinyllama-1.1b-chat-v1.0.Q5_0.gguf 2>> error.log  
+
 echo " "   | tee -a error.log
-echo "gemma-2-2b-it.Q6_K.gguf downloaded"  | tee -a error.log
+echo "gemma-2-2b-it.Q6_K.gguf and tinyllama downloaded"  | tee -a error.log
 echo "Download folder is:  ~/llama.cpp/models"    | tee -a error.log
 echo "Check as: ls -la ~/llama.cpp/models/"    | tee -a error.log
 echo "---------"   | tee -a error.log
