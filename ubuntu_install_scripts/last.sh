@@ -103,4 +103,4 @@ echo "Will shut down Ubuntu console"
 echo "----------"
 echo " "
 sleep 9
-wsl.exe  --shutdown
+exit
