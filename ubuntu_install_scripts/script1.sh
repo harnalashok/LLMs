@@ -36,7 +36,7 @@ echo " "
 sleep 2
 sudo apt update
 sudo apt upgrade -y
-sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde -y  
+sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git -y  
 
 echo " "
 echo "Ubuntu upgraded ......"  | tee -a error.log
@@ -59,7 +59,8 @@ pip install chromadb   2>> error.log
 sleep 2
 echo " "    | tee -a error.log
 echo "ChromaDB installed"    | tee -a error.log
-echo "------ "    | tee -a error.log
+echo "Installation is at: ~/.local/bin/chroma"  | tee -a error.log
+eecho "------ "    | tee -a error.log
 
 #  TO START CHROMA AS a SERVICE
 #*********************************
@@ -72,7 +73,7 @@ echo "Type = simple"  >> chroma.service
 echo "User = root"  >> chroma.service
 echo "Group = root"  >> chroma.service
 echo "WorkingDirectory = ~/Documents"  >> chroma.service
-echo "ExecStart=~/anaconda3/bin/chroma run --host 127.0.0.1 --port 8000 --path ~/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
+echo "ExecStart=~/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path ~/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
 echo " "  >> chroma.service
 echo "[Install]"  >> chroma.service
 echo "WantedBy = multi-user.target"  >> chroma.service
