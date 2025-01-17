@@ -22,6 +22,11 @@ echo "Script: test.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
+
+# Stop ollama, if started
+sudo systemctl stop ollama
+
+
 # Check ollama models
 echo "Ollama models are here"  | tee -a error.log
 echo "-------------"  | tee -a error.log
