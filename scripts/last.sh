@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# LAst amended: 17th Jan, 2025
+# Ref: https://www.server-world.info/en/note?os=Ubuntu_22.04&p=llama&f=1
+
+
+# Connected scripts are:
+# These sscripts run in sequence.
+#     script0.sh
+#     script1.sh
+#     script2.sh
+#     script3.sh
+#     docker_install.sh
+#     script4.sh
+#     model_install.sh
+#     test.sh
+#     last.sh
+
+
+echo " " | tee -a error.log
+echo "*********"  | tee -a error.log
+echo "Script: last.sh"  | tee -a error.log
+echo "**********" | tee -a error.log
+echo " " | tee -a error.log
+
+
+# Install required packages:
+echo "Installing dependencies " | tee -a error.log
+echo "*********"  | tee -a error.log
+sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
+echo "Dependencies installed"  | tee -a error.log
+echo " " | tee -a error.log
+
+# Login as a common user and prepare Python virtual environment to install [llama-cpp-python].
+echo " "  | tee -a error.log
+echo "Installing llama-cpp-python " | tee -a error.log
+echo "*********"  | tee -a error.log
+
+# Creating virtual environment
+ python3 -m venv --system-site-packages ~/llama 
+ # Activating virtual envitronment
+ source ~/llama/bin/activate 
+ # Install [llama-cpp-python]. 
+ pip3 install llama-cpp-python[server] 
+ echo " "  | tee -a error.log
+ echo "Installation of  llama-cpp-python done" | tee -a error.log
+ echo "*********"  | tee -a error.log
+
+# Downloading thellama-2-13b-chat.Q4_K_M.gguf format model.
+# It's possible to download models from the following sitew.
+# In this example, we will use [llama-2-13b-chat.Q4_K_M.gguf]. 
+#  ⇒ https://huggingface.co/TheBloke/Llama-2-7B-chat-GGUF/tree/main
+#  ⇒ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF/tree/main
+#  ⇒ https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF/tree/main 
+
+  cd  ~/llama.cpp/models/
+  wget https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF/resolve/main/llama-2-13b-chat.Q4_K_M.gguf 
+ 
+
