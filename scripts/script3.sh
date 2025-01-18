@@ -30,7 +30,7 @@ echo "------"   | tee -a error.log
 echo " "   | tee -a error.log
 sleep 9
 uv venv
-uv pip install langflow==1.0.9 2>> error.log
+uv pip install langflow 2>> error.log
 sleep 2
 echo "  "    | tee -a error.log
 echo "  "    | tee -a error.log
