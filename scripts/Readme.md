@@ -22,7 +22,8 @@ Copy and paste.
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/scripts/script0.sh   
    perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh   
    chmod +x /home/ashok/*.sh   
-   bash script0.sh   
+   bash script0.sh
+   cd ~/  
 ```
 Also, allocate 26GB memory to WSL Ubuntu (and the rest to Windows)        
 Execute the following in **PowerShell** to allocate 26gb    
