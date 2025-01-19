@@ -7,13 +7,13 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-#     last.sh
+#     script5.sh
+#     script6.sh
+#     script7.sh
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
-echo "Script: model_install.sh"  | tee -a error.log
+echo "Script: script7.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
@@ -58,7 +58,7 @@ sleep 5
 fi
 
 # Move script file to done folder
-mv ~/model_install.sh ~/done
-mv ~/next/test.sh  ~
+mv ~/script7.sh  ~/done
+
 exit
 
