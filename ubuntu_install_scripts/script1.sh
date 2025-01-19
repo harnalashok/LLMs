@@ -12,10 +12,9 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-#     last.sh
-
+#     script5.sh
+#     script6.sh
+#     script7.sh
 
 # This file is called by script0.sh
 
