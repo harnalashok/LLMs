@@ -3,4 +3,6 @@ Last amended: 19th Jan, 2025
 Document stores (by Leon Van Zyl:          
 >> RAG Like a BOSS [Link here](https://www.youtube.com/watch?v=PLuSfAkOHOA&t=0s)
 > Build Your Own ChatGPT Alternative FREE (NO CODE Required) [Link here](https://www.youtube.com/watch?v=lJOZiRoZNJw&t=0s)    
-> 
+
+Agents     
+> Make Your RAG Agents Actually Work! (No More Hallucinations) [Link here](https://www.youtube.com/watch?v=OejuvdyN_U8)
