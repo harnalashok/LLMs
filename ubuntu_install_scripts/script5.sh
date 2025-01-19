@@ -13,12 +13,13 @@
 #     docker_install.sh
 #     script4.sh
 #     model_install.sh
-#     test.sh
+#     script5.sh
+#     script6.sh
 
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
-echo "Script: test.sh"  | tee -a error.log
+echo "Script: script5.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
@@ -62,8 +63,8 @@ echo "------- "    | tee -a error.log
 echo " "    | tee -a error.log
 
 # Move scripts
-mv ~/test.sh  ~/done
-mv ~/next/last.sh  ~/
+mv ~/script5.sh  ~/done
+mv ~/next/script6.sh  ~/
 
 echo " "     | tee -a error.log
 echo "-------"     | tee -a error.log
