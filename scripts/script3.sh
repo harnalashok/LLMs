@@ -10,10 +10,9 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-#     last.sh
-
+#     script5.sh
+#     script6.sh
+#     script7.sh
 
 
 echo " " | tee -a error.log
@@ -55,10 +54,9 @@ echo " "   | tee -a error.log
 sleep 9
 npm install -g flowise  2>> error.log
 echo " "
-echo " "     | tee -a /home/ashok/error.log
-echo "flowise installed"    | tee -a /home/ashok/error.log
-echo " "     | tee -a /home/ashok/error.log
-
+echo " "     | tee -a ~/error.log
+echo "flowise installed"    | tee -a ~/error.log
+echo " "     | tee -a ~/error.log
 
 
 # Download tinyllama
@@ -71,15 +69,15 @@ echo " "   | tee -a error.log
 ollama pull tinyllama   2>> error.log
 sleep 9
 
-echo "  "     | tee -a /home/ashok/error.log
-echo "  "     | tee -a /home/ashok/error.log
-echo "tinyllama downloaded"     | tee -a /home/ashok/error.log
-echo "Check as: ollama list"    | tee -a /home/ashok/error.log
-echo "-------"   | tee -a /home/ashok/error.log
+echo "  "     | tee -a ~/error.log
+echo "  "     | tee -a ~/error.log
+echo "tinyllama downloaded"     | tee -a ~/error.log
+echo "Check as: ollama list"    | tee -a ~/error.log
+echo "-------"   | tee -a ~/error.log
 
 # Move script file to done folder
-mv /home/ashok/script3.sh /home/ashok/done
-mv /home/ashok/next/docker_install.sh  /home/ashok
+mv ~/script3.sh ~/done
+mv ~/next/docker_install.sh  ~
 
 echo " "
 echo "Will shut down Ubuntu console"
