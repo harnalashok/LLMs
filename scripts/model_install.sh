@@ -34,16 +34,30 @@ fi
 
 
 echo " "    | tee -a error.log
-echo " Pulling text-embedding model"    | tee -a error.log
+echo " Pulling text-embedding model for ollama"    | tee -a error.log
 echo " "    | tee -a error.log
 echo "--------- "    | tee -a error.log
-
 ollama pull nomic-embed-text  2>> error.log
 sleep 6
-echo "Pulling olomo2 model"    | tee -a error.log
-ollama pull olmo2  2>> error.log
+echo "nomic-embed-text pulled"   | tee -a error.log
+echo "------- "    | tee -a error.log
+echo " "    | tee -a error.log
+
+echo " "    | tee -a error.log
+echo "Will pull olom2 model, next. File size: 4.5gb"  | tee -a error.log
+read -p "Shall I go ahead and pull olom2 model (yY/nN? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo " "    | tee -a error.log
+    echo "OK. Pulling olomo2 model"    | tee -a error.log
+    ollama pull olmo2  2>> error.log
 sleep 5
+fi
 
 # Move script file to done folder
 mv /home/ashok/model_install.sh /home/ashok/done
 mv /home/ashok/next/test.sh  /home/ashok
+sleep 2
+wsl.exe --shutdown
+
