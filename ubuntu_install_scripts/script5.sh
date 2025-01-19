@@ -12,10 +12,9 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
 #     script5.sh
 #     script6.sh
-
+#     script7.sh
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
