@@ -60,7 +60,6 @@ echo " "    | tee -a error.log
 echo "Testing llama.cpp"    | tee -a error.log
 echo "------- "    | tee -a error.log
 echo " "    | tee -a error.log
-sleep 9
 
 # Move scripts
 mv ~/test.sh  ~/done
@@ -69,11 +68,13 @@ mv ~/next/last.sh  ~/
 echo " "     | tee -a error.log
 echo "-------"     | tee -a error.log
 echo "Sending a prompt to gemma-2-2b"     | tee -a error.log
+echo "Press ctrl+c to stop it any time."    | tee -a error.log
 echo "-------"     | tee -a error.log
 echo " "     | tee -a error.log
+echo " "     | tee -a error.log
+sleep 9
 cd ~/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
-
 
 echo " "
 echo " "
