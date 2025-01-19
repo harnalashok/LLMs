@@ -12,14 +12,14 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-#     last.sh
+#     script5.sh
+#     script6.sh
+#     script7.sh
 
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
-echo "Script: last.sh"  | tee -a error.log
+echo "Script: script6.sh"  | tee -a error.log
 echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
@@ -96,7 +96,8 @@ echo "*********"  | tee -a error.log
 ////
 
 # Move script file to done folder
-mv ~/last.sh ~/done
+mv ~/script6.sh ~/done
+mv ~/next/script7.sh ~/
 
 echo "  "
 echo "Will shut down Ubuntu console"
