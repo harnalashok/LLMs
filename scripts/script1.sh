@@ -12,9 +12,9 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-
+#     script5.sh
+#     script6.sh
+#     acript7.sh
 
 # This file is called by script0.sh
 
@@ -76,8 +76,8 @@ echo "[Service]"  >> chroma.service
 echo "Type = simple"  >> chroma.service
 echo "User = root"  >> chroma.service
 echo "Group = root"  >> chroma.service
-echo "WorkingDirectory = /home/ashok/Documents"  >> chroma.service
-echo "ExecStart=/home/ashok/anaconda3/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
+echo "WorkingDirectory = ~/Documents"  >> chroma.service
+echo "ExecStart=~/anaconda3/bin/chroma run --host 127.0.0.1 --port 8000 --path ~/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
 echo " "  >> chroma.service
 echo "[Install]"  >> chroma.service
 echo "WantedBy = multi-user.target"  >> chroma.service
@@ -97,9 +97,9 @@ echo " "     | tee -a error.log
 sleep 9
 
 # Change machine name
-echo " "     | tee -a /home/ashok/error.log
+echo " "     | tee -a ~/error.log
 echo "Will change machine name to 'master'..."  | tee -a error.log
-echo "------------------"     | tee -a /home/ashok/error.log
+echo "------------------"     | tee -a ~/error.log
 sleep 9
 
 echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
@@ -119,13 +119,13 @@ echo "--------------"   | tee -a error.log
 echo " "   | tee -a error.log
 sleep 9
 curl -LsSf https://astral.sh/uv/install.sh | sh   2>> error.log
-echo " "     | tee -a /home/ashok/error.log
-echo "uv installed"     | tee -a /home/ashok/error.log
+echo " "     | tee -a ~/error.log
+echo "uv installed"     | tee -a ~/error.log
 sleep 9
 
 # Move script file to done folder
-mv /home/ashok/script1.sh /home/ashok/done
-mv /home/ashok/next/script2.sh /home/ashok
+mv ~/script1.sh ~/done
+mv ~/next/script2.sh ~
 
 # Shut down ubuntu
 echo " "
