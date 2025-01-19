@@ -10,10 +10,9 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-#     last.sh
-
+#     script5.sh
+#     script6.sh
+#     script7.sh
 
 
 #------ Steps ---------
@@ -67,9 +66,9 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubunt
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script3.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script4.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/docker_install.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/test.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/model_install.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/last.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script5.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script7.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script6.sh -P ~/next
 
 echo "  "
 echo "Script files downloaded....."
@@ -83,9 +82,9 @@ perl -pi -e 's/\r\n/\n/g' ~/next/script2.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script3.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/docker_install.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script4.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/test.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/model_install.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/last.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script5.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script7.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script6.sh
 
 
 chmod +x *.sh
