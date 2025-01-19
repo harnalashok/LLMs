@@ -1,4 +1,6 @@
-# Last amended: 14th August, 2024
+# Last amended: 16th Jan, 2025
+# BOOK: https://volcano-ice-cd6.notion.site/Introduction-to-Practical-Building-LLM-Applications-with-Flowise-LangChain-03d6d75bfd20495d96dfdae964bea5a5
+
 # Ref: https://docs.flowiseai.com/getting-started
 #      https://flowiseai.com/
 # Discord reference:
