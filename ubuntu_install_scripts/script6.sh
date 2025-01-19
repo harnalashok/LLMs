@@ -48,6 +48,12 @@ echo "*********"  | tee -a error.log
  echo "Installation of  llama-cpp-python done" | tee -a error.log
  echo "*********"  | tee -a error.log
  sleep 9
+
+# Move scripts
+mv script6.sh  ~/done/
+mv ~/next/script7.sh  ~/
+
+ 
 # Downloading thellama-2-13b-chat.Q4_K_M.gguf format model.
 # It's possible to download models from the following sitew.
 # In this example, we will use [llama-2-13b-chat.Q4_K_M.gguf]. 
@@ -69,6 +75,8 @@ echo "*********"  | tee -a error.log
  echo "Will test llama-cpp-python now"  | tee -a error.log
  echo  "*********"  | tee -a error.log
  sleep 4
+
+ 
  
  echo " "  | tee -a error.log
  echo "Testing llama-cpp-python with Llama-2-13B-chat-GGUF" | tee -a error.log
