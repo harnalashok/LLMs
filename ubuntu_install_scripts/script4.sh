@@ -10,8 +10,10 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
+#     script5.sh
+#     script5.sh
+#     script7.sh
+
 
 echo " " | tee -a error.log
 echo "*********"  | tee -a error.log
@@ -78,12 +80,12 @@ sleep 9
 
 # Move script file to done folder
 mv ~/script4.sh ~/done
-mv ~/next/model_install.sh  ~
+mv ~/next/script5.sh  ~/
 
 echo " "
 echo "You can now test installation, as below."
 echo "Will shut down Ubuntu console, then open and execute:"
-echo "    ./test.sh"
+echo "    ./script5.sh"
 sleep 8
 echo " "
 exit
