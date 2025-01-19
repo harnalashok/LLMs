@@ -41,6 +41,21 @@ echo "**********" | tee -a error.log
 echo " " | tee -a error.log
 
 
+# Check user and hostnames
+if [[ `hostname` != 'master' ]]; then
+    echo "First change host name to 'master'"   | tee -a error.log
+    sleep 9
+    exit
+fi
+
+if [[ $USER != 'ashok' ]]; then
+    echo "First change user name to 'ashok'"   | tee -a error.log
+    sleep 9
+    exit
+fi
+
+
+
 mkdir ~/done
 echo "Downloading all script files from github" 
 echo "---------------------------"
