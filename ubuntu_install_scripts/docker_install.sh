@@ -9,10 +9,9 @@
 #     script3.sh
 #     docker_install.sh
 #     script4.sh
-#     model_install.sh
-#     test.sh
-#     last.sh
-
+#     script5.sh
+#     script6.sh
+#     script7.sh
 
 # Install docker engine on Ubuntu
 # Better follow this reference:
@@ -94,16 +93,15 @@ echo "Docker installation process completed"     | tee -a ~/error.log
 
 echo " "     | tee -a ~/error.log
 
-echo "Machine will be rebooted in 10s"
-echo "Reopen it thereafter, and perform tests"
-echo "Read script4.sh for tests"
+echo "Machine will be rebooted in 9s"
+echo "Reopen it thereafter, and perform few tests"
+echo "with script4.sh"
 echo " "
-sleep 10
-
 # Move script file to done folder
 mv ~/docker_install.sh ~/done
 mv ~/next/script4.sh  ~
-sleep 2
+sleep 9
+
 reboot
 #############
 
