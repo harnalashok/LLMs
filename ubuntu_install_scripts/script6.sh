@@ -89,5 +89,5 @@ echo "  "
 echo "Will shut down Ubuntu console"
 echo "----------"
 echo " "
-sleep 9
+exec sleep 9
 exit
