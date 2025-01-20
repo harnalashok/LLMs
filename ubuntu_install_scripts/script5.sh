@@ -45,6 +45,7 @@ echo "Starting flowise. Acess it at port 3000"    | tee -a ~/error.log
 echo "------- "    | tee -a ~/error.log
 echo " "    | tee -a ~/error.log
 sleep 9
+echo "Start flowise as: npx flowise start "    | tee -a ~/error.log
 npx flowise start & > /dev/null &
 
 # Test docker
@@ -75,6 +76,8 @@ echo " "     | tee -a ~/error.log
 sleep 9
 cd ~/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
+echo "Test llama.cpp, as"    | tee -a ~/info.log
+echo "    llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128 "     | tee -a ~/info.log
 
 echo " "
 echo " "
