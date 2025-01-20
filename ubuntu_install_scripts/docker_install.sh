@@ -99,7 +99,7 @@ echo "with script4.sh"
 echo " "
 # Move script file to done folder
 mv ~/docker_install.sh ~/done
-mv ~/next/script4.sh  ~
+mv ~/next/script4.sh  ~/
 sleep 9
 
 reboot
