@@ -49,6 +49,7 @@ echo "*********"  | tee -a ~/error.log
  echo "*********"  | tee -a ~/error.log
  
  echo "Installation of  llama-cpp-python done" | tee -a ~/info.log
+ echo "Activate virtual environment as: source ~/llama/bin/activate "   | tee -a ~/info.log
  echo "*********"  | tee -a ~/info.log
  sleep 9
 
@@ -75,7 +76,7 @@ mv ~/next/script7.sh  ~/
  echo " "  | tee -a ~/error.log
  echo "Downloaded Llama-2-13B-chat-GGUF" | tee -a ~/error.log
  echo "Downloaded Llama-2-13B-chat-GGUF" | tee -a ~/info.log
- echo "Downloading size: 7.8GB" | tee -a ~/info.log
+ echo "Downloaded size: 7.8GB" | tee -a ~/info.log
  echo "Folder is ~/llama.cpp/models/"  | tee -a ~/info.log
  sleep 9
  
