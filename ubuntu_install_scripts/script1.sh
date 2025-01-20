@@ -19,19 +19,19 @@
 # This file is called by script0.sh
 
 
-echo " " | tee -a error.log
-echo "*********"  | tee -a error.log
-echo "Script: script1.sh"  | tee -a error.log
-echo "**********" | tee -a error.log
-echo " " | tee -a error.log
+echo " " | tee -a ~/error.log
+echo "*********"  | tee -a ~/error.log
+echo "Script: script1.sh"  | tee -a ~/error.log
+echo "**********" | tee -a ~/error.log
+echo " " | tee -a ~/error.log
 
 
 # Install software
 echo "  "
-echo "------------"   | tee -a error.log
-echo " Will update Ubuntu"  | tee -a error.log
+echo "------------"   | tee -a ~/error.log
+echo " Will update Ubuntu"  | tee -a ~/error.log
 echo " You will be asked for password...supply it..."
-echo "----------"   | tee -a error.log
+echo "----------"   | tee -a ~/error.log
 echo " "
 sleep 2
 sudo apt update
@@ -39,28 +39,29 @@ sudo apt upgrade -y
 sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  -y  
 
 echo " "
-echo "Ubuntu upgraded ......"  | tee -a error.log
+echo "Ubuntu upgraded ......"  | tee -a ~/error.log
+echo "Ubuntu upgraded ......"  | tee -a info.log
 
 # Install 'fnm' (Fast Node Manager)
-echo " "   | tee -a error.log
-echo "Will install fnm: Fast Node Manager..."  | tee -a error.log
-echo "------------------"   | tee -a error.log
+echo " "   | tee -a ~/error.log
+echo "Will install fnm: Fast Node Manager..."  | tee -a ~/error.log
+echo "------------------"   | tee -a ~/error.log
 sleep 9
-sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> error.log
+sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> ~/error.log
 
 # Install chromadb
-echo " "   | tee -a error.log
-echo " Will Install chromadb"  | tee -a error.log
-echo "------------"   | tee -a error.log
-echo " "   | tee -a error.log
+echo " "   | tee -a ~/error.log
+echo " Will Install chromadb"  | tee -a ~/error.log
+echo "------------"   | tee -a ~/error.log
+echo " "   | tee -a ~/error.log
 sleep 9
-pip install chromadb   2>> error.log
+pip install chromadb   2>> ~/error.log
 
 sleep 2
-echo " "    | tee -a error.log
-echo "ChromaDB installed"    | tee -a error.log
-echo "Installation is at: ~/.local/bin/chroma"  | tee -a error.log
-eecho "------ "    | tee -a error.log
+echo " "    | tee -a ~/error.log
+echo "ChromaDB installed"    | tee -a ~/error.log
+echo "Installation is at: ~/.local/bin/chroma"  | tee -a ~/error.log
+eecho "------ "    | tee -a ~/error.log
 
 #  TO START CHROMA AS a SERVICE
 #*********************************
@@ -81,23 +82,23 @@ sudo mv chroma.service /etc/systemd/system/chroma.service
 #---------------------
 
 # You can now start chroma, as:
-echo " "     | tee -a error.log
-echo "---Start/Stop Chroma as-------"     | tee -a error.log
-echo "sudo systemctl daemon-reload"   | tee -a error.log
-echo "sudo systemctl enable chroma"     | tee -a error.log
-echo "sudo systemctl start chroma"     | tee -a error.log
-echo "Chroma is available at port 8000"     | tee -a error.log
-echo "Check as: "      | tee -a error.log
-echo "    netstat -aunt | grep 8000"      | tee -a error.log
-echo "----------"      | tee -a error.log
-echo " "     | tee -a error.log
+echo " "     | tee -a ~/error.log
+echo "---Start/Stop Chroma as-------"     | tee -a ~/error.log
+echo "sudo systemctl daemon-reload"   | tee -a ~/error.log
+echo "sudo systemctl enable chroma"     | tee -a ~/error.log
+echo "sudo systemctl start chroma"     | tee -a ~/error.log
+echo "Chroma is available at port 8000"     | tee -a ~/error.log
+echo "Check as: "      | tee -a ~/error.log
+echo "    netstat -aunt | grep 8000"      | tee -a ~/error.log
+echo "----------"      | tee -a ~/error.log
+echo " "     | tee -a ~/error.log
 sleep 9
 
 
 if [[ `hostname` != "master" ]]; then
    # Change machine name
    echo " "     | tee -a ~/error.log
-   echo "Will change machine name to 'master'..."  | tee -a error.log
+   echo "Will change machine name to 'master'..."  | tee -a ~/error.log
    echo "------------------"     | tee -a ~/error.log
    sleep 9
    echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
