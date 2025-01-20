@@ -94,7 +94,7 @@ echo " "
 echo "You can now test installation, as below."
 echo "Will shut down Ubuntu console, then open and execute:"
 echo "    ./script5.sh"
-sleep 8
+exec sleep 8
 echo " "
 exit
 
