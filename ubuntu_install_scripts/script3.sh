@@ -96,7 +96,7 @@ echo "Reopen it and install docker, as:"
 echo "  sudo ./docker_install.sh"
 echo "----------"
 echo " "
-sleep 10
+exec sleep 10
 exit
 
 
