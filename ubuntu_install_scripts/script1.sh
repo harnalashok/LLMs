@@ -65,6 +65,7 @@ echo " "    | tee -a ~/error.log
 echo "ChromaDB installed"    | tee -a ~/error.log
 echo "3. ChromaDB installed"    | tee -a ~/info.log
 echo "4. Database is at: ~/.local/bin/chroma"  | tee -a ~/info.log
+echo "      chromadb port is: 8000"   | tee -a ~/info.log
 eecho "------ "    | tee -a ~/error.log
 
 #  TO START CHROMA AS a SERVICE
