@@ -35,7 +35,7 @@ fi
 
 echo "Installing milvus vector database using docker"    | tee -a ~/error.log
 echo "You will be asked for the password. Supply it..."    | tee -a ~/error.log
-echo "It is assumed that docker engine is already installed."    | tee -a ~/error.log
+echo "Ports used are: 9091 and 19530."    | tee -a ~/error.log
 echo " "    | tee -a ~/error.log
 sleep 3
 
@@ -43,9 +43,9 @@ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/stan
 bash standalone_embed.sh start  2>> ~/error.log
 
 echo " "
-echo "Milvus installed"    | tee -a ~/error.log
+echo "Milvus vector database installed"    | tee -a ~/error.log
 echo "To stop docker use the following commands:"
-echo "      bash standalone_embed.sh stop
+echo "      bash standalone_embed.sh stop"
 echo "To delete the database, use the following command:
 echo "      bash standalone_embed.sh delete"
 echo "--------------------"
