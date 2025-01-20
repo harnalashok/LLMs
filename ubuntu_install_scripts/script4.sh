@@ -49,10 +49,15 @@ echo "Milvus vector database installed"    | tee -a ~/error.log
 echo "Milvus vector database installed"    | tee -a ~/info.log
 echo "Ports used are: 9091 and 19530."    | tee -a ~/info.log
 echo "To stop docker use the following commands:"    | tee -a ~/info.log
-echo "      bash standalone_embed.sh stop"    | tee -a ~/info.log
+echo "      ./standalone_embed.sh stop"    | tee -a ~/info.log
 echo "To delete the database, use the following command:"    | tee -a ~/info.log
-echo "      bash standalone_embed.sh delete"     | tee -a ~/info.log
+echo "      ./standalone_embed.sh delete"     | tee -a ~/info.log
 echo "--------------------"    | tee -a ~/info.log
+
+mkdir ~/milvus
+mv standalone_embed.sh ~/milvus/
+echo "PATH=$PATH:~/milvus/" >> .bashrc
+
 sleep 9
 
 
