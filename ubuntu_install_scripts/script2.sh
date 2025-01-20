@@ -45,6 +45,7 @@ curl -fsSL https://ollama.com/install.sh | sh  2>> ~/error.log
 echo "---------"     | tee -a ~/error.log
 echo "Ollama installed"     | tee -a ~/error.log
 echo "9. Ollama installed"     | tee -a ~/info.log
+echo "   ollama listens at port: 11434"      | tee -a ~/info.log
 echo "-----------"     | tee -a ~/error.log
 echo " "     | tee -a ~/error.log
 sleep 9
