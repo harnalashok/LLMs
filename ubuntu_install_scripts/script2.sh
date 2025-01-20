@@ -131,6 +131,7 @@ echo "After shutdown, reopen ubuntu console and execute the command:"
 echo "    ./script3.sh"
 echo "----------"
 echo " "
-sleep 9
+exec sleep 9
 exit
+
 
