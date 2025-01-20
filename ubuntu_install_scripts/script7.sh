@@ -84,7 +84,7 @@ python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.
 echo "python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & "   | tee -a ~/info.log
 echo " "  | tee -a ~/error.log
 echo " "  | tee -a ~/info.log
-sleep 9
+exec sleep 9
 
 << ////
 
