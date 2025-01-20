@@ -73,11 +73,14 @@ echo "Press ctrl+c to stop it any time."    | tee -a ~/error.log
 echo "-------"     | tee -a ~/error.log
 echo " "     | tee -a ~/error.log
 echo " "     | tee -a ~/error.log
+echo "Test llama.cpp, as"    | tee -a ~/info.log
+echo "    llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128 "     | tee -a ~/info.log
+echo "Press ctrl+c to kill the process..."
 sleep 9
 cd ~/llama.cpp/models
 llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128
-echo "Test llama.cpp, as"    | tee -a ~/info.log
-echo "    llama-cli -m gemma-2-2b-it.Q6_K.gguf -p "I believe the meaning of life is" -n 128 "     | tee -a ~/info.log
+exec sleep 2
+
 
 echo " "
 echo " "
