@@ -16,11 +16,11 @@
 #     script7.sh
 
 
-echo " " | tee -a error.log
-echo "*********"  | tee -a error.log
-echo "Script: script2.sh"  | tee -a error.log
-echo "**********" | tee -a error.log
-echo " " | tee -a error.log
+echo " " | tee -a ~/error.log
+echo "*********"  | tee -a ~/error.log
+echo "Script: script2.sh"  | tee -a ~/error.log
+echo "**********" | tee -a ~/error.log
+echo " " | tee -a ~/error.log
 
 
 DIRECTORY="~/llama.cpp"
@@ -36,24 +36,24 @@ fi
 echo " "
 echo " "
 echo "------"
-echo "Installing ollama quietly. Takes time...."  | tee -a error.log
+echo "Installing ollama quietly. Takes time...."  | tee -a ~/error.log
 echo "When asked, supply password"
 echo "------"
 echo " "
 echo " "
-curl -fsSL https://ollama.com/install.sh | sh  2>> error.log  
-echo "---------"     | tee -a error.log
-echo "Ollama installed"     | tee -a error.log
-echo "-----------"     | tee -a error.log
-echo " "     | tee -a error.log
+curl -fsSL https://ollama.com/install.sh | sh  2>> ~/error.log  
+echo "---------"     | tee -a ~/error.log
+echo "Ollama installed"     | tee -a ~/error.log
+echo "-----------"     | tee -a ~/error.log
+echo " "     | tee -a ~/error.log
 sleep 9
 
 
 # Installing llama.cpp
-echo " "   | tee -a error.log
-echo "Installing llama.cpp"  | tee -a error.log
-echo "------------"   | tee -a error.log
-echo " "   | tee -a error.log
+echo " "   | tee -a ~/error.log
+echo "Installing llama.cpp"  | tee -a ~/error.log
+echo "------------"   | tee -a ~/error.log
+echo " "   | tee -a ~/error.log
 git clone https://github.com/ggerganov/llama.cpp
 cd llama.cpp
 cmake -B build
@@ -67,36 +67,36 @@ ln -s ~/llama.cpp/models/ ~/gguf
 
 
 echo "PATH=\$PATH:~/llama.cpp/build/bin" >> .bashrc
-echo " "   | tee -a error.log
-echo "-------"   | tee -a error.log
-echo "llama.cpp installed"   | tee -a error.log
-echo "-------"   | tee -a error.log
+echo " "   | tee -a ~/error.log
+echo "-------"   | tee -a ~/error.log
+echo "llama.cpp installed"   | tee -a ~/error.log
+echo "-------"   | tee -a ~/error.log
 
 
 
 
 # 1.2 download and install Node.js
-echo " "   | tee -a error.log
-echo "-------"   | tee -a error.log
-echo "Installing Node.js ver 20......"  | tee -a error.log
-echo "-------"   | tee -a error.log
-fnm use --install-if-missing 20   2>> error.log
-echo " "    | tee -a error.log
-echo "Node.js installed"    | tee -a error.log
-echo "------------"    | tee -a error.log
-echo "  "    | tee -a error.log
+echo " "   | tee -a ~/error.log
+echo "-------"   | tee -a ~/error.log
+echo "Installing Node.js ver 20......"  | tee -a ~/error.log
+echo "-------"   | tee -a ~/error.log
+fnm use --install-if-missing 20   2>> ~/error.log
+echo " "    | tee -a ~/error.log
+echo "Node.js installed"    | tee -a ~/error.log
+echo "------------"    | tee -a ~/error.log
+echo "  "    | tee -a ~/error.log
 
 
 
 # Downloading smaller gguf model
 echo "  "     | tee -a ~/error.log
-echo "Will download gemma-2 gguf model from huggingface"  | tee -a error.log
+echo "Will download gemma-2 gguf model from huggingface"  | tee -a ~/error.log
 echo "Will take lot of time....."     | tee -a ~/error.log
-echo "-------------------"   | tee -a error.log
+echo "-------------------"   | tee -a ~/error.log
 echo " "     | tee -a ~/error.log
 sleep 9
 cd ~/llama.cpp/models
-wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf? 2>> error.log
+wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf? 2>> ~/error.log
 # You may have to issue the following command to cleanup also.
 mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
 
@@ -107,13 +107,13 @@ echo "Will take some time....."     | tee -a ~/error.log
 echo "File size is 780mb"    | tee -a ~/error.log
 echo "-------------------"   | tee -a error.log
 echo " "     | tee -a ~/error.log
-wget -c   https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/blob/main/tinyllama-1.1b-chat-v1.0.Q5_0.gguf 2>> error.log  
+wget -c   https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/blob/main/tinyllama-1.1b-chat-v1.0.Q5_0.gguf 2>> ~/error.log  
 
-echo " "   | tee -a error.log
-echo "gemma-2-2b-it.Q6_K.gguf and tinyllama downloaded"  | tee -a error.log
-echo "Download folder is:  ~/llama.cpp/models"    | tee -a error.log
-echo "Check as: ls -la ~/llama.cpp/models/"    | tee -a error.log
-echo "---------"   | tee -a error.log
+echo " "   | tee -a ~/error.log
+echo "gemma-2-2b-it.Q6_K.gguf and tinyllama downloaded"  | tee -a ~/error.log
+echo "Download folder is:  ~/llama.cpp/models"    | tee -a ~/error.log
+echo "Check as: ls -la ~/llama.cpp/models/"    | tee -a ~/error.log
+echo "---------"   | tee -a ~/error.log
 sleep 9
 
 # Move script file to done folder
