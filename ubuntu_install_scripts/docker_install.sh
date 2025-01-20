@@ -27,11 +27,11 @@
 
 cd ~
 
-echo " " | tee -a error.log
-echo "*********"  | tee -a error.log
-echo "Script: docker_install.sh"  | tee -a error.log
-echo "**********" | tee -a error.log
-echo " " | tee -a error.log
+echo " " | tee -a ~/error.log
+echo "*********"  | tee -a ~/error.log
+echo "Script: docker_install.sh"  | tee -a ~/error.log
+echo "**********" | tee -a ~/error.log
+echo " " | tee -a ~/error.log
 
 # If not started as sudo then inform:
 # ref: https://askubuntu.com/a/30157/8698
@@ -80,6 +80,11 @@ echo " "
 echo "Docker engine installed."     | tee -a ~/error.log
 echo "Adding user 'ashok' to 'docker' group"     | tee -a ~/error.log
 echo "to enable running docker commands by 'ashok' without sudo"     | tee -a ~/error.log
+
+echo "Docker engine installed."     | tee -a ~/info.log
+echo "Added user 'ashok' to 'docker' group"     | tee -a ~/info.log
+echo "to enable running docker commands by 'ashok' without sudo"     | tee -a ~/info.log
+
 sleep 9
 groupadd docker
 usermod -aG docker ashok
