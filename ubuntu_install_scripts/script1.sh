@@ -141,6 +141,6 @@ echo "Reopen it after it closes, and then execute the command:"
 echo "     ./script2.sh"
 echo "*******"
 echo " "
-sleep 9
+exec sleep 9
 exit
 
