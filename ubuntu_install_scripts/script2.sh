@@ -44,6 +44,7 @@ echo " "
 curl -fsSL https://ollama.com/install.sh | sh  2>> ~/error.log  
 echo "---------"     | tee -a ~/error.log
 echo "Ollama installed"     | tee -a ~/error.log
+echo "9. Ollama installed"     | tee -a ~/info.log
 echo "-----------"     | tee -a ~/error.log
 echo " "     | tee -a ~/error.log
 sleep 9
@@ -70,6 +71,7 @@ echo "PATH=\$PATH:~/llama.cpp/build/bin" >> .bashrc
 echo " "   | tee -a ~/error.log
 echo "-------"   | tee -a ~/error.log
 echo "llama.cpp installed"   | tee -a ~/error.log
+echo "10. llama.cpp installed"   | tee -a ~/info.log
 echo "-------"   | tee -a ~/error.log
 
 
@@ -83,6 +85,7 @@ echo "-------"   | tee -a ~/error.log
 fnm use --install-if-missing 20   2>> ~/error.log
 echo " "    | tee -a ~/error.log
 echo "Node.js installed"    | tee -a ~/error.log
+echo "11. Node.js installed"    | tee -a ~/error.log
 echo "------------"    | tee -a ~/error.log
 echo "  "    | tee -a ~/error.log
 
@@ -99,7 +102,7 @@ cd ~/llama.cpp/models
 wget -c   https://huggingface.co/MaziyarPanahi/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it.Q6_K.gguf? 2>> ~/error.log
 # You may have to issue the following command to cleanup also.
 mv 'gemma-2-2b-it.Q6_K.gguf?' gemma-2-2b-it.Q6_K.gguf
-
+echo "12. gemm-1-2b installed"  | tee -a ~/info.log
 
 echo " "     | tee -a ~/error.log
 echo "Downloading tinyllama gguf model from huggingface"  | tee -a error.log
@@ -111,8 +114,9 @@ wget -c   https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/blob/mai
 
 echo " "   | tee -a ~/error.log
 echo "gemma-2-2b-it.Q6_K.gguf and tinyllama downloaded"  | tee -a ~/error.log
-echo "Download folder is:  ~/llama.cpp/models"    | tee -a ~/error.log
-echo "Check as: ls -la ~/llama.cpp/models/"    | tee -a ~/error.log
+echo "13. gemma-2-2b-it.Q6_K.gguf and tinyllama downloaded"  | tee -a ~/info.log
+echo "       Download folder is:  ~/llama.cpp/models"    | tee -a ~/info.log
+echo "       Check as: ls -la ~/llama.cpp/models/"    | tee -a ~/error.log
 echo "---------"   | tee -a ~/error.log
 sleep 9
 
