@@ -63,6 +63,7 @@ echo " "     | tee -a ~/error.log
 echo "flowise installed"    | tee -a ~/error.log
 echo " "     | tee -a ~/error.log
 echo "flowise installed"    | tee -a ~/info.log
+echo "flowise port is: 3000"    | tee -a ~/info.log
 echo " "     | tee -a ~/info.log
 
 
