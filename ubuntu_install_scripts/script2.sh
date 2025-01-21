@@ -23,6 +23,7 @@ echo "**********" | tee -a ~/error.log
 echo " " | tee -a ~/error.log
 
 
+bash conda deactivate
 DIRECTORY="~/llama.cpp"
 if [ -d "$DIRECTORY" ]; then
   echo "$DIRECTORY does exist."
