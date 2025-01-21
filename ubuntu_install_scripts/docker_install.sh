@@ -26,6 +26,8 @@
 
 cd ~
 
+conda deactivate
+
 echo " " | tee -a ~/error.log
 echo "*********"  | tee -a ~/error.log
 echo "Script: docker_install.sh"  | tee -a ~/error.log
