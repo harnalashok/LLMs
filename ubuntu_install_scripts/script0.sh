@@ -90,10 +90,23 @@ perl -pi -e 's/\r\n/\n/g' ~/next/script6.sh
 chmod +x *.sh
 chmod +x ~/next/*.sh
 
+# Install Anaconda
+wget -c https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+bash Anaconda3-2024.10-1-Linux-x86_64.sh -b
+sleep 2
+rm Anaconda3-2024.10-1-Linux-x86_64.sh
+echo "PATH=\$PATH:~/anaconda3/bin/" >> ~/.bashrc
+echo "conda init "  >> ~/info.log
+echo "conda activate " >> ~/info.log
+echo "conda deactivate " >> ~/info.log
+
+
+
 # Move script file to 'done' folder
 mv ~/script0.sh  ~/done
 # Bring in the next file
 mv ~/next/script1.sh  ~/
+echo "Terminal will close."
+echo "Open it again, and issue the following command"
+echo "
 
-echo " Changing host name"
-bash script1.sh
