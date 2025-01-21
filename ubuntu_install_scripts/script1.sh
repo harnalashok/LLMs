@@ -27,7 +27,7 @@ echo " " | tee -a ~/error.log
 
 
 # Install software
-bash conda deactivate
+conda deactivate
 
 echo "  "
 echo "------------"   | tee -a ~/error.log
