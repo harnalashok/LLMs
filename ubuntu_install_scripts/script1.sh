@@ -27,6 +27,8 @@ echo " " | tee -a ~/error.log
 
 
 # Install software
+bash conda deactivate
+
 echo "  "
 echo "------------"   | tee -a ~/error.log
 echo " Will update Ubuntu"  | tee -a ~/error.log
