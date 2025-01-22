@@ -122,5 +122,7 @@ mv ~/next/script00.sh  ~/  | tee -a ~/error.log
 echo "Terminal will close."  | tee -a ~/error.log
 echo "Open it again, and issue the following command:"   | tee -a ~/error.log
 echo "   ./script00.sh"  | tee -a ~/error.log
-exec sleep 9
+exec sleep 2
+exit
+
 
