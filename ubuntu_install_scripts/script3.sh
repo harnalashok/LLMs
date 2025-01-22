@@ -15,80 +15,80 @@
 #     script7.sh
 
 
-echo " " | tee -a ~/error.log
-echo "*********"  | tee -a ~/error.log
-echo "Script: script3.sh"  | tee -a ~/error.log
-echo "**********" | tee -a ~/error.log
-echo " " | tee -a ~/error.log
+echo " " | tee -a /home/ashok/error.log
+echo "*********"  | tee -a /home/ashok/error.log
+echo "Script: script3.sh"  | tee -a /home/ashok/error.log
+echo "**********" | tee -a /home/ashok/error.log
+echo " " | tee -a /home/ashok/error.log
 
 #conda deactivate
 # Install langflow
-echo " "   | tee -a ~/error.log
-echo "Installing langflow..."  | tee -a ~/error.log
-echo "------"   | tee -a ~/error.log
-echo " "   | tee -a ~/error.log
+echo " "   | tee -a /home/ashok/error.log
+echo "Installing langflow..."  | tee -a /home/ashok/error.log
+echo "------"   | tee -a /home/ashok/error.log
+echo " "   | tee -a /home/ashok/error.log
 sleep 9
 uv venv
-uv pip install langflow  2>> ~/error.log
+uv pip install langflow  2>> /home/ashok/error.log
 sleep 2
-echo "  "    | tee -a ~/error.log
-echo "  "    | tee -a ~/info.log
+echo "  "    | tee -a /home/ashok/error.log
+echo "  "    | tee -a /home/ashok/info.log
 
-echo "langflow installed"   | tee -a ~/error.log
-echo "langflow installed"   | tee -a ~/info.log
+echo "langflow installed"   | tee -a /home/ashok/error.log
+echo "langflow installed"   | tee -a /home/ashok/info.log
 
 
 # https://docs.langflow.org/configuration-cli
-echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a ~/info.log
-echo "Run following command to get langflow CLI options:"    | tee -a ~/info.log
-echo "        uv run langflow"    | tee -a ~/info.log
-echo "Generate api-key, as: "    | tee -a ~/info.log
-echo "        uv run langflow api-key"    | tee -a ~/info.log
-echo "Run langflow, as:"    | tee -a ~/info.log
-echo "        uv run langflow run"    | tee -a ~/info.log
-echo "---------- "   | tee -a ~/info.log
-echo "  "   | tee -a ~/info.log
+echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a /home/ashok/info.log
+echo "Run following command to get langflow CLI options:"    | tee -a /home/ashok/info.log
+echo "        uv run langflow"    | tee -a /home/ashok/info.log
+echo "Generate api-key, as: "    | tee -a /home/ashok/info.log
+echo "        uv run langflow api-key"    | tee -a /home/ashok/info.log
+echo "Run langflow, as:"    | tee -a /home/ashok/info.log
+echo "        uv run langflow run"    | tee -a /home/ashok/info.log
+echo "---------- "   | tee -a /home/ashok/info.log
+echo "  "   | tee -a /home/ashok/info.log
 
 sleep 9
 
 # 2.1 Install Flowise as NORMAL user
 echo " "
-echo "Installing flowvise...Takes time..."  | tee -a ~/error.log
-echo "------"   | tee -a ~/error.log
-echo " "   | tee -a ~/error.log
+echo "Installing flowvise...Takes time..."  | tee -a /home/ashok/error.log
+echo "------"   | tee -a /home/ashok/error.log
+echo " "   | tee -a /home/ashok/error.log
 sleep 9
-npm install -g flowise  2>> ~/error.log
+npm install -g flowise  2>> /home/ashok/error.log
 echo " "
-echo " "     | tee -a ~/error.log
-echo "flowise installed"    | tee -a ~/error.log
-echo " "     | tee -a ~/error.log
-echo "flowise installed"    | tee -a ~/info.log
-echo "flowise port is: 3000"    | tee -a ~/info.log
-echo " "     | tee -a ~/info.log
+echo " "     | tee -a /home/ashok/error.log
+echo "flowise installed"    | tee -a /home/ashok/error.log
+echo " "     | tee -a /home/ashok/error.log
+echo "flowise installed"    | tee -a /home/ashok/info.log
+echo "flowise port is: 3000"    | tee -a /home/ashok/info.log
+echo " "     | tee -a /home/ashok/info.log
 
 
 
 # Download tinyllama
-echo " "   | tee -a ~/error.log
-echo "--------- "   | tee -a ~/error.log
-echo "Downloading tinyllama for ollama"   | tee -a ~/error.log
+echo " "   | tee -a /home/ashok/error.log
+echo "--------- "   | tee -a /home/ashok/error.log
+echo "Downloading tinyllama for ollama"   | tee -a /home/ashok/error.log
 echo "Download size is 637MB"
-echo "------"   | tee -a ~/error.log
-echo " "   | tee -a ~/error.log
-ollama pull tinyllama   2>> ~/error.log
+echo "------"   | tee -a /home/ashok/error.log
+echo " "   | tee -a /home/ashok/error.log
+ollama pull tinyllama   2>> /home/ashok/error.log
 sleep 9
 
-echo "  "     | tee -a ~/error.log
-echo "  "     | tee -a ~/error.log
-echo "tinyllama downloaded"     | tee -a ~/error.log
-echo "tinyllama downloaded"     | tee -a ~/info.log
+echo "  "     | tee -a /home/ashok/error.log
+echo "  "     | tee -a /home/ashok/error.log
+echo "tinyllama downloaded"     | tee -a /home/ashok/error.log
+echo "tinyllama downloaded"     | tee -a /home/ashok/info.log
 
-echo "Check as: ollama list"    | tee -a ~/info.log
-echo "-------"   | tee -a ~/info.log
+echo "Check as: ollama list"    | tee -a /home/ashok/info.log
+echo "-------"   | tee -a /home/ashok/info.log
 
 # Move script file to done folder
-mv ~/script3.sh ~/done
-mv ~/next/docker_install.sh  ~
+mv /home/ashok/script3.sh /home/ashok/done
+mv /home/ashok/next/docker_install.sh  ~
 
 echo " "
 echo "Will shut down Ubuntu console"
