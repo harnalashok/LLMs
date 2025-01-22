@@ -69,6 +69,8 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubunt
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script5.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script7.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script6.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script00.sh -P ~/next
+
 
 echo "  "
 echo "Script files downloaded....."
@@ -85,6 +87,7 @@ perl -pi -e 's/\r\n/\n/g' ~/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script5.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script7.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script6.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script00.sh
 
 
 chmod +x *.sh
