@@ -28,11 +28,11 @@ cd ~
 
 conda deactivate
 
-echo " " | tee -a ~/error.log
-echo "*********"  | tee -a ~/error.log
-echo "Script: docker_install.sh"  | tee -a ~/error.log
-echo "**********" | tee -a ~/error.log
-echo " " | tee -a ~/error.log
+echo " " | tee -a /home/ashok/error.log
+echo "*********"  | tee -a /home/ashok/error.log
+echo "Script: docker_install.sh"  | tee -a /home/ashok/error.log
+echo "**********" | tee -a /home/ashok/error.log
+echo " " | tee -a /home/ashok/error.log
 
 # If not started as sudo then inform:
 # ref: https://askubuntu.com/a/30157/8698
@@ -70,38 +70,38 @@ echo "Updating Ubuntu packages list.."
 apt update -y
 sleep 2
 
-echo "Downloading and installing docker engine"    | tee -a ~/error.log
-echo "============"     | tee -a ~/error.log
-echo " "     | tee -a ~/error.log
+echo "Downloading and installing docker engine"    | tee -a /home/ashok/error.log
+echo "============"     | tee -a /home/ashok/error.log
+echo " "     | tee -a /home/ashok/error.log
 snap install docker
 apt  install docker-compose  -y
-echo " "     | tee -a ~/error.log
-echo "============"     | tee -a ~/error.log
+echo " "     | tee -a /home/ashok/error.log
+echo "============"     | tee -a /home/ashok/error.log
 echo " "
-echo "Docker engine installed."     | tee -a ~/error.log
-echo "Adding user 'ashok' to 'docker' group"     | tee -a ~/error.log
-echo "to enable running docker commands by 'ashok' without sudo"     | tee -a ~/error.log
+echo "Docker engine installed."     | tee -a /home/ashok/error.log
+echo "Adding user 'ashok' to 'docker' group"     | tee -a /home/ashok/error.log
+echo "to enable running docker commands by 'ashok' without sudo"     | tee -a /home/ashok/error.log
 
-echo "Docker engine installed."     | tee -a ~/info.log
-echo "Added user 'ashok' to 'docker' group"     | tee -a ~/info.log
-echo "to enable running docker commands by 'ashok' without sudo"     | tee -a ~/info.log
+echo "Docker engine installed."     | tee -a /home/ashok/info.log
+echo "Added user 'ashok' to 'docker' group"     | tee -a /home/ashok/info.log
+echo "to enable running docker commands by 'ashok' without sudo"     | tee -a /home/ashok/info.log
 
 sleep 9
 groupadd docker
 usermod -aG docker ashok
-echo " "    | tee -a ~/error.log
+echo " "    | tee -a /home/ashok/error.log
 
-echo "Docker installation process completed"     | tee -a ~/error.log
+echo "Docker installation process completed"     | tee -a /home/ashok/error.log
 
-echo " "     | tee -a ~/error.log
+echo " "     | tee -a /home/ashok/error.log
 
 echo "Machine will be rebooted in 9s"
 echo "Reopen it thereafter, and perform few tests"
 echo "with script4.sh"
 echo " "
 # Move script file to done folder
-mv ~/docker_install.sh ~/done
-mv ~/next/script4.sh  ~/
+mv /home/ashok/docker_install.sh /home/ashok/done
+mv /home/ashok/next/script4.sh  /home/ashok/
 sleep 9
 
 reboot
