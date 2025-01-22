@@ -21,7 +21,7 @@ echo "Script: script3.sh"  | tee -a ~/error.log
 echo "**********" | tee -a ~/error.log
 echo " " | tee -a ~/error.log
 
-conda deactivate
+#conda deactivate
 # Install langflow
 echo " "   | tee -a ~/error.log
 echo "Installing langflow..."  | tee -a ~/error.log
