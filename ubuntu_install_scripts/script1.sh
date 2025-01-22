@@ -19,21 +19,21 @@
 # This file is called by script0.sh
 
 
-echo " " | tee -a ~/error.log
-echo "*********"  | tee -a ~/error.log
-echo "Script: script1.sh"  | tee -a ~/error.log
-echo "**********" | tee -a ~/error.log
-echo " " | tee -a ~/error.log
+echo " " | tee -a /home/ashok/error.log
+echo "*********"  | tee -a /home/ashok/error.log
+echo "Script: script1.sh"  | tee -a /home/ashok/error.log
+echo "**********" | tee -a /home/ashok/error.log
+echo " " | tee -a /home/ashok/error.log
 
 
 # Install software
 # conda deactivate
 
 echo "  "
-echo "------------"   | tee -a ~/error.log
-echo " Will update Ubuntu"  | tee -a ~/error.log
+echo "------------"   | tee -a /home/ashok/error.log
+echo " Will update Ubuntu"  | tee -a /home/ashok/error.log
 echo " You will be asked for password...supply it..."
-echo "----------"   | tee -a ~/error.log
+echo "----------"   | tee -a /home/ashok/error.log
 echo " "
 sleep 2
 sudo apt update
@@ -41,34 +41,34 @@ sudo apt upgrade -y
 sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  -y  
 
 echo " "
-echo "Ubuntu upgraded ......"  | tee -a ~/error.log
-echo "1. Ubuntu upgraded ......"  | tee -a ~/info.log
+echo "Ubuntu upgraded ......"  | tee -a /home/ashok/error.log
+echo "1. Ubuntu upgraded ......"  | tee -a /home/ashok/info.log
 
 # Install 'fnm' (Fast Node Manager)
-echo " "   | tee -a ~/error.log
-echo "Will install fnm: Fast Node Manager..."  | tee -a ~/error.log
-echo "------------------"   | tee -a ~/error.log
+echo " "   | tee -a /home/ashok/error.log
+echo "Will install fnm: Fast Node Manager..."  | tee -a /home/ashok/error.log
+echo "------------------"   | tee -a /home/ashok/error.log
 sleep 9
-sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> ~/error.log
-echo "Fast Node Manager (fnm) installed"  | tee -a ~/error.log
-echo "2. Fast Node Manager (fnm) installed"  | tee -a ~/info.log
+sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> /home/ashok/error.log
+echo "Fast Node Manager (fnm) installed"  | tee -a /home/ashok/error.log
+echo "2. Fast Node Manager (fnm) installed"  | tee -a /home/ashok/info.log
 
 
 # Install chromadb
-echo " "   | tee -a ~/error.log
-echo " Will Install chromadb"  | tee -a ~/error.log
-echo "------------"   | tee -a ~/error.log
-echo " "   | tee -a ~/error.log
+echo " "   | tee -a /home/ashok/error.log
+echo " Will Install chromadb"  | tee -a /home/ashok/error.log
+echo "------------"   | tee -a /home/ashok/error.log
+echo " "   | tee -a /home/ashok/error.log
 sleep 9
-pip install chromadb   2>> ~/error.log
+pip install chromadb   2>> /home/ashok/error.log
 
 sleep 2
-echo " "    | tee -a ~/error.log
-echo "ChromaDB installed"    | tee -a ~/error.log
-echo "3. ChromaDB installed"    | tee -a ~/info.log
-echo "4. Database is at: ~/.local/bin/chroma"  | tee -a ~/info.log
-echo "      chromadb port is: 8000"   | tee -a ~/info.log
-eecho "------ "    | tee -a ~/error.log
+echo " "    | tee -a /home/ashok/error.log
+echo "ChromaDB installed"    | tee -a /home/ashok/error.log
+echo "3. ChromaDB installed"    | tee -a /home/ashok/info.log
+echo "4. Database is at: /home/ashok/.local/bin/chroma"  | tee -a /home/ashok/info.log
+echo "      chromadb port is: 8000"   | tee -a /home/ashok/info.log
+eecho "------ "    | tee -a /home/ashok/error.log
 
 #  TO START CHROMA AS a SERVICE
 #*********************************
@@ -80,8 +80,8 @@ echo "[Service]"  >> chroma.service
 echo "Type = simple"  >> chroma.service
 echo "User = root"  >> chroma.service
 echo "Group = root"  >> chroma.service
-echo "WorkingDirectory = ~/Documents"  >> chroma.service
-echo "ExecStart=~/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path ~/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
+echo "WorkingDirectory = /home/ashok/Documents"  >> chroma.service
+echo "ExecStart=/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
 echo " "  >> chroma.service
 echo "[Install]"  >> chroma.service
 echo "WantedBy = multi-user.target"  >> chroma.service
@@ -89,24 +89,24 @@ sudo mv chroma.service /etc/systemd/system/chroma.service
 #---------------------
 
 # You can now start chroma, as:
-echo " "     | tee -a ~/error.log
-echo "5. ---Start/Stop Chroma as-------"     | tee -a ~/info.log
-echo "     sudo systemctl daemon-reload"   | tee -a ~/info.log
-echo "     sudo systemctl enable chroma"     | tee -a ~/info.log
-echo "     sudo systemctl start chroma"     | tee -a ~/info.log
-echo "6. Chroma is available at port 8000"     | tee -a ~/info.log
-echo "7. Check as: "      | tee -a ~/info.log
-echo "      netstat -aunt | grep 8000"      | tee -a ~/info.log
-echo "----------"      | tee -a ~/info.log
-echo " "     | tee -a ~/info.log
+echo " "     | tee -a /home/ashok/error.log
+echo "5. ---Start/Stop Chroma as-------"     | tee -a /home/ashok/info.log
+echo "     sudo systemctl daemon-reload"   | tee -a /home/ashok/info.log
+echo "     sudo systemctl enable chroma"     | tee -a /home/ashok/info.log
+echo "     sudo systemctl start chroma"     | tee -a /home/ashok/info.log
+echo "6. Chroma is available at port 8000"     | tee -a /home/ashok/info.log
+echo "7. Check as: "      | tee -a /home/ashok/info.log
+echo "      netstat -aunt | grep 8000"      | tee -a /home/ashok/info.log
+echo "----------"      | tee -a /home/ashok/info.log
+echo " "     | tee -a /home/ashok/info.log
 sleep 9
 
 
 if [[ `hostname` != "master" ]]; then
    # Change machine name
-   echo " "     | tee -a ~/error.log
-   echo "Will change machine name to 'master'..."  | tee -a ~/error.log
-   echo "------------------"     | tee -a ~/error.log
+   echo " "     | tee -a /home/ashok/error.log
+   echo "Will change machine name to 'master'..."  | tee -a /home/ashok/error.log
+   echo "------------------"     | tee -a /home/ashok/error.log
    sleep 9
    echo '[boot]' | sudo tee  /etc/wsl.conf > /dev/null
    echo 'systemd=true' | sudo tee -a /etc/wsl.conf > /dev/null
@@ -125,15 +125,15 @@ echo "--------------"   | tee -a error.log
 echo " "   | tee -a error.log
 sleep 9
 curl -LsSf https://astral.sh/uv/install.sh | sh   2>> error.log
-echo " "     | tee -a ~/error.log
-echo " "     | tee -a ~/info.log
-echo "uv installed"     | tee -a ~/error.log
-echo "8. uv installed"     | tee -a ~/info.log
+echo " "     | tee -a /home/ashok/error.log
+echo " "     | tee -a /home/ashok/info.log
+echo "uv installed"     | tee -a /home/ashok/error.log
+echo "8. uv installed"     | tee -a /home/ashok/info.log
 sleep 9
 
 # Move script file to done folder
-mv ~/script1.sh ~/done
-mv ~/next/script2.sh ~
+mv /home/ashok/script1.sh /home/ashok/done
+mv /home/ashok/next/script2.sh /home/ashok/
 
 # Shut down ubuntu
 echo " "
