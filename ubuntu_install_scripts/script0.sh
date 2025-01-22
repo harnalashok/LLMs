@@ -5,7 +5,6 @@
 # Connected scripts are:
 # These sscripts run in sequence.
 #     script0.sh
-#     script00.sh
 #     script1.sh
 #     script2.sh
 #     script3.sh
@@ -14,6 +13,7 @@
 #     script5.sh
 #     script6.sh
 #     script7.sh
+#     script8.sh
 
 
 #------ Steps ---------
@@ -70,7 +70,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubunt
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script5.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script7.sh -P ~/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script6.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script00.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script8.sh -P ~/next
 
 
 echo "  "
@@ -94,24 +94,7 @@ perl -pi -e 's/\r\n/\n/g' ~/next/script00.sh
 chmod +x *.sh
 chmod +x ~/next/*.sh
 
-# Install Anaconda
-echo " "
-echo "Downloading Anaconda" | tee -a ~/error.log
-wget -c https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
-bash Anaconda3-2024.10-1-Linux-x86_64.sh -b
-sleep 2
-echo "Anaconda installed" | tee -a ~/info.log
-rm Anaconda3-2024.10-1-Linux-x86_64.sh
-echo "PATH=\$PATH:~/anaconda3/bin/" >> ~/.bashrc
 
-echo " "  | tee -a ~/info.log
-echo " ---------" | tee -a ~/error.log
-echo "To begin using Anaconda, you need to initialise it, as"  | tee -a ~/info.log
-echo "      conda init "  | tee -a ~/info.log
-echo "      Bring base environment,  as: conda activate " >> ~/info.log
-echo "      Remove base environment, as:  conda deactivate " >> ~/info.log
-echo "------"  | tee -a ~/info.log
-echo " "  | tee -a ~/info.log
 
 
 # Move script file to 'done' folder
