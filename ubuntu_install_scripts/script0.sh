@@ -73,7 +73,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubunt
 echo "  "
 echo "Script files downloaded....."
 echo "Wait..You will have to supply password..."
-sleep 9
+sleep 3
 
 # Doc to Unix conversion
 perl -pi -e 's/\r\n/\n/g' ~/next/script0.sh
