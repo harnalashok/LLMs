@@ -22,7 +22,7 @@
 
 
 #            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script0.sh
-#            perl -pi -e 's/\r\n/\n/g' ~/script0.sh
+#            perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh
 #            chmod +x *.sh
 
 #     ii) Then, execute this file as:
@@ -56,21 +56,21 @@ fi
 
 
 
-mkdir ~/done
+mkdir /home/ashok/done
 echo "Downloading all script files from github" 
 echo "---------------------------"
 echo "  "
 # Raw github files are downloaded
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script0.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script1.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script2.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script3.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script4.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/docker_install.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script5.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script7.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script6.sh -P ~/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script8.sh -P ~/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script0.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script1.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script2.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script3.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script4.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/docker_install.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script5.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script7.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script6.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/ubuntu_install_scripts/script8.sh -P /home/ashok/next
 
 
 echo "  "
@@ -79,33 +79,33 @@ echo "Wait..You will have to supply password..."
 sleep 3
 
 # Doc to Unix conversion
-perl -pi -e 's/\r\n/\n/g' ~/next/script0.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script1.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script2.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script3.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/docker_install.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script4.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script5.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script7.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script6.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script8.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script0.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script1.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script2.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script5.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script7.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script6.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script8.sh
 
 
 chmod +x *.sh
-chmod +x ~/next/*.sh
+chmod +x /home/ashok/next/*.sh
 
 
 
 
 # Move script file to 'done' folder
-mv ~/script0.sh  ~/done
+mv /home/ashok/script0.sh  /home/ashok/done
 # Bring in the next file
-mv  ~/next/script1.sh  ~/  
+mv  /home/ashok/next/script1.sh  /home/ashok/  
 
-echo "Terminal will close."  | tee -a ~/error.log
-echo "Close it, if it does not close by itself"  | tee -a ~/error.log
-echo "Open it again, and issue the following command:"   | tee -a ~/error.log
-echo "   ~/script1.sh"  | tee -a ~/error.log
+echo "Terminal will close."  | tee -a /home/ashok/error.log
+echo "Close it, if it does not close by itself"  | tee -a /home/ashok/error.log
+echo "Open it again, and issue the following command:"   | tee -a /home/ashok/error.log
+echo "   /home/ashok/script1.sh"  | tee -a /home/ashok/error.log
 exec sleep 2
 exit 
 
