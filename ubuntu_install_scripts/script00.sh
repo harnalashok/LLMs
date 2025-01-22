@@ -2,7 +2,7 @@ minal and #!/bin/sh
 
 conda init
 
-mv ~/script00.sh ¬/done
+mv ~/script00.sh ~/done
 mv ~/next/script1.sh  ~/
 
 echo "Will close terminal. "  
