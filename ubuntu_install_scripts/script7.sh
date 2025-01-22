@@ -17,7 +17,7 @@ echo "Script: script7.sh"  | tee -a ~/error.log
 echo "**********" | tee -a ~/error.log
 echo " " | tee -a ~/error.log
 
-conda deactivate
+# conda deactivate
 
 # Download ollama nomic-embed-text
 if netstat -aunt   |  grep '11434'; then  
