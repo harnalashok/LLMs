@@ -23,7 +23,7 @@ echo "Script: script6.sh"  | tee -a ~/error.log
 echo "**********" | tee -a ~/error.log
 echo " " | tee -a ~/error.log
 
-conda  deactivate
+#conda  deactivate
 
 # Install required packages:
 echo "Installing dependencies " | tee -a ~/error.log
