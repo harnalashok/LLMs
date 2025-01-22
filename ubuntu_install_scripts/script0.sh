@@ -88,7 +88,7 @@ perl -pi -e 's/\r\n/\n/g' ~/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script5.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script7.sh
 perl -pi -e 's/\r\n/\n/g' ~/next/script6.sh
-perl -pi -e 's/\r\n/\n/g' ~/next/script00.sh
+perl -pi -e 's/\r\n/\n/g' ~/next/script8.sh
 
 
 chmod +x *.sh
@@ -100,13 +100,14 @@ chmod +x ~/next/*.sh
 # Move script file to 'done' folder
 mv ~/script0.sh  ~/done
 # Bring in the next file
-mv  ~/next/script00.sh  ~/  
+mv  ~/next/script1.sh  ~/  
 
 echo "Terminal will close."  | tee -a ~/error.log
 echo "Close it, if it does not close by itself"  | tee -a ~/error.log
 echo "Open it again, and issue the following command:"   | tee -a ~/error.log
-echo "   ~/script00.sh"  | tee -a ~/error.log
+echo "   ~/script1.sh"  | tee -a ~/error.log
 exec sleep 2
-exit
+exit 
+
 
 
