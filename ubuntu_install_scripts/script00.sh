@@ -6,6 +6,7 @@ mv ~/script00.sh ~/done
 mv ~/next/script1.sh  ~/
 
 echo "Will close terminal. "  
+echo "Close it yourself, if it does not close on its own"
 echo "Next, open terminal and issue command"
 echo "   ./script1.sh"
 
