@@ -22,7 +22,7 @@ echo "Script: script5.sh"  | tee -a ~/error.log
 echo "**********" | tee -a ~/error.log
 echo " " | tee -a ~/error.log
 
-conda deactivate
+#conda deactivate
 
 # Check ollama models
 echo "Ollama models are stored here"  | tee -a ~/info.log
