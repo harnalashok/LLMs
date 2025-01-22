@@ -21,7 +21,7 @@ echo "Script: script4.sh"  | tee -a ~/error.log
 echo "**********" | tee -a ~/error.log
 echo " " | tee -a ~/error.log
 
-conda deactivate
+#conda deactivate
 
 # Check if Docker installed
 if docker -v  |  grep 'version'; then  
