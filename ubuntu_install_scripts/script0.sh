@@ -117,7 +117,7 @@ echo " "  | tee -a ~/info.log
 # Move script file to 'done' folder
 mv ~/script0.sh  ~/done
 # Bring in the next file
-mv ~/next/script1.sh  ~/  | tee -a ~/error.log
+mv ~/next/script00.sh  ~/  | tee -a ~/error.log
 
 echo "Terminal will close."  | tee -a ~/error.log
 echo "Open it again, and issue the following command:"   | tee -a ~/error.log
