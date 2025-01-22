@@ -1,5 +1,13 @@
 #!/bin/bash
 
+echo "**************"
+echo "Be WARNED that Anaconda 'base' environment will hide
+echo "   your existing python environment."
+echo "Deactivate base environment while using other "
+echo " python environments with the command:"
+echo "      conda deactivate
+echo "**************"
+sleep 9
 
 # Install Anaconda
 echo " "
