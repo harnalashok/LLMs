@@ -11,80 +11,80 @@
 #     script6.sh
 #     script7.sh
 
-echo " " | tee -a ~/error.log
-echo "*********"  | tee -a ~/error.log
-echo "Script: script7.sh"  | tee -a ~/error.log
-echo "**********" | tee -a ~/error.log
-echo " " | tee -a ~/error.log
+echo " " | tee -a /home/ashok/error.log
+echo "*********"  | tee -a /home/ashok/error.log
+echo "Script: script7.sh"  | tee -a /home/ashok/error.log
+echo "**********" | tee -a /home/ashok/error.log
+echo " " | tee -a /home/ashok/error.log
 
 # conda deactivate
 
 # Download ollama nomic-embed-text
 if netstat -aunt   |  grep '11434'; then  
-   echo " "      | tee -a ~/error.log
-   echo "Ollama is already started"     | tee -a ~/error.log
-   echo " "      | tee -a ~/error.log
+   echo " "      | tee -a /home/ashok/error.log
+   echo "Ollama is already started"     | tee -a /home/ashok/error.log
+   echo " "      | tee -a /home/ashok/error.log
  else  
     # Download ollama nomic-embed-text
     # Start ollama in background
-    echo " "    | tee -a ~/error.log
-    echo "-----------"    | tee -a ~/error.log
-    echo "Starting ollama in background"    | tee -a ~/error.log
-    echo "---------"    | tee -a ~/error.log
-    echo " "    | tee -a ~/error.log
+    echo " "    | tee -a /home/ashok/error.log
+    echo "-----------"    | tee -a /home/ashok/error.log
+    echo "Starting ollama in background"    | tee -a /home/ashok/error.log
+    echo "---------"    | tee -a /home/ashok/error.log
+    echo " "    | tee -a /home/ashok/error.log
     ollama serve &  > /dev/null &
-	echo "You may also start ollama, as: "     | tee -a ~/info.log
-	echo "    ollama serve &  > /dev/null & "     | tee -a ~/info.log
+	echo "You may also start ollama, as: "     | tee -a /home/ashok/info.log
+	echo "    ollama serve &  > /dev/null & "     | tee -a /home/ashok/info.log
 	
 fi
 
-echo " "    | tee -a ~/error.log
-echo " Pulling text-embedding model for ollama"    | tee -a ~/error.log
-echo " "    | tee -a ~/error.log
-echo "--------- "    | tee -a ~/error.log
+echo " "    | tee -a /home/ashok/error.log
+echo " Pulling text-embedding model for ollama"    | tee -a /home/ashok/error.log
+echo " "    | tee -a /home/ashok/error.log
+echo "--------- "    | tee -a /home/ashok/error.log
 
-ollama pull nomic-embed-text  2>> ~/error.log
+ollama pull nomic-embed-text  2>> /home/ashok/error.log
 sleep 2
-echo "nomic-embed-text pulled"   | tee -a ~/error.log
-echo "------- "    | tee -a ~/error.log
-echo "nomic-embed-text pulled"   | tee -a ~/info.log
-echo "------- "    | tee -a ~/info.log
-echo " "    | tee -a ~/info.log
+echo "nomic-embed-text pulled"   | tee -a /home/ashok/error.log
+echo "------- "    | tee -a /home/ashok/error.log
+echo "nomic-embed-text pulled"   | tee -a /home/ashok/info.log
+echo "------- "    | tee -a /home/ashok/info.log
+echo " "    | tee -a /home/ashok/info.log
 
-echo " "    | tee -a ~/error.log
-echo "Will pull olom2 model, next. File size: 4.5gb"  | tee -a ~/error.log
+echo " "    | tee -a /home/ashok/error.log
+echo "Will pull olom2 model, next. File size: 4.5gb"  | tee -a /home/ashok/error.log
 read -p "Shall I go ahead and pull olom2 model (yY/nN? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    echo " "    | tee -a ~/error.log
-    echo "OK. Pulling olomo2 model"    | tee -a ~/error.log
-    ollama pull olmo2  2>> ~/error.log
+    echo " "    | tee -a /home/ashok/error.log
+    echo "OK. Pulling olomo2 model"    | tee -a /home/ashok/error.log
+    ollama pull olmo2  2>> /home/ashok/error.log
 	sleep 2
-	echo "olmo2  pulled"   | tee -a ~/info.log
-    echo "------- "    | tee -a ~/info.log
-    echo " "    | tee -a ~/info.log
+	echo "olmo2  pulled"   | tee -a /home/ashok/info.log
+    echo "------- "    | tee -a /home/ashok/info.log
+    echo " "    | tee -a /home/ashok/info.log
 	sleep 5
 fi
 
 # Move script file to done folder
-mv ~/script7.sh  ~/done
+mv /home/ashok/script7.sh  /home/ashok/done
 
-echo "Will test llama-cpp-python now"  | tee -a ~/error.log
-echo  "*********"  | tee -a ~/error.log
-echo " "  | tee -a ~/error.log
-echo "Testing llama-cpp-python with Llama-2-13B-chat-GGUF" | tee -a ~/error.log
-echo "Test llama-cpp-python, as: "  | tee -a ~/info.log
-echo "     llama-cpp-python with Llama-2-13B-chat-GGUF" | tee -a ~/info.log
-echo "Access it at localhost:8000/docs"  | tee -a ~/info.log
-echo  "*********"  | tee -a ~/error.log
+echo "Will test llama-cpp-python now"  | tee -a /home/ashok/error.log
+echo  "*********"  | tee -a /home/ashok/error.log
+echo " "  | tee -a /home/ashok/error.log
+echo "Testing llama-cpp-python with Llama-2-13B-chat-GGUF" | tee -a /home/ashok/error.log
+echo "Test llama-cpp-python, as: "  | tee -a /home/ashok/info.log
+echo "     llama-cpp-python with Llama-2-13B-chat-GGUF" | tee -a /home/ashok/info.log
+echo "Access it at localhost:8000/docs"  | tee -a /home/ashok/info.log
+echo  "*********"  | tee -a /home/ashok/error.log
 
 sleep 9
 
-python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & 
-echo "python3 -m llama_cpp.server --model ~/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & "   | tee -a ~/info.log
-echo " "  | tee -a ~/error.log
-echo " "  | tee -a ~/info.log
+python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & 
+echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & "   | tee -a /home/ashok/info.log
+echo " "  | tee -a /home/ashok/error.log
+echo " "  | tee -a /home/ashok/info.log
 exec sleep 9
 
 << ////
