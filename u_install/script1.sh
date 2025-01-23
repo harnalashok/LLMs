@@ -46,6 +46,7 @@ echo " "
 echo "------"
 echo "Installing ollama quietly. Takes time...."  | tee -a /home/ashok/error.log
 echo "When asked, supply password"
+echo "No messages will appear on screen"
 echo "------"
 echo " "
 echo " "
