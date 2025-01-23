@@ -3,7 +3,7 @@ Copy and paste.
 
 
 ```
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script0.sh   
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh   
    perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
    chmod +x  ~/*.sh   
    bash script0.sh
