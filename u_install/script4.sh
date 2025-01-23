@@ -61,6 +61,12 @@ echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
 sleep 3
 
 
+git clone https://github.com/FlowiseAI/Flowise.git
+cd Flowise/
+docker build --no-cache -t flowise .
+docker run -d --name flowise -p 3000:3000 flowise
+
+
 # Move script file to done folder
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/script5.sh  /home/ashok/
