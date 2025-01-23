@@ -104,6 +104,8 @@ mv /home/ashok/next/script3.sh  /home/ashok/
 
 echo "Close your terminal"
 sleep 10
+kill $PPID
+
 
 
 
