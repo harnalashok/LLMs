@@ -101,7 +101,9 @@ echo " "
 # Move script file to done folder
 mv /home/ashok/docker_install.sh /home/ashok/done
 mv /home/ashok/next/script3.sh  /home/ashok/
-reboot
+
+echo "Close your terminal"
+sleep 10
 
 
 
