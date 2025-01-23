@@ -137,17 +137,17 @@ sleep 2
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
 mv /home/ashok/next/script2.sh /home/ashok/
-bash script2.sh
+#bash script2.sh
 
 
 # Shut down ubuntu
-#echo " "
-#echo "*******"
-#echo "Ubuntu terminal will be closed."
-#echo "Reopen it after it closes, and then execute the command:"
-#echo "     ./script2.sh"
-#echo "*******"
-#echo " "
-#exec sleep 9
-#exit
+echo " "
+echo "*******"
+echo "Ubuntu terminal will be closed."
+echo "Reopen it after it closes, and then execute the command:"
+echo "     ./script2.sh"
+echo "*******"
+echo " "
+exec sleep 9
+exit
 
