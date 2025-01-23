@@ -149,5 +149,5 @@ echo "     ./script2.sh"
 echo "*******"
 echo " "
 exec sleep 9
-exit
+kill $PPID
 
