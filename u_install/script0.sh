@@ -21,7 +21,7 @@
 #        execute the three commands:
 
 
-#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script0.sh
+#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh
 #            perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh
 #            chmod +x *.sh
 
@@ -64,17 +64,17 @@ echo "Downloading all script files from github"
 echo "---------------------------"
 echo "  "
 # Raw github files are downloaded
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script0.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script1.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script2.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script3.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script4.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/docker_install.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script5.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script6.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script7.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script8.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install_scripts/script9.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script1.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script2.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script3.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script4.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/docker_install.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script5.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script6.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script7.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script8.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script9.sh -P /home/ashok/next
 
 
 
