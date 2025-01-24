@@ -61,6 +61,7 @@ echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
 sleep 3
 
 # Install Flowise through docker"
+# Ref: https://docs.flowiseai.com/getting-started
 echo "Installing flowise docker"                            | tee -a /home/ashok/info.log
 cd ~/
 git clone https://github.com/FlowiseAI/Flowise.git
@@ -74,6 +75,13 @@ echo "            docker stop flowise"                     | tee -a /home/ashok/
 echo " Also, check all containers available, as:"
 echo "             docker ps -a "                          | tee -a /home/ashok/info.log
 sleep 4
+
+# Ref: https://docs.langflow.org/Deployment/deployment-docker
+netstat -aunt grep 7860
+git clone https://github.com/langflow-ai/langflow.git
+cd langflow/docker_example
+docker-compose up
+netstat -aunt | grep 7860
 
 
 # Move script file to done folder
