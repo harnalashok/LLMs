@@ -106,15 +106,15 @@ echo "docker-compose down"                               >> /home/ashok/stop_lan
 cd ~/
 chmod +x *.sh
 mv /home/ashok/script4.sh /home/ashok/done
-mv /home/ashok/next/script5.sh  /home/ashok/
+mv /home/ashok/next/script7.sh  /home/ashok/
 
-bash script5.sh
+bash script7.sh
 
 
 #echo " "
 #echo "You can now test installation, as below."
 #echo "Will shut down Ubuntu console, then open and execute:"
-#echo "    ./script5.sh"
+#echo "    ./script7.sh"
 #exec sleep 8
 #echo " "
 #exit
