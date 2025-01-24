@@ -143,7 +143,7 @@ mv /home/ashok/next/script2.sh /home/ashok/
 # Shut down ubuntu
 echo " "
 echo "*******"
-echo "Ubuntu terminal will be closed."
+echo "Close Ubuntu terminal."
 echo "Reopen it after it closes, and then execute the command:"
 echo "     ./script2.sh"
 echo "*******"
