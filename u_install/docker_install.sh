@@ -97,12 +97,11 @@ echo " "                                                             | tee -a /h
 mv /home/ashok/docker_install.sh /home/ashok/done
 mv /home/ashok/next/script3.sh  /home/ashok/
 
-echo "Close your terminal"
-echo "Reopen it and then execute:"
+echo "Machine will be rebooted "
+echo "After restart, execute:"
 echo "    ./script3.sh"
 sleep 10
-kill $PPID
-
+reboot
 
 
 
