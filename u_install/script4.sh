@@ -97,7 +97,7 @@ netstat -aunt | grep 7860
 
 echo "cd /home/ashok/langflow/docker_example"            >> /home/ashok/start_langflow.sh
 echo "docker-compose up"                                 >> /home/ashok/start_langflow.sh
-echo "cd /home/ashok/Flowise"                            >> /home/ashok/stop_langflow.sh
+echo "cd /home/ashok/langflow/docker_example"            >> /home/ashok/start_langflow.sh
 echo "docker-compose down"                               >> /home/ashok/stop_langflow.sh
 
 
