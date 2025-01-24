@@ -60,11 +60,20 @@ echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
 
 sleep 3
 
-
+# Install Flowise through docker"
+echo "Installing flowise docker"                            | tee -a /home/ashok/info.log
+cd ~/
 git clone https://github.com/FlowiseAI/Flowise.git
 cd Flowise/
 docker build --no-cache -t flowise .
 docker run -d --name flowise -p 3000:3000 flowise
+echo "In future to start/stop containers, proceed, as:"
+echo "            cd /home/ashok/Flowise"                  | tee -a /home/ashok/info.log
+echo "            docker start flowise"                    | tee -a /home/ashok/info.log
+echo "            docker stop flowise"                     | tee -a /home/ashok/info.log
+echo " Also, check all containers available, as:"
+echo "             docker ps -a "                          | tee -a /home/ashok/info.log
+sleep 4
 
 
 # Move script file to done folder
