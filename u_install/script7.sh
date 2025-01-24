@@ -57,17 +57,9 @@ echo "*********"  | tee -a /home/ashok/error.log
 # Move scripts
 mv /home/ashok/script7.sh  /home/ashok/done/
 mv /home/ashok/next/script8.sh  /home/ashok/
-
- 
-
   
 # Move script file to done folder
 mv /home/ashok/script6.sh /home/ashok/done
 mv /home/ashok/next/script7.sh /home/ashok/
 
-echo "  "
-echo "Will shut down Ubuntu console"
-echo "----------"
-echo " "
-exec sleep 9
-exit
+
