@@ -90,6 +90,9 @@ eecho "------ "                                | tee -a /home/ashok/error.log
 #  TO START CHROMA AS a SERVICE
 #*********************************
 cd ~/
+sudo touch     /var/log/chroma.log
+sudo chmod 777 /var/log/chroma.log
+
 echo '[Unit]'                       > chroma.service
 echo "Description = Chroma Service" >> chroma.service
 echo "After = network.target"       >> chroma.service
