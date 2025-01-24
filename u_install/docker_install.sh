@@ -92,17 +92,14 @@ echo "Docker installation process completed"                         | tee -a /h
 
 echo " "                                                             | tee -a /home/ashok/error.log
 
-echo "Machine will be rebooted in 9s"
-echo "Reopen it thereafter, and perform few tests"
-echo "with script4.sh"
-echo " "
-
 
 # Move script file to done folder
 mv /home/ashok/docker_install.sh /home/ashok/done
 mv /home/ashok/next/script3.sh  /home/ashok/
 
 echo "Close your terminal"
+echo "Reopen it and then execute:"
+echo "    ./script3.sh"
 sleep 10
 kill $PPID
 
