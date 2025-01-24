@@ -52,6 +52,10 @@ echo "*********"  | tee -a /home/ashok/error.log
  echo "Installation of  llama-cpp-python done" | tee -a /home/ashok/info.log
  echo "Activate virtual environment as: source /home/ashok/llama/bin/activate "   | tee -a /home/ashok/info.log
  echo "*********"  | tee -a /home/ashok/info.log
+# llama-cpp-python template
+echo "source /home/ashok/llama/bin/activate" | tee -a /home/ashok/llama_cpp_template.sh
+echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/llama_cpp_template.sh       
+ 
  sleep 9
 
 # Move scripts
