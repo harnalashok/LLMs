@@ -80,7 +80,7 @@ echo "Access it at localhost:8000/docs"  | tee -a /home/ashok/info.log
 echo  "*********"  | tee -a /home/ashok/error.log
 
 sleep 9
-
+source /home/ashok/llama/bin/activate 
 python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & 
 echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & "   | tee -a /home/ashok/info.log
 echo " "  | tee -a /home/ashok/error.log
