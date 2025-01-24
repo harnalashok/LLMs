@@ -50,6 +50,8 @@ echo "Run langflow, as:"                                     | tee -a /home/asho
 echo "        uv run langflow run"                           | tee -a /home/ashok/info.log
 echo "---------- "                                           | tee -a /home/ashok/info.log
 echo "  "                                                    | tee -a /home/ashok/info.log
+echo "source .venv/bin/activate"                             | tee -a /home/ashok/langflow_start.sh
+echo "uv run langflow run"                                   | tee -a /home/ashok/langflow_start.sh
 sleep 2
 
 # 2.1 Install Flowise as NORMAL user
