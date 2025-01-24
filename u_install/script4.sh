@@ -102,6 +102,7 @@ echo "docker-compose down"                               >> /home/ashok/stop_lan
 
 
 # Move script file to done folder
+cd ~/
 chmod +x *.sh
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/script5.sh  /home/ashok/
