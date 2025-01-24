@@ -58,13 +58,14 @@ mkdir /home/ashok/milvus
 mv standalone_embed.sh /home/ashok/milvus/
 echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
 
-echo "Ports used are: 9091 and 19530."  >> /home/ashok/start_milvus.sh
+echo "Ports are: 9091 and 19530."       >> /home/ashok/start_milvus.sh
 echo "cd /home/ashok/milvus"            >> /home/ashok/start_milvus.sh
 echo "bash standalone_embed.sh start"   >> /home/ashok/start_milvus.sh
 
 echo "Ports are: 9091 and 19530."       >> /home/ashok/stop_milvus.sh
 echo "cd /home/ashok/milvus"            >> /home/ashok/stop_milvus.sh
 echo "bash standalone_embed.sh stop"    >> /home/ashok/stop_milvus.sh
+
 echo "cd /home/ashok/milvus"            >> /home/ashok/delete_milvus_db.sh
 echo "bash standalone_embed.sh delete"  >> /home/ashok/delete_milvus_db.sh
 sleep 3
