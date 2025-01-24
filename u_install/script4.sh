@@ -90,6 +90,7 @@ sleep 4
 
 # Ref: https://docs.langflow.org/Deployment/deployment-docker
 echo "Installing langflow docker"                     | tee -a /home/ashok/info.log
+cd /home/ashok/
 git clone https://github.com/langflow-ai/langflow.git
 cd langflow/docker_example
 sudo docker-compose up
