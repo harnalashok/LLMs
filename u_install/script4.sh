@@ -72,7 +72,7 @@ sleep 3
 
 # Install Flowise through docker"
 # Ref: https://docs.flowiseai.com/getting-started
-echo "Installing flowise docker"                            | tee -a /home/ashok/info.log
+echo "Installing flowise docker"                          | tee -a /home/ashok/info.log
 cd ~/
 git clone https://github.com/FlowiseAI/Flowise.git
 cd Flowise/
