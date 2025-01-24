@@ -93,20 +93,28 @@ echo "docker stop flowise"                                >> /home/ashok/stop_fl
 sleep 4
 
 # Ref: https://docs.langflow.org/Deployment/deployment-docker
-echo "Installing langflow docker"                     | tee -a /home/ashok/info.log
+echo "Installing langflow docker"                         | tee -a /home/ashok/info.log
 cd /home/ashok/
 git clone https://github.com/langflow-ai/langflow.git
 cd langflow/docker_example
 sudo docker-compose up -d
 netstat -aunt | grep 7860
 
-echo "echo 'langflow port 7860 onstarting'"                       >> /home/ashok/start_langflow.sh
+echo "echo 'langflow port 7860 onstarting'"                >> /home/ashok/start_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/start_langflow.sh
-echo "docker-compose up -d"                                   >> /home/ashok/start_langflow.sh
+echo "docker-compose up -d"                                >> /home/ashok/start_langflow.sh
 
-echo "echo 'langflow port: 7860'"                                 >> /home/ashok/stop_langflow.sh
+echo "echo 'langflow port: 7860'"                          >> /home/ashok/stop_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/stop_langflow.sh
 echo "docker-compose down"                                 >> /home/ashok/stop_langflow.sh
+
+# Installing portrainer
+cd ~/
+mkdir /home/ashok/portainer
+cd /home/ashok/portainer/
+sudo docker volume create portainer_data
+sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+cd ~/
 
 
 # Move script file to done folder
