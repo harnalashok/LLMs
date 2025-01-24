@@ -57,14 +57,16 @@ echo "--------------------"                                  | tee -a /home/asho
 mkdir /home/ashok/milvus
 mv standalone_embed.sh /home/ashok/milvus/
 echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
+
+echo "Ports used are: 9091 and 19530."  >> /home/ashok/start_milvus.sh
 echo "cd /home/ashok/milvus"            >> /home/ashok/start_milvus.sh
 echo "bash standalone_embed.sh start"   >> /home/ashok/start_milvus.sh
+
+echo "Ports are: 9091 and 19530."       >> /home/ashok/stop_milvus.sh
 echo "cd /home/ashok/milvus"            >> /home/ashok/stop_milvus.sh
 echo "bash standalone_embed.sh stop"    >> /home/ashok/stop_milvus.sh
 echo "cd /home/ashok/milvus"            >> /home/ashok/delete_milvus_db.sh
 echo "bash standalone_embed.sh delete"  >> /home/ashok/delete_milvus_db.sh
-
-
 sleep 3
 
 # Install Flowise through docker"
@@ -82,10 +84,11 @@ echo "            docker stop flowise"                     | tee -a /home/ashok/
 echo " Also, check all containers available, as:"
 echo "             docker ps -a "                          | tee -a /home/ashok/info.log
 
-echo "cd /home/ashok/Flowise"            >> /home/ashok/start_flowise.sh
-echo "docker start flowise"              >> /home/ashok/start_flowise.sh
-echo "cd /home/ashok/Flowise"            >> /home/ashok/stop_flowise.sh
-echo "docker stop flowise"               >> /home/ashok/stop_flowise.sh
+echo "Flowise port 3000 onstarting"                       >> /home/ashok/start_flowise.sh
+echo "cd /home/ashok/Flowise"                             >> /home/ashok/start_flowise.sh
+echo "docker start flowise"                               >> /home/ashok/start_flowise.sh
+echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop_flowise.sh
+echo "docker stop flowise"                                >> /home/ashok/stop_flowise.sh
 sleep 4
 
 # Ref: https://docs.langflow.org/Deployment/deployment-docker
@@ -96,10 +99,13 @@ cd langflow/docker_example
 sudo docker-compose up
 netstat -aunt | grep 7860
 
-echo "cd /home/ashok/langflow/docker_example"            >> /home/ashok/start_langflow.sh
-echo "docker-compose up"                                 >> /home/ashok/start_langflow.sh
-echo "cd /home/ashok/langflow/docker_example"            >> /home/ashok/start_langflow.sh
-echo "docker-compose down"                               >> /home/ashok/stop_langflow.sh
+echo "langflow port 7860 onstarting"                       >> /home/ashok/start_langflow.sh
+echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/start_langflow.sh
+echo "docker-compose up"                                   >> /home/ashok/start_langflow.sh
+
+echo "langflow port: 7860"                                 >> /home/ashok/stop_langflow.sh
+echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/stop_langflow.sh
+echo "docker-compose down"                                 >> /home/ashok/stop_langflow.sh
 
 
 # Move script file to done folder
