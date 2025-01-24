@@ -57,6 +57,13 @@ echo "--------------------"                                  | tee -a /home/asho
 mkdir /home/ashok/milvus
 mv standalone_embed.sh /home/ashok/milvus/
 echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
+echo "cd /home/ashok/milvus"            >> /home/ashok/start_milvus.sh
+echo "bash standalone_embed.sh start"   >> /home/ashok/start_milvus.sh
+echo "cd /home/ashok/milvus"            >> /home/ashok/stop_milvus.sh
+echo "bash standalone_embed.sh stop"    >> /home/ashok/stop_milvus.sh
+echo "cd /home/ashok/milvus"            >> /home/ashok/delete_milvus_db.sh
+echo "bash standalone_embed.sh delete"  >> /home/ashok/delete_milvus_db.sh
+
 
 sleep 3
 
@@ -74,17 +81,28 @@ echo "            docker start flowise"                    | tee -a /home/ashok/
 echo "            docker stop flowise"                     | tee -a /home/ashok/info.log
 echo " Also, check all containers available, as:"
 echo "             docker ps -a "                          | tee -a /home/ashok/info.log
+
+echo "cd /home/ashok/Flowise"            >> /home/ashok/start_flowise.sh
+echo "docker start flowise"              >> /home/ashok/start_flowise.sh
+echo "cd /home/ashok/Flowise"            >> /home/ashok/stop_flowise.sh
+echo "docker stop flowise"               >> /home/ashok/stop_flowise.sh
 sleep 4
 
 # Ref: https://docs.langflow.org/Deployment/deployment-docker
-netstat -aunt grep 7860
+echo "Installing langflow docker"                     | tee -a /home/ashok/info.log
 git clone https://github.com/langflow-ai/langflow.git
 cd langflow/docker_example
 docker-compose up
 netstat -aunt | grep 7860
 
+echo "cd /home/ashok/langflow/docker_example"            >> /home/ashok/start_langflow.sh
+echo "docker-compose up"                                 >> /home/ashok/start_langflow.sh
+echo "cd /home/ashok/Flowise"                            >> /home/ashok/stop_langflow.sh
+echo "docker-compose down"                               >> /home/ashok/stop_langflow.sh
+
 
 # Move script file to done folder
+chmod +x *.sh
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/script5.sh  /home/ashok/
 
