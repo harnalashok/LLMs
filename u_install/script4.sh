@@ -97,12 +97,12 @@ echo "Installing langflow docker"                     | tee -a /home/ashok/info.
 cd /home/ashok/
 git clone https://github.com/langflow-ai/langflow.git
 cd langflow/docker_example
-sudo docker-compose up
+sudo docker-compose up -d
 netstat -aunt | grep 7860
 
 echo "langflow port 7860 onstarting"                       >> /home/ashok/start_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/start_langflow.sh
-echo "docker-compose up"                                   >> /home/ashok/start_langflow.sh
+echo "docker-compose up -d"                                   >> /home/ashok/start_langflow.sh
 
 echo "langflow port: 7860"                                 >> /home/ashok/stop_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/stop_langflow.sh
