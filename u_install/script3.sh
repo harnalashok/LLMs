@@ -69,6 +69,7 @@ echo " "                                                    | tee -a /home/ashok
 echo "flowise installed"                                    | tee -a /home/ashok/info.log
 echo "flowise port is: 3000"                                | tee -a /home/ashok/info.log
 echo " "                                                    | tee -a /home/ashok/info.log
+echo "npx flowise start"                                    | tee -a /home/ashok/flowise_start.sh
 
 
 
