@@ -88,12 +88,12 @@ sleep 2
 mv /home/ashok/script3.sh  /home/ashok/done
 mv /home/ashok/next/script4.sh  /home/ashok/
 
-bash script4.sh
+#bash script4.sh
 
 #echo " "
-#echo "Will shut down Ubuntu console"
-#echo "Reopen it and install docker, as:"
-#echo "  sudo ./docker_install.sh"
+#echo "Shut down Ubuntu console"
+#echo "Reopen it and install  as:"
+#echo "  ./script4.sh"
 #echo "----------"
 #echo " "
 #exec sleep 10
