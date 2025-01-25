@@ -161,7 +161,7 @@ sleep 2
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
 mv /home/ashok/next/script2.sh /home/ashok/
-bash script2.sh
+#bash script2.sh
 
 
 # Shut down ubuntu
