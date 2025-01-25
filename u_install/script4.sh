@@ -140,7 +140,7 @@ echo "docker start portainer"                           >> /home/ashok/start_por
 cd ~/
 chmod +x *.sh
 mv /home/ashok/script4.sh /home/ashok/done
-mv /home/ashok/next/script7.sh  /home/ashok/
+mv /home/ashok/next/script5.sh  /home/ashok/
 
 #bash script5.sh
 
