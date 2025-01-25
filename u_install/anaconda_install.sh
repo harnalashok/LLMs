@@ -1,16 +1,17 @@
 #!/bin/bash
 
 
-echo "========script9=============="
-echo "Will install Anaconda"
+echo "========script=============="
+echo "Will install Anaconda through command line"
 echo "==========================="
 echo "  "
 echo " "
 
 echo "**************"
-echo "Be WARNED that Anaconda 'base' environment will hide
-echo "   your existing python environment(s)."
-echo "Deactivate base environment while using other "
+echo "Be WARNED creates a 'base' environment."
+echo "This environment hides your existing"
+echo "python environment(s)."
+echo "Deactivate 'base' environment while using other "
 echo " python environments with the command:"
 echo "      conda deactivate
 echo "**************"
