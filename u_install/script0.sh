@@ -119,7 +119,7 @@ mv /home/ashok/script0.sh  /home/ashok/done
 mv  /home/ashok/next/script1.sh  /home/ashok/
 
 # Execute the bnext script
-bash script1.sh
+#bash script1.sh
 
 #echo "Terminal will close."                              | tee -a /home/ashok/error.log
 #echo "Close it, if it does not close by itself"          | tee -a /home/ashok/error.log
