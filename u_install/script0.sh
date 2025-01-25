@@ -102,10 +102,6 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script5.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script6.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script7.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script8.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script9.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/download_models.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_llama_cpp_python.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_scripts.sh
