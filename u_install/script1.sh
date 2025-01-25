@@ -64,13 +64,20 @@ echo "No messages will appear on screen"
 echo "------"
 echo " "
 echo " "
-curl -fsSL https://ollama.com/install.sh | sh    2>> /home/ashok/error.log  
-echo "---------"                                 | tee -a /home/ashok/error.log
-echo "Ollama installed"                          | tee -a /home/ashok/error.log
-echo "9. Ollama installed"                       | tee -a /home/ashok/info.log
-echo "   ollama listens at port: 11434"          | tee -a /home/ashok/info.log
-echo "-----------"                               | tee -a /home/ashok/error.log
-echo " "                                         | tee -a /home/ashok/error.log
+curl -fsSL https://ollama.com/install.sh | sh       2>> /home/ashok/error.log  
+echo "---------"                                    | tee -a /home/ashok/error.log
+echo "Ollama installed"                             | tee -a /home/ashok/error.log
+echo "9. Ollama installed"                          | tee -a /home/ashok/info.log
+echo "   ollama listens at port: 11434"             | tee -a /home/ashok/info.log
+echo "-----------"                                  | tee -a /home/ashok/error.log
+echo " "                                            | tee -a /home/ashok/error.log
+echo "You may start ollama in the background, as:"  | tee -a /home/ashok/info.log
+echo "    ollama serve &  > /dev/null & "           | tee -a /home/ashok/info.log
+echo "Or, as:"                                      | tee -a /home/ashok/info.log
+echo "sudo systemctl start|stop|restart ollama"     | tee -a /home/ashok/info.log  
+
+
+
 sleep 2
 
 

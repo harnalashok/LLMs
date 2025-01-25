@@ -26,46 +26,11 @@ if netstat -aunt   |  grep '11434'; then
    echo " "      | tee -a /home/ashok/error.log
  else  
     # Download ollama nomic-embed-text
-    # Start ollama in background
-    echo " "    | tee -a /home/ashok/error.log
-    echo "-----------"    | tee -a /home/ashok/error.log
-    echo "Starting ollama in background"    | tee -a /home/ashok/error.log
-    echo "---------"    | tee -a /home/ashok/error.log
-    echo " "    | tee -a /home/ashok/error.log
-    ollama serve &  > /dev/null &
-	echo "You may also start ollama, as: "     | tee -a /home/ashok/info.log
-	echo "    ollama serve &  > /dev/null & "     | tee -a /home/ashok/info.log
-	
+    
 fi
 
-echo " "    | tee -a /home/ashok/error.log
-echo " Pulling text-embedding model for ollama"    | tee -a /home/ashok/error.log
-echo " "    | tee -a /home/ashok/error.log
-echo "--------- "    | tee -a /home/ashok/error.log
 
-ollama pull nomic-embed-text  2>> /home/ashok/error.log
-sleep 2
-echo "nomic-embed-text pulled"   | tee -a /home/ashok/error.log
-echo "------- "    | tee -a /home/ashok/error.log
-echo "nomic-embed-text pulled"   | tee -a /home/ashok/info.log
-echo "------- "    | tee -a /home/ashok/info.log
-echo " "    | tee -a /home/ashok/info.log
 
-echo " "    | tee -a /home/ashok/error.log
-echo "Will pull olom2 model, next. File size: 4.5gb"  | tee -a /home/ashok/error.log
-read -p "Shall I go ahead and pull olom2 model (yY/nN? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    echo " "    | tee -a /home/ashok/error.log
-    echo "OK. Pulling olomo2 model"    | tee -a /home/ashok/error.log
-    ollama pull olmo2  2>> /home/ashok/error.log
-	sleep 2
-	echo "olmo2  pulled"   | tee -a /home/ashok/info.log
-    echo "------- "    | tee -a /home/ashok/info.log
-    echo " "    | tee -a /home/ashok/info.log
-	sleep 5
-fi
 
 # Move script file to done folder
 mv /home/ashok/script7.sh  /home/ashok/done

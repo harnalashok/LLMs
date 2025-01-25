@@ -32,6 +32,18 @@ else
 fi
 
 
+
+echo "========script4=============="
+echo "Will install Milvus vectordb docker"
+echo "Will install Flowise docker"
+echo "Will install langflow docker"
+echo "Will install portainer docker"
+echo "Will prepare start script for each"
+echo "Will call script5.sh"
+echo "==========================="
+sleep 10
+
+
 # Milvus install
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
@@ -92,6 +104,8 @@ echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop_fl
 echo "docker stop flowise"                                >> /home/ashok/stop_flowise.sh
 sleep 4
 
+
+
 # Ref: https://docs.langflow.org/Deployment/deployment-docker
 echo "Installing langflow docker"                         | tee -a /home/ashok/info.log
 cd /home/ashok/
@@ -109,12 +123,17 @@ echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/stop_l
 echo "docker-compose down"                                 >> /home/ashok/stop_langflow.sh
 
 # Installing portrainer
+echo "Installinh portrainer docker in directory portrainer"  | tee -a /home/ashok/info.log
 cd ~/
 mkdir /home/ashok/portainer
 cd /home/ashok/portainer/
 sudo docker volume create portainer_data
+# This is one long line command
 sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
 cd ~/
+# Script to start portainer container
+echo "cd /home/ashok/portainer/"                        >> /home/ashok/start_portainer.sh
+echo "docker start portainer"                           >> /home/ashok/start_portainer.sh
 
 
 # Move script file to done folder
@@ -123,7 +142,7 @@ chmod +x *.sh
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/script7.sh  /home/ashok/
 
-bash script7.sh
+bash script5.sh
 
 
 #echo " "
