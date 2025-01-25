@@ -47,7 +47,7 @@ sleep 10
 
 
 # Check user and hostnames
-if [[ `hostname` != 'master' ]]; then
+if [[ `hostname` != 'ashok' ]]; then
     echo "First change host name to 'master'"   |  tee -a /home/ashok/error.log
     sleep 9
     exit
