@@ -142,7 +142,7 @@ chmod +x *.sh
 mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/script7.sh  /home/ashok/
 
-bash script5.sh
+#bash script5.sh
 
 
 #echo " "
