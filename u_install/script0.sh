@@ -34,6 +34,16 @@
 
 #------ Steps ---------
 
+echo "========script0=============="
+echo "Hostname must be 'master'"
+echo "User name must be 'ashok'"
+echo "Will check these."
+echo "Will download all scripts and place them in the 'next' folder"
+echo "Any scripts executed will be placed in 'done' folder"
+echo "Will call script1.sh"
+echo "==========================="
+sleep 10
+
 
 
 # Check user and hostnames

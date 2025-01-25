@@ -24,6 +24,18 @@
 #   sudo ./docker_install.sh
 
 
+
+echo "========script2=============="
+echo "Will install docker engine using snap"
+echo "Will reboot machine"
+echo "Call ./script3.sh after rebooting"
+echo "==========================="
+sleep 10
+
+
+
+
+
 cd ~
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log

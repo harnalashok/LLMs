@@ -18,6 +18,20 @@
 # This file is called by script0.sh
 
 
+echo "========script1=============="
+echo "Will update Ubuntu"
+echo "Will install necessary packages"
+echo "Will install Ollama quietly"
+echo "Will install Fast Node Manager (fnm)"
+echo "Will install chromadb"
+echo "Will install uv for langflow install"
+echo "Will call script2.sh"
+echo "==========================="
+sleep 10
+
+
+
+
 echo " "                                       | tee -a /home/ashok/error.log
 echo "*********"                               | tee -a /home/ashok/error.log
 echo "Script: script1.sh"                      | tee -a /home/ashok/error.log
@@ -140,7 +154,7 @@ sleep 2
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
 mv /home/ashok/next/script2.sh /home/ashok/
-#bash script2.sh
+bash script2.sh
 
 
 # Shut down ubuntu

@@ -15,6 +15,16 @@
 #     script7.sh
 
 
+
+
+echo "========script3=============="
+echo "Will install langflow using uv (but in virtual environment)"
+echo "Will install Flowise directly using npm"
+echo "Will call script4.sh"
+echo "==========================="
+sleep 10
+
+
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log
 echo "Script: script3.sh"                     | tee -a /home/ashok/error.log

@@ -16,6 +16,16 @@
 #     script7.sh
 
 
+
+
+echo "========script2=============="
+echo "Will install llama.cpp directly"
+echo "Will install Node.js"
+echo "Will call docker_install.sh as sudo user"
+echo "==========================="
+sleep 10
+
+
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log
 echo "Script: script2.sh"                     | tee -a /home/ashok/error.log
