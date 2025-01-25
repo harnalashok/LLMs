@@ -1,4 +1,4 @@
-# Test scripts
+# Test llama_cpp_python
 
 # These sscripts run in sequence.
 #     script0.sh
@@ -11,12 +11,13 @@
 #     script6.sh
 #     script7.sh
 
-echo " " | tee -a /home/ashok/error.log
-echo "*********"  | tee -a /home/ashok/error.log
-echo "Script: script8.sh"  | tee -a /home/ashok/error.log
-echo "**********" | tee -a /home/ashok/error.log
-echo " " | tee -a /home/ashok/error.log
+echo " "                                          | tee -a /home/ashok/info.log
+echo "*********"                                  | tee -a /home/ashok/info.log
+echo "Script: test_llama_cpp_python.sh"           | tee -a /home/ashok/info.log
+echo "**********"                                 | tee -a /home/ashok/info.log
+echo " "                                          | tee -a /home/ashok/info.log
 
+# If required
 # conda deactivate
 
 echo "Will test llama-cpp-python now"                      | tee -a /home/ashok/info.log
