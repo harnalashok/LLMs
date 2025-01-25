@@ -66,21 +66,21 @@ echo "uv run langflow run"                                   | tee -a /home/asho
 sleep 2
 
 # 2.1 Install Flowise as NORMAL user
-echo " "
-echo "Installing flowvise...Takes time..."                  | tee -a /home/ashok/error.log
-echo "------"                                               | tee -a /home/ashok/error.log
-echo " "                                                    | tee -a /home/ashok/error.log
-sleep 2
+#echo " "
+#echo "Installing flowvise...Takes time..."                  | tee -a /home/ashok/error.log
+#echo "------"                                               | tee -a /home/ashok/error.log
+#echo " "                                                    | tee -a /home/ashok/error.log
+#sleep 2
 
-npm install -g flowise  2>> /home/ashok/error.log
-echo " "
-echo " "                                                    | tee -a /home/ashok/error.log
-echo "flowise installed"                                    | tee -a /home/ashok/error.log
-echo " "                                                    | tee -a /home/ashok/error.log
-echo "flowise installed"                                    | tee -a /home/ashok/info.log
-echo "flowise port is: 3000"                                | tee -a /home/ashok/info.log
-echo " "                                                    | tee -a /home/ashok/info.log
-echo "npx flowise start"                                    | tee -a /home/ashok/flowise_start.sh
+#npm install -g flowise  2>> /home/ashok/error.log
+#echo " "
+#echo " "                                                    | tee -a /home/ashok/error.log
+#echo "flowise installed"                                    | tee -a /home/ashok/error.log
+#echo " "                                                    | tee -a /home/ashok/error.log
+#echo "flowise installed"                                    | tee -a /home/ashok/info.log
+#echo "flowise port is: 3000"                                | tee -a /home/ashok/info.log
+#echo " "                                                    | tee -a /home/ashok/info.log
+#echo "npx flowise start"                                    | tee -a /home/ashok/flowise_start.sh
 
 
 
