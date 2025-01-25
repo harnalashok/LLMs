@@ -71,18 +71,18 @@ echo "-------"                                  | tee -a /home/ashok/error.log
 
 
 # 1.2 download and install Node.js
-echo " "                                       | tee -a /home/ashok/error.log
-echo "-------"                                 | tee -a /home/ashok/error.log
-echo "Installing Node.js ver 20......"         | tee -a /home/ashok/error.log
-echo "-------"                                 | tee -a /home/ashok/error.log
-fnm use --install-if-missing 20                2>> /home/ashok/error.log
-echo " "                                       | tee -a /home/ashok/error.log
-echo "Node.js installed"                       | tee -a /home/ashok/error.log
-echo "11. Node.js installed"                   | tee -a /home/ashok/error.log
-echo "------------"                            | tee -a /home/ashok/error.log
-echo "  "                                      | tee -a /home/ashok/error.log
+#echo " "                                       | tee -a /home/ashok/error.log
+#echo "-------"                                 | tee -a /home/ashok/error.log
+#echo "Installing Node.js ver 20......"         | tee -a /home/ashok/error.log
+#echo "-------"                                 | tee -a /home/ashok/error.log
+#fnm use --install-if-missing 20                2>> /home/ashok/error.log
+#echo " "                                       | tee -a /home/ashok/error.log
+#echo "Node.js installed"                       | tee -a /home/ashok/error.log
+#echo "11. Node.js installed"                   | tee -a /home/ashok/error.log
+#echo "------------"                            | tee -a /home/ashok/error.log
+#echo "  "                                      | tee -a /home/ashok/error.log
 
-sleep 2
+#sleep 2
 
 # Move script file to done folder
 mv /home/ashok/script2.sh /home/ashok/done
