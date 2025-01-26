@@ -21,4 +21,29 @@ docker ps
 
 docker ps -a
 
+Notable ports:
+	a. 11434	ollama
+	b. 8000		chromadb
+	c. 3000		flowise
+	d. 9091 & 19530 milvus
+	e. 7860		langflow
+	f. 8080		llama.cpp
+	g. 8000		llama-cpp-python
+  h. 8000   docker-pr (part of docker portainer) 
+
+
+Start
+	ollama		         sudo systemctl start ollama
+	flowise		         ./flowise_start.sh
+                     ./start_flowise.sh   (for docker)
+  langflow           ./langflow_start.sh
+                     ./start_langflow.sh  (for docker)
+  chromadb
+                     ./start_chroma.sh
+  milvus             ./start_milvus
+  portainer          ./start_portainer.sh
+  llama.cpp server   ./llamacpp_server.sh
+  llama_cpp_python   ./llama_cpp_template.sh
+  
+
 ###########################33
