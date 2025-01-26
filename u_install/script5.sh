@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # LAst amended: 17th Jan, 2025
 # Ref: https://www.server-world.info/en/note?os=Ubuntu_22.04&p=llama&f=1
