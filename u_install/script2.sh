@@ -89,7 +89,7 @@ echo "-------"                                  | tee -a /home/ashok/error.log
 mv /home/ashok/script2.sh /home/ashok/done
 mv /home/ashok/next/docker_install.sh /home/ashok/
 
-sudo bash docker_install.sh
+# sudo bash docker_install.sh
 
 
 
