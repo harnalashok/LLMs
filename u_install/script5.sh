@@ -33,8 +33,6 @@ echo "Script: script5.sh"  | tee -a /home/ashok/error.log
 echo "**********" | tee -a /home/ashok/error.log
 echo " " | tee -a /home/ashok/error.log
 
-#conda  deactivate
-
 # Install required packages:
 echo "Installing dependencies " | tee -a /home/ashok/error.log
 echo "*********"  | tee -a /home/ashok/error.log
@@ -49,12 +47,16 @@ echo " "  | tee -a /home/ashok/error.log
 echo "Installing llama-cpp-python " | tee -a /home/ashok/error.log
 echo "*********"  | tee -a /home/ashok/error.log
 
+# Remove any venv, if it exists:
+rm -rf /home/ashok/llama 
 # Creating virtual environment
  python3 -m venv --system-site-packages /home/ashok/llama 
  # Activating virtual envitronment
  source /home/ashok/llama/bin/activate 
  # Install [llama-cpp-python]. 
  pip3 install llama-cpp-python[server] 
+ sleep 2
+ deactivate
  echo " "  | tee -a /home/ashok/error.log
  echo "Installation of  llama-cpp-python done" | tee -a /home/ashok/error.log
  echo "*********"  | tee -a /home/ashok/error.log
@@ -63,9 +65,9 @@ echo "*********"  | tee -a /home/ashok/error.log
  echo "Activate virtual environment as: source /home/ashok/llama/bin/activate "   | tee -a /home/ashok/info.log
  echo "*********"  | tee -a /home/ashok/info.log
 # llama-cpp-python template
-echo "source /home/ashok/llama/bin/activate" | tee -a /home/ashok/llama_cpp_template.sh
+echo "source /home/ashok/llama/bin/activate" > tee -a /home/ashok/llama_cpp_template.sh
 echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/llama_cpp_template.sh       
- 
+chmod +x  
  sleep 9
 
 # Move scripts
