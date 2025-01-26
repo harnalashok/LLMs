@@ -89,9 +89,6 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 
 echo "  "
 echo "Script files downloaded....."
-echo "Wait..You will have to supply password..."
-
-
 
 
 # Doc to Unix conversion
@@ -113,21 +110,11 @@ chmod +x /home/ashok/next/*.sh
 
 # Move script file to 'done' folder
 mv /home/ashok/script0.sh  /home/ashok/done
-
-
 # Bring in the next file
 mv  /home/ashok/next/script1.sh  /home/ashok/
 
+
 # Execute the bnext script
-#bash script1.sh
-
-#echo "Terminal will close."                              | tee -a /home/ashok/error.log
-#echo "Close it, if it does not close by itself"          | tee -a /home/ashok/error.log
-#echo "Open it again, and issue the following command:"   | tee -a /home/ashok/error.log
-#echo "   /home/ashok/script1.sh"                         | tee -a /home/ashok/error.log
-#exec sleep 2
-#exit 
-
-
+bash script1.sh
 
 
