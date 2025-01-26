@@ -16,7 +16,7 @@
 
 
 echo "========script5=============="
-echo "Will install llama-cpp-python"
+echo "Will install llama-cpp-python in a new python env"
 echo "Will prepare a sample start script for it"
 echo "Will call no other script.sh"
 echo "==========================="
