@@ -28,7 +28,7 @@ Notable ports:
 	d. 9091 & 19530 milvus
 	e. 7860		langflow
 	f. 8080		llama.cpp
-	g. 8000		llama-cpp-python
+	g. 8000		llama-cpp-python   (port can be changed)
         h. 8000         docker-pr (part of docker portainer)
         i  9443         portainer; https://127.0.0.1:9443
 
