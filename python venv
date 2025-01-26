@@ -79,7 +79,10 @@ use the virtual environment during subsequent invocations.
           uv venv
           # Install a package in the new virtual environment
           uv pip install ruff
-You can also activate a uv evironment,as:
+uv pip install, behind the scenes activates the environment, installs pip package
+and then deactivates it. There is no need to deactivate the environment when using uv.
+
+You can also explicitly activate a uv evironment,as:
 
           source .venv/bin/activate
 
