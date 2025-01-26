@@ -1,3 +1,6 @@
+Pyhton Virtual Environments
+============================
+
 Virtual environments in python can be created using conda, uv or simply python.
 Virtual environments are directories that contain all necessary python packages
 to work on a project. Simple python command to create a virtual environment is:
@@ -22,17 +25,10 @@ And deactivate it, with simple command:
 
           deactivate
 
-uv also creates oython environment, as:
-
-uv venv 
-
-ashok@ashok:~$ uv venv ~/abc/def/hjk
-Using CPython 3.10.12 interpreter at: /usr/bin/python3
-Creating virtual environment at: abc/def/hjk
-Activate with: source abc/def/hjk/bin/activate
-
-
           ashok@ashok:~$  python3 -m venv path/to/package/name
+
+You can explore what is under name/ folder, as:
+
           ashok@ashok:~$ ls -la ~/path/to/package/name/
           total 24
           drwxr-xr-x 5 ashok ashok 4096 Jan 26 13:40 .
@@ -42,10 +38,30 @@ Activate with: source abc/def/hjk/bin/activate
           drwxr-xr-x 3 ashok ashok 4096 Jan 26 13:40 lib
           lrwxrwxrwx 1 ashok ashok    3 Jan 26 13:40 lib64 -> lib
           -rw-r--r-- 1 ashok ashok   71 Jan 26 13:40 pyvenv.cfg
+
+And here is the content of .cfg file.
+
           ashok@ashok:~$ cat ~/path/to/package/name/pyvenv.cfg
           home = /usr/bin
           include-system-site-packages = false
           version = 3.10.12
+
+uv also creates python environment, as:
+
+          uv venv 
+This creates a python environment at folder .venv under the current path.
+You can specify the location, as:
+
+          ashok@ashok:~$ uv venv ~/abc/def/hjk
+          Using CPython 3.10.12 interpreter at: /usr/bin/python3
+          Creating virtual environment at: abc/def/hjk
+          Activate with: source abc/def/hjk/bin/activate
+
+You can list all python environment under the home folder, as:
+
+          find ~ | grep /bin/activate
+
+Here is an example:
 
           ashok@ashok:~$ find ~ | grep /bin/activate
           /home/ashok/path/to/package/name/bin/activate.csh
@@ -62,5 +78,6 @@ Activate with: source abc/def/hjk/bin/activate
           /home/ashok/llama/bin/activate.fish
           /home/ashok/llama/bin/activate
 
+--------------------------------------
 
   
