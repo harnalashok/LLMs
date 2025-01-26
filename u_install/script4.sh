@@ -143,12 +143,13 @@ mv /home/ashok/script4.sh /home/ashok/done
 mv /home/ashok/next/script5.sh  /home/ashok/
 
 #bash script5.sh
+reboot
 
 
 #echo " "
 #echo "You can now test installation, as below."
 #echo "Will shut down Ubuntu console, then open and execute:"
-#echo "    ./script7.sh"
+#echo "    ./script5.sh"
 #exec sleep 8
 #echo " "
 #exit
