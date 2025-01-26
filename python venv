@@ -18,6 +18,19 @@ virtual environment, as:
 
         source /path/to/package/name/bin/activate
 
+And deactivate it, with simple command:
+
+          deactivate
+
+uv also creates oython environment, as:
+
+uv venv 
+
+ashok@ashok:~$ uv venv ~/abc/def/hjk
+Using CPython 3.10.12 interpreter at: /usr/bin/python3
+Creating virtual environment at: abc/def/hjk
+Activate with: source abc/def/hjk/bin/activate
+
 
           ashok@ashok:~$  python3 -m venv path/to/package/name
           ashok@ashok:~$ ls -la ~/path/to/package/name/
