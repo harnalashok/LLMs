@@ -60,5 +60,21 @@ xiv) Downloads *olmo2* from *ollama library*<br>
            last.sh
 </pre>
 
+<pre>
+   My WSL instalation has a number of folder paths with spaces. Putting 
+PATH=$PATH:/home/ashok/llama.cpp/build/bin
+PATH=$PATH:/home/ashok/.local/bin:/home/ashok/.local/bin:/run/user/1000/fnm_multishells/653_1737863874230/bin
+PATH=$PATH:/home/ashok/.local/share/fnm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+PATH=$PATH:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/windows/system32:/mnt/c/windows:/mnt/c/windows/System32/Wbem
+PATH=$PATH:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/'Program Files (x86)'/'NVIDIA Corporation'/PhysX/Common
+PATH=$PATH:/mnt/c/'Program Files'/'NVIDIA Corporation'/'NVIDIA NvDLISR':/mnt/c/Users/Administrator/AppData/Local/Microsoft/WindowsApps
+PATH=$PATH:/mnt/c/'Program Files'/HP/OMEN-Broadcast/Common:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem
+PATH=$PATH:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/'Program Files'/HP/'HP One Agent'
+PATH=$PATH:/mnt/c/'Program Files (x86)'/'Bitvise SSH Client':/mnt/c/Users/ashok/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/ashok/.lmstudio/bin
+PATH=$PATH:/snap/bin:/home/ashok/llama.cpp/build/bin:/home/ashok/milvus/
+
+   
+</pre>
+
 
 
