@@ -57,6 +57,11 @@ You can specify the location, as:
           Creating virtual environment at: abc/def/hjk
           Activate with: source abc/def/hjk/bin/activate
 
+By default, each time the command, uv venv is executed, earlier python
+environment is deleted. hthis default behaviour can be changed. See:
+
+          uv help venv
+
 You can list all python environment under the home folder, as:
 
           find ~ | grep /bin/activate
