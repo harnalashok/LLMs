@@ -57,7 +57,8 @@ sleep 2
 # Create a symlink to models and to gguf folder
 ln -s /home/ashok/llama.cpp/models/ /home/ashok/
 ln -s /home/ashok/llama.cpp/models/ /home/ashok/gguf
-
+echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/llamacpp_server.sh
+chmod +x /home/ashok/*.sh
 
 
 echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
