@@ -44,6 +44,22 @@ Start
   portainer          ./start_portainer.sh
   llama.cpp server   ./llamacpp_server.sh
   llama_cpp_python   ./llama_cpp_template.sh
+
+Installed software:
+	a. Anaconda
+	b. conda environment: langchain
+	c. langchain and llama-index
+	d. ollama
+	e. flowise
+	f. langflow
+	g. llama.cpp
+	h. llama-cpp-python
+	i  huggingface_hub
+	j. docker
+	k. chromadb
+	l. milvus vectordb
+	m. Node.js
+	n. Fast Node Manager (fnm)
   
 
 ###########################33
