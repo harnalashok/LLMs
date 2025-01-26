@@ -1,0 +1,24 @@
+# 26th Jan, 2025
+# Miscelleaneous help commands:
+
+# 1. If some service is listening on a port:
+
+netstat -aunt | grep 8000
+
+# 2. Which service is listening on a port
+
+sudo lsof -i:8000 -S
+
+# 3. Stop docker portainer container:
+
+docker stop portainer
+
+# 4. Show me running containers:
+
+docker ps
+
+# 5.0 Show me all containers:
+
+docker ps -a
+
+###########################33
