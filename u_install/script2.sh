@@ -21,7 +21,7 @@
 echo "========script2=============="
 echo "Will install llama.cpp directly"
 echo "Will install Node.js"
-echo "Will call docker_install.sh as sudo user"
+echo "Call docker_install.sh as sudo user"
 echo "==========================="
 sleep 10
 
