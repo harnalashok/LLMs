@@ -25,7 +25,7 @@ echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
 echo "Will install chromadb"
 echo "Will install uv for langflow install"
-echo "Will call script2.sh"
+echo "Reboot machine and call script2.sh"
 echo "==========================="
 sleep 10
 
@@ -165,13 +165,14 @@ sleep 2
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
 mv /home/ashok/next/script2.sh /home/ashok/
-#bash script2.sh
 
+# If not wsl, then
+reboot
 
-# Shut down ubuntu
+# Shut down wsl ubuntu
 echo " "
 echo "*******"
-echo "Close Ubuntu terminal."
+echo "Shut down Ubuntu terminal."
 echo "Reopen it after it closes, and then execute the command:"
 echo "     ./script2.sh"
 echo "*******"
