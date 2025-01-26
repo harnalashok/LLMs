@@ -47,11 +47,11 @@ sleep 10
 
 
 # Check user and hostnames
-if [[ `hostname` != 'ashok' ]]; then
-    echo "First change host name to 'master'"   |  tee -a /home/ashok/error.log
-    sleep 9
-    exit
-fi
+#if [[ `hostname` != 'master' ]]; then
+#    echo "First change host name to 'master'"   |  tee -a /home/ashok/error.log
+#    sleep 9
+#    exit
+#fi
 
 if [[ $USER != 'ashok' ]]; then
     echo "First change user name to 'ashok'"   |  tee -a /home/ashok/error.log
