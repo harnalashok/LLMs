@@ -143,6 +143,9 @@ echo "7. Check as: "                           | tee -a /home/ashok/info.log
 echo "      netstat -aunt | grep 8000"         | tee -a /home/ashok/info.log
 echo "----------"                              | tee -a /home/ashok/info.log
 echo " "                                       | tee -a /home/ashok/info.log
+echo "sudo systemctl start chroma"             | tee -a /home/ashok/start_chroma.sh
+echo "sudo systemctl stop chroma"              | tee -a /home/ashok/stop_chroma.sh
+chmod +x /home/ashok/*.sh
 sleep 2
 
 
