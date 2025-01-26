@@ -54,7 +54,8 @@ uv also creates python environment, as:
 
           uv venv 
 
-A specific name or path can be specified, e.g., to create a virtual environment at my-name:
+A specific name or path can be specified, e.g., to create a virtual environment 
+at my-name:
 
           uv venv my-name
 
@@ -68,8 +69,9 @@ You can specify the location, as:
           Creating virtual environment at: abc/def/hjk
           Activate with: source abc/def/hjk/bin/activate
 
-By default, each time the command, uv venv is executed, earlier default python
-environment is deleted. hthis default behaviour can be changed. See:
+By default, each time the command, 'uv venv' is executed, earlier default
+python environment is deleted. This default behaviour, however, can be changed. 
+See:
 
           uv help venv
 
@@ -93,7 +95,8 @@ uv will search for a virtual environment in the following order:
     ii)  An activated Conda environment based on the CONDA_PREFIX environment variable.
     iii) A virtual environment at .venv in the current directory, or in the nearest parent directory.
 
-If no virtual environment is found, uv will prompt the user to create one in the current directory via uv venv.
+If no virtual environment is found, uv will prompt the user to create one in the current directory 
+via 'uv venv'.
 
 List all python environments
 ===========================
