@@ -63,6 +63,7 @@ sleep 2
 
 uv venv
 uv pip install langflow  2>> /home/ashok/error.log
+deactivate
 sleep 2
 echo "  "                                    | tee -a /home/ashok/error.log
 echo "  "                                    | tee -a /home/ashok/info.log
