@@ -33,6 +33,26 @@ echo "**********"                             | tee -a /home/ashok/error.log
 echo " "                                      | tee -a /home/ashok/error.log
 
 
+# 2.1 Install Flowise as NORMAL user
+echo " "
+echo "Installing flowvise...Takes time..."                  | tee -a /home/ashok/error.log
+echo "------"                                               | tee -a /home/ashok/error.log
+echo " "                                                    | tee -a /home/ashok/error.log
+sleep 2
+
+npm install -g flowise  2>> /home/ashok/error.log
+echo " "
+echo " "                                                    | tee -a /home/ashok/error.log
+echo "flowise installed"                                    | tee -a /home/ashok/error.log
+echo " "                                                    | tee -a /home/ashok/error.log
+echo "flowise installed"                                    | tee -a /home/ashok/info.log
+echo "flowise port is: 3000"                                | tee -a /home/ashok/info.log
+echo " "                                                    | tee -a /home/ashok/info.log
+echo "npx flowise start"                                    | tee -a /home/ashok/flowise_start.sh
+chmod +x /home/ashok/*.sh
+
+
+
 # Install langflow
 echo " "                                      | tee -a /home/ashok/error.log
 echo "Installing langflow..."                 | tee -a /home/ashok/error.log
@@ -63,25 +83,8 @@ echo "---------- "                                           | tee -a /home/asho
 echo "  "                                                    | tee -a /home/ashok/info.log
 echo "source .venv/bin/activate"                             | tee -a /home/ashok/langflow_start.sh
 echo "uv run langflow run"                                   | tee -a /home/ashok/langflow_start.sh
+chmod +x /home/ashok/*.sh
 sleep 2
-
-# 2.1 Install Flowise as NORMAL user
-#echo " "
-#echo "Installing flowvise...Takes time..."                  | tee -a /home/ashok/error.log
-#echo "------"                                               | tee -a /home/ashok/error.log
-#echo " "                                                    | tee -a /home/ashok/error.log
-#sleep 2
-
-#npm install -g flowise  2>> /home/ashok/error.log
-#echo " "
-#echo " "                                                    | tee -a /home/ashok/error.log
-#echo "flowise installed"                                    | tee -a /home/ashok/error.log
-#echo " "                                                    | tee -a /home/ashok/error.log
-#echo "flowise installed"                                    | tee -a /home/ashok/info.log
-#echo "flowise port is: 3000"                                | tee -a /home/ashok/info.log
-#echo " "                                                    | tee -a /home/ashok/info.log
-#echo "npx flowise start"                                    | tee -a /home/ashok/flowise_start.sh
-
 
 
 # Move script file to done folder
@@ -90,13 +93,13 @@ mv /home/ashok/next/script4.sh  /home/ashok/
 
 #bash script4.sh
 
-#echo " "
-#echo "Shut down Ubuntu console"
-#echo "Reopen it and install  as:"
-#echo "  ./script4.sh"
-#echo "----------"
-#echo " "
-#exec sleep 10
-#exit
+echo " "
+echo "Shut down Ubuntu console"
+echo "Reopen it and install  as:"
+echo "  ./script4.sh"
+echo "----------"
+echo " "
+exec sleep 10
+exit
 
 
