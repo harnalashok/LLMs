@@ -66,7 +66,7 @@ rm -rf /home/ashok/llama
  echo "*********"  | tee -a /home/ashok/info.log
 # llama-cpp-python template
 echo "source /home/ashok/llama/bin/activate" > /home/ashok/llama_cpp_template.sh
-echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models//llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/llama_cpp_template.sh
+echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models/llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/llama_cpp_template.sh
 chmod +x *.sh
  sleep 9
 
