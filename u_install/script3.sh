@@ -21,7 +21,7 @@ echo "========script3=============="
 echo "Will install langflow using uv (but in virtual environment)"
 echo "Will install Flowise directly using npm"
 echo "Will prepare start script for each"
-echo "Will call script4.sh"
+echo "Reboot and call script4.sh"
 echo "==========================="
 sleep 10
 
@@ -92,7 +92,7 @@ mv /home/ashok/script3.sh  /home/ashok/done
 mv /home/ashok/next/script4.sh  /home/ashok/
 
 #bash script4.sh
-
+reboot
 echo " "
 echo "Shut down Ubuntu console"
 echo "Reopen it and install  as:"
