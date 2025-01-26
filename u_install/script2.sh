@@ -57,9 +57,6 @@ sleep 2
 # Create a symlink to models and to gguf folder
 ln -s /home/ashok/llama.cpp/models/ /home/ashok/
 ln -s /home/ashok/llama.cpp/models/ /home/ashok/gguf
-echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/llamacpp_server.sh
-chmod +x /home/ashok/*.sh
-
 
 echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
 echo " "                                        | tee -a /home/ashok/error.log
@@ -67,23 +64,25 @@ echo "-------"                                  | tee -a /home/ashok/error.log
 echo "llama.cpp installed"                      | tee -a /home/ashok/error.log
 echo "10. llama.cpp installed"                  | tee -a /home/ashok/info.log
 echo "-------"                                  | tee -a /home/ashok/error.log
+echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/llamacpp_server.sh
+chmod +x /home/ashok/*.sh
 
 
 
 
 # 1.2 download and install Node.js
-#echo " "                                       | tee -a /home/ashok/error.log
-#echo "-------"                                 | tee -a /home/ashok/error.log
-#echo "Installing Node.js ver 20......"         | tee -a /home/ashok/error.log
-#echo "-------"                                 | tee -a /home/ashok/error.log
-#fnm use --install-if-missing 20                2>> /home/ashok/error.log
-#echo " "                                       | tee -a /home/ashok/error.log
-#echo "Node.js installed"                       | tee -a /home/ashok/error.log
-#echo "11. Node.js installed"                   | tee -a /home/ashok/error.log
-#echo "------------"                            | tee -a /home/ashok/error.log
-#echo "  "                                      | tee -a /home/ashok/error.log
-
-#sleep 2
+echo " "                                       | tee -a /home/ashok/error.log
+echo "-------"                                 | tee -a /home/ashok/error.log
+echo "Installing Node.js ver 20......"         | tee -a /home/ashok/error.log
+echo "-------"                                 | tee -a /home/ashok/error.log
+fnm use --install-if-missing 20                2>> /home/ashok/error.log
+echo " "                                       | tee -a /home/ashok/error.log
+echo "Node.js installed"                       | tee -a /home/ashok/error.log
+echo "11. Node.js installed"                   | tee -a /home/ashok/error.log
+node -v
+echo "------------"                            | tee -a /home/ashok/error.log
+echo "  "                                      | tee -a /home/ashok/error.log
+sleep 6
 
 # Move script file to done folder
 mv /home/ashok/script2.sh /home/ashok/done
@@ -94,9 +93,9 @@ mv /home/ashok/next/docker_install.sh /home/ashok/
 
 
 #echo "  "
-#echo "Will shut down Ubuntu console"
+#echo "Shut down/reboot Ubuntu"
 #echo "After shutdown, reopen ubuntu console and execute the command:"
-#echo "    ./script3.sh"
+#echo " sudo   ./docker_install.sh"
 #echo "----------"
 #echo " "
 #exec sleep 9
