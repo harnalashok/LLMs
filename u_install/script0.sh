@@ -77,6 +77,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script4.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/docker_install.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script5.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script6.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/download_models.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_llama_cpp_python.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_scripts.sh -P /home/ashok/next
@@ -95,6 +96,7 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script5.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script6.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/download_models.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_llama_cpp_python.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_scripts.sh
