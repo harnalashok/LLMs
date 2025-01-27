@@ -140,6 +140,20 @@ Here is an example:
           /home/ashok/llama/bin/activate.fish
           /home/ashok/llama/bin/activate
 
+Delete or Remove python virtual env
+=====================================
+
+The only way  one can remove python environment is:
+         sudo rm -rf venv
+where venv is your path to environment. There is no command for deleting your 
+virtual environment. Simply deactivate it and rid your application of its 
+artifacts by recursively removing the directory.
+Note that this is the same regardless of what kind of virtual environment 
+you are using. virtualenv, venv, Anaconda environment, pyenv, pipenv are
+all based the same principle here.
+uv also deletes the earlier virtual environment, when you create it.
+
+
 --------------------------------------
 
   
