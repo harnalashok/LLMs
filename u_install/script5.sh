@@ -11,13 +11,13 @@
       #     script3.sh
       #     script4.sh
       #     script5.sh
+      #     script6.sh
 
 echo "========script5=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
 echo "Will call no other script"
 echo "You may call script6.sh"
-echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
 
