@@ -71,6 +71,7 @@ chmod +x /home/ashok/*.sh
 
 
 # 1.2 download and install Node.js
+
 echo " "                                       | tee -a /home/ashok/error.log
 echo "-------"                                 | tee -a /home/ashok/error.log
 echo "Installing Node.js ver 20......"         | tee -a /home/ashok/error.log
@@ -100,5 +101,23 @@ mv /home/ashok/next/docker_install.sh /home/ashok/
 #echo " "
 #exec sleep 9
 #exit
+
+<< ////
+What is Node.js and npm
+=======================
+Node.js is a powerful and efficient open-source runtime environment built on
+Chrome's V8 JavaScript engine. It allows developers to run JavaScript on the 
+server side, which helps in the creation of scalable and high-performance 
+web applications.
+NPM, or Node Package Manager, is a free, open-source registry and tool for 
+managing JavaScript packages. It's the default package manager for Node.js
+
+What does NPM do?
+
+    Store packages: NPM is a repository for storing and sharing open-source JavaScript packages. 
+    Install packages: NPM has a command-line interface (CLI) that lets you install packages from the registry. 
+    Manage packages: NPM helps you manage package versions and dependencies. 
+    Collaborate: NPM lets you create organizations to share packages privately or publicly. 
+<< ////
 
 
