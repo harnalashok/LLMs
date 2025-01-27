@@ -2,6 +2,19 @@
 
 # Install langchain and langgraph
 
+echo "========script6=============="
+echo "Will install langchain"
+echo "Will install LangGraph"
+echo "Will install LangServe"
+echo "Will install LangChain CLI"
+echo "Will call no other script"
+echo "You may call script6.sh"
+echo "You may call download_models.sh to download gguf models or from ollama library"
+echo "==========================="
+sleep 10
+
+
+
 # Create python environment for installing
 python3 -m venv /home/ashok/langchain
 source /home/ashok/langchain/bin/activate
