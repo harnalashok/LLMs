@@ -1,5 +1,7 @@
 # 26th Jan, 2025
-# Miscelleaneous help commands:
+# Miscelleaneous help commands
+# For python virtual environments, please see:
+#   https://github.com/harnalashok/LLMs/blob/main/python%20venv
 
 # 1. If some service is listening on a port:
 
