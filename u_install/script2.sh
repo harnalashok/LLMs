@@ -114,6 +114,8 @@ What does NPM do?
     Install packages: NPM has a command-line interface (CLI) that lets you install packages from the registry. 
     Manage packages: NPM helps you manage package versions and dependencies. 
     Collaborate: NPM lets you create organizations to share packages privately or publicly. 
-<< ////
+    
+ << ////
+
 
 
