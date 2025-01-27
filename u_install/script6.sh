@@ -13,5 +13,7 @@ pip install langgraph
 pip install "langserve[all]"
 pip install langchain-cli
 deactivate
-
+# Create script
+echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
+echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
 sleep 2
