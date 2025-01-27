@@ -3,26 +3,20 @@
 # LAst amended: 17th Jan, 2025
 # Ref: https://www.server-world.info/en/note?os=Ubuntu_22.04&p=llama&f=1
 
-
-# Connected scripts are:
 # These sscripts run in sequence.
-#     script0.sh
-#     script1.sh
-#     script2.sh
-#     script3.sh
-#     docker_install.sh
-#     script4.sh
-#     script5.sh
-#     script6.sh
-#     script7.sh
-
-
-
+      #     script0.sh
+      #     script1.sh
+      #     script2.sh
+      #     docker_install.sh
+      #     script3.sh
+      #     script4.sh
+      #     script5.sh
 
 echo "========script5=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
-echo "Will call no other script.sh"
+echo "Will call no other script"
+echo "You may call download_models.sh to install models"
 echo "==========================="
 sleep 10
 
