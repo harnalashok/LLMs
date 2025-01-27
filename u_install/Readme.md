@@ -12,8 +12,9 @@ Copy and paste.
 ```
 
 
-File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts. And file, info.log,      
-keeps information about what all is installed.     
+File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.
+And file, info.log, keeps information about what all is installed.      
+File <b>'help.txt'</b> contains information about ports, packages etc      
 
 To read about *python virtual environments*, please [see this file](https://github.com/harnalashok/LLMs/blob/main/python%20venv) in my github.
    
