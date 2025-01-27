@@ -1,4 +1,4 @@
-To begin installing all packages, execute the following five commands in *Ubuntu* console.<br>
+To begin installing all packages, execute the following five commands in *Ubuntu* console (whether Ubuntu machine or WSL).<br>
 Copy and paste.
 
 
