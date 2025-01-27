@@ -31,7 +31,7 @@
 #------ Steps ---------
 
 echo "========script0=============="
-echo "Hostname must be 'master'"
+echo "Hostname is irrelevant "
 echo "User name must be 'ashok'"
 echo "Will check these."
 echo "Will download all scripts and place them in the 'next' folder"
