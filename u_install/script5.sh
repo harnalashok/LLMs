@@ -43,7 +43,7 @@ echo "*********"  | tee -a /home/ashok/error.log
 
 # Remove any venv, if it exists:
 rm -rf /home/ashok/llama
-# Creating virtual environment
+# Creat virtual environment at ~/llama folder:
  python3 -m venv --system-site-packages /home/ashok/llama
  # Activating virtual envitronment
  source /home/ashok/llama/bin/activate
