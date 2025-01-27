@@ -7,8 +7,7 @@ echo "Will install langchain"
 echo "Will install LangGraph"
 echo "Will install LangServe"
 echo "Will install LangChain CLI"
-echo "Will call no other script"
-echo "You may call script6.sh"
+echo "Will install LlamaIndex"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
@@ -37,3 +36,6 @@ deactivate
 echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
 echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
 sleep 2
+
+
+
