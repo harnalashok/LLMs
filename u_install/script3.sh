@@ -17,7 +17,7 @@
 
 echo "========script3=============="
 echo "Will install langflow using uv (but in virtual environment)"
-echo "Will install Flowise directly using npm"
+echo "Will install Flowise using npm (node package manager)"
 echo "Will prepare start script for each"
 echo "Reboot and call script4.sh"
 echo "==========================="
