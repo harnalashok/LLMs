@@ -16,6 +16,7 @@ echo "========script5=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
 echo "Will call no other script"
+echo "You may call script6.sh"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
@@ -73,10 +74,10 @@ sleep 9
 
 # Move scripts
 mv /home/ashok/script5.sh  /home/ashok/done/
-mv /home/ashok/next/download_models.sh   /home/ashok/
+mv /home/ashok/next/script6.sh   /home/ashok/
 
 echo "You may like to execute:"
-echo "       ./download_models.sh"
+echo "       ./script6.sh"
 sleep 10
 kill $PPID
 
