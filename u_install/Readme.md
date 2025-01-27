@@ -10,7 +10,7 @@ Copy and paste.
    bash script0.sh
    cd ~/   
 ```
-Scripts assume that username is *'ashok'*. If that is not so, you can either replace */home/ashok/* with /home/<username>/ or with ~/.
+Scripts assume that username is *'ashok'*. If that is not so, you can either replace */home/ashok/* with /home/\<username\>/ or with ~/.
 
 
 File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.
