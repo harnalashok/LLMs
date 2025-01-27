@@ -32,10 +32,21 @@ pip install llama-index
 pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-huggingface
 
 deactivate
+
 # Create script
 echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
 echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
 sleep 2
+
+# Move scripts
+mv /home/ashok/script6.sh  /home/ashok/done/
+mv /home/ashok/next/download_models.sh   /home/ashok/
+
+echo "You may like to execute:"
+echo "       ./download_models.sh"
+sleep 10
+kill $PPID
+
 
 
 
