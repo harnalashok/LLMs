@@ -18,6 +18,7 @@ pip install langchain-cli
 pip install llama-index
 # Ollama and huggingface oriented
 pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-huggingface
+
 deactivate
 # Create script
 echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
