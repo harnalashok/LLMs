@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Last amended: 14th Jan, 2024
-
- # These sscripts run in sequence.
+# Last amended: 27th Jan, 2024
+# These sscripts run in sequence.
       #     script0.sh
       #     script1.sh
       #     script2.sh
@@ -27,7 +26,6 @@ else
    sleep 10
    exit
 fi
-
 
 
 echo "========script4=============="
