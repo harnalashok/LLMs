@@ -34,7 +34,7 @@ echo "Will install Flowise docker"
 echo "Will install langflow docker"
 echo "Will install portainer docker"
 echo "Will prepare start script for each"
-echo "Will call script5.sh"
+echo "Call script5.sh after this is finished."
 echo "==========================="
 sleep 10
 
