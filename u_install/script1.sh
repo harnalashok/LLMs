@@ -101,7 +101,7 @@ echo "ChromaDB installed"                      | tee -a /home/ashok/error.log
 echo "3. ChromaDB installed"                   | tee -a /home/ashok/info.log
 echo "4. Database is at: /home/ashok/.local/bin/chroma"  | tee -a /home/ashok/info.log
 echo "      chromadb port is: 8000"            | tee -a /home/ashok/info.log
-eecho "------ "                                | tee -a /home/ashok/error.log
+echo "------ "                                | tee -a /home/ashok/error.log
 
 #  TO START CHROMA AS a SERVICE
 #*********************************
