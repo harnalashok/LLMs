@@ -16,8 +16,25 @@ environment at the following location:
   
           /home/ashok/path/to/package/name/
 
-And all python packages would be installed thereon. You can activate the 
-virtual environment, as:
+And all python packages would be installed thereon. 
+
+-m flag
+=========
+The -m switch in Python is a command-line option that allows you 
+to run a module as a script (ie import module as also execute module
+file). This means you can execute Python code directly from the
+command line without the need for an external script file. 
+By using -m, you can invoke Python modules as standalone programs.
+Thus, the line:
+
+          python3 -m venv /path/to/package/name
+
+imports and exectes venv module.
+
+Activate and Deactivate
+=========================
+
+You can activate the virtual environment, as:
 
         source /path/to/package/name/bin/activate
 
@@ -50,6 +67,7 @@ uv
 ======
 Ref: https://docs.astral.sh/uv/pip/environments/#using-a-virtual-environment
 ++++++
+
 uv also creates python environment, as:
 
           uv venv 
@@ -100,6 +118,7 @@ via 'uv venv'.
 
 List all python environments
 ===========================
+
 You can list all python environment under the home folder, as:
 
           find ~ | grep /bin/activate
