@@ -13,7 +13,7 @@ Copy and paste.
 Scripts assume that username is *'ashok'*. If that is not so, you can either replace */home/ashok/* with /home/\<username\>/ or with ~/.
 
 
-File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.
+File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts as also progress in installation. It is helpful to browse contents of error.log or info.log in another terminal (`cat error.log`)
 And file, info.log, keeps information about what all is installed.      
 File <b><i>['help.txt'](https://github.com/harnalashok/LLMs/blob/main/u_install/help.txt)</i></b> contains information about ports, packages etc      
 
