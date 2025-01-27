@@ -9,6 +9,7 @@
       #     script3.sh
       #     script4.sh
       #     script5.sh
+      #     script6.sh
 
 
 echo " "                                      | tee -a /home/ashok/error.log
