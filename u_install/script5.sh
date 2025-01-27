@@ -28,12 +28,12 @@ echo "**********" | tee -a /home/ashok/error.log
 echo " " | tee -a /home/ashok/error.log
 
 # Install required packages:
-echo "Installing dependencies " | tee -a /home/ashok/error.log
-echo "*********"  | tee -a /home/ashok/error.log
-sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq
-echo "Dependencies installed"  | tee -a /home/ashok/error.log
-echo " " | tee -a /home/ashok/error.log
-sleep 9
+#echo "Installing dependencies " | tee -a /home/ashok/error.log
+#echo "*********"  | tee -a /home/ashok/error.log
+#sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq
+#echo "Dependencies installed"  | tee -a /home/ashok/error.log
+#echo " " | tee -a /home/ashok/error.log
+#sleep 9
 
 # Login as a common user and prepare Python virtual environment
 #   to install [llama-cpp-python].
