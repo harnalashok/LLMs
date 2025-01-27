@@ -16,7 +16,7 @@ echo "========script5=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
 echo "Will call no other script"
-echo "You may call download_models.sh to install models"
+echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
 
