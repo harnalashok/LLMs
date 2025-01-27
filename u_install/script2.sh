@@ -2,25 +2,21 @@
 
 # Last amended: 14th Jan, 2025
 
-
-# Connected scripts are:
-# These sscripts run in sequence.
-#     script0.sh
-#     script1.sh
-#     script2.sh
-#     script3.sh
-#     docker_install.sh
-#     script4.sh
-#     script5.sh
-#     script6.sh
-#     script7.sh
-
+ # These scripts run in sequence.
+      #     script0.sh
+      #     script1.sh
+      #     script2.sh
+      #     docker_install.sh
+      #     script3.sh
+      #     script4.sh
+      #     script5.sh
 
 
 
 echo "========script2=============="
 echo "Will install llama.cpp directly"
 echo "Will install Node.js"
+echo "   What is Node.js--See the end of this file"
 echo "Call docker_install.sh as sudo user"
 echo "==========================="
 sleep 10
