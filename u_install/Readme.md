@@ -12,7 +12,8 @@ Copy and paste.
 ```
 
 
-File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.   
+File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts.     
+To read about *python virtual environments*, please (see this file)[https://github.com/harnalashok/LLMs/blob/main/python%20venv] in my github.
    
 ------------     
 Following software are intended to be installed/launched in a fresh wsl ubuntu,<br>
