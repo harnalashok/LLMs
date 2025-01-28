@@ -12,7 +12,7 @@ echo "You may call download_models.sh to download gguf models or from ollama lib
 echo "==========================="
 sleep 10
 
-
+cd ~/
 
 # Create python environment for installing
 python3 -m venv /home/ashok/langchain
