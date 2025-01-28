@@ -44,30 +44,37 @@ mv /home/ashok/next/download_models.sh   /home/ashok/
 
 
 # Install openwebui
+# Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
+
 # Check existing python versions
-echo "Existing python versions are as below"
+echo "Existing python versions on your machine are are as below"
+echo " "
+
 ls /usr/bin/python*
-read -p "Do you want to continue? " -n 1 -r
+
+read -p "Do you want to continue to install python3.11 ? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     exit 1
 fi
+echo " "
 echo "---------"
 echo "Installing python3.11"
 echo "----- "
 sleep 4
 
-# Install python 3.11
+# Install python 3.11 now
 sudo apt install python3.11 -y
 
 # Install tool to create python venv
 # invokable with its own Python executable
+
 sudo apt install python3.11-venv  -y
 
 # Check again python versions
-
-echo "Installed python versions are:"
+echo "Installed python versions now are:"
+echo " "
 ls /usr/bin/python*
 sleep 4
 
@@ -93,6 +100,13 @@ echo "Done. Starting openwebui........"
 echo "Access it at port 7860"
 echo " You can kill it after starting"
 sleep 9
+
+# Create script to start openwebui
+echo "source /home/ashok/openwebui/bin/activate" > openwebui_start.sh
+echo "open-webui serve"                          >> openwebui_start.sh
+chmod +x /home/ashok/*.sh
+
+
 # Start open-webui once
 open-webui serve
 
