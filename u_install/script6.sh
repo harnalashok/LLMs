@@ -38,9 +38,25 @@ echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
 echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
 sleep 2
 
+# Move scripts
+mv /home/ashok/script6.sh  /home/ashok/done/
+mv /home/ashok/next/download_models.sh   /home/ashok/
+
+
 # Install openwebui
 # Check existing python versions
+echo "Existing python versions are as below"
 ls /usr/bin/python*
+read -p "Do you want to continue? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
+echo "---------"
+echo "Installing python3.11"
+echo "----- "
+sleep 4
 
 # Install python 3.11
 sudo apt install python3.11 -y
@@ -50,25 +66,37 @@ sudo apt install python3.11 -y
 sudo apt install python3.11-venv  -y
 
 # Check again python versions
+
+echo "Installed python versions are:"
 ls /usr/bin/python*
+sleep 4
 
 # Create python virtual env at openwebui
+echo "Creating python virtual env at openwebui"
 # Using python3.11 package
-
 python3.11 -m venv /home/ashok/openwebui
+
+echo "Activating the new python env"
 # Activate the python env
 source /home/ashok/openwebui/bin/activate
+sleep 2
+
+echo "Installing openwebui....Takes lots of time...."
+sleep 4
 # Install openwebui. Takes time
 pip3.11 install open-webui
 
+echo " "
+echo " "
+echo "------------"
+echo "Done. Starting openwebui........"
+echo "Access it at port 7860"
+echo " You can kill it after starting"
+sleep 9
 # Start open-webui once
 open-webui serve
 
 
-
-# Move scripts
-mv /home/ashok/script6.sh  /home/ashok/done/
-mv /home/ashok/next/download_models.sh   /home/ashok/
 
 echo "You may like to execute:"
 echo "       ./download_models.sh"
