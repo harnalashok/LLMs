@@ -13,7 +13,7 @@
 #     script5.sh
 #     script6.sh
 
-
+cd ~/
 
 
 echo "========script3=============="
