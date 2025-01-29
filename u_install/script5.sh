@@ -21,6 +21,7 @@ echo "You may call script6.sh"
 echo "==========================="
 sleep 10
 
+cd ~/
 
 echo " " | tee -a /home/ashok/error.log
 echo "*********"  | tee -a /home/ashok/error.log
