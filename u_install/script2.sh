@@ -62,8 +62,14 @@ echo "-------"                                  | tee -a /home/ashok/error.log
 echo "llama.cpp installed"                      | tee -a /home/ashok/error.log
 echo "10. llama.cpp installed"                  | tee -a /home/ashok/info.log
 echo "-------"                                  | tee -a /home/ashok/error.log
-echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/llamacpp_server.sh
-chmod +x /home/ashok/*.sh
+
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "echo 'llama.cpp server will be available at port: '"      | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/start/start_llamacpp_server.sh
+chmod +x /home/ashok/start/*.sh
 
 
 
