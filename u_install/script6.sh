@@ -30,13 +30,17 @@ pip install langchain-cli
 
 # LLamaindex install
 # Mostly openai related
+echo "Installing llama-index"
+echo
 pip install llama-index
 # Ollama and huggingface oriented
 pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-huggingface
+sleep 2
 
+# Deactivate the environment
 deactivate
 
-# Create script
+# Create script to activate 'langchain' env
 echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
 echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
 sleep 2
@@ -49,7 +53,11 @@ mv /home/ashok/next/download_models.sh   /home/ashok/
 # Install openwebui using pip
 # Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
 
-# Check existing installed python versions
+
+echo "Will begin installing open-webui. Python version needed is exactly 3.11"
+echo " "
+sleep 6
+# Check existing installed python versions on your machine
 echo "Existing python versions on your machine are are as below"
 echo " "
 
