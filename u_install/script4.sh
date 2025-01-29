@@ -126,7 +126,6 @@ echo "netstat -aunt | grep 3000"                           >> /home/ashok/stop/s
 sleep 4
 
 
-
 # Ref: https://docs.langflow.org/Deployment/deployment-docker
 echo "Installing langflow docker"                         | tee -a /home/ashok/info.log
 cd /home/ashok/
@@ -153,10 +152,6 @@ echo "docker-compose down"                                 >> /home/ashok/stop/s
 echo "netstat -aunt | grep 7860"                           >> /home/ashok/stop/stop_docker_langflow.sh
 
 
-
-
-
-
 # Installing portrainer
 echo "Installinh portrainer docker in directory portrainer"  | tee -a /home/ashok/info.log
 cd ~/
@@ -180,6 +175,13 @@ echo "echo '#=========='"                                      >> /home/ashok/st
 echo "cd /home/ashok/portainer/"                               >> /home/ashok/start/start_portainer.sh
 echo "docker start portainer"                                  >> /home/ashok/start/start_portainer.sh
 echo "netstat -aunt | grep 9443"                               >> /home/ashok/start/start_portainer.sh
+
+echo '#!/bin/bash'                                             >> /home/ashok/stop/stop_portainer.sh
+echo " "                                                       >> /home/ashok/stop/stop_portainer.sh
+echo "cd ~/"                                                   >> /home/ashok/stop/stop_portainer.sh
+echo "cd /home/ashok/portainer/"                               >> /home/ashok/stop/stop_portainer.sh
+echo "docker stop portainer"                                   >> /home/ashok/stop/stop_portainer.sh
+echo "netstat -aunt | grep 9443"                               >> /home/ashok/stop/stop_portainer.sh
 
 
 
