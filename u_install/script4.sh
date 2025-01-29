@@ -11,6 +11,7 @@
       #     script5.sh
       #     script6.sh
 
+cd ~/
 
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log
