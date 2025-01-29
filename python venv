@@ -153,6 +153,56 @@ you are using. virtualenv, venv, Anaconda environment, pyenv, pipenv are
 all based the same principle here.
 uv also deletes the earlier virtual environment, when you create it.
 
+Install multiple virtual environments with diff python versions
+=================================
+
+Should you want to create a virtual env for a python version
+that is not available on your machine, you have to first install that
+python version and then only create a new virtual env. Here are the steps
+for installing a venv which is python3.11 based:
+
+                    echo "Existing python versions on your machine are are as below"
+                    echo " "
+                    
+                    ls /usr/bin/ | grep python
+                    
+                    read -p "Do you want to continue to install python3.11 ? " -n 1 -r
+                    echo    # (optional) move to a new line
+                    if [[ ! $REPLY =~ ^[Yy]$ ]]
+                    then
+                        exit 1
+                    fi
+                    echo " "
+                    echo "---------"
+                    echo "Installing python3.11"
+                    echo "----- "
+                    sleep 4
+                    
+                    # Install python 3.11 now
+                    sudo apt update
+                    sudo apt install python3.11 -y
+                    
+                    # Install tool to create python3.11 venv
+                    # invokable with its own Python executable
+                    
+                    sudo apt install python3.11-venv  -y
+                    
+                    # Check again python versions
+                    echo "Installed python versions now are:"
+                    echo " "
+                    ls /usr/bin/ | grep python
+                    sleep 9
+                    
+                    # Create python virtual env at openwebui
+                    echo "Creating python virtual env at openwebui"
+                    # Using python3.11 package
+                    python3.11 -m venv /home/ashok/openwebui
+                    
+                    echo "Activating the new python env"
+                    # Activate the python env
+                    source /home/ashok/openwebui/bin/activate
+                    sleep 2
+                    # DONE
 
 --------------------------------------
 
