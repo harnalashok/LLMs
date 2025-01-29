@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Install langchain and langgraph
+# Install langchain and llamaindex
+# 
 
 echo "========script6=============="
 echo "Will install langchain"
@@ -14,7 +15,9 @@ sleep 10
 
 cd ~/
 
-# Create python environment for installing
+# Create python environment at 'langchain'
+#  for installing langchain and llama-index
+
 python3 -m venv /home/ashok/langchain
 source /home/ashok/langchain/bin/activate
 pip install langchain
@@ -43,10 +46,10 @@ mv /home/ashok/script6.sh  /home/ashok/done/
 mv /home/ashok/next/download_models.sh   /home/ashok/
 
 
-# Install openwebui
+# Install openwebui using pip
 # Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
 
-# Check existing python versions
+# Check existing installed python versions
 echo "Existing python versions on your machine are are as below"
 echo " "
 
@@ -61,6 +64,7 @@ fi
 echo " "
 echo "---------"
 echo "Installing python3.11"
+echo "Open Webui needs python3.11"
 echo "----- "
 sleep 4
 
@@ -97,20 +101,23 @@ echo " "
 echo " "
 echo "------------"
 echo "Done. Starting openwebui........"
+echo "During initial startup it imports many files"
 echo "Access it at port 7860"
-echo " You can kill it after starting"
+echo "You can kill it after starting with ctrl+c"
+echo "------------"
+echo " "
 sleep 9
 
-# Create script to start openwebui
+# Create script to start openwebui thenext time
+# Activate the env
 echo "source /home/ashok/openwebui/bin/activate" > openwebui_start.sh
 echo "open-webui serve"                          >> openwebui_start.sh
 chmod +x /home/ashok/*.sh
 
-
 # Start open-webui once
 open-webui serve
 
-
+deactivate
 
 echo "You may like to execute:"
 echo "       ./download_models.sh"
