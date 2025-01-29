@@ -77,6 +77,7 @@ echo "----- "
 sleep 4
 
 # Install python 3.11 now
+sudo apt update
 sudo apt install python3.11 -y
 
 # Install tool to create python venv
