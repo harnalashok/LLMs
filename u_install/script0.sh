@@ -41,7 +41,7 @@ echo "Will call script1.sh"
 echo "==========================="
 sleep 10
 
-
+cd ~/
 
 # Check user and hostnames
 #if [[ `hostname` != 'master' ]]; then
