@@ -105,11 +105,24 @@ echo "            docker stop flowise"                     | tee -a /home/ashok/
 echo " Also, check all containers available, as:"
 echo "             docker ps -a "                          | tee -a /home/ashok/info.log
 
-echo "echo 'Flowise port 3000 onstarting'"                >> /home/ashok/start_flowise.sh
-echo "cd /home/ashok/Flowise"                             >> /home/ashok/start_flowise.sh
-echo "docker start flowise"                               >> /home/ashok/start_flowise.sh
-echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop_flowise.sh
-echo "docker stop flowise"                                >> /home/ashok/stop_flowise.sh
+
+
+echo '#!/bin/bash'                                         >> /home/ashok/start/start_docker_flowise.sh
+echo " "                                                   >> /home/ashok/start/start_docker_flowise.sh
+echo "cd ~/"                                               >> /home/ashok/start/start_docker_flowise.sh
+echo "echo 'Flowise port 3000 onstarting'"                 >> /home/ashok/start/start_docker_flowise.sh
+echo "cd /home/ashok/Flowise"                              >> /home/ashok/starr/start_docker_flowise.sh
+echo "docker start flowise"                                >> /home/ashok/start/start_docker_flowise.sh
+echo "netstat -aunt | grep 3000"                           >> /home/ashok/start/start_docker_flowise.sh
+
+
+echo '#!/bin/bash'                                        >> /home/ashok/stop/stop_docker_flowise.sh
+echo " "                                                  >> /home/ashok/stop/stop_docker_flowise.sh
+echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_flowise.sh
+echo "echo 'Flowise Stopping'"                            >> /home/ashok/stop/stop_docker_flowise.sh
+echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop/stop_docker_flowise.sh
+echo "docker stop flowise"                                >> /home/ashok/stop/stop_docker_flowise.sh
+echo "netstat -aunt | grep 3000"                           >> /home/ashok/stop/stop_docker_flowise.sh
 sleep 4
 
 
