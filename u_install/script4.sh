@@ -67,13 +67,24 @@ mkdir /home/ashok/milvus
 mv standalone_embed.sh /home/ashok/milvus/
 echo "PATH=$PATH:/home/ashok/milvus/" >> .bashrc
 
-echo "echo 'Ports are: 9091 and 19530.'"       >> /home/ashok/start_milvus.sh
-echo "cd /home/ashok/milvus"                   >> /home/ashok/start_milvus.sh
-echo "bash standalone_embed.sh start"          >> /home/ashok/start_milvus.sh
 
-echo "echo 'Ports are: 9091 and 19530.'"       >> /home/ashok/stop_milvus.sh
-echo "cd /home/ashok/milvus"                   >> /home/ashok/stop_milvus.sh
-echo "bash standalone_embed.sh stop"           >> /home/ashok/stop_milvus.sh
+
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_milvus.sh
+echo " "                                                   | tee -a /home/ashok/start/start_milvus.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_milvus.sh
+echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/ashok/start/start_milvus.sh
+echo "cd /home/ashok/milvus"                               | tee -a /home/ashok/start/start_milvus.sh
+echo "bash standalone_embed.sh start"                      | tee -a /home/ashok/start/start_milvus.sh
+echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/start/start_milvus.sh
+
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_milvus.sh 
+echo " "                                                   | tee -a /home/ashok/stop/stop_milvus.sh 
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_milvus.sh 
+echo "cd /home/ashok/milvus"                               | tee -a /home/ashok/stop/stop_milvus.sh 
+echo "bash standalone_embed.sh stop"                       | tee -a /home/ashok/stop/stop_milvus.sh 
+echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/stop/stop_milvus.sh 
+
 
 echo "cd /home/ashok/milvus"                   >> /home/ashok/delete_milvus_db.sh
 echo "bash standalone_embed.sh delete"         >> /home/ashok/delete_milvus_db.sh
