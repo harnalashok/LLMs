@@ -165,18 +165,39 @@ chmod +x /home/ashok/*.sh
 sleep 2
 
 
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_chroma.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
+echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
+echo "echo 'Data dir is ~/Documents/data'"                 | tee -a /home/ashok/start/start_chroma.sh 
+echo "echo 'Logs are at /var/log/chroma.log'"              | tee -a /home/ashok/start/start_chroma.sh 
+
+echo "sudo systemctl start chroma"                         | tee -a /home/ashok/start/start_chroma.sh  
+echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/start/start_chroma.sh  
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_chroma.sh  
+echo " "                                                   | tee -a /home/ashok/stop/stop_chroma.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_chroma.sh  
+echo "echo 'chromadb will be stopped'"                     | tee -a /home/ashok/stop/stop_chroma.sh  
+echo "sudo systemctl stop chroma"                          | tee -a /home/ashok/stop/stop_chroma.sh  
+echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/stop/stop_chroma.sh  
+
 # Install uv for langflow install
 echo " "                                       | tee -a /home/ashok/info.log
 echo "Installing uv"                           | tee -a /home/ashok/info.log
 echo "--------------"                          | tee -a /home/ashok/info.log
 echo " "                                       | tee -a /home/ashok/info.log
 sleep 2
-curl -LsSf https://astral.sh/uv/install.sh | sh   2>> /home/ashok/error.log
+curl -LsSf https://astral.sh/uv/install.sh     | sh   2>> /home/ashok/error.log
 echo " "                                       | tee -a /home/ashok/error.log
 echo " "                                       | tee -a /home/ashok/info.log
 echo "uv installed"                            | tee -a /home/ashok/error.log
 echo "8. uv installed"                         | tee -a /home/ashok/info.log
 sleep 2
+
+
+
 
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
