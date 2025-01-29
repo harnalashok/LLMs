@@ -73,6 +73,27 @@ echo "Or, as:"                                      | tee -a /home/ashok/info.lo
 echo "sudo systemctl start|stop|restart ollama"     | tee -a /home/ashok/info.log  
 
 
+mkdir /home/ashok/start
+mkdir /home/ashok/stop
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_ollama.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_ollama.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_ollama.sh  
+echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/ashok/start/start_ollama.sh  
+echo "sudo systemctl start ollama"                         | tee -a /home/ashok/start/start_ollama.sh  
+echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/start/start_ollama.sh  
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_ollama.sh  
+echo " "                                                   | tee -a /home/ashok/stop/stop_ollama.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_ollama.sh  
+echo "echo 'Ollama will be stopped'"                       | tee -a /home/ashok/stop/stop_ollama.sh  
+echo "sudo systemctl stop ollama"                          | tee -a /home/ashok/stop/stop_ollama.sh  
+echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/stop/stop_ollama.sh  
+
+chmod +x /home/ashok/start/*.sh
+chmod +x /home/ashok/stop/*.sh
+
+
 
 sleep 2
 
