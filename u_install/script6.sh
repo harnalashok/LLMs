@@ -131,9 +131,12 @@ sleep 9
 
 # Create script to start openwebui thenext time
 # Activate the env
-echo "source /home/ashok/openwebui/bin/activate" > /home/ashok/start/openwebui_start.sh
+echo "source /home/ashok/openwebui/bin/activate" >  /home/ashok/start/openwebui_start.sh
 echo "open-webui serve"                          >> /home/ashok/start/openwebui_start.sh
+
 chmod +x /home/ashok/*.sh
+chmod +x /home/ashok/start/*.sh
+
 
 # Start open-webui once
 open-webui serve
