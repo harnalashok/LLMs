@@ -135,22 +135,27 @@ cd langflow/docker_example
 sudo docker-compose up -d
 netstat -aunt | grep 7860
 
-echo '#!/bin/bash'                                        >> /home/ashok/stop/start_docker_langflow.sh
-echo " "                                                  >> /home/ashok/stop/start_docker_langflow.sh
-echo "cd ~/"                                              >> /home/ashok/stop/start_docker_langflow.sh
+echo '#!/bin/bash'                                         >> /home/ashok/start/start_docker_langflow.sh
+echo " "                                                   >> /home/ashok/start/start_docker_langflow.sh
+echo "cd ~/"                                               >> /home/ashok/start/start_docker_langflow.sh
 echo "echo 'langflow port 7860 onstarting'"                >> /home/ashok/start/start_docker_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/start/start_docker_langflow.sh
 echo "docker-compose up -d"                                >> /home/ashok/start/start_docker_langflow.sh
-echo "netstat -aunt | grep 7860"                           >> /home/ashok/stop/start_docker_langflow.sh
+echo "netstat -aunt | grep 7860"                           >> /home/ashok/start/start_docker_langflow.sh
 
 
 echo '#!/bin/bash'                                        >> /home/ashok/stop/stop_docker_langflow.sh
 echo " "                                                  >> /home/ashok/stop/stop_docker_langflow.sh
 echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_langflow.sh
-echo "echo 'langflow port: 7860'"                          >> /home/ashok/stop/stop_docker_langflow.sh
+echo "echo 'langflow will be stopped'"                    >> /home/ashok/stop/stop_docker_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/stop/stop_docker_langflow.sh
 echo "docker-compose down"                                 >> /home/ashok/stop/stop_docker_langflow.sh
 echo "netstat -aunt | grep 7860"                           >> /home/ashok/stop/stop_docker_langflow.sh
+
+
+
+
+
 
 # Installing portrainer
 echo "Installinh portrainer docker in directory portrainer"  | tee -a /home/ashok/info.log
@@ -163,13 +168,18 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -
 cd ~/
 # Script to start portainer container
 
-echo "echo '#========'"                                        > /home/ashok/start_portainer.sh
-echo "echo '#Access portainer at:'"                            >> /home/ashok/start_portainer.sh
-echo "echo '#https://127.0.0.1:9443'"                          >> /home/ashok/start_portainer.sh
-echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/ashok/start_portainer.sh
-echo "echo '#=========='"                                      >> /home/ashok/start_portainer.sh
-echo "cd /home/ashok/portainer/"                               >> /home/ashok/start_portainer.sh
-echo "docker start portainer"                                   >> /home/ashok/start_portainer.sh
+
+echo '#!/bin/bash'                                             >> /home/ashok/start/start_portainer.sh
+echo " "                                                       >> /home/ashok/start/start_portainer.sh
+echo "cd ~/"                                                   >> /home/ashok/start/start_portainer.sh
+echo "echo '#========'"                                        >> /home/ashok/start/start_portainer.sh
+echo "echo '#Access portainer at:'"                            >> /home/ashok/start/start_portainer.sh
+echo "echo '#https://127.0.0.1:9443'"                          >> /home/ashok/start/start_portainer.sh
+echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/ashok/start/start_portainer.sh
+echo "echo '#=========='"                                      >> /home/ashok/start/start_portainer.sh
+echo "cd /home/ashok/portainer/"                               >> /home/ashok/start/start_portainer.sh
+echo "docker start portainer"                                  >> /home/ashok/start/start_portainer.sh
+echo "netstat -aunt | grep 9443"                               >> /home/ashok/start/start_portainer.sh
 
 
 
