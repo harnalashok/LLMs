@@ -50,13 +50,19 @@ mv /home/ashok/script6.sh  /home/ashok/done/
 mv /home/ashok/next/download_models.sh   /home/ashok/
 
 
-# Install openwebui using pip
+# Install openwebui using pip. Refer its github site
 # Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
+# OpenWebUI utilizes Ollama to run GGUF models, so you'll need to be familiar 
+#  with Ollama's functionality to fully manage your GGUF models
 
-
-echo "Will begin installing open-webui. Python version needed is exactly 3.11"
 echo " "
-sleep 6
+echo "---------------"
+echo "Will begin installing open-webui. Python version needed is exactly 3.11"
+echo "Note: Open WebUI connects to Ollama to work with"
+echo "Better install ollama if not already installed."
+echo "---------------"
+echo " "
+sleep 9
 # Check existing installed python versions on your machine
 echo "Existing python versions on your machine are are as below"
 echo " "
@@ -101,9 +107,14 @@ echo "Activating the new python env"
 source /home/ashok/openwebui/bin/activate
 sleep 2
 
+echo "--------------"
 echo "Installing openwebui....Takes lots of time...."
-sleep 4
-# Install openwebui. Takes time
+echo "If it breaks, try again....."
+echo "--------------"
+echo " "
+sleep 9
+
+# Installing openwebui. Takes time
 pip3.11 install open-webui
 
 echo " "
