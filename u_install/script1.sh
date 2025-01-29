@@ -159,22 +159,23 @@ echo "7. Check as: "                           | tee -a /home/ashok/info.log
 echo "      netstat -aunt | grep 8000"         | tee -a /home/ashok/info.log
 echo "----------"                              | tee -a /home/ashok/info.log
 echo " "                                       | tee -a /home/ashok/info.log
-echo "sudo systemctl start chroma"             | tee -a /home/ashok/start_chroma.sh
-echo "sudo systemctl stop chroma"              | tee -a /home/ashok/stop_chroma.sh
-chmod +x /home/ashok/*.sh
+
 sleep 2
 
 
 
-echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_chroma.sh  
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
 echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
 echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
 echo "echo 'Data dir is ~/Documents/data'"                 | tee -a /home/ashok/start/start_chroma.sh 
 echo "echo 'Logs are at /var/log/chroma.log'"              | tee -a /home/ashok/start/start_chroma.sh 
+echo "echo 'sudo kill -9 2197 2203'"                       | tee -a /home/ashok/start/start_chroma.sh  
+sudo echo"`lsof -i :8000`"                                 | tee -a /home/ashok/start/start_chroma.sh  
+#echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/start/start_chroma.sh  
+echo "sleep 5"                                             | tee -a /home/ashok/start/start_chroma.sh  
+echo "/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log &"   | tee -a /home/ashok/start/start_chroma.sh  
 
-echo "sudo systemctl start chroma"                         | tee -a /home/ashok/start/start_chroma.sh  
-echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/start/start_chroma.sh  
 
 echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_chroma.sh  
 echo " "                                                   | tee -a /home/ashok/stop/stop_chroma.sh  
@@ -182,6 +183,8 @@ echo "cd ~/"                                               | tee -a /home/ashok/
 echo "echo 'chromadb will be stopped'"                     | tee -a /home/ashok/stop/stop_chroma.sh  
 echo "sudo systemctl stop chroma"                          | tee -a /home/ashok/stop/stop_chroma.sh  
 echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/stop/stop_chroma.sh  
+
+chmod +x /home/ashok/start/*.sh
 
 # Install uv for langflow install
 echo " "                                       | tee -a /home/ashok/info.log
