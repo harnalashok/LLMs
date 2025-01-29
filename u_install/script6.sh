@@ -9,6 +9,7 @@ echo "Will install LangGraph"
 echo "Will install LangServe"
 echo "Will install LangChain CLI"
 echo "Will install LlamaIndex"
+echo "Will install Open WebUI--needs ollama behind the scenes"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
