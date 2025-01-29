@@ -135,11 +135,18 @@ cd langflow/docker_example
 sudo docker-compose up -d
 netstat -aunt | grep 7860
 
+echo '#!/bin/bash'                                        >> /home/ashok/stop/start_docker_langflow.sh
+echo " "                                                  >> /home/ashok/stop/start_docker_langflow.sh
+echo "cd ~/"                                              >> /home/ashok/stop/start_docker_langflow.sh
 echo "echo 'langflow port 7860 onstarting'"                >> /home/ashok/start/start_docker_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/start/start_docker_langflow.sh
 echo "docker-compose up -d"                                >> /home/ashok/start/start_docker_langflow.sh
 echo "netstat -aunt | grep 7860"                           >> /home/ashok/stop/start_docker_langflow.sh
 
+
+echo '#!/bin/bash'                                        >> /home/ashok/stop/stop_docker_langflow.sh
+echo " "                                                  >> /home/ashok/stop/stop_docker_langflow.sh
+echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_langflow.sh
 echo "echo 'langflow port: 7860'"                          >> /home/ashok/stop/stop_docker_langflow.sh
 echo "cd /home/ashok/langflow/docker_example"              >> /home/ashok/stop/stop_docker_langflow.sh
 echo "docker-compose down"                                 >> /home/ashok/stop/stop_docker_langflow.sh
