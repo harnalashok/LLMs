@@ -22,6 +22,7 @@ echo "Call docker_install.sh as sudo user"
 echo "==========================="
 sleep 10
 
+cd ~/
 
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log
