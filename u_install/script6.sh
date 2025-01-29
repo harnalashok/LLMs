@@ -67,7 +67,7 @@ sleep 9
 echo "Existing python versions on your machine are are as below"
 echo " "
 
-ls /usr/bin/python*
+ls /usr/bin/ | grep python
 
 read -p "Do you want to continue to install python3.11 ? " -n 1 -r
 echo    # (optional) move to a new line
@@ -94,8 +94,8 @@ sudo apt install python3.11-venv  -y
 # Check again python versions
 echo "Installed python versions now are:"
 echo " "
-ls /usr/bin/python*
-sleep 4
+ls /usr/bin/ | grep python
+sleep 9
 
 # Create python virtual env at openwebui
 echo "Creating python virtual env at openwebui"
