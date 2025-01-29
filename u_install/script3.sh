@@ -47,8 +47,16 @@ echo " "                                                    | tee -a /home/ashok
 echo "flowise installed"                                    | tee -a /home/ashok/info.log
 echo "flowise port is: 3000"                                | tee -a /home/ashok/info.log
 echo " "                                                    | tee -a /home/ashok/info.log
-echo "npx flowise start"                                    | tee -a /home/ashok/flowise_start.sh
-chmod +x /home/ashok/*.sh
+
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_npx_flowise.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo 'Flowise will be available at port 3000'"       | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "npx flowise start"                                   | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "netstat -aunt | grep 3000"                           | tee -a /home/ashok/start/start_npx_flowise.sh
+
+chmod +x /home/ashok/start/*.sh
 
 
 
@@ -83,9 +91,19 @@ echo "Run langflow, as:"                                     | tee -a /home/asho
 echo "        uv run langflow run"                           | tee -a /home/ashok/info.log
 echo "---------- "                                           | tee -a /home/ashok/info.log
 echo "  "                                                    | tee -a /home/ashok/info.log
-echo "source .venv/bin/activate"                             | tee -a /home/ashok/langflow_start.sh
-echo "uv run langflow run"                                   | tee -a /home/ashok/langflow_start.sh
-chmod +x /home/ashok/*.sh
+
+
+echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "echo 'Langflow will be available at port 7860'"      | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "echo 'deactivate venv with, deactivate, command'"    | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "source .venv/bin/activate"                           | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "uv run langflow run"                                 | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "netstat -aunt | grep 3000"                           | tee -a /home/ashok/start/start_uv_langflow.sh  
+
+chmod +x /home/ashok/start/*.sh
+
 sleep 2
 
 
