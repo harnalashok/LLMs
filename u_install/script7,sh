@@ -48,10 +48,7 @@ echo "./LM-Studio-0.3.9-3-x64.AppImage"                  >> /home/ashok/start/st
 # Install Anything LLM
 curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
 echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"         > /home/ashok/start/start_anythingllm.sh
-ashok@master:~$ echo "./anythingllm-desktop start"                  >>  /home/ashok/start/start_anythingllm.sh
-bash: syntax error near unexpected token `>'
 echo "./anythingllm-desktop start"                  >>  /home/ashok/start/start_anythingllm.sh
-./anythingllm-desktop start
 
 
 
