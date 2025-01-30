@@ -64,7 +64,7 @@ echo "10. llama.cpp installed"                  | tee -a /home/ashok/info.log
 echo "-------"                                  | tee -a /home/ashok/error.log
 
 
-echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_llamacpp_server.sh
 echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_llamacpp_server.sh
 echo "echo 'llama.cpp server will be available at port: '"      | tee -a /home/ashok/start/start_llamacpp_server.sh
