@@ -66,6 +66,14 @@ Installed software:
 Using FAISS
 39  source /home/ashok/faiss/bin/activate
    40  pip install faiss
+
+ashok@master:~$ mkdir lms
+ashok@master:~$ cd lms
+ashok@master:~/lms$ wget -c https://installers.lmstudio.ai/linux/x64/0.3.9-3/LM-Studio-0.3.9-3-x64.AppImage
+chmod +x *.AppImage
+cd ~/
+sudo apt install libfuse2
+
    41  pip3 install faiss
    42  pip install faiss-cpu
    43  python -c "import faiss; print(faiss.__version__)"
