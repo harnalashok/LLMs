@@ -30,6 +30,9 @@ echo "echo 'To deactivate issue just the command: deactivate'"           >> /hom
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 
 # Install LM Studio
+# sudo apt install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev
+# sudo apt-get install libasound2
+
 mkdir lms
 cd lms
 # Download current lm studio. Check the download link
