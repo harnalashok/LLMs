@@ -103,13 +103,14 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_llama_cpp_python.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_scripts.sh
 
 # The script gives lists of virtual venvs created
-echo "echo 'List of virtual envs:'"   >   /home/ashok/start/find_venv.sh
-echo "echo 'List of virtual envs:'"   >   /home/ashok/find_venv.sh
-echo "find ~ | grep -E '/bin/activate$'"   >> /home/ashok/start/find_venv.sh
+echo '#!/bin/bash'                         >   /home/ashok/find_venv.sh
+echo " "                                   >>   /home/ashok/find_venv.sh
+echo "cd ~/"                               >>   /home/ashok/find_venv.sh
+echo "echo 'List of virtual envs:'"        >>   /home/ashok/find_venv.sh
 echo "find ~ | grep -E '/bin/activate$'"   >> /home/ashok/find_venv.sh
 
 chmod +x *.sh
-chmod +x /home/ashok/next/*.sh
+
 
 
 # Move script file to 'done' folder
