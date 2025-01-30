@@ -110,6 +110,7 @@ echo "echo 'List of virtual envs:'"        >>   /home/ashok/find_venv.sh
 echo "find ~ | grep -E '/bin/activate$'"   >> /home/ashok/find_venv.sh
 
 chmod +x *.sh
+chmod +x /home/ashok/next/*.sh
 
 
 
