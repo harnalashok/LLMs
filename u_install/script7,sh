@@ -47,8 +47,12 @@ echo "./LM-Studio-0.3.9-3-x64.AppImage"                  >> /home/ashok/start/st
 
 # Install Anything LLM
 curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
-echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"         > /home/ashok/start/start_anythingllm.sh
-echo "./anythingllm-desktop start"                  >>  /home/ashok/start/start_anythingllm.sh
+
+echo '#!/bin/bash'                                                      > /home/ashok/start/start_anythingllm.sh
+echo " "                                                                >> /home/ashok/start/start_anythingllm.sh
+echo "cd ~/"                                                            >> /home/ashok/start/start_anythingllm.sh
+echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"           >> /home/ashok/start/start_anythingllm.sh
+echo "./anythingllm-desktop start"                                     >>  /home/ashok/start/start_anythingllm.sh
 
 
 
