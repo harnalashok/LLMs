@@ -63,5 +63,10 @@ Installed software:
 	m. Node.js
 	n. Fast Node Manager (fnm)
   
-
+Using FAISS
+39  source /home/ashok/faiss/bin/activate
+   40  pip install faiss
+   41  pip3 install faiss
+   42  pip install faiss-cpu
+   43  python -c "import faiss; print(faiss.__version__)"
 ###########################33
