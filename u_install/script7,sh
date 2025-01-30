@@ -15,7 +15,7 @@ sleep 10
 
 cd ~/
 
-# Create 
+# Create venv for FAISS
 python3 -m venv /home/ashok/faiss
 source /home/ashok/faiss/bin/activate
 pip3 install faiss-cpu
@@ -25,24 +25,21 @@ echo "echo 'source /home/ashok/start/activate_faiss.sh'"         >> /home/ashok/
 echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/ashok/start/activate_faiss.sh
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 
-
-
-
-# Installing FAISS library
-  41  pip3 install faiss
-   42  pip install faiss-cpu
-   43  python -c "import faiss; print(faiss.__version__)"
-python 
-source /home/ashok/faiss/bin/activate
-pip install faiss
-
-ashok@master:~$ mkdir lms
-ashok@master:~$ cd lms
-ashok@master:~/lms$ wget -c https://installers.lmstudio.ai/linux/x64/0.3.9-3/LM-Studio-0.3.9-3-x64.AppImage
+# Install LM Studio
+mkdir lms
+cd lms
+# Download current lm studio. Check the download link
+wget -c https://installers.lmstudio.ai/linux/x64/0.3.9-3/LM-Studio-0.3.9-3-x64.AppImage
 chmod +x *.AppImage
+
 cd ~/
 sudo apt install libfuse2
-cd ~/
+
+echo "cd /home/ashok/lms" > /home/ashok/start/start_lmstudio.sh
+echo "./LM-Studio-0.3.9-3-x64.AppImage" >> /home/ashok/start/start_lmstudio.sh
+ashok@master:~$ cd st
+
+
 # ANything LLM
 curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
 /home/ashok/AnythingLLMDesktop/anythingllm-desktop
@@ -56,9 +53,7 @@ cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop
 ./anythingllm-desktop start
 
 
-echo "cd /home/ashok/lms" > /home/ashok/start/start_lmstudio.sh
-echo "./LM-Studio-0.3.9-3-x64.AppImage" >> /home/ashok/start/start_lmstudio.sh
-ashok@master:~$ cd st
+
 
 
 
