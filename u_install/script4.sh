@@ -78,7 +78,7 @@ echo "bash standalone_embed.sh start"                      | tee -a /home/ashok/
 echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/start/start_milvus.sh
 
 
-echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_milvus.sh 
+echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_milvus.sh 
 echo " "                                                   | tee -a /home/ashok/stop/stop_milvus.sh 
 echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_milvus.sh 
 echo "cd /home/ashok/milvus"                               | tee -a /home/ashok/stop/stop_milvus.sh 
@@ -86,7 +86,7 @@ echo "bash standalone_embed.sh stop"                       | tee -a /home/ashok/
 echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/stop/stop_milvus.sh 
 
 
-echo "cd /home/ashok/milvus"                   >> /home/ashok/delete_milvus_db.sh
+echo "cd /home/ashok/milvus"                    > /home/ashok/delete_milvus_db.sh
 echo "bash standalone_embed.sh delete"         >> /home/ashok/delete_milvus_db.sh
 sleep 3
 
@@ -107,7 +107,7 @@ echo "             docker ps -a "                          | tee -a /home/ashok/
 
 
 
-echo '#!/bin/bash'                                         >> /home/ashok/start/start_docker_flowise.sh
+echo '#!/bin/bash'                                         >  /home/ashok/start/start_docker_flowise.sh
 echo " "                                                   >> /home/ashok/start/start_docker_flowise.sh
 echo "cd ~/"                                               >> /home/ashok/start/start_docker_flowise.sh
 echo "echo 'Flowise port 3000 onstarting'"                 >> /home/ashok/start/start_docker_flowise.sh
@@ -116,7 +116,7 @@ echo "docker start flowise"                                >> /home/ashok/start/
 echo "netstat -aunt | grep 3000"                           >> /home/ashok/start/start_docker_flowise.sh
 
 
-echo '#!/bin/bash'                                        >> /home/ashok/stop/stop_docker_flowise.sh
+echo '#!/bin/bash'                                        >  /home/ashok/stop/stop_docker_flowise.sh
 echo " "                                                  >> /home/ashok/stop/stop_docker_flowise.sh
 echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_flowise.sh
 echo "echo 'Flowise Stopping'"                            >> /home/ashok/stop/stop_docker_flowise.sh
@@ -134,7 +134,7 @@ cd langflow/docker_example
 sudo docker-compose up -d
 netstat -aunt | grep 7860
 
-echo '#!/bin/bash'                                         >> /home/ashok/start/start_docker_langflow.sh
+echo '#!/bin/bash'                                          >  /home/ashok/start/start_docker_langflow.sh
 echo " "                                                   >> /home/ashok/start/start_docker_langflow.sh
 echo "cd ~/"                                               >> /home/ashok/start/start_docker_langflow.sh
 echo "echo 'langflow port 7860 onstarting'"                >> /home/ashok/start/start_docker_langflow.sh
@@ -143,7 +143,7 @@ echo "docker-compose up -d"                                >> /home/ashok/start/
 echo "netstat -aunt | grep 7860"                           >> /home/ashok/start/start_docker_langflow.sh
 
 
-echo '#!/bin/bash'                                        >> /home/ashok/stop/stop_docker_langflow.sh
+echo '#!/bin/bash'                                         > /home/ashok/stop/stop_docker_langflow.sh
 echo " "                                                  >> /home/ashok/stop/stop_docker_langflow.sh
 echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_langflow.sh
 echo "echo 'langflow will be stopped'"                    >> /home/ashok/stop/stop_docker_langflow.sh
@@ -164,7 +164,7 @@ cd ~/
 # Script to start portainer container
 
 
-echo '#!/bin/bash'                                             >> /home/ashok/start/start_portainer.sh
+echo '#!/bin/bash'                                              > /home/ashok/start/start_portainer.sh
 echo " "                                                       >> /home/ashok/start/start_portainer.sh
 echo "cd ~/"                                                   >> /home/ashok/start/start_portainer.sh
 echo "echo '#========'"                                        >> /home/ashok/start/start_portainer.sh
@@ -176,7 +176,7 @@ echo "cd /home/ashok/portainer/"                               >> /home/ashok/st
 echo "docker start portainer"                                  >> /home/ashok/start/start_portainer.sh
 echo "netstat -aunt | grep 9443"                               >> /home/ashok/start/start_portainer.sh
 
-echo '#!/bin/bash'                                             >> /home/ashok/stop/stop_portainer.sh
+echo '#!/bin/bash'                                              > /home/ashok/stop/stop_portainer.sh
 echo " "                                                       >> /home/ashok/stop/stop_portainer.sh
 echo "cd ~/"                                                   >> /home/ashok/stop/stop_portainer.sh
 echo "cd /home/ashok/portainer/"                               >> /home/ashok/stop/stop_portainer.sh
