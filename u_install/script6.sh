@@ -42,7 +42,10 @@ sleep 2
 deactivate
 
 # Create script to activate 'langchain' env
-echo "echo 'Call as: source venv_langchain.sh' " > venv_langchain.sh
+echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' " > venv_langchain.sh
+echo "echo 'source venv_langchain.sh' " >> venv_langchain.sh
+echo "echo '(Note the change in prompt after activating)' " >> venv_langchain.sh
+echo "echo '(To deactivate, just enter the command: deactivate)' " >> venv_langchain.sh
 echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
 sleep 2
 
