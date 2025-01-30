@@ -20,7 +20,11 @@ python3 -m venv /home/ashok/faiss
 source /home/ashok/faiss/bin/activate
 pip3 install faiss-cpu
 
-echo "echo 'Activate FAISS library, as:'"                                 > /home/ashok/start/activate_faiss.sh
+
+echo '#!/bin/bash'                                                      > /home/ashok/start/activate_faiss.sh
+echo " "                                                                >> /home/ashok/start/activate_faiss.sh
+echo "cd ~/"                                                            >> /home/ashok/start/activate_faiss.sh
+echo "echo 'Activate FAISS library, as:'"                                >> /home/ashok/start/activate_faiss.sh                             
 echo "echo 'source /home/ashok/start/activate_faiss.sh'"                 >> /home/ashok/start/activate_faiss.sh
 echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/ashok/start/activate_faiss.sh
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
