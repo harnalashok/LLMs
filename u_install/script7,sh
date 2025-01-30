@@ -52,6 +52,9 @@ echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"           >> /home/
 echo "./anythingllm-desktop start"                                     >>  /home/ashok/start/start_anythingllm.sh
 
 
+chmod +x /home/ashok/*.sh
+chmod +x /home/ashok/start/*.sh
+chmod +x /home/ashok/stop/*.sh
 
 
 
