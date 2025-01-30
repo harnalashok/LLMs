@@ -73,6 +73,27 @@ ashok@master:~/lms$ wget -c https://installers.lmstudio.ai/linux/x64/0.3.9-3/LM-
 chmod +x *.AppImage
 cd ~/
 sudo apt install libfuse2
+cd ~/
+# ANything LLM
+curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
+/home/ashok/AnythingLLMDesktop/anythingllm-desktop
+./anythingllm-desktop start
+ashok@master:~$ echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop" > /home/ashok/start/start_anythingllm.sh
+ashok@master:~$ echo "./anythingllm-desktop start" >> > /home/ashok/start/start_anythingllm.sh
+bash: syntax error near unexpected token `>'
+ashok@master:~$ echo "./anythingllm-desktop start" >>  /home/ashok/start/start_anythingllm.sh
+ashok@master:~$ cat start/start_anythingllm.sh 
+cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop
+./anythingllm-desktop start
+
+
+echo "cd /home/ashok/lms" > /home/ashok/start/start_lmstudio.sh
+echo "./LM-Studio-0.3.9-3-x64.AppImage" >> /home/ashok/start/start_lmstudio.sh
+ashok@master:~$ cd st
+
+
+
+
 
    41  pip3 install faiss
    42  pip install faiss-cpu
