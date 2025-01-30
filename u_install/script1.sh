@@ -94,7 +94,9 @@ chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
 
-
+# Copy earlier created scripts
+cp /home/ashok/find_venv.sh  /home/ashok/start/
+cp /home/ashok/find_venv.sh  /home/ashok/stop/
 sleep 2
 
 
