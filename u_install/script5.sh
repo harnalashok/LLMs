@@ -69,7 +69,7 @@ rm -rf /home/ashok/llama
  
 # Write llama-cpp-python template
 
-echo '#!/bin/bash'                                         | tee -a /home/ashok/start/llama_cpp_template.sh
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/llama_cpp_template.sh
 echo " "                                                   | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "source /home/ashok/llama/bin/activate"               | tee -a /home/ashok/start/llama_cpp_template.sh
