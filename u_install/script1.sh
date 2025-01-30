@@ -44,7 +44,7 @@ echo " "
 sleep 2
 sudo apt update
 sudo apt upgrade -y
-sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  -y  
+sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  libfuse2 -y  
 sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
 echo " "
 echo "Ubuntu upgraded ......"                | tee -a /home/ashok/error.log
