@@ -42,12 +42,15 @@ sleep 2
 deactivate
 
 # Create script to activate 'langchain' env
-echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' " > venv_langchain.sh
-echo "echo 'source venv_langchain.sh' " >> venv_langchain.sh
-echo "echo '(Note the change in prompt after activating)' " >> venv_langchain.sh
-echo "echo '(To deactivate, just enter the command: deactivate)' " >> venv_langchain.sh
-echo "source /home/ashok/langchain/bin/activate"  >> venv_langchain.sh
+echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/ashok/activate_langchain_venv.sh
+echo "echo 'source venv_langchain.sh' "                                    >>  /home/ashok/activate_langchain_venv.sh
+echo "echo '(Note the change in prompt after activating)' "                >>  /home/ashok/activate_langchain_venv.sh
+echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/ashok/activate_langchain_venv.sh
+echo "source /home/ashok/langchain/bin/activate"                           >>  /home/ashok/activate_langchain_venv.sh
 sleep 2
+
+cp /home/ashok/activate_langchain_venv.sh  /home/ashok/start/activate_langchain_venv.sh
+cp /home/ashok/activate_langchain_venv.sh  /home/ashok/stop/activate_langchain_venv.sh
 
 # Move scripts
 mv /home/ashok/script6.sh  /home/ashok/done/
@@ -136,8 +139,10 @@ sleep 9
 # Activate the env
 echo "source /home/ashok/openwebui/bin/activate" >  /home/ashok/start/start_openwebui.sh
 echo "open-webui serve"                          >> /home/ashok/start/start_openwebui.sh
+
 chmod +x /home/ashok/*.sh
 chmod +x /home/ashok/start/*.sh
+chmod +x /home/ashok/stop/*.sh
 
 
 # Start open-webui once
