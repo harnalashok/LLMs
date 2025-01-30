@@ -1,6 +1,33 @@
-Using FAISS
-39  source /home/ashok/faiss/bin/activate
-   40  pip install faiss
+#!/bin/bash
+
+ 
+
+echo "========script7=============="
+echo "Will install FAISS"
+echo "Will install LangGraph"
+echo "Will install LangServe"
+echo "Will install LangChain CLI"
+echo "Will install LlamaIndex"
+echo "Will install Open WebUI--needs ollama behind the scenes"
+echo "You may call download_models.sh to download gguf models or from ollama library"
+echo "==========================="
+sleep 10
+
+cd ~/
+
+# Create 
+python3 -m venv /home/ashok/faiss
+ashok@ashok:~$ source /home/ashok/faiss/bin/activate
+(faiss) ashok@ashok:~$ pip3 install faiss-cpu
+
+
+# Installing FAISS library
+  41  pip3 install faiss
+   42  pip install faiss-cpu
+   43  python -c "import faiss; print(faiss.__version__)"
+python 
+source /home/ashok/faiss/bin/activate
+pip install faiss
 
 ashok@master:~$ mkdir lms
 ashok@master:~$ cd lms
@@ -30,6 +57,4 @@ ashok@master:~$ cd st
 
 
 
-   41  pip3 install faiss
-   42  pip install faiss-cpu
-   43  python -c "import faiss; print(faiss.__version__)"
+ 
