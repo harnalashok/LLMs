@@ -54,7 +54,7 @@ cp /home/ashok/activate_langchain_venv.sh  /home/ashok/stop/activate_langchain_v
 
 # Move scripts
 mv /home/ashok/script6.sh  /home/ashok/done/
-mv /home/ashok/next/download_models.sh   /home/ashok/
+mv /home/ashok/next/script7.sh   /home/ashok/
 
 
 # Install openwebui using pip. Refer its github site
