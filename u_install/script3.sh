@@ -49,7 +49,7 @@ echo "flowise port is: 3000"                                | tee -a /home/ashok
 echo " "                                                    | tee -a /home/ashok/info.log
 
 
-echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_npx_flowise.sh  
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_npx_flowise.sh  
 echo " "                                                   | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo 'Flowise will be available at port 3000'"       | tee -a /home/ashok/start/start_npx_flowise.sh
@@ -93,7 +93,7 @@ echo "---------- "                                           | tee -a /home/asho
 echo "  "                                                    | tee -a /home/ashok/info.log
 
 
-echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_uv_langflow.sh  
 echo " "                                                   | tee -a /home/ashok/start/start_uv_langflow.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_uv_langflow.sh  
 echo "echo 'Langflow will be available at port 7860'"      | tee -a /home/ashok/start/start_uv_langflow.sh  
