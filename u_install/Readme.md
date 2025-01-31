@@ -49,6 +49,10 @@ xii)Installs chromadb. Read more [here](https://github.com/harnalashok/LLMs/blob
 xii) Downloads: Llama-Thinker-3B-Preview-GGUF from huggingface<br>
 xiii) Downloads: *nomic-embed-text* from *ollama library*<br>
 xiv) Downloads *olmo2* from *ollama library*<br>
+ xv) Installs LM Studio    
+xvi) Installs AnythingLLM     
+xvii)Installs OpenWebUI    
+xviii)Installs FAISS     
 
 
 
