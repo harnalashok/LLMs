@@ -62,6 +62,8 @@ xiv) Downloads *olmo2* from *ollama library*<br>
       #     script3.sh
       #     script4.sh
       #     script5.sh
+      #     script6.sh
+      #     script7.sh
 </pre>
 
 <pre>
