@@ -2,6 +2,8 @@
 
 # LAst amended: 27th Jan, 2025
 # Ref: https://www.server-world.info/en/note?os=Ubuntu_22.04&p=llama&f=1
+# For examples of OPENAI usage, see:
+#      # Ref: https://github.com/Jaimboh/Llama.cpp-Local-OpenAI-server/tree/main
 
 # These sscripts run in sequence.
       #     script0.sh
