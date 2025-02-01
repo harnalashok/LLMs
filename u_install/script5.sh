@@ -68,6 +68,7 @@ rm -rf /home/ashok/llama
  echo "*********"  | tee -a /home/ashok/info.log
  
 # Write llama-cpp-python template
+# Ref: https://github.com/Jaimboh/Llama.cpp-Local-OpenAI-server/tree/main
 
 echo '#!/bin/bash'                                                       >  /home/ashok/start/start_llama_cpp_server.sh
 echo " "                                                                 >> /home/ashok/start/start_llama_cpp_server.sh
