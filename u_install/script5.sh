@@ -67,7 +67,11 @@ rm -rf /home/ashok/llama
  echo "Activate virtual environment as: source /home/ashok/llama/bin/activate "   | tee -a /home/ashok/info.log
  echo "*********"  | tee -a /home/ashok/info.log
  
-# Write llama-cpp-python template
+
+# Ref: https://github.com/Jaimboh/Llama.cpp-Local-OpenAI-server/tree/main
+
+## A.
+# Write llama-cpp-python server start sample
 # Ref: https://github.com/Jaimboh/Llama.cpp-Local-OpenAI-server/tree/main
 
 echo '#!/bin/bash'                                                       >  /home/ashok/start/start_llama_cpp_server.sh
@@ -80,21 +84,26 @@ echo "sleep 9 "                                                           >> ~/s
 echo "echo 'Kill, as:  sudo kill -9 PID1 PID2'"                           >> ~/start/start_llama_cpp_server.sh
 echo "python -m llama_cpp.server --host 127.0.0.1 --model_alias gpt-3.5-turbo --model models/llama-2-13b-chat.Q4_K_M.gguf  --chat functionary" >> ~/start/start_llama_cpp_server.sh
 
-
+## B.
 echo '#!/bin/bash'                                         >  /home/ashok/help_llama_cpp.sh
 echo " "                                                   >> /home/ashok/help_llama_cpp.sh
 echo "cd ~/"                                               >> /home/ashok/help_llama_cpp.sh
+echo "source /home/ashok/llama/bin/activate"               >> /home/ashok/help_llama_cpp.sh
 echo "python -m llama_cpp.server "                         >> /home/ashok/help_llama_cpp.sh
 chmod +x /home/ashok/*.sh
 
-
+## C.
+# Write llama-cpp-python template
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/llama_cpp_template.sh
 echo " "                                                   | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "source /home/ashok/llama/bin/activate"               | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models/llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/start/llama_cpp_template.sh
 
- echo "sudo lsof -i:8000"   > /home/ashok/start/pid_at_8000.sh
+## D.
+echo "echo 'Which service(s) is/are at port 8000?'"     > /home/ashok/start/pid_at_8000.sh
+echo "echo 'Kill as: sudo kill -9 PID1  PID2'"       >> /home/ashok/start/pid_at_8000.sh
+echo "sudo lsof -i:8000"                                >> /home/ashok/start/pid_at_8000.sh
 
 chmod +x /home/ashok/start/*.sh
 chmod +x *.sh
