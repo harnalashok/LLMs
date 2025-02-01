@@ -77,7 +77,8 @@ rm -rf /home/ashok/llama
 echo '#!/bin/bash'                                                                 >  /home/ashok/start/start_llama_cpp_python_server.sh
 echo " "                                                                           >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'Will start the server with model:'"                                   >> /home/ashok/start/start_llama_cpp_python_server.sh
-echo "echo '       llama-2-13b-chat.Q4_K_M.gguf '"                                 >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo '       llama-2-13b-chat.Q4_K_M.gguf '"                                >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo '       Model alias is: gpt-3.5-turbo  '"                              >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'If the start fails as port 8000 is already busy'"                      >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'then, issue following command to check which service is'"              >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'listening on port 8000. And kill it.'"                                 >> /home/ashok/start/start_llama_cpp_python_server.sh
@@ -99,11 +100,13 @@ chmod +x /home/ashok/*.sh
 
 ## C.
 # Write llama-cpp-python template
-echo '#!/bin/bash'                                         | tee    /home/ashok/start/llama_cpp_template.sh
-echo " "                                                   | tee -a /home/ashok/start/llama_cpp_template.sh
-echo "cd ~/"                                               | tee -a /home/ashok/start/llama_cpp_template.sh
-echo "source /home/ashok/llama/bin/activate"               | tee -a /home/ashok/start/llama_cpp_template.sh
-echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models/llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/start/llama_cpp_template.sh
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/llama_cpp_python_template.sh
+echo " "                                                   | tee -a /home/ashok/start/llama_cpp_python_template.sh
+echo "echo 'Will start the server with model:'"            | tee -a /home/ashok/start/llama_cpp_python_template.sh
+echo "echo '       llama-2-13b-chat.Q4_K_M.gguf '"         | tee -a /home/ashok/start/llama_cpp_python_template.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/llama_cpp_python_template.sh
+echo "source /home/ashok/llama/bin/activate"               | tee -a /home/ashok/start/llama_cpp_python_template.sh
+echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models/llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/start/llama_cpp_python_template.sh
 
 ## D.
 echo "echo 'Which service(s) is/are at port 8000?'"     > /home/ashok/start/pid_at_8000.sh
