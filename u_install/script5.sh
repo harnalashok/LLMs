@@ -69,11 +69,33 @@ rm -rf /home/ashok/llama
  
 # Write llama-cpp-python template
 
+echo '#!/bin/bash'                                                       >  /home/ashok/start/start_llama_cpp_server.sh
+echo " "                                                                 >> /home/ashok/start/start_llama_cpp_server.sh
+echo "echo 'Will start the server. If it fails as 8000 is already busy'"  > ~/start/start_llama_cpp_server.sh
+echo "echo 'then, issue following command to check which service is'"     >> ~/start/start_llama_cpp_server.sh
+echo "echo 'listening on port 8000. And kill it.'"                        >> ~/start/start_llama_cpp_server.sh
+echo "echo 'sudo lsof -i:8000'"                                           >> ~/start/start_llama_cpp_server.sh
+echo "sleep 9 "                                                           >> ~/start/start_llama_cpp_server.sh            
+echo "echo 'Kill, as:  sudo kill -9 PID1 PID2'"                           >> ~/start/start_llama_cpp_server.sh
+echo "python -m llama_cpp.server --host 127.0.0.1 --model_alias gpt-3.5-turbo --model models/llama-2-13b-chat.Q4_K_M.gguf  --chat functionary" >> ~/start/start_llama_cpp_server.sh
+
+
+echo '#!/bin/bash'                                         >  /home/ashok/help_llama_cpp.sh
+echo " "                                                   >> /home/ashok/help_llama_cpp.sh
+echo "cd ~/"                                               >> /home/ashok/help_llama_cpp.sh
+echo "python -m llama_cpp.server "                         >> /home/ashok/help_llama_cpp.sh
+chmod +x /home/ashok/*.sh
+
+
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/llama_cpp_template.sh
 echo " "                                                   | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "source /home/ashok/llama/bin/activate"               | tee -a /home/ashok/start/llama_cpp_template.sh
 echo "python3 -m llama_cpp.server --model /home/ashok/llama.cpp/models/llama-2-13b-chat.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --chat functionary & " | tee -a /home/ashok/start/llama_cpp_template.sh
+
+ echo "sudo lsof -i:8000"   > /home/ashok/start/pid_at_8000.sh
+
+chmod +x /home/ashok/start/*.sh
 chmod +x *.sh
 sleep 9
 
