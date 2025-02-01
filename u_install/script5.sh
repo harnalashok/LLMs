@@ -74,17 +74,20 @@ rm -rf /home/ashok/llama
 # Write llama-cpp-python server start sample
 # Ref: https://github.com/Jaimboh/Llama.cpp-Local-OpenAI-server/tree/main
 
-echo '#!/bin/bash'                                                                 >  /home/ashok/start/start_llama_cpp_server.sh
-echo " "                                                                           >> /home/ashok/start/start_llama_cpp_server.sh
-echo "echo 'Will start the server. with model:'"                                   >> /home/ashok/start/start_llama_cpp_server.sh
-echo "echo '       llama-2-13b-chat.Q4_K_M.gguf '"                                 >> /home/ashok/start/start_llama_cpp_server.sh
-echo "echo 'If the start fails if 8000 is already busy'"                           >>            ~/start/start_llama_cpp_server.sh
-echo "echo 'then, issue following command to check which service is'"     >> ~/start/start_llama_cpp_server.sh
-echo "echo 'listening on port 8000. And kill it.'"                        >> ~/start/start_llama_cpp_server.sh
-echo "echo 'sudo lsof -i:8000'"                                           >> ~/start/start_llama_cpp_server.sh
-echo "echo 'Kill, as:  sudo kill -9 PID1 PID2'"                           >> ~/start/start_llama_cpp_server.sh
-echo "sleep 10 "                                                           >> ~/start/start_llama_cpp_server.sh
-echo "python -m llama_cpp.server --host 127.0.0.1 --model_alias gpt-3.5-turbo --model models/llama-2-13b-chat.Q4_K_M.gguf  --chat functionary" >> ~/start/start_llama_cpp_server.sh
+echo '#!/bin/bash'                                                                 >  /home/ashok/start/start_llama_cpp_python_server.sh
+echo " "                                                                           >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'Will start the server with model:'"                                   >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo '       llama-2-13b-chat.Q4_K_M.gguf '"                                 >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'If the start fails as port 8000 is already busy'"                      >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'then, issue following command to check which service is'"              >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'listening on port 8000. And kill it.'"                                 >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'sudo lsof -i:8000'"                                                    >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'Kill, as:  sudo kill -9 PID1 PID2'"                                    >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "cd ~/"                                                                       >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "source /home/ashok/llama/bin/activate"                                       >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "sleep 10 "                                                                   >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "python -m llama_cpp.server --host 127.0.0.1 --model_alias gpt-3.5-turbo --model models/llama-2-13b-chat.Q4_K_M.gguf  --chat functionary" >> /home/ashok/start/start_llama_cpp_python_server.sh
+chmod +x /home/ashok/start/*.sh
 
 ## B.
 echo '#!/bin/bash'                                         >  /home/ashok/help_llama_cpp.sh
