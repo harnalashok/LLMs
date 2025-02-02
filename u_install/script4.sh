@@ -162,6 +162,7 @@ sudo docker volume create portainer_data
 # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
 
 <<comment
+cd /home/ashok/portainer
 docker rm portainer
 docker volume create portainer_data
 sudo docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
