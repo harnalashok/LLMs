@@ -46,6 +46,13 @@ echo "./LM-Studio-0.3.9-3-x64.AppImage"                  >> /home/ashok/start/st
 # i)  Create a folder under .lmstudio/models: 
 echo '#!/bin/bash'                                       > /home/ashok/lms/symlink_gguf.sh
 echo " "                                                 >> /home/ashok/lms/symlink_gguf.sh
+
+echo "if [ "\$\#" -ne 2 ]"                               >> /home/ashok/lms/symlink_gguf.sh
+echo "then"                                              >> /home/ashok/lms/symlink_gguf.sh
+   echo "echo 'Incorrect number of arguments'"           >> /home/ashok/lms/symlink_gguf.sh
+   echo "exit 1"                                         >> /home/ashok/lms/symlink_gguf.sh
+echo "fi"                                                >> /home/ashok/lms/symlink_gguf.sh
+
 echo "echo 'Start LMStudio and change Models directory to: /home/ashok/.lmstudio'"  >> /home/ashok/lms/symlink_gguf.sh
 echo "sleep 9"                                           >> /home/ashok/lms/symlink_gguf.sh
 echo "mkdir ~/.lmstudio/models/\$1"                       >> /home/ashok/lms/symlink_gguf.sh
