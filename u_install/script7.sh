@@ -60,6 +60,7 @@ echo '#!/bin/bash'                                       > /home/ashok/lms/symli
 echo " "                                                 >> /home/ashok/lms/symlink_gguf.sh
 echo "if [ "\$\#" -ne 2 ]"                               >> /home/ashok/lms/symlink_gguf.sh
 echo "then"                                              >> /home/ashok/lms/symlink_gguf.sh
+   echo "echo '  '"                                       >> /home/ashok/lms/symlink_gguf.sh
    echo "echo 'Incorrect number of arguments.'"           >> /home/ashok/lms/symlink_gguf.sh
    echo "echo '  '"                                       >> /home/ashok/lms/symlink_gguf.sh
    echo "echo 'Usage: ./symlink_gguf.sh YourModelName  ggufFileName'"  >> /home/ashok/lms/symlink_gguf.sh
@@ -79,7 +80,7 @@ echo "ln -s ~/llama.cpp/models/\$2"                       >> /home/ashok/lms/sym
 # iv) Move this symlink to flder created above:
 echo "mv \$2 /home/ashok/.lmstudio/models/\$1"             >> /home/ashok/lms/symlink_gguf.sh
 chmod +x /home/ashok/lms/*.sh
-cp ~/lms/symlink.sh  ~/
+cp ~/lms/symlink_gguf.sh  ~/
 
 
 ##########################
