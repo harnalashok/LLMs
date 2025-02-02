@@ -72,6 +72,16 @@ echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee 
 chmod +x /home/ashok/start/*.sh
 
 
+## Modelfile
+# Create a sample Modelfile to transform a gguf models for use in Ollama:
+# You can then issue the command to use a gguf model within ollama:
+# See file help.txt for more details.
+
+echo "FROM ~/gguf/llama-2-13b-chat.Q4_K_M.gguf"  > /home/ashok/Modelfile
+
+#  ollama create <YourModelName> -f /home/ashok/Modelfile
+# Note ollama blobs are stored at:  /usr/share/ollama/.ollama/models/blobs/
+
 
 
 # 1.2 download and install Node.js
