@@ -105,9 +105,13 @@ FROM ~/Downloads/miqu-1-70b.q4_k_m.gguf
 # now run the ollama command to create the loadable model
 
 > ollama create <your-model-name-here> -f Modelfile 
-
-
-ls -la /usr/share/ollama/.ollama/models/blobs/
+# A quick example:
+i) Modelfile:
+FROM ~/gguf/llama-2-13b-chat.Q4_K_M.gguf
+ii)
+> ollama create llama2-13B -f Modelfile
+iii) Look at the blob created:
+>ls -la /usr/share/ollama/.ollama/models/blobs/
 total 15398268
 drwxr-xr-x 2 ollama ollama       4096 Feb  2 16:31 .
 drwxr-xr-x 4 ollama ollama       4096 Feb  2 08:53 ..
