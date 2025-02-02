@@ -88,8 +88,8 @@ echo "echo 'listening on port 8000. And kill it.'"                              
 echo "echo 'sudo lsof -i:8000'"                                                    >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'Kill, as:  sudo kill -9 PID1 PID2'"                                    >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "cd ~/"                                                                       >> /home/ashok/start/start_llama_cpp_python_server.sh
-echo "source /home/ashok/llama/bin/activate"                                       >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "sleep 10 "                                                                   >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "source /home/ashok/llama/bin/activate"                                       >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "python -m llama_cpp.server --host 127.0.0.1 --model_alias gpt-3.5-turbo --model models/llama-2-13b-chat.Q4_K_M.gguf  --chat functionary" >> /home/ashok/start/start_llama_cpp_python_server.sh
 chmod +x /home/ashok/start/*.sh
 
