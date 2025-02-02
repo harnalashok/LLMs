@@ -48,15 +48,15 @@ echo '#!/bin/bash'                                       > /home/ashok/lms/symli
 echo " "                                                 >> /home/ashok/lms/symlink_gguf.sh
 echo "echo 'Start LMStudio and change Models directory to: /home/ashok/.lmstudio'"  >> /home/ashok/lms/symlink_gguf.sh
 echo "sleep 9"                                           >> /home/ashok/lms/symlink_gguf.sh
-echo "mkdir ~/.lmstudio/models/%1"                       >> /home/ashok/lms/symlink_gguf.sh
+echo "mkdir ~/.lmstudio/models/\$1"                       >> /home/ashok/lms/symlink_gguf.sh
 # ii) Move to your home folder
 echo "cd ~/"                                             >> /home/ashok/lms/symlink_gguf.sh
 # iii) Create a softlink of a gguf file in the current folder:
-echo "ln -s ~/llama.cpp/models/%2"                       >> /home/ashok/lms/symlink_gguf.sh
+echo "ln -s ~/llama.cpp/models/\$2"                       >> /home/ashok/lms/symlink_gguf.sh
       
 # iv) Move this symlink to flder created above:
-echo "mv %2 /home/ashok/.lmstudio/models/%1"             >> /home/ashok/lms/symlink_gguf.sh
-
+echo "mv \$2 /home/ashok/.lmstudio/models/\$1"             >> /home/ashok/lms/symlink_gguf.sh
+chmod +x /home/ashok/lms/*.sh
 
 
 
