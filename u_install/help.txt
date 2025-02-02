@@ -72,6 +72,7 @@ How to use llama.cpp gguf models in LMStudio
 # ii) Move to your home folder
      cd ~/
 # iii) Create a softlink of a gguf file in the current folder:
+      cd ~/
       ln -s ~/llama.cpp/models/gemma-2-2b-it.Q6_K.gguf 
 # iv) Move this symlink to flder created above:
       mv gemma-2-2b-it.Q6_K.gguf /home/ashok/.lmstudio/models/gemma
