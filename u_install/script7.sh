@@ -37,19 +37,27 @@ wget -c https://installers.lmstudio.ai/linux/x64/0.3.9-3/LM-Studio-0.3.9-3-x64.A
 chmod +x *.AppImage
 cd ~/
 
+## Script to start lmstudio
 echo '#!/bin/bash'                                       > /home/ashok/start/start_lmstudio.sh
 echo " "                                                 >> /home/ashok/start/start_lmstudio.sh
 echo "cd /home/ashok/lms"                                >> /home/ashok/start/start_lmstudio.sh
 echo "./LM-Studio-0.3.9-3-x64.AppImage"                  >> /home/ashok/start/start_lmstudio.sh
+cp /home/ashok/start/start_lmstudio.sh  /home/ashok/lms/
+chmod +x /home/ashok/lms/*.sh
 
+## Script to develop a symlink for any gguf folder in
+#  in ~/llama.cpp/models folder to ~/.lmstudio/models
 
-# i)  Create a folder under .lmstudio/models: 
 echo '#!/bin/bash'                                       > /home/ashok/lms/symlink_gguf.sh
 echo " "                                                 >> /home/ashok/lms/symlink_gguf.sh
 
 echo "if [ "\$\#" -ne 2 ]"                               >> /home/ashok/lms/symlink_gguf.sh
 echo "then"                                              >> /home/ashok/lms/symlink_gguf.sh
    echo "echo 'Incorrect number of arguments'"           >> /home/ashok/lms/symlink_gguf.sh
+   echo "echo 'Usage: ./symlink_gguf.sh YourModelName  ggufFileName'"  >> /home/ashok/lms/symlink_gguf.sh
+   echo "echo 'Example:'"                                      >> /home/ashok/lms/symlink_gguf.sh
+   echo "echo './symlink_gguf gemma gemma-2-2b-it.Q6_K.gguf'"  >> /home/ashok/lms/symlink_gguf.sh
+   echo "echo 'File gemma-2-2b-it.Q6_K.gguf must be in ~/llama.cpp/models folder'"   >> /home/ashok/lms/symlink_gguf.sh
    echo "exit 1"                                         >> /home/ashok/lms/symlink_gguf.sh
 echo "fi"                                                >> /home/ashok/lms/symlink_gguf.sh
 
