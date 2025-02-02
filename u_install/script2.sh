@@ -96,6 +96,10 @@ sleep 6
 mv /home/ashok/script2.sh /home/ashok/done
 mv /home/ashok/next/docker_install.sh /home/ashok/
 
+ echo "PATH=\$PATH:/home/ashok/start;/home/ashok/stop"  >> /home/ashok/.bashrc
+
+
+
 # sudo bash docker_install.sh
 
 
