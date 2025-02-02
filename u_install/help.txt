@@ -78,51 +78,50 @@ How to use llama.cpp gguf models in LMStudio
       mv gemma-2-2b-it.Q6_K.gguf /home/ashok/.lmstudio/models/gemma
 #  v) Start LMStudio and change Models directory to: /home/ashok/.lmstudio
 
-Ollama and local gguf file
+Ollama and local gguf model
 ===================
-Ollama can use existing local gguf models. But, first it writes them in its own way.
+Ollama can use downloaded local gguf models. But, first it writes them in its own way.
 In doing so it,essesntially, makes a copy of it. Thus, it is as good as 'ollama pull'
-command. To use a gguf model, proceed as follows:
+command. To use a local gguf model, proceed as follows:
 
-OPEN TERMINAL:
+	OPEN TERMINAL:
+	
+	# first make sure you're in your home directory
+	
+	> cd ~
+	
+	# Make a file called 'Modelfile' and put one line into it per the docs, I use the nano editor, but anything will do
+	
+	> nano Modelfile
+	
+	# type in one line that indicates where to pull the gguf file from, such as:
+	
+	FROM ~/gguf/llama-thinker-3b-preview-q8_0.gguf
+	
+	# save the file: in nano that's CTRL-O (writes it to disk), press enter to confirm filename, then CTRL-X to exit the editor.
+	
+	# now run the ollama command to create the loadable model
+	
+	> ollama create <your-model-name-here> -f Modelfile 
 
-# first make sure you're in your home directory
-
-> cd ~
-
-# Make a file called 'Modelfile' and put one line into it per the docs, I use the nano editor, but anything will do
-
-> nano Modelfile
-
-# type in one line that indicates where to pull the gguf file from, such as:
-
-FROM ~/Downloads/miqu-1-70b.q4_k_m.gguf
-
-# of course the path to the gguf needs to match where you have it.
-
-# save the file: in nano that's CTRL-O (writes it to disk), press enter to confirm filename, then CTRL-X to exit the editor.
-
-# now run the ollama command to create the loadable model
-
-> ollama create <your-model-name-here> -f Modelfile 
 # A quick example:
-i) Modelfile:
-FROM ~/gguf/llama-2-13b-chat.Q4_K_M.gguf
-ii)
-> ollama create llama2-13B -f Modelfile
-iii) Look at the blob created:
->ls -la /usr/share/ollama/.ollama/models/blobs/
-total 15398268
-drwxr-xr-x 2 ollama ollama       4096 Feb  2 16:31 .
-drwxr-xr-x 4 ollama ollama       4096 Feb  2 08:53 ..
--rw-r--r-- 1 ollama ollama       7712 Feb  2 09:13 sha256-0b4284c1f87029e67654c7953afa16279961632cf73dcfe33374c4c2f298fa35
--rw-r--r-- 1 ollama ollama 5963057248 Feb  2 09:10 sha256-11f274007f093fefeec994a5dbbb33d0733a4feb87f7ab66dcd7c1069fef0068
--rw-r--r-- 1 ollama ollama        269 Feb  2 09:13 sha256-715415638c9c4c0cb2b78783da041b97bd1205f8b9f9494bd7e5a850cb443602
--rw-r--r-- 1 ollama ollama 7865956224 Feb  2 16:31 sha256-7ddfe27f61bf994542c22aca213c46ecbd8a624cca74abff02a7b5a8c18f787f
--rw-r--r-- 1 ollama ollama        266 Feb  2 16:31 sha256-eaf01729e752f8421efdd4151362fd000bcf66f0af7a9117625d2fbbd0a8b921
--rw-r--r-- 1 ollama ollama 1938763584 Feb  2 09:13 sha256-ece5e659647a20a5c28ab9eea1c12a1ad430bc0f2a27021d00ad103b3bf5206f
--rw-r--r-- 1 ollama ollama        572 Feb  2 09:13 sha256-fbd313562bb706ac00f1a18c0aad8398b3c22d5cd78c47ff6f7246c4c3438576
--rw-r--r-- 1 ollama ollama         32 Feb  2 09:13 sha256-fefc914e46e6024467471837a48a24251db2c6f3f58395943da7bf9dc6f70fb6
+	i) Modelfile:
+	FROM ~/gguf/llama-2-13b-chat.Q4_K_M.gguf
+	ii)
+	> ollama create llama2-13B -f Modelfile
+	iii) Look at the blob created:
+	>ls -la /usr/share/ollama/.ollama/models/blobs/
+	total 15398268
+	drwxr-xr-x 2 ollama ollama       4096 Feb  2 16:31 .
+	drwxr-xr-x 4 ollama ollama       4096 Feb  2 08:53 ..
+	-rw-r--r-- 1 ollama ollama       7712 Feb  2 09:13 sha256-0b4284c1f87029e67654c7953afa16279961632cf73dcfe33374c4c2f298fa35
+	-rw-r--r-- 1 ollama ollama 5963057248 Feb  2 09:10 sha256-11f274007f093fefeec994a5dbbb33d0733a4feb87f7ab66dcd7c1069fef0068
+	-rw-r--r-- 1 ollama ollama        269 Feb  2 09:13 sha256-715415638c9c4c0cb2b78783da041b97bd1205f8b9f9494bd7e5a850cb443602
+	-rw-r--r-- 1 ollama ollama 7865956224 Feb  2 16:31 sha256-7ddfe27f61bf994542c22aca213c46ecbd8a624cca74abff02a7b5a8c18f787f
+	-rw-r--r-- 1 ollama ollama        266 Feb  2 16:31 sha256-eaf01729e752f8421efdd4151362fd000bcf66f0af7a9117625d2fbbd0a8b921
+	-rw-r--r-- 1 ollama ollama 1938763584 Feb  2 09:13 sha256-ece5e659647a20a5c28ab9eea1c12a1ad430bc0f2a27021d00ad103b3bf5206f
+	-rw-r--r-- 1 ollama ollama        572 Feb  2 09:13 sha256-fbd313562bb706ac00f1a18c0aad8398b3c22d5cd78c47ff6f7246c4c3438576
+	-rw-r--r-- 1 ollama ollama         32 Feb  2 09:13 sha256-fefc914e46e6024467471837a48a24251db2c6f3f58395943da7bf9dc6f70fb6
 
 
 
