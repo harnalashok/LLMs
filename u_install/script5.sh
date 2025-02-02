@@ -81,7 +81,7 @@ echo " "                                                                        
 echo "echo 'Will start the server with model:'"                                   >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo '       llama-2-13b-chat.Q4_K_M.gguf '"                                >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo '       Model alias is: gpt-3.5-turbo  '"                              >> /home/ashok/start/start_llama_cpp_python_server.sh
-echo "echo 'If the start fails as port 8000 is already busy'"                      >> /home/ashok/start/start_llama_cpp_python_server.sh
+echo "echo 'If the server fails as port 8000 is already busy'"                      >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'then, issue following command to check which service is'"              >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'listening on port 8000. And kill it.'"                                 >> /home/ashok/start/start_llama_cpp_python_server.sh
 echo "echo 'sudo lsof -i:8000'"                                                    >> /home/ashok/start/start_llama_cpp_python_server.sh
