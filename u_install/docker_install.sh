@@ -12,6 +12,10 @@
 #     script5.sh
 
 
+##########################
+###  Docker install using snap
+##########################
+
 # Install docker engine on Ubuntu
 # Better follow this reference:
 # Ref:    https://docs.docker.com/engine/install/ubuntu/
