@@ -33,7 +33,9 @@ echo "Script: script1.sh"                      | tee -a /home/ashok/error.log
 echo "**********"                              | tee -a /home/ashok/error.log
 echo " "                                       | tee -a /home/ashok/error.log
 
-
+################
+# Update Ubuntu
+################
 
 echo "  "
 echo "------------"                            | tee -a /home/ashok/error.log
@@ -49,6 +51,10 @@ sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq
 echo " "
 echo "Ubuntu upgraded ......"                | tee -a /home/ashok/error.log
 echo "1. Ubuntu upgraded ......"             | tee -a /home/ashok/info.log
+
+################
+# Install Ollama
+################
 
 # Installing ollama
 echo " "
@@ -72,10 +78,11 @@ echo "    ollama serve &  > /dev/null & "           | tee -a /home/ashok/info.lo
 echo "Or, as:"                                      | tee -a /home/ashok/info.log
 echo "sudo systemctl start|stop|restart ollama"     | tee -a /home/ashok/info.log  
 
-
+# Folders for start/stop scripts
 mkdir /home/ashok/start
 mkdir /home/ashok/stop
 
+# Ollama start script:
 echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_ollama.sh  
 echo " "                                                   | tee -a /home/ashok/start/start_ollama.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_ollama.sh  
@@ -83,6 +90,7 @@ echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/ashok/
 echo "sudo systemctl start ollama"                         | tee -a /home/ashok/start/start_ollama.sh  
 echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/start/start_ollama.sh  
 
+# Ollama stop script
 echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_ollama.sh  
 echo " "                                                   | tee -a /home/ashok/stop/stop_ollama.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_ollama.sh  
@@ -90,6 +98,7 @@ echo "echo 'Ollama will be stopped'"                       | tee -a /home/ashok/
 echo "sudo systemctl stop ollama"                          | tee -a /home/ashok/stop/stop_ollama.sh  
 echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/stop/stop_ollama.sh  
 
+# PRemission changes
 chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
@@ -99,7 +108,9 @@ cp /home/ashok/find_venv.sh  /home/ashok/start/
 cp /home/ashok/find_venv.sh  /home/ashok/stop/
 sleep 2
 
-
+###########
+# Fast Node Manager install
+############
 
 # Install 'fnm' (Fast Node Manager)
 echo " "                                       | tee -a /home/ashok/error.log
@@ -110,6 +121,9 @@ sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> /home/ashok/error.lo
 echo "Fast Node Manager (fnm) installed"       | tee -a /home/ashok/error.log
 echo "2. Fast Node Manager (fnm) installed"    | tee -a /home/ashok/info.log
 
+###########
+# chromadb install
+############
 
 # Install chromadb
 echo " "                                       | tee -a /home/ashok/error.log
@@ -149,7 +163,7 @@ echo "WantedBy = multi-user.target"  >> chroma.service
 sudo mv chroma.service /etc/systemd/system/chroma.service
 #---------------------
 
-
+# This is outdated. Needs rechecking.
 # You can now start chroma, as:
 echo " "                                       | tee -a /home/ashok/error.log
 echo "5. ---Start/Stop Chroma as-------"       | tee -a /home/ashok/info.log
@@ -165,7 +179,7 @@ echo " "                                       | tee -a /home/ashok/info.log
 sleep 2
 
 
-
+# Chroma start script
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
 echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
@@ -178,7 +192,8 @@ sudo echo"`lsof -i :8000`"                                 | tee -a /home/ashok/
 echo "sleep 5"                                             | tee -a /home/ashok/start/start_chroma.sh  
 echo "/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log &"   | tee -a /home/ashok/start/start_chroma.sh  
 
-
+# Chroma stop script
+# This is outdated
 echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_chroma.sh  
 echo " "                                                   | tee -a /home/ashok/stop/stop_chroma.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_chroma.sh  
@@ -187,6 +202,10 @@ echo "sudo systemctl stop chroma"                          | tee -a /home/ashok/
 echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/stop/stop_chroma.sh  
 
 chmod +x /home/ashok/start/*.sh
+
+###########
+# uv install
+############
 
 # Install uv for langflow install
 echo " "                                       | tee -a /home/ashok/info.log
@@ -199,6 +218,7 @@ echo " "                                       | tee -a /home/ashok/error.log
 echo " "                                       | tee -a /home/ashok/info.log
 echo "uv installed"                            | tee -a /home/ashok/error.log
 echo "8. uv installed"                         | tee -a /home/ashok/info.log
+uv --version                                   | tee -a /home/ashok/info.log
 sleep 2
 
 
