@@ -4,6 +4,7 @@
 
 echo "========script7=============="
 echo "Will install FAISS"
+echo "Will install n8n docker"
 echo "Will install LM Studio"
 echo "Will install AnythingLLM"
 echo "You may call download_models.sh to download gguf models or from ollama library"
@@ -30,6 +31,25 @@ echo "echo 'source /home/ashok/start/activate_faiss.sh'"                 >> /hom
 echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/ashok/start/activate_faiss.sh
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 
+
+##########################
+### n8n
+##########################
+# Refer: https://github.com/n8n-io/n8n?tab=readme-ov-file#quick-start
+
+cd ~/
+docker volume create n8n_data
+docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/node/.n8n docker.n8n.io/n8nio/n8n
+# Access at localhost:5678
+
+# n8n start script
+echo '#!/bin/bash'                                                                                            > /home/ashok/start/start_n8n.sh
+echo " "                                                                                                      >> /home/ashok/start/start_n8n.sh
+echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                         >> /home/ashok/start/start_n8n.sh
+echo "sleep 9"                                                                                                >> /home/ashok/start/start_n8n.sh
+echo "cd ~/"                                                                                                  >> /home/ashok/start/start_n8n.sh
+echo "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/ashok/start/start_n8n.sh
+chmod +x /home/ashok/start/*.sh
 ##########################
 ### Install LMStudio
 ##########################
