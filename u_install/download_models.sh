@@ -13,6 +13,7 @@ echo "Will pull ollama models:"
 echo "      tinyllama"
 echo "      nomic-embed-text"
 echo "      olom2"
+echo "      deepseek-r1"
 echo "==========================="
 sleep 10
 
