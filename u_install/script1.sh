@@ -227,6 +227,8 @@ sleep 2
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
 mv /home/ashok/next/script2.sh /home/ashok/
+# Make a copy of this script also
+cp /home/ashok/find_venv.sh /home/ashok/start/
 
 # If not wsl, then
 reboot
