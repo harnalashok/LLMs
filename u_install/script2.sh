@@ -30,7 +30,7 @@ echo "Script: script2.sh"                     | tee -a /home/ashok/error.log
 echo "**********"                             | tee -a /home/ashok/error.log
 echo " "                                      | tee -a /home/ashok/error.log
 
-
+# Check if llama.cpp is already installed?
 
 DIRECTORY="/home/ashok/llama.cpp"
 if [ -d "$DIRECTORY" ]; then
@@ -40,6 +40,9 @@ if [ -d "$DIRECTORY" ]; then
   sleep 40
 fi
 
+###################
+# llama.cpp install
+###################
 
 # Installing llama.cpp
 echo " "                                         | tee -a /home/ashok/error.log
@@ -64,10 +67,16 @@ echo "10. llama.cpp installed"                  | tee -a /home/ashok/info.log
 echo "-------"                                  | tee -a /home/ashok/error.log
 
 
+# Script to start llama.cpp server
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_llamacpp_server.sh
 echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "echo 'llama.cpp server will be available at port: '"      | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo " "                                                                  | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "sleep 10"                                                           | tee -a /home/ashok/start/start_llamacpp_server.sh
 echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/start/start_llamacpp_server.sh
 chmod +x /home/ashok/start/*.sh
 
