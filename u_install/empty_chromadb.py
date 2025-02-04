@@ -1,5 +1,7 @@
-# Python program to  empty chromadb
-#  empty all vectors
+# Python program to  empty chromadb collection
+#  ie empty all vectors without deleting the collection
+# Use as:
+#         python3 empty_chromadb.py
 
 import chromadb
 from time import sleep
