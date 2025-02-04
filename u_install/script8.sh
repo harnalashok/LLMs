@@ -6,6 +6,9 @@ echo "You may call download_models.sh to download gguf models or from ollama lib
 echo "==========================="
 sleep 10
 
+# Create a script, that will inturn, help create user and password
+# in postgresql
+
 echo "#!/bin/bash"  > /home/ashok/createpostgresuser.sh
 echo " "   >>   /home/ashok/createpostgresuser.sh
 echo "echo 'Ref: https://stackoverflow.com/a/2172588'" >>   /home/ashok/createpostgresuser.sh
