@@ -123,7 +123,13 @@ command. To use a local gguf model, proceed as follows:
 	-rw-r--r-- 1 ollama ollama        572 Feb  2 09:13 sha256-fbd313562bb706ac00f1a18c0aad8398b3c22d5cd78c47ff6f7246c4c3438576
 	-rw-r--r-- 1 ollama ollama         32 Feb  2 09:13 sha256-fefc914e46e6024467471837a48a24251db2c6f3f58395943da7bf9dc6f70fb6
 
-
+## Managing chromadb
+	# To empty the collection, use the command:
+	cd ~/
+	python3 empty_chromadb.py
+	# To get the list of collection names, use the command:
+	# Default collection name appears to be 'documenData'
+	python3 get_chroma_collectionsName.py
 
 
 ###########################33
