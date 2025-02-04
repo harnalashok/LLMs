@@ -24,7 +24,6 @@ echo "sudo -u postgres psql postgres"                                           
 chmod +x /home/ashok/*.sh
 
 
-
 echo "You may like to execute:"
 echo "       ./download_models.sh"
 sleep 10
