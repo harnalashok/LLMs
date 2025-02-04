@@ -1,4 +1,4 @@
-# python program to get names of collections
+# python program to get names of chroma collections
 # # Use as:
 #         python3 get_chroma_collectionsName.py
 
