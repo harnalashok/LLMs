@@ -57,6 +57,10 @@ echo " "
 echo "Ubuntu upgraded ......"                | tee -a /home/ashok/error.log
 echo "1. Ubuntu upgraded ......"             | tee -a /home/ashok/info.log
 
+# Folders for start/stop scripts
+mkdir /home/ashok/start
+mkdir /home/ashok/stop
+
 # Postgresql start/stop script
 echo '#!/bin/bash'                                                      > /home/ashok/start/start_postgresql.sh  
 echo " "                                                               >> /home/ashok/start/start_postgresql.sh  
@@ -99,9 +103,6 @@ echo "    ollama serve &  > /dev/null & "           | tee -a /home/ashok/info.lo
 echo "Or, as:"                                      | tee -a /home/ashok/info.log
 echo "sudo systemctl start|stop|restart ollama"     | tee -a /home/ashok/info.log  
 
-# Folders for start/stop scripts
-mkdir /home/ashok/start
-mkdir /home/ashok/stop
 
 # Ollama start script:
 echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_ollama.sh  
