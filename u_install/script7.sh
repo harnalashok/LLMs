@@ -7,6 +7,7 @@ echo "Will install FAISS"
 echo "Will install n8n docker"
 echo "Will install LM Studio"
 echo "Will install AnythingLLM"
+echo "You may execute script.sh after this"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
@@ -120,6 +121,11 @@ echo "./anythingllm-desktop start"                                     >>  /home
 chmod +x /home/ashok/*.sh
 chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
+
+echo "You may like to execute:"
+echo "       ./script8.sh"
+sleep 10
+kill $PPID
 
 
 
