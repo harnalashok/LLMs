@@ -61,12 +61,17 @@ echo "1. Ubuntu upgraded ......"             | tee -a /home/ashok/info.log
 echo '#!/bin/bash'                                                      > /home/ashok/start/start_postgresql.sh  
 echo " "                                                               >> /home/ashok/start/start_postgresql.sh  
 echo "cd ~/"                                                           >> /home/ashok/start/start_postgresql.sh  
+echo "echo 'postgresql will be available on port 5432'"                >> /home/ashok/start/start_postgresql.sh  
 echo "sudo systemctl start postgresql.service"                         >> /home/ashok/start/start_postgresql.sh  
+echo "sleep 2"                                                         >> /home/ashok/start/start_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/ashok/start/start_postgresql.sh  
 
 echo '#!/bin/bash'                                                      > /home/ashok/stop/stop_postgresql.sh  
 echo " "                                                               >> /home/ashok/stop/stop_postgresql.sh  
 echo "cd ~/"                                                           >> /home/ashok/stop/stop_postgresql.sh  
 echo "sudo systemctl stop postgresql.service"                          >> /home/ashok/stop/stop_postgresql.sh  
+echo "sleep 2"                                                         >> /home/ashok/stop/stop_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/ashok/stop/stop_postgresql.sh  
 
 ################
 # Install Ollama
