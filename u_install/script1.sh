@@ -11,6 +11,8 @@
       #     script4.sh
       #     script5.sh
       #     script6.sh
+      #     script7.sh
+      #     script8.sh
 
 
 echo "========script1=============="
