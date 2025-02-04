@@ -225,6 +225,19 @@ echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/
 
 chmod +x /home/ashok/start/*.sh
 
+
+
+# Download python scripts to manage chroma db
+echo "Downloading python scripts to manage chromadb"
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/empty_chromadb.py
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/get_chroma_collectionsName.py
+echo "Use them as:"
+echo "cd ~/"
+echo "python3 empty_chromadb.py"
+echo "python3 get_chroma_collectionsName.py"
+sleep 5
+
+
 ###########
 # uv install
 ############
