@@ -15,6 +15,7 @@
 
 echo "========script1=============="
 echo "Will update Ubuntu"
+echo "Will install postgresql"
 echo "Will install necessary packages"
 echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
@@ -35,6 +36,7 @@ echo " "                                       | tee -a /home/ashok/error.log
 
 ################
 # Update Ubuntu
+# Also install postgresql
 ################
 
 echo "  "
@@ -47,10 +49,22 @@ sleep 2
 sudo apt update
 sudo apt upgrade -y
 sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  libfuse2 -y  
+sudo apt install postgresql postgresql-contrib -y
 sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
 echo " "
 echo "Ubuntu upgraded ......"                | tee -a /home/ashok/error.log
 echo "1. Ubuntu upgraded ......"             | tee -a /home/ashok/info.log
+
+# Postgresql start/stop script
+echo '#!/bin/bash'                                                      > /home/ashok/start/start_postgresql.sh  
+echo " "                                                               >> /home/ashok/start/start_postgresql.sh  
+echo "cd ~/"                                                           >> /home/ashok/start/start_postgresql.sh  
+echo "sudo systemctl start postgresql.service"                         >> /home/ashok/start/start_postgresql.sh  
+
+echo '#!/bin/bash'                                                      > /home/ashok/stop/stop_postgresql.sh  
+echo " "                                                               >> /home/ashok/stop/stop_postgresql.sh  
+echo "cd ~/"                                                           >> /home/ashok/stop/stop_postgresql.sh  
+echo "sudo systemctl stop postgresql.service"                          >> /home/ashok/stop/stop_postgresql.sh  
 
 ################
 # Install Ollama
