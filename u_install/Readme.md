@@ -52,7 +52,8 @@ xiv) Downloads *olmo2* from *ollama library*<br>
  xv) Installs LM Studio    
 xvi) Installs AnythingLLM     
 xvii)Installs OpenWebUI    
-xviii)Installs FAISS     
+xviii)Installs FAISS    
+xix) Install postgresql for record manager
 
 
 
@@ -68,6 +69,7 @@ xviii)Installs FAISS
       #     script5.sh
       #     script6.sh
       #     script7.sh
+      #     script8.sh
 </pre>
 
 <pre>
