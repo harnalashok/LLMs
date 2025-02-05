@@ -15,6 +15,7 @@
       #     script5.sh
       #     script6.sh
       #     script7.sh
+      #     script8.sh
 
 echo "========script5=============="
 echo "Will install llama-cpp-python"
