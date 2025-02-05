@@ -125,7 +125,7 @@ mv /home/ashok/script2.sh /home/ashok/done
 mv /home/ashok/next/docker_install.sh /home/ashok/
 
 # Add start/stop folders to PATH in .bashrc
-echo "PATH=\$PATH:/home/ashok/start;/home/ashok/stop"  >> /home/ashok/.bashrc
+echo "PATH=\$PATH:/home/ashok/start:/home/ashok/stop"  >> /home/ashok/.bashrc
 
 
 
