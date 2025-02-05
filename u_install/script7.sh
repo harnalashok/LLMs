@@ -115,6 +115,10 @@ chmod +x /home/ashok/lms/*.sh
 cp ~/lms/symlink_gguf.sh  ~/
 
 
+mv /home/ashok/script7.sh /home/ashok/done/4
+mv /home/ashok/next/script8.sh  /home/ashok/
+
+
 ##########################
 ### Install AnythingLLM
 ##########################
