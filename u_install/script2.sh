@@ -115,7 +115,9 @@ echo "------------"                            | tee -a /home/ashok/error.log
 echo "  "                                      | tee -a /home/ashok/error.log
 
 # Refer https://github.com/Schniz/fnm#shell-setup
-echo 'eval "$(fnm env --use-on-cd --shell bash)"'   >> /home/ashok/.bashrc
+echo " "                                            >>  /home/ashok/.bashrc
+echo 'eval "$(fnm env --use-on-cd --shell bash)"'   >>  /home/ashok/.bashrc
+echo " "                                            >>  /home/ashok/.bashrc
 sleep 6
 
 # Move script file to done folder
