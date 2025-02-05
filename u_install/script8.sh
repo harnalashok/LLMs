@@ -37,6 +37,7 @@ echo "sleep 10"                                                                 
 echo "sudo -u postgres psql postgres"                                                     >> /home/ashok/createpostgresuser.sh
 chmod +x /home/ashok/*.sh
 
+mv /home/ashok/script8.sh  /home/ashok/done/
 
 echo "You may like to execute:"
 echo "       ./download_models.sh"
