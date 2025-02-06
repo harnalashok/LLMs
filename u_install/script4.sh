@@ -40,17 +40,22 @@ echo "sleep 10"                                                                 
 echo "sudo -u postgres psql postgres"                                                     >> /home/ashok/createpostgresuser.sh
 chmod +x /home/ashok/*.sh
 
-mv /home/ashok/script8.sh  /home/ashok/done/
+mv /home/ashok/script4.sh  /home/ashok/done/
+mv /home/ashok/next/script4a.sh  /home/ashok/
+
+LOCALAI=http://localhost:8080
+curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
+     "id": "localai@bert-embeddings"
+   }'
+
+
 
 echo "You may like to execute:"
-echo "       ./download_models.sh"
+echo "       ./script4a.sh"
 sleep 10
 kill $PPID
 
 
 mkdir /home/ashok/localai
 docker run -ti --name local-ai -p 8080:8080 localai/localai:latest-cpu
-LOCALAI=http://localhost:8080
-curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
-     "id": "localai@bert-embeddings"
-   }'
+
