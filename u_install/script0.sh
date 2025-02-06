@@ -6,7 +6,7 @@
       #     script0.sh
       #     script1.sh
       #     script2.sh
-      #     docker_install.sh
+      #     ubuntu_docker.sh
       #     script3.sh
       #     script4.sh
       #     script5.sh
