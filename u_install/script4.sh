@@ -43,19 +43,19 @@ chmod +x /home/ashok/*.sh
 mv /home/ashok/script4.sh  /home/ashok/done/
 mv /home/ashok/next/script4a.sh  /home/ashok/
 
+
+mkdir /home/ashok/localai
+cd /home/ashok/localai
+docker run -ti --name local-ai -p 8080:8080 localai/localai:latest-cpu
+
 LOCALAI=http://localhost:8080
 curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
      "id": "localai@bert-embeddings"
    }'
 
-
-
+cd ~/
 echo "You may like to execute:"
 echo "       ./script4a.sh"
 sleep 10
-kill $PPID
-
-
-mkdir /home/ashok/localai
-docker run -ti --name local-ai -p 8080:8080 localai/localai:latest-cpu
+reboot
 
