@@ -122,7 +122,7 @@ sleep 6
 
 # Move script file to done folder
 mv /home/ashok/script2.sh /home/ashok/done
-mv /home/ashok/next/docker_install.sh /home/ashok/
+mv /home/ashok/next/ubuntu_docker.sh /home/ashok/
 
 # Add start/stop folders to PATH in .bashrc
 echo "PATH=\$PATH:/home/ashok/start:/home/ashok/stop"  >> /home/ashok/.bashrc
@@ -136,7 +136,7 @@ echo "PATH=\$PATH:/home/ashok/start:/home/ashok/stop"  >> /home/ashok/.bashrc
 #echo "  "
 #echo "Shut down/reboot Ubuntu"
 #echo "After shutdown, reopen ubuntu console and execute the command:"
-#echo " sudo   ./docker_install.sh"
+#echo " sudo   ./ubuntu_docker.sh"
 #echo "----------"
 #echo " "
 #exec sleep 9
