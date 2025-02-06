@@ -50,3 +50,7 @@ kill $PPID
 
 mkdir /home/ashok/localai
 docker run -ti --name local-ai -p 8080:8080 localai/localai:latest-cpu
+LOCALAI=http://localhost:8080
+curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
+     "id": "localai@bert-embeddings"
+   }'
