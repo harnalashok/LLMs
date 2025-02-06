@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Last amended: 14th Jan, 2025
+# Last amended: 6th Feb, 2025
 
  # These scripts run in sequence.
       #     script0.sh
       #     script1.sh
       #     script2.sh
-      #     docker_install.sh
+      #     ubuntu_docker.sh
       #     script3.sh
       #     script4.sh
       #     script5.sh
@@ -20,7 +20,7 @@ echo "========script2=============="
 echo "Will install llama.cpp directly"
 echo "Will install Node.js"
 echo "   What is Node.js--See the end of this file"
-echo "Call docker_install.sh as sudo user"
+echo "Call ubuntu_docker.sh as sudo user"
 echo "==========================="
 sleep 10
 
@@ -129,7 +129,7 @@ echo "PATH=\$PATH:/home/ashok/start:/home/ashok/stop"  >> /home/ashok/.bashrc
 
 
 
-# sudo bash docker_install.sh
+# sudo bash ubuntu_docker.sh
 
 
 
