@@ -78,7 +78,9 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script2.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script3.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script4.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/docker_install.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script4a.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/ubuntu_docker1.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/ubuntu_docker2.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script5.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script6.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script7.sh -P /home/ashok/next
@@ -98,7 +100,8 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script0.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script1.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script2.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script3.sh
-perl -pi -e 's/\r\n/\n/g' /home/ashok/next/docker_install.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/ubuntu_docker1.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/ubuntu_docker2.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script4.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script5.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script6.sh
