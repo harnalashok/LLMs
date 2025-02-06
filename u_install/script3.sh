@@ -19,7 +19,9 @@ cd ~/
 
 
 echo "========script3=============="
+echo "Will install langflow using uv (but in virtual environment)"
 echo "Will install Flowise using npm (node package manager)"
+echo "Will prepare start script for each"
 echo "Reboot and call script4.sh"
 echo "==========================="
 sleep 10
@@ -55,6 +57,52 @@ echo "cd ~/"                                               | tee -a /home/ashok/
 echo "echo 'Flowise will be available at port 3000'"       | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "npx flowise start"                                   | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "netstat -aunt | grep 3000"                           | tee -a /home/ashok/start/start_npx_flowise.sh
+
+chmod +x /home/ashok/start/*.sh
+
+
+
+# Install langflow
+echo " "                                      | tee -a /home/ashok/error.log
+echo "Installing langflow..."                 | tee -a /home/ashok/error.log
+echo "------"                                 | tee -a /home/ashok/error.log
+echo " "                                      | tee -a /home/ashok/error.log
+sleep 2
+
+
+# Create default .venv environment in the current folder
+# Existing environment is first deleted
+uv venv
+# Install in the default environment ie .venv
+uv pip install langflow  2>> /home/ashok/error.log
+sleep 2
+echo "  "                                    | tee -a /home/ashok/error.log
+echo "  "                                    | tee -a /home/ashok/info.log
+
+echo "langflow installed"                    | tee -a /home/ashok/error.log
+echo "langflow installed"                    | tee -a /home/ashok/info.log
+
+
+# https://docs.langflow.org/configuration-cli
+echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a /home/ashok/info.log
+echo "Run following command to get langflow CLI options:"    | tee -a /home/ashok/info.log
+echo "        uv run langflow"                               | tee -a /home/ashok/info.log
+echo "Generate api-key, as: "                                | tee -a /home/ashok/info.log
+echo "        uv run langflow api-key"                       | tee -a /home/ashok/info.log
+echo "Run langflow, as:"                                     | tee -a /home/ashok/info.log
+echo "        uv run langflow run"                           | tee -a /home/ashok/info.log
+echo "---------- "                                           | tee -a /home/ashok/info.log
+echo "  "                                                    | tee -a /home/ashok/info.log
+
+
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_uv_langflow.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "echo 'Langflow will be available at port 7860'"      | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "echo 'deactivate venv with, deactivate, command'"    | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "source .venv/bin/activate"                           | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "uv run langflow run"                                 | tee -a /home/ashok/start/start_uv_langflow.sh  
+echo "netstat -aunt | grep 3000"                           | tee -a /home/ashok/start/start_uv_langflow.sh  
 
 chmod +x /home/ashok/start/*.sh
 
