@@ -18,8 +18,10 @@
 echo "========script1=============="
 echo "Will update Ubuntu"
 echo "Will install necessary packages"
+echo "Will install postgresql"
 echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
+echo "Will install uv for langflow install"
 echo "Will install chromadb"
 echo "Reboot machine and call script2.sh"
 echo "==========================="
@@ -112,6 +114,30 @@ cp /home/ashok/find_venv.sh  /home/ashok/start/
 cp /home/ashok/find_venv.sh  /home/ashok/stop/
 sleep 2
 
+################
+# Install postgresql
+################
+
+sudo apt install postgresql postgresql-contrib -y
+
+# Postgresql start/stop script
+echo '#!/bin/bash'                                                      > /home/ashok/start/start_postgresql.sh  
+echo " "                                                               >> /home/ashok/start/start_postgresql.sh  
+echo "cd ~/"                                                           >> /home/ashok/start/start_postgresql.sh  
+echo "echo 'postgresql will be available on port 5432'"                >> /home/ashok/start/start_postgresql.sh  
+echo "sudo systemctl start postgresql.service"                         >> /home/ashok/start/start_postgresql.sh  
+echo "sleep 2"                                                         >> /home/ashok/start/start_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/ashok/start/start_postgresql.sh  
+
+echo '#!/bin/bash'                                                      > /home/ashok/stop/stop_postgresql.sh  
+echo " "                                                               >> /home/ashok/stop/stop_postgresql.sh  
+echo "cd ~/"                                                           >> /home/ashok/stop/stop_postgresql.sh  
+echo "sudo systemctl stop postgresql.service"                          >> /home/ashok/stop/stop_postgresql.sh  
+echo "sleep 2"                                                         >> /home/ashok/stop/stop_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/ashok/stop/stop_postgresql.sh  
+
+
+
 ###########
 # Fast Node Manager install
 ############
@@ -124,6 +150,28 @@ sleep 9
 sudo curl -fsSL https://fnm.vercel.app/install | bash   2>> /home/ashok/error.log
 echo "Fast Node Manager (fnm) installed"       | tee -a /home/ashok/error.log
 echo "2. Fast Node Manager (fnm) installed"    | tee -a /home/ashok/info.log
+
+
+
+###########
+# uv install
+############
+
+# Install uv for langflow install
+echo " "                                       | tee -a /home/ashok/info.log
+echo "Installing uv"                           | tee -a /home/ashok/info.log
+echo "--------------"                          | tee -a /home/ashok/info.log
+echo " "                                       | tee -a /home/ashok/info.log
+sleep 2
+curl -LsSf https://astral.sh/uv/install.sh     | sh   2>> /home/ashok/error.log
+echo " "                                       | tee -a /home/ashok/error.log
+echo " "                                       | tee -a /home/ashok/info.log
+echo "uv installed"                            | tee -a /home/ashok/error.log
+echo "8. uv installed"                         | tee -a /home/ashok/info.log
+uv --version                                   | tee -a /home/ashok/info.log
+sleep 2
+
+
 
 ###########
 # chromadb install
