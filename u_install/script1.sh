@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 23rd Jan, 2025
+# Last amended: 06th Feb, 2025
 
  # These scripts run in sequence.
       #     script0.sh
@@ -17,12 +17,10 @@
 
 echo "========script1=============="
 echo "Will update Ubuntu"
-echo "Will install postgresql"
 echo "Will install necessary packages"
 echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
 echo "Will install chromadb"
-echo "Will install uv for langflow install"
 echo "Reboot machine and call script2.sh"
 echo "==========================="
 sleep 10
@@ -51,7 +49,6 @@ sleep 2
 sudo apt update
 sudo apt upgrade -y
 sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  libfuse2 -y  
-sudo apt install postgresql postgresql-contrib -y
 sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
 echo " "
 echo "Ubuntu upgraded ......"                | tee -a /home/ashok/error.log
@@ -61,21 +58,6 @@ echo "1. Ubuntu upgraded ......"             | tee -a /home/ashok/info.log
 mkdir /home/ashok/start
 mkdir /home/ashok/stop
 
-# Postgresql start/stop script
-echo '#!/bin/bash'                                                      > /home/ashok/start/start_postgresql.sh  
-echo " "                                                               >> /home/ashok/start/start_postgresql.sh  
-echo "cd ~/"                                                           >> /home/ashok/start/start_postgresql.sh  
-echo "echo 'postgresql will be available on port 5432'"                >> /home/ashok/start/start_postgresql.sh  
-echo "sudo systemctl start postgresql.service"                         >> /home/ashok/start/start_postgresql.sh  
-echo "sleep 2"                                                         >> /home/ashok/start/start_postgresql.sh  
-echo "netstat -aunt | grep 5432"                                       >> /home/ashok/start/start_postgresql.sh  
-
-echo '#!/bin/bash'                                                      > /home/ashok/stop/stop_postgresql.sh  
-echo " "                                                               >> /home/ashok/stop/stop_postgresql.sh  
-echo "cd ~/"                                                           >> /home/ashok/stop/stop_postgresql.sh  
-echo "sudo systemctl stop postgresql.service"                          >> /home/ashok/stop/stop_postgresql.sh  
-echo "sleep 2"                                                         >> /home/ashok/stop/stop_postgresql.sh  
-echo "netstat -aunt | grep 5432"                                       >> /home/ashok/stop/stop_postgresql.sh  
 
 ################
 # Install Ollama
@@ -242,26 +224,6 @@ echo "cd ~/"
 echo "python3 empty_chromadb.py"
 echo "python3 get_chroma_collectionsName.py"
 sleep 5
-
-
-###########
-# uv install
-############
-
-# Install uv for langflow install
-echo " "                                       | tee -a /home/ashok/info.log
-echo "Installing uv"                           | tee -a /home/ashok/info.log
-echo "--------------"                          | tee -a /home/ashok/info.log
-echo " "                                       | tee -a /home/ashok/info.log
-sleep 2
-curl -LsSf https://astral.sh/uv/install.sh     | sh   2>> /home/ashok/error.log
-echo " "                                       | tee -a /home/ashok/error.log
-echo " "                                       | tee -a /home/ashok/info.log
-echo "uv installed"                            | tee -a /home/ashok/error.log
-echo "8. uv installed"                         | tee -a /home/ashok/info.log
-uv --version                                   | tee -a /home/ashok/info.log
-sleep 2
-
 
 
 
