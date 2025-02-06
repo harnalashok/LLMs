@@ -33,13 +33,16 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# Check if docker installed
 sudo docker run hello-world
 
+# Run docker witout root privileges
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
 
-sudo systemctl disable docker.service
-sudo systemctl disable containerd.service
+#sudo systemctl disable docker.service
+#sudo systemctl disable containerd.service
+reboot
