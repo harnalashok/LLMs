@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Download stable diffusion model for image generation
+# Ref: https://localai.io/features/image-generation/
 
 
 LOCALAI=http://localhost:8080
