@@ -11,17 +11,18 @@
       #     script6.sh
       #     script7.sh
       #     script8.sh
+      #     script9.sh
 
 
       
-echo "========script6=============="
+echo "========script7=============="
 echo "Will install langchain"
 echo "Will install LangGraph"
 echo "Will install LangServe"
 echo "Will install LangChain CLI"
 echo "Will install LlamaIndex"
 echo "Will install Open WebUI--needs ollama behind the scenes"
-echo "You may call script7.sh "
+echo "You may call script8.sh "
 echo "==========================="
 sleep 10
 
@@ -64,8 +65,8 @@ cp /home/ashok/activate_langchain_venv.sh  /home/ashok/start/activate_langchain_
 cp /home/ashok/activate_langchain_venv.sh  /home/ashok/stop/activate_langchain_venv.sh
 
 # Move scripts
-mv /home/ashok/script6.sh  /home/ashok/done/
-mv /home/ashok/next/script7.sh   /home/ashok/
+mv /home/ashok/script7.sh        /home/ashok/done/
+mv /home/ashok/next/script8.sh   /home/ashok/
 
 
 # Install openwebui using pip. Refer its github site
@@ -162,7 +163,7 @@ open-webui serve
 deactivate
 
 echo "You may like to execute:"
-echo "       ./script7.sh"
+echo "       ./script8.sh"
 sleep 10
 kill $PPID
 
