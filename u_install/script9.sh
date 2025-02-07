@@ -11,10 +11,11 @@
       #     script6.sh
       #     script7.sh
       #     script8.sh
+      #     script9.sh
 
 
 
-echo "========script7=============="
+echo "========script9=============="
 echo "Will create script to create postgresql user/database"  
 echo "Needed for RecordManager"
 echo "You may call download_models.sh to download gguf models or from ollama library"
@@ -37,7 +38,7 @@ echo "sleep 10"                                                                 
 echo "sudo -u postgres psql postgres"                                                     >> /home/ashok/createpostgresuser.sh
 chmod +x /home/ashok/*.sh
 
-mv /home/ashok/script8.sh  /home/ashok/done/
+mv /home/ashok/script9.sh  /home/ashok/done/
 
 echo "You may like to execute:"
 echo "       ./download_models.sh"
