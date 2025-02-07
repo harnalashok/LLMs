@@ -60,10 +60,12 @@ docker run -it -d --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/
 # n8n start script
 echo '#!/bin/bash'                                                                                            > /home/ashok/start/start_n8n.sh
 echo " "                                                                                                      >> /home/ashok/start/start_n8n.sh
-echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                         >> /home/ashok/start/start_n8n.sh
+echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                     >> /home/ashok/start/start_n8n.sh
+echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"                                                     >> /home/ashok/start/start_n8n.sh
+
 echo "sleep 9"                                                                                                >> /home/ashok/start/start_n8n.sh
 echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_n8n.sh
-echo "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/ashok/start/start_n8n.sh
+echo "docker run -d -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/ashok/start/start_n8n.sh
 chmod +x /home/ashok/start/*.sh
 ##########################
 ### Install LMStudio
