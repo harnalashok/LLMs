@@ -2,6 +2,7 @@
 
 # Download Generate images
 # Ref: https://localai.io/features/image-generation/
+# stablediffusioan model needs to be pre-installed
 
 
 # 512x512 is supported too
