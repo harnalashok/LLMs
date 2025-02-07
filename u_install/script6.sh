@@ -17,7 +17,7 @@
       #     script7.sh
       #     script8.sh
 
-echo "========script5=============="
+echo "========script6=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
 echo "Will call no other script"
@@ -122,11 +122,11 @@ chmod +x *.sh
 sleep 9
 
 # Move scripts
-mv /home/ashok/script5.sh  /home/ashok/done/
-mv /home/ashok/next/script6.sh   /home/ashok/
+mv /home/ashok/script6.sh        /home/ashok/done/
+mv /home/ashok/next/script7.sh   /home/ashok/
 
 echo "You may like to execute:"
-echo "       ./script6.sh"
+echo "       ./script7.sh"
 sleep 10
 kill $PPID
 
