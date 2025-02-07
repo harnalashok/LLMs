@@ -11,9 +11,10 @@
       #     script6.sh
       #     script7.sh
       #     script8.sh
+      #     script9.sh
 
 
-echo "========script7=============="
+echo "========script8=============="
 echo "Will install FAISS"
 echo "Will install n8n docker"
 echo "Will install LM Studio"
@@ -115,8 +116,8 @@ chmod +x /home/ashok/lms/*.sh
 cp ~/lms/symlink_gguf.sh  ~/
 
 
-mv /home/ashok/script7.sh /home/ashok/done/4
-mv /home/ashok/next/script8.sh  /home/ashok/
+mv /home/ashok/script8.sh       /home/ashok/done/
+mv /home/ashok/next/script9.sh  /home/ashok/
 
 
 ##########################
@@ -138,7 +139,7 @@ chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
 echo "You may like to execute:"
-echo "       ./script8.sh"
+echo "       ./script9.sh"
 sleep 10
 kill $PPID
 
