@@ -48,10 +48,30 @@ mkdir /home/ashok/localai
 cd /home/ashok/localai
 docker run -ti --name local-ai -p 8080:8080 localai/localai:latest-cpu
 
+echo "Download localai model"
+echo "Process will run in background"
+sleep 5
+
 LOCALAI=http://localhost:8080
 curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
      "id": "localai@bert-embeddings"
    }'
+
+# Start local-ai in future
+echo "#!/bin/bash"                                                                         > /home/ashok/start/start_localai.sh
+echo " "                                                                                  >> /home/ashok/start/start_localai.sh
+echo "/home/ashok/localai"                                                                >> /home/ashok/start/start_localai.sh
+echo "docker start local-ai"                                                              >> /home/ashok/start/start_localai.sh
+chmod +x /home/ashok/start/*.sh
+
+# Stop local-ai in future
+echo "#!/bin/bash"                                                                         > /home/ashok/stop/stop_localai.sh
+echo " "                                                                                  >> /home/ashok/stop/stop_localai.sh
+echo "/home/ashok/localai"                                                                >> /home/ashok/stop/stop_localai.sh
+echo "docker stop local-ai"                                                              >> /home/ashok/stop/stop_localai.sh
+chmod +x /home/ashok/stop/*.sh
+
+
 
 cd ~/
 echo "You may like to execute:"
