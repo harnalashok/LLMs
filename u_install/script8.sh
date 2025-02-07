@@ -51,8 +51,10 @@ echo "source /home/ashok/faiss/bin/activate"                             >> /hom
 # Refer: https://github.com/n8n-io/n8n?tab=readme-ov-file#quick-start
 
 cd ~/
+mkdir /home/ashok/n8n
+cd /home/ashok/n8n
 docker volume create n8n_data
-docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/node/.n8n docker.n8n.io/n8nio/n8n
+docker run -it -d --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n
 # Access at localhost:5678
 
 # n8n start script
@@ -60,8 +62,8 @@ echo '#!/bin/bash'                                                              
 echo " "                                                                                                      >> /home/ashok/start/start_n8n.sh
 echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                         >> /home/ashok/start/start_n8n.sh
 echo "sleep 9"                                                                                                >> /home/ashok/start/start_n8n.sh
-echo "cd ~/"                                                                                                  >> /home/ashok/start/start_n8n.sh
-echo "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/ashok/start/start_n8n.sh
+echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_n8n.sh
+echo "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/ashok/start/start_n8n.sh
 chmod +x /home/ashok/start/*.sh
 ##########################
 ### Install LMStudio
