@@ -62,14 +62,14 @@ curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
 # Start local-ai in future
 echo "#!/bin/bash"                                                                         > /home/ashok/start/start_localai.sh
 echo " "                                                                                  >> /home/ashok/start/start_localai.sh
-echo "/home/ashok/localai"                                                                >> /home/ashok/start/start_localai.sh
+echo "cd /home/ashok/localai"                                                                >> /home/ashok/start/start_localai.sh
 echo "docker start local-ai"                                                              >> /home/ashok/start/start_localai.sh
 chmod +x /home/ashok/start/*.sh
 
 # Stop local-ai in future
 echo "#!/bin/bash"                                                                         > /home/ashok/stop/stop_localai.sh
 echo " "                                                                                  >> /home/ashok/stop/stop_localai.sh
-echo "/home/ashok/localai"                                                                >> /home/ashok/stop/stop_localai.sh
+echo "cd /home/ashok/localai"                                                                >> /home/ashok/stop/stop_localai.sh
 echo "docker stop local-ai"                                                              >> /home/ashok/stop/stop_localai.sh
 chmod +x /home/ashok/stop/*.sh
 
