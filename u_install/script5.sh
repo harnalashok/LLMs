@@ -10,12 +10,15 @@
       #     script4.sh
       #     script5.sh
       #     script6.sh
+      #     script7.sh
+      #     script8.sh
+      #     script9.sh
 
 cd ~/
 
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log
-echo "Script: script4.sh"                     | tee -a /home/ashok/error.log
+echo "Script: script5.sh"                     | tee -a /home/ashok/error.log
 echo "**********"                             | tee -a /home/ashok/error.log
 echo " "                                      | tee -a /home/ashok/error.log
 
@@ -30,7 +33,7 @@ else
 fi
 
 
-echo "========script4b=============="
+echo "========script5=============="
 echo "Will install Milvus vectordb docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
@@ -197,13 +200,13 @@ echo "netstat -aunt | grep 9443"                               >> /home/ashok/st
 # Move script file to done folder
 cd ~/
 chmod +x *.sh
-mv /home/ashok/script4b.sh /home/ashok/done
-mv /home/ashok/next/script5.sh  /home/ashok/
+mv /home/ashok/script5.sh       /home/ashok/done
+mv /home/ashok/next/script6.sh  /home/ashok/
 
 
 echo " "
 echo "Reboot and then, install llama-cpp-python, as below."
-echo "    ./script5.sh"
+echo "    ./script6.sh"
 sleep 8
 echo " "
 reboot
