@@ -46,7 +46,8 @@ mv /home/ashok/next/script4a.sh  /home/ashok/
 
 mkdir /home/ashok/localai
 cd /home/ashok/localai
-docker run -ti --name local-ai -p 8080:8080 localai/localai:latest-cpu
+# Should run in detached mode
+docker run -ti -d --name local-ai -p 8080:8080 localai/localai:latest-cpu
 
 echo "Download localai model"
 echo "Process will run in background"
