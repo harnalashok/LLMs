@@ -2,6 +2,7 @@
 
 # Download Generate images
 # Ref: https://localai.io/features/image-generation/
+# stablediffusioan model needs to be pre-installed
 
 
 curl http://localhost:8080/v1/images/generations -H "Content-Type: application/json" -d '{
