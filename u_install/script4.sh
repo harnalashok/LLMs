@@ -77,6 +77,7 @@ wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_in
 
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/generate_image.sh   -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/generate_image2.sh  -P /home/ashok/localai
+chmod +x /home/ashok/localai/*.sh
 
 cd ~/
 echo "You may like to execute:"
