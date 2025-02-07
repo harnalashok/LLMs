@@ -30,7 +30,7 @@ else
 fi
 
 
-echo "========script4=============="
+echo "========script4b=============="
 echo "Will install Milvus vectordb docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
@@ -197,7 +197,7 @@ echo "netstat -aunt | grep 9443"                               >> /home/ashok/st
 # Move script file to done folder
 cd ~/
 chmod +x *.sh
-mv /home/ashok/script4.sh /home/ashok/done
+mv /home/ashok/script4b.sh /home/ashok/done
 mv /home/ashok/next/script5.sh  /home/ashok/
 
 
