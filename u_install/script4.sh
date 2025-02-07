@@ -54,11 +54,6 @@ echo "Download localai model"
 echo "Process will run in background"
 sleep 5
 
-LOCALAI=http://localhost:8080
-curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
-     "id": "localai@bert-embeddings"
-   }'
-
 # Start local-ai in future
 echo "#!/bin/bash"                                                                         > /home/ashok/start/start_localai.sh
 echo " "                                                                                  >> /home/ashok/start/start_localai.sh
