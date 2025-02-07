@@ -40,8 +40,8 @@ echo "sleep 10"                                                                 
 echo "sudo -u postgres psql postgres"                                                     >> /home/ashok/createpostgresuser.sh
 chmod +x /home/ashok/*.sh
 
-mv /home/ashok/script4.sh  /home/ashok/done/
-mv /home/ashok/next/script4a.sh  /home/ashok/
+mv /home/ashok/script4.sh       /home/ashok/done/
+mv /home/ashok/next/script5.sh  /home/ashok/
 
 
 mkdir /home/ashok/localai
@@ -76,7 +76,7 @@ chmod +x /home/ashok/stop/*.sh
 
 cd ~/
 echo "You may like to execute:"
-echo "       ./script4a.sh"
+echo "       ./script5.sh"
 sleep 10
 reboot
 
