@@ -72,6 +72,8 @@ chmod +x /home/ashok/stop/*.sh
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_localaiModel1.sh  -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_localaiModel2.sh  -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_stablediffusion.sh   -P /home/ashok/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_status.sh   -P /home/ashok/localai
+
 
 # Download to files to create create images
 
