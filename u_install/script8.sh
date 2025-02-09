@@ -49,6 +49,8 @@ echo "source /home/ashok/faiss/bin/activate"                             >> /hom
 ### n8n
 ##########################
 # Refer: https://github.com/n8n-io/n8n?tab=readme-ov-file#quick-start
+# Workflow automation with n8n:
+#                https://community.n8n.io/tags/c/tutorials/28/course-beginner
 
 cd ~/
 mkdir /home/ashok/n8n
