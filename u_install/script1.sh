@@ -18,7 +18,7 @@
 echo "========script1=============="
 echo "Will update Ubuntu"
 echo "Will install necessary packages"
-echo "Will install postgresql"
+echo "Will install postgresql & sqlite3"
 echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
 echo "Will install uv for langflow install"
@@ -115,10 +115,10 @@ cp /home/ashok/find_venv.sh  /home/ashok/stop/
 sleep 2
 
 ################
-# Install postgresql
+# Install postgresql and sqlite3
 ################
 
-sudo apt install postgresql postgresql-contrib -y
+sudo apt install postgresql postgresql-contrib sqlite3   -y
 
 # Postgresql start/stop script
 echo '#!/bin/bash'                                                      > /home/ashok/start/start_postgresql.sh  
