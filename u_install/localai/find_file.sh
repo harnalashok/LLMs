@@ -14,6 +14,6 @@ if [[ $# -eq 0 ]] ; then
     exit 0
 fi
 
-
+cd ~/
 # sudo find / -iname 'llama-3.2-1b*' 2>/dev/null
 sudo find / -iname  $1'*'  2>/dev/null
