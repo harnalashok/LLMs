@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Last amended: 06th Feb, 2025
+# Copyright:: 
 
  # These scripts run in sequence.
       #     script0.sh
@@ -136,6 +137,19 @@ echo "sudo systemctl stop postgresql.service"                          >> /home/
 echo "sleep 2"                                                         >> /home/ashok/stop/stop_postgresql.sh  
 echo "netstat -aunt | grep 5432"                                       >> /home/ashok/stop/stop_postgresql.sh  
 
+
+# A small help script
+echo '#!/bin/bash'                                                     > /home/ashok/create_sqlite_db.sh 
+echo " "                                                               >> /home/ashok/create_sqlite_db.sh 
+echo "# Create sqlite3 database"                                       >> /home/ashok/create_sqlite_db.sh 
+echo " "                                                               >> /home/ashok/create_sqlite_db.sh  
+echo " "                                                               >> /home/ashok/create_sqlite_db.sh 
+echo "echo 'How to create sqlite3 database?'"                          >> /home/ashok/create_sqlite_db.sh 
+echo "echo 'To create database: mydatabase.db'"                        >> /home/ashok/create_sqlite_db.sh 
+echo "echo 'issue command:'"                                           >> /home/ashok/create_sqlite_db.sh 
+echo "echo '         sqlite3 mydatabase.db'"                           >> /home/ashok/create_sqlite_db.sh 
+echo " "                                                               >> /home/ashok/create_sqlite_db.sh 
+chmod +x *.sh
 
 
 ###########
