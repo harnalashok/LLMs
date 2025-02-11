@@ -1,3 +1,5 @@
+## Installing a bundle of AI tools and packages
+
 To begin installing all packages, execute the following five commands in *Ubuntu* console (whether Ubuntu machine or WSL).<br>
 We assume Ubuntu/WSL username as 'ashok'. Copy and paste.
 
