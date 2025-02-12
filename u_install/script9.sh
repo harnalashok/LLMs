@@ -38,7 +38,7 @@ chmod +x /home/ashok/*.sh
 # Install a needed package (depending upon your version of postgres)
 # Check version as: pg_config --version
 # Assuming version 14
-sudo apt install postgresql-server-dev-14
+sudo apt install postgresql-server-dev-14  -y
 
 # Ref: https://github.com/pgvector/pgvector
 cd /tmp
