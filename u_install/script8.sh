@@ -44,6 +44,7 @@ echo "echo 'source /home/ashok/start/activate_faiss.sh'"                 >> /hom
 echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/ashok/start/activate_faiss.sh
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 
+deactivate
 
 ##########################
 ### n8n
@@ -67,6 +68,10 @@ echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"  
 echo "sleep 9"                                                                                                             >> /home/ashok/start/start_n8n.sh
 echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_n8n.sh
 echo "docker run -d -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_n8n.sh
+
+cd ~/
+ln -sT /home/ashok/start/start_n8n.sh start_n8n.sh
+
 chmod +x /home/ashok/start/*.sh
 ##########################
 ### Install LMStudio
