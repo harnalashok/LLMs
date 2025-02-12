@@ -7,9 +7,15 @@ echo "============"
 echo 'Will open psql shell to create user, password and his database'
 echo "============"
 echo " "
-echo 'Write below a user LOGIN password, mypass, within single inverted commas'
-echo 'CREATE ROLE myuser LOGIN PASSWORD mypass ; '
-echo 'CREATE DATABASE mydatabase WITH OWNER = myuser;'
+echo 'Enter SQL command as in example below to create  a user LOGIN id'
+echo ' and his password, mypass (password be within single inverted commas)'
+echo "  "
+echo "Example:  CREATE ROLE myuser LOGIN PASSWORD 'mypass' ; "
+echo " "
+echo "Create database as:"
+echo '          CREATE DATABASE mydatabase WITH OWNER = myuser;'
+echo " "
 echo 'To quit psql shell enter \q'
+echo " "
 sleep 10
 sudo -u postgres psql postgres
