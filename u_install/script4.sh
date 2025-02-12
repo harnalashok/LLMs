@@ -76,6 +76,18 @@ wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_in
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/find_file.sh                  -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/find_file.sh                  -P /home/ashok/
 
+# MAke symbolic links
+cd /home/ashok
+ln -sT /home/ashok/start/start_localai.sh start_localai.sh
+ln -sT /home/ashok/start/start_chroma.sh start_chroma.sh
+ln -sT /home/ashok/start/start_npx_flowise.sh start_flowise.sh
+ln -sT /home/ashok/start/start_uv_langflow.sh start_langflow.sh
+ln -sT /home/ashok/start/start_postgresql.sh start_postgresql.sh
+
+ln -sT /home/ashok/stop/stop_chroma.sh stop_chroma.sh
+ln -sT /home/ashok/stop/stop_localai.sh stop_localai.sh
+ln -sT /home/ashok/stop/stop_postgresql.sh stop_postgresql.sh
+
 
 # Download to files to create create images
 
