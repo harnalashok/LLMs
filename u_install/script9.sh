@@ -22,20 +22,12 @@ echo "You may call download_models.sh to download gguf models or from ollama lib
 echo "==========================="
 sleep 10
 
-# Create a script, that will inturn, help create user and password
+# Download scripts that will inturn, help create user and password
 # in postgresql
 
-echo "#!/bin/bash"                                                                         > /home/ashok/createpostgresuser.sh
-echo " "                                                                                  >>   /home/ashok/createpostgresuser.sh
-echo "echo 'Ref: https://stackoverflow.com/a/2172588'"                                    >>   /home/ashok/createpostgresuser.sh
-echo "echo 'Will open psql shell to create user, password and his database'"              >>   /home/ashok/createpostgresuser.sh
-echo "echo 'Write below a user LOGIN password, mypass, within single inverted commas'"    >>   /home/ashok/createpostgresuser.sh
-echo "echo 'CREATE ROLE myuser LOGIN PASSWORD mypass ; '"                                 >>   /home/ashok/createpostgresuser.sh
-echo "echo 'CREATE DATABASE mydatabase WITH OWNER = myuser;'"                             >> /home/ashok/createpostgresuser.sh
-echo "echo 'To quit psql shell enter \\q'"                                                >> /home/ashok/createpostgresuser.sh
-echo "sleep 10"                                                                           >> /home/ashok/createpostgresuser.sh
-# To open psql shell to enter DDL/DML commands
-echo "sudo -u postgres psql postgres"                                                     >> /home/ashok/createpostgresuser.sh
+cd /home/ashok/
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createpostgresuser.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/show_postgres_databases.sh
 chmod +x /home/ashok/*.sh
 
 mv /home/ashok/script9.sh  /home/ashok/done/
