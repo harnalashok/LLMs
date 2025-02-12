@@ -18,6 +18,7 @@
 echo "========script9=============="
 echo "Will create script to create postgresql user/database"  
 echo "Needed for RecordManager"
+echo "Add vector storage capability to postgres"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
@@ -30,7 +31,26 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/show_postgres_databases.sh
 chmod +x /home/ashok/*.sh
 
+
+# Add vector storage capability
+# My version of postgres db is 14.
+# (Check as: pg_config --version)
+# Install a needed package
+sudo apt install postgresql-server-dev-14
+
+cd /tmp
+git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
+cd pgvector
+make
+sudo make install 
+
+
+
+
+
 mv /home/ashok/script9.sh  /home/ashok/done/
+
+
 
 echo "You may like to execute:"
 echo "       ./download_models.sh"
