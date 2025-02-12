@@ -38,11 +38,14 @@ chmod +x /home/ashok/*.sh
 # Install a needed package
 sudo apt install postgresql-server-dev-14
 
+# Ref: https://github.com/pgvector/pgvector
 cd /tmp
 git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
 cd pgvector
 make
 sudo make install 
+
+
 
 mv /home/ashok/script9.sh  /home/ashok/done/
 
