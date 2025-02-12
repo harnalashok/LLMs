@@ -46,6 +46,7 @@ git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
 cd pgvector
 make
 sudo make install 
+cd ~/
 
 
 
