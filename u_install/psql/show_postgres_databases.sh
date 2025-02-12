@@ -15,4 +15,7 @@ echo 'To quit psql shell enter:  \q'
 echo " "
 echo " "
 sleep 10
+echo " "
+pg_config --version
+echo " "
 sudo -u postgres psql postgres
