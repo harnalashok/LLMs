@@ -5,6 +5,8 @@ We assume Ubuntu/WSL username as 'ashok'. Copy and paste.
 
 
 ```
+   mkdir /home/ashok/Documents
+   mkdir /home/ashok/Downlods
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/help.txt
    perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
