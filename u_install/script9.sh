@@ -44,10 +44,6 @@ cd pgvector
 make
 sudo make install 
 
-
-
-
-
 mv /home/ashok/script9.sh  /home/ashok/done/
 
 
