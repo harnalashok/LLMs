@@ -80,14 +80,9 @@ echo "cd /home/ashok/n8n"                                                       
 echo "docker run -d -it --rm --network host  --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_wsl_n8n.sh
 
 
-
-
-
-
-
-
 cd ~/
 ln -sT /home/ashok/start/start_n8n.sh start_n8n.sh
+ln -sT /home/ashok/start/start_wsl_n8n.sh start_wsl_n8n.sh
 
 chmod +x /home/ashok/start/*.sh
 ##########################
