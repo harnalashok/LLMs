@@ -60,7 +60,7 @@ docker volume create n8n_data
 docker run -it -d --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n
 # Access at localhost:5678
 
-# n8n start script
+# n8n start script for Ubuntu
 echo '#!/bin/bash'                                                                                            > /home/ashok/start/start_n8n.sh
 echo " "                                                                                                      >> /home/ashok/start/start_n8n.sh
 echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                     >> /home/ashok/start/start_n8n.sh
@@ -68,6 +68,23 @@ echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"  
 echo "sleep 9"                                                                                                             >> /home/ashok/start/start_n8n.sh
 echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_n8n.sh
 echo "docker run -d -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_n8n.sh
+
+# n8n start script for WSL
+echo '#!/bin/bash'                                                                                                              > /home/ashok/start/start_wsl_n8n.sh
+echo " "                                                                                                                        >> /home/ashok/start/start_wsl_n8n.sh
+echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                       >> /home/ashok/start/start_wsl_n8n.sh
+echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"                                                  >> /home/ashok/start/start_wsl_n8n.sh
+echo "sleep 9"                                                                                                                  >> /home/ashok/start/start_wsl_n8n.sh
+echo "cd /home/ashok/n8n"                                                                                                       >> /home/ashok/start/start_wsl_n8n.sh
+# REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
+echo "docker run -d -it --rm --network host  --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_wsl_n8n.sh
+
+
+
+
+
+
+
 
 cd ~/
 ln -sT /home/ashok/start/start_n8n.sh start_n8n.sh
