@@ -30,7 +30,7 @@ cd /home/ashok/
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createpostgresuser.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/show_postgres_databases.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createvectordb.sh
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createvectordb.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/delete_postgres_db.sh
 chmod +x /home/ashok/*.sh
 
 # Create links
@@ -38,6 +38,7 @@ cd /home/ashok/psql
 ln -sT /home/ashok/createpostgresuser.sh         createpostgresuser.sh
 ln -sT /home/ashok/show_postgres_databases.sh    show_postgres_databases.sh
 ln -sT /home/ashok/createvectordb.sh             createvectordb.sh
+ln -sT /home/ashok/delete_postgres_db.sh         delete_postgres_db.sh
 cd ~/
 
 # Add vector storage capability
