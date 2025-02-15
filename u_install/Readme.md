@@ -62,10 +62,10 @@ xiv) Downloads *olmo2* from *ollama library*<br>
  xv) Installs LM Studio    
 xvi) Installs AnythingLLM     
 xvii)Installs OpenWebUI    
-xviii)Installs FAISS    
-xix) Install postgresql for record manager and pgvector for vector database
-xx) Redis
-xxi) LocalAI
+xviii)Installs FAISS        
+xix) Install postgresql for record manager and pgvector for vector database      
+xx) Redis     
+xxi) LocalAI      
 
 
 
