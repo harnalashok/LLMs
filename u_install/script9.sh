@@ -27,13 +27,16 @@ sleep 10
 # in postgresql
 
 cd /home/ashok/
-mkdir /home/ashok/psql
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createpostgresuser.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/show_postgres_databases.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createvectordb.sh
-
 chmod +x /home/ashok/*.sh
 
+cd /home/ashok/psql
+ln -sT /home/ashok/createpostgresuser.sh         createpostgresuser.sh
+ln -sT /home/ashok/show_postgres_databases.sh    show_postgres_databases.sh
+ln -sT /home/ashok/createvectordb.sh             createvectordb.sh
+cd ~/
 
 # Add vector storage capability
 # My version of postgres db is 14.
