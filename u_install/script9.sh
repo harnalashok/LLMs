@@ -32,6 +32,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createvectordb.sh
 chmod +x /home/ashok/*.sh
 
+# Create links
 cd /home/ashok/psql
 ln -sT /home/ashok/createpostgresuser.sh         createpostgresuser.sh
 ln -sT /home/ashok/show_postgres_databases.sh    show_postgres_databases.sh
