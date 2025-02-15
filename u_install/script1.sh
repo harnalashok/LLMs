@@ -42,6 +42,7 @@ echo " "                                       | tee -a /home/ashok/error.log
 # Also install postgresql
 ################
 
+
 echo "  "
 echo "------------"                            | tee -a /home/ashok/error.log
 echo " Will update Ubuntu"                     | tee -a /home/ashok/error.log
@@ -60,6 +61,7 @@ echo "1. Ubuntu upgraded ......"             | tee -a /home/ashok/info.log
 # Folders for start/stop scripts
 mkdir /home/ashok/start
 mkdir /home/ashok/stop
+mkdir /home/ashok/psql
 
 
 ################
@@ -106,7 +108,7 @@ echo "sudo systemctl stop ollama"                          | tee -a /home/ashok/
 echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/stop/stop_ollama.sh  
 
 # PRemission changes
-chmod +x /home/ashok/start/*.sh
+chmod +x /home/ashok/start/*.sh   
 chmod +x /home/ashok/stop/*.sh
 
 
@@ -137,6 +139,10 @@ echo "sudo systemctl stop postgresql.service"                          >> /home/
 echo "sleep 2"                                                         >> /home/ashok/stop/stop_postgresql.sh  
 echo "netstat -aunt | grep 5432"                                       >> /home/ashok/stop/stop_postgresql.sh  
 
+cd /home/ashok/psql
+ln -sT /home/ashok/stop/stop_postgresql.sh stop_postgresql.sh
+ln -sT /home/ashok/start/start_postgresql.sh start_postgresql.sh
+cd ~/
 
 # A small help script
 echo '#!/bin/bash'                                                     > /home/ashok/create_sqlite_db.sh 
