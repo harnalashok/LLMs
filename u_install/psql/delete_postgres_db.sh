@@ -8,7 +8,7 @@ echo "============"
 echo " "
 echo 'Enter SQL command as in example below to drop database'
 echo "  "
-echo "Drop database as:"
+echo "Example command to drop database:"
 echo '          drop database gdatabase ;'
 echo " "
 echo 'To quit psql shell enter \q'
