@@ -18,7 +18,7 @@
 
 
 
-echo "========script7=============="
+echo "========script4=============="
 echo "Install n8n with npx"
 echo "Will create script to create postgresql user/database"  
 echo "Needed for RecordManager"
