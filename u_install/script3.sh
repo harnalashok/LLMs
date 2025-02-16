@@ -35,6 +35,11 @@ echo "**********"                             | tee -a /home/ashok/error.log
 echo " "                                      | tee -a /home/ashok/error.log
 
 
+#####################
+## Flowise install
+####################
+
+
 # 2.1 Install Flowise as NORMAL user
 echo " "
 echo "Installing flowvise...Takes time..."                  | tee -a /home/ashok/error.log
@@ -61,7 +66,9 @@ echo "netstat -aunt | grep 3000"                           | tee -a /home/ashok/
 
 chmod +x /home/ashok/start/*.sh
 
-
+#####################
+## langflow install
+####################
 
 # Install langflow
 echo " "                                      | tee -a /home/ashok/error.log
