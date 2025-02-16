@@ -39,7 +39,7 @@ echo "Will install Flowise docker"
 echo "Will install langflow docker"
 echo "Will install portainer docker"
 echo "Will prepare start script for each"
-echo "Call script5.sh after this is finished."
+#echo "Call script5.sh after this is finished."
 echo "==========================="
 sleep 10
 
@@ -207,7 +207,7 @@ mv /home/ashok/next/script6.sh  /home/ashok/
 
 echo " "
 echo "Reboot and then, install llama-cpp-python, as below."
-echo "    ./script6.sh"
+#echo "    ./script6.sh"
 sleep 8
 echo " "
 reboot
