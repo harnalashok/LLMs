@@ -2,22 +2,7 @@
 
 # REf: https://github.com/mudler/LocalAI
 
- # These scripts run in sequence.
-      #     script0.sh
-      #     script1.sh
-      #     script2.sh
-      #     ubuntu_docker1.sh
-      #     ubuntu_docker2.sh
-      #     script3.sh
-      #     script4.sh
-      #     script5.sh
-      #     script6.sh
-      #     script7.sh
-      #     script8.sh
-      #     script9.sh
-
-
-
+ 
 echo "========script4=============="
 echo "Install n8n with npx"
 echo "Will create script to create postgresql user/database"  
