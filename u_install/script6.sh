@@ -1,6 +1,10 @@
 #!/bin/bash
 
-
+echo "========script6=============="
+echo "Will Install FAISS library"
+echo "Will install redis-stack-server docker"
+echo "==========================="
+sleep 10
 
 
 cd ~/
