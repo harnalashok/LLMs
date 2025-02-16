@@ -78,7 +78,7 @@ chmod +x /home/ashok/stop/*.sh
 
 
 ##########################
-### n8n
+### n8n docker
 ##########################
 # Refer: https://github.com/n8n-io/n8n?tab=readme-ov-file#quick-start
 # Workflow automation with n8n:
