@@ -54,3 +54,8 @@ echo "netstat -aunt | grep 6379"                                                
 chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
+
+# Move script file to done folder
+mv /home/ashok/script6.sh /home/ashok/done
+mv /home/ashok/next/script7.sh /home/ashok/
+
