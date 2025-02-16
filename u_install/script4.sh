@@ -19,11 +19,54 @@
 
 
 echo "========script7=============="
+echo "Install n8n with npx"
 echo "Will create script to create postgresql user/database"  
 echo "Needed for RecordManager"
 echo "Will install LocalAI docker"
 echo "==========================="
 sleep 10
+
+
+
+#####################
+## n8n install
+####################
+
+
+# 2.1 Install n8n as NORMAL user
+echo " "
+echo "Installing n8n...Takes time..."                       | tee -a /home/ashok/error.log
+echo "------"                                               | tee -a /home/ashok/error.log
+echo " "                                                    | tee -a /home/ashok/error.log
+sleep 2
+
+
+npm install -g n8n                                          2>> /home/ashok/error.log
+echo " "
+echo " "                                                    | tee -a /home/ashok/error.log
+echo "n8n installed"                                        | tee -a /home/ashok/error.log
+echo " "                                                    | tee -a /home/ashok/error.log
+echo "n8n installed"                                        | tee -a /home/ashok/info.log
+echo "n8n port is: 5678"                                    | tee -a /home/ashok/info.log
+echo " "                                                    | tee -a /home/ashok/info.log
+
+
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_npx_n8n.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_npx_n8n.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_npx_n8n.sh
+echo "echo 'n8n will be available at port 5678'"           | tee -a /home/ashok/start/start_npx_n8n.sh
+echo "n8n start"                                           | tee -a /home/ashok/start/start_npx_n8n.sh
+echo "netstat -aunt | grep 5678"                           | tee -a /home/ashok/start/start_npx_n8n.sh
+
+chmod +x /home/ashok/start/*.sh
+
+
+
+#####################
+## script to create REcord MAnager
+####################
+
+
 
 # Create a script, that will inturn, help create user and password
 # in postgresql
@@ -44,6 +87,10 @@ chmod +x /home/ashok/*.sh
 mv /home/ashok/script4.sh       /home/ashok/done/
 mv /home/ashok/next/script5.sh  /home/ashok/
 
+
+#####################
+## LocalAI install
+####################
 
 mkdir /home/ashok/localai
 cd /home/ashok/localai
@@ -83,6 +130,7 @@ cd /home/ashok
 ln -sT /home/ashok/start/start_localai.sh start_localai.sh
 ln -sT /home/ashok/start/start_chroma.sh start_chroma.sh
 ln -sT /home/ashok/start/start_npx_flowise.sh start_flowise.sh
+ln -sT /home/ashok/start/start_npx_n8n.sh start_n8n.sh
 ln -sT /home/ashok/start/start_uv_langflow.sh start_langflow.sh
 ln -sT /home/ashok/start/start_postgresql.sh start_postgresql.sh
 
