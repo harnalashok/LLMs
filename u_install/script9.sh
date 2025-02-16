@@ -18,7 +18,7 @@ cd ~/
 
 echo " "                                      | tee -a /home/ashok/error.log
 echo "*********"                              | tee -a /home/ashok/error.log
-echo "Script: script5.sh"                     | tee -a /home/ashok/error.log
+echo "Script: script9.sh"                     | tee -a /home/ashok/error.log
 echo "**********"                             | tee -a /home/ashok/error.log
 echo " "                                      | tee -a /home/ashok/error.log
 
