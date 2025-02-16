@@ -10,5 +10,6 @@ curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
    }'
 
 echo " "
+echo " "
 echo "To check download status, execute: ./get_download_status.sh "   
 echo " "
