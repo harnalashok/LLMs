@@ -15,7 +15,7 @@
 
 
 
-echo "========script9=============="
+echo "========script5=============="
 echo "Will create script to create postgresql user/database"  
 echo "Needed for RecordManager"
 echo "Add vector storage capability to postgres"
