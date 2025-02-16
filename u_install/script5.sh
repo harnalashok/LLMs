@@ -59,11 +59,12 @@ cd ~/
 
 
 
-mv /home/ashok/script9.sh  /home/ashok/done/
+mv /home/ashok/script5.sh        /home/ashok/done/
+mv /home/ashok/next/script6.sh   /home/ashok/
 
 
 
 echo "You may like to execute:"
-echo "       ./download_models.sh"
+echo "       ./script6.sh"
 sleep 10
 kill $PPID
