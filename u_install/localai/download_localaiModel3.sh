@@ -9,3 +9,7 @@ curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
      "id": "moondream2"
    }'
 
+echo " "
+echo "To check download status, execute: ./get_download_status.sh "   
+echo " "   
+
