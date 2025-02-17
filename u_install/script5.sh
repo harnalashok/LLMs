@@ -16,8 +16,7 @@
 
 
 echo "========script5=============="
-echo "Will create script to create postgresql user/database"  
-echo "Needed for RecordManager"
+echo "Download psql scripts"  
 echo "Add vector storage capability to postgres"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
