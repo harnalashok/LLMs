@@ -5,8 +5,6 @@
  
 echo "========script4=============="
 echo "Install n8n with npx"
-echo "Will create script to create postgresql user/database"  
-echo "Needed for RecordManager"
 echo "Will install LocalAI docker"
 echo "==========================="
 sleep 10
@@ -14,7 +12,7 @@ sleep 10
 
 
 #####################
-## n8n install
+## n8n install (with npx)
 ####################
 
 
@@ -47,27 +45,7 @@ chmod +x /home/ashok/start/*.sh
 
 
 
-#####################
-## script to create REcord MAnager
-####################
 
-
-
-# Create a script, that will inturn, help create user and password
-# in postgresql
-
-echo "#!/bin/bash"                                                                         > /home/ashok/createpostgresuser.sh
-echo " "                                                                                  >>   /home/ashok/createpostgresuser.sh
-echo "echo 'Ref: https://stackoverflow.com/a/2172588'"                                    >>   /home/ashok/createpostgresuser.sh
-echo "echo 'Will open psql shell to create user, password and his database'"              >>   /home/ashok/createpostgresuser.sh
-echo "echo 'Write below a user LOGIN password, mypass, within single inverted commas'"    >>   /home/ashok/createpostgresuser.sh
-echo "echo 'CREATE ROLE myuser LOGIN PASSWORD mypass ; '"                                 >>   /home/ashok/createpostgresuser.sh
-echo "echo 'CREATE DATABASE mydatabase WITH OWNER = myuser;'"                             >> /home/ashok/createpostgresuser.sh
-echo "echo 'To quit psql shell enter \\q'"                                                >> /home/ashok/createpostgresuser.sh
-echo "sleep 10"                                                                           >> /home/ashok/createpostgresuser.sh
-# To open psql shell to enter DDL/DML commands
-echo "sudo -u postgres psql postgres"                                                     >> /home/ashok/createpostgresuser.sh
-chmod +x /home/ashok/*.sh
 
 mv /home/ashok/script4.sh       /home/ashok/done/
 mv /home/ashok/next/script5.sh  /home/ashok/
@@ -100,7 +78,7 @@ echo "cd /home/ashok/localai"                                                   
 echo "docker stop local-ai"                                                              >> /home/ashok/stop/stop_localai.sh
 chmod +x /home/ashok/stop/*.sh
 
-# Download two sh files to download models
+# Download sh files to download models
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_localaiModel1.sh    -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_localaiModel2.sh    -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_localaiModel3.sh    -P /home/ashok/localai
