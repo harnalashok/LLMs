@@ -16,6 +16,8 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/show_postgres_databases.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createvectordb.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/delete_postgres_db.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/psql.sh
+
 chmod +x /home/ashok/*.sh
 
 # Create links
