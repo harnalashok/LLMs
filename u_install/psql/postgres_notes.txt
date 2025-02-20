@@ -126,7 +126,7 @@ SET
 db_amit=# 			-- Role is postgres. Database is db_amit
 
 
-# 11. Grant all privilges to a role for a table under a database
+# 12. Grant all privilges to a role for a table under a database
 #     The table was created as owner 'postgres'
 
 
@@ -160,7 +160,7 @@ db_amit=# \dt			--Database (d) tables(t)
 
 
 ###########
-#12.0 Slash commands: 
+#13.0 Slash commands: 
 ###########
 
     \l             -- List all databases
