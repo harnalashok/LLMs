@@ -15,6 +15,10 @@ echo " "
 echo "Create database as:"
 echo '          CREATE DATABASE mydatabase WITH OWNER = myuser;'
 echo " "
+echo "Within a database, you can create a schema, as:"
+echo '          CREATE schema myschema ; '
+echo " "
+
 echo 'To quit psql shell enter \q'
 echo " "
 sleep 10
