@@ -96,7 +96,7 @@ CREATE TABLE product (
 			feedback     text 
 		    );
 		    
-\dt  gives the following output:
+        \dt  gives the following output:
 		    
 	amit=> \dt
 	
@@ -155,7 +155,9 @@ amit=# \dt			--Database (d) tables(t)
 		|          |       | amit=arwdDxt/postgres     |                   | 
 	(4 rows)
 
-
+## From command line:
+## Ref: https://stackoverflow.com/a/28687714
+## sudo -u postgres bash -c "psql -c \"CREATE USER vagrant WITH PASSWORD 'vagrant';\""
 ##################################
 
  	
