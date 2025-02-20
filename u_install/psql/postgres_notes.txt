@@ -1,15 +1,17 @@
 # Postgres notes:
 # Last amended: 20th Feb, 2025
-# Install postgres as:
 
-sudo apt install postgresql postgresql-contrib sqlite3   -y
-sudo apt install postgresql-server-dev-14  -y
-cd /tmp
-git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
-cd pgvector
-make
-sudo make install 
-cd ~/
+
+#0.0  Install postgres as:
+
+	sudo apt install postgresql postgresql-contrib sqlite3   -y
+	sudo apt install postgresql-server-dev-14  -y
+	cd /tmp
+	git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
+	cd pgvector
+	make
+	sudo make install 
+	cd ~/
 
 
 
