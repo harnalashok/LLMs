@@ -5,7 +5,7 @@ echo 'Ref: https://stackoverflow.com/a/2172588'
 echo "https://www.postgresql.org/docs/current/ddl-schemas.html"
 echo " "
 echo "============"
-echo 'Will open psql shell to create user, password and his database'
+echo 'Will open psql shell for operations'
 echo "============"
 echo " "
 echo 'Enter SQL command as in example below to create  a user LOGIN id'
