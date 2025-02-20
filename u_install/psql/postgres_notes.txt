@@ -65,7 +65,7 @@
 
 	sudo -u postgres psql postgres
 	CREATE ROLE queen LOGIN PASSWORD 'queen' ;
-	CREATE DATABASE queen WITH OWNER = queen ;	-- Owner has all privilegs
+	CREATE DATABASE db_queen WITH OWNER = queen ;	-- Owner has all privilegs
 	\l		-- Check databases created
 
 
@@ -78,8 +78,8 @@
 
 	sudo -u postgres psql postgres
 	CREATE ROLE joker LOGIN PASSWORD 'joker' ;
-	CREATE DATABASE joker WITH OWNER = joker;
-	\c joker				-- Connect to database joker 
+	CREATE DATABASE db_joker WITH OWNER = joker;
+	\c db_joker				-- Connect to database db_joker 
 	set role joker ;			-- Change role to joker. Default is postgres
 	create table n8n (id integer) ; 	-- With role joker
 	\dt					-- Check
@@ -98,7 +98,7 @@ CREATE TABLE product (
 		    
         \dt  gives the following output:
 		    
-	amit=> \dt
+	db_amit=> \dt            -- db_amit is database
 	
 		 List of relations
 	 Schema |   Name   | Type  |  Owner   
@@ -114,20 +114,20 @@ CREATE TABLE product (
 #11. Prompt differences:
 
 postgres=# 		-- Connected to default database 'postgres'
-amit=# 			-- Database is amit. Hash shows that role is postgres
-amit=> 			-- Database is amit. '=>' shows that role is NOT postgres
+db_amit=# 			-- Database is db_amit. Hash shows that role is postgres
+db_amit=> 			-- Database is db_amit. '=>' shows that role is NOT postgres
 
-amit=> 			-- Role is NOT postgres. Database is amit
+db_amit=> 			-- Role is NOT postgres. Database is db_amit
 amit=> set role postgres ;
 SET
-amit=# 			-- Role is postgres. Database is amit
+db_amit=# 			-- Role is postgres. Database is db_amit
 
 
 # 11. Grant all privilges to a role for a table under a database
 #     The table was created as owner 'postgres'
 
 
-amit=# \dt			--Database (d) tables(t)
+db_amit=# \dt			--Database (d) tables(t)
 
 		  List of relations
 	 Schema |   Name   | Type  |  Owner   
@@ -140,11 +140,11 @@ amit=# \dt			--Database (d) tables(t)
 
 # Now grant all priviges on table postgres to user amit:
 
-	amit=# 	GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO amit ;
+	db_amit=# 	GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO amit ;
 
 # Use \dp command to get more database (d) privilege (p) informtion
 
-	amit=# \dp
+	db_amit=# \dp
 		                          Access privileges
 	 Schema |   Name   | Type  |     Access privileges     | Column privileges | Policies 
 	--------+----------+-------+---------------------------+-------------------+----------
