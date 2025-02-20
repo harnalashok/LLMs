@@ -26,7 +26,11 @@ ln -sT /home/ashok/createvectordb.sh             createvectordb.sh
 ln -sT /home/ashok/delete_postgres_db.sh         delete_postgres_db.sh
 cd ~/
 
-# Add vector storage capability
+###########
+## Add vector storage capability
+############
+
+# Add vector storage capability to postgres
 # My version of postgres db is 14.
 # (Check as: pg_config --version)
 # Install a needed package (depending upon your version of postgres)
