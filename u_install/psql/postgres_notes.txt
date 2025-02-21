@@ -1,6 +1,86 @@
 # Postgres notes:
 # Last amended: 20th Feb, 2025
 
+Concepts
+=========
+        Key words: Default database, superuser, logged in role, prompt
+
+	Postgres has, by default, a database 'postgres' and a superuser 'postgres'.
+	A superuser in PostgreSQL is a user who bypasses all permission checks. 
+	This user can do anything. The prompt:
+	
+	               postgres=# 
+	
+	indicates that the database is postgres and the '#' symbol indicates that the logged
+	in role is the superuser, 'postgres'.
+	You can change the logged in role with the command: 'Set Role muyser ;' and, the prompt
+        will change. 'Set Role' DOES NOT change connected database:
+	
+		postgres=# set role myuser ;
+		postgres=> create database xyz ;              -- Role changed; prompt changes. Database is still 'postgres'
+		ERROR:  permission denied to create database  --'myuser' must be first given privilegs by superuser.
+	
+	Set the role back to superuser, and as superuser, create a database and grant ownership to
+	myuser:
+	
+		postgres=> set role postgres ;
+		postgres=# CREATE DATABASE mydatabase WITH OWNER = myuser;
+		CREATE DATABASE
+	
+	IF 'myuser' wants to create a table, he has to proceed as follows. First connect to
+	the database, mydatabase:
+	
+		postgres=# \c mydatabase
+		You are now connected to database "mydatabase" as user "postgres".
+		mydatabase=#
+	
+	Connected to database, mydatabase, but the logged in role is still the superuser. If
+	any table is created, it will be created by the superuser within this database. Remember,
+	the superuser can bypass all permission checks.
+	
+		postgres=# \c mydatabase
+		You are now connected to database "mydatabase" as user "postgres".
+		mydatabase=# create table n8n (id integer) ;
+		CREATE TABLE
+		mydatabase=# \dt
+		        List of relations
+		 Schema | Name | Type  |  Owner
+		--------+------+-------+----------
+		 public | n8n  | table | postgres
+		(1 row)
+	
+	Thus, the user, myuser, has no authority over the table n8n. There are two ways, myuser
+	can have a table:
+
+		I. Superuser grants all privileges over the table.
+		II. The user logs in as 'myuser' and creates a table.
+	
+	Here we follow the IInd route:
+	
+		mydatabase=# set role myuser ;
+		SET
+		mydatabase=> create table axr (id char(5)) ;   
+		CREATE TABLE
+		mydatabase=> \dt             --Check ownership
+		        List of relations
+		 Schema | Name | Type  |  Owner
+		--------+------+-------+----------
+		 public | axr  | table | myuser
+		 public | n8n  | table | postgres
+		(2 rows)
+
+	To find out the current logged in role, issue command 'select current_user'
+
+		mydatabase=> select current_user ;
+		 current_user
+		--------------
+		 myuser
+		(1 row)
+
+	A quick summary:
+		postgres=# 		        -- Database postgres. Role postgres
+		db_amit=# 			-- Database  db_amit. Role postgers
+		db_amit=> 			-- Database  db_amit. Role amit
 
 #0.0  Install postgres as:
 
@@ -116,7 +196,7 @@ CREATE TABLE product (
 
 #11. Prompt differences:
 
-postgres=# 		-- Connected to default database 'postgres'
+postgres=# 		        -- Connected to default database 'postgres'
 db_amit=# 			-- Database is db_amit. Hash shows that role is postgres
 db_amit=> 			-- Database is db_amit. '=>' shows that role is NOT postgres
 
