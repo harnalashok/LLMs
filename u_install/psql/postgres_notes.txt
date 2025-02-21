@@ -18,8 +18,8 @@ Concepts
 	
 		postgres=# set role myuser ;
 		postgres=> create database xyz ;              -- Role changed; prompt changes. Database still 'postgres'
-		ERROR:  permission denied to create database  --'myuser' must be first given privilegs by superuser.
-	
+		ERROR:  permission denied to create database  --'myuser' be first given privilegs by superuser
+                                                              	
 	Set the role back to superuser, and as superuser, create a database and grant ownership to
 	myuser:
 	
