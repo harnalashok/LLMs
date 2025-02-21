@@ -71,7 +71,7 @@ Concepts
 
 	To find out the current logged in role, issue command 'select current_user'
 
-		mydatabase=> select current_user ;
+		mydatabase=> select user ;    -- OR current_user
 		 current_user
 		--------------
 		 myuser
