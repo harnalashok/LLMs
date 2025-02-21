@@ -94,7 +94,6 @@ Concepts
 	cd ~/
 
 
-
 #1. Open psql shell:
 
 	sudo -u postgres psql postgres
