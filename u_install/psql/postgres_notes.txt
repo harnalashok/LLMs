@@ -17,7 +17,7 @@ Concepts
         will change. 'Set Role' DOES NOT change connected database:
 	
 		postgres=# set role myuser ;
-		postgres=> create database xyz ;              -- Role changed; prompt changes. Database is still 'postgres'
+		postgres=> create database xyz ;              -- Role changed; prompt changes. Database still 'postgres'
 		ERROR:  permission denied to create database  --'myuser' must be first given privilegs by superuser.
 	
 	Set the role back to superuser, and as superuser, create a database and grant ownership to
