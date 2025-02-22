@@ -44,9 +44,6 @@ echo "netstat -aunt | grep 5678"                           | tee -a /home/ashok/
 chmod +x /home/ashok/start/*.sh
 
 
-
-
-
 mv /home/ashok/script4.sh       /home/ashok/done/
 mv /home/ashok/next/script5.sh  /home/ashok/
 
