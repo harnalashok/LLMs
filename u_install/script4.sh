@@ -93,6 +93,8 @@ cd /home/ashok
 ln -sT /home/ashok/start/start_localai.sh start_localai.sh
 ln -sT /home/ashok/start/start_chroma.sh start_chroma.sh
 ln -sT /home/ashok/start/start_npx_flowise.sh start_flowise.sh
+ln -sT /home/ashok/start/start_debug_flowise.sh start_debug_flowise.sh
+
 ln -sT /home/ashok/start/start_npx_n8n.sh start_n8n.sh
 ln -sT /home/ashok/start/start_uv_langflow.sh start_langflow.sh
 ln -sT /home/ashok/start/start_postgresql.sh start_postgresql.sh
