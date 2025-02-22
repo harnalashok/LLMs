@@ -64,6 +64,13 @@ echo "echo 'Flowise will be available at port 3000'"       | tee -a /home/ashok/
 echo "npx flowise start"                                   | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "netstat -aunt | grep 3000"                           | tee -a /home/ashok/start/start_npx_flowise.sh
 
+echo '#!/bin/bash'                                                      | tee    /home/ashok/start/start_debug_flowise.sh  
+echo " "                                                                | tee -a /home/ashok/start/start_debug_flowise.sh  
+echo "cd ~/"                                                            | tee -a /home/ashok/start/start_debug_flowise.sh  
+echo "echo 'Flowise will be available at port 3000 in debug mode'"      | tee -a /home/ashok/start/start_debug_flowise.sh  
+echo "npx flowise start --DEBUG=true"                                   | tee -a /home/ashok/start/start_debug_flowise.sh  
+echo "netstat -aunt | grep 3000"                                        | tee -a /home/ashok/start/start_debug_flowise.sh  
+
 chmod +x /home/ashok/start/*.sh
 
 #####################
