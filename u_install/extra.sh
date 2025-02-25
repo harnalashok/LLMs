@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# In some machines, incomplete installation has been made
+# This script is to fill that gap.
+# It is not to be executed along with script0...series
+
 # REf: https://github.com/mudler/LocalAI
 
  
