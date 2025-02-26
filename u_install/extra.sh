@@ -53,10 +53,15 @@ echo "Add vector storage capability to postgres"
 echo "==========================="
 sleep 10
 
-# Download scripts that will inturn, help create user and password
+# Download scripts that will in turn, help create user and password
 # in postgresql
 
+mkdir /home/ashok/psql
 cd /home/ashok/
+rm         createpostgresuser.sh
+rm    show_postgres_databases.sh
+rm             createvectordb.sh
+rm         delete_postgres_db.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createpostgresuser.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/show_postgres_databases.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/psql/createvectordb.sh
