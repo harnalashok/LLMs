@@ -189,17 +189,11 @@ chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
 # Install mysql shell
-udo apt-get install mysql-client
-
-
-
-
-
-
-
-
-
-
+sudo apt-get install mysql-client
+# Initialize Answer all questions as No, exept the last one
+echo "Initialize: Answer all questions as No, exept the last one"
+sleep 5
+sudo mysql_secure_installation
 
 
 # Move scripts
