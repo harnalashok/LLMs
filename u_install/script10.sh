@@ -188,7 +188,8 @@ chmod +x *.sh
 chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
-
+# Install mysql shell
+udo apt-get install mysql-client
 
 
 
