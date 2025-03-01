@@ -160,7 +160,7 @@ chmod +x /home/ashok/stop/*.sh
 #############
 # https://documentation.ubuntu.com/server/how-to/databases/install-mysql/index.html
 
-sudo apt install mysql-server
+sudo apt install mysql-server -y
 sudo service mysql status
 sudo ss -tap | grep mysql
 
