@@ -140,10 +140,19 @@ echo "netstat -aunt | grep 27017"                          | tee -a /home/ashok/
 echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_mongodb.sh  
 echo " "                                                   | tee -a /home/ashok/stop/stop_mongodb.sh  
 echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_mongodb.sh  
-echo "echo 'mongodb will be stopped'"                      | tee -a /home/ashok/stop/stop_mongodb.sh  
+echo "echo 'mongodb will be stopped...wait'"               | tee -a /home/ashok/stop/stop_mongodb.sh  
 echo "docker stop mongodb"                                 | tee -a /home/ashok/stop/stop_mongodb.sh  
 echo "netstat -aunt | grep 27017"                          | tee -a /home/ashok/stop/stop_mongodb.sh  
 
+# Create links
+cd /home/ashok/start
+ln -sT /home/ashok/start/start_mongodb.sh          /home/ashok/start_mongodb.sh  
+cd /home/ashok/stop
+ln -sT /home/ashok/stop/stop_mongodb.sh           /home/ashok/stop_mongodb.sh  
+cd ~/
+chmod +x *.sh
+chmod +x /home/ashok/start/*.sh
+chmod +x /home/ashok/stop/*.sh
 
 
 
