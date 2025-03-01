@@ -164,6 +164,42 @@ sudo apt install mysql-server
 sudo service mysql status
 sudo ss -tap | grep mysql
 
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_mysqlserver.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_mysqlserver.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_mysqlserver.sh   
+echo "echo 'mysqlserver will be available on port 33060'"  | tee -a /home/ashok/start/start_mysqlserver.sh  
+echo "sudo service mysql restart"                          | tee -a /home/ashok/start/start_mysqlserver.sh  
+echo "netstat -aunt | grep 33060"                          | tee -a /home/ashok/start/start_mysqlserver.sh  
+
+echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_mysqlserver.sh  
+echo " "                                                   | tee -a /home/ashok/stop/stop_mysqlserver.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_mysqlserver.sh  
+echo "echo 'mysqlserver will be stopped'"                  | tee -a /home/ashok/stop/stop_mysqlserver.sh  
+echo "sudo service mysql stop"                             | tee -a /home/ashok/stop/stop_mysqlserver.sh  
+echo "netstat -aunt | grep 33060"                          | tee -a /home/ashok/stop/stop_mysqlserver.sh  
+
+# Create links
+cd /home/ashok/start
+ln -sT  /home/ashok/start/start_mysqlserver.sh             /home/ashok/start_mysqlserver.sh    
+cd /home/ashok/stop
+ln -sT /home/ashok/stop/stop_mysqlserver.sh             /home/ashok/stop_mysqlserver.sh    
+cd ~/
+chmod +x *.sh
+chmod +x /home/ashok/start/*.sh
+chmod +x /home/ashok/stop/*.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Move scripts
 mv /home/ashok/script10.sh        /home/ashok/done/
