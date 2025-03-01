@@ -155,7 +155,14 @@ chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
 
+#############
+## mysql server install
+#############
+# https://documentation.ubuntu.com/server/how-to/databases/install-mysql/index.html
 
+sudo apt install mysql-server
+sudo service mysql status
+sudo ss -tap | grep mysql
 
 
 # Move scripts
