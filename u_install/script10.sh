@@ -9,8 +9,8 @@
 echo "========script10=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
+echo "Will install mongodb docker and mongosh shell"
 echo "Will call no other script"
-echo "You may call script6.sh"
 echo "==========================="
 sleep 10
 
@@ -130,7 +130,19 @@ docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:lat
 netstat -aunt | grep 27017
 # mongosh --port 27017
 
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_mongodb.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_mongodb.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_mongodb.sh  
+echo "echo 'mongodb will be available on port 27017'"      | tee -a /home/ashok/start/start_mongodb.sh  
+echo "docker start mongodb"                                | tee -a /home/ashok/start/start_mongodb.sh  
+echo "netstat -aunt | grep 27017"                          | tee -a /home/ashok/start/start_mongodb.sh  
 
+echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_mongodb.sh  
+echo " "                                                   | tee -a /home/ashok/stop/stop_mongodb.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_mongodb.sh  
+echo "echo 'mongodb will be stopped'"                      | tee -a /home/ashok/stop/stop_mongodb.sh  
+echo "docker stop mongodb"                                 | tee -a /home/ashok/stop/stop_mongodb.sh  
+echo "netstat -aunt | grep 27017"                          | tee -a /home/ashok/stop/stop_mongodb.sh  
 
 
 
