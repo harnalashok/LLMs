@@ -190,10 +190,21 @@ chmod +x /home/ashok/stop/*.sh
 
 # Install mysql shell
 sudo apt-get install mysql-client
+
 # Initialize Answer all questions as No, exept the last one
 echo "Initialize: Answer all questions as No, exept the last one"
 sleep 5
 sudo mysql_secure_installation
+sleep 2
+clear
+
+
+echo " "
+echo "======="
+echo "sudo mysql -u root -p "
+echo "root has no password"
+echo "===== "
+echo " "
 
 
 # Move scripts
