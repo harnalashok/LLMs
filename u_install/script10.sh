@@ -5,17 +5,6 @@
 # For examples of OPENAI usage, see:
 #      # Ref: https://github.com/Jaimboh/Llama.cpp-Local-OpenAI-server/tree/main
 
-# These sscripts run in sequence.
-      #     script0.sh
-      #     script1.sh
-      #     script2.sh
-      #     docker_install.sh
-      #     script3.sh
-      #     script4.sh
-      #     script5.sh
-      #     script6.sh
-      #     script7.sh
-      #     script8.sh
 
 echo "========script10=============="
 echo "Will install llama-cpp-python"
@@ -120,6 +109,33 @@ echo "sudo lsof -i:8000"                                >> /home/ashok/start/pid
 chmod +x /home/ashok/start/*.sh
 chmod +x *.sh
 sleep 9
+
+#############
+## mongodb docker install
+#############
+
+# Install mongosh shell
+# Ref: https://www.mongodb.com/docs/mongodb-shell/install/
+
+wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
+
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-mongosh
+
+# Install images and then run the container
+# https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/#std-label-docker-mongodb-community-install
+docker pull mongodb/mongodb-community-server:latest
+docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest
+netstat -aunt | grep 27017
+# mongosh --port 27017
+
+
+
+
+
+
+
 
 # Move scripts
 mv /home/ashok/script10.sh        /home/ashok/done/
