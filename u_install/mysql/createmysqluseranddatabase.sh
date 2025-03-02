@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Needed so that sudo password is not asked again
+# sudo PAssword is also being supplied 
 echo ashok | sudo -S pwd
 echo " "
 echo " "
