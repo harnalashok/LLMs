@@ -196,6 +196,9 @@ echo "Initialize: Answer all questions as No, exept the last one"
 sleep 5
 sudo mysql_secure_installation
 sleep 2
+
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/mysql/mysql.sh
+
 clear
 
 
