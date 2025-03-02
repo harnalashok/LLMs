@@ -23,4 +23,4 @@ echo "================"
 echo " "
 echo "Just press ENTER, as there is no password."
 sleep 8
-echo ashok | sudo -S mysql -u root -p
+sudo -S mysql -u root -p
