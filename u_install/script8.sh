@@ -141,12 +141,8 @@ docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghc
 # Start docker GPU support
 docker run -d -p 3000:8080 --gpus all -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:cuda
 
-
-
-
-
-
-
+# Container name:  open-webui
+echo" Next stime start/stop as: docker start/stop  open-webui "
 
 # Misc 
 chmod +x /home/ashok/*.sh
