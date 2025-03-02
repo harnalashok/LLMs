@@ -1,25 +1,12 @@
 #!/bin/bash
 
-  # These scripts run in sequence.
-      #     script0.sh
-      #     script1.sh
-      #     script2.sh
-      #     docker_install.sh
-      #     script3.sh
-      #     script4.sh
-      #     script5.sh
-      #     script6.sh
-      #     script7.sh
-      #     script8.sh
-      #     script9.sh
-
 
 echo "========script8=============="
 echo "Will install n8n docker"
 echo "Will install LM Studio"
 echo "Will install AnythingLLM"
 echo "Will install open webui"
-echo "You may execute script.sh after this"
+echo "You may execute script9.sh after this"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
@@ -65,6 +52,7 @@ ln -sT /home/ashok/start/start_docker_n8n.sh start_docker_n8n.sh
 ln -sT /home/ashok/start/start_wsl_n8n.sh    start_wsl_n8n.sh
 
 chmod +x /home/ashok/start/*.sh
+
 ##########################
 ### Install LMStudio
 ##########################
@@ -125,6 +113,7 @@ mv /home/ashok/next/script9.sh  /home/ashok/
 ##########################
 ### Install AnythingLLM
 ##########################
+
 curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
 
 # Script to start anythingLLM
