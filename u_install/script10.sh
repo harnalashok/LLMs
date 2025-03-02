@@ -10,6 +10,7 @@ echo "========script10=============="
 echo "Will install llama-cpp-python"
 echo "Will prepare a sample start script for it"
 echo "Will install mongodb docker and mongosh shell"
+echo "Will install mysql-server and mysql client"
 echo "Will call no other script"
 echo "==========================="
 sleep 10
@@ -197,9 +198,13 @@ sleep 5
 sudo mysql_secure_installation
 sleep 2
 
+mkdir /home/ashok/mysql
+cd   /home/ashok/mysql
 wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/mysql/mysql.sh
-
-clear
+ln -sT /home/ashok/mysql/mysql.sh             /home/ashok/mysql.sh  
+cd ~/
+chmod +x *.sh
+chmod +x /home/ashok/mysql/*.sh
 
 
 echo " "
