@@ -130,11 +130,20 @@ echo "./anythingllm-desktop start"                                     >>  /home
 # Ref: https://docs.openwebui.com/getting-started/quick-start
 ##########################
 
+echo "Open webui will be available at"
+echo "http://127.0.0.1:3000"
+echo "Pulling images"
 docker pull ghcr.io/open-webui/open-webui:main
+
+echo "Running docker"
 # Start docker--NonGPU support
 docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 # Start docker GPU support
 docker run -d -p 3000:8080 --gpus all -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:cuda
+
+
+
+
 
 
 
