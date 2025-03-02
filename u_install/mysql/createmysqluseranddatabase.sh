@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sudo pwd
+# Needed so that sudo password is not asked again
+echo ashok | sudo -S pwd
 echo " "
 echo " "
 echo "Execute the following three statements in mysql shell"
@@ -16,4 +17,4 @@ echo "================"
 echo " "
 echo "Just press ENTER, as there is no password."
 sleep 8
-sudo mysql -u root -p
+echo ashok | sudo -S mysql -u root -p
