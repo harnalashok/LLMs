@@ -20,7 +20,7 @@ else
 fi
 
 
-echo "========script5=============="
+echo "========script9=============="
 echo "Will install Milvus vectordb docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
