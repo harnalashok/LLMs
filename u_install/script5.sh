@@ -3,7 +3,7 @@
 
 echo "========script5=============="
 echo "Download psql scripts"  
-echo "Add vector storage capability to postgres"
+echo "Adds vector storage capability to postgres"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
 sleep 10
