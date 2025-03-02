@@ -3,8 +3,9 @@
 echo " "
 echo "---------"
 echo "Logging in as root user"
-echo "When asked, supply 'sudo' password of ashok, supply it"
-echo "But 'root' has no password. When asked, just press ENTER"
+echo "First, you may be asked to supply 'sudo' password of ashok, supply it"
+echo "Next, just a statement-- 'Enter Password' would appear. "
+echo "Just press ENTER as 'root' has no password."
 echo "----------"
 echo " "
 sleep 8
