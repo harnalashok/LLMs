@@ -200,7 +200,7 @@ sleep 2
 
 mkdir /home/ashok/mysql
 cd   /home/ashok/mysql
-wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/mysql/mysql.sh
+wget https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/mysql/mysql.sh
 ln -sT /home/ashok/mysql/mysql.sh             /home/ashok/mysql.sh  
 cd ~/
 chmod +x *.sh
