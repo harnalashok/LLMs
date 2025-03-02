@@ -18,6 +18,7 @@ echo "========script8=============="
 echo "Will install n8n docker"
 echo "Will install LM Studio"
 echo "Will install AnythingLLM"
+echo "Will install open webui"
 echo "You may execute script.sh after this"
 echo "You may call download_models.sh to download gguf models or from ollama library"
 echo "==========================="
@@ -132,6 +133,21 @@ echo " "                                                                >> /home
 echo "cd ~/"                                                            >> /home/ashok/start/start_anythingllm.sh
 echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"           >> /home/ashok/start/start_anythingllm.sh
 echo "./anythingllm-desktop start"                                     >>  /home/ashok/start/start_anythingllm.sh
+
+
+
+##########################
+### Install OpenWebUI
+# Ref: https://docs.openwebui.com/getting-started/quick-start
+##########################
+
+docker pull ghcr.io/open-webui/open-webui:main
+# Start docker--NonGPU support
+docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
+# Start docker GPU support
+docker run -d -p 3000:8080 --gpus all -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:cuda
+
+
 
 
 # Misc 
