@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-sudo cd ~/
+sudo pwd
 echo " "
 echo " "
 echo "Execute the following three statements in mysql shell"
