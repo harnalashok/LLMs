@@ -207,13 +207,6 @@ chmod +x *.sh
 chmod +x /home/ashok/mysql/*.sh
 
 
-echo " "
-echo "======="
-echo "sudo mysql -u root -p "
-echo "root has no password"
-echo "===== "
-echo " "
-
 
 # Move scripts
 mv /home/ashok/script10.sh        /home/ashok/done/
