@@ -64,7 +64,8 @@ sleep 5
 # Start local-ai in future
 echo "#!/bin/bash"                                                                         > /home/ashok/start/start_localai.sh
 echo " "                                                                                  >> /home/ashok/start/start_localai.sh
-echo "cd /home/ashok/localai"                                                                >> /home/ashok/start/start_localai.sh
+echo "cd /home/ashok/localai"                                                             >> /home/ashok/start/start_localai.sh
+echo "echo 'Localai will be available at port 8080'"                                      >> /home/ashok/start/start_localai.sh
 echo "docker start local-ai"                                                              >> /home/ashok/start/start_localai.sh
 chmod +x /home/ashok/start/*.sh
 
