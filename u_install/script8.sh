@@ -1,4 +1,4 @@
-#!/bin/bash
+o #!/bin/bash
 
 
 echo "========script8=============="
@@ -151,7 +151,7 @@ echo" Next stime start/stop as: docker start/stop  open-webui "
 echo '#!/bin/bash'                                       > /home/ashok/start/start_openwebui.sh
 echo " "                                                 >> /home/ashok/start/start_openwebui.sh
 echo "cd /home/ashok"                                    >> /home/ashok/start/start_openwebui.sh
-echo "'Access it as: http://127.0.0.1:3000'"             >> /home/ashok/start/start_openwebui.sh
+echo "echo 'Access it as: http://127.0.0.1:3000'"             >> /home/ashok/start/start_openwebui.sh
 echo "docker start open-webui"                           >> /home/ashok/start/start_openwebui.sh
 chmod +x /home/ashok/start/*.sh
 
