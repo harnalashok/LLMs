@@ -15,6 +15,11 @@ sleep 10
 
 cd ~/
 
+#################
+# langchain & langraph
+#################
+
+
 # Create python environment at 'langchain'
 #  for installing langchain and llama-index
 
@@ -27,6 +32,10 @@ pip install langchain-experimental
 pip install langgraph
 pip install "langserve[all]"
 pip install langchain-cli
+
+#################
+# llamaindex
+#################
 
 # LLamaindex install
 # Mostly openai related
@@ -55,6 +64,9 @@ cp /home/ashok/activate_langchain_venv.sh  /home/ashok/stop/activate_langchain_v
 mv /home/ashok/script7.sh        /home/ashok/done/
 mv /home/ashok/next/script8.sh   /home/ashok/
 
+#################
+# openwebui
+#################
 
 # Install openwebui using pip. Refer its github site
 # Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
