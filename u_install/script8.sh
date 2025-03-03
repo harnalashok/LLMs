@@ -148,6 +148,7 @@ docker run -d -p 3000:8080 --gpus all -v open-webui:/app/backend/data --name ope
 echo" Next stime start/stop as: docker start/stop  open-webui "
 
 ## Script to start open-webui
+cd ~/
 echo '#!/bin/bash'                                       > /home/ashok/start/start_openwebui.sh
 echo " "                                                 >> /home/ashok/start/start_openwebui.sh
 echo "cd /home/ashok"                                    >> /home/ashok/start/start_openwebui.sh
