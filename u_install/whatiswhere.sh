@@ -1,6 +1,6 @@
 
 echo "========script1=============="
-echo "Will update Ubuntu"
+echo "Updates Ubuntu"
 echo "Will install necessary packages"
 echo "Will install postgresql & sqlite3"
 echo "Will install Ollama quietly"
@@ -25,7 +25,7 @@ echo "Will install LocalAI docker"
 echo "==========================="
 
 echo "========script5=============="
-echo "Download psql scripts"  
+echo "Downloads psql scripts"  
 echo "Add vector storage capability to postgres"
 echo "==========================="
 
