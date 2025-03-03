@@ -67,6 +67,7 @@ echo " "                                                                        
 echo "cd /home/ashok/localai"                                                             >> /home/ashok/start/start_localai.sh
 echo "echo 'Localai will be available at port 8080'"                                      >> /home/ashok/start/start_localai.sh
 echo "docker start local-ai"                                                              >> /home/ashok/start/start_localai.sh
+echo "netstat -aunt | grep 8080"                                                          >> /home/ashok/start/start_localai.sh
 chmod +x /home/ashok/start/*.sh
 
 # Stop local-ai in future
@@ -89,6 +90,7 @@ wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_in
 # MAke symbolic links
 cd /home/ashok
 ln -sT /home/ashok/start/start_localai.sh start_localai.sh
+ln -sT /home/ashok/stop/stop_localai.sh stop_localai.sh
 ln -sT /home/ashok/start/start_chroma.sh start_chroma.sh
 ln -sT /home/ashok/start/start_npx_flowise.sh start_flowise.sh
 ln -sT /home/ashok/start/start_debug_flowise.sh start_debug_flowise.sh
