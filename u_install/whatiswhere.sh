@@ -48,7 +48,7 @@ echo "========script8=============="
 echo "Will install n8n docker"
 echo "Will install LM Studio"
 echo "Will install AnythingLLM"
-echo "Will install open webui"
+echo "Will install open webui docker"
 echo "==========================="
 
 echo "========script9=============="
