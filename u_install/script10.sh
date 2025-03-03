@@ -213,10 +213,6 @@ chmod +x /home/ashok/mysql/*.sh
 # Move scripts
 mv /home/ashok/script10.sh        /home/ashok/done/
 
-
-#echo "You may like to execute:"
-#echo "       ./script7.sh"
-sleep 10
 kill $PPID
 
 
