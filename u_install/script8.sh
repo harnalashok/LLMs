@@ -126,7 +126,7 @@ echo "./anythingllm-desktop start"                                     >>  /home
 
 
 ##########################
-### Install OpenWebUI
+### Install OpenWebUI docker
 # Ref: https://docs.openwebui.com/getting-started/quick-start
 ##########################
 
@@ -143,6 +143,23 @@ docker run -d -p 3000:8080 --gpus all -v open-webui:/app/backend/data --name ope
 
 # Container name:  open-webui
 echo" Next stime start/stop as: docker start/stop  open-webui "
+
+## Script to start open-webui
+echo '#!/bin/bash'                                       > /home/ashok/start/start_openwebui.sh
+echo " "                                                 >> /home/ashok/start/start_openwebui.sh
+echo "cd /home/ashok"                                    >> /home/ashok/start/start_openwebui.sh
+echo "'Access it as: http://127.0.0.1:3000'"             >> /home/ashok/start/start_openwebui.sh
+echo "docker start open-webui"                           >> /home/ashok/start/start_openwebui.sh
+chmod +x /home/ashok/start/*.sh
+
+## Script to stop open-webui
+echo '#!/bin/bash'                                       > /home/ashok/stop/stop_openwebui.sh
+echo " "                                                 >> /home/ashok/stop/stop_openwebui.sh
+echo "cd /home/ashok"                                    >> /home/ashok/stop/stop_openwebui.sh
+echo "docker stop open-webui"                            >> /home/ashok/stop/stop_openwebui.sh
+chmod +x /home/ashok/stop/*.sh
+
+
 
 # Misc 
 chmod +x /home/ashok/*.sh
