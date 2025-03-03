@@ -130,6 +130,7 @@ echo "./anythingllm-desktop start"                                     >>  /home
 # Ref: https://docs.openwebui.com/getting-started/quick-start
 ##########################
 
+cd ~/
 echo "Open webui will be available at"
 echo "http://127.0.0.1:3000"
 echo "Pulling images"
