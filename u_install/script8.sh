@@ -114,15 +114,17 @@ mv /home/ashok/next/script9.sh  /home/ashok/
 ### Install AnythingLLM
 ##########################
 
+cd ~/
 curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
 
+cd ~/
 # Script to start anythingLLM
 echo '#!/bin/bash'                                                      > /home/ashok/start/start_anythingllm.sh
 echo " "                                                                >> /home/ashok/start/start_anythingllm.sh
 echo "cd ~/"                                                            >> /home/ashok/start/start_anythingllm.sh
 echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"           >> /home/ashok/start/start_anythingllm.sh
 echo "./anythingllm-desktop start"                                     >>  /home/ashok/start/start_anythingllm.sh
-
+chmod +x /home/ashok/start/*.sh
 
 
 ##########################
