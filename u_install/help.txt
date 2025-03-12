@@ -131,9 +131,10 @@ command. To use a local gguf model, proceed as follows:
 	# To get the list of collection names, use the command:
 	# Default collection name appears to be 'documenData'
 	python3 get_chroma_collectionsName.py
+
 ## FAISS library
-        While using flowise, the 'Base Path to Load' that needs to be spcified is of the folder where data files
-        will be saved.
+        While using flowise, the 'Base Path to Load' that needs to be spcified is of the folder where 
+        data files will be saved. Consider this as the location of FAISS database for that application.
 
 
 ###########################33
