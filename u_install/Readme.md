@@ -15,6 +15,7 @@ We assume Ubuntu/WSL username as 'ashok'. Copy and paste.
    fi
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/help.txt
+   ln -sT /home/ashok/help.txt /home/ashok/Documents/help.txt
    perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
    chmod +x  ~/*.sh   
    bash script0.sh
