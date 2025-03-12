@@ -13,6 +13,12 @@ cd ~/
 ### Install FAISS library
 ##########################
 
+echo "============"
+echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
+echo "is of the folder where data files will be saved. Consider this as the "
+echo "location of FAISS database for that application."
+echo "=============="
+sleep 8
 # Create venv for FAISS
 python3 -m venv /home/ashok/faiss
 source /home/ashok/faiss/bin/activate
@@ -27,7 +33,8 @@ echo "echo 'source /home/ashok/start/activate_faiss.sh'"                 >> /hom
 echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/ashok/start/activate_faiss.sh
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 deactivate
-
+echo "FAISS library installed"
+sleep 4
 
 ##########################
 ### redis-stack-server docker install
