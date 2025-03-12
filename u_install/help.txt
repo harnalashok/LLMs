@@ -62,6 +62,7 @@ Installed software:
 	l. milvus vectordb
 	m. Node.js
 	n. Fast Node Manager (fnm)
+        o. FAISS library
   
 
 How to use llama.cpp gguf models in LMStudio
@@ -130,6 +131,8 @@ command. To use a local gguf model, proceed as follows:
 	# To get the list of collection names, use the command:
 	# Default collection name appears to be 'documenData'
 	python3 get_chroma_collectionsName.py
+## FAISS library
+        While using flowise, the Base Path that needs to be spcified is of the folder where 
 
 
 ###########################33
