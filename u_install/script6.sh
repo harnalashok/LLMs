@@ -13,11 +13,13 @@ cd ~/
 ### Install FAISS library
 ##########################
 
+echo " "
 echo "============"
 echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
 echo "is of the folder where data files will be saved. Consider this as the "
 echo "location of FAISS database for that application."
 echo "=============="
+echo " "
 sleep 8
 # Create venv for FAISS
 python3 -m venv /home/ashok/faiss
