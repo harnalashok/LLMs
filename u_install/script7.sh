@@ -43,7 +43,8 @@ echo "Installing llama-index"
 echo
 pip install llama-index
 # Ollama, huggingface and localai oriented
-pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss
+pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama
+ llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss
 pip install faiss-cpu
 sleep 2
 
