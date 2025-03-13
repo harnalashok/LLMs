@@ -42,8 +42,8 @@ pip install langchain-cli
 echo "Installing llama-index"
 echo
 pip install llama-index
-# Ollama and huggingface oriented
-pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-huggingface
+# Ollama, huggingface and localai oriented
+pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss
 sleep 2
 
 # Deactivate the environment
