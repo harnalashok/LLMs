@@ -47,6 +47,7 @@ pip install llama-index-core llama-index-readers-file llama-index-llms-ollama ll
 pip install faiss-cpu
 pip install jupyterlab
 pip install ipython
+pip install notebook
 sleep 2
 
 # Deactivate the environment
