@@ -46,6 +46,7 @@ pip install llama-index
 pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss llama-index-vector-stores-chroma
 pip install faiss-cpu
 pip install jupyterlab
+pip install ipython
 sleep 2
 
 # Deactivate the environment
@@ -57,6 +58,7 @@ echo "echo 'source /home/ashok/langchain/bin/activate' "                   >>  /
 echo "echo '(Note the change in prompt after activating)' "                >>  /home/ashok/activate_langchain_venv.sh
 echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/ashok/activate_langchain_venv.sh
 echo "source /home/ashok/langchain/bin/activate"                           >>  /home/ashok/activate_langchain_venv.sh
+chmod +x /home/ashok/*.sh
 sleep 2
 
 cp /home/ashok/activate_langchain_venv.sh  /home/ashok/start/activate_langchain_venv.sh
