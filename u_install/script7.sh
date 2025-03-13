@@ -52,7 +52,7 @@ deactivate
 
 # Create script to activate 'langchain' env
 echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/ashok/activate_langchain_venv.sh
-echo "echo 'source venv_langchain.sh' "                                    >>  /home/ashok/activate_langchain_venv.sh
+echo "echo 'source /home/ashok/langchain/bin/activate' "                   >>  /home/ashok/activate_langchain_venv.sh
 echo "echo '(Note the change in prompt after activating)' "                >>  /home/ashok/activate_langchain_venv.sh
 echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/ashok/activate_langchain_venv.sh
 echo "source /home/ashok/langchain/bin/activate"                           >>  /home/ashok/activate_langchain_venv.sh
