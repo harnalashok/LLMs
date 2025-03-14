@@ -5,6 +5,7 @@ echo " "
 echo "Actual model is: Llama-3.2-1B-Instruct-Q4_K_M-GGUF"
 echo "llama3.2 embeddings model"
 echo "Can be used as drop-in replacement for bert-embeddings" 
+echo "Hence the name bert-embeddings"
 echo " "
 sleep 4
 
