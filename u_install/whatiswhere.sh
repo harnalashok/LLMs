@@ -53,6 +53,7 @@ echo "==========================="
 
 echo "========script9=============="
 echo "Will install Milvus vectordb docker"
+echo "Qdrant vector db install docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
 echo "Will install portainer docker"
