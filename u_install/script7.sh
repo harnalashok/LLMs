@@ -47,6 +47,7 @@ pip install --upgrade transformers
 pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss llama-index-vector-stores-chroma
 pip install --upgrade transformers
 pip install faiss-cpu
+pip install qdrant-client
 pip install jupyterlab
 pip install ipython
 pip install notebook
