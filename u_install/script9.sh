@@ -30,8 +30,9 @@ echo "Will prepare start script for each"
 echo "==========================="
 sleep 10
 
-
+###############
 # Milvus install
+################
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
 echo "Installing milvus vector database using docker"       | tee -a /home/ashok/error.log
@@ -79,6 +80,21 @@ echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/
 echo "cd /home/ashok/milvus"                    > /home/ashok/delete_milvus_db.sh
 echo "bash standalone_embed.sh delete"         >> /home/ashok/delete_milvus_db.sh
 sleep 3
+
+#############
+# Qdrant vector db install
+##############
+# REf: https://airbyte.com/tutorials/beginners-guide-to-qdrant
+
+docker pull qdrant/qdrant
+# Create volume for data
+mkdir -p /home/ashok/databases/qdrant/storage
+# Start container
+docker run --publish 6333:6333 --volume /home/ashok/databases/qdrant/storage/:/qdrant/storage qdrant/qdrant
+
+
+
+
 
 # Install Flowise through docker"
 # Ref: https://docs.flowiseai.com/getting-started
