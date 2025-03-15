@@ -22,6 +22,7 @@ fi
 
 echo "========script9=============="
 echo "Will install Milvus vectordb docker"
+echo "Will install Qdrant vectordb docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
 echo "Will install portainer docker"
@@ -106,6 +107,9 @@ echo "cd ~/"                                               | tee -a /home/ashok/
 echo "docker stop romantic_albattani"                      | tee -a /home/ashok/stop/stop_qdrant.sh 
 echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/stop/stop_qdrant.sh 
 
+cd /home/ashok
+ln -sT /home/ashok/start/start_qdrant.sh start_qdrant.sh
+ln -sT /home/ashok/stop/stop_qdrant.sh stop_qdrant.sh 
 
 
 
