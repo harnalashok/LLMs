@@ -95,8 +95,8 @@ mkdir -p /home/ashok/databases/qdrant/storage
 docker run --publish 6333:6333 --volume /home/ashok/databases/qdrant/storage/:/qdrant/storage qdrant/qdrant
 
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_qdrant.sh
-echo "Database files are here:"                            | tee -a /home/ashok/start/start_qdrant.sh
-echo "   ~/databases/qdrant/storage"                       | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo 'Database files are here:'"                     | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo '     ~/databases/qdrant/storage'"              | tee -a /home/ashok/start/start_qdrant.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_qdrant.sh
 echo "docker start romantic_albattani"                     | tee -a /home/ashok/start/start_qdrant.sh
 echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/start/start_qdrant.sh
@@ -110,7 +110,9 @@ echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/
 cd /home/ashok
 ln -sT /home/ashok/start/start_qdrant.sh start_qdrant.sh
 ln -sT /home/ashok/stop/stop_qdrant.sh stop_qdrant.sh 
-
+chmod +x ~/*.sh
+chmod +x ~/start/*.sh
+chmod +x ~/stop/*.sh
 
 
 
