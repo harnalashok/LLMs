@@ -1,7 +1,7 @@
 ## Installing a bundle of AI tools and packages
 
 To begin installing all packages, execute the following five commands in *Ubuntu* console (whether Ubuntu machine or WSL).<br>
-We assume Ubuntu/WSL username as 'ashok'. Copy and paste.
+We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is installed from which script is [here](https://github.com/harnalashok/LLMs/blob/main/u_install/whatiswhere.sh).
 
 
 ```
