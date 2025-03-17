@@ -160,6 +160,39 @@ sudo sed -i '/127.0.1.1	master/c\127.0.1.1	ashok.fsm.ac.in ashok' /etc/hosts
 # Restart network services
 sudo systemctl restart systemd-networkd
 
+##########33
+#qdrant
+########
+
+cd ~/
+docker pull qdrant/qdrant
+# Create volume for data
+mkdir -p /home/ashok/databases/qdrant/storage
+# Start container
+docker run --publish 6333:6333 --volume /home/ashok/databases/qdrant/storage/:/qdrant/storage qdrant/qdrant
+
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_qdrant.sh
+echo "echo 'Database files are here:'"                     | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo '     ~/databases/qdrant/storage'"              | tee -a /home/ashok/start/start_qdrant.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_qdrant.sh
+echo "docker start romantic_albattani"                     | tee -a /home/ashok/start/start_qdrant.sh
+echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/start/start_qdrant.sh
+
+echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_qdrant.sh
+echo " "                                                   | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_qdrant.sh
+echo "docker stop romantic_albattani"                      | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/stop/stop_qdrant.sh 
+
+cd /home/ashok
+ln -sT /home/ashok/start/start_qdrant.sh start_qdrant.sh
+ln -sT /home/ashok/stop/stop_qdrant.sh stop_qdrant.sh 
+chmod +x ~/*.sh
+chmod +x ~/start/*.sh
+chmod +x ~/stop/*.sh
+
+
+
 
 
 
