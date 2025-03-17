@@ -88,24 +88,31 @@ sleep 3
 # REf: https://airbyte.com/tutorials/beginners-guide-to-qdrant
 
 cd ~/
-docker pull qdrant/qdrant
-# Create volume for data
-mkdir -p /home/ashok/databases/qdrant/storage
-# Start container
-docker run --publish 6333:6333 --volume /home/ashok/databases/qdrant/storage/:/qdrant/storage qdrant/qdrant
 
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_qdrant.sh
 echo "echo 'Database files are here:'"                     | tee -a /home/ashok/start/start_qdrant.sh
 echo "echo '     ~/databases/qdrant/storage'"              | tee -a /home/ashok/start/start_qdrant.sh
+echo " "                                                   | tee -a /home/ashok/start/start_qdrant.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_qdrant.sh
 echo "docker start romantic_albattani"                     | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo 'If there is no start response, then' "         | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo 'check docker container name as:' "             | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo 'docker ps -a' "                                | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo 'Then start qdrant, as:' "                       | tee -a /home/ashok/start/start_qdrant.sh
+echo "echo 'docker start <name>' "                         | tee -a /home/ashok/start/start_qdrant.sh
 echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/start/start_qdrant.sh
 
 echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_qdrant.sh
 echo " "                                                   | tee -a /home/ashok/stop/stop_qdrant.sh 
 echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_qdrant.sh
 echo "docker stop romantic_albattani"                      | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "echo 'If there is no stop response, then' "          | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "echo 'check docker container name as:' "             | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "echo 'docker ps -a' "                                | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "echo 'Then stop qdrant, as:' "                       | tee -a /home/ashok/stop/stop_qdrant.sh 
+echo "echo 'docker stop <name>' "                          | tee -a /home/ashok/stop/stop_qdrant.sh 
 echo "netstat -aunt | grep 6333"                           | tee -a /home/ashok/stop/stop_qdrant.sh 
+
 
 cd /home/ashok
 ln -sT /home/ashok/start/start_qdrant.sh start_qdrant.sh
@@ -113,6 +120,16 @@ ln -sT /home/ashok/stop/stop_qdrant.sh stop_qdrant.sh
 chmod +x ~/*.sh
 chmod +x ~/start/*.sh
 chmod +x ~/stop/*.sh
+
+
+
+
+docker pull qdrant/qdrant
+# Create volume for data
+mkdir -p /home/ashok/databases/qdrant/storage
+# Start container
+docker run --publish 6333:6333 --volume /home/ashok/databases/qdrant/storage/:/qdrant/storage qdrant/qdrant
+
 
 
 
