@@ -121,9 +121,6 @@ chmod +x ~/*.sh
 chmod +x ~/start/*.sh
 chmod +x ~/stop/*.sh
 
-
-
-
 docker pull qdrant/qdrant
 # Create volume for data
 mkdir -p /home/ashok/databases/qdrant/storage
