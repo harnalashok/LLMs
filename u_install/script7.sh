@@ -41,6 +41,8 @@ pip install langchain-cli
 # Mostly openai related
 echo "Installing llama-index"
 echo
+# Required for spyder:
+sudo apt install pyqt5-dev-tools
 pip install llama-index
 # Ollama, huggingface and localai oriented
 pip install --upgrade transformers
@@ -53,6 +55,7 @@ pip install llama-index-vector-stores-qdrant fastembed
 pip install jupyterlab
 pip install ipython
 pip install notebook
+pip install spyder numpy scipy pandas matplotlib sympy cython
 sleep 2
 
 # Deactivate the environment
