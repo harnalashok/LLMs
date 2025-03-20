@@ -16,6 +16,8 @@ curl $LOCALAI/models/apply -H "Content-Type: application/json" -d '{
    
 echo " "
 echo " "
+echo "Downloaded models are stored here:"
+echo "       /var/lib/docker/volumes/12518350e14a619d6c5412073fec2a2988d41ea582780244d168c6d8ccef5229/_data/"
 echo "To check download status, execute: ./get_download_status.sh "   
 echo " "
 
