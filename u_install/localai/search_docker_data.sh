@@ -5,6 +5,7 @@
 echo " "
 echo "==========="
 echo "Search data/models (for example localai models) under one of these folders"
+echo "  /var/lib/docker/volumes/...."
 echo "==========="
 echo " "
 sudo  sudo ls -la /var/lib/docker/volumes
