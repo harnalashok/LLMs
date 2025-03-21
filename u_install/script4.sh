@@ -85,7 +85,9 @@ wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_in
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/download_stablediffusion.sh   -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/get_download_status.sh        -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/find_file.sh                  -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/find_file.sh                  -P /home/ashok/
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/find_file.sh                  -P /home/ashok/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/search_docker_data.sh         -P /home/ashok/
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/search_docker_data.sh         -P /home/ashok/localai
 
 # MAke symbolic links
 cd /home/ashok
@@ -108,6 +110,8 @@ ln -sT /home/ashok/stop/stop_postgresql.sh stop_postgresql.sh
 
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/generate_image.sh   -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/localai/generate_image2.sh  -P /home/ashok/localai
+
+chmod +x /home/ashok/*.sh
 chmod +x /home/ashok/localai/*.sh
 
 cd ~/
