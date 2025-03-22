@@ -55,6 +55,7 @@ pip install llama-index-vector-stores-qdrant fastembed
 pip install jupyterlab
 pip install ipython
 pip install notebook
+pip install streamlit
 pip install spyder numpy scipy pandas matplotlib sympy cython
 sleep 2
 
