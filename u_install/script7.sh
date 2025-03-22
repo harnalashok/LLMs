@@ -56,6 +56,7 @@ pip install jupyterlab
 pip install ipython
 pip install notebook
 pip install streamlit
+pip install tavily-python
 pip install spyder numpy scipy pandas matplotlib sympy cython
 sleep 2
 
