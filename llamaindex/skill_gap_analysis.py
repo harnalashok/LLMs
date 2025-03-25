@@ -1,5 +1,17 @@
+# Notes: 
+#           a. The RAG library uses llama_index (para AA.)
+#              (it requires a special python environment)
+#           b. llm used here is MistralAI.  (pata BB)
+#              (the API needs to be purchased)
+#           c. The embedding model is of ollama. (para BB)
+#           d. Vector store is chromadb (para CC)
+#              (Vector store needs to be updated through cron job.
+#           e. Rename and select columns of data in para CC.
+#           f. For web search tavily is used. (para FF.)
+#              (the API needs to be purchased)
 
-#----------- Libraries and modules -----------
+
+#----------- AA. Libraries and modules -----------
 # 1.0 SimpleDirectoryReader can also load metadata from a dictionary
 #     https://docs.llamaindex.ai/en/stable/module_guides/loading/simpledirectoryreader/
 from llama_index.core.readers import SimpleDirectoryReader
@@ -25,7 +37,11 @@ from llama_index.vector_stores.chroma import ChromaVectorStore
 import os
 import pandas as pd
 
-#--------Model related--------------
+
+
+
+
+#--------BB. Model related--------------
 
 # 2.0 Define embedding function
 
@@ -40,13 +56,15 @@ embed_model= OllamaEmbedding(
 
 Settings.embed_model = embed_model
 
-# 2.1 Set llm_settings
-# pip install llama-index-llms-mistralai
+# 2.1 Set llm_settings:
+#     MistralAI is used here.
+#     The api_key is obtained from MistralAI
+#     pip install llama-index-llms-mistralai
 from llama_index.llms.mistralai import MistralAI
 llm = MistralAI(api_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
 Settings.llm = llm
 
-#---------------Read Data -----------------
+#---------------CC. Read Data -----------------
 
 # 2.2 Get Data:
 from llama_index.core import Document
@@ -65,7 +83,7 @@ columns_of_interest = ['Roll_Number', 'fullName' ,'Gender', 'Degree', 'Experienc
 # 2.6  Reduce df columns to needed columns
 df = df[columns_of_interest]
 
-#----------------- Create vector store---------
+#----------------- DD. Create chroma vector store---------
 
 # 3.0 Convert rows of the CSV into Document objects
 documents = [Document(text=row.to_string()) for _, row in df[columns_of_interest].iterrows()]
@@ -93,7 +111,7 @@ vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 # 3.4
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-#------------ Vectorize now 
+#------------EE. Vectorize now --------------        
 
 # 4.0 Takes docs and storage context:
 #     Repeating this operation, doubles the number of vectors/records in the collection
@@ -104,7 +122,7 @@ index = VectorStoreIndex.from_documents(
                                          show_progress= False                 # Show progress bar
                                         )
 
-#-----------------Tools -------------------
+#-----------------FF. Tools -------------------
 
 # 5.0  Tools
 
@@ -141,7 +159,8 @@ from llama_index.core.tools import FunctionTool
 search_web_tool         = FunctionTool.from_defaults(fn= search_jobs_on_web)
 course_recommender_tool = FunctionTool.from_defaults(fn=course_recommender)
 
-#-------------AgentRunner and AgentWorker------------
+
+#-------------GG. AgentRunner and AgentWorker------------
 
 # 6.0
 from llama_index.core.agent import FunctionCallingAgentWorker
@@ -157,7 +176,7 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
 # 6.2 Define supervisor
 agent = AgentRunner(agent_worker)
 
-#-------------Chatting with the agent------------
+#-------------HH. Chatting with the agent------------
 
 response = agent.chat(
                       "Give all details of 'Rahul Kumar' having age of 23 from the data in the database"
