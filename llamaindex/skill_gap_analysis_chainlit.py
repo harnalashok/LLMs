@@ -14,6 +14,7 @@
 #----------- AA. Libraries and modules -----------
 # 1.0 SimpleDirectoryReader can also load metadata from a dictionary
 #     https://docs.llamaindex.ai/en/stable/module_guides/loading/simpledirectoryreader/
+import chainlit as cl   
 from llama_index.core.readers import SimpleDirectoryReader
 from llama_index.readers.file import PagedCSVReader
 
@@ -32,6 +33,9 @@ import chromadb
 from llama_index.core import StorageContext
 from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.chroma import ChromaVectorStore
+
+from llama_index.core.agent import FunctionCallingAgentWorker
+from llama_index.core.agent import AgentRunner
 
 # 1.4 Misc
 import os
@@ -116,8 +120,7 @@ course_recommender_tool = FunctionTool.from_defaults(fn=course_recommender)
 #-------------GG. AgentRunner and AgentWorker------------
 
 # 6.0
-from llama_index.core.agent import FunctionCallingAgentWorker
-from llama_index.core.agent import AgentRunner
+
 
 # 6.1 Define workers
 agent_worker = FunctionCallingAgentWorker.from_tools(
@@ -128,6 +131,40 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
 
 # 6.2 Define supervisor
 agent = AgentRunner(agent_worker)
+
+
+# ---------------------- CHAINLIT CHAT INTERFACE ------------------------
+
+# Called when chat session starts
+@cl.on_chat_start
+def start():
+    # Save the query engine and CSV data to the session state
+    cl.user_session.set("agent", agent)
+    
+
+    # Send welcome message to the user
+    cl.Message(content="✅ CSV loaded and indexed! Ask me about job responsibilities for any job title and company.").send()
+
+# Called whenever the user sends a message
+@cl.on_message
+def main(message: cl.Message):
+    query = message.content                     # Get the user's question
+    agent = cl.user_session.get("agent")
+
+    # Use LLM to respond to the user's question based on indexed data
+    response = agent.chat(query)
+    cl.Message(content=response.response).send()  # Send the LLM's response
+
+# --------------------------- RUN APP LOCALLY ---------------------------
+
+# This ensures the app runs only when the script is executed directly
+if __name__ == "__main__":
+    cl.run()    # Launches the Chainlit app
+
+
+
+
+
 
 #-------------HH. Chatting with the agent------------
 
