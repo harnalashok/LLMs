@@ -10,6 +10,9 @@
 #           f. For web search tavily is used. (para FF.)
 #              (the API needs to be purchased)
 
+# See this link:  
+#       https://gist.github.com/amosgyamfi/ab99aa937cf8b93f1010c20a8d73963b#file-chainlit_llamaindex-py
+
 
 #----------- AA. Libraries and modules -----------
 # 1.0 SimpleDirectoryReader can also load metadata from a dictionary
