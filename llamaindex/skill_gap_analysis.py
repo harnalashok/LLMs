@@ -132,7 +132,7 @@ from llama_index.core.tools import QueryEngineTool
 vector_query_engine = index.as_query_engine()
 
 # 5.2 Query engine tool
-desc = "Your job is to query the stored data from file data.csv but NOT to search the "
+desc = "Your job is only to answer from the file data.csv. You will neither search the web nor answer from prior knowledge"
 read_tool = QueryEngineTool.from_defaults(
                                              query_engine=vector_query_engine,
                                              description=( desc
