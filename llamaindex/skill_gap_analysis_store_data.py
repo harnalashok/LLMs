@@ -70,7 +70,7 @@ Settings.llm = llm
 from llama_index.core import Document
 
 # 2.3 csv file location
-file_path = ('~/Documents/csvrag/data/data_reduced.csv') # insert the path of the csv file
+file_path = ('/home/ashok/Documents/csvrag/data/data_reduced.csv') # insert the path of the csv file
 df = pd.read_csv(file_path)
 
 # 2.4
@@ -90,7 +90,7 @@ documents = [Document(text=row.to_string()) for _, row in df.iterrows()]
 # 3.1 This creates persistent collection. A folder by name of chromadb
 #     is created and below that a chroma.sqlite3 database exists:
 
-databasePath = "~/Documents/chroma_db"
+databasePath = "/home/ashok/Documents/chroma_db"
 chroma_client = chromadb.PersistentClient(path=databasePath)
 
 # 3.2 Check if collection exists. If so delete it.
