@@ -1,3 +1,6 @@
+# Last amended: 26th March/2025
+# This app reads vector store data saved by 'skill_gap_analysis_store_data.py'
+
 import streamlit as st
 from llama_index.core.readers import SimpleDirectoryReader
 from llama_index.readers.file import PagedCSVReader
