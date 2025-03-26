@@ -19,7 +19,8 @@
 #           e. Rename and select columns of data in para CC.
 #           f. Ollama embediing model is being used.
 
-
+# Run as:
+#       python skill_gap_analysis_store_data.py
 
 #----------- AA. Libraries and modules -----------
 
