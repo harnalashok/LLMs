@@ -1,22 +1,28 @@
-# Last amended: 26th March/2025
-# This app stores vector data 
-# And this is used by by 'skill_gap_analysis_streamlit_app.py'
+# Last amedned: 26th March, 2025
+
+# Objectives:
+#           This file reads data from file data_reduced.csv
+#           Transforms them into embedding vectors and stores
+#           the vectors in chromadb.
+#           This file Must be rerun regularly through a cron 
+#           job for updation of vector store.
 
 
 # Notes: 
 #           a. The RAG library uses llama_index (para AA.)
-#              (it requires a special python environment)
+#               A special python environment has been created
 #           b. llm used here is MistralAI.  (pata BB)
 #              (the API needs to be purchased)
 #           c. The embedding model is of ollama. (para BB)
-#           d. Vector store is chromadb (para CC)
+#           d. Vector store is chromadb (para DD)
 #              (Vector store needs to be updated through cron job.
 #           e. Rename and select columns of data in para CC.
-#           f. For web search tavily is used. (para FF.)
-#              (the API needs to be purchased)
+#           f. Ollama embediing model is being used.
+
 
 
 #----------- AA. Libraries and modules -----------
+
 # 1.0 SimpleDirectoryReader can also load metadata from a dictionary
 #     https://docs.llamaindex.ai/en/stable/module_guides/loading/simpledirectoryreader/
 from llama_index.core.readers import SimpleDirectoryReader
@@ -44,8 +50,6 @@ import pandas as pd
 
 
 
-
-
 #--------BB. Model related--------------
 
 # 2.0 Define embedding function
@@ -65,6 +69,7 @@ Settings.embed_model = embed_model
 #     MistralAI is used here.
 #     The api_key is obtained from MistralAI
 #     pip install llama-index-llms-mistralai
+
 from llama_index.llms.mistralai import MistralAI
 llm = MistralAI(api_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
 Settings.llm = llm
@@ -114,15 +119,15 @@ vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 # 3.4
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-#------------EE. Vectorize now --------------        
+#------------EE. Vectorize abd save now --------------        
 
 # 4.0 Takes docs and storage context:
-#     Repeating this operation, doubles the number of vectors/records in the collection
+  
 
 index = VectorStoreIndex.from_documents(
                                          documents,
                                          storage_context=storage_context,
-                                         show_progress= False                 # Show progress bar
+                                         show_progress= False                 # Show progress bar is False
                                         )
 
-###################3
+################### DONE ###################
