@@ -1,3 +1,8 @@
+# Last amended: 26th March/2025
+# This app stores vector data 
+# And this is used by by 'skill_gap_analysis_streamlit_app.py'
+
+
 # Notes: 
 #           a. The RAG library uses llama_index (para AA.)
 #              (it requires a special python environment)
