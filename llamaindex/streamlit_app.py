@@ -27,6 +27,51 @@ import pandas as pd
 
 
 
+###### Hotfix ofor mistral
+
+def new_mixtral_messages(result: AgentRunResult) -> list[ModelMessage]:
+    """
+    Converts messages to a format compatible with Mistral:
+    - Converts ToolCallPart to TextPart containing the args as text
+    - Skips ToolReturnPart entirely
+    - Preserves message metadata and other part types
+    """
+    new_messages = []
+
+    for msg in result.new_messages():
+        new_parts = []
+        for part in msg.parts:
+            if isinstance(part, ToolCallPart):
+                # Convert tool call to text, handling both dict and string args
+                content = part.args_as_json_str() if isinstance(part.args, dict) else str(part.args)
+                new_parts.append(TextPart(content=content))
+            elif isinstance(part, ToolReturnPart):
+                # Skip tool returns
+                continue
+            else:
+                # Keep all other parts unchanged
+                new_parts.append(part)
+
+        # Create the appropriate message type
+        if isinstance(msg, ModelResponse):
+            new_msg = ModelResponse(
+                parts=new_parts,
+                model_name=msg.model_name,
+                timestamp=msg.timestamp
+            )
+        elif isinstance(msg, ModelRequest):
+            new_msg = ModelRequest(parts=new_parts)
+        else:
+            raise NotImplemented("There should not be another type of message!")
+        new_messages.append(new_msg)
+    return new_messages
+
+
+#######3
+
+
+
+
 #--------BB. Model related--------------
 
 # 2.0 Define embedding function
@@ -47,7 +92,19 @@ Settings.embed_model = embed_model
 #     The api_key is obtained from MistralAI
 #     pip install llama-index-llms-mistralai
 from llama_index.llms.mistralai import MistralAI
-llm = MistralAI(api_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
+#llm = MistralAI(api_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
+#Settings.llm = llm
+
+
+# OpenRouter
+from llama_index.llms.openrouter import OpenRouter
+llm = OpenRouter(
+    api_key="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",
+    max_tokens=2000,
+    context_window=4096, 
+    model="google/gemini-2.5-pro-exp-03-25",  # google/gemini-2.5-pro-exp-03-25:free
+)
+
 Settings.llm = llm
 
 
@@ -76,6 +133,7 @@ vector_query_engine = index.as_query_engine()
 desc = "Your job is only to answer from the file data.csv. You will neither search the web nor answer from prior knowledge"
 read_tool = QueryEngineTool.from_defaults(
                                              query_engine=vector_query_engine,
+                                             return_direct = True,
                                              description=( desc
                                                            
                                                          ),
@@ -155,4 +213,4 @@ if st.session_state.messages[-1]["role"] != "assistant":
         st.write(response_stream.response)
         message = {"role": "assistant", "content": response_stream.response}
         # Add response to message history
-        st.session_state.messages.append(message)
+        #st.session_state.messages.append(message)
