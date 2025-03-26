@@ -1,4 +1,6 @@
-# Notes: 
+# Last amended: 26th March, 2025
+# Notes:    chainlit has 'await' error problems
+#           streamlit does not
 #           a. The RAG library uses llama_index (para AA.)
 #              (it requires a special python environment)
 #           b. llm used here is MistralAI.  (pata BB)
