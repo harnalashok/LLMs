@@ -68,11 +68,11 @@ Settings.embed_model = embed_model
 
 # 2.1 Set llm_settings:
 #     MistralAI is used here.
-#     The api_key is obtained from MistralAI
+#     The _key is obtained from MistralAI
 #     pip install llama-index-llms-mistralai
 
 from llama_index.llms.mistralai import MistralAI
-llm = MistralAI(api_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
+llm = MistralAI(api_key="apikey")
 Settings.llm = llm
 
 #---------------CC. Read Data -----------------
