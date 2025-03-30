@@ -66,11 +66,11 @@ Settings.embed_model = embed_model
 
 # 2.1 Set llm_settings:
 #     MistralAI is used here.
-#     The api_key is obtained from MistralAI
+#     The _key is obtained from MistralAI
 #     pip install llama-index-llms-mistralai
 
 from llama_index.llms.mistralai import MistralAI
-llm = MistralAI(api_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
+llm = MistralAI(_key="VIScv20xwi7bmBbxZ6SiNJzkh35ZOWvM")
 Settings.llm = llm
 
 
@@ -111,13 +111,13 @@ from tavily import AsyncTavilyClient
 
 async def search_jobs_on_web(query: str) -> str:
     """Given the degree and specialization, search for jobs on the web where he can apply as per his qualifications. You are not to search for any other information on the web."""
-    client = AsyncTavilyClient(api_key="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")
+    client = AsyncTavilyClient(api_key="apikey")
     return str( client.search(query))
 
 # 4.4 Course recommender tool
 async def course_recommender(query: str) -> str:
     """Given the job requirments, recommend courses from the web ."""
-    client = AsyncTavilyClient(api_key="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")
+    client = AsyncTavilyClient(api_key="apikey")
     return str( client.search(query))
 
 # 4.5 Function tools from functions
