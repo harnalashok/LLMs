@@ -78,7 +78,8 @@ Settings.llm = llm
 #------------------CC. Read Index from disk-----------
 # 3.0 Load from disk
 
-db2 = chromadb.PersistentClient(path="~/Documents/chroma_db")
+# Specifying path as: ~/Documents/.. will NOT work
+db2 = chromadb.PersistentClient(path="/home/ashok/Documents/chroma_db")
 chroma_collection = db2.get_or_create_collection("datastore")
 vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 index = VectorStoreIndex.from_vector_store(
