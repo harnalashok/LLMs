@@ -1,5 +1,5 @@
 #!/bin/bash
-# Last amended: 19th March, 2025
+# Last amended: 03rd April, 2025
 
       
 echo "========script7=============="
@@ -37,28 +37,52 @@ pip install langchain-cli
 # llamaindex
 #################
 
-# LLamaindex install
+# 1.0 LLamaindex install
 # Mostly openai related
 echo "Installing llama-index"
 echo
-# Required for spyder:
-sudo apt install pyqt5-dev-tools
 pip install llama-index
-# Ollama, huggingface and localai oriented
+
+# 1,1 Ollama, huggingface and localai (openailike) oriented
 pip install --upgrade transformers
-pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss llama-index-vector-stores-chroma 
+pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
 pip install llama-index-readers-file llama-index-embeddings-fastembed
+# Needed inspite of code repeated above
 pip install --upgrade transformers
+
+# 1.2 Vector stores
 pip install faiss-cpu
-pip install qdrant-client
+pip install qdrant-client llama-index-vector-stores-chroma 
 pip install llama-index-vector-stores-qdrant fastembed
+
+# 1.3 Web access site
+pip install tavily-python
+
+# 1.4 Yahoo finance data
+pip install yfinance
+
+# 1.5 For groq, together, mistralAI access
+pip install llama-index-llms-groq
+pip install llama-index-llms-together
+pip install llama-index-llms-mistralai
+
+# 1.6 Essentials/Misc
+pip install spyder numpy scipy pandas matplotlib sympy cython
 pip install jupyterlab
 pip install ipython
 pip install notebook
 pip install streamlit
-pip install tavily-python
-pip install spyder numpy scipy pandas matplotlib sympy cython
-sleep 2
+# Required for spyder:
+sudo apt install pyqt5-dev-tools
+
+# 1.7 Install visual studio code
+# REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+cd /home/ashok/Downloads
+wget -c https://go.microsoft.com/fwlink/?LinkID=760868
+# Fill in filename from above
+sudo apt install ./<file>.deb  
+
+sleep 5
 
 # Deactivate the environment
 deactivate
