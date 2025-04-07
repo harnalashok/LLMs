@@ -115,7 +115,7 @@ mv /home/ashok/next/script9.sh  /home/ashok/
 ##########################
 
 cd ~/
-curl -fsSL https://cdn.useanything.com/latest/installer.sh | sh
+curl -fsSL https://cdn.anythingllm.com/latest/installer.sh | sh
 
 cd ~/
 # Script to start anythingLLM
