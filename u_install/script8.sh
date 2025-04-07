@@ -124,8 +124,10 @@ echo " "                                                                >> /home
 echo "cd ~/"                                                            >> /home/ashok/start/start_anythingllm.sh
 echo "cd /home/ashok/AnythingLLMDesktop/anythingllm-desktop"           >> /home/ashok/start/start_anythingllm.sh
 echo "./anythingllm-desktop start"                                     >>  /home/ashok/start/start_anythingllm.sh
+cd ~/
+ln -sT /home/ashok/start/start_anythingllm.sh start_anythingllm.sh
 chmod +x /home/ashok/start/*.sh
-
+chmod +x /home/ashok/*.sh
 
 ##########################
 ### Install OpenWebUI docker
