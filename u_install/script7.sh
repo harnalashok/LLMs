@@ -8,6 +8,7 @@ echo "Will install LangGraph"
 echo "Will install LangServe"
 echo "Will install LangChain CLI"
 echo "Will install LlamaIndex"
+echo "Will install litellm"
 echo "Will install Open WebUI--needs ollama behind the scenes"
 echo "You may call script8.sh "
 echo "==========================="
@@ -74,6 +75,13 @@ pip install notebook
 pip install streamlit
 # Required for spyder:
 sudo apt install pyqt5-dev-tools
+
+# 1.7 Install litellm
+#     Cal call 100+ LLMs in the OpenAI format
+#     Refer: https://docs.litellm.ai/docs/#quick-start-proxy---cli
+pip install 'litellm[proxy]'
+
+
 
 # 1.7 Install visual studio code
 # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
