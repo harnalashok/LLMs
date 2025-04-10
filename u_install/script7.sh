@@ -80,7 +80,12 @@ sudo apt install pyqt5-dev-tools
 #     Cal call 100+ LLMs in the OpenAI format
 #     Refer: https://docs.litellm.ai/docs/#quick-start-proxy---cli
 pip install 'litellm[proxy]'
-
+# Make a folder to store config.yaml files
+#  for various LLMs 
+# 
+mkdir /home/ashok/litellm
+cd /home/ashok/litellem
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/config.yaml
 
 
 # 1.7 Install visual studio code
