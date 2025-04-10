@@ -84,8 +84,14 @@ pip install 'litellm[proxy]'
 #  for various LLMs 
 # 
 mkdir /home/ashok/litellm
+# Download config file for using ollama
+#  as if they are OpenAI models
+# (Refer: https://docs.litellm.ai/docs/providers/ollama)
+# Start litellm server as: litellm --config /path/to/config.yaml
+# Use it in flowise: https://docs.flowiseai.com/integrations/litellm
 cd /home/ashok/litellem
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/config.yaml
+cd /home/ashok
 
 
 # 1.7 Install visual studio code
