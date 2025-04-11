@@ -97,6 +97,8 @@ mkdir /home/ashok/litellm
 cd /home/ashok/litellm
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/config_ollama.yaml
 cd /home/ashok
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/start_ollama_openai.sh
+chmod +x /home/ashok/*.sh
 
 #################
 # Visual Studio Code
