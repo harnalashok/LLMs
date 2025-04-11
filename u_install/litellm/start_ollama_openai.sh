@@ -15,6 +15,7 @@ echo "Kill the process by finding its pid, as:"
 echo "lsof -i :4000"
 echo " "
 echo "Litellm has many features to control/monitor LLM access"
+echo "See: https://docs.litellm.ai/docs/proxy/enterprise#swagger-docs---custom-routes--branding"
 echo "========="
 echo " "
 sleep 5
