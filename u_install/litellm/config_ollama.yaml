@@ -8,6 +8,7 @@
 #    litellm --config /path/to/config.yaml
 # See here how to use it in flowise:
 #    https://docs.flowiseai.com/integrations/litellm
+#    See file: OneDrive/Documents/flowise/chatflows/14.litellm chatflow.json
 model_list:
   - model_name: "mistral:latest"             ### can be gpt-3.5-turbo          
     litellm_params:                          ### Begin litellm parameters
