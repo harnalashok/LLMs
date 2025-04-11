@@ -88,6 +88,7 @@ pip install 'litellm[proxy]'
 # Make a folder to store config.yaml files
 #  for various LLMs 
 # 
+cd /home/ashok/
 mkdir /home/ashok/litellm
 # Download config file for using ollama
 #  as if they are OpenAI models
