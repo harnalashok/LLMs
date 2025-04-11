@@ -79,6 +79,7 @@ sudo apt install pyqt5-dev-tools
 #################
 # litellm
 # Makes every LLM appear as OpenAI
+# Can control/monitor access to LLMs
 #################
 
 # 1.7 Install litellm
