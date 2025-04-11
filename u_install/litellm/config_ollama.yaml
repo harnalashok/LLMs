@@ -1,8 +1,13 @@
 # A config file to use ollama models
 #  as if they are OpenAI models
-# Refer: https://docs.litellm.ai/docs/providers/ollama
-# Start litellm server as: litellm --config /path/to/config.yaml
-# See here how to use it in flowise: https://docs.flowiseai.com/integrations/litellm
+# Sample config files are here:
+#    https://docs.litellm.ai/docs/proxy/configs
+# For ollama, refer: 
+#    https://docs.litellm.ai/docs/providers/ollama
+# Start litellm server as: 
+#    litellm --config /path/to/config.yaml
+# See here how to use it in flowise:
+#    https://docs.flowiseai.com/integrations/litellm
 model_list:
   - model_name: "mistral:latest"             ### can be gpt-3.5-turbo          
     litellm_params:                          ### Begin litellm parameters
