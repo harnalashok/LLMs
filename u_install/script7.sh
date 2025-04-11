@@ -76,8 +76,13 @@ pip install streamlit
 # Required for spyder:
 sudo apt install pyqt5-dev-tools
 
+#################
+# litellm
+# Makes every LLM appear as OpenAI
+#################
+
 # 1.7 Install litellm
-#     Cal call 100+ LLMs in the OpenAI format
+#     Can call 100+ LLMs in the OpenAI format
 #     Refer: https://docs.litellm.ai/docs/#quick-start-proxy---cli
 pip install 'litellm[proxy]'
 # Make a folder to store config.yaml files
@@ -89,12 +94,17 @@ mkdir /home/ashok/litellm
 # (Refer: https://docs.litellm.ai/docs/providers/ollama)
 # Start litellm server as: litellm --config /path/to/config.yaml
 # Use it in flowise: https://docs.flowiseai.com/integrations/litellm
-cd /home/ashok/litellem
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/config.yaml
+cd /home/ashok/litellm
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/config_ollama.yaml
 cd /home/ashok
 
+#################
+# Visual Studio Code
+#################
+# Activate python virtual environment
+# source /home/ashok/langchain/bin/activate
 
-# 1.7 Install visual studio code
+# 1.8 Install visual studio code
 # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
 cd /home/ashok/Downloads
 wget -c https://go.microsoft.com/fwlink/?LinkID=760868
