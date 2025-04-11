@@ -14,6 +14,7 @@ echo "----"
 echo "Kill the process by finding its pid, as:"
 echo "lsof -i :4000"
 echo " "
+echo "Litellm has many features to control/monitor LLM access"
 echo "========="
 echo " "
 sleep 5
