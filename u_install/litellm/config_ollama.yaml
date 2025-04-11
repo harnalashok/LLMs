@@ -4,7 +4,8 @@
 # Start litellm server as: litellm --config /path/to/config.yaml
 # See here how to use it in flowise: https://docs.flowiseai.com/integrations/litellm
 model_list:
-  - model_name: "mistral:latest"             
-    litellm_params:
-      model: "ollama_chat/mistral:latest"
+  - model_name: "mistral:latest"             ### can be gpt-3.5-turbo          
+    litellm_params:                          ### Begin litellm parameters
+      model: "ollama_chat/mistral:latest"    ### Actual ollama model name
       api_base: "http://localhost:11434"
+      temperature: 0.7
