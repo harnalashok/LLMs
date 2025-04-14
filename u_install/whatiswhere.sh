@@ -1,3 +1,4 @@
+# LAst amended: 14th April, 2025
 
 echo "========script1=============="
 echo "Updates Ubuntu"
@@ -43,6 +44,7 @@ echo "Will install Visual Studio Code Editor"
 echo "Will install LangChain CLI"
 echo "Will install LlamaIndex"
 echo "Will install Open WebUI--needs ollama behind the scenes"
+echo "Install python (3.13) virtual envion"
 echo "You may call script8.sh "
 echo "==========================="
 
