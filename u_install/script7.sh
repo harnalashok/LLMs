@@ -237,6 +237,8 @@ deactivate
 # Create python3.13 virtual env
 #################
 
+# What all python versions are installed:
+ls /usr/bin | grep python
 
 sudo apt install python3.13 -y
 sudo apt-get install python3.13-venv -y
