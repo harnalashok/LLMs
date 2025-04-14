@@ -233,21 +233,25 @@ open-webui serve
 
 deactivate
 
+#################
+# Create python3.13 virtual env
+#################
+
 
 sudo apt install python3.13 -y
 sudo apt-get install python3.13-venv -y
 python3.13 -m venv /home/ashok/python313
-# Create script to activate 'langchain' env
-echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/ashok/activate_langchain_venv.sh
-echo "echo 'source /home/ashok/langchain/bin/activate' "                   >>  /home/ashok/activate_langchain_venv.sh
-echo "echo '(Note the change in prompt after activating)' "                >>  /home/ashok/activate_langchain_venv.sh
-echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/ashok/activate_langchain_venv.sh
-echo "source /home/ashok/langchain/bin/activate"                           >>  /home/ashok/activate_langchain_venv.sh
+# Create script to activate 'python313' env
+echo "echo 'To activate python3.13 virtual envs, activate as:' "            > /home/ashok/activate_python313_venv.sh
+echo "echo 'source /home/ashok/python313/bin/activate' "                   >>  /home/ashok/activate_python313_venv.sh
+echo "echo '(Note the change in prompt after activating)' "                >> /home/ashok/activate_python313_venv.sh
+echo "echo '(To deactivate, just enter the command: deactivate)' "         >> /home/ashok/activate_python313_venv.sh
+echo "source /home/ashok/python313/bin/activate"                           >> /home/ashok/activate_python313_venv.sh
 chmod +x /home/ashok/*.sh
 sleep 2
 
-cp /home/ashok/activate_langchain_venv.sh  /home/ashok/start/activate_langchain_venv.sh
-cp /home/ashok/activate_langchain_venv.sh  /home/ashok/stop/activate_langchain_venv.sh
+cp /home/ashok/activate_python313_venv.sh  /home/ashok/start/activate_python313_venv.sh
+cp /home/ashok/activate_python313_venv.sh  /home/ashok/stop/activate_python313_venv.sh
 
 
 echo "You may like to execute:"
