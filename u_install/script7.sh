@@ -253,6 +253,7 @@ sleep 2
 cp /home/ashok/activate_python313_venv.sh  /home/ashok/start/activate_python313_venv.sh
 cp /home/ashok/activate_python313_venv.sh  /home/ashok/stop/activate_python313_venv.sh
 
+#=========
 
 echo "You may like to execute:"
 echo "       ./script8.sh"
