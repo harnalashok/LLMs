@@ -103,17 +103,22 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 chmod +x /home/ashok/*.sh
 
 #################
-# Visual Studio Code
+# Visual Studio Code install
 #################
 # Activate python virtual environment
 # source /home/ashok/langchain/bin/activate
 
 # 1.8 Install visual studio code
 # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
-cd /home/ashok/Downloads
-wget -c https://go.microsoft.com/fwlink/?LinkID=760868
+mkdir /home/ashok/1234
+cd /home/ashok/1234
+# Direct download link
+wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 # Fill in filename from above
-sudo apt install ./<file>.deb  
+mv * code.deb
+sudo apt install /home/ashok/1234/code.deb  -y
+cd /home/ashok
+rm -rf /home/ashok/1234/
 
 sleep 5
 
@@ -138,7 +143,15 @@ mv /home/ashok/next/script8.sh   /home/ashok/
 
 #################
 # openwebui
+# A new venv for python3.11 is created
 #################
+
+echo "Install OpenWebUI? [Y,n]"
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+        echo "do that"
+
+
 
 # Install openwebui using pip. Refer its github site
 # Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
@@ -148,8 +161,9 @@ mv /home/ashok/next/script8.sh   /home/ashok/
 echo " "
 echo "---------------"
 echo "Will begin installing open-webui. Python version needed is exactly 3.11"
+echo "Will create a venv for python3.11"
 echo "Note: Open WebUI connects to Ollama to work with"
-echo "Better install ollama if not already installed."
+echo "Better first install ollama if not already installed."
 echo "---------------"
 echo " "
 sleep 9
@@ -232,6 +246,12 @@ chmod +x /home/ashok/stop/*.sh
 open-webui serve
 
 deactivate
+
+else
+        echo "don't do that"
+fi
+
+
 
 #################
 # Create python3.13 virtual env
