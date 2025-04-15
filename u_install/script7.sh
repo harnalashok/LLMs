@@ -1,5 +1,5 @@
 #!/bin/bash
-# Last amended: 03rd April, 2025
+# Last amended: 15th April, 2025
 
       
 echo "========script7=============="
@@ -9,7 +9,8 @@ echo "Will install LangServe"
 echo "Will install LangChain CLI"
 echo "Will install LlamaIndex"
 echo "Will install litellm"
-echo "Will install Open WebUI--needs ollama behind the scenes"
+echo "Will install Open WebUI--needs ollama behind the scenes (Optional)"
+echo "Will install python3.13 venv (optional)
 echo "You may call script8.sh "
 echo "==========================="
 sleep 10
