@@ -274,7 +274,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
       cp /home/ashok/activate_python313_venv.sh  /home/ashok/start/activate_python313_venv.sh
       cp /home/ashok/activate_python313_venv.sh  /home/ashok/stop/activate_python313_venv.sh
 else
-        echo "Skipping install of OpenWebUI"
+        echo "Skipping install of python3.11 virtual env"
 fi
 #=========
 
