@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# LAst amended: 14th Jan, 2024
+# LAst amended: 15th April, 2025
 
 cd ~/
 
@@ -19,6 +19,15 @@ echo "*********"                              | tee -a /home/ashok/error.log
 echo "Script: script3.sh"                     | tee -a /home/ashok/error.log
 echo "**********"                             | tee -a /home/ashok/error.log
 echo " "                                      | tee -a /home/ashok/error.log
+
+
+echo "Shall I install ollama docker? [Y,n]"
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+else
+        echo "Skipping install of ollama docker"
+fi
 
 
 #####################
