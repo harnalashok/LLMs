@@ -65,49 +65,54 @@ mkdir /home/ashok/psql
 # Install Ollama
 ################
 
-# Installing ollama
-echo " "
-echo " "
-echo "------"
-echo "Installing ollama quietly. Takes time...."  | tee -a /home/ashok/error.log
-echo "When asked, supply password"
-echo "No messages will appear on screen"
-echo "------"
-echo " "
-echo " "
-curl -fsSL https://ollama.com/install.sh | sh       2>> /home/ashok/error.log  
-echo "---------"                                    | tee -a /home/ashok/error.log
-echo "Ollama installed"                             | tee -a /home/ashok/error.log
-echo "9. Ollama installed"                          | tee -a /home/ashok/info.log
-echo "   ollama listens at port: 11434"             | tee -a /home/ashok/info.log
-echo "-----------"                                  | tee -a /home/ashok/error.log
-echo " "                                            | tee -a /home/ashok/error.log
-echo "You may start ollama in the background, as:"  | tee -a /home/ashok/info.log
-echo "    ollama serve &  > /dev/null & "           | tee -a /home/ashok/info.log
-echo "Or, as:"                                      | tee -a /home/ashok/info.log
-echo "sudo systemctl start|stop|restart ollama"     | tee -a /home/ashok/info.log  
-
-
-# Ollama start script:
-echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_ollama.sh  
-echo " "                                                   | tee -a /home/ashok/start/start_ollama.sh  
-echo "cd ~/"                                               | tee -a /home/ashok/start/start_ollama.sh  
-echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/ashok/start/start_ollama.sh  
-echo "sudo systemctl start ollama"                         | tee -a /home/ashok/start/start_ollama.sh  
-echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/start/start_ollama.sh  
-
-# Ollama stop script
-echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_ollama.sh  
-echo " "                                                   | tee -a /home/ashok/stop/stop_ollama.sh  
-echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_ollama.sh  
-echo "echo 'Ollama will be stopped'"                       | tee -a /home/ashok/stop/stop_ollama.sh  
-echo "sudo systemctl stop ollama"                          | tee -a /home/ashok/stop/stop_ollama.sh  
-echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/stop/stop_ollama.sh  
-
-# PRemission changes
-chmod +x /home/ashok/start/*.sh   
-chmod +x /home/ashok/stop/*.sh
-
+echo "Shall I install Ollama bare? [Y,n]"    # Else docker ollama may be installed
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+    # Installing ollama
+    echo " "
+    echo " "
+    echo "------"
+    echo "Installing ollama quietly. Takes time...."  | tee -a /home/ashok/error.log
+    echo "When asked, supply password"
+    echo "No messages will appear on screen"
+    echo "------"
+    echo " "
+    echo " "
+    curl -fsSL https://ollama.com/install.sh | sh       2>> /home/ashok/error.log  
+    echo "---------"                                    | tee -a /home/ashok/error.log
+    echo "Ollama installed"                             | tee -a /home/ashok/error.log
+    echo "9. Ollama installed"                          | tee -a /home/ashok/info.log
+    echo "   ollama listens at port: 11434"             | tee -a /home/ashok/info.log
+    echo "-----------"                                  | tee -a /home/ashok/error.log
+    echo " "                                            | tee -a /home/ashok/error.log
+    echo "You may start ollama in the background, as:"  | tee -a /home/ashok/info.log
+    echo "    ollama serve &  > /dev/null & "           | tee -a /home/ashok/info.log
+    echo "Or, as:"                                      | tee -a /home/ashok/info.log
+    echo "sudo systemctl start|stop|restart ollama"     | tee -a /home/ashok/info.log  
+    
+    
+    # Ollama start script:
+    echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_ollama.sh  
+    echo " "                                                   | tee -a /home/ashok/start/start_ollama.sh  
+    echo "cd ~/"                                               | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/ashok/start/start_ollama.sh  
+    echo "sudo systemctl start ollama"                         | tee -a /home/ashok/start/start_ollama.sh  
+    echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/start/start_ollama.sh  
+    
+    # Ollama stop script
+    echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_ollama.sh  
+    echo " "                                                   | tee -a /home/ashok/stop/stop_ollama.sh  
+    echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_ollama.sh  
+    echo "echo 'Ollama will be stopped'"                       | tee -a /home/ashok/stop/stop_ollama.sh  
+    echo "sudo systemctl stop ollama"                          | tee -a /home/ashok/stop/stop_ollama.sh  
+    echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/stop/stop_ollama.sh  
+    
+    # PRemission changes
+    chmod +x /home/ashok/start/*.sh   
+    chmod +x /home/ashok/stop/*.sh
+else
+        echo "Skipping install of Ollama"
+fi    
 
 # Copy earlier created scripts
 cp /home/ashok/find_venv.sh  /home/ashok/start/
