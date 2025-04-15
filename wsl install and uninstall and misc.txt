@@ -152,11 +152,15 @@ Create a new /etc/resolv.conf with the following entry.
 #########
 # 1. Click Windows + I to open Settings
 # 2. Click App > Apps & features
-# 3. Choose Windows Subsystem for Linux WSLg Preview and 
+# 3. Look for Installed apps and search for Ubuntu
+     click Uninstall > Uninstall. In Windows 11, you need to click three dots and click Uninstall.
+# 4. (Not sure) Choose Windows Subsystem for Linux WSLg Preview and 
 #    click Uninstall > Uninstall. In Windows 11, you need to click three dots and click Uninstall.
 LASTLY:
-<b>Open poerrshell and issue command:</b>
-    wsl --unregister ubuntu
+# 5. Open poerrshell and issue command:
+         wsl --unregister ubuntu 
+     OR,
+         wsl --unregister Ubuntu-22.04
 Without this command, on re-installation of ubuntu, earleir files will 
 come back.
 
