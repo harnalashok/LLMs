@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 06th Feb, 2025
+# Last amended: 15th April, 2025
 # Ref: https://docs.docker.com/engine/install/ubuntu/
 #      https://docs.docker.com/engine/install/linux-postinstall/
 
@@ -37,6 +37,7 @@ mv /home/ashok/next/script3.sh  /home/ashok/
 
 # PReparing docker for GPU
 # Ref StackOverflow: https://stackoverflow.com/a/77269071
+# Ref: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation
 
 # 1.0 Configure the repository (it is one command):
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey |sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
