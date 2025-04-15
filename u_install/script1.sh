@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 14th April, 2025
+# Last amended: 15th April, 2025
 # Copyright:: 
 
 
@@ -118,6 +118,7 @@ sleep 2
 # Install postgresql and sqlite3
 ################
 
+echo "Installing postgresql and sqlite3"
 sudo apt install postgresql postgresql-contrib sqlite3   -y
 
 # Postgresql start/stop script
@@ -172,11 +173,13 @@ echo "2. Fast Node Manager (fnm) installed"    | tee -a /home/ashok/info.log
 
 ###########
 # uv install
+# An extremely fast Python package and project manager,
 ############
 
-# Install uv for langflow install
+# Install uv, Needed to install langflow and other packages
 echo " "                                       | tee -a /home/ashok/info.log
 echo "Installing uv"                           | tee -a /home/ashok/info.log
+echo "An extremely fast Python package and project manager"
 echo "--------------"                          | tee -a /home/ashok/info.log
 echo " "                                       | tee -a /home/ashok/info.log
 sleep 2
