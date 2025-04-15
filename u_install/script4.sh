@@ -4,7 +4,7 @@
 
  
 echo "========script4=============="
-echo "Install n8n with npx"
+echo "Install n8n with npm"
 echo "Will install LocalAI docker"
 echo "==========================="
 sleep 10
@@ -12,7 +12,7 @@ sleep 10
 
 
 #####################
-## n8n install (with npx)
+## n8n install (with npm)
 ####################
 
 
