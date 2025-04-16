@@ -29,18 +29,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo '#!/bin/bash'                                                                         > /home/ashok/start/start_docker_ollama.sh
       echo " "                                                                                  >> /home/ashok/start/start_docker_ollama.sh
       echo "echo 'Start ollama docker as: docker exec -it ollama ollama run <modelName>'"       >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'ollama will be available at port 11434'"                                      >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'Pull ollama model as: ollama pull llama3'"                                    >> /home/ashok/start/start_docker_ollama.sh
-      echo "docker start local-ai"                                                              >> /home/ashok/start/start_localai.sh
-      echo "netstat -aunt | grep 8080"                                                          >> /home/ashok/start/start_localai.sh
-      chmod +x /home/ashok/start/*.sh
-      
-      # Stop local-ai in future
-      echo '#!/bin/bash'                                                                         > /home/ashok/stop/stop_localai.sh
-      echo " "                                                                                  >> /home/ashok/stop/stop_localai.sh
-      echo "cd /home/ashok/localai"                                                                >> /home/ashok/stop/stop_localai.sh
-      echo "docker stop local-ai"                                                              >> /home/ashok/stop/stop_localai.sh
-      chmod +x /home/ashok/stop/*.sh
+      echo "echo 'ollama access at port 11434'"                                                 >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Access as: http://host.docker.internal:11434'"                                >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Pull ollama model as: ollama pull <modelName'"                                >> /home/ashok/start/start_docker_ollama.sh
 else
         echo "Skipping install of ollama docker"
 fi
