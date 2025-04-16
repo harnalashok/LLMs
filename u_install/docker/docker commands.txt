@@ -1,4 +1,4 @@
-# Last amended: 6th Jan, 2025
+# Last amended: 16th April, 2025
 # My folder: D:\OneDrive\Documents\docker
 # Ref: https://docs.docker.com/engine/reference/commandline/builder/
 # kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
@@ -7,6 +7,10 @@
 
 ## Docker version
 	docker -v
+
+# Build a docker container from docker-compose.yml
+
+        docker compose up -d
 
 
 # List docker images:
