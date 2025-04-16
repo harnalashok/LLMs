@@ -1,0 +1,147 @@
+# Last amended: 6th Jan, 2025
+# My folder: D:\OneDrive\Documents\docker
+# Ref: https://docs.docker.com/engine/reference/commandline/builder/
+# kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
+
+
+
+## Docker version
+	docker -v
+
+
+# List docker images:
+	sudo docker images
+	sudo docker image ls
+
+
+# Pull/run image 
+	sudo docker pull image-name 		Pulls image-name from DockerHub by default
+	sudo docker run image-name 		    Starts a container from an image
+    docker run 
+	    -p 8080:8080	\				Container ports
+		--name local-ai \				Assign a name to container
+		-ti 			\				Allocate a  pseudo-TTY
+		localai/localai:latest-aio-cpu  Image name
+
+# Start/Stop container-
+    sudo docker start container-id/container-name 	Restarts a stopped container
+	sudo docker stop container-id/container-name 	Stops a running container
+
+# Stop all containers:
+	docker stop $(docker ps -aq)
+
+# List all running containers
+	sudo docker ps
+	sudo docker container ls
+
+# List all containers:
+	sudo docker ps -a
+	sudo docker container ls --all
+
+
+# Remove any stopped containers and all unused images ie images from which
+#  no container is borne  and not just dangling images:
+    sudo docker system prune -a
+
+
+# Delete docker images
+#  To remove the image, you have to remove/stop all the containers which are using it.
+# a. What Images exist?
+		docker images
+# b. Stop container if running
+# docker stop <container_id>: To stop a running container.
+		docker stop local-ai
+	
+# c. docker rm <container_id>: To remove/delete a docker container(only if it stopped).
+		docker rm local-ai
+	
+# c.1 Delete all containers:
+		docker container rm -f $(docker container ls -aq)
+		
+OR
+# Delete specific multiple containers: 
+	sudo docker container rm webserver laughing_kowalevski relaxed_sammet		
+
+# d. docker image ls: To see the list of all the available images with their tag, image id, creation time and size.
+   docker image ls
+
+		(base) ashok@ashok:~$ docker image ls
+		REPOSITORY        TAG              IMAGE ID       CREATED         SIZE
+		localai/localai   latest-aio-cpu   34c46e2ddf0f   3 weeks ago     6.62GB
+		hello-world       latest           d2c94e258dcb   20 months ago   13.3kB
+
+# e. docker rmi <image_id>: To delete a specific image.
+	docker rmi 34c46e2ddf0f
+
+
+
+# Deleting docker volumes:
+# a. Get list of docker volumes:
+# 	   docker volume ls
+
+		(base) ashok@ashok:~$ docker volume ls
+		DRIVER    VOLUME NAME
+		local     0ad23fee3bcc8131b7c629c638708951a6c65a906d24ca8a001c030be2db2fe0
+		local     344187cb692b21bf30248e239da87e3c77889e9e37fe16d6a189d5886f7bfdf3
+
+# b. To delete docker volumes, first stop and delete all containers.
+    docker stop $(docker ps -aq)
+	docker container rm -f $(docker container ls -aq)
+# c. Then delete docker volumes:
+	docker volume rm -f $(docker volume ls -q)	
+
+		(base) ashok@ashok:~$ docker volume rm -f $(docker volume ls -q)
+		0ad23fee3bcc8131b7c629c638708951a6c65a906d24ca8a001c030be2db2fe0
+		344187cb692b21bf30248e239da87e3c77889e9e37fe16d6a189d5886f7bfdf3
+
+
+# Build an image from dockerfile.yml
+	docker build path 		Builds an image at the path using instructions in the Dockerfile
+
+
+## System size
+# Give container/images size information:
+	sudo docker system df
+	sudo docker system df --verbose
+	
+## Rename container:
+	sudo docker container rename old_CONTAINER NEW_NAME
+
+
+
+# List --help for any command:
+	sudo docker ps --help
+	sudo docker container --help
+	sudo docker compose --help
+	
+	####### Useful docker commands: ############333
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container (say, ls -la)
+	 docker exec -it   92985f90db92  ls -la /
+
+  ps          List containers
+  images      List images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  container   Manage containers
+  image       Manage images
+  volume      Manage volumes
+
+Commands:
+  cp          Copy files/folders between a container and the local filesystem
+  port        List port mappings or a specific mapping for the container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+
+
+Global Options:
+      --config string      Location of client config files (default "/home/ashok/.docker")
+  -v, --version            Print version information and quit
