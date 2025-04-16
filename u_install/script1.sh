@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 15th April, 2025
+# Last amended: 16th April, 2025
 # Copyright:: 
 
 
@@ -79,6 +79,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo " "
     echo " "
     curl -fsSL https://ollama.com/install.sh | sh       2>> /home/ashok/error.log  
+    # Disable ollama on start
+    sudo systemctl disable ollama
+    # Stop ollama, if running
+    sudo systemctl stop ollama
+    
     echo "---------"                                    | tee -a /home/ashok/error.log
     echo "Ollama installed"                             | tee -a /home/ashok/error.log
     echo "9. Ollama installed"                          | tee -a /home/ashok/info.log
