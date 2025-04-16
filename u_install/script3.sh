@@ -26,13 +26,14 @@ read input
 if [[ $input == "Y" || $input == "y" ]]; then
       docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
       # Start ollama docker in future
-      echo '#!/bin/bash'                                                                         > /home/ashok/start/start_docker_ollama.sh
-      echo " "                                                                                  >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'Start ollama docker as: docker exec -it ollama ollama run <modelName>'"       >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'ollama access at port 11434'"                                                 >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'Access as: http://host.docker.internal:11434'"                                >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'Pull ollama model as: ollama pull <modelName'"                                >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo 'Start/Stop ollama docker: docker start/stop ollama'"                          >> /home/ashok/start/start_docker_ollama.sh
+      echo '#!/bin/bash'                                                                                     > /home/ashok/start/start_docker_ollama.sh
+      echo " "                                                                                               >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Start ollama docker with an LLM as: docker exec -it ollama ollama run <modelName>'"        >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Simple start/stop ollama docker: docker start/stop ollama'"                                >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'ollama access at port 11434'"                                                              >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Access as: http://host.docker.internal:11434'"                                             >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Pull ollama model as: ollama pull <modelName'"                                             >> /home/ashok/start/start_docker_ollama.sh
+     
 else
         echo "Skipping install of ollama docker"
 fi
