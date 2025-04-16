@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# LAst amended: 15th April, 2025
+# LAst amended: 16th April, 2025
 
 cd ~/
 
 
 echo "========script3=============="
+echo "Will install ollama docker"
 echo "Will install langflow using uv (but in virtual environment)"
 echo "Will install Flowise using npm (node package manager)"
 echo "Will prepare start script for each"
