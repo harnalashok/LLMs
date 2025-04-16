@@ -25,6 +25,8 @@ echo "Shall I install ollama docker? [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
       docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+      echo "ollama pull llama3"
+      echo "Start ollama docker as: docker exec -it ollama ollama run llama3"
 else
         echo "Skipping install of ollama docker"
 fi
