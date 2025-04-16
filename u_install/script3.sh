@@ -32,6 +32,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo "echo 'ollama access at port 11434'"                                                 >> /home/ashok/start/start_docker_ollama.sh
       echo "echo 'Access as: http://host.docker.internal:11434'"                                >> /home/ashok/start/start_docker_ollama.sh
       echo "echo 'Pull ollama model as: ollama pull <modelName'"                                >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo 'Start/Stop ollama docker: docker start/stop ollama'"                          >> /home/ashok/start/start_docker_ollama.sh
 else
         echo "Skipping install of ollama docker"
 fi
