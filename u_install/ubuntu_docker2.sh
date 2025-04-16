@@ -56,6 +56,13 @@ sudo nvidia-ctk runtime configure --runtime=docker
 
 sudo systemctl restart docker
 
+# Store docker help files
+mkdir /home/ashok/Documents/dockers
+cd /home/ashok/Documents/dockers
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/docker/Understanding%20docker%20technology.pdf?raw=true
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/docker/docker%20commands.txt?raw=true
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/docker/dockers%20in%20brief.pdf?raw=true
+cd /home/ashok/
 
 
 echo "Machine will be rebooted "
