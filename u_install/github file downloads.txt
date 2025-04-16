@@ -1,0 +1,13 @@
+How to download github files:
+https://stackoverflow.com/a/62731023
+
+
+In new UI interface(about June 2020), if your file url is
+
+https://github.com/StellarCN/scp_zh/blob/master/fonts/SimHei.ttf
+
+then
+
+wget https://github.com/StellarCN/scp_zh/blob/master/fonts/SimHei.ttf?raw=true
+
+==============
