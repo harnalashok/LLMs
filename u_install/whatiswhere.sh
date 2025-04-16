@@ -16,6 +16,7 @@ echo "Will install Node.js"
 echo "==========================="
 
 echo "========script3=============="
+echo "Will install ollama docker"
 echo "Will install langflow using uv (but in virtual environment)"
 echo "Will install Flowise using npm (node package manager)"
 echo "==========================="
