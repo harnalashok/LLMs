@@ -4,6 +4,11 @@
 
 # Ref: https://neo4j.com/docs/operations-manual/current/installation/linux/debian/#debian-installation
 
+echo "Will install neo4j community edition"
+echo "----------"
+sleep 2
+echo " "
+echo " "
 #  Add the Neo4j repository to the package manager
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/neotechnology.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/neotechnology.gpg] https://debian.neo4j.com stable latest' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
@@ -15,15 +20,25 @@ apt list -a neo4j
 # Install Neo4j Community Edition:
 sudo apt-get install neo4j=1:2025.03.0 -y
 
+echo " "
+echo "neo4j Installation complete"
+echo "-----------"
+echo " "
 # Default file locations:
-echi " Default file locations:  https://neo4j.com/docs/operations-manual/current/configuration/file-locations/"
+echo "Default file locations:  https://neo4j.com/docs/operations-manual/current/configuration/file-locations/"
 # Default ports
 echo "Default ports: https://neo4j.com/docs/operations-manual/current/configuration/ports/"
-echo "Start stop neo4j, as: sudo systemctl start/stop neo4j"
+echo "Start stop neo4j, as:"
+echo "sudo systemctl start/stop neo4j"
+echo " "
+echo "============"
 echo "Check if port 7687 is listening using netstat"
+echo "Test  Neo4j connection with the command:"
+echo " cypher-shell -a 'neo4j://127.0.0.1:7687' "
 echo "Default database user: neo4j"
 echo "Default database password: neo4j"
-sleep 5
+echo "============"
+sleep 8
 
 
 
