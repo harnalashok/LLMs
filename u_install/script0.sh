@@ -76,7 +76,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/download_models.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_llama_cpp_python.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_scripts.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4j%20install.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4jInstall.sh -P /home/ashok/next
 
 
 
@@ -98,6 +98,7 @@ perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script7.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script8.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script9.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/script10.sh
+perl -pi -e 's/\r\n/\n/g' /home/ashok/next/neo4jInstall.sh
 
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/download_models.sh
 perl -pi -e 's/\r\n/\n/g' /home/ashok/next/test_llama_cpp_python.sh
