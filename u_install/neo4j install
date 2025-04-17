@@ -1,18 +1,27 @@
+#!/bin/bash
+
+# LAst amended: 17th April, 2025
+
 # Ref: https://neo4j.com/docs/operations-manual/current/installation/linux/debian/#debian-installation
 
+#  Add the Neo4j repository to the package manager
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/neotechnology.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/neotechnology.gpg] https://debian.neo4j.com stable latest' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
 sudo apt-get update
 
+# Once the repository has been added to apt, you can verify which Neo4j versions are available by running
+apt list -a neo4j
+
+# Install Neo4j Community Edition:
 sudo apt-get install neo4j=1:2025.03.0 -y
 
 # Default file locations:
-https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
+echi " Default file locations:  https://neo4j.com/docs/operations-manual/current/configuration/file-locations/"
 # Default ports
-https://neo4j.com/docs/operations-manual/current/configuration/ports/
+echo "Default ports: https://neo4j.com/docs/operations-manual/current/configuration/ports/"
+echo "Start stop neo4j, as: sudo systemctl start/stop neo4j"
+echo "Check if port 7687 is listening using netstat"
+sleep 5
 
-sudo systemctl start neo4j
-netstat -aunt | grep 7687
 
-sudo systemctl enable --now neo4j
-sudo systemctl enable --now neo4j
+
