@@ -76,6 +76,7 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/download_models.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_llama_cpp_python.sh -P /home/ashok/next
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_scripts.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4j%20install.sh -P /home/ashok/next
 
 
 
