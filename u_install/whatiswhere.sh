@@ -74,4 +74,10 @@ echo "Will install mysql-server and mysql client"
 echo "Will call no other script"
 echo "==========================="
 
+echo " "
+echo "========neo4j=============="
+echo "Will install neo4j community edition"
+echo "==========================="
+
+
 
