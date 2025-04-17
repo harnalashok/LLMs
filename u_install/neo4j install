@@ -21,6 +21,8 @@ echi " Default file locations:  https://neo4j.com/docs/operations-manual/current
 echo "Default ports: https://neo4j.com/docs/operations-manual/current/configuration/ports/"
 echo "Start stop neo4j, as: sudo systemctl start/stop neo4j"
 echo "Check if port 7687 is listening using netstat"
+echo "Default database user: neo4j"
+echo "Default database password: neo4j"
 sleep 5
 
 
