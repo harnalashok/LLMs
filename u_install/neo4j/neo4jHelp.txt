@@ -10,6 +10,12 @@ neo4j
 
 sudo systemctl start/stop neo4j
 
+1a. In WSL Ubuntu, look for file /etc/neo4j/neo4j.conf
+     and un-comment the following line:
+
+        server.default_listen_address=0.0.0.0
+     Restart neo4j
+
 2. Open neo4j shell in console, as:
 
 cypher-shell -a 'neo4j://127.0.0.1:7687'
