@@ -3,7 +3,7 @@
 # LAst amended: 17th April, 2025
 # Install process is same for Ubuntu machine and WSL ubuntu
 # For WSL ubuntu there is need to edit /etc/neo4j/neo4j.conf file
-# and uncomment 
+# and uncomment line:  server.default_listen_address=0.0.0.0
 
 # Ref: https://neo4j.com/docs/operations-manual/current/installation/linux/debian/#debian-installation
 
