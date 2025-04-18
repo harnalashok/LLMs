@@ -1,0 +1,99 @@
+neo4j
+======
+
+0. Defaults:
+	username: neo4j
+	password: neo4j
+
+
+1. Start/stop neo4j as:
+
+sudo systemctl start/stop neo4j
+
+2. Open neo4j shell in console, as:
+
+cypher-shell -a 'neo4j://127.0.0.1:7687'
+
+3. Or, access it in browser, as:
+
+localhost:7474
+
+// Databases in Community edition
+// Ref: https://stackoverflow.com/a/60431349
+
+4. Not possible to create a new database through
+   cypher-shell in community edition. But you can
+   do so by editing: /etc/neo4j/neo4j.conf and 
+   write a name of default database, as:
+   
+# The name of the default database
+#initial.dbms.default_database=neo4j
+initial.dbms.default_database=school
+
+Restart neo4j. The new database is created.
+But in community edition, one can use only one
+database at a time ie the default dataabse and
+no other.
+
+//Reset database password:
+
+5. In cypher shell, enter command:
+
+neo4j@neo4j> ALTER USER neo4j SET PASSWORD 'foreschool' ;
+
+Logoff (ctrl+D) and login with the new password.
+
+
+6. Docker neo4j install
+# https://neo4j.com/docs/operations-manual/current/docker/introduction/
+
+docker run -d \						# detach mode
+    --restart always \					# Restart docker on reboot
+    --publish=7474:7474 --publish=7687:7687 \
+    --env NEO4J_AUTH=neo4j/your_password \		# My login password: your_password
+    --volume=/path/to/your/data:/data \			# Path to data folder in my ubuntu system
+    --name=myneo4j					# Your name of container. Else, it will change at every restart
+    neo4j:2025.03.0
+
+
+docker run -d \
+    --restart no \
+    --publish=7474:7474 --publish=7687:7687 \
+    --env NEO4J_AUTH=neo4j/your_password \
+    --volume=/path/to/your/data:/data \
+    --name=myneo4j \
+    neo4j:2025.03.0
+    
+# Next time start/stop this docker,as:   
+
+docker start myneo4j
+docker stop myneo4j 
+    
+    
+docker run -d \
+    --restart no \
+    --publish=7474:7474 --publish=7687:7687 \
+    --env NEO4J_AUTH=neo4j/your_password \
+    --volume=/path/to/your/data:/data \
+    neo4j:2025.03.0    
+    
+docker run \
+    --restart no \					# No restart
+    --publish=7474:7474 --publish=7687:7687 \
+    --env NEO4J_AUTH=neo4j/your_password \		
+    --volume=/home/ashok/data:/data \
+    neo4j:2025.03.0   
+    
+    
+7. To stop neo4j docker, first get container's name, as:
+
+docker ps
+
+Then use that name to stop docker, as:
+
+docker stop <containerName>
+
+    
+
+
+
