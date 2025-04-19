@@ -41,6 +41,30 @@ echo " cypher-shell -a 'neo4j://127.0.0.1:7687' "
 echo "Default database user: neo4j"
 echo "Default database password: neo4j"
 echo "============"
+
+
+# neo4j start script:
+echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_neo4j.sh  
+echo " "                                                   | tee -a /home/ashok/start/start_neo4j.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_neo4j.sh   
+echo "echo 'neo4j will be available at port 7474'"         | tee -a /home/ashok/start/start_neo4j.sh  
+echo "sudo systemctl start neo4j"                          | tee -a /home/ashok/start/start_neo4j.sh  
+echo "netstat -aunt | grep 7878"                           | tee -a /home/ashok/start/start_neo4j.sh  
+
+# neo4j stop script
+echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_neo4j.sh  
+echo " "                                                   | tee -a /home/ashok/stop/stop_neo4j.sh  
+echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_neo4j.sh  
+echo "echo 'neo4j will be stopped'"                        | tee -a /home/ashok/stop/stop_neo4j.sh  
+echo "sudo systemctl stop neo4j"                           | tee -a /home/ashok/stop/stop_neo4j.sh  
+echo "netstat -aunt | grep 7474"                           | tee -a /home/ashok/stop/stop_neo4j.sh  
+
+# PRemission changes
+chmod +x /home/ashok/start/*.sh   
+chmod +x /home/ashok/stop/*.sh
+
+
+
 sleep 8
 
 
