@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 16th April, 2025
+# Last amended: 9th May, 2025
 # Copyright:: 
 
 
@@ -65,7 +65,7 @@ mkdir /home/ashok/psql
 # Install Ollama
 ################
 
-echo "Shall I install Ollama bare? [Y,n]"    # Else docker ollama may be installed
+echo "Shall I install Ollama directly OR you want to install ollama docker latter? [Y,n]"    # Else docker ollama may be installed
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
     # Installing ollama
