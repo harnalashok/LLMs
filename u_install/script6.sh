@@ -1,4 +1,4 @@
-o "#!/bin/bash
+#!/bin/bash
 
 echo "========script6=============="
 echo "Will Install FAISS library"
