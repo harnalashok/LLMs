@@ -52,6 +52,18 @@ echo "sudo systemctl start neo4j"                          | tee -a /home/ashok/
 echo "echo 'Test as: netstat -aunt | grep 7474'"           | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo 'Or run command: ./start_neo4j.sh again'"       | tee -a /home/ashok/start/start_neo4j.sh  
 echo "netstat -aunt | grep 7474"                           | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo '==========='"                                  | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo 'Access neo4j shell, as:'"                      | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo '       cypher-shell -a '\''neo4j://127.0.0.1:7687'\'"     | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo '       userid: neo4j, password: neo4j'"        | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo 'Access neo4j in browser, as:'"                 | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo '       localhost:7474'"                        | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo '       userid: neo4j, password: neo4j'"        | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo '==========='"                                  | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh  
+
 
 # neo4j stop script
 echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_neo4j.sh  
