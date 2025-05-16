@@ -50,7 +50,7 @@ echo "cd ~/"                                               | tee -a /home/ashok/
 echo "echo 'neo4j will be available at port 7474'"         | tee -a /home/ashok/start/start_neo4j.sh  
 echo "sudo systemctl start neo4j"                          | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo 'Test as: netstat -aunt | grep 7474'"           | tee -a /home/ashok/start/start_neo4j.sh  
-echo "echo 'Or run command: ./start_neo4j.sh again'"       | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo 'Or re-run command: ./start_neo4j.sh'"          | tee -a /home/ashok/start/start_neo4j.sh  
 echo "netstat -aunt | grep 7474"                           | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo '==========='"                                  | tee -a /home/ashok/start/start_neo4j.sh  
@@ -62,7 +62,18 @@ echo "echo 'Access neo4j in browser, as:'"                 | tee -a /home/ashok/
 echo "echo '       localhost:7474'"                        | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo '       userid: neo4j, password: neo4j'"        | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo '==========='"                                  | tee -a /home/ashok/start/start_neo4j.sh 
-echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo 'Note:'"                                        | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' It is not possible to create a new database'"  | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' in community edition. But you can change the'" | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' name of default database, neo4j, by editing:'" | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' file: /etc/neo4j/neo4j.conf '"                 | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' Set the name of your default database, as'"    | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' initial.dbms.default_database=school'"         | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ' Restart neo4j'"                                | tee -a /home/ashok/start/start_neo4j.sh 
+echo "echo ''"                                             | tee -a /home/ashok/start/start_neo4j.sh 
+
+
 
 
 # neo4j stop script
