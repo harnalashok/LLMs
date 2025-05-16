@@ -64,8 +64,16 @@ echo "echo 'Stopping redis server'"                                             
 echo "cd /home/ashok/redis"                                                                                      >> /home/ashok/stop/stop_redis.sh
 echo " docker stop redis-stack-server"                                                                           >> /home/ashok/stop/stop_redis.sh
 echo "netstat -aunt | grep 6379"                                                                                 >> /home/ashok/stop/stop_redis.sh
+
+# Download neo4j install script
+echo "Downloading neo4j install script"
+cd /home/ashok
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4jInstall.sh
+
+chmod +x /home/ashok/*.sh
 chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
+
 
 
 # Move script file to done folder
