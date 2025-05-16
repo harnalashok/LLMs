@@ -50,7 +50,7 @@ echo "cd ~/"                                               | tee -a /home/ashok/
 echo "echo 'neo4j will be available at port 7474'"         | tee -a /home/ashok/start/start_neo4j.sh  
 echo "sudo systemctl start neo4j"                          | tee -a /home/ashok/start/start_neo4j.sh  
 echo "echo 'Test as: netstat -aunt | grep 7474'"           | tee -a /home/ashok/start/start_neo4j.sh  
-echo "Or run this command again"                           | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo 'Or run command: ./start_neo4j.sh again'"       | tee -a /home/ashok/start/start_neo4j.sh  
 echo "netstat -aunt | grep 7474"                           | tee -a /home/ashok/start/start_neo4j.sh  
 
 # neo4j stop script
