@@ -20,8 +20,10 @@ sudo apt-get update
 # Once the repository has been added to apt, you can verify which Neo4j versions are available by running
 apt list -a neo4j
 
-# Install Neo4j Community Edition:
-sudo apt-get install neo4j=1:2025.03.0 -y
+# Install current Neo4j Community Edition:
+sudo apt-get install neo4j
+echo "Your version of neo4j is: (neo4j -V)"
+neo4j -V
 
 echo " "
 echo "neo4j Installation complete"
