@@ -49,6 +49,8 @@ echo " "                                                   | tee -a /home/ashok/
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_neo4j.sh   
 echo "echo 'neo4j will be available at port 7474'"         | tee -a /home/ashok/start/start_neo4j.sh  
 echo "sudo systemctl start neo4j"                          | tee -a /home/ashok/start/start_neo4j.sh  
+echo "echo 'Test as: netstat -aunt | grep 7474'"           | tee -a /home/ashok/start/start_neo4j.sh  
+echo "Or run this command again"                           | tee -a /home/ashok/start/start_neo4j.sh  
 echo "netstat -aunt | grep 7474"                           | tee -a /home/ashok/start/start_neo4j.sh  
 
 # neo4j stop script
@@ -57,7 +59,7 @@ echo " "                                                   | tee -a /home/ashok/
 echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_neo4j.sh  
 echo "echo 'neo4j will be stopped'"                        | tee -a /home/ashok/stop/stop_neo4j.sh  
 echo "sudo systemctl stop neo4j"                           | tee -a /home/ashok/stop/stop_neo4j.sh  
-echo "netstat -aunt | grep 7474"                           | tee -a /home/ashok/stop/stop_neo4j.sh  
+echo "echo 'Test as: netstat -aunt | grep 7474'"           | tee -a /home/ashok/stop/stop_neo4j.sh  
 
 cd /home/ashok
 ln -sT /home/ashok/stop/stop_neo4j.sh   stop_neo4j.sh  
