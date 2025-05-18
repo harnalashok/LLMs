@@ -1,0 +1,7 @@
+# Last amended: 18th May, 2025
+
+1. Neo4j Example datasets and guides:
+	https://neo4j.com/docs/getting-started/appendix/example-data/
+	
+2. Neo4j graph examples
+	https://github.com/neo4j-graph-examples	
