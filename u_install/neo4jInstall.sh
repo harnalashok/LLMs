@@ -101,7 +101,7 @@ cd neo4j
 wget -c https://go.neo4j.com/rs/710-RRC-335/images/Get_Started_with_Cypher_ebook.pdf
 wget -c https://www.ksi.mff.cuni.cz/~svoboda/courses/202-NDBI006/lectures/NDBI006-Lecture-06-Cypher.pdf
 wget -c https://s3.amazonaws.com/artifacts.opencypher.org/openCypher9.pdf
-https://piazza.com/class_profile/get_resource/jsd7vhgcid7jj/jvyxpxy1wss6y3
+wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/neo4j/northwind_database_import.pdf?raw=true
 cd /home/ashok
 
 sleep 8
