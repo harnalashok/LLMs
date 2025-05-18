@@ -95,7 +95,14 @@ cd ~/
 chmod +x /home/ashok/start/*.sh   
 chmod +x /home/ashok/stop/*.sh
 
-
+cd /home/ashok/Documents
+mkdir neo4j
+cd neo4j
+wget -c https://go.neo4j.com/rs/710-RRC-335/images/Get_Started_with_Cypher_ebook.pdf
+wget -c https://www.ksi.mff.cuni.cz/~svoboda/courses/202-NDBI006/lectures/NDBI006-Lecture-06-Cypher.pdf
+wget -c https://s3.amazonaws.com/artifacts.opencypher.org/openCypher9.pdf
+https://piazza.com/class_profile/get_resource/jsd7vhgcid7jj/jvyxpxy1wss6y3
+cd /home/ashok
 
 sleep 8
 
