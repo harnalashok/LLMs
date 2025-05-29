@@ -79,6 +79,22 @@ echo "echo 'Flowise will be available at port 3000 in debug mode'"      | tee -a
 echo "npx flowise start --DEBUG=true"                                   | tee -a /home/ashok/start/start_debug_flowise.sh  
 echo "netstat -aunt | grep 3000"                                        | tee -a /home/ashok/start/start_debug_flowise.sh  
 
+# Update flowise
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/update_npx_flowise.sh  
+echo " "                                                   | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "cd /home/ashok"                                      | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "echo 'Flowise will be updated'"                      | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "npm install -g flowise"                              | tee -a /home/ashok/start/update_npx_flowise.sh
+echo " "                                                   | tee -a /home/ashok/start/update_npx_flowise.sh
+echo " "                                                   | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "echo '============'"                                 | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "echo 'flowise version'"                              | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "echo '============'"                                 | tee -a /home/ashok/start/update_npx_flowise.sh
+echo "flowise"                                             | tee -a /home/ashok/start/update_npx_flowise.sh
+
+
+
+
 chmod +x /home/ashok/start/*.sh
 
 #####################
