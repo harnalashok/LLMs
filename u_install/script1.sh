@@ -79,7 +79,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "------"
     echo " "
     echo " "
-    curl -fsSL https://ollama.com/install.sh | sh       2>> /home/ashok/error.log  
+    curl -fsSL https://ollama.com/install.sh | sh      
     # Disable ollama on start
     sudo systemctl disable ollama
     # Stop ollama, if running
