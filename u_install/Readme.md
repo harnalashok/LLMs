@@ -82,8 +82,8 @@ iii) Get your Ubuntu's screen resolution. Right click on Ubuntu desktop
      and click *Display Settings*. Note the Resolution. In my Ubuntu machine it is 1600 X 900     
  iv) Go to Windows machine. Right click on the Desktop and then click *Display Settings*     
       Match the Resolution of your Windows machine to that of Ubuntu machine. In my case      
-      resolution was 3840 X 2160. I reduced it to 1600 X 1200.
-  v) In the search bar search for rdp Or Remote Desktop Connectionm and enter the IP of your
+      resolution was 3840 X 2160. I reduced it to 1600 X 1200.       
+  v) In the search bar search for rdp Or Remote Desktop Connection and enter the IP of your
      Ubuntu machine. Supply userid and password. Done.         
 
 ### Problems in WSL
