@@ -79,12 +79,13 @@ ii) Check if it is listening at port 3389
       > *sudo lsof -i:3389*      
 iii) Check IP of your Ubuntu machine using *ifconfig*              
  iv) Get your Ubuntu's screen resolution. Right click on Ubuntu desktop       
-     and click *Display Settings*. Note the Resolution. In my Ubuntu machine it is 1600 X 900     
-  v) Go to Windows machine. Right click on the Desktop and then click *Display Settings*     
+     and click *Display Settings*. Note the Resolution. In my Ubuntu machine it is 1600 X 900       
+> v) On ubuntu, click *Settings-->Sharing* and set *Remote Desktop* on, if not already on      
+ vi) Go to Windows machine. Right click on the Desktop and then click *Display Settings*     
       Match the Resolution of your Windows machine to that of Ubuntu machine. In my case      
       resolution was 3840 X 2160. I reduced it to 1600 X 1200.       
- vi) In the search bar search for rdp Or Remote Desktop Connection and enter the IP of your      
-     Ubuntu machine. Supply userid and password. Done.         
+ vi) In the Windows search bar at the bottom, search for rdp Or Remote Desktop Connection            
+     and enter the IP of your Ubuntu machine. Supply userid and password. Done.              
 
 ### Problems in WSL
 <pre>
