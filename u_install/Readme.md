@@ -72,23 +72,21 @@ xxi) LocalAI
 
 
 
-### Script sequence
-<pre>
-      # These sscripts run in sequence.
-      #     script0.sh
-      #     script1.sh
-      #     script2.sh
-      #     ubunu_docker1.sh
-      #     ubuntu_docker2.sh
-      #     script3.sh
-      #     script4.sh
-      #     script5.sh
-      #     script6.sh
-      #     script7.sh
-      #     script8.sh
-      #     script9.sh  
-</pre>
+### Ubuntu Desktop sharing
+To share your Ubuntu desktop on Intranet,      
+i)  Check if *gnome-remote-dektop* is installed.      
+ii) Check if it is listening at port 3389      
+      > *sudo lsof -i:3389*      
+iii) Check IP of your Ubuntu machine using *ifconfig*              
+iii) Get your Ubuntu's screen resolution. Right click on Ubuntu desktop       
+     and click *Display Settings*. Note the Resolution. In my Ubuntu machine it is 1600 X 900     
+ iv) Go to Windows machine. Right click on the Desktop and then click *Display Settings*     
+      Match the Resolution of your Windows machine to that of Ubuntu machine. In my case      
+      resolution was 3840 X 2160. I reduced it to 1600 X 1200.
+  v) In the search bar search for rdp Or Remote Desktop Connectionm and enter the IP of your
+     Ubuntu machine. Supply userid and password. Done.         
 
+### Problems in WSL
 <pre>
    My WSL instalation has a number of folder paths with spaces. Putting 
 PATH=$PATH:/home/ashok/llama.cpp/build/bin
