@@ -36,6 +36,11 @@ echo "echo 'To deactivate issue just the command: deactivate'"           >> /hom
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 deactivate
 echo "FAISS library installed"
+
+# FAISS remove database script
+cd /home/ashok/
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/faiss/empty_faiss_database.sh
+chmod +x *.sh
 sleep 4
 
 ##########################
