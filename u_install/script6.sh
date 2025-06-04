@@ -35,9 +35,10 @@ echo "echo 'source /home/ashok/start/activate_faiss.sh'"                 >> /hom
 echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/ashok/start/activate_faiss.sh
 echo "source /home/ashok/faiss/bin/activate"                             >> /home/ashok/start/activate_faiss.sh
 deactivate
-echo "FAISS library installed"
+echo "FAISS library installed at /home/ashok/faiss/"
+echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
 
-# FAISS remove database script
+# FAISS download data-cleaning script
 cd /home/ashok/
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/faiss/empty_faiss_database.sh
 chmod +x *.sh
