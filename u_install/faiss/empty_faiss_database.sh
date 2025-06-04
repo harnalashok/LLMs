@@ -19,7 +19,7 @@ done
 
 rm /home/ashok/faiss/docstore.json
 rm /home/ashok/faiss/faiss.index
-echo "Done..."
+echo "Done...FAISS library has no data files.."
 
 
 
