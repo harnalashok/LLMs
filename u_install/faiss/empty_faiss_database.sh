@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
-echo "Files docstore.json and faiss.index will be deleted"
+echo "Files 'docstore.json' and 'faiss.index' will be deleted"
+echo "from folder /home/ashok/faiss"
 
 while true; do
 
