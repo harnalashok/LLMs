@@ -2,8 +2,25 @@
 
 
 echo "Files docstore.json and faiss.index will be deleted"
-echo "Press ctrl+c now to abort. Waiting for 8 seconds..."
-sleep 8
+
+while true; do
+
+read -p "Do you want to proceed? (y/n) " yn
+
+case $yn in 
+	[yY] ) echo ok, we will proceed;
+		break;;
+	[nN] ) echo exiting...;
+		exit;;
+	* ) echo invalid response;;
+esac
+
+done
+
 rm /home/ashok/faiss/docstore.json
 rm /home/ashok/faiss/faiss.index
 echo "Done..."
+
+
+
+
