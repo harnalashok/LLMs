@@ -1,7 +1,15 @@
 #!/bin/bash
 
-echo "Files 'docstore.json' and 'faiss.index' will be deleted"
-echo "from folder /home/ashok/faiss"
+echo " "
+echo "  Files 'docstore.json' and 'faiss.index' will be deleted"
+echo "    from folder: /home/ashok/faiss/"
+echo "=============="
+echo "  NOTE=>"
+echo "  Each time, you click 'Upsert' button to store vector data"
+echo "    in FAISS, earlier vector store is first deleted."
+echo "       There is NO appendment to existing vector store."
+echo " "
+echo "=============="
 
 while true; do
 
