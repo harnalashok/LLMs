@@ -50,7 +50,9 @@ sleep 4
 # Ref: https://redis.io/docs/latest/operate/oss_and_stack/install/install-stack/docker/
 
 mkdir /home/ashok/redis
-docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest
+echo "This also mounts $HOME/redis/ as data volume to save data"
+# Mount /home/ashok/redis as /data
+docker run -d --name redis-stack-server -v /home/ashok/redis:/data -p 6379:6379 redis/redis-stack-server:latest
 
 # redis start script
 echo '#!/bin/bash'                                                                                             > /home/ashok/start/start_redis.sh
@@ -58,6 +60,7 @@ echo " "                                                                        
 echo "echo 'Access redis server port 6379. Wait...starting...'"                                                >> /home/ashok/start/start_redis.sh
 echo "echo 'To stop it, issue command: cd /home/ashok/redis/ ; docker stop redis-stack-server'"                 >> /home/ashok/start/start_redis.sh
 echo "echo 'To connect to redis cli, after start, issue command: docker exec -it  redis-stack-server redis-cli'"   >> /home/ashok/start/start_redis.sh
+echo "echo 'In the redis-cli, issue command: SAVE. This will dump memory to $HOME/redis folder'"                >> /home/ashok/start/start_redis.sh
 echo "sleep 9"                                                                                                  >> /home/ashok/start/start_redis.sh
 echo "cd /home/ashok/redis"                                                                                      >> /home/ashok/start/start_redis.sh
 echo " docker start redis-stack-server"                                                                          >> /home/ashok/start/start_redis.sh
