@@ -57,14 +57,15 @@ docker run -d --name redis-stack-server -v /home/ashok/redis:/data -p 6379:6379 
 # redis start script
 echo '#!/bin/bash'                                                                                             > /home/ashok/start/start_redis.sh
 echo " "                                                                                                       >> /home/ashok/start/start_redis.sh
-echo "echo 'Access redis server port 6379. Wait...starting...'"                                                >> /home/ashok/start/start_redis.sh
-echo "echo 'To stop it, issue command: cd /home/ashok/redis/ ; docker stop redis-stack-server'"                 >> /home/ashok/start/start_redis.sh
-echo "echo 'To connect to redis cli, after start, issue command: docker exec -it  redis-stack-server redis-cli'"   >> /home/ashok/start/start_redis.sh
-echo "echo 'In the redis-cli, issue command: SAVE. This will dump memory to $HOME/redis folder'"                >> /home/ashok/start/start_redis.sh
+echo "echo 'Access redis server at port 6379. Wait...starting...'"                                           >> /home/ashok/start/start_redis.sh
+echo "echo '1. To stop docker, issue command: docker stop redis-stack-server'"                               >> /home/ashok/start/start_redis.sh
+echo "echo '2. To connect to redis cli, issue command: docker exec -it  redis-stack-server redis-cli'"        >> /home/ashok/start/start_redis.sh
+echo "echo '      In the redis-cli, issue command: SAVE. This will dump memory to folder: $HOME/redis/'"      >> /home/ashok/start/start_redis.sh
+echo "echo '3. Interact with the docker OS, as:  docker exec -it   containerID  ls -la /'"                     >> /home/ashok/start/start_redis.sh
 echo "sleep 9"                                                                                                  >> /home/ashok/start/start_redis.sh
-echo "cd /home/ashok/redis"                                                                                      >> /home/ashok/start/start_redis.sh
-echo " docker start redis-stack-server"                                                                          >> /home/ashok/start/start_redis.sh
-echo "netstat -aunt | grep 6379"                                                                                 >> /home/ashok/start/start_redis.sh
+echo "cd /home/ashok/redis"                                                                                     >> /home/ashok/start/start_redis.sh
+echo " docker start redis-stack-server"                                                                         >> /home/ashok/start/start_redis.sh
+echo "netstat -aunt | grep 6379"                                                                                >> /home/ashok/start/start_redis.sh
 
 
 # redis stop script
