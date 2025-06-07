@@ -332,6 +332,10 @@ echo "</html>"                                                    | sudo tee -a 
 
 cd /etc/apache2/sites-available/
 sudo cp 000-default.conf ai.conf
+# Replace DocumentRoot from /var/www/html to /var/www/ai/
+sudo sed -i '/DocumentRoot/d' ./ai.conf
+sudo sed -i '/ServerAdmin/a DocumentRoot /var/www/ai/' ai.conf
+
  
 
 
