@@ -319,6 +319,8 @@ cp /home/ashok/find_venv.sh /home/ashok/start/
 ############
 
 sudo apt install apache2  -y
+
+# Creating Virtual Host. Needs more work
 sudo mkdir /var/www/ai/
 cd /var/www/ai/
 echo "<html>"                                    | sudo tee /var/www/ai/index.html
@@ -335,11 +337,9 @@ sudo cp 000-default.conf ai.conf
 # Replace DocumentRoot from /var/www/html to /var/www/ai/
 sudo sed -i '/DocumentRoot/d' ./ai.conf
 sudo sed -i '/ServerAdmin/a DocumentRoot /var/www/ai/' ai.conf
-
- 
-
-
-
+sudo sed -i '/ServerAdmin/a ServerName ai.fore.com' ai.conf
+sudo a2ensite ai.conf
+sudo systemctl reload apache2
 
 # If not wsl, then
 reboot
