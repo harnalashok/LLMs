@@ -312,6 +312,25 @@ mv /home/ashok/next/script2.sh /home/ashok/
 # Make a copy of this script also
 cp /home/ashok/find_venv.sh /home/ashok/start/
 
+###########
+# apache2 install
+############
+
+sudo apt install apache2  -y
+sudo mkdir /var/www/ai/
+cd /var/www/ai/
+echo "<html>"                                    | sudo tee /var/www/ai/index.html
+echo "<head>"                                    | sudo tee -a  /var/www/ai/index.html 
+echo "<title> Ubuntu rocks! </title>"            | sudo tee -a  /var/www/ai/index.html 
+echo "</head>"                                   | sudo tee -a  /var/www/ai/index.html 
+echo "<body>"                                    | sudo tee -a  /var/www/ai/index.html 
+echo "<p> I'm running this website on an Ubuntu Server server!"   | sudo tee -a  /var/www/ai/index.html 
+echo "</body>"                                                    | sudo tee -a  /var/www/ai/index.html 
+echo "</html>"                                                    | sudo tee -a  /var/www/ai/index.html 
+
+
+
+
 # If not wsl, then
 reboot
 
