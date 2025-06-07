@@ -330,6 +330,10 @@ echo "<p> I'm running this website on an Ubuntu Server server!"   | sudo tee -a 
 echo "</body>"                                                    | sudo tee -a  /var/www/ai/index.html 
 echo "</html>"                                                    | sudo tee -a  /var/www/ai/index.html 
 
+cd /etc/apache2/sites-available/
+sudo cp 000-default.conf ai.conf
+ 
+
 
 
 
