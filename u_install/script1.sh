@@ -12,6 +12,7 @@ echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
 echo "Will install uv for langflow install"
 echo "Will install chromadb"
+echo "Install apache2 webserver"
 echo "Reboot machine and call script2.sh"
 echo "==========================="
 sleep 10
@@ -313,7 +314,8 @@ mv /home/ashok/next/script2.sh /home/ashok/
 cp /home/ashok/find_venv.sh /home/ashok/start/
 
 ###########
-# apache2 install
+# apache2 webserver install
+# Ref: https://ubuntu.com/tutorials/install-and-configure-apache#2-installing-apache
 ############
 
 sudo apt install apache2  -y
