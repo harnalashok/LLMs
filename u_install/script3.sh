@@ -67,14 +67,14 @@ echo " "                                                    | tee -a /home/ashok
 echo '#!/bin/bash'                                           | tee    /home/ashok/start/start_npx_flowise.sh  
 echo " "                                                     | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "cd ~/"                                                 | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo ' ' "                                                      | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo '----------'"               | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo ' ' "                                                               | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo '----------'"                                                       | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo 'Will delete your earlier passwd, chatflows, Document Stores etc'"  | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo '----------'"               | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo ' ' "                                                      | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo 'To avoid any changes, start flowise as: npx flowise start'"      | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo ' ' "                                                      | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo 'Waiting for 10 secs. Press ctrl+c to break...'"                            | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo '----------'"                                                       | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo ' ' "                                                               | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo 'To avoid any changes, start flowise as: npx flowise start'"        | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo ' ' "                                                               | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo 'Waiting for 10 secs. Press ctrl+c to break...'"                    | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "sleep 15"                                              | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo 'Clearing now....'"                               | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "rm -r .flowise"                                        | tee -a /home/ashok/start/start_npx_flowise.sh
