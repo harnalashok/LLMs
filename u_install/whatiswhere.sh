@@ -8,6 +8,7 @@ echo "Will install Ollama quietly"
 echo "Will install Fast Node Manager (fnm)"
 echo "Will install uv for langflow install"
 echo "Will install chromadb"
+echo "Install apache2 webserver"
 echo "==========================="
 
 echo "========script2=============="
