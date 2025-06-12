@@ -127,6 +127,24 @@ cp /home/ashok/find_venv.sh  /home/ashok/stop/
 sleep 2
 
 ################
+## Download embedding models
+################
+
+echo "Downloading embedding models"
+echo "Try them when your RAG answers are not that good"
+sudo systemctl start ollama
+
+echo "1. nomic-embed-text"
+ollama pull nomic-embed-text
+echo "2. mxbai-embed-large"
+ollama pull mxbai-embed-large
+echo "3. snowflake-arctic-embed:335m"
+ollama pull snowflake-arctic-embed:335m
+echo "4. snowflake-arctic-embed2"
+ollama pull snowflake-arctic-embed2
+
+
+################
 # Install postgresql and sqlite3
 ################
 
