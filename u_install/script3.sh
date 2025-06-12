@@ -103,10 +103,6 @@ echo "echo '============'"                                 | tee -a /home/ashok/
 echo "echo 'flowise version'"                              | tee -a /home/ashok/start/update_npx_flowise.sh
 echo "echo '============'"                                 | tee -a /home/ashok/start/update_npx_flowise.sh
 echo "flowise"                                             | tee -a /home/ashok/start/update_npx_flowise.sh
-
-
-
-
 chmod +x /home/ashok/start/*.sh
 
 #####################
