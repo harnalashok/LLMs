@@ -144,6 +144,10 @@ echo "4. snowflake-arctic-embed2"
 ollama pull snowflake-arctic-embed2
 echo "5. timyllama download"
 ollama pull tinyllama
+echo "6. whisper-tiny download"
+ollama pull dimavz/whisper-tiny
+echo "7. tinyagent download"
+ollama pull andthattoo/tinyagent-1.1b
 
 echo " "
 echo " "
