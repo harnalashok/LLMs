@@ -142,6 +142,21 @@ echo "3. snowflake-arctic-embed:335m"
 ollama pull snowflake-arctic-embed:335m
 echo "4. snowflake-arctic-embed2"
 ollama pull snowflake-arctic-embed2
+echo "5. timyllama download"
+ollama pull tinyllama
+
+echo " "
+echo " "
+echo "============="
+echo "Consider downloading the following ollama models"
+echo "      1. llama3.2:latest"
+echo "      2. codellama:latest"
+echo "      3. gemma3:latest"
+echo "      4. mistral:latest"
+echo "      5. qwen3:latest"
+echo "============="
+
+
 
 
 ################
