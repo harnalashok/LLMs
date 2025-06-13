@@ -72,9 +72,10 @@ echo "echo '----------'"                                                       |
 echo "echo 'Will delete your earlier passwd, chatflows, Document Stores etc'"  | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo '----------'"                                                       | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo ' ' "                                                               | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo 'To avoid any changes, start flowise as: npx flowise start'"        | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo  -e '\033[33;5mTo avoid any deletions, start flowise as: \033[0m'" | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo '       ==> npx flowise start <=='"                                   | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo ' ' "                                                               | tee -a /home/ashok/start/start_npx_flowise.sh
-echo "echo 'Waiting for 10 secs. Press ctrl+c to break...'"                    | tee -a /home/ashok/start/start_npx_flowise.sh
+echo "echo 'Press ctrl+c now to avoid deletions. Will wait for 10 secs.'"                  | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "sleep 15"                                              | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "echo 'Clearing now....'"                               | tee -a /home/ashok/start/start_npx_flowise.sh
 echo "rm -r .flowise"                                        | tee -a /home/ashok/start/start_npx_flowise.sh
