@@ -99,10 +99,18 @@ if [[ $input == "Y" || $input == "y" ]]; then
     
     
     # Ollama start script:
-    echo '#!/bin/bash'                                         | tee -a /home/ashok/start/start_ollama.sh  
-    echo " "                                                   | tee -a /home/ashok/start/start_ollama.sh  
-    echo "cd ~/"                                               | tee -a /home/ashok/start/start_ollama.sh  
+    echo '#!/bin/bash'                                         | tee  /home/ashok/start/start_ollama.sh  
+    echo "echo ' ' "                                           | tee -a /home/ashok/start/start_ollama.sh  
+    echo "cd /home/ashok"                                               | tee -a /home/ashok/start/start_ollama.sh  
     echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo 'You can also start ollama, as: ollama serve'"  | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo ' ' "                                           | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo '========'"                                     | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo 'Look for ollama models in folder:'"           | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo '       sudo ls -la /usr/share/ollama/.ollama/models/manifests/registry.ollama.ai/library/'"  | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo '========'"                                     | tee -a /home/ashok/start/start_ollama.sh  
+    echo "echo ' ' "                                           | tee -a /home/ashok/start/start_ollama.sh  
+    echo "sleep 4"                                             | tee -a /home/ashok/start/start_ollama.sh  
     echo "sudo systemctl start ollama"                         | tee -a /home/ashok/start/start_ollama.sh  
     echo "netstat -aunt | grep 11434"                          | tee -a /home/ashok/start/start_ollama.sh  
     
