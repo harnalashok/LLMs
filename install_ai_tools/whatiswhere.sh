@@ -14,6 +14,7 @@ echo "==========================="
 echo "========script2=============="
 echo "Will install llama.cpp directly"
 echo "Will install Node.js"
+echo "Install github-desktop"
 echo "==========================="
 
 echo "========script3=============="
