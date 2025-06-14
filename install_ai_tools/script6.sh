@@ -44,6 +44,23 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_ins
 chmod +x *.sh
 sleep 4
 
+cd ~/
+
+##########################
+### Install chromadb docker
+##########################
+
+
+
+ cd /home/ashok
+ docker pull chromadb/chroma
+ 
+
+
+
+
+
+
 ##########################
 ### redis-stack-server docker install
 ##########################
