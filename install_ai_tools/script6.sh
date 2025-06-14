@@ -49,37 +49,34 @@ cd ~/
 
 ##########################
 ### Install chromadb docker
+# Ref: https://docs.trychroma.com/production/containers/docker
 ##########################
 
+cd /home/ashok
 echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
-    # Installing chromadb docker. 
-    # Install chromadb
-    echo " "                                       | tee -a /home/ashok/error.log
-    echo " Will Install chromadb docker"                  | tee -a /home/ashok/error.log
+    # Installing chromadb docker.  
+    echo " "                                        | tee -a /home/ashok/error.log
+    echo " Installing chromadb docker"             | tee -a /home/ashok/error.log
     echo "------------"                            | tee -a /home/ashok/error.log
     echo " "                                       | tee -a /home/ashok/error.log
     sleep 3
     docker pull chromadb/chroma
     sleep 2
 	
-	# Chroma start script
+    # Chroma start script
     echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
     echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
     echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
     echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
     echo "echo 'Data dir is ~/chroma-data/'"                 | tee -a /home/ashok/start/start_chroma.sh 
-	   echo "docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma"  | tee -a /home/ashok/start/start_chroma.sh 
-    echo "sleep 5"                                             | tee -a /home/ashok/start/start_chroma.sh  
+    echo "docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma"  | tee -a /home/ashok/start/start_chroma.sh 
 else
         echo "Skipping install of chromadb docker"
 fi   
 
-chmod +x /home/ashok/start/*.sh
-
-cd /home/ashok
-
+chmod +x /home/ashok/start/*.s
 
 ##########################
 ### redis-stack-server docker install
