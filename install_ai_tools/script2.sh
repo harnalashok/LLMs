@@ -6,6 +6,7 @@ echo "========script2=============="
 echo "Will install llama.cpp directly"
 echo "Will install Node.js"
 echo "   What is Node.js--See the end of this file"
+echo "Install github-desktop"
 echo "Call ubuntu_docker1.sh as sudo user"
 echo "==========================="
 sleep 10
@@ -112,6 +113,23 @@ mv /home/ashok/next/ubuntu_docker1.sh /home/ashok/
 
 # Add start/stop folders to PATH in .bashrc
 echo "PATH=\$PATH:/home/ashok/start:/home/ashok/stop"  >> /home/ashok/.bashrc
+
+
+###############
+# github-desktop install
+# May not work in WSL2 systems
+###############
+
+echo "Installing github-desktop. Maynot work in WSL2 systems...."
+sleep 3
+
+wget -qO - https://mirror.mwt.me/shiftkey-desktop/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/mwt-desktop.gpg > /dev/null
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/mwt-desktop.gpg] https://mirror.mwt.me/shiftkey-desktop/deb/ any main" > /etc/apt/sources.list.d/mwt-desktop.list'
+
+sudo apt update && sudo apt install github-desktop -y
+
+echo "github-desktop installed"
+sleep 4
 
 
 
