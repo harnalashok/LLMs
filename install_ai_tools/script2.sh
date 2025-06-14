@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 6th Feb, 2025
+# Last amended: 14th June, 2025
 
 echo "========script2=============="
 echo "Will install llama.cpp directly"
@@ -118,6 +118,7 @@ echo "PATH=\$PATH:/home/ashok/start:/home/ashok/stop"  >> /home/ashok/.bashrc
 ###############
 # github-desktop install
 # May not work in WSL2 systems
+# Ref: https://github.com/shiftkey/desktop?tab=readme-ov-file#installation-via-package-manager
 ###############
 
 echo "Installing github-desktop. Maynot work in WSL2 systems...."
