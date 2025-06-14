@@ -35,6 +35,7 @@ echo "==========================="
 
 echo "========script6=============="
 echo "Will Install FAISS library"
+echo "Install chromadb docker"
 echo "Will install redis-stack-server docker"
 echo "==========================="
 
