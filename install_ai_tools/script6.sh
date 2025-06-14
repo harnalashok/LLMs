@@ -56,9 +56,9 @@ cd /home/ashok
 echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
-    # Installing chromadb docker.  
-    echo " "                                        | tee -a /home/ashok/error.log
-    echo " Installing chromadb docker"             | tee -a /home/ashok/error.log
+    # Pulling chromadb docker image  
+    echo " "                                       | tee -a /home/ashok/error.log
+    echo " Pulling chromadb docker image"          | tee -a /home/ashok/error.log
     echo "------------"                            | tee -a /home/ashok/error.log
     echo " "                                       | tee -a /home/ashok/error.log
     sleep 3
@@ -73,7 +73,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'Data dir is ~/chroma-data/'"                 | tee -a /home/ashok/start/start_chroma.sh 
     echo "docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma"  | tee -a /home/ashok/start/start_chroma.sh 
 else
-        echo "Skipping install of chromadb docker"
+    echo "Skipping install of chromadb docker"
 fi   
 
 chmod +x /home/ashok/start/*.s
