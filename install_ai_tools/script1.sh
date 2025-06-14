@@ -254,104 +254,107 @@ sleep 2
 # chromadb install
 ############
 
-# Install chromadb
-echo " "                                       | tee -a /home/ashok/error.log
-echo " Will Install chromadb"                  | tee -a /home/ashok/error.log
-echo "------------"                            | tee -a /home/ashok/error.log
-echo " "                                       | tee -a /home/ashok/error.log
-sleep 3
-pip install chromadb   2>> /home/ashok/error.log
-sleep 2
 
-echo " "                                       | tee -a /home/ashok/error.log
-echo "ChromaDB installed"                      | tee -a /home/ashok/error.log
-echo "3. ChromaDB installed"                   | tee -a /home/ashok/info.log
-echo "4. Database is at: /home/ashok/.local/bin/chroma"  | tee -a /home/ashok/info.log
-echo "      chromadb port is: 8000"            | tee -a /home/ashok/info.log
-echo "------ "                                | tee -a /home/ashok/error.log
-
-#  TO START CHROMA AS a SERVICE
-#*********************************
-cd ~/
-sudo touch     /var/log/chroma.log
-sudo chmod 777 /var/log/chroma.log
-
-echo '[Unit]'                       > chroma.service
-echo "Description = Chroma Service" >> chroma.service
-echo "After = network.target"       >> chroma.service
-echo " "                            >> chroma.service
-echo "[Service]"                    >> chroma.service
-echo "Type = simple"                >> chroma.service
-echo "User = root"                  >> chroma.service
-echo "Group = root"                 >> chroma.service
-echo "WorkingDirectory = /home/ashok/Documents"  >> chroma.service
-echo "ExecStart=/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
-echo " "                             >> chroma.service
-echo "[Install]"                     >> chroma.service
-echo "WantedBy = multi-user.target"  >> chroma.service
-sudo mv chroma.service /etc/systemd/system/chroma.service
-#---------------------
-
-# This is outdated. Needs rechecking.
-# You can now start chroma, as:
-echo " "                                       | tee -a /home/ashok/error.log
-echo "5. ---Start/Stop Chroma as-------"       | tee -a /home/ashok/info.log
-echo "     sudo systemctl daemon-reload"       | tee -a /home/ashok/info.log
-echo "     sudo systemctl enable chroma"       | tee -a /home/ashok/info.log
-echo "     sudo systemctl start chroma"        | tee -a /home/ashok/info.log
-echo "6. Chroma is available at port 8000"     | tee -a /home/ashok/info.log
-echo "7. Check as: "                           | tee -a /home/ashok/info.log
-echo "      netstat -aunt | grep 8000"         | tee -a /home/ashok/info.log
-echo "----------"                              | tee -a /home/ashok/info.log
-echo " "                                       | tee -a /home/ashok/info.log
-
-sleep 2
-
-
-# Chroma start script
-echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
-echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
-echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
-echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
-echo "echo 'Data dir is ~/Documents/data'"                 | tee -a /home/ashok/start/start_chroma.sh 
-echo "echo 'Logs are at /var/log/chroma.log'"              | tee -a /home/ashok/start/start_chroma.sh 
-echo "echo 'sudo kill -9 2197 2203'"                       | tee -a /home/ashok/start/start_chroma.sh  
-sudo echo"`lsof -i :8000`"                                 | tee -a /home/ashok/start/start_chroma.sh  
-#echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/start/start_chroma.sh  
-echo "sleep 5"                                             | tee -a /home/ashok/start/start_chroma.sh  
-echo "/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log &"   | tee -a /home/ashok/start/start_chroma.sh  
-
-# Chroma stop script
-# This is outdated
-echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_chroma.sh  
-echo " "                                                   | tee -a /home/ashok/stop/stop_chroma.sh  
-echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_chroma.sh  
-echo "echo 'chromadb will be stopped'"                     | tee -a /home/ashok/stop/stop_chroma.sh  
-echo "sudo systemctl stop chroma"                          | tee -a /home/ashok/stop/stop_chroma.sh  
-echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/stop/stop_chroma.sh  
-
+echo "Shall I install chromadb directly OR you want to install chromadb docker latter? [Y,n]"    # Else docker chromadb may be installed
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+    # Installing chromadb. 
+    # Install chromadb
+    echo " "                                       | tee -a /home/ashok/error.log
+    echo " Will Install chromadb"                  | tee -a /home/ashok/error.log
+    echo "------------"                            | tee -a /home/ashok/error.log
+    echo " "                                       | tee -a /home/ashok/error.log
+    sleep 3
+    pip install chromadb   2>> /home/ashok/error.log
+    sleep 2
+    
+    echo " "                                       | tee -a /home/ashok/error.log
+    echo "ChromaDB installed"                      | tee -a /home/ashok/error.log
+    echo "3. ChromaDB installed"                   | tee -a /home/ashok/info.log
+    echo "4. Database is at: /home/ashok/.local/bin/chroma"  | tee -a /home/ashok/info.log
+    echo "      chromadb port is: 8000"            | tee -a /home/ashok/info.log
+    echo "------ "                                | tee -a /home/ashok/error.log
+    
+    #  TO START CHROMA AS a SERVICE
+    #*********************************
+    cd ~/
+    sudo touch     /var/log/chroma.log
+    sudo chmod 777 /var/log/chroma.log
+    
+    echo '[Unit]'                       > chroma.service
+    echo "Description = Chroma Service" >> chroma.service
+    echo "After = network.target"       >> chroma.service
+    echo " "                            >> chroma.service
+    echo "[Service]"                    >> chroma.service
+    echo "Type = simple"                >> chroma.service
+    echo "User = root"                  >> chroma.service
+    echo "Group = root"                 >> chroma.service
+    echo "WorkingDirectory = /home/ashok/Documents"  >> chroma.service
+    echo "ExecStart=/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log"  >> chroma.service
+    echo " "                             >> chroma.service
+    echo "[Install]"                     >> chroma.service
+    echo "WantedBy = multi-user.target"  >> chroma.service
+    sudo mv chroma.service /etc/systemd/system/chroma.service
+    #---------------------
+    
+    # This is outdated. Needs rechecking.
+    # You can now start chroma, as:
+    echo " "                                       | tee -a /home/ashok/error.log
+    echo "5. ---Start/Stop Chroma as-------"       | tee -a /home/ashok/info.log
+    echo "     sudo systemctl daemon-reload"       | tee -a /home/ashok/info.log
+    echo "     sudo systemctl enable chroma"       | tee -a /home/ashok/info.log
+    echo "     sudo systemctl start chroma"        | tee -a /home/ashok/info.log
+    echo "6. Chroma is available at port 8000"     | tee -a /home/ashok/info.log
+    echo "7. Check as: "                           | tee -a /home/ashok/info.log
+    echo "      netstat -aunt | grep 8000"         | tee -a /home/ashok/info.log
+    echo "----------"                              | tee -a /home/ashok/info.log
+    echo " "                                       | tee -a /home/ashok/info.log
+    
+    sleep 2
+    
+    
+    # Chroma start script
+    echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
+    echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
+    echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
+    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
+    echo "echo 'Data dir is ~/Documents/data'"                 | tee -a /home/ashok/start/start_chroma.sh 
+    echo "echo 'Logs are at /var/log/chroma.log'"              | tee -a /home/ashok/start/start_chroma.sh 
+    echo "echo 'sudo kill -9 2197 2203'"                       | tee -a /home/ashok/start/start_chroma.sh  
+    sudo echo"`lsof -i :8000`"                                 | tee -a /home/ashok/start/start_chroma.sh  
+    #echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/start/start_chroma.sh  
+    echo "sleep 5"                                             | tee -a /home/ashok/start/start_chroma.sh  
+    echo "/home/ashok/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/ashok/Documents/data --log-path /var/log/chroma.log &"   | tee -a /home/ashok/start/start_chroma.sh  
+    
+    # Chroma stop script
+    # This is outdated
+    echo '#!/bin/bash'                                         | tee -a /home/ashok/stop/stop_chroma.sh  
+    echo " "                                                   | tee -a /home/ashok/stop/stop_chroma.sh  
+    echo "cd ~/"                                               | tee -a /home/ashok/stop/stop_chroma.sh  
+    echo "echo 'chromadb will be stopped'"                     | tee -a /home/ashok/stop/stop_chroma.sh  
+    echo "sudo systemctl stop chroma"                          | tee -a /home/ashok/stop/stop_chroma.sh  
+    echo "netstat -aunt | grep 8000"                           | tee -a /home/ashok/stop/stop_chroma.sh  
+    # Download python scripts to manage chroma db
+    echo "Downloading python scripts to manage chromadb"
+    cd /home/ashok
+    rm  empty_chromadb.py
+    rm get_chroma_collectionsName.py
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/empty_chromadb.py
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/get_chroma_collectionsName.py
+    
+    perl -pi -e 's/\r\n/\n/g' /home/ashok/empty_chromadb.py
+    perl -pi -e 's/\r\n/\n/g' /home/ashok/get_chroma_collectionsName.py
+    echo "Use them as:"
+    echo "cd ~/"
+    echo "python3 empty_chromadb.py"
+    echo "python3 get_chroma_collectionsName.py"
+    sleep 5
+else
+        echo "Skipping install of chromadb"
+fi   
+ 
 chmod +x /home/ashok/start/*.sh
-
-
-
-# Download python scripts to manage chroma db
-echo "Downloading python scripts to manage chromadb"
-cd ~/
-rm  empty_chromadb.py
-rm get_chroma_collectionsName.py
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/empty_chromadb.py
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/get_chroma_collectionsName.py
-
-perl -pi -e 's/\r\n/\n/g' /home/ashok/empty_chromadb.py
-perl -pi -e 's/\r\n/\n/g' /home/ashok/get_chroma_collectionsName.py
-echo "Use them as:"
-echo "cd ~/"
-echo "python3 empty_chromadb.py"
-echo "python3 get_chroma_collectionsName.py"
-sleep 5
-
-
-
+    
 # Move script file to done folder
 mv /home/ashok/script1.sh /home/ashok/done
 mv /home/ashok/next/script2.sh /home/ashok/
@@ -363,6 +366,9 @@ cp /home/ashok/find_venv.sh /home/ashok/start/
 # Ref: https://ubuntu.com/tutorials/install-and-configure-apache#2-installing-apache
 ############
 
+echo "Will install apache2 web-server"
+echo "Start as: sudo systemctl start apache2"
+sleep 4
 sudo apt install apache2  -y
 
 # Creating Virtual Host. Needs more work
