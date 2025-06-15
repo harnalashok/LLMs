@@ -33,7 +33,7 @@ fi
 # llama.cpp install
 ###################
 
-echo "Shall I install llama.cpp OR you want to skip ? [Y,n]"    # Else docker chromadb may be installed
+echo "Shall I install llama.cpp ? [Y,n]"    # Else docker chromadb may be installed
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
   # Installing llama.cpp
