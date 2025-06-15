@@ -101,13 +101,10 @@ cd neo4j
 wget -c https://go.neo4j.com/rs/710-RRC-335/images/Get_Started_with_Cypher_ebook.pdf
 wget -c https://www.ksi.mff.cuni.cz/~svoboda/courses/202-NDBI006/lectures/NDBI006-Lecture-06-Cypher.pdf
 wget -c https://s3.amazonaws.com/artifacts.opencypher.org/openCypher9.pdf
-wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/neo4j/northwind_database_import.pdf?raw=true
-wget -c	https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4j/neo4jExamples.txt
-wget -c	https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4j/neo4jHelp.txt
-wget -c	https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4j/sample.csv
+wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/neo4j/northwind_database_import.pdf?raw=true
+wget -c	https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/neo4j/neo4jExamples.txt
+wget -c	https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/neo4j/neo4jHelp.txt
+wget -c	https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/neo4j/sample.csv
 cd /home/ashok
 
 sleep 8
-
-
-
