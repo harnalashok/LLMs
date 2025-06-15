@@ -1,0 +1,19 @@
+# Refer: https://github.com/langflow-ai/langflow/issues/1882#issuecomment-2662915373
+networks:
+  chromadb:
+    driver: bridge
+    name: chromadb
+services:
+  chroma:
+    image: chromadb/chroma
+    environment:
+      - ALLOW_RESET=true
+      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]
+    ports:
+      - 8000:8000
+    volumes:
+      - ./chroma_data:/chroma/chroma_data
+    networks:
+      - chromadb
+volumes:
+  chroma_data: 
