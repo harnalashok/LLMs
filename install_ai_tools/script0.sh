@@ -6,7 +6,7 @@
 #        execute the three commands:
 
 
-#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh
+#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script0.sh
 #            perl -pi -e 's/\r\n/\n/g' /home/ashok/script0.sh
 #            chmod +x *.sh
 
@@ -59,24 +59,24 @@ echo "Downloading all script files from github"
 echo "---------------------------"
 echo "  "
 # Raw github files are downloaded
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script1.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script2.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script3.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script4.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/ubuntu_docker1.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/ubuntu_docker2.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script5.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script6.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script7.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script8.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script9.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script10.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script0.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script1.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script2.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script3.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script4.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script5.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script6.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script7.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script8.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script9.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script10.sh -P /home/ashok/next
 
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/download_models.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_llama_cpp_python.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/test_scripts.sh -P /home/ashok/next
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4jInstall.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/download_models.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/test_llama_cpp_python.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/test_scripts.sh -P /home/ashok/next
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/neo4jInstall.sh -P /home/ashok/next
 
 
 
