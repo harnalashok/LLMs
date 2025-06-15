@@ -57,12 +57,14 @@ echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be i
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
     # Pulling chromadb docker image  
+    cd /home/ashok/
     echo " "                                       | tee -a /home/ashok/error.log
     echo " Pulling chromadb docker image"          | tee -a /home/ashok/error.log
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/chroma/docker-compose.yml
     echo "------------"                            | tee -a /home/ashok/error.log
     echo " "                                       | tee -a /home/ashok/error.log
     sleep 3
-    docker pull chromadb/chroma
+    docker compose up --build -d
     sleep 2
 	
     # Chroma start script
