@@ -41,7 +41,7 @@ echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
 
 # FAISS download data-cleaning script
 cd /home/ashok/
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/faiss/empty_faiss_database.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
 chmod +x *.sh
 sleep 4
 
@@ -112,7 +112,7 @@ echo "netstat -aunt | grep 6379"                                                
 # Download neo4j install script
 echo "Downloading neo4j install script"
 cd /home/ashok
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/neo4jInstall.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/neo4jInstall.sh
 
 chmod +x /home/ashok/*.sh
 chmod +x /home/ashok/start/*.sh
