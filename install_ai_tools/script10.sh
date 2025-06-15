@@ -200,8 +200,8 @@ sleep 2
 
 mkdir /home/ashok/mysql
 cd   /home/ashok/mysql
-wget https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/mysql/mysql.sh
-wget https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/mysql/createmysqluseranddatabase.sh
+wget https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mysql/mysql.sh
+wget https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mysql/createmysqluseranddatabase.sh
 ln -sT /home/ashok/mysql/mysql.sh             /home/ashok/mysql.sh  
 ln -sT /home/ashok/mysql/createmysqluseranddatabase.sh             /home/ashok/createmysqluseranddatabase.sh 
 cd ~/
