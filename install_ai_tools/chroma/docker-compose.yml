@@ -6,6 +6,7 @@ networks:
 services:
   chroma:
     image: chromadb/chroma
+    container_name: ashok_chroma
     environment:
       - ALLOW_RESET=true
       - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]
