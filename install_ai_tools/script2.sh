@@ -33,40 +33,47 @@ fi
 # llama.cpp install
 ###################
 
-# Installing llama.cpp
-echo " "                                         | tee -a /home/ashok/error.log
-echo "Installing llama.cpp"                      | tee -a /home/ashok/error.log
-echo "------------"                              | tee -a /home/ashok/error.log
-echo " "                                         | tee -a /home/ashok/error.log
-git clone https://github.com/ggerganov/llama.cpp
-cd llama.cpp
-cmake -B build
-cmake --build build --config Release
-cd ~
-sleep 2
-# Create a symlink to models and to gguf folder
-ln -s /home/ashok/llama.cpp/models/ /home/ashok/
-ln -s /home/ashok/llama.cpp/models/ /home/ashok/gguf
-
-echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
-echo " "                                        | tee -a /home/ashok/error.log
-echo "-------"                                  | tee -a /home/ashok/error.log
-echo "llama.cpp installed"                      | tee -a /home/ashok/error.log
-echo "10. llama.cpp installed"                  | tee -a /home/ashok/info.log
-echo "-------"                                  | tee -a /home/ashok/error.log
-
-
-# Script to start llama.cpp server
-echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_llamacpp_server.sh
-echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "cd ~/"                                               | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo " "                                                                  | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "sleep 10"                                                           | tee -a /home/ashok/start/start_llamacpp_server.sh
-echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/start/start_llamacpp_server.sh
+echo "Shall I install llama.cpp OR you want to skip ? [Y,n]"    # Else docker chromadb may be installed
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+  # Installing llama.cpp
+  echo " "                                         | tee -a /home/ashok/error.log
+  echo "Installing llama.cpp"                      | tee -a /home/ashok/error.log
+  echo "------------"                              | tee -a /home/ashok/error.log
+  echo " "                                         | tee -a /home/ashok/error.log
+  git clone https://github.com/ggerganov/llama.cpp
+  cd llama.cpp
+  cmake -B build
+  cmake --build build --config Release
+  cd ~
+  sleep 2
+  # Create a symlink to models and to gguf folder
+  ln -s /home/ashok/llama.cpp/models/ /home/ashok/
+  ln -s /home/ashok/llama.cpp/models/ /home/ashok/gguf
+  
+  echo "PATH=\$PATH:/home/ashok/llama.cpp/build/bin" >> .bashrc
+  echo " "                                        | tee -a /home/ashok/error.log
+  echo "-------"                                  | tee -a /home/ashok/error.log
+  echo "llama.cpp installed"                      | tee -a /home/ashok/error.log
+  echo "10. llama.cpp installed"                  | tee -a /home/ashok/info.log
+  echo "-------"                                  | tee -a /home/ashok/error.log
+  
+  
+  # Script to start llama.cpp server
+  echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_llamacpp_server.sh
+  echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo "cd ~/"                                               | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo " "                                                   | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo " "                                                                  | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo "sleep 10"                                                           | tee -a /home/ashok/start/start_llamacpp_server.sh
+  echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/ashok/start/start_llamacpp_server.sh
+else
+  echo "Skipping install of llama.cpp"
+fi
+  
 chmod +x /home/ashok/start/*.sh
 
 ##########
