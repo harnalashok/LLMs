@@ -339,8 +339,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/ashok
     rm  empty_chromadb.py
     rm get_chroma_collectionsName.py
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/empty_chromadb.py
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/get_chroma_collectionsName.py
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/empty_chromadb.py
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/get_chroma_collectionsName.py
     
     perl -pi -e 's/\r\n/\n/g' /home/ashok/empty_chromadb.py
     perl -pi -e 's/\r\n/\n/g' /home/ashok/get_chroma_collectionsName.py
