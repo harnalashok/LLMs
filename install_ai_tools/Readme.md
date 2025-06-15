@@ -3,7 +3,7 @@
 See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20uninstall%20and%20misc.txt) for installing/uninstalling ubuntu from wsl      
 
 To begin installing all packages, execute the following five commands in *Ubuntu* console (whether Ubuntu machine or WSL).<br>
-We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is installed from which script is [here](https://github.com/harnalashok/LLMs/blob/main/u_install/whatiswhere.sh).
+We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is installed from which script is [here](https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/whatiswhere.sh).
 
 
 ```
@@ -15,8 +15,8 @@ We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is inst
    if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
    fi
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/script0.sh
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/help.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script0.sh
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/help.txt
    ln -sT /home/ashok/help.txt /home/ashok/Documents/help.txt
    perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
    chmod +x  ~/*.sh   
@@ -28,7 +28,7 @@ Scripts assume that username is *'ashok'*. If that is not so, you can either rep
 
 File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts as also progress in installation. It is helpful to browse contents of error.log or info.log in another terminal (`cat error.log`)
 And file, info.log, keeps information about what all is installed.      
-File <b><i>['help.txt'](https://github.com/harnalashok/LLMs/blob/main/u_install/help.txt)</i></b> contains information about ports, packages etc      
+File <b><i>['help.txt'](https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/help.txt)</i></b> contains information about ports, packages etc      
 
 To read about *python virtual environments*, please [see this file](https://github.com/harnalashok/LLMs/blob/main/python%20venv) in my github.
    
