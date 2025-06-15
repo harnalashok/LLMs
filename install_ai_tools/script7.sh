@@ -98,9 +98,9 @@ mkdir /home/ashok/litellm
 # Start litellm server as: litellm --config /path/to/config.yaml
 # Use it in flowise: https://docs.flowiseai.com/integrations/litellm
 cd /home/ashok/litellm
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/config_ollama.yaml
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/litellm/config_ollama.yaml
 cd /home/ashok
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/u_install/litellm/start_ollama_openai.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/litellm/start_ollama_openai.sh
 chmod +x /home/ashok/*.sh
 
 #################
