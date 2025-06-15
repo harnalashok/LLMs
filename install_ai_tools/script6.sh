@@ -72,8 +72,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
     echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
     echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
-    echo "echo 'Data dir is ~/chroma-data/'"                 | tee -a /home/ashok/start/start_chroma.sh 
-    echo "docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma"  | tee -a /home/ashok/start/start_chroma.sh 
+    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/ashok/start/start_chroma.sh 
+    echo "echo 'In flowise, access it as: http://127.0.0.1:8000'"                   | tee -a /home/ashok/start/start_chroma.sh 
+    echo "docker start ashok_chroma"                           | tee -a /home/ashok/start/start_chroma.sh 
 else
     echo "Skipping install of chromadb docker"
 fi   
