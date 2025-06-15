@@ -4,18 +4,7 @@
 # Ref: https://docs.docker.com/engine/install/ubuntu/
 #      https://docs.docker.com/engine/install/linux-postinstall/
 
- # These scripts run in sequence.
-      #     script0.sh
-      #     script1.sh
-      #     script2.sh
-      #     ubuntu_docker1.sh
-      #     ubuntu_docker2.sh
-      #     script3.sh
-      #     script4.sh
-      #     script5.sh
-      #     script6.sh
-      #     script7,sh
-      #     script8.sh
+
 
 # Check if docker installed
 sudo docker run hello-world
@@ -59,9 +48,9 @@ sudo systemctl restart docker
 # Store docker help files
 mkdir /home/ashok/Documents/dockers
 cd /home/ashok/Documents/dockers
-wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/docker/Understanding%20docker%20technology.pdf?raw=true
-wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/docker/docker%20commands.txt?raw=true
-wget -c https://github.com/harnalashok/LLMs/blob/main/u_install/docker/dockers%20in%20brief.pdf?raw=true
+wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/Understanding%20docker%20technology.pdf?raw=true
+wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/docker%20commands.txt?raw=true
+wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
 cd /home/ashok/
 
 
