@@ -22,7 +22,7 @@ fi
 
 echo "========script9=============="
 echo "Will install Milvus vectordb docker"
-echo "Will install mellisearch vector store"
+echo "Will install meilisearch vector store"
 echo "Will install Qdrant vectordb docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
@@ -85,7 +85,7 @@ echo "bash standalone_embed.sh delete"         >> /home/ashok/delete_milvus_db.s
 sleep 3
 
 ###############
-# Mellisearch install
+# Meilisearch install
 # Ref: https://www.meilisearch.com/docs/guides/docker
 ################
 
@@ -102,14 +102,15 @@ docker run -it --rm \
 echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_meilisearch.sh
 echo " "                                                   | tee -a /home/ashok/start/start_meilisearch.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_meilisearch.sh
-echo "echo 'Port is: 7700'"                   | tee -a /home/ashok/start/start_meilisearch.sh
-echo "echo 'Access in flowise as: http://localhost:7700'"                  tee -a /home/ashok/start/start_meilisearch.sh
-echo "echo 'Press ctrl+c to terminate'"      | tee -a /home/ashok/start/start_meilisearch.sh  
-echo "docker run -it --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee    /home/ashok/start/start_meilisearch.sh
-
-
-
-
+echo "echo ' '"                                            | tee -a /home/ashok/start/start_meilisearch.sh  
+echo "echo '=====Useful info========'"                     | tee -a /home/ashok/start/start_meilisearch.sh  
+echo "echo 'Port is: 7700'"                                | tee -a /home/ashok/start/start_meilisearch.sh
+echo "echo 'Data folder is: /home/ashok/meili_data'"       | tee -a /home/ashok/start/start_meilisearch.sh
+echo "echo 'Access in flowise as: http://localhost:7700'"  |   tee -a /home/ashok/start/start_meilisearch.sh
+echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/ashok/start/start_meilisearch.sh  
+echo "echo '================='"                            | tee -a /home/ashok/start/start_meilisearch.sh  
+echo "sleep 8"                                             | tee -a /home/ashok/start/start_meilisearch.sh  
+echo "docker run -it --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee  -a  /home/ashok/start/start_meilisearch.sh
 
 
 
