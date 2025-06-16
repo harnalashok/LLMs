@@ -99,6 +99,15 @@ docker run -it --rm \
   echo "Mellisearch installed"
 
 
+echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_meilisearch.sh
+echo " "                                                   | tee -a /home/ashok/start/start_meilisearch.sh
+echo "cd ~/"                                               | tee -a /home/ashok/start/start_meilisearch.sh
+echo "echo 'Port is: 7700'"                   | tee -a /home/ashok/start/start_meilisearch.sh
+echo "echo 'Access in flowise as: http://localhost:7700'"                  tee -a /home/ashok/start/start_meilisearch.sh
+echo "echo 'Press ctrl+c to terminate'"      | tee -a /home/ashok/start/start_meilisearch.sh  
+echo "docker run -it --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee    /home/ashok/start/start_meilisearch.sh
+
+
 
 
 
