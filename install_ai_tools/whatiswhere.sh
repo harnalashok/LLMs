@@ -61,6 +61,7 @@ echo "==========================="
 
 echo "========script9=============="
 echo "Will install Milvus vectordb docker"
+echo "Will install meilisearch  vectorstore"
 echo "Qdrant vector db install docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
