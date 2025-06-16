@@ -65,9 +65,10 @@ echo '#!/bin/bash'                                         | tee    /home/ashok/
 echo " "                                                   | tee -a /home/ashok/start/start_milvus.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_milvus.sh
 echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/ashok/start/start_milvus.sh
+echo "echo 'Access in flowise as: http://localhost:19530.'"                   | tee -a /home/ashok/start/start_milvus.sh
 echo "cd /home/ashok/milvus"                               | tee -a /home/ashok/start/start_milvus.sh
 echo "bash standalone_embed.sh start"                      | tee -a /home/ashok/start/start_milvus.sh
-echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/start/start_milvus.sh
+echo "netstat -aunt | grep 19530"                          | tee -a /home/ashok/start/start_milvus.sh
 
 
 echo '#!/bin/bash'                                         | tee    /home/ashok/stop/stop_milvus.sh 
