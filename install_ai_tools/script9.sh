@@ -22,6 +22,7 @@ fi
 
 echo "========script9=============="
 echo "Will install Milvus vectordb docker"
+echo "Will install mellisearch vector store"
 echo "Will install Qdrant vectordb docker"
 echo "Will install Flowise docker"
 echo "Will install langflow docker"
@@ -82,6 +83,26 @@ echo "netstat -aunt | grep 9091"                           | tee -a /home/ashok/
 echo "cd /home/ashok/milvus"                    > /home/ashok/delete_milvus_db.sh
 echo "bash standalone_embed.sh delete"         >> /home/ashok/delete_milvus_db.sh
 sleep 3
+
+###############
+# Mellisearch install
+# Ref: https://www.meilisearch.com/docs/guides/docker
+################
+
+echo "Installing mellisearch vector database using docker"       | tee -a /home/ashok/error.log
+docker pull getmeili/meilisearch:v1.15
+docker run -it --rm \
+  -p 7700:7700 \
+  -v $(pwd)/meili_data:/meili_data \
+  getmeili/meilisearch:v1.15
+
+  echo "Mellisearch installed"
+
+
+
+
+
+
 
 #############
 # Qdrant vector db install
