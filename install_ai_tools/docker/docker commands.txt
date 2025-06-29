@@ -1,7 +1,24 @@
-# Last amended: 16th April, 2025
+# Last amended: 20th June, 2025
 # My folder: D:\OneDrive\Documents\docker
 # Ref: https://docs.docker.com/engine/reference/commandline/builder/
 # kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
+
+
+# Quick Summary:
+
+	==A Docker image is a standalone, executable file used to create a container== 
+	
+	docker build	==> Builds image from dockerfile
+	docker run		==> Downlods an image from specified docker registry
+						and then runs an image to create container
+	docker compose	==> Downloads multiple images and manage multiple containers
+	docker start	==> Start a container
+	docker stop		==  Stop a container
+
+
+
+
+
 
 
 
@@ -11,6 +28,8 @@
 # Build a docker container from docker-compose.yml
 
         docker compose up -d
+		
+		-d is for detached mode ie 
 
 
 # List docker images:
@@ -26,6 +45,15 @@
 		--name local-ai \				Assign a name to container
 		-ti 			\				Allocate a  pseudo-TTY
 		localai/localai:latest-aio-cpu  Image name
+		
+	docker run 		\					Download an image and con 
+			-d 		\					Run container in detached mode
+			-v ollama:/root/.ollama		Mount local folder ollama over container folder /root/.ollama
+			-p 11434:11434				App port is 11434
+			--name ollama				Container name is ollama
+			ollama/ollama				Download image from default docker registry
+										from location ollama/ollama
+		
 
 # Start/Stop container-
     sudo docker start container-id/container-name 	Restarts a stopped container
