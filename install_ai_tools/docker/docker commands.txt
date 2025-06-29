@@ -9,8 +9,8 @@
 	==A Docker image is a standalone, executable file used to create a container== 
 	
 	docker build	==> Builds image from dockerfile
-	docker run		==> Downlods an image from specified docker registry
-						and then runs an image to create container
+	docker run	==> Downlods an image from specified docker registry
+			     and then runs an image to create container
 	docker compose	==> Downloads multiple images and manage multiple containers
 	docker start	==> Start a container
 	docker stop	==>  Stop a container
@@ -20,6 +20,8 @@
 			    or recreated. These are essential for maintaining data consistency and
                             sharing the data between multiple containers.
 			    (Example: docker volume create n8n_data )
+			    docker run command can automatically create volumes if a volume is
+ 			    specified with the -v
 
 ## Docker version
 	docker -v
@@ -45,13 +47,14 @@
 		-ti 			\				Allocate a  pseudo-TTY
 		localai/localai:latest-aio-cpu  Image name
 		
-	docker run 		\					Download an image and con 
-			-d 		\					Run container in detached mode
-			-v ollama:/root/.ollama		Mount local folder ollama over container folder /root/.ollama
-			-p 11434:11434				App port is 11434
-			--name ollama				Container name is ollama
-			ollama/ollama				Download image from default docker registry
-										from location ollama/ollama
+    docker run   \				Download an image and con 
+	   -d 	\				Run container in detached mode
+	   -v ollama:/root/.ollama \	        Mount local folder ollama (as docker volume) over
+     	                                        container folder /root/.ollama
+	   -p 11434:11434 \			App port is 11434
+	   --name ollama  \		        Container name is ollama
+	    ollama/ollama 			Download image from default docker registry
+						from location ollama/ollama
 		
 
 # Start/Stop container-
