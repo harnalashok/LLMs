@@ -14,6 +14,12 @@
 	docker compose	==> Downloads multiple images and manage multiple containers
 	docker start	==> Start a container
 	docker stop		==  Stop a container
+ 	docker volume	==> Docker volumes are meant to provide a persistent storage mechanism.
+			    It is used for managing data and storing them outside the container's
+			    system ensuring it data persistence even when the container is removed
+			    or recreated. These are essential for maintaining data consistency and
+                            sharing the data between multiple containers.
+			    (Example: docker volume create n8n_data )
 
 
 
