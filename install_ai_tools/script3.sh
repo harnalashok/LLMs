@@ -36,8 +36,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo "echo '1. Run a model as: docker exec -it ollama ollama run <modelName>'"                            >> /home/ashok/start/start_docker_ollama.sh
       echo "echo '   and not as: ollama run <modelName>'"                                                       >> /home/ashok/start/start_docker_ollama.sh
       echo "echo '2. Start/stop ollama docker: docker start/stop ollama'"                                       >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '3. Ollama access at port 11434'"                                                              >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '   Or, access as: http://host.docker.internal:11434'"                                         >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo '3. Ollama is at port 11434'"                                                                  >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo '   Access as: http://host.docker.internal:11434'"                                             >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/ashok/start/start_docker_ollama.sh
       echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/ashok/start/start_docker_ollama.sh
       echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/ashok/start/start_docker_ollama.sh
       chmod +x /home/ashok/start/*.sh
