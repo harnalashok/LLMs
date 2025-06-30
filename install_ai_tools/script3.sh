@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# LAst amended: 29th May, 2025
+# LAst amended: 30th June, 2025
 
 cd ~/
 
@@ -25,6 +25,10 @@ echo " "                                      | tee -a /home/ashok/error.log
 echo "Shall I install ollama docker? [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
+      # For model storage local folder ollama is mounted.
+      echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
+      echo "Will install ollama for GPU..."
+      sleep 4
       docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
       # Start ollama docker in future
       echo '#!/bin/bash'                                                                                        > /home/ashok/start/start_docker_ollama.sh
@@ -35,6 +39,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo "echo '3. Ollama access at port 11434'"                                                              >> /home/ashok/start/start_docker_ollama.sh
       echo "echo '   Or, access as: http://host.docker.internal:11434'"                                         >> /home/ashok/start/start_docker_ollama.sh
       echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/ashok/start/start_docker_ollama.sh
+      echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/ashok/start/start_docker_ollama.sh
       chmod +x /home/ashok/start/*.sh
      
 else
