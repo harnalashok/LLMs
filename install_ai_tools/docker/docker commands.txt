@@ -1,4 +1,4 @@
-# Last amended: 20th June, 2025
+# Last amended: 30th June, 2025
 # My folder: D:\OneDrive\Documents\docker
 # Ref: https://docs.docker.com/engine/reference/commandline/builder/
 # kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
@@ -22,6 +22,7 @@
 			    (Example: docker volume create n8n_data )
 			    docker run command can automatically create volumes if a volume is
  			    specified with the -v
+			    The default location of created volumes is /var/lib/docker/volumes/
 
 ## Docker version
 	docker -v
@@ -50,7 +51,8 @@
     docker run   \				Download an image and run 
 	   -d 	\				Run container in detached mode
 	   -v ollama:/root/.ollama \	        Mount local folder ollama (as docker volume) over
-     	                                        container folder /root/.ollama
+     	                                        container folder /root/.ollama. The local folder
+						is /var/lib/docker/volumes/ollama
 	   -p 11434:11434 \			App port is 11434
 	   --name ollama  \		        Container name is ollama
 	    ollama/ollama 			Download image from default docker registry
