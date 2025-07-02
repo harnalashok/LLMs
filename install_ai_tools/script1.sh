@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 9th May, 2025
+# Last amended: 2nd July, 2025
 # Copyright:: 
 
 
@@ -162,7 +162,7 @@ echo " "
 echo "============="
 echo "Consider downloading the following ollama models"
 echo "      1. llama3.2:latest"
-echo "      2. deepcoder (size:9gb) or better still codestral (size:12gb) for coding help "
+echo "      2. codestral (size:12gb) for coding help; deepcoder (size:9gb) " 
 echo "      3. gemma3:latest or better gemma3:12b"
 echo "      4. mistral:latest"
 echo "      5. qwen3:latest"
