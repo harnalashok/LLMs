@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Last amended: 3rd July, 2025
 
 #------ Steps ---------
 #     i) Download this file in Ubuntu, and
@@ -109,6 +110,13 @@ echo '#!/bin/bash'                         >   /home/ashok/find_venv.sh
 echo " "                                   >>   /home/ashok/find_venv.sh
 echo "cd ~/"                               >>   /home/ashok/find_venv.sh
 echo "echo 'List of virtual envs:'"        >>   /home/ashok/find_venv.sh
+echo "echo '=========='"        >>   /home/ashok/find_venv.sh
+echo "echo 'Activate any virtual env as:'"        >>   /home/ashok/find_venv.sh
+echo "echo '    source <address>'"            >>   /home/ashok/find_venv.sh
+echo "echo '    Example: source /home/ashok/langchain/bin/activate'"        >>   /home/ashok/find_venv.sh
+echo "echo 'Deactivate as:'"        >>   /home/ashok/find_venv.sh
+echo "echo '    deactivate'"        >>   /home/ashok/find_venv.sh
+echo "echo '=========='"        >>   /home/ashok/find_venv.sh
 echo "find ~ | grep -E '/bin/activate$'"   >> /home/ashok/find_venv.sh
 
 chmod +x *.sh
