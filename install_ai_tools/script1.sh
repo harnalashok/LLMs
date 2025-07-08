@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 2nd July, 2025
+# Last amended: 8th July, 2025
 # Copyright:: 
 
 
@@ -67,8 +67,11 @@ mkdir /home/ashok/psql
 # Install Ollama
 ################
 
+
 echo "Shall I install Ollama directly OR you want to install ollama docker latter? [Y,n]"    # Else docker ollama may be installed
 read input
+# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
+input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     # Installing ollama
     echo " "
@@ -257,6 +260,7 @@ sleep 2
 
 echo "Shall I install chromadb directly OR you want to install chromadb docker latter? [Y,n]"    # Else docker chromadb may be installed
 read input
+input=${input:-n}
 if [[ $input == "Y" || $input == "y" ]]; then
     # Installing chromadb. 
     # Install chromadb
