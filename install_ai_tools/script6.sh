@@ -77,12 +77,12 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
     echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/ashok/start/start_chroma.sh 
     echo "echo 'In flowise, access it as: http://127.0.0.1:8000'"                   | tee -a /home/ashok/start/start_chroma.sh 
-    echo "docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/ashok/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3"                           | tee -a /home/ashok/start/start_chroma.sh 
+    echo "docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/ashok/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3"   | tee -a /home/ashok/start/start_chroma.sh 
 else
     echo "Skipping install of chromadb docker"
 fi   
 
-chmod +x /home/ashok/start/*.s
+chmod +x /home/ashok/start/*.sh
 
 ##########################
 ### redis-stack-server docker install
