@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# LAst amended: 8th July, 2025
+
 echo "========script6=============="
 echo "Will Install FAISS library"
 echo "Will install chromadb docker"
@@ -55,6 +57,7 @@ cd ~/
 cd /home/ashok
 echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
 read input
+input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     # Pulling chromadb docker image  
     cd /home/ashok/
