@@ -1,5 +1,5 @@
 #!/bin/bash
-# Last amended: 15th April, 2025
+# Last amended: 8th July, 2025
 
       
 echo "========script7=============="
@@ -149,6 +149,7 @@ mv /home/ashok/next/script8.sh   /home/ashok/
 
 echo "Shall I install OpenWebUI? [Y,n]"
 read input
+input=${input:-n}
 if [[ $input == "Y" || $input == "y" ]]; then
       # Install openwebui using pip. Refer its github site
       # Ref: https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-
@@ -255,6 +256,7 @@ fi
 
 echo "Shall I create a virtual env for python3.13? [Y,n]"
 read input
+input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
       echo "Here are a list of python versions installed on your machine"
       # What all python versions are installed:
