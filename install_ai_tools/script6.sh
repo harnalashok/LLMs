@@ -63,12 +63,12 @@ if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/ashok/
     echo " "                                       | tee -a /home/ashok/error.log
     echo " Pulling chromadb docker image"          | tee -a /home/ashok/error.log
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/chroma/docker-compose.yml
+    # Refer: https://cookbook.chromadb.dev/strategies/cors/
+    docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/ashok/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3
     echo "------------"                            | tee -a /home/ashok/error.log
     echo " "                                       | tee -a /home/ashok/error.log
     sleep 3
-    docker compose up --build -d
-    sleep 2
+   
 	
     # Chroma start script
     echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
@@ -77,7 +77,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
     echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/ashok/start/start_chroma.sh 
     echo "echo 'In flowise, access it as: http://127.0.0.1:8000'"                   | tee -a /home/ashok/start/start_chroma.sh 
-    echo "docker start ashok_chroma"                           | tee -a /home/ashok/start/start_chroma.sh 
+    echo "docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/ashok/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3"                           | tee -a /home/ashok/start/start_chroma.sh 
 else
     echo "Skipping install of chromadb docker"
 fi   
