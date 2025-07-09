@@ -52,6 +52,7 @@ cd ~/
 ##########################
 ### Install chromadb docker
 # Ref: https://docs.trychroma.com/production/containers/docker
+#      https://cookbook.chromadb.dev/strategies/cors/
 ##########################
 
 cd /home/ashok
