@@ -107,7 +107,7 @@ chmod +x /home/ashok/stop/*.sh
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_bert_embeddings.sh   -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma3_4b_it.sh      -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_localaiModel3.sh    -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_localaiModel4.sh    -P /home/ashok/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_mistral_7b_instruct.sh    -P /home/ashok/localai
 wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_stablediffusion.sh   -P /home/ashok/localai
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_localaiModel_gemma.sh -P /home/ashok/localai
 
