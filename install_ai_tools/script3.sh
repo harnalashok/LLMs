@@ -24,6 +24,7 @@ echo " "                                      | tee -a /home/ashok/error.log
 
 echo "Shall I install ollama docker? [Y,n]"
 read input
+input=${input:-n}
 if [[ $input == "Y" || $input == "y" ]]; then
       # For model storage local folder ollama is mounted.
       echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
