@@ -206,6 +206,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "            docker stop flowise"                     | tee -a /home/ashok/info.log
    echo " Also, check all containers available, as:"
    echo "             docker ps -a "                          | tee -a /home/ashok/info.log
+ else
+   echo "Flowise docker will not be installed"
+ fi  
 
 
 
