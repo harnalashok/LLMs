@@ -167,40 +167,45 @@ docker run --publish 6333:6333 --volume /home/ashok/databases/qdrant/storage/:/q
 # flowise docker
 ######################
 
-# Install Flowise through docker"
-# Ref: https://docs.flowiseai.com/getting-started
-echo "Installing flowise docker"                          | tee -a /home/ashok/info.log
-cd ~/
-git clone https://github.com/FlowiseAI/Flowise.git
-cd Flowise/
-sudo docker build --no-cache -t flowise .
-sudo docker run -d --name flowise -p 3000:3000 flowise
-echo "In future to start/stop containers, proceed, as:"
-echo "            cd /home/ashok/Flowise"                  | tee -a /home/ashok/info.log
-echo "            docker start flowise"                    | tee -a /home/ashok/info.log
-echo "            docker stop flowise"                     | tee -a /home/ashok/info.log
-echo " Also, check all containers available, as:"
-echo "             docker ps -a "                          | tee -a /home/ashok/info.log
 
+echo "Shall I install flowise docker? [Y,n]"    
+read input
+# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
+input=${input:-n}
+if [[ $input == "Y" || $input == "y" ]]; then
+   # Install Flowise through docker"
+   # Ref: https://docs.flowiseai.com/getting-started
+   echo "Installing flowise docker"                          | tee -a /home/ashok/info.log
+   # Start script
+   echo '#!/bin/bash'                                         >  /home/ashok/start/start_docker_flowise.sh
+   echo " "                                                   >> /home/ashok/start/start_docker_flowise.sh
+   echo "cd ~/"                                               >> /home/ashok/start/start_docker_flowise.sh
+   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/ashok/start/start_docker_flowise.sh
+   echo "cd /home/ashok/Flowise"                              >> /home/ashok/starr/start_docker_flowise.sh
+   echo "docker start flowise"                                >> /home/ashok/start/start_docker_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/ashok/start/start_docker_flowise.sh
 
-
-echo '#!/bin/bash'                                         >  /home/ashok/start/start_docker_flowise.sh
-echo " "                                                   >> /home/ashok/start/start_docker_flowise.sh
-echo "cd ~/"                                               >> /home/ashok/start/start_docker_flowise.sh
-echo "echo 'Flowise port 3000 onstarting'"                 >> /home/ashok/start/start_docker_flowise.sh
-echo "cd /home/ashok/Flowise"                              >> /home/ashok/starr/start_docker_flowise.sh
-echo "docker start flowise"                                >> /home/ashok/start/start_docker_flowise.sh
-echo "netstat -aunt | grep 3000"                           >> /home/ashok/start/start_docker_flowise.sh
-
-
-echo '#!/bin/bash'                                        >  /home/ashok/stop/stop_docker_flowise.sh
-echo " "                                                  >> /home/ashok/stop/stop_docker_flowise.sh
-echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_flowise.sh
-echo "echo 'Flowise Stopping'"                            >> /home/ashok/stop/stop_docker_flowise.sh
-echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop/stop_docker_flowise.sh
-echo "docker stop flowise"                                >> /home/ashok/stop/stop_docker_flowise.sh
-echo "netstat -aunt | grep 3000"                           >> /home/ashok/stop/stop_docker_flowise.sh
-sleep 4
+   # Stop script
+   echo '#!/bin/bash'                                        >  /home/ashok/stop/stop_docker_flowise.sh
+   echo " "                                                  >> /home/ashok/stop/stop_docker_flowise.sh
+   echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_flowise.sh
+   echo "echo 'Flowise Stopping'"                            >> /home/ashok/stop/stop_docker_flowise.sh
+   echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop/stop_docker_flowise.sh
+   echo "docker stop flowise"                                >> /home/ashok/stop/stop_docker_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/ashok/stop/stop_docker_flowise.sh
+   sleep 4
+   
+   cd ~/
+   git clone https://github.com/FlowiseAI/Flowise.git
+   cd Flowise/
+   sudo docker build --no-cache -t flowise .
+   sudo docker run -d --name flowise -p 3000:3000 flowise
+   echo "In future to start/stop containers, proceed, as:"
+   echo "            cd /home/ashok/Flowise"                  | tee -a /home/ashok/info.log
+   echo "            docker start flowise"                    | tee -a /home/ashok/info.log
+   echo "            docker stop flowise"                     | tee -a /home/ashok/info.log
+   echo " Also, check all containers available, as:"
+   echo "             docker ps -a "                          | tee -a /home/ashok/info.log
 
 
 
