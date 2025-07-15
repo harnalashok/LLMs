@@ -181,7 +181,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo " "                                                   >> /home/ashok/start/start_docker_flowise.sh
    echo "cd ~/"                                               >> /home/ashok/start/start_docker_flowise.sh
    echo "echo 'Flowise port 3000 onstarting'"                 >> /home/ashok/start/start_docker_flowise.sh
-   echo "cd /home/ashok/Flowise"                              >> /home/ashok/starr/start_docker_flowise.sh
+   echo "cd /home/ashok/Flowise"                              >> /home/ashok/start/start_docker_flowise.sh
    echo "docker start flowise"                                >> /home/ashok/start/start_docker_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/ashok/start/start_docker_flowise.sh
 
