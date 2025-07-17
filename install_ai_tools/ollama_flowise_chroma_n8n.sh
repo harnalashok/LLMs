@@ -58,6 +58,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
     perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
     perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
+    chmod +x /home/$USER/*.sh
     echo " "
     echo "Ubuntu upgraded ......"               
     
