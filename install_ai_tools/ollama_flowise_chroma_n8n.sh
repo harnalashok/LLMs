@@ -54,67 +54,26 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
     
     echo " "
-    echo "========="
     echo "Ubuntu upgraded ......"               
-    echo "=========="
+    
     # Folders for start/stop scripts
     mkdir /home/$USER/start
     mkdir /home/$USER/stop
-    echo "Machine will be rebooted. After reboot run this script again."
     echo " "
     echo " "
+    echo "====NOTE====="
+    echo "Reboot the machine. After reboot, execute following three scripts in sequence:"
+    echo "And, after executing EACH script, reboot the machine"
+    echo " "
+    echo "1=>   ./ubuntu_docker1.sh "
+    echo "2=>   ./ubuntu_docker2.sh "
+    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+    echo "=========="
     sleep 5
-    reboot
+    #reboot
 else
     echo "Ubuntu will not be updated"
 fi
-
-################
-# Install docker
-################
-
-cd /home/$USER
-echo "Shall I install docker? Answer 'n' if docker already installed [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    sudo apt-get update
-    sudo apt-get install ca-certificates curl
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
-    
-    # Add the repository to Apt sources:
-    echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update -y
-    
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin  -y
-    reboot
-else 
-   echo "Done"
-fi   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ##########################
