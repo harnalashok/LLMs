@@ -57,8 +57,8 @@ echo "Ubuntu upgraded ......"
 echo "1. Ubuntu upgraded ......"            
 
 # Folders for start/stop scripts
-mkdir /home/ashok/start
-mkdir /home/ashok/stop
+mkdir /home/$USER/start
+mkdir /home/$USER/stop
 
 
 ##########################
@@ -67,35 +67,35 @@ mkdir /home/ashok/stop
 #      https://cookbook.chromadb.dev/strategies/cors/
 ##########################
 
-cd /home/ashok
+cd /home/$USER
 echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
 
     # Write chroma start script
-    echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_chroma.sh  
-    echo " "                                                   | tee -a /home/ashok/start/start_chroma.sh  
-    echo "cd ~/"                                               | tee -a /home/ashok/start/start_chroma.sh  
-    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/ashok/start/start_chroma.sh 
-    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/ashok/start/start_chroma.sh 
-    echo "echo 'In flowise, access it as: http://127.0.0.1:8000'"                   | tee -a /home/ashok/start/start_chroma.sh 
-    echo "docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/ashok/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3 "   | tee -a /home/ashok/start/start_chroma.sh 
+    echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_chroma.sh  
+    echo " "                                                   | tee -a /home/$USER/start/start_chroma.sh  
+    echo "cd ~/"                                               | tee -a /home/$USER/start/start_chroma.sh  
+    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start/start_chroma.sh 
+    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start/start_chroma.sh 
+    echo "echo 'In flowise, access it as: http://127.0.0.1:8000'"                   | tee -a /home/$USER/start/start_chroma.sh 
+    echo "docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3 "   | tee -a /home/$USER/start/start_chroma.sh 
 
     # Pulling chromadb docker image  
-    cd /home/ashok/
-    echo " "                                       | tee -a /home/ashok/error.log
-    echo " Pulling chromadb docker image"          | tee -a /home/ashok/error.log
+    cd /home/$USER/
+    echo " "                                       | tee -a /home/$USER/error.log
+    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
     # Refer: https://cookbook.chromadb.dev/strategies/cors/
-    docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/ashok/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3 
-    echo "------------"                            | tee -a /home/ashok/error.log
-    echo " "                                       | tee -a /home/ashok/error.log
+    docker run -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3 
+    echo "------------"                            | tee -a /home/$USER/error.log
+    echo " "                                       | tee -a /home/$USER/error.log
     sleep 3
 else
     echo "Skipping install of chromadb docker"
 fi   
 
-chmod +x /home/ashok/start/*.sh
+chmod +x /home/$USER/start/*.sh
 
 ##########################
 ### n8n docker
@@ -106,37 +106,37 @@ chmod +x /home/ashok/start/*.sh
 #                https://community.n8n.io/tags/c/tutorials/28/course-beginner
 
 cd ~/
-mkdir /home/ashok/n8n
-cd /home/ashok/n8n
+mkdir /home/$USER/n8n
+cd /home/$USER/n8n
 docker volume create n8n_data
-docker run -it -d --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+docker run -it -d --rm --name n8n -p 5678:5678 -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
 # Access at localhost:5678
 
 # n8n start script for Ubuntu
-echo '#!/bin/bash'                                                                                                        > /home/ashok/start/start_docker_n8n.sh
-echo " "                                                                                                                  >> /home/ashok/start/start_docker_n8n.sh
-echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/ashok/start/start_docker_n8n.sh
-echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"                                             >> /home/ashok/start/start_docker_n8n.sh
-echo "sleep 9"                                                                                                             >> /home/ashok/start/start_docker_n8n.sh
-echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_docker_n8n.sh
-echo "docker run -d -it --rm --name n8n -p 5678:5678 -v /home/ashok/n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_docker_n8n.sh
+echo '#!/bin/bash'                                                                                                        > /home/$USER/start/start_docker_n8n.sh
+echo " "                                                                                                                  >> /home/$USER/start/start_docker_n8n.sh
+echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start/start_docker_n8n.sh
+echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start/start_docker_n8n.sh
+echo "sleep 9"                                                                                                             >> /home/$USER/start/start_docker_n8n.sh
+echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start/start_docker_n8n.sh
+echo "docker run -d -it --rm --name n8n -p 5678:5678 -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/$USER/start/start_docker_n8n.sh
 
 # n8n start script for WSL
-echo '#!/bin/bash'                                                                                                         > /home/ashok/start/start_wsl_n8n.sh
-echo " "                                                                                                                   >> /home/ashok/start/start_wsl_n8n.sh
-echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                  >> /home/ashok/start/start_wsl_n8n.sh
-echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"                                             >> /home/ashok/start/start_wsl_n8n.sh
-echo "sleep 9"                                                                                                             >> /home/ashok/start/start_wsl_n8n.sh
-echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_wsl_n8n.sh
+echo '#!/bin/bash'                                                                                                         > /home/$USER/start/start_wsl_n8n.sh
+echo " "                                                                                                                   >> /home/$USER/start/start_wsl_n8n.sh
+echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                  >> /home/$USER/start/start_wsl_n8n.sh
+echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start/start_wsl_n8n.sh
+echo "sleep 9"                                                                                                             >> /home/$USER/start/start_wsl_n8n.sh
+echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start/start_wsl_n8n.sh
 # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
-echo "docker run -d -it --rm --network host  --name n8n -p 5678:5678 -v /home/ashok/n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/ashok/start/start_wsl_n8n.sh
+echo "docker run -d -it --rm --network host  --name n8n -p 5678:5678 -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start/start_wsl_n8n.sh
 
 
 cd ~/
-ln -sT /home/ashok/start/start_docker_n8n.sh start_docker_n8n.sh
-ln -sT /home/ashok/start/start_wsl_n8n.sh    start_wsl_n8n.sh
+ln -sT /home/$USER/start/start_docker_n8n.sh start_docker_n8n.sh
+ln -sT /home/$USER/start/start_wsl_n8n.sh    start_wsl_n8n.sh
 
-chmod +x /home/ashok/start/*.sh
+chmod +x /home/$USER/start/*.sh
 
 ##########################
 ### ollama docker
@@ -147,28 +147,28 @@ read input
 input=${input:-n}
 if [[ $input == "Y" || $input == "y" ]]; then
       # Start ollama docker in future
-      echo '#!/bin/bash'                                                                                        > /home/ashok/start/start_docker_ollama.sh
-      echo " "                                                                                                  >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '1. Run a model as: docker exec -it ollama ollama run <modelName>'"                            >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '   and not as: ollama run <modelName>'"                                                       >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '2. Start/stop ollama docker: docker start/stop ollama'"                                       >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '3. Ollama is at port 11434'"                                                                  >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '   Access as: http://host.docker.internal:11434'"                                             >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/ashok/start/start_docker_ollama.sh
-      echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/ashok/start/start_docker_ollama.sh
-      chmod +x /home/ashok/start/*.sh
+      echo '#!/bin/bash'                                                                                        > /home/$USER/start/start_docker_ollama.sh
+      echo " "                                                                                                  >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '1. Run a model as: docker exec -it ollama ollama run <modelName>'"                            >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '   and not as: ollama run <modelName>'"                                                       >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '2. Start/stop ollama docker: docker start/stop ollama'"                                       >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '3. Ollama is at port 11434'"                                                                  >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '   Access as: http://host.docker.internal:11434'"                                             >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start/start_docker_ollama.sh
+      chmod +x /home/$USER/start/*.sh
 
       # For model storage local folder ollama is mounted.
       echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
       echo "Will install ollama for GPU..."
       sleep 4
-      docker run -d --gpus=all -v /home/ashok/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+      docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 else
         echo "Skipping install of ollama docker"
 fi
 
-chmod +x /home/ashok/start/*.sh
+chmod +x /home/$USER/start/*.sh
 
 
 #####################3
@@ -183,24 +183,24 @@ input=${input:-n}
 if [[ $input == "Y" || $input == "y" ]]; then
    # Install Flowise through docker"
    # Ref: https://docs.flowiseai.com/getting-started
-   echo "Installing flowise docker"                          | tee -a /home/ashok/info.log
+   echo "Installing flowise docker"                          | tee -a /home/$USER/info.log
    # Start script
-   echo '#!/bin/bash'                                         >  /home/ashok/start/start_docker_flowise.sh
-   echo " "                                                   >> /home/ashok/start/start_docker_flowise.sh
-   echo "cd ~/"                                               >> /home/ashok/start/start_docker_flowise.sh
-   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/ashok/start/start_docker_flowise.sh
-   echo "cd /home/ashok/Flowise"                              >> /home/ashok/start/start_docker_flowise.sh
-   echo "docker start flowise"                                >> /home/ashok/start/start_docker_flowise.sh
-   echo "netstat -aunt | grep 3000"                           >> /home/ashok/start/start_docker_flowise.sh
+   echo '#!/bin/bash'                                         >  /home/$USER/start/start_docker_flowise.sh
+   echo " "                                                   >> /home/$USER/start/start_docker_flowise.sh
+   echo "cd ~/"                                               >> /home/$USER/start/start_docker_flowise.sh
+   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start/start_docker_flowise.sh
+   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start/start_docker_flowise.sh
+   echo "docker start flowise"                                >> /home/$USER/start/start_docker_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start/start_docker_flowise.sh
 
    # Stop script
-   echo '#!/bin/bash'                                        >  /home/ashok/stop/stop_docker_flowise.sh
-   echo " "                                                  >> /home/ashok/stop/stop_docker_flowise.sh
-   echo "cd ~/"                                              >> /home/ashok/stop/stop_docker_flowise.sh
-   echo "echo 'Flowise Stopping'"                            >> /home/ashok/stop/stop_docker_flowise.sh
-   echo "cd /home/ashok/Flowise"                             >> /home/ashok/stop/stop_docker_flowise.sh
-   echo "docker stop flowise"                                >> /home/ashok/stop/stop_docker_flowise.sh
-   echo "netstat -aunt | grep 3000"                           >> /home/ashok/stop/stop_docker_flowise.sh
+   echo '#!/bin/bash'                                        >  /home/$USER/stop/stop_docker_flowise.sh
+   echo " "                                                  >> /home/$USER/stop/stop_docker_flowise.sh
+   echo "cd ~/"                                              >> /home/$USER/stop/stop_docker_flowise.sh
+   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop/stop_docker_flowise.sh
+   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop/stop_docker_flowise.sh
+   echo "docker stop flowise"                                >> /home/$USER/stop/stop_docker_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop/stop_docker_flowise.sh
    sleep 4
    
    cd ~/
@@ -209,7 +209,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    sudo docker build --no-cache -t flowise .
    sudo docker run -d --name flowise -p 3000:3000 flowise
    echo "In future to start/stop containers, proceed, as:"
-   echo "            cd /home/ashok/Flowise"                  
+   echo "            cd /home/$USER/Flowise"                  
    echo "            docker start flowise"                    
    echo "            docker stop flowise"                     
    echo " Also, check all containers available, as:"
@@ -218,5 +218,5 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "Flowise docker will not be installed"
  fi  
 
-chmod +x /home/ashok/start/*.sh
-chmod +x /home/ashok/stop/*.sh
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/stop/*.sh
