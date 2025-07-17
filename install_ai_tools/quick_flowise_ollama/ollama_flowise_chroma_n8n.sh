@@ -119,7 +119,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd ~/"                                               | tee -a /home/$USER/start/start_chroma.sh  
     echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start/start_chroma.sh 
     echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start/start_chroma.sh 
-    echo "echo 'In flowise, access it as: http://127.0.0.1:8000'"                   | tee -a /home/$USER/start/start_chroma.sh 
+    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start/start_chroma.sh 
     echo "docker run -d -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 chromadb/chroma:0.6.3 "   | tee -a /home/$USER/start/start_chroma.sh 
 
     # Pulling chromadb docker image  
@@ -225,7 +225,7 @@ input=${input:-y}
 if [[ $input == "Y" || $input == "y" ]]; then
    # Install Flowise through docker"
    # Ref: https://docs.flowiseai.com/getting-started
-   echo "Installing flowise docker"                          | tee -a /home/$USER/info.log
+   echo "Installing flowise docker. Takes time.."             
    # Start script
    echo '#!/bin/bash'                                         >  /home/$USER/start/start_docker_flowise.sh
    echo " "                                                   >> /home/$USER/start/start_docker_flowise.sh
