@@ -3,6 +3,14 @@
 # Last amended: 17th July, 2025
 
 
+
+if [[ $USER != 'ashok' ]]; then
+    echo "First change user name to 'ashok' or create a user 'ashok'"   |  tee -a /home/ashok/error.log
+    sleep 9
+    exit
+fi
+
+
 echo "========script=============="
 echo "Will update Ubuntu"
 echo "Will install flowise docker"
