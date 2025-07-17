@@ -5,7 +5,7 @@
 
 
 if [[ $USER != 'ashok' ]]; then
-    echo "First change user name to 'ashok' or create a user 'ashok'"   |  tee -a /home/ashok/error.log
+    echo "First change user name to 'ashok' or create a user 'ashok'. Run the script when user is 'ashok'"  
     sleep 9
     exit
 fi
