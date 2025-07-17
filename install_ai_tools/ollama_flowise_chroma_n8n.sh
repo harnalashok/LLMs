@@ -53,6 +53,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
     
+    # Download docker installation scripts
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
+    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
+    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
     echo " "
     echo "Ubuntu upgraded ......"               
     
@@ -69,10 +74,29 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "2=>   ./ubuntu_docker2.sh "
     echo "3=>   ./ollama_flowise_chroma_n8n.sh"
     echo "=========="
-    sleep 5
-    #reboot
+    sleep 15
+    reboot
 else
     echo "Ubuntu will not be updated"
+fi
+
+
+# Check if docker is installed
+
+if command -v docker &> /dev/null; then
+    echo "Docker is installed."
+else
+    echo "Docker is not installed."
+    echo "====NOTE====="
+    echo "Reboot the machine. After reboot, execute following three scripts in sequence:"
+    echo "And, after executing EACH script, reboot the machine"
+    echo " "
+    echo "1=>   ./ubuntu_docker1.sh "
+    echo "2=>   ./ubuntu_docker2.sh "
+    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+    echo "=========="
+    sleep 15
+    reboot
 fi
 
 
