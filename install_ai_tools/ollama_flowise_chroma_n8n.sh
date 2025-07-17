@@ -19,10 +19,7 @@ echo "Will install chromadb docker"
 echo "Will install n8n docker"
 
 echo "==========================="
-sleep 10
-
-
-cd ~/
+sleep 4
 
 
 ################
@@ -30,35 +27,94 @@ cd ~/
 # Also install postgresql
 ################
 
+cd /home/$USER
+echo "Shall I update ubuntu? Answer 'n' if update already done [Y,n]"  
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    echo "  "
+    echo "------------"                            
+    echo " Will update Ubuntu"                     
+    echo " You will be asked for password...supply it..."
+    echo "----------"                              
+    echo " "
+    sleep 2
+    sudo apt update
+    sudo apt upgrade -y
+    
+    # To get multiple python versions, install repo
+    # See: https://askubuntu.com/a/1538589
+    sudo add-apt-repository ppa:deadsnakes/ppa -y
+    sudo apt update 
+    
+    # pipx to install poetry
+    sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
+    sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
+    sudo apt-get install python3-tk -y
+    sudo apt-get install libssl-dev libcurl4-openssl-dev -y
+    
+    echo " "
+    echo "========="
+    echo "Ubuntu upgraded ......"               
+    echo "=========="
+    # Folders for start/stop scripts
+    mkdir /home/$USER/start
+    mkdir /home/$USER/stop
+    echo "Machine will be rebooted. After reboot run this script again."
+    echo " "
+    echo " "
+    sleep 5
+    reboot
+else
+    echo "Ubuntu will not be updated"
+fi
 
-echo "  "
-echo "------------"                            
-echo " Will update Ubuntu"                     
-echo " You will be asked for password...supply it..."
-echo "----------"                              
-echo " "
-sleep 2
-sudo apt update
-sudo apt upgrade -y
+################
+# Install docker
+################
 
-# To get multiple python versions, install repo
-# See: https://askubuntu.com/a/1538589
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt update 
+cd /home/$USER
+echo "Shall I install docker? Answer 'n' if docker already installed [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    
+    # Add the repository to Apt sources:
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update -y
+    
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin  -y
+    reboot
+else 
+   echo "Done"
+fi   
+    
 
-# pipx to install poetry
-sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
-sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
-sudo apt-get install python3-tk -y
-sudo apt-get install libssl-dev libcurl4-openssl-dev -y
 
-echo " "
-echo "Ubuntu upgraded ......"               
-echo "1. Ubuntu upgraded ......"            
 
-# Folders for start/stop scripts
-mkdir /home/$USER/start
-mkdir /home/$USER/stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##########################
