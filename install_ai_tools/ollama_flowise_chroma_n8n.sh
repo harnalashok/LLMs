@@ -190,19 +190,21 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo '#!/bin/bash'                                                                                        > /home/$USER/start/start_docker_ollama.sh
       echo " "                                                                                                  >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '1. Run a model as: docker exec -it ollama ollama run <modelName>'"                            >> /home/$USER/start/start_docker_ollama.sh
-      echo "echo '   and not as: ollama run <modelName>'"                                                       >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '   Alias for command=> docker exec -it ollama => has a name: ollama'"                             >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '2. Start/stop ollama docker: docker start/stop ollama'"                                       >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '3. Ollama is at port 11434'"                                                                  >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '   Access as: http://host.docker.internal:11434'"                                             >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start/start_docker_ollama.sh
       echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start/start_docker_ollama.sh
+      echo "echo '6. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start/start_docker_ollama.sh
       chmod +x /home/$USER/start/*.sh
 
       # For model storage local folder ollama is mounted.
       echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
       echo "Will install ollama for GPU..."
       sleep 4
+      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
       docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 else
         echo "Skipping install of ollama docker"
