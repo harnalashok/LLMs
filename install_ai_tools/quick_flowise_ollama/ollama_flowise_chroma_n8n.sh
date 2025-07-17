@@ -173,7 +173,7 @@ echo "docker run -d -it --rm --network host  --name n8n -p 5678:5678 -v /home/$U
 
 
 cd ~/
-ln -sT /home/$USER/start/start_docker_n8n.sh start_docker_n8n.sh
+ln -sT /home/$USER/start/start_docker_n8n.sh start_n8n.sh
 ln -sT /home/$USER/start/start_wsl_n8n.sh    start_wsl_n8n.sh
 
 chmod +x /home/$USER/start/*.sh
@@ -221,7 +221,7 @@ chmod +x /home/$USER/start/*.sh
 echo "Shall I install flowise docker? [Y,n]"    
 read input
 # Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
-input=${input:-n}
+input=${input:-y}
 if [[ $input == "Y" || $input == "y" ]]; then
    # Install Flowise through docker"
    # Ref: https://docs.flowiseai.com/getting-started
@@ -255,7 +255,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "            docker start flowise"                    
    echo "            docker stop flowise"                     
    echo " Also, check all containers available, as:"
-   echo "             docker ps -a "                          
+   echo "             docker ps -a "     
+   ln -sT /home/$USER/start/start_docker_flowise.sh start_flowise.sh
+   ln -sT /home/$USER/stop/stop_docker_flowise.sh stop_flowise.sh
  else
    echo "Flowise docker will not be installed"
  fi  
