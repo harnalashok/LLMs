@@ -184,7 +184,7 @@ chmod +x /home/$USER/start/*.sh
 
 echo "Shall I install ollama docker? [Y,n]"
 read input
-input=${input:-n}
+input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
       # Start ollama docker in future
       echo '#!/bin/bash'                                                                                        > /home/$USER/start/start_docker_ollama.sh
@@ -221,7 +221,7 @@ chmod +x /home/$USER/start/*.sh
 echo "Shall I install flowise docker? [Y,n]"    
 read input
 # Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
-input=${input:-n}
+input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
    # Install Flowise through docker"
    # Ref: https://docs.flowiseai.com/getting-started
