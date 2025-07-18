@@ -24,7 +24,10 @@ cd ~/
 mkdir /home/ashok/n8n
 cd /home/ashok/n8n
 docker volume create n8n_data
-docker run -it -d --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+# To escape Javascript heap space error. Increase 4096 if required:
+#   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+#   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
+docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096"  -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n
 # Access at localhost:5678
 
 # n8n start script for Ubuntu
@@ -34,7 +37,7 @@ echo "echo 'Access n8n at port 5678. Wait...starting...'"                       
 echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"                                             >> /home/ashok/start/start_docker_n8n.sh
 echo "sleep 9"                                                                                                             >> /home/ashok/start/start_docker_n8n.sh
 echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_docker_n8n.sh
-echo "docker run -d -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_docker_n8n.sh
+echo "docker run -d -it --rm --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_docker_n8n.sh
 
 # n8n start script for WSL
 echo '#!/bin/bash'                                                                                                              > /home/ashok/start/start_wsl_n8n.sh
