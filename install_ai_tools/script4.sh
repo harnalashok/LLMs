@@ -38,6 +38,7 @@ echo '#!/bin/bash'                                         | tee    /home/ashok/
 echo " "                                                   | tee -a /home/ashok/start/start_npx_n8n.sh
 echo "cd ~/"                                               | tee -a /home/ashok/start/start_npx_n8n.sh
 echo "echo 'n8n will be available at port 5678'"           | tee -a /home/ashok/start/start_npx_n8n.sh
+echo "echo 'Use top -u ashok command to see memory usage'"           | tee -a /home/ashok/start/start_npx_n8n.sh
 # To escape JavaScript Heap Space error:
 # Refer: https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
 #        https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
