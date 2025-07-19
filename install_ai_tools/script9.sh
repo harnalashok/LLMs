@@ -91,7 +91,7 @@ sleep 3
 
 echo "Installing mellisearch vector database using docker"       | tee -a /home/ashok/error.log
 docker pull getmeili/meilisearch:v1.15
-docker run -it --rm \
+docker run -d --rm \
   -p 7700:7700 \
   -v $(pwd)/meili_data:/meili_data \
   getmeili/meilisearch:v1.15
@@ -110,7 +110,7 @@ echo "echo 'Access in flowise as: http://localhost:7700'"  |   tee -a /home/asho
 echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/ashok/start/start_meilisearch.sh  
 echo "echo '================='"                            | tee -a /home/ashok/start/start_meilisearch.sh  
 echo "sleep 8"                                             | tee -a /home/ashok/start/start_meilisearch.sh  
-echo "docker run -it --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee  -a  /home/ashok/start/start_meilisearch.sh
+echo "docker run -d --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee  -a  /home/ashok/start/start_meilisearch.sh
 
 
 
