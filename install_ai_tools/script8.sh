@@ -35,6 +35,7 @@ echo '#!/bin/bash'                                                              
 echo " "                                                                                                                  >> /home/ashok/start/start_docker_n8n.sh
 echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/ashok/start/start_docker_n8n.sh
 echo "echo 'To stop it, issue command: cd /home/ashok/n8n/ ; docker stop n8n'"                                             >> /home/ashok/start/start_docker_n8n.sh
+echo "echo 'Use \"top -u ashok\" command to see memory usage'"                                                             >> /home/ashok/start/start_docker_n8n.sh
 echo "sleep 9"                                                                                                             >> /home/ashok/start/start_docker_n8n.sh
 echo "cd /home/ashok/n8n"                                                                                                  >> /home/ashok/start/start_docker_n8n.sh
 echo "docker run -d -it --rm --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" -v n8n_data:/home/ashok/n8n/node/.n8n docker.n8n.io/n8nio/n8n"        >> /home/ashok/start/start_docker_n8n.sh
