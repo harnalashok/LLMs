@@ -17,7 +17,7 @@ We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is inst
    fi
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script0.sh
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/help.txt
-   ln -sT /home/ashok/help.txt /home/ashok/Documents/help.txt
+   ln -sT /home/$USER/help.txt /home/$USER/Documents/help.txt
    perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
    chmod +x  ~/*.sh   
    bash script0.sh
