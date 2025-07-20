@@ -7,11 +7,11 @@ We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is inst
 
 
 ```
-  DIRECTORY=/home/ashok/Documents
+  DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
   fi
-   DIRECTORY=/home/ashok/Downloads
+   DIRECTORY=/home/$USER/Downloads
    if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
    fi
