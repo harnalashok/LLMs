@@ -1,19 +1,17 @@
 To quickly install dockers for flowise+ollama+chromadb+n8n follow this script
 
 ```
-  DIRECTORY=/home/ashok/Documents
+  DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
   fi
-   DIRECTORY=/home/ashok/Downloads
+   DIRECTORY=/home/$USER/Downloads
    if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
    fi
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script0.sh
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/help.txt
-   ln -sT /home/ashok/help.txt /home/ashok/Documents/help.txt
-   perl -pi -e 's/\r\n/\n/g' ~/script0.sh   
+   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n.sh
+   perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n.sh
    chmod +x  ~/*.sh   
-   bash script0.sh
+   bash ollama_flowise_chroma_n8n.sh
    cd ~/   
 ```
