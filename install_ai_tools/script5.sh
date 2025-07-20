@@ -11,24 +11,24 @@ sleep 10
 # Download scripts that will inturn, help create user and password
 # in postgresql
 
-cd /home/ashok/
+cd /home/$USER/
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-chmod +x /home/ashok/*.sh
+chmod +x /home/$USER/*.sh
 
 
 
 # Create links
-cd /home/ashok/psql
-ln -sT /home/ashok/createpostgresuser.sh         createpostgresuser.sh
-ln -sT /home/ashok/show_postgres_databases.sh    show_postgres_databases.sh
-ln -sT /home/ashok/createvectordb.sh             createvectordb.sh
-ln -sT /home/ashok/delete_postgres_db.sh         delete_postgres_db.sh
-ln -sT /home/ashok/psql.sh                       psql.sh
+cd /home/$USER/psql
+ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
+ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
+ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
+ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
+ln -sT /home/$USER/psql.sh                       psql.sh
 cd ~/
 
 ###########
@@ -53,8 +53,8 @@ cd ~/
 
 
 
-mv /home/ashok/script5.sh        /home/ashok/done/
-mv /home/ashok/next/script6.sh   /home/ashok/
+mv /home/$USER/script5.sh        /home/$USER/done/
+mv /home/$USER/next/script6.sh   /home/$USER/
 
 
 
