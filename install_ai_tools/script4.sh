@@ -18,47 +18,47 @@ sleep 10
 
 # 2.1 Install n8n as NORMAL user
 echo " "
-echo "Installing n8n...Takes time..."                       | tee -a /home/ashok/error.log
-echo "------"                                               | tee -a /home/ashok/error.log
-echo " "                                                    | tee -a /home/ashok/error.log
+echo "Installing n8n...Takes time..."                       | tee -a /home/$USER/error.log
+echo "------"                                               | tee -a /home/$USER/error.log
+echo " "                                                    | tee -a /home/$USER/error.log
 sleep 2
 
 
-npm install -g n8n                                          2>> /home/ashok/error.log
+npm install -g n8n                                          2>> /home/$USER/error.log
 echo " "
-echo " "                                                    | tee -a /home/ashok/error.log
-echo "n8n installed"                                        | tee -a /home/ashok/error.log
-echo " "                                                    | tee -a /home/ashok/error.log
-echo "n8n installed"                                        | tee -a /home/ashok/info.log
-echo "n8n port is: 5678"                                    | tee -a /home/ashok/info.log
-echo " "                                                    | tee -a /home/ashok/info.log
+echo " "                                                    | tee -a /home/$USER/error.log
+echo "n8n installed"                                        | tee -a /home/$USER/error.log
+echo " "                                                    | tee -a /home/$USER/error.log
+echo "n8n installed"                                        | tee -a /home/$USER/info.log
+echo "n8n port is: 5678"                                    | tee -a /home/$USER/info.log
+echo " "                                                    | tee -a /home/$USER/info.log
 
 
-echo '#!/bin/bash'                                         | tee    /home/ashok/start/start_npx_n8n.sh  
-echo " "                                                   | tee -a /home/ashok/start/start_npx_n8n.sh
-echo "cd ~/"                                               | tee -a /home/ashok/start/start_npx_n8n.sh
-echo "echo 'n8n will be available at port 5678'"           | tee -a /home/ashok/start/start_npx_n8n.sh
-echo "echo 'Use \"top -u ashok\" command to see memory usage'"           | tee -a /home/ashok/start/start_npx_n8n.sh
-echo "sleep 5"           | tee -a /home/ashok/start/start_npx_n8n.sh
+echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_npx_n8n.sh  
+echo " "                                                   | tee -a /home/$USER/start/start_npx_n8n.sh
+echo "cd ~/"                                               | tee -a /home/$USER/start/start_npx_n8n.sh
+echo "echo 'n8n will be available at port 5678'"           | tee -a /home/$USER/start/start_npx_n8n.sh
+echo "echo 'Use \"top -u ashok\" command to see memory usage'"           | tee -a /home/$USER/start/start_npx_n8n.sh
+echo "sleep 5"           | tee -a /home/$USER/start/start_npx_n8n.sh
 # To escape JavaScript Heap Space error:
 # Refer: https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
 #        https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
-echo " NODE_OPTIONS="--max-old-space-size=8000" npx n8n"       | tee -a /home/ashok/start/start_npx_n8n.sh
-echo "netstat -aunt | grep 5678"                           | tee -a /home/ashok/start/start_npx_n8n.sh
+echo " NODE_OPTIONS="--max-old-space-size=8000" npx n8n"       | tee -a /home/$USER/start/start_npx_n8n.sh
+echo "netstat -aunt | grep 5678"                           | tee -a /home/$USER/start/start_npx_n8n.sh
 
-chmod +x /home/ashok/start/*.sh
+chmod +x /home/$USER/start/*.sh
 
 
-mv /home/ashok/script4.sh       /home/ashok/done/
-mv /home/ashok/next/script5.sh  /home/ashok/
+mv /home/$USER/script4.sh       /home/$USER/done/
+mv /home/$USER/next/script5.sh  /home/$USER/
 
 
 #####################
 ## LocalAI install
 ####################
 
-mkdir /home/ashok/localai
-cd /home/ashok/localai
+mkdir /home/$USER/localai
+cd /home/$USER/localai
 
 # PReparing docker for GPU
 # Ref StackOverflow: https://stackoverflow.com/a/77269071
@@ -93,59 +93,59 @@ docker run -ti --name local-ai -p 8080:8080 --gpus all localai/localai:latest-gp
 sleep 5
 
 # Start local-ai in future
-echo '#!/bin/bash'                                                                         > /home/ashok/start/start_localai.sh
-echo " "                                                                                  >> /home/ashok/start/start_localai.sh
-echo "cd /home/ashok/localai"                                                             >> /home/ashok/start/start_localai.sh
-echo "echo 'Localai will be available at port 8080'"                                      >> /home/ashok/start/start_localai.sh
-echo "docker start local-ai"                                                              >> /home/ashok/start/start_localai.sh
-echo "netstat -aunt | grep 8080"                                                          >> /home/ashok/start/start_localai.sh
-chmod +x /home/ashok/start/*.sh
+echo '#!/bin/bash'                                                                         > /home/$USER/start/start_localai.sh
+echo " "                                                                                  >> /home/$USER/start/start_localai.sh
+echo "cd /home/$USER/localai"                                                             >> /home/$USER/start/start_localai.sh
+echo "echo 'Localai will be available at port 8080'"                                      >> /home/$USER/start/start_localai.sh
+echo "docker start local-ai"                                                              >> /home/$USER/start/start_localai.sh
+echo "netstat -aunt | grep 8080"                                                          >> /home/$USER/start/start_localai.sh
+chmod +x /home/$USER/start/*.sh
 
 # Stop local-ai in future
-echo '#!/bin/bash'                                                                         > /home/ashok/stop/stop_localai.sh
-echo " "                                                                                  >> /home/ashok/stop/stop_localai.sh
-echo "cd /home/ashok/localai"                                                                >> /home/ashok/stop/stop_localai.sh
-echo "docker stop local-ai"                                                              >> /home/ashok/stop/stop_localai.sh
-chmod +x /home/ashok/stop/*.sh
+echo '#!/bin/bash'                                                                         > /home/$USER/stop/stop_localai.sh
+echo " "                                                                                  >> /home/$USER/stop/stop_localai.sh
+echo "cd /home/$USER/localai"                                                                >> /home/$USER/stop/stop_localai.sh
+echo "docker stop local-ai"                                                              >> /home/$USER/stop/stop_localai.sh
+chmod +x /home/$USER/stop/*.sh
 
 # Download sh files to download models
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_bert_embeddings.sh   -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma3_4b_it.sh      -P /home/ashok/localai
-#wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_localaiModel3.sh    -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_mistral_7b_instruct.sh    -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_stablediffusion.sh   -P /home/ashok/localai
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma_3_27b_it.sh     -P /home/ashok/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_bert_embeddings.sh   -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma3_4b_it.sh      -P /home/$USER/localai
+#wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_localaiModel3.sh    -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_mistral_7b_instruct.sh    -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_stablediffusion.sh   -P /home/$USER/localai
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma_3_27b_it.sh     -P /home/$USER/localai
 
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/get_download_status.sh        -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/ashok/
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/ashok/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/get_download_status.sh        -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/$USER/
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/$USER/localai
 
 # MAke symbolic links
-cd /home/ashok
-ln -sT /home/ashok/start/start_localai.sh start_localai.sh
-ln -sT /home/ashok/stop/stop_localai.sh stop_localai.sh
-ln -sT /home/ashok/start/start_chroma.sh start_chroma.sh
-ln -sT /home/ashok/start/start_npx_flowise.sh start_flowise.sh
-ln -sT /home/ashok/start/start_debug_flowise.sh start_debug_flowise.sh
+cd /home/$USER
+ln -sT /home/$USER/start/start_localai.sh start_localai.sh
+ln -sT /home/$USER/stop/stop_localai.sh stop_localai.sh
+ln -sT /home/$USER/start/start_chroma.sh start_chroma.sh
+ln -sT /home/$USER/start/start_npx_flowise.sh start_flowise.sh
+ln -sT /home/$USER/start/start_debug_flowise.sh start_debug_flowise.sh
 
-ln -sT /home/ashok/start/start_npx_n8n.sh start_n8n.sh
-ln -sT /home/ashok/start/start_uv_langflow.sh start_langflow.sh
-ln -sT /home/ashok/start/start_postgresql.sh start_postgresql.sh
+ln -sT /home/$USER/start/start_npx_n8n.sh start_n8n.sh
+ln -sT /home/$USER/start/start_uv_langflow.sh start_langflow.sh
+ln -sT /home/$USER/start/start_postgresql.sh start_postgresql.sh
 
-ln -sT /home/ashok/stop/stop_chroma.sh stop_chroma.sh
-ln -sT /home/ashok/stop/stop_localai.sh stop_localai.sh
-ln -sT /home/ashok/stop/stop_postgresql.sh stop_postgresql.sh
+ln -sT /home/$USER/stop/stop_chroma.sh stop_chroma.sh
+ln -sT /home/$USER/stop/stop_localai.sh stop_localai.sh
+ln -sT /home/$USER/stop/stop_postgresql.sh stop_postgresql.sh
 
 
 # Download to files to create create images
 
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/generate_image.sh   -P /home/ashok/localai
-wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/generate_image2.sh  -P /home/ashok/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/generate_image.sh   -P /home/$USER/localai
+wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/generate_image2.sh  -P /home/$USER/localai
 
-chmod +x /home/ashok/*.sh
-chmod +x /home/ashok/localai/*.sh
+chmod +x /home/$USER/*.sh
+chmod +x /home/$USER/localai/*.sh
 
 cd ~/
 echo "You may like to execute:"
