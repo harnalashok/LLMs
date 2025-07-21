@@ -107,8 +107,7 @@ if command -v docker &> /dev/null; then
 else
     echo "Docker is not installed."
     echo "====NOTE====="
-    echo "Reboot the machine. After reboot, execute following three scripts in sequence:"
-    echo "And, after executing EACH script, reboot the machine"
+    echo "Execute following scripts in sequence"
     echo " "
     echo "1=>   ./ubuntu_docker1.sh "
     echo "2=>   ./ubuntu_docker2.sh "
