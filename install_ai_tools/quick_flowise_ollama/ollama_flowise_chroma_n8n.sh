@@ -196,6 +196,7 @@ echo "Shall I install ollama docker? [Y,n]"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
+      cd /home/$USER/
       # Start ollama docker in future
       echo '#!/bin/bash'                                                                                        > /home/$USER/start_docker_ollama.sh
       echo " "                                                                                                  >> /home/$USER/start_docker_ollama.sh
@@ -234,6 +235,7 @@ read input
 # Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
 input=${input:-y}
 if [[ $input == "Y" || $input == "y" ]]; then
+   cd /home/$USER/
    # Install Flowise through docker"
    # Ref: https://docs.flowiseai.com/getting-started
    echo "Installing flowise docker. Takes time.."             
@@ -286,15 +288,36 @@ chmod +x /home/$USER/*.sh
     read input
     input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
+        cd /home/$USER/
         echo " "
         echo "Installing dify docker"
         echo "Access it at: http://localhost/install"
         echo " "
         sleep 5
+        cd /home/$USER
         git clone https://github.com/langgenius/dify.git
-        cd dify/docker
+        cd /home/$USER/dify/docker
         cp .env.example .env
         docker compose up -d
+
+       # Start script
+       echo '#!/bin/bash'                                         >  /home/$USER/start_dify.sh
+       echo " "                                                   >> /home/$USER/start_dify.sh
+       echo "echo 'dify port 80 onstarting'"                      >> /home/$USER/start_dify.sh
+       echo "cd /home/$USER/dify/docker"                           >> /home/$USER/start_dify.sh
+       echo "docker compose up -d"                                 >> /home/$USER/start_dify.sh
+  
+       # Stop script
+       echo '#!/bin/bash'                                        >  /home/$USER/stop_dify.sh
+       echo " "                                                  >> /home/$USER/stop_dify.sh
+       echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
+       echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
+       echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
+   sleep 4
+
+
+
+        
     else
         echo "dify not installed"
     fi
@@ -309,6 +332,7 @@ echo "Shall I install RAGFlow docker? [Y,n]"    #
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
+    cd /home/$USER/
     echo "Installing RagFlow docker"
     echo "After installation, access ragflow, as: http://<hostIP>"
     sleep 5
