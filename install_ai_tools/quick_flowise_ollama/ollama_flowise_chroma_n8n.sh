@@ -17,6 +17,7 @@ echo "Will install flowise docker"
 echo "Will install ollama docker for gpu"
 echo "Will install chromadb docker"
 echo "Will install n8n docker"
+echo "Will install Ragflow docker"
 
 echo "==========================="
 sleep 2
@@ -285,7 +286,6 @@ chmod +x /home/$USER/*.sh
    
 ##########################
 
-cd /home/$USER
 echo "Shall I install RAGFlow docker? [Y,n]"    # 
 read input
 input=${input:-Y}
@@ -317,6 +317,32 @@ if [[ $input == "Y" || $input == "y" ]]; then
      cd ragflow/docker
      docker compose -f docker-compose-gpu.yml up -d
      docker logs -f ragflow-server
-     
+else
+     echo "Ragflow will not be installed"
+fi
+
+##########################
+### Install dify
+# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
+   
+##########################
+     echo "Shall I install dify docker? [Y,n]"    # 
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
+        echo " "
+        echo "Installing dify docker"
+        echo "Access it at: http://localhost/install"
+        echo " "
+        sleep 5
+        git clone https://github.com/langgenius/dify.git
+        cd dify/docker
+        cp .env.example .env
+        docker compose up -d
+    else
+        echo "dify not installed"
+    fi
+    
+
      
 
