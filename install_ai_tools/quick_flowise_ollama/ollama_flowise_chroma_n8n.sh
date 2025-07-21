@@ -279,8 +279,6 @@ chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/*.sh
 
 
-
-
 ##########################
 ### Install dify
 # Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
@@ -323,8 +321,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
     echo "netstat -aunt | grep 80"                              >> /home/$USER/start_ragflow.sh
-
-
     # Stop script
      echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
      echo " "                                                  >> /home/$USER/stop_ragflow.sh
