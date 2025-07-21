@@ -70,15 +70,32 @@ if [ ! -f /home/$USER/foo.txt ]; then
     mkdir /home/$USER/stop
     echo " "
     echo " "
-    echo "====NOTE====="
-    echo "Reboot the machine. After reboot, execute following three scripts in sequence:"
-    echo "And, after executing EACH script, reboot the machine"
-    echo " "
-    echo "1=>   ./ubuntu_docker1.sh "
-    echo "2=>   ./ubuntu_docker2.sh "
-    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
-    echo "=========="
-    sleep 15
+   
+    if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+        echo "====NOTE====="
+        echo "Ubuntu shell will be closed. Then reopen it and execute following three scripts in sequence:"
+        echo "And, after executing EACH script, close ubuntu shell again."
+        echo " "
+        echo "1=>   ./ubuntu_docker1.sh "
+        echo "2=>   ./ubuntu_docker2.sh "
+        echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+        echo "=========="
+        sleep 15
+        wsl.exe --shutdown
+    else
+        echo "====NOTE====="
+        echo "Machine will be rebooted. After reboot, execute following three scripts in sequence:"
+        echo "And, after executing EACH script, reboot the machine"
+        echo " "
+        echo "1=>   ./ubuntu_docker1.sh "
+        echo "2=>   ./ubuntu_docker2.sh "
+        echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+        echo "=========="
+        sleep 15
+        reboot
+    fi
+
+    
     reboot
 fi
 
