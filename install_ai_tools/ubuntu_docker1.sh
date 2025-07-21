@@ -4,20 +4,6 @@
 # Ref: https://docs.docker.com/engine/install/ubuntu/
 #      https://docs.docker.com/engine/install/linux-postinstall/
 
- # These scripts run in sequence.
-      #     script0.sh
-      #     script1.sh
-      #     script2.sh
-      #     ubuntu_docker1.sh
-      #     ubuntu_docker2.sh
-      #     script3.sh
-      #     script4.sh
-      #     script5.sh
-      #     script6.sh
-      #     script7,sh
-      #     script8.sh
-
-
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
@@ -39,10 +25,14 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 mv /home/ashok/ubuntu_docker1.sh       /home/ashok/done
 mv /home/ashok/next/ubuntu_docker2.sh  /home/ashok/
 
-echo "Machine will be rebooted "
-echo "After restart, execute:"
+echo "Ubuntu will be closed/rebooted "
+echo "After opening/restart, execute:"
 echo "    ./ubuntu_docker2.sh"
 sleep 10
-reboot
+if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+    wsl.exe --shutdown
+else
+    reboot
+fi    
 
 
