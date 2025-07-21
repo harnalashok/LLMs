@@ -5,7 +5,13 @@
 #      https://docs.docker.com/engine/install/linux-postinstall/
 
 
-
+echo " "
+echo "=========="
+echo "'ubuntu_docker1.sh' must have been executed earlier to this script. Else, this script will give errors."
+echo "Break by pressing ctrl+c if 'ubuntu_docker1.sh' not executed"
+echo "============"
+echo " "
+sleep 10
 # Check if docker installed
 sudo docker run hello-world
 
@@ -53,10 +59,9 @@ wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/do
 wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
 cd /home/ashok/
 
-
 echo "Machine will be rebooted "
-echo "After restart, execute:"
-echo "    ./script3.sh"
-sleep 10
+#echo "After restart, execute:"
+#echo "    ./script3.sh"
+#sleep 10
 reboot
 
