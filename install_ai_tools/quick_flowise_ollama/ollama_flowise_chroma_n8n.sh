@@ -29,10 +29,11 @@ sleep 2
 ################
 
 cd /home/$USER
-echo "Shall I update ubuntu? Answer 'n' if update already done [Y,n]"  
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
+
+#echo "Shall I update ubuntu? Answer 'n' if update already done [Y,n]"  
+#read input
+#input=${input:-Y}
+if [ ! -f /home/$USER/foo.txt ]; then
     echo "  "
     echo "------------"                            
     echo " Will update Ubuntu"                     
@@ -53,6 +54,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
+    echo "Ubuntu being updated" > /home/$USER/foo.txt   # To avoid repeat updation
     
     # Download docker installation scripts
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
@@ -78,8 +80,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "=========="
     sleep 15
     reboot
-else
-    echo "Ubuntu will not be updated"
 fi
 
 
