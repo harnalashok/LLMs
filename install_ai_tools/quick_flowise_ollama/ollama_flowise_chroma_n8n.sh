@@ -95,13 +95,7 @@ if [ ! -f /home/$USER/foo.txt ]; then
         reboot
     fi
 
-    
-    reboot
-fi
-
-
 # Check if docker is installed
-
 if command -v docker &> /dev/null; then
     echo "Docker is installed."
 else
@@ -114,8 +108,7 @@ else
     echo "3=>   ./ollama_flowise_chroma_n8n.sh"
     echo "=========="
     sleep 15
-    reboot
-fi
+ fi
 
 
 ##########################
