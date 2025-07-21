@@ -94,7 +94,7 @@ if [ ! -f /home/$USER/foo.txt ]; then
         sleep 15
         reboot
     fi
-
+fi
 # Check if docker is installed
 if command -v docker &> /dev/null; then
     echo "Docker is installed."
@@ -109,6 +109,7 @@ else
     echo "=========="
     sleep 15
  fi
+
 
 
 ##########################
