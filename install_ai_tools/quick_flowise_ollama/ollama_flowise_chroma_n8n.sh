@@ -280,6 +280,29 @@ chmod +x /home/$USER/*.sh
 
 
 
+
+##########################
+### Install dify
+# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
+   
+##########################
+     echo "Shall I install dify docker? [Y,n]"    # 
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
+        echo " "
+        echo "Installing dify docker"
+        echo "Access it at: http://localhost/install"
+        echo " "
+        sleep 5
+        git clone https://github.com/langgenius/dify.git
+        cd dify/docker
+        cp .env.example .env
+        docker compose up -d
+    else
+        echo "dify not installed"
+    fi
+
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
@@ -320,28 +343,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
      echo "Ragflow will not be installed"
 fi
-
-##########################
-### Install dify
-# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
-   
-##########################
-     echo "Shall I install dify docker? [Y,n]"    # 
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-        echo " "
-        echo "Installing dify docker"
-        echo "Access it at: http://localhost/install"
-        echo " "
-        sleep 5
-        git clone https://github.com/langgenius/dify.git
-        cd dify/docker
-        cp .env.example .env
-        docker compose up -d
-    else
-        echo "dify not installed"
-    fi
+    
     
 
      
