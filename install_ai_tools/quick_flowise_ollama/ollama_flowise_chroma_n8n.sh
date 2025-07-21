@@ -4,11 +4,11 @@
 
 
 
-if [[ $USER != 'ashok' ]]; then
-    echo "First change user name to 'ashok' or create a user 'ashok'. Run the script when user is 'ashok'"  
-    sleep 9
-    exit
-fi
+#if [[ $USER != 'ashok' ]]; then
+#    echo "First change user name to 'ashok' or create a user 'ashok'. Run the script when user is 'ashok'"  
+#    sleep 9
+#    exit
+#fi
 
 
 echo "========script=============="
@@ -18,7 +18,7 @@ echo "Will install ollama docker for gpu"
 echo "Will install chromadb docker"
 echo "Will install n8n docker"
 echo "Will install Ragflow docker"
-
+echo "Will install dify docker"
 echo "==========================="
 sleep 2
 
