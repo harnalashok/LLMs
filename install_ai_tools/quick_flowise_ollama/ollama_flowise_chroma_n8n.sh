@@ -4,13 +4,6 @@
 
 
 
-#if [[ $USER != 'ashok' ]]; then
-#    echo "First change user name to 'ashok' or create a user 'ashok'. Run the script when user is 'ashok'"  
-#    sleep 9
-#    exit
-#fi
-
-
 echo "========script=============="
 echo "Will update Ubuntu"
 echo "Will install flowise docker"
@@ -29,10 +22,6 @@ sleep 2
 ################
 
 cd /home/$USER
-
-#echo "Shall I update ubuntu? Answer 'n' if update already done [Y,n]"  
-#read input
-#input=${input:-Y}
 if [ ! -f /home/$USER/foo.txt ]; then
     echo "  "
     echo "------------"                            
@@ -70,7 +59,6 @@ if [ ! -f /home/$USER/foo.txt ]; then
     mkdir /home/$USER/stop
     echo " "
     echo " "
-   
     if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
         echo "====NOTE====="
         echo "Ubuntu shell will be closed. Then reopen it and execute following three scripts in sequence:"
@@ -97,6 +85,7 @@ if [ ! -f /home/$USER/foo.txt ]; then
 fi
 # Check if docker is installed
 if command -v docker &> /dev/null; then
+   
     echo "Docker is installed."
 else
     echo "Docker is not installed."
@@ -123,7 +112,6 @@ echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be i
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
-
     # Write chroma start script
     echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
     echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
