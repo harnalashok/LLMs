@@ -63,5 +63,10 @@ echo "Machine will be rebooted "
 #echo "After restart, execute:"
 #echo "    ./script3.sh"
 #sleep 10
-reboot
+if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+    wsl.exe --shutdown
+else
+    reboot
+fi  
+
 
