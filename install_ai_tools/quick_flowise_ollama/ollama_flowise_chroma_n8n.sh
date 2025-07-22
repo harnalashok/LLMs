@@ -298,26 +298,23 @@ chmod +x /home/$USER/*.sh
         git clone https://github.com/langgenius/dify.git
         cd /home/$USER/dify/docker
         cp .env.example .env
+        sed -i 's/NGINX_PORT=80/NGINX_PORT=8887/' .env
+        sed -i 's/EXPOSE_NGINX_PORT=80/EXPOSE_NGINX_PORT=8887/' .env
+        sed -i 's/NGINX_SSL_PORT=443/NGINX_SSL_PORT=4443/' .env
         docker compose up -d
-
-       # Start script
-       echo '#!/bin/bash'                                         >  /home/$USER/start_dify.sh
-       echo " "                                                   >> /home/$USER/start_dify.sh
-       echo "echo 'dify port 80 onstarting'"                      >> /home/$USER/start_dify.sh
-       echo "cd /home/$USER/dify/docker"                           >> /home/$USER/start_dify.sh
-       echo "docker compose up -d"                                 >> /home/$USER/start_dify.sh
-  
-       # Stop script
-       echo '#!/bin/bash'                                        >  /home/$USER/stop_dify.sh
-       echo " "                                                  >> /home/$USER/stop_dify.sh
-       echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
-       echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
-       echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
-   sleep 4
-
-
-
-        
+        # Start script
+        echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
+        echo " "                                                   >> /home/$USER/start_dify.sh
+        echo "echo 'dify port 8887 onstarting'"                    >> /home/$USER/start_dify.sh
+        echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
+        echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
+        # Stop script
+        echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
+        echo " "                                                  >> /home/$USER/stop_dify.sh
+        echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
+        echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
+        echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
+        sleep 4
     else
         echo "dify not installed"
     fi
