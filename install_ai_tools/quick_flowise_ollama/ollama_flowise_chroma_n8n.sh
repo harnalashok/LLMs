@@ -336,25 +336,26 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # Start script
     echo '#!/bin/bash'                                         >  /home/$USER/start_ragflow.sh
     echo " "                                                   >> /home/$USER/start_ragflow.sh
-    echo "echo 'RagFlow port 80 onstarting'"                   >> /home/$USER/start_ragflow.sh
+    echo "echo 'RagFlow port 800 onstarting'"                  >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
     echo "netstat -aunt | grep 80"                              >> /home/$USER/start_ragflow.sh
     # Stop script
-     echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
-     echo " "                                                  >> /home/$USER/stop_ragflow.sh
-     echo "cd ~/"                                              >> /home/$USER/stop_ragflow.sh
-     echo "echo 'ragflow Stopping'"                            >> /home/$USER/stop_ragflow.sh
-     echo "cd /home/$USER/ragflow/docker"                      >> /home/$USER/stop_ragflow.sh
-     echo "docker compose -f docker-compose-gpu.yml stop "     >> /home/$USER/stop_ragflow.sh
-     chmod +x /home/$USER/*.sh
-     chmod +x /home/$USER/*.sh
-        
-     sudo sysctl -w vm.max_map_count=262144
-     git clone https://github.com/infiniflow/ragflow.git
-     cd ragflow/docker
-     docker compose -f docker-compose-gpu.yml up -d
-     docker logs -f ragflow-server
+    echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
+    echo " "                                                  >> /home/$USER/stop_ragflow.sh
+    echo "cd ~/"                                              >> /home/$USER/stop_ragflow.sh
+    echo "echo 'ragflow Stopping'"                            >> /home/$USER/stop_ragflow.sh
+    echo "cd /home/$USER/ragflow/docker"                      >> /home/$USER/stop_ragflow.sh
+    echo "docker compose -f docker-compose-gpu.yml stop "     >> /home/$USER/stop_ragflow.sh
+    chmod +x /home/$USER/*.sh
+    chmod +x /home/$USER/*.sh
+    sudo sysctl -w vm.max_map_count=262144
+    git clone https://github.com/infiniflow/ragflow.git
+    cd ragflow/docker
+    sed -i 's/80:80/800:80/' docker-compose-gpu.yml
+    sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
+    docker compose -f docker-compose-gpu.yml up -d
+    docker logs -f ragflow-server
 else
      echo "Ragflow will not be installed"
 fi
