@@ -161,14 +161,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # Access at localhost:5678
     
     # n8n start script for Ubuntu
-    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_docker_n8n.sh
-    echo " "                                                                                                                  >> /home/$USER/start_docker_n8n.sh
-    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_docker_n8n.sh
-    echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_docker_n8n.sh
-    echo "echo 'Use \"top -u $USER\" command to see memory usage'"                                                             >>  /home/ashok/start_docker_n8n.sh
-    echo "sleep 9"                                                                                                             >> /home/$USER/start_docker_n8n.sh
-    echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_docker_n8n.sh
-    echo "docker run -d -it --rm --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_docker_n8n.sh
+    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
+    echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
+    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
+    echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_n8n.sh
+    echo "echo 'Use \"top -u $USER\" command to see memory usage'"                                                             >>  /home/ashok/start_n8n.sh
+    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
+    echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
+    echo "docker run -d -it --rm --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
     
     # n8n start script for WSL
     echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
@@ -180,8 +180,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
     echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
     cd ~/
-    ln -sT /home/$USER/start_docker_n8n.sh start_n8n.sh
-    ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
+    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
+    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
 else
     echo "n8n docker will not be installed"
 fi
@@ -198,17 +198,17 @@ input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
       cd /home/$USER/
       # Start ollama docker in future
-      echo '#!/bin/bash'                                                                                        > /home/$USER/start_docker_ollama.sh
-      echo " "                                                                                                  >> /home/$USER/start_docker_ollama.sh
-      echo "echo '1. Run a model as: docker exec -it ollama ollama run <modelName>'"                            >> /home/$USER/start_docker_ollama.sh
-      echo "echo '   Alias for command=> docker exec -it ollama => has a name: ollama'"                             >> /home/$USER/start_docker_ollama.sh
-      echo "echo '2. Start/stop ollama docker: docker start/stop ollama'"                                       >> /home/$USER/start_docker_ollama.sh
-      echo "echo '3. Ollama is at port 11434'"                                                                  >> /home/$USER/start_docker_ollama.sh
-      echo "echo '   Access as: http://host.docker.internal:11434'"                                             >> /home/$USER/start_docker_ollama.sh
-      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start_docker_ollama.sh
-      echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_docker_ollama.sh
-      echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_docker_ollama.sh
-      echo "echo '6. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_docker_ollama.sh
+      echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
+      echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+      echo "echo '1. Run a model as: docker exec -it ollama ollama run <modelName>'"                            >> /home/$USER/start_ollama.sh
+      echo "echo '   Alias for command=> docker exec -it ollama => has a name: ollama'"                             >> /home/$USER/start_ollama.sh
+      echo "echo '2. Start/stop ollama docker: docker start/stop ollama'"                                       >> /home/$USER/start_ollama.sh
+      echo "echo '3. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
+      echo "echo '   Access as: http://host.docker.internal:11434'"                                             >> /home/$USER/start_ollama.sh
+      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start_ollama.sh
+      echo "echo '4. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
+      echo "echo '5. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
+      echo "echo '6. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
       chmod +x /home/$USER/*.sh
 
       # For model storage local folder ollama is mounted.
@@ -240,13 +240,13 @@ if [[ $input == "Y" || $input == "y" ]]; then
    # Ref: https://docs.flowiseai.com/getting-started
    echo "Installing flowise docker. Takes time.."             
    # Start script
-   echo '#!/bin/bash'                                         >  /home/$USER/start_docker_flowise.sh
-   echo " "                                                   >> /home/$USER/start_docker_flowise.sh
-   echo "cd ~/"                                               >> /home/$USER/start_docker_flowise.sh
-   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_docker_flowise.sh
-   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_docker_flowise.sh
-   echo "docker start flowise"                                >> /home/$USER/start_docker_flowise.sh
-   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_docker_flowise.sh
+   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
+   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
+   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
 
    # Stop script
    echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
@@ -269,8 +269,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "            docker stop flowise"                     
    echo " Also, check all containers available, as:"
    echo "             docker ps -a "     
-   ln -sT /home/$USER/start_docker_flowise.sh start_flowise.sh
-   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
+   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
+   #ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
  else
    echo "Flowise docker will not be installed"
  fi  
@@ -290,8 +290,10 @@ chmod +x /home/$USER/*.sh
     if [[ $input == "Y" || $input == "y" ]]; then
         cd /home/$USER/
         echo " "
+        echo "======"                                             
         echo "Installing dify docker"
-        echo "Access it at: http://localhost/install"
+        echo "Access it at: http://localhost:8887/install"
+        echo "======"                                              
         echo " "
         sleep 5
         cd /home/$USER
@@ -305,9 +307,14 @@ chmod +x /home/$USER/*.sh
         # Start script
         echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
         echo " "                                                   >> /home/$USER/start_dify.sh
-        echo "echo 'dify port 8887 onstarting'"                    >> /home/$USER/start_dify.sh
+        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
+        echo "echo 'dify port is 8887'"                            >> /home/$USER/start_dify.sh
+        echo "echo 'Access it at: http://localhost:8887/install'"  >> /home/$USER/start_dify.sh
+        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
+        echo "sleep 4"                                             >> /home/$USER/start_dify.sh
         echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
         echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
+        echo "netstat -aunt | grep 8887"                           >> /home/$USER/start_dify.sh
         # Stop script
         echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
         echo " "                                                  >> /home/$USER/stop_dify.sh
@@ -331,15 +338,19 @@ input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/$USER/
     echo "Installing RagFlow docker"
-    echo "After installation, access ragflow, as: http://<hostIP>"
+    echo "After installation, access ragflow, as: http://<hostIP>:800"
     sleep 5
     # Start script
     echo '#!/bin/bash'                                         >  /home/$USER/start_ragflow.sh
     echo " "                                                   >> /home/$USER/start_ragflow.sh
-    echo "echo 'RagFlow port 800 onstarting'"                  >> /home/$USER/start_ragflow.sh
+    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
+    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
+    echo "echo 'Access ragflow, as: http://<hostIP>:800'"      >> /home/$USER/start_ragflow.sh
+    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
+    echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
-    echo "netstat -aunt | grep 80"                              >> /home/$USER/start_ragflow.sh
+    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
     # Stop script
     echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
     echo " "                                                  >> /home/$USER/stop_ragflow.sh
@@ -355,12 +366,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sed -i 's/80:80/800:80/' docker-compose-gpu.yml
     sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
     docker compose -f docker-compose-gpu.yml up -d
+    echo " "
+    echo " "
+    echo "==========="
+    echo "Will Initialise ragflow. Use ctrl+c to break AFTER process ha started."
+    echo "==========="
+    sleep 5
     docker logs -f ragflow-server
 else
      echo "Ragflow will not be installed"
-fi
-    
-    
-
-     
+fi    
 
