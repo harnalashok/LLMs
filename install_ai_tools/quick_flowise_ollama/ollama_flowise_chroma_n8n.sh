@@ -386,8 +386,10 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo " "
     echo " "
     echo "==========="
-    echo "Will Initialise ragflow. Use ctrl+c to break AFTER process ha started."
+    echo "Will Initialise ragflow. Use ctrl+c to break AFTER process has started."
     echo "==========="
+    echo " "
+    echo " "
     sleep 5
     docker logs -f ragflow-server
 else
