@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 22nd July, 2025
+# Last amended: 23rd July, 2025
 
 
 
@@ -85,7 +85,6 @@ if [ ! -f /home/$USER/foo.txt ]; then
 fi
 # Check if docker is installed
 if command -v docker &> /dev/null; then
-   
     echo "Docker is installed."
 else
     echo "Docker is not installed."
@@ -108,6 +107,9 @@ else
 ##########################
 
 cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
 echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
 read input
 input=${input:-Y}
@@ -146,6 +148,9 @@ chmod +x /home/$USER/*.sh
 
 
 cd /home/$USER
+echo " "
+echo " "
+echo "------------"   
 echo "Shall I install n8n docker? [Y,n]"    
 read input
 input=${input:-Y}
@@ -192,6 +197,9 @@ chmod +x /home/$USER/*.sh
 ### ollama docker
 ##########################
 
+echo " "
+echo " "
+echo "------------"   
 echo "Shall I install ollama docker? [Y,n]"
 read input
 input=${input:-Y}
@@ -229,7 +237,9 @@ chmod +x /home/$USER/*.sh
 # flowise docker
 ######################
 
-
+echo " "
+echo " "
+echo "------------"   
 echo "Shall I install flowise docker? [Y,n]"    # Default is yes
 read input
 # Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
@@ -284,7 +294,11 @@ chmod +x /home/$USER/*.sh
 # Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
    
 ##########################
-     echo "Shall I install dify docker? [Y,n]"    # 
+  
+    echo " "
+    echo " "
+    echo "------------"   
+    echo "Shall I install dify docker? [Y,n]"    # 
     read input
     input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
@@ -332,6 +346,9 @@ chmod +x /home/$USER/*.sh
    
 ##########################
 
+echo " "
+echo " "
+echo "------------"   
 echo "Shall I install RAGFlow docker? [Y,n]"    # 
 read input
 input=${input:-Y}
