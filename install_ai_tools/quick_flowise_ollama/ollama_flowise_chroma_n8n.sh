@@ -342,6 +342,139 @@ chmod +x /home/$USER/*.sh
         echo "dify not installed"
     fi
 
+
+################
+# Install postgresql and sqlite3
+################
+
+echo "Installing postgresql and sqlite3"
+sudo apt install postgresql postgresql-contrib sqlite3   -y
+
+# Postgresql start/stop script
+echo '#!/bin/bash'                                                      > /home/$USER/start/start_postgresql.sh  
+echo " "                                                               >> /home/$USER/start/start_postgresql.sh  
+echo "cd ~/"                                                           >> /home/$USER/start/start_postgresql.sh  
+echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start/start_postgresql.sh  
+echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start/start_postgresql.sh  
+echo "sleep 2"                                                         >> /home/$USER/start/start_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start/start_postgresql.sh  
+
+echo '#!/bin/bash'                                                      > /home/$USER/stop/stop_postgresql.sh  
+echo " "                                                               >> /home/$USER/stop/stop_postgresql.sh  
+echo "cd ~/"                                                           >> /home/$USER/stop/stop_postgresql.sh  
+echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop/stop_postgresql.sh  
+echo "sleep 2"                                                         >> /home/$USER/stop/stop_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop/stop_postgresql.sh  
+
+cd /home/$USER/psql
+ln -sT /home/$USER/stop/stop_postgresql.sh stop_postgresql.sh
+ln -sT /home/$USER/start/start_postgresql.sh start_postgresql.sh
+cd ~/
+
+# A small help script
+echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+chmod +x *.sh
+
+
+################
+# Install postgresql and sqlite3
+################
+
+echo "Installing postgresql and sqlite3"
+sudo apt install postgresql postgresql-contrib sqlite3   -y
+
+cd /home/$USER/
+# Postgresql start/stop script
+echo '#!/bin/bash'                                                      > /home/$USER/start/start_postgresql.sh  
+echo " "                                                               >> /home/$USER/start/start_postgresql.sh  
+echo "cd ~/"                                                           >> /home/$USER/start/start_postgresql.sh  
+echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start/start_postgresql.sh  
+echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start/start_postgresql.sh  
+echo "sleep 2"                                                         >> /home/$USER/start/start_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start/start_postgresql.sh  
+
+echo '#!/bin/bash'                                                      > /home/$USER/stop/stop_postgresql.sh  
+echo " "                                                               >> /home/$USER/stop/stop_postgresql.sh  
+echo "cd ~/"                                                           >> /home/$USER/stop/stop_postgresql.sh  
+echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop/stop_postgresql.sh  
+echo "sleep 2"                                                         >> /home/$USER/stop/stop_postgresql.sh  
+echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop/stop_postgresql.sh  
+
+cd /home/$USER/psql
+ln -sT /home/$USER/stop/stop_postgresql.sh stop_postgresql.sh
+ln -sT /home/$USER/start/start_postgresql.sh start_postgresql.sh
+cd ~/
+
+# A small help script
+echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+chmod +x *.sh
+
+
+#############
+# psql related
+# Download scripts that will inturn, help create user and password
+# in postgresql
+##############
+
+cd /home/$USER/
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+chmod +x /home/$USER/*.sh
+
+
+# Create links
+mkdir /home/$USER/psql
+cd /home/$USER/psql
+ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
+ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
+ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
+ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
+ln -sT /home/$USER/psql.sh                       psql.sh
+cd ~/
+
+###########
+## Add postgres vector storage capability
+############
+
+# Add vector storage capability to postgres
+# My version of postgres db is 14.
+# (Check as: pg_config --version)
+# Install a needed package (depending upon your version of postgres)
+# Check version as: pg_config --version
+# Assuming version 14
+sudo apt install postgresql-server-dev-14  -y
+
+# Ref: https://github.com/pgvector/pgvector
+cd /tmp
+git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
+cd pgvector
+make
+sudo make install 
+cd /home/$USER/
+
+
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
