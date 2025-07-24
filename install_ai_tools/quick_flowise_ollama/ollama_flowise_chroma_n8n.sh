@@ -431,8 +431,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # (Check as: pg_config --version)
     # Install a needed package (depending upon your version of postgres)
     # Check version as: pg_config --version
-    # Assuming version 14
-    sudo apt install postgresql-server-dev-14  -y
+    # Assuming version 16
+    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
+    sudo apt install postgresql-server-dev-16  -y
     # Ref: https://github.com/pgvector/pgvector
     cd /tmp
     git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
