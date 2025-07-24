@@ -215,6 +215,29 @@ echo "echo '         sqlite3 mydatabase.db'"                           >> /home/
 echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
 chmod +x *.sh
 
+# Creating user 'ashok', and database 'ashok'. 
+# User 'ashok' has full authority over database 'ashok'
+echo " "
+echo " "
+echo "========="
+echo "Creating user 'ashok' and database 'askok'"
+echo "User 'ashok' has full authority over database 'ashok'"
+echo "User 'ashok' has password: ashok"
+echo "========="
+echo " "
+echo " "
+sleep 5
+sudo -u postgres psql -c 'create database ashok;'
+sudo -u postgres psql -c 'create user ashok;'
+sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+# Test the above, as:
+#   PGPASSWORD=qwerty psql -h localhost -p 5432 -U ashok -d ashok  
+#   CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);
+#   select * from acars ;
+
+INSERT INTO cars (brand, model, year)
+VALUES ('Ford', 'Mustang', 1964); 
 
 ###########
 # Fast Node Manager install
