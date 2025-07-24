@@ -161,29 +161,29 @@ if [[ $input == "Y" || $input == "y" ]]; then
     docker volume create n8n_data
     #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
     #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
-    # Access at localhost:5678
-    docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096"   -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+    # Access at localhost:45678
+    docker run -it -d --rm --name n8n -p 45678:5678 -e NODE_OPTIONS="--max-old-space-size=4096"   -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
     # Access at localhost:5678
     
     # n8n start script for Ubuntu
     echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
     echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
-    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
+    echo "echo 'Access n8n at port 45678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
     echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_n8n.sh
     echo "echo 'Use \"top -u $USER\" command to see memory usage'"                                                             >>  /home/$USER/start_n8n.sh
     echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
     echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
-    echo "docker run -d -it --rm --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+    echo "docker run -d -it --rm --name n8n -p 45678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
     
     # n8n start script for WSL
     echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
     echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
-    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                  >> /home/$USER/start_wsl_n8n.sh
+    echo "echo 'Access n8n at port 45678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
     echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
     echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
     echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
     # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
-    echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
+    echo "docker run -d -it --rm --network host --name n8n -p 45678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
     cd ~/
     #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
     #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
