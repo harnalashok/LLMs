@@ -347,7 +347,6 @@ chmod +x /home/$USER/*.sh
 # Install postgresql and sqlite3
 ################
 
-
 echo " "
 echo " "
 echo "------------"   
@@ -422,9 +421,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sleep 5
     sudo -u postgres psql -c 'create database ashok;'
     sudo -u postgres psql -c 'create user ashok;'
+    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
     sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
-
-sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
     ###########
     ## Add postgres vector storage capability
     ############
