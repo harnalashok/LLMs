@@ -43,7 +43,10 @@
 	sudo docker pull image-name 		Pulls image-name from DockerHub by default
 	sudo docker run image-name 		Starts a container from an image
     docker run 
-	    -p 8080:8080	\		Container ports
+	    -p 8080:8080	\		-p for Publishing 
+                                                    hostPort:ContainerPort; A request at HostPort is forwarded to containerPort
+                                                    For example, to publish the container's port 80 to host port 8080:
+                                                    docker run -d -p 8080:80 nginx
 		--name local-ai \		Assign a name to container
 		-ti 		\	        Allocate a  pseudo-TTY
 		localai/localai:latest-aio-cpu  Image name
@@ -53,7 +56,9 @@
 	   -v ollama:/root/.ollama \	        Mount local folder ollama (as docker volume) over
      	                                        container folder /root/.ollama. The local folder
 						is /var/lib/docker/volumes/ollama
-	   -p 11434:11434 \			App port is 11434
+	   -p 11434:11434 \			HostPort is 11434 and so also containerPort; A request at HostPort is forwarded to containerPort
+                                                For example, to publish the container's port 80 to host port 8080:
+                                                docker run -d -p 8080:80 nginx
 	   --name ollama  \		        Container name is ollama
 	    ollama/ollama 			Download image from default docker registry
 						from location ollama/ollama
