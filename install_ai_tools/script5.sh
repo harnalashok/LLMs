@@ -8,8 +8,14 @@ echo "You may call download_models.sh to download gguf models or from ollama lib
 echo "==========================="
 sleep 10
 
+
+
+
+#############
+# Postgres related
 # Download scripts that will inturn, help create user and password
 # in postgresql
+##############
 
 cd /home/$USER/
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
@@ -21,8 +27,8 @@ wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/insta
 chmod +x /home/$USER/*.sh
 
 
-
 # Create links
+mkdir /home/$USER/psql
 cd /home/$USER/psql
 ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
 ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
@@ -32,7 +38,7 @@ ln -sT /home/$USER/psql.sh                       psql.sh
 cd ~/
 
 ###########
-## Add vector storage capability
+## Add postgres vector storage capability
 ############
 
 # Add vector storage capability to postgres
@@ -49,8 +55,8 @@ git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
 cd pgvector
 make
 sudo make install 
-cd ~/
-
+cd /home/$USER/
+########
 
 
 mv /home/$USER/script5.sh        /home/$USER/done/
