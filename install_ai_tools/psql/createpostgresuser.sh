@@ -4,13 +4,22 @@ echo " "
 echo 'Ref: https://stackoverflow.com/a/2172588'
 echo "https://www.postgresql.org/docs/current/ddl-schemas.html"
 echo " "
+echo "  "
+echo "========="
+echo "User 'ashok' and database 'askok' already exist"
+echo "User 'ashok' has full authority over database 'ashok'"
+echo "User 'ashok' has password: ashok"
+echo "========="
+echo "  "
+echo " "
+sleep 5
 echo "============"
 echo 'Will open psql shell for operations'
 echo "============"
 echo " "
 echo 'Enter SQL command as in example below to create  a user LOGIN id'
 echo ' and his password, mypass (password be within single inverted commas)'
-echo "  "
+echo " "
 echo "AAA."
 echo "Example:  CREATE ROLE myuser LOGIN PASSWORD 'mypass' ; "
 echo " "
