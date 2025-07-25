@@ -125,19 +125,19 @@ Concepts
 		CREATE TABLE
 		joker=# 
 
-joker=# INSERT INTO departments (department_id,department_name)
-VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT');
-INSERT 0 3
-joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (1,'Alice', 10);
-INSERT 0 1
-joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (2,'Bob', 10);
-INSERT 0 1
-joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (3,'sudha', 20);
-INSERT 0 1
-joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (4,'Charlie', 3);
-ERROR:  insert or update on table "employees" violates foreign key constraint "employees_departmentid_fkey"
-DETAIL:  Key (departmentid)=(3) is not present in table "departments".
-joker=# 
+		joker=# INSERT INTO departments (department_id,department_name)
+		VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT');
+		INSERT 0 3
+		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (1,'Alice', 10);
+		INSERT 0 1
+		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (2,'Bob', 10);
+		INSERT 0 1
+		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (3,'sudha', 20);
+		INSERT 0 1
+		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (4,'Charlie', 3);
+		ERROR:  insert or update on table "employees" violates foreign key constraint "employees_departmentid_fkey"
+		DETAIL:  Key (departmentid)=(3) is not present in table "departments".
+		joker=# 
 
 
 
