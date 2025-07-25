@@ -197,7 +197,7 @@ Concepts
 		    \q: 		Quits the psql session.
 		    \?: 		Displays a comprehensive list of all available meta-commands with brief descriptions.
 		
-References:
+Self-study References:
 Querying a table:    https://www.postgresql.org/docs/current/tutorial-select.html
 Join between tables: https://www.postgresql.org/docs/current/tutorial-join.html
 Aggregate functions: https://www.postgresql.org/docs/current/tutorial-agg.html
