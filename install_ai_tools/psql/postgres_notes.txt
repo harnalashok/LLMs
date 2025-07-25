@@ -31,9 +31,7 @@ Concepts
 
         To list all 'superusers', issue command: \du
 
-        Key words: Default database, superuser, logged in role, prompt
-
-	Postgres has, by default, a database 'postgres' and a superuser 'postgres'.
+        3. Postgres has, by default, a database 'postgres' and a superuser 'postgres'.
 	A superuser in PostgreSQL is a user who bypasses all permission checks. 
 	This user can do anything. The prompt:
 	
@@ -52,7 +50,27 @@ Concepts
 	myuser:
 	
 		postgres=> set role postgres ;
-		postgres=# CREATE DATABASE mydatabase WITH OWNER = myuser;
+
+	4. To create a database and a user, first loginto system user (and NOT postgres user) postgres :
+
+		ashok@ashok:~$ sudo su postgres
+           
+            Then, open psql:
+
+                postgres@ashok:~$ psql
+
+            This command assumes that postgres has a role with the same name as the current user *ie postgres)
+            and tries to log you in (else, issue command: psql ashok --- to login a user ashok). Prompt is:
+
+		postgres=# 
+	
+	5. Create a user and create a database, as:
+
+	
+
+
+
+postgres=# CREATE DATABASE mydatabase WITH OWNER = myuser;
 		CREATE DATABASE
 	
 	IF 'myuser' wants to create a table, he has to proceed as follows. First connect to
