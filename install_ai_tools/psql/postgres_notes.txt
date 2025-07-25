@@ -70,7 +70,7 @@ Concepts
 		postgres=# CREATE DATABASE joker ;
      
 
-
+CREATE DATABASE dbname OWNER rolename;
 
 postgres=# CREATE DATABASE mydatabase WITH OWNER = myuser;
 		CREATE DATABASE
