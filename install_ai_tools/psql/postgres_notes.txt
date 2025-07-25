@@ -1,13 +1,33 @@
 # Postgres notes:  
-Last amended: 24th July, 2025  
+# Last amended: 25th July, 2025  
+
 Concepts
-  =========
-       psql Prompt:
+=========
+       1. psql Prompt:
        A standard prompt is displayed when psql is ready to accept a new SQL command
        or meta-command. By default, it often shows the database name followed by => 
        for regular users or # for superusers (e.g., mydatabase=> or postgres=#). 
-       List all databases with **\l** command.
+       List all databases with \l command.
 
+       2. System users and postgres users:
+       The root user is an account on the system independent from Postgres. There is 
+       only ONE root user. A superuser is an account in Postgres with access to 
+       everything. There may be MANY superusers. System accounts and Postgres 
+       accounts are different things, although unless you specify a Postgres username
+       when you connect to the database (through utilities like psql, createdb, dropdb,
+       or otherwise), it will use the current system user's name in hopes that there is
+       a corresponding Postgres account with the same name. The root user does not, 
+       by default, have a corresponding account in Postgres. When you install Postgres 
+       on *nix, it creates both a superuser named postgres and a system user named postgres.
+       Therefore, when you need to do something with Postgres as the built-in superuser, 
+       you have two options:
+
+               a. You may sudo su - postgres to become the postgres system user and 
+                  execute your command (createdb, psql, etc). Because the system user
+                  has the same name as the database superuser, your command will 
+                  connect as the appropriate account.
+    	       b. You may specify the username to execute as with the -U switch, eg
+                  psql -U postgres 
 
         Key words: Default database, superuser, logged in role, prompt
 
