@@ -3,6 +3,13 @@
 
 Concepts
 =========
+       psql Prompt:
+       A standard prompt is displayed when psql is ready to accept a new SQL command
+       or meta-command. By default, it often shows the database name followed by => 
+       for regular users or # for superusers (e.g., mydatabase=> or postgres=#). 
+       List all databases with **\l** command.
+
+
         Key words: Default database, superuser, logged in role, prompt
 
 	Postgres has, by default, a database 'postgres' and a superuser 'postgres'.
