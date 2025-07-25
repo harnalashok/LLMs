@@ -89,13 +89,16 @@ Concepts
 		# Create a table:
 		joker=# CREATE TABLE product (
                         id           char(5) primary key,
-                        name         varchar(20),           -- low temperature
-                        price        real,           -- high temperature
-                        qty          integer,          -- precipitation
+                        name         varchar(20),      
+                        price        real,             
+                        qty          integer,          
                         purchased    boolean,          -- true or false
                         feedback     text 
                     );
 		CREATE TABLE
+
+		joker=# INSERT INTO product (id, name, price) VALUES ('01121', 'Mustang', 60.4);
+
 		
 
 
