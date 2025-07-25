@@ -96,8 +96,9 @@ Concepts
                         feedback     text 
                     );
 		CREATE TABLE
-
+		# Insert values
 		joker=# INSERT INTO product (id, name, price) VALUES ('01121', 'Mustang', 60.4);
+		joker=# select * from product ;
 
 		
 
