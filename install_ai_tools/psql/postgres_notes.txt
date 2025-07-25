@@ -186,8 +186,21 @@ Concepts
 		 public | product     | table | postgres
 		(3 rows)
 
-		
+	11. Commonly Used Meta-Commands:
 
+		    \l:			Lists all available databases on the PostgreSQL server.
+		    \c:  mydatabase: 	Connects to a mydatabase.
+		    \dt: 		Lists all tables within the current database. 
+		    \d employees: 	Describes employees table
+		    \du: 		Lists all roles (users) and their attributes.
+		    \dn: 		Lists all schemas.
+		    \q: 		Quits the psql session.
+		    \?: 		Displays a comprehensive list of all available meta-commands with brief descriptions.
+		
+References:
+Querying a table:    https://www.postgresql.org/docs/current/tutorial-select.html
+Join between tables: https://www.postgresql.org/docs/current/tutorial-join.html
+Aggregate functions: https://www.postgresql.org/docs/current/tutorial-agg.html
 
 =======================OLD Collection=================================
 
