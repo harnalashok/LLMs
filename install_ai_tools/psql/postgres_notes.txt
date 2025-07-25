@@ -139,11 +139,7 @@ Concepts
 		DETAIL:  Key (departmentid)=(3) is not present in table "departments".
 		joker=# 
 
-
-
-
-
-	Schemas in postgresql:
+	9. Schemas in postgresql:
 		In PostgreSQL, a schema is a named collection or logical grouping of database objects within a single database. 
 		These objects can include tables, views, functions, sequences, indexes, and data types. Schemas serve as 
 		namespaces, allowing for the organization and management of database objects in complex databases.
@@ -180,18 +176,21 @@ Concepts
 
 		CREATE TABLE mydatabase.public.products (...);
 
-
-
-
-
-
+	10. What tables exist in the current databaseL Use \dt
+		joker=# \dt
+		            List of relations
+		 Schema |    Name     | Type  |  Owner   
+		--------+-------------+-------+----------
+		 public | departments | table | postgres
+		 public | employees   | table | postgres
+		 public | product     | table | postgres
+		(3 rows)
 
 		
 
-CREATE DATABASE dbname OWNER rolename;
 
-postgres=# CREATE DATABASE mydatabase WITH OWNER = myuser;
-		CREATE DATABASE
+=======================OLD Collection=================================
+
 	
 	IF 'myuser' wants to create a table, he has to proceed as follows. First connect to
 	the database, mydatabase:
