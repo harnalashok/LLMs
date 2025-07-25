@@ -27,7 +27,9 @@ Concepts
                   has the same name as the database superuser, your command will 
                   connect as the appropriate account.
     	       b. You may specify the username to execute as with the -U switch, eg
-                  psql -U postgres 
+                  psql -U postgres   
+
+        To list all 'superusers', issue command: \du
 
         Key words: Default database, superuser, logged in role, prompt
 
