@@ -68,6 +68,8 @@ Concepts
 
 		postgres=# create user joker with password 'joker' ;
 		postgres=# CREATE DATABASE joker ;
+		postgres=# CREATE DATABASE king with owner ashok ; 
+		postgres=# CREATE DATABASE king with owner ashok ; 
      
 
 CREATE DATABASE dbname OWNER rolename;
