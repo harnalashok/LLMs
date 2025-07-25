@@ -144,21 +144,42 @@ Concepts
 
 
 	Schemas in postgresql:
+		In PostgreSQL, a schema is a named collection or logical grouping of database objects within a single database. 
+		These objects can include tables, views, functions, sequences, indexes, and data types. Schemas serve as 
+		namespaces, allowing for the organization and management of database objects in complex databases.
+		
+		Key aspects of PostgreSQL schemas:
+		Organization:
+			Schemas provide a way to logically group related database objects, making complex databases more 
+			manageable and easier to understand. For instance, you could have separate schemas for different
+			applications, departments, or functional areas within the same database (e.g., sales, hr, ecommerce).
+		
+		Namespacing:
+			Schemas create distinct namespaces. This means that objects with the same name can exist in different
+			schemas without causing conflicts. For example, you could have a users table in a public schema and 
+			another users table in an auth schema, referenced as public.users and auth.users respectively. 
+		Access Control:
+			Schemas can be used to manage permissions and access control. You can grant or revoke privileges on
+			specific schemas or the objects within them to different users or roles, enhancing security and data
+			isolation.
+		Default Schema:
+			Every new PostgreSQL database automatically includes a public schema, which is the default schema for
+			creating objects if no specific schema is mentioned.
 
-In PostgreSQL, a schema is a named collection or logical grouping of database objects within a single database. These objects can include tables, views, functions, sequences, indexes, and data types. Schemas serve as namespaces, allowing for the organization and management of database objects.
-Key aspects of PostgreSQL schemas:
+		We created tables without specifying any schema names. By default such tables (and other objects) are 
+		automatically put into a schema named “public”. Every new database contains such a schema. Thus, the 
+		following are equivalent:
+		
+		CREATE TABLE products ( ... );
+		
+		and:
+		
+		CREATE TABLE public.products ( ... );
 
-    Organization:
-    Schemas provide a way to logically group related database objects, making complex databases more manageable and easier to understand. For instance, you could have separate schemas for different applications, departments, or functional areas within the same database (e.g., sales, hr, ecommerce).
+		and:
 
-Namespacing:
-Schemas create distinct namespaces. This means that objects with the same name can exist in different schemas without causing conflicts. For example, you could have a users table in a public schema and another users table in an auth schema, referenced as public.users and auth.users respectively. 
-Access Control:
-Schemas can be used to manage permissions and access control. You can grant or revoke privileges on specific schemas or the objects within them to different users or roles, enhancing security and data isolation.
-Default Schema:
-Every new PostgreSQL database automatically includes a public schema, which is the default schema for creating objects if no specific schema is mentioned.
-Schema Search Path:
-PostgreSQL uses a search_path to determine the order in which schemas are checked when an object is referenced without a fully qualified name (e.g., just users instead of public.users). The default search path typically includes $user (the schema named after the current user) and public. This path can be customized.
+		CREATE TABLE mydatabase.public.products (...);
+
 
 
 
