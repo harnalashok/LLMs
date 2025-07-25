@@ -70,7 +70,40 @@ Concepts
 		postgres=# CREATE DATABASE joker ;
 		postgres=# CREATE DATABASE king with owner ashok ; 
 		postgres=# GRANT ALL PRIVILEGES ON DATABASE joker TO ashok; 
-     
+        
+	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
+	   Thus, this command fails:
+
+		ashok@ashok:~$ psql -U joker -d 'joker' ;
+	
+	7. Login as, postgres user and change role to joker, as:
+
+		sudo su postgres
+		psql -U postgres
+		postgres=# set role joker ;
+		postgres=> 
+		# Connect to joker database
+		postgres=> \c joker
+		You are now connected to database "joker" as user "postgres".
+		joker=# 
+		# Create a table:
+		joker=# CREATE TABLE product (
+                        id           char(5) primary key,
+                        name         varchar(20),           -- low temperature
+                        price        real,           -- high temperature
+                        qty          integer,          -- precipitation
+                        purchased    boolean,          -- true or false
+                        feedback     text 
+                    );
+		CREATE TABLE
+		
+
+
+
+
+
+
+		
 
 CREATE DATABASE dbname OWNER rolename;
 
