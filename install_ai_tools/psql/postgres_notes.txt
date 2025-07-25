@@ -1,8 +1,7 @@
-# Postgres notes:
-# Last amended: 24th July, 2025
-
+# Postgres notes:  
+Last amended: 24th July, 2025  
 Concepts
-=========
+  =========
        psql Prompt:
        A standard prompt is displayed when psql is ready to accept a new SQL command
        or meta-command. By default, it often shows the database name followed by => 
