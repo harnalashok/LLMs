@@ -196,11 +196,33 @@ Concepts
 		    \dn: 		Lists all schemas.
 		    \q: 		Quits the psql session.
 		    \?: 		Displays a comprehensive list of all available meta-commands with brief descriptions.
-		
-Self-study References:
-Querying a table:    https://www.postgresql.org/docs/current/tutorial-select.html
-Join between tables: https://www.postgresql.org/docs/current/tutorial-join.html
-Aggregate functions: https://www.postgresql.org/docs/current/tutorial-agg.html
+
+	12. Roles vs users:
+		In PostgreSQL, the concepts of "users" and "roles" are essentially unified. Both are represented by the
+		same underlying entity, a "role." The primary difference lies in a single attribute: the LOGIN attribute.
+	    Role:
+    		A role in PostgreSQL is a general concept that can represent either an individual user or a group of users. 
+		Roles are used to manage permissions and ownership of database objects. They can be granted various 
+		privileges (e.g., SELECT, INSERT, UPDATE) on tables, views, functions, and other database objects. 
+		Roles can also be members of other roles, inheriting their permissions.
+    	   User:
+    		A "user" in PostgreSQL is simply a role that has the LOGIN attribute enabled. This attribute allows 
+		the role to connect to the PostgreSQL server and authenticate, typically using a password. When you 
+		CREATE USER, you are effectively creating a role with the LOGIN attribute set to TRUE by default. 
+
+	Key Differences Summarized:
+	    Login Capability:
+    		The defining difference is that a "user" (a role with LOGIN attribute) can log in to the database,
+		while a "group role" (a role without LOGIN attribute) cannot directly log in.
+    	    Purpose:
+    		Roles without LOGIN are primarily used for organizing permissions and creating logical groups of
+		privileges that can be easily assigned to multiple users. Roles with LOGIN are intended for 
+		individual or application-specific access.
+    		
+	13. Self-study References:
+		Querying a table:    https://www.postgresql.org/docs/current/tutorial-select.html
+		Join between tables: https://www.postgresql.org/docs/current/tutorial-join.html
+		Aggregate functions: https://www.postgresql.org/docs/current/tutorial-agg.html
 
 =======================OLD Collection=================================
 
