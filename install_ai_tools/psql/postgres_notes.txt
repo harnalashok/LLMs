@@ -67,8 +67,8 @@ Concepts
 	5. Create a user and create a database, as:
 
 		postgres=# create user joker with password 'joker' ;
-
-       6. postgres=# create user joker with password 'joker' ;
+		postgres=# CREATE DATABASE joker ;
+     
 
 
 
