@@ -460,10 +460,13 @@ db_amit=# \dt			--Database (d) tables(t)
 ## sudo -u postgres bash -c "psql -c \"CREATE USER vagrant WITH PASSWORD 'vagrant';\""
 ##################################
 
+# Replace user by anyname and change password
 sudo -u postgres psql -c 'create database ashok;'
 sudo -u postgres psql -c 'create user ashok;'
 sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
 sudo -u postgres psql -c "alter user ashok with encrypted password 'qwerty';"
+sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO ashok;" 
+
 PGPASSWORD=ashok psql -h localhost -p 5432 -U ashok -d ashok  
 # psql shell
 CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);
