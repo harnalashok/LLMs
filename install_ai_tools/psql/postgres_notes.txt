@@ -467,11 +467,14 @@ sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
 sudo -u postgres psql -c "alter user ashok with encrypted password 'qwerty';"
 sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO ashok;" 
 
+# For any user amit
+sudo useradd -m amit
+sudo passwd amit
 sudo -u postgres psql -c 'create database amit;'
 sudo -u postgres psql -c 'create user amit;'
 sudo -u postgres psql -c 'grant all privileges on database amit to amit;'
 sudo -u postgres psql -c "alter user amit with encrypted password 'amit';"
-sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO amit;" 
+sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO amit;" -d amit 
 
 PGPASSWORD=ashok psql -h localhost -p 5432 -U ashok -d ashok  
 # psql shell
