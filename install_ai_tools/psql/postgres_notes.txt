@@ -472,10 +472,10 @@ sudo useradd -m amit
 sudo passwd amit
 sudo -u postgres psql -c 'create database amit;'
 sudo -u postgres psql -c 'create user amit;'
-sudo -u postgres psql -c 'grant all privileges on database amit to amit;'
+sudo -u postgres psql -c 'grant all privileges on database amit to amit;' -d amit
 sudo -u postgres psql -c "alter user amit with encrypted password 'amit';"
 sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO amit;" -d amit 
-
+CREATE EXTENSION vector;
 PGPASSWORD=ashok psql -h localhost -p 5432 -U ashok -d ashok  
 # psql shell
 CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);
