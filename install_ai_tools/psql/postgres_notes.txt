@@ -463,19 +463,38 @@ db_amit=# \dt			--Database (d) tables(t)
 # Replace user by anyname and change password
 sudo -u postgres psql -c 'create database ashok;'
 sudo -u postgres psql -c 'create user ashok;'
-sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;' -d ashok
 sudo -u postgres psql -c "alter user ashok with encrypted password 'qwerty';"
-sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO ashok;" 
+sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO ashok;" -d ashok 
+sudo -u postgres psql -c " CREATE EXTENSION vector;" -d ashok 
 
-# For any user amit
+# For any other user amit
+# First add amit to system user
 sudo useradd -m amit
 sudo passwd amit
+# Add as postgres user and connected to postgres database
 sudo -u postgres psql -c 'create database amit;'
 sudo -u postgres psql -c 'create user amit;'
+# Modify as postgres user but while connected to amit database
 sudo -u postgres psql -c 'grant all privileges on database amit to amit;' -d amit
+# Set password as postgres user and connected to postgres database
 sudo -u postgres psql -c "alter user amit with encrypted password 'amit';"
+# Modify as postgres user but while connected to amit database
 sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO amit;" -d amit 
-CREATE EXTENSION vector;
+sudo -u postgres psql -c " CREATE EXTENSION vector;" -d gautam 
+
+# For any user gandhi
+sudo useradd -m gandhi
+sudo passwd gandhi
+sudo -u postgres psql -c 'create database gandhi;'
+sudo -u postgres psql -c 'create user gandhi;'
+sudo -u postgres psql -c 'grant all privileges on database gandhi to gandhi;' -d gandhi
+sudo -u postgres psql -c "alter user gandhi with encrypted password 'gandhi';"
+sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO gandhi;" -d gandhi 
+sudo -u postgres psql -c " CREATE EXTENSION vector;" -d gandhi 
+
+
+
 PGPASSWORD=ashok psql -h localhost -p 5432 -U ashok -d ashok  
 # psql shell
 CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);
