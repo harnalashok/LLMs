@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 20th July, 2025
+# Last amended: 26th July, 2025
 
 #------ Steps ---------
 #     i) Download this file in Ubuntu, and
@@ -118,6 +118,15 @@ echo "echo 'Deactivate as:'"        >>   /home/$USER/find_venv.sh
 echo "echo '    deactivate'"        >>   /home/$USER/find_venv.sh
 echo "echo '=========='"        >>   /home/$USER/find_venv.sh
 echo "find ~ | grep -E '/bin/activate$'"   >> /home/$USER/find_venv.sh
+
+# Script to stop all dockers
+echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
+echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
+echo " "                                                   | tee -a /home/$USER/stop_alldockers.sh
+echo "cd /home/$USER/"                                     | tee -a /home/$USER/stop_alldockers.sh
+echo "docker stop $(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
+echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
+
 
 chmod +x *.sh
 chmod +x /home/$USER/next/*.sh
