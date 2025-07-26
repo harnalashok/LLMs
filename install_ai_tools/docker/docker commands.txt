@@ -68,7 +68,7 @@
     sudo docker start container-id/container-name 	Restarts a stopped container
 	sudo docker stop container-id/container-name 	Stops a running container
 
-# Stop all containers:
+# Stop all dockers stop all containers:
 	docker stop $(docker ps -aq)
 
 # List all running containers
