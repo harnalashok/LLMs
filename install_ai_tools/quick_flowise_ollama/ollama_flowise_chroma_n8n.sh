@@ -59,7 +59,7 @@ if [ ! -f /home/$USER/foo.txt ]; then
     echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
     echo " "                                                   | tee -a /home/$USER/stop_alldockers.sh
     echo "cd /home/$USER/"                                     | tee -a /home/$USER/stop_alldockers.sh
-    echo "docker stop $(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
+    echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
     echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
     chmod +x *.sh   
     # Folders for start/stop scripts
