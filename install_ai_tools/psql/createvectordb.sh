@@ -6,6 +6,8 @@ echo " "
 echo "============"
 echo 'Add vector storage capability to an existing pg database'
 echo 'Will open psql shell to execute two commands.'
+echo "You must be a superuser to make any database a vector database"
+echo "ie i) sudo su postgres ; ii) psql ; iii) \c mydatabase ; iv) CREATE EXTENSION vector; v) \q "
 echo "============"
 echo " "
 echo 'To create a user and a database first execute script:'
