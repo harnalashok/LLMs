@@ -275,6 +275,10 @@ Concepts
 		Join between tables: https://www.postgresql.org/docs/current/tutorial-join.html
 		Aggregate functions: https://www.postgresql.org/docs/current/tutorial-agg.html
 
+	15. Postgresql version:
+
+		psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+
 =======================OLD Collection=================================
 
 	
