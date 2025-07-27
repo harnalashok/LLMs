@@ -219,15 +219,15 @@ Concepts
 		privileges that can be easily assigned to multiple users. Roles with LOGIN are intended for 
 		individual or application-specific access.
 
-	13. Directly from command line:
+	13. psql directly from command line (shell):
 		## Ref: https://stackoverflow.com/a/28687714
 		## sudo -u postgres bash -c "psql -c \"CREATE USER vagrant WITH PASSWORD 'vagrant';\""
 		##################################
 		AA)
 		# Remember postgres is BOTH a system user as also postgres user
-		# sudo -u postgres: Run the command as a user (postgres) other than the default target user (usually root).
+		# sudo -u postgres: Run the command as user (postgres) other than the default root user.
 		# psql -c : Specifies that psql is to execute the given command string, command.
-		# psql -c "command" -d : Specifies the name of the database to connect to while executing the command.
+		# psql -c "command" -d : Specifies name of database to connect to while executing the command.
 		# For system user: 'ashok'
 		sudo -u postgres psql -c 'create database ashok;'
 		sudo -u postgres psql -c 'create user ashok;'
