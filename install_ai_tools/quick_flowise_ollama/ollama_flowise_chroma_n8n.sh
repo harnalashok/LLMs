@@ -282,7 +282,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
    sudo docker build --no-cache -t flowise .
-   sudo docker run -d --name flowise -p 3000:3000 flowise
+   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
    echo "In future to start/stop containers, proceed, as:"
    echo "            cd /home/$USER/Flowise"                  
    echo "            docker start flowise"                    
