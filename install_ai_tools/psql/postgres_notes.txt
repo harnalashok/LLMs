@@ -218,8 +218,59 @@ Concepts
     		Roles without LOGIN are primarily used for organizing permissions and creating logical groups of
 		privileges that can be easily assigned to multiple users. Roles with LOGIN are intended for 
 		individual or application-specific access.
+
+	13. Directly from command line:
+		## Ref: https://stackoverflow.com/a/28687714
+		## sudo -u postgres bash -c "psql -c \"CREATE USER vagrant WITH PASSWORD 'vagrant';\""
+		##################################
+		AA)
+		# Remember postgres is BOTH a system user as also postgres user
+		# sudo -u postgres: Run the command as a user (postgres) other than the default target user (usually root).
+		# psql -c : Specifies that psql is to execute the given command string, command.
+		# psql -c "command" -d : Specifies the name of the database to connect to while executing the command.
+		# For system user: 'ashok'
+		sudo -u postgres psql -c 'create database ashok;'
+		sudo -u postgres psql -c 'create user ashok;'
+		sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;' -d ashok
+		sudo -u postgres psql -c "alter user ashok with encrypted password 'qwerty';"
+		sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO ashok;" -d ashok 
+		sudo -u postgres psql -c " CREATE EXTENSION vector;" -d ashok 
+
+		AB)
+		# For any other user amit
+		# First add amit to system user
+		sudo useradd -m amit
+		sudo passwd amit
+		# Execute all the following as superuser ie as postgres 
+		# Unless so specified (with -d), default connected database is: postgres
+		sudo -u postgres psql -c 'create database amit;'
+		sudo -u postgres psql -c 'create user amit;'
+		# Issue command as superuser but while connected to amit database
+		sudo -u postgres psql -c 'grant all privileges on database amit to amit;' -d amit
+		# Issue command as superuser (postgres) but while connected to postgres database (default)
+		sudo -u postgres psql -c "alter user amit with encrypted password 'amit';"
+		# Modify as postgres user but while connected to amit database
+		sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO amit;" -d amit 
+		sudo -u postgres psql -c " CREATE EXTENSION vector;" -d gautam 
+
+		AC)
+		# For any user gandhi
+		sudo useradd -m gandhi
+		sudo passwd gandhi
+		sudo -u postgres psql -c 'create database gandhi;'
+		sudo -u postgres psql -c 'create user gandhi;'
+		sudo -u postgres psql -c 'grant all privileges on database gandhi to gandhi;' -d gandhi
+		sudo -u postgres psql -c "alter user gandhi with encrypted password 'gandhi';"
+		sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO gandhi;" -d gandhi 
+		sudo -u postgres psql -c " CREATE EXTENSION vector;" -d gandhi 
+		
+		AD)
+		# psql shell
+		CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);
+		INSERT INTO cars (brand, model, year) VALUES ('Ford', 'Mustang', 1964);
+		select * from cars ;
     		
-	13. Self-study References:
+	14. Self-study References:
 		Querying a table:    https://www.postgresql.org/docs/current/tutorial-select.html
 		Join between tables: https://www.postgresql.org/docs/current/tutorial-join.html
 		Aggregate functions: https://www.postgresql.org/docs/current/tutorial-agg.html
@@ -459,8 +510,11 @@ db_amit=# \dt			--Database (d) tables(t)
 ## Ref: https://stackoverflow.com/a/28687714
 ## sudo -u postgres bash -c "psql -c \"CREATE USER vagrant WITH PASSWORD 'vagrant';\""
 ##################################
-
-# Replace user by anyname and change password
+# Remember postgres is BOTH a system user as also postgres user
+# sudo -u postgres: Run the command as a user (postgres) other than the default target user (usually root).
+# psql -c : Specifies that psql is to execute the given command string, command.
+# psql -c "command" -d : Specifies the name of the database to connect to while executing the command.
+# For system user: 'ashok'
 sudo -u postgres psql -c 'create database ashok;'
 sudo -u postgres psql -c 'create user ashok;'
 sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;' -d ashok
@@ -472,12 +526,13 @@ sudo -u postgres psql -c " CREATE EXTENSION vector;" -d ashok
 # First add amit to system user
 sudo useradd -m amit
 sudo passwd amit
-# Add as postgres user and connected to postgres database
+# Execute all the following as superuser ie as postgres 
+# Unless so specified (with -d), default connected database is: postgres
 sudo -u postgres psql -c 'create database amit;'
 sudo -u postgres psql -c 'create user amit;'
-# Modify as postgres user but while connected to amit database
+# Issue command as superuser but while connected to amit database
 sudo -u postgres psql -c 'grant all privileges on database amit to amit;' -d amit
-# Set password as postgres user and connected to postgres database
+# Issue command as superuser (postgres) but while connected to postgres database (default)
 sudo -u postgres psql -c "alter user amit with encrypted password 'amit';"
 # Modify as postgres user but while connected to amit database
 sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO amit;" -d amit 
