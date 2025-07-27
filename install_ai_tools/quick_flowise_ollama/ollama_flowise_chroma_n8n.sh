@@ -204,6 +204,8 @@ chmod +x /home/$USER/*.sh
 ##########################
 ### ollama docker
 ##########################
+docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+
 
 echo " "
 echo " "
@@ -267,6 +269,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
    echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
+
+docker run -d --name flowise -p 3000:3000 --network host flowise
 
    # Stop script
    echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
