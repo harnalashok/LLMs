@@ -278,6 +278,8 @@ Concepts
 	15. Postgresql version:
 
 		psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+                version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+                echo $version
 
 =======================OLD Collection=================================
 
