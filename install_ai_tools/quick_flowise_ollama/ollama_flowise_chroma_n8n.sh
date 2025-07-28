@@ -33,19 +33,16 @@ if [ ! -f /home/$USER/foo.txt ]; then
     sleep 2
     sudo apt update
     sudo apt upgrade -y
-    
     # To get multiple python versions, install repo
     # See: https://askubuntu.com/a/1538589
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt update 
-    
     # pipx to install poetry
     sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
     echo "Ubuntu being updated" > /home/$USER/foo.txt   # To avoid repeat updation
-    
     # Download docker installation scripts
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
