@@ -204,8 +204,6 @@ chmod +x /home/$USER/*.sh
 ##########################
 ### ollama docker
 ##########################
-docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
-
 
 echo " "
 echo " "
@@ -230,14 +228,15 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
       echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh                                                                             
       chmod +x /home/$USER/*.sh
-
       # For model storage local folder ollama is mounted.
       echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
       echo "Will install ollama for GPU..."
       sleep 4
       # Creating alias for command: docker exec -it ollama
       echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
-      docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+      # network host would be local mashine
+      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
 else
         echo "Skipping install of ollama docker"
 fi
@@ -269,9 +268,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
    echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-
-docker run -d --name flowise -p 3000:3000 --network host flowise
-
    # Stop script
    echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
    echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
@@ -281,12 +277,12 @@ docker run -d --name flowise -p 3000:3000 --network host flowise
    echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
    sleep 4
-   
    cd ~/
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
    sudo docker build --no-cache -t flowise .
    sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+   #    docker run -d --name flowise -p 3000:3000 --network host flowise
    echo "In future to start/stop containers, proceed, as:"
    echo "            cd /home/$USER/Flowise"                  
    echo "            docker start flowise"                    
@@ -500,6 +496,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sed -i 's/80:80/800:80/' docker-compose-gpu.yml
     sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
     docker compose -f docker-compose-gpu.yml up -d
+    # docker update --restart=no [container_name_or_id]
     echo " "
     echo " "
     echo "==========="
