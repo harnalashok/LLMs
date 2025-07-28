@@ -47,7 +47,10 @@ cd ~/
 # Install a needed package (depending upon your version of postgres)
 # Check version as: pg_config --version
 # Assuming version 14
-sudo apt install postgresql-server-dev-14  -y
+psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+echo $version
+sudo apt install postgresql-server-dev-$version  -y
 
 # Ref: https://github.com/pgvector/pgvector
 cd /tmp
