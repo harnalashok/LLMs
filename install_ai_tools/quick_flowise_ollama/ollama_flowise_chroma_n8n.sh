@@ -103,8 +103,6 @@ else
     sleep 15
  fi
 
-
-
 ##########################
 ### Install chromadb docker
 # Ref: https://docs.trychroma.com/production/containers/docker
@@ -167,7 +165,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
     #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
     # Access at localhost:45678
-    docker run -it -d --rm --name n8n -p 45678:5678 -e NODE_OPTIONS="--max-old-space-size=4096"   -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+    docker run -it -d --rm --name n8n -p 45678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
     # Access at localhost:5678
     
     # n8n start script for Ubuntu
