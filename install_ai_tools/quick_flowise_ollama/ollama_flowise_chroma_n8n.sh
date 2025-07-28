@@ -411,22 +411,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
     ln -sT /home/$USER/psql.sh                       psql.sh
     cd ~/
-    # Creating user 'ashok', and database 'ashok'. 
-    # User 'ashok' has full authority over database 'ashok'
-    echo " "
-    echo " "
-    echo "========="
-    echo "Creating user 'ashok' and database 'askok'"
-    echo "User 'ashok' has full authority over database 'ashok'"
-    echo "User 'ashok' has password: ashok"
-    echo "========="
-    echo " "
-    echo " "
-    sleep 5
-    sudo -u postgres psql -c 'create database ashok;'
-    sudo -u postgres psql -c 'create user ashok;'
-    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
-    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
     ###########
     ## Add postgres vector storage capability
     ############
@@ -437,7 +421,10 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # Check version as: pg_config --version
     # Assuming version 16
     pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
-    sudo apt install postgresql-server-dev-16  -y
+    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+    sudo apt install postgresql-server-dev-$version  -y
+    #sudo apt install postgresql-server-dev-16  -y
     # Ref: https://github.com/pgvector/pgvector
     cd /tmp
     git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
@@ -445,6 +432,24 @@ if [[ $input == "Y" || $input == "y" ]]; then
     make
     sudo make install 
     cd /home/$USER/
+    # Creating user 'ashok', and database 'ashok'. 
+    # User 'ashok' has full authority over database 'ashok'
+    echo " "
+    echo " "
+    echo "========="
+    echo "Creating user 'ashok' and database 'askok'"
+    echo "User 'ashok' has full authority over database 'ashok'"
+    echo "User 'ashok' has password: ashok"
+    echo "Database 'ashok' can also be used as vector database"
+    echo "========="
+    echo " "
+    echo " "
+    sleep 5
+    sudo -u postgres psql -c 'create database ashok;'
+    sudo -u postgres psql -c 'create user ashok;'
+    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+    sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
  else
    echo "Postgres not installed"
  fi  
