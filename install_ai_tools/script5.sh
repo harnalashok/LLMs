@@ -59,6 +59,24 @@ cd pgvector
 make
 sudo make install 
 cd /home/$USER/
+# Creating user 'ashok', and database 'ashok'. 
+# User 'ashok' has full authority over database 'ashok'
+echo " "
+echo " "
+echo "========="
+echo "Creating user 'ashok' and database 'askok'"
+echo "User 'ashok' has full authority over database 'ashok'"
+echo "User 'ashok' has password: ashok"
+echo "Database 'ashok' can also be used as vector database"
+echo "========="
+echo " "
+echo " "
+sleep 5
+sudo -u postgres psql -c 'create database ashok;'
+sudo -u postgres psql -c 'create user ashok;'
+sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 ########
 
 
