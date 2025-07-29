@@ -549,8 +549,14 @@ sudo -u postgres psql -c "alter user ashok with encrypted password 'qwerty';"
 sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO ashok;" -d ashok 
 sudo -u postgres psql -c " CREATE EXTENSION vector;" -d ashok 
 # Add a table and a record
-sudo -u ashok psql -c "CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);" -U localhost -d ashok
+sudo -u ashok psql -c "CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);" -d ashok
 sudo -u ashok psql -c "INSERT INTO acars (brand, model, year) VALUES ('Ford', 'Mustang', 1964);" -d ashok
+
+# Add two more tables, one having foreign key
+sudo -u ashok psql -c "CREATE TABLE departments (department_id int PRIMARY KEY,department_name VARCHAR(100) NOT NULL);" -d ashok
+sudo -u ashok psql -c "CREATE TABLE employees (employee_id int PRIMARY KEY,employee_name VARCHAR(100) NOT NULL,age float, departmentId INT REFERENCES departments (department_id) );"  -d ashok
+sudo -u ashok psql -c "INSERT INTO departments (department_id,department_name) VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT'), (30, 'Operations') ;" -d ashok
+sudo -u ashok psql -c "INSERT INTO employees (employee_id,employee_name, age, departmentId) values (1,'Alice', 30.4, 10),(2,'Bob',50.8, 10),(3,'sudha', 39.0, 20), (4,'Charlie',34.0, 30),(5,'ashok',34.0, 30),(6,'des',45.0, 10),(7,'rehman',38.8, 20) ;" -d ashok
 
 
 # For system user amit
@@ -571,8 +577,15 @@ sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO amit;" -d amit
 sudo -u postgres psql -c " CREATE EXTENSION vector;" -d amit 
 # Add a table and a record
 # Add a table and a record
-sudo -u amit psql -c "CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);" -U localhost -d amit
+sudo -u amit psql -c "CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);"  -d amit
 sudo -u amit psql -c "INSERT INTO acars (brand, model, year) VALUES ('Ford', 'Mustang', 1964);" -d amit
+
+# Add two more tables, one having foreign key
+sudo -u amit psql -c "CREATE TABLE departments (department_id int PRIMARY KEY,department_name VARCHAR(100) NOT NULL);" -d amit
+sudo -u amit psql -c "CREATE TABLE employees (employee_id int PRIMARY KEY,employee_name VARCHAR(100) NOT NULL,age float, departmentId INT REFERENCES departments (department_id) );"  -d amit
+sudo -u amit psql -c "INSERT INTO departments (department_id,department_name) VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT'), (30, 'Operations') ;" -d amit
+sudo -u amit psql -c "INSERT INTO employees (employee_id,employee_name, age, departmentId) values (1,'Alice', 30.4, 10),(2,'Bob',50.8, 10),(3,'sudha', 39.0, 20), (4,'Charlie',34.0, 30),(5,'amit',34.0, 30),(6,'des',45.0, 10),(7,'rehman',38.8, 20) ;" -d amit
+
 
 # For system user gandhi
 #================
@@ -585,8 +598,17 @@ sudo -u postgres psql -c "alter user gandhi with encrypted password 'gandhi';"
 sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO gandhi;" -d gandhi 
 sudo -u postgres psql -c " CREATE EXTENSION vector;" -d gandhi 
 # Add a table and a record
-sudo -u gandhi psql -c "CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);" -U localhost -d gandhi
+sudo -u gandhi psql -c "CREATE TABLE acars (  brand VARCHAR(255),  model VARCHAR(255),  year INT);"  -d gandhi
 sudo -u gandhi psql -c "INSERT INTO acars (brand, model, year) VALUES ('Ford', 'Mustang', 1964);" -d gandhi
+
+# Add two more tables, one having foreign key
+sudo -u gandhi psql -c "CREATE TABLE departments (department_id int PRIMARY KEY,department_name VARCHAR(100) NOT NULL);" -d gandhi
+sudo -u gandhi psql -c "CREATE TABLE employees (employee_id int PRIMARY KEY,employee_name VARCHAR(100) NOT NULL,age float, departmentId INT REFERENCES departments (department_id) );"  -d gandhi
+sudo -u gandhi psql -c "INSERT INTO departments (department_id,department_name) VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT'), (30, 'Operations') ;" -d gandhi
+sudo -u gandhi psql -c "INSERT INTO employees (employee_id,employee_name, age, departmentId) values (1,'Alice', 30.4, 10),(2,'Bob',50.8, 10),(3,'sudha', 39.0, 20), (4,'Charlie',34.0, 30),(5,'amit',34.0, 30),(6,'des',45.0, 10),(7,'rehman',38.8, 20) ;" -d gandhi
+
+
+
 
 PGPASSWORD=ashok psql -h localhost -p 5432 -U ashok -d ashok  
 # psql shell
