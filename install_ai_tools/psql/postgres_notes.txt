@@ -295,6 +295,8 @@ Concepts
 		‘how to write 172.30.109.200 with netmask of 255.255.240.0 in cidr notation’. 
 		(Also may see this link for calculation: https://dnschecker.org/netmask-cidr.php )
 			host    all     all       172.30.96.0/20    md5
+               	(Edit as:
+                          sudo nano /etc/postgresql/14/main/pg_hba.conf )
 
 
 
