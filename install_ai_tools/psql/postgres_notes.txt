@@ -281,6 +281,21 @@ Concepts
                 version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
                 echo $version
 
+
+	16. Security configuration in postgresql:
+
+		Two files deal with security: postgresql.conf and pg_hba.conf. Both are in folder:
+		/etc/postgresql/$version/main/ folder. One way to amend is here:
+
+
+		Configure /etc/postgresql/pg_hba.conf. For broader access (e.g., from a specific IP range),
+		you can use a CIDR notation. In google you can raise a query: 
+		‘how to write 172.30.109.200 with netmask of 255.255.240.0 in cidr notation’. 
+		(Also may see this link for calculation: https://dnschecker.org/netmask-cidr.php )
+			host    all     all       172.30.96.0/20    md5
+
+
+
 =======================OLD Collection=================================
 
 	
