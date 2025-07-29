@@ -119,22 +119,23 @@ Concepts
 		CREATE TABLE
 		joker=# CREATE TABLE employees (
 		    employee_id int PRIMARY KEY,
-		    employee_name VARCHAR(100) NOT NULL,
+                    employee_name VARCHAR(100) NOT NULL,
+                    age float,
 		    departmentId INT REFERENCES departments (department_id)
 		    );
 		CREATE TABLE
 		joker=# 
 
 		joker=# INSERT INTO departments (department_id,department_name)
-		VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT');
+		VALUES (1, 'Human Resources'), (10,'Finance'), (20,'IT'), (30, 'Operations') ;
 		INSERT 0 3
-		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (1,'Alice', 10);
+		joker=# INSERT INTO employees (employee_id,employee_name, age, departmentId) values (1,'Alice', 30.4, 10);
 		INSERT 0 1
-		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (2,'Bob', 10);
+		joker=# INSERT INTO employees (employee_id,employee_name, age, departmentId) values (2,'Bob',50.8, 10);
 		INSERT 0 1
-		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (3,'sudha', 20);
+		joker=# INSERT INTO employees (employee_id,employee_name, age, departmentId) values (3,'sudha', 39.0, 20);
 		INSERT 0 1
-		joker=# INSERT INTO employees (employee_id,employee_name, departmentId) values (4,'Charlie', 3);
+		joker=# INSERT INTO employees (employee_id,employee_name, age, departmentId) values (4,'Charlie',34.0, 3);
 		ERROR:  insert or update on table "employees" violates foreign key constraint "employees_departmentid_fkey"
 		DETAIL:  Key (departmentid)=(3) is not present in table "departments".
 		joker=# 
