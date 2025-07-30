@@ -1,0 +1,59 @@
+# Last amended: 12th Oct, 2023
+# Import MongoDbDatabases
+
+# Execute the following commands in bash shell 
+# to import the json datasets:
+
+
+
+# 0.1
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongo
+sudo mkdir -p /var/lib/mongo
+sudo mkdir -p /var/log/mongodb
+sudo chmod -R 777 /var/lib/mongo
+sudo chmod -R 777 /var/log/mongodb
+ 
+# 0.2
+cd ~
+mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
+
+
+
+
+# 1.0   File simple.json is a simple json file. You can open it
+#  	and perform expts as to what gets imported and what not.
+
+
+mongoimport    \
+     --db simple \
+     --collection rest \
+     --drop \
+     --host localhost:27017  \
+     --file /home/ashok/Documents/mongodb/datasets/simple.json
+
+
+
+mongoimport     \
+     --db restaurants \
+     --collection rest \
+     --drop \
+     --host localhost:27017  \
+     --file /home/ashok/Documents/mongodb/datasets/primer-dataset.json
+
+
+mongoimport \
+         --db books \
+         --collection lib \
+         --drop \
+         --file /home/ashok/Documents/mongodb/datasets/catalog.books.json
+
+
+mongoimport \
+         --db credit_card \
+         --collection trans \
+         --drop \
+         --file /home/ashok/Documents/mongodb/datasets/credit_card_transactions.json
+
+cd ~/
+
