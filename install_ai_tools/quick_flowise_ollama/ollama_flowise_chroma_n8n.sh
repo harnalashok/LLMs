@@ -11,6 +11,7 @@ echo "Will install ollama docker for gpu"
 echo "Will install chromadb docker"
 echo "Will install n8n docker"
 echo "Will install dify docker"
+echo "Will install mongodb and mongosh:
 echo "Installs postgres db and pgvector"
 echo "Will install Ragflow docker"
 echo "==========================="
@@ -476,8 +477,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo apt-get update
     sudo apt-get install -y mongodb-org
     sudo systemctl start mongod
-   #On error
-   #sudo systemctl daemon-reload
+    #On error
+    #sudo systemctl daemon-reload
    # Mongosh
    echo "Will install mongosh"
    sleep 4
@@ -488,6 +489,16 @@ if [[ $input == "Y" || $input == "y" ]]; then
    sudo apt-get update
    sudo apt-get install -y mongodb-mongosh
    mongosh --version
+   netstat a-aunt | grep 27017
+   # mongodb start script
+   echo '#!/bin/bash'                                                      > /home/$USER/start_mongodb.sh  
+   echo " "                                                               >> /home/$USER/start_mongodb.sh  
+   echo "cd ~/"                                                           >> /home/$USER/start_mongodb.sh  
+   echo "echo 'mongodb will be available on port 27017'"                  >> /home/$USER/start_mongodb.sh  
+   echo "sudo systemctl start mongod"                                     >> /home/$USER/start_mongodb.sh  
+   echo "sleep 2"                                                         >> /home/$USER/start_mongodb.sh  
+   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh  
+   chmod +x /home/$USER/*.sh
 else
     echo "Mongodb not installed"
 fi    
