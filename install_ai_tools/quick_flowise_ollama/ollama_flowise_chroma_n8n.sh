@@ -464,7 +464,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 echo " "
 echo " "
 echo "------------"   
-echo "Shall I install mongodb db? [Y,n]"    # 
+echo "Shall I install mongodb db for Ubuntu 22.04? [Y,n]"    # 
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
@@ -517,14 +517,67 @@ if [[ $input == "Y" || $input == "y" ]]; then
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
 else
-    echo "Mongodb not installed"
+    echo "Mongodb for Ubuntu 22.04 not installed"
 fi    
 
-
-
-
-
-
+echo " "
+echo " "
+echo "------------"   
+echo "Shall I install mongodb db for Ubuntu 24.04? [Y,n]"    # 
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    cd /home/$USER/
+    sudo apt-get install gnupg curl
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+            sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+            --dearmor
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+    sudo apt-get update
+    sudo apt-get install -y mongodb-org
+    sudo systemctl start mongod
+    #On error
+    #sudo systemctl daemon-reload
+   # Mongosh
+   echo "Will install mongosh"
+   sleep 4
+   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
+   sudo apt-get install gnupg
+   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
+   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+   sudo apt-get update
+   sudo apt-get install -y mongodb-mongosh
+   mongosh --version
+   netstat a-aunt | grep 27017
+   # mongodb start script
+   echo '#!/bin/bash'                                                      > /home/$USER/start_mongodb.sh  
+   echo " "                                                               >> /home/$USER/start_mongodb.sh  
+   echo "cd ~/"                                                           >> /home/$USER/start_mongodb.sh  
+   echo "echo 'mongodb will be available on port 27017'"                  >> /home/$USER/start_mongodb.sh  
+   echo "sudo systemctl start mongod"                                     >> /home/$USER/start_mongodb.sh  
+   echo "sleep 2"                                                         >> /home/$USER/start_mongodb.sh  
+   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh  
+   chmod +x /home/$USER/*.sh
+   # Dowload some files
+   mkdir -p /home/$USER/Documents/mongodb/datasets
+   cd /home/$USER/Documents/mongodb/datasets
+   wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
+   cd /home/$USER/Documents/mongodb
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
+else
+    echo "Mongodb for Ubuntu24.04 not installed"
+fi   
 
 
 ##########################
