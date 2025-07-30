@@ -1,0 +1,529 @@
+# Last amended: 2nd May, 2023
+# VM folder: /home/ashok/Documents/mongodb/mongodb_class_exercises
+
+# NOTE:
+# Log files: /var/log/mongodb/mongod.log  --Cannot be deleted without changing owner
+# Data files folder:  /var/lib/mongo/     --Cannot be deleted without changing owner
+
+Objectives:
+	1. Monogodb Install/update
+	2. Monogd start
+	3. Database/collection creation
+	4. Data insertion
+	5. Data updation
+
+
+# Mongodb playground:
+https://mongoplayground.net/
+#
+
+####################### A. Installation/Updation/Starting #######################
+
+# 0. Install MongoDB Community on Ubuntu using .tgz Tarball:
+#    Ref: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu-tarball/
+
+
+# Monogo 5.0 or above will not install on Ubuntu for 
+#  certain CPUs.
+# Mongo version on this machine is 4.4.11.
+
+#0.1 Remove earlier i) contents of log directory 
+#    and ii)  contents of data storage directory (/var/lib/mongo)
+	
+ sudo rm -r /var/log/mongodb
+ sudo rm -r /var/lib/mongo
+ sudo mkdir -p /var/lib/mongo
+ sudo mkdir -p /var/log/mongodb
+ sudo chmod -R 777 /var/lib/mongo
+ sudo chmod -R 777 /var/log/mongodb
+ 
+# 0.2 mongodb conf file is here:
+#     It lists default log and data storage paths
+
+ gedit /etc/mongod.conf
+
+
+##    ===================
+##    Start mongod server
+##    ===================
+
+# 1.0 Start mongodb and ALSO NOTE its pid
+#    
+cd ~
+mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
+
+
+# 1.1 Check, if you like, that mongod has started:
+
+ netstat -aunt | grep 27017
+	
+# 1.2 NOTE: If mongod fails to start then check for files
+
+#	/tmp/mongo-*-27017*-
+#       /tmp/mongo-* 
+#       and delete them
+#             --Incidentally 27017 is mongodb port
+
+
+# 1.3 Stop mongod using its pid, as:
+
+	kill -9 <pid>
+	
+     You can also get mongod's pid as:
+     
+     ps aux | grep mongod	
+
+
+##  2.0  mongo shell client (try also mongosh)
+##       ==================
+# Ref: https://docs.mongodb.com/manual/mongo/
+
+# 2.1 Open mongo shell
+
+	$ mongo
+	>
+	
+	
+# 2.2
+	IF you get warnings when mongo shell is started,
+	you may like to amend the init script, as mentioned here:
+	
+	https://docs.mongodb.com/master/tutorial/transparent-huge-pages/
+	
+	reboot the machine, start mongod and open mongo. One warning disappears.
+
+	
+# 2.3. Get help and issue basic commands
+
+	> help
+	> help admin		// Admin help; ex: listFiles("/home")
+	> show dbs		// Show databases ; 'admin', 'config', 'local'
+	> show collections	// Show collections: None in fresh db
+	> show users            // None in fresh db
+
+####################### B. CRUD operations #######################
+#  CRUD => Create, Read, Update, Delete operations
+## Ref:  https://docs.mongodb.com/manual/crud/
+## 3. Database creation
+##    ================
+
+#	Unlike in SQL, databases in MongoDB are created
+#	lazily. One does not create databases using any
+#	explicit commands. Depending on your commands, 
+#	the system creates it for you once it determines
+#	a database needs to be created. To begin creating
+#	a new database, first execute the use command to
+#	switch to a new database, and then issue a command
+#	which saves some data to the database - this results
+#	in the creation on the new database.
+
+# 4.	Create and use database personal. If database exists,
+#	it is put in use if database does not exist, it will
+#	be created lazily
+
+	> use personal
+	> db.getName()          // Name of current database
+	> show dbs		// 'personal' will not be shown till one record inserted
+	> db.			// Tab completion. Shell has tab-completion feature
+	# Henceforth 'db.' in mongo shell will refer to 'personal' database.	
+
+#	If database 'personal' appears then drop it as:
+#       > use personal
+#       > db.dropDatabase()
+	
+
+
+## 5. Collection (Table) creation
+##    ===========================
+
+# 5.1 Insert your first document and also create a collection, as follows:
+
+# 5.1.1 First define a blog-document:
+
+
+
+#	Document is a blog. Its fields are
+#			_id	      --> key:value (if not provided, system generated)	
+#			Title	      --> key:value
+#			Description   --> key:value
+#			By            --> key:value
+#			URL           --> key:value
+#			Tags          --> key: array-of-values
+#			Likes         --> key:value
+#			Comments      --> key: array of documents
+		
+# Define a document
+
+post = {
+              _id: 1234,
+            title: 'MongoDB Overview',
+      description: 'MongoDB is no sql database',
+               by: 'tutorials point',
+              url: 'http://www.tutorialspoint.com',
+             tags: ['mongodb','database','NoSQL'],
+            likes: 100,
+         comments: [
+                    {
+                     user: 'user1',
+                  message: 'My first comment',
+                     like: 0
+                    },
+                   {
+                    user: 'user2',
+                 message: 'My second comments',
+                    like: 5
+                   }
+                 ]
+     }
+
+
+# 6. Insert above document in collection 'first'. 'first' is created
+#     if it does not exist. Collection is akin to 'table' in mongodb.
+
+	db.first.insert(post)
+
+# 7. Now see databases and collections (tables):
+
+	> show dbs
+	> show collections
+
+# 8. Insert mutiple documents at one go:
+#    No of documents in the array: 5
+
+# 8.1   Note that 'many' is an array of six documents
+#       many --> An array of documents
+#       Each Document has this structure:
+#      name          --> key:value
+#      age           --> key:value
+#      type          --> key:value
+#      status        --> key:value
+#      favourites    --> key:Document (nested document)
+#      finished      --> key: Array of values
+#      badges        --> key: Array of values
+#      points        --> Key: Array of documents
+    
+# Define many documents in an array of documents:
+
+many=[
+     {
+       _id: 1,
+       name: "sue",
+       age: 19,
+       type: 1,
+       status: "P",
+       favorites: { artist: "Picasso", food: "pizza" },
+       finished: [ 17, 3 ],
+       badges: [ "blue", "black" ],
+       points: [
+                { points: 85, bonus: 20 },
+                { points: 85, bonus: 10 }
+               ]
+     },
+     {
+       _id: 2,
+       name: "bob",
+       age: 42,
+       type: 2,
+       status: "A",
+       favorites: { artist: "Miro", food: "meringue" },
+       finished: [ 11, 25 ],
+       badges: [ "green" ],
+       points: [
+                 { points: 85, bonus: 20 },
+                 { points: 64, bonus: 12 }
+               ]
+     },
+     {
+       _id: 3,
+       name: "ahn",
+       age: 22,
+       type: 2,
+       status: "A",
+       favorites: { artist: "Cassatt", food: "cake" },
+       finished: [ 6 ],
+       badges: [ "blue", "Picasso" ],
+       points: [
+                { points: 81, bonus: 8 },
+                { points: 55, bonus: 20 }
+               ]
+     },
+     {
+       _id: 4,
+       name: "xi",
+       age: 34,
+       type: 2,
+       status: "D",
+       favorites: { artist: "Chagall", food: "chocolate" },
+       finished: [ 5, 11 ],
+       badges: [ "Picasso", "black" ],
+       points: [
+                 { points: 53, bonus: 15 },
+                 { points: 51, bonus: 15 }
+               ]
+     },
+     {
+       _id: 5,
+       name: "xyz",
+       age: 23,
+       type: 2,
+       status: "D",
+       favorites: { artist: "Noguchi", food: "nougat" },
+       finished: [ 14, 6 ],
+       badges: [ "orange" ],
+       points: [
+                 { points: 71, bonus: 20 }
+               ]
+     },
+     {
+       _id: 6,
+       name: "abc",
+       age: 43,
+       type: 3,
+       status: "A",
+       favorites: { food: "pizza", artist: "Picasso" },
+       finished: [ 18, 12 ],
+       badges: [ "black", "blue" ],
+       points: [
+                 { points: 78, bonus: 8 },
+                 { points: 57, bonus: 7 }
+               ]
+     }
+   ]
+
+
+# 8.2 Insert 'many' in collection 'users'
+
+	db.users.insertMany(many)
+
+
+# 9. Next directly insert again six documents 
+#    in 'users' collection. Note that database
+#    does not stop you from inserting dupicates.
+#    Except that _id must be different. 
+
+
+db.users.insertMany(
+   [
+     {
+       _id: 7,
+       name: "sue",
+       age: 19,
+       type: 1,
+       status: "P",
+       favorites: { artist: "Picasso", food: "pizza" },
+       finished: [ 17, 3 ],
+       badges: [ "blue", "black" ],
+       points: [
+          { points: 85, bonus: 20 },
+          { points: 85, bonus: 10 }
+       ]
+     },						// Note comma here
+     {
+       _id: 8,
+       name: "bob",
+       age: 42,
+       type: 1,
+       status: "A",
+       favorites: { artist: "Miro", food: "meringue" },
+       finished: [ 11, 25 ],
+       badges: [ "green" ],
+       points: [
+          { points: 85, bonus: 20 },
+          { points: 64, bonus: 12 }
+       ]
+     },
+     {
+       _id: 9,
+       name: "ahn",
+       age: 22,
+       type: 2,
+       status: "A",
+       favorites: { artist: "Cassatt", food: "cake" },
+       finished: [ 6 ],
+       badges: [ "blue", "Picasso" ],
+       points: [
+          { points: 81, bonus: 8 },
+          { points: 55, bonus: 20 }
+       ]
+     },
+     {
+       _id: 10,
+       name: "xi",
+       age: 34,
+       type: 2,
+       status: "D",
+       favorites: { artist: "Chagall", food: "chocolate" },
+       finished: [ 5, 11 ],
+       badges: [ "Picasso", "black" ],
+       points: [
+          { points: 53, bonus: 15 },
+          { points: 51, bonus: 15 }
+       ]
+     },
+     {
+       _id: 11,
+       name: "xyz",
+       age: 23,
+       type: 2,
+       status: "D",
+       favorites: { artist: "Noguchi", food: "nougat" },
+       finished: [ 14, 6 ],
+       badges: [ "orange" ],
+       points: [
+          { points: 71, bonus: 20 }
+       ]
+     },
+     {
+       _id: 12,
+       name: "abc",
+       age: 43,
+       type: 1,
+       status: "A",
+       favorites: { food: "pizza", artist: "Picasso" },
+       finished: [ 18, 12 ],
+       badges: [ "black", "blue" ],
+       points: [
+          { points: 78, bonus: 8 },
+          { points: 57, bonus: 7 }
+       ]
+     }
+   ]
+)
+
+
+# 10. Insert following four documents (note that _id will be given by system itself).
+#       This example also shows schema free nature of documents
+
+	db.users.insert({name: 'paulo'})
+	db.users.insert({name: 'patric'})
+	db.users.insert({name: 'pedro'})
+	db.users.insert({name: 'Metro'})
+
+# 11.  Show all documents in a collection in a nice (pretty) format:
+
+	db.users.find()			// This command is like 'select * from db'
+	db.users.find().pretty()	// pretty 
+
+# 12. Show only one document:
+
+	db.users.findOne()        // OR # Show top-one
+	db.users.find().limit(1)
+
+
+# 13. Update document (update, updateMany, updateOne)
+#     Ref: https://docs.mongodb.com/manual/tutorial/update-documents/
+#          https://docs.mongodb.com/manual/reference/method/db.collection.update/
+#     Syntax:  db.collection.update(query,update, options)
+# 	db.collection.update(
+#			<query>,    <==> A document
+#			<update>,   <==> A document
+#			   {        <==> options document 
+#     				upsert: <boolean: true or false>,
+#				multi: <boolean: true or false>,  
+#				writeConcern: <document>,
+#				collation: <document>,
+#				arrayFilters: [ <filterdocument1>, ... ],
+#				hint:  <document|string>        // Available starting in MongoDB 4.2
+#			   }
+#			)
+#
+
+# 13.1 First define a json document:
+
+doc = [
+	{
+	   "name"  : "mouse",
+	   "wt"	   : "5gm",
+	   "age"   : 3 
+	},
+	
+	{  "name" : "mouse",
+	   "wt"  : "10 inches",
+	   "loc" : "jocs"
+	},
+	{
+	   "name" : "bats",
+	   "wt"    : "1kg",
+	   "ht"    : 4
+	},
+	
+	{
+	   "name" : "mouse",
+	   "wt"    : "1kg",
+	   "loc"   : "ap"
+	}
+
+      ]	   
+
+
+# 13.2 Drop any existing collection by name of 'docs'
+	
+db.docs.drop()	
+db.docs.find()
+	   
+# 13.2 Create/insert into 'docs':
+
+db.docs.insertMany(doc)	  
+
+# 13.3 Uopdate just one document from 'docs' collection:
+
+db.docs.update(
+                {"name" : "mouse"},
+                {$set   : { "wt"  :  "38gm" } },
+                {"upsert" : false,
+                 "multi"  : false
+                }
+              )
+
+# 13.2.1 Check:
+                 
+db.docs.find()  
+
+# 13.3 Update multiple documents in 'docs' collection:
+
+db.docs.update(
+                {"name" : "mouse"},
+                {
+                   $set   :
+                          { "wt"  :  "38gm" }
+                 },
+                {"upsert" : false,
+                 "multi"  : true
+                }
+              )
+
+# 13.4 Update multiple fields in multiple documents:
+#      Ref: https://docs.mongodb.com/manual/reference/operator/update/set/
+
+db.docs.find()                
+
+db.docs.update(
+                {"name" : "mouse"},
+                {
+                   $set   :
+                          { "wt"  :  "58gm", "name" : "mics" }
+                 },
+                {"upsert" : false,
+                 "multi"  : true
+                }
+              )
+
+db.docs.find()
+
+# 14.0 Delete a record:
+#  syntax: db.docs.remove(<query>)
+#          <query> points to documents to be removed
+
+# Example from elsewhere. Correct it:
+
+db.people_x.find()
+db.people_x.remove({ "name" : "John" } )       
+db.people_x.find()
+
+# 15. Next Step: Goto file: mongo_class_exercises-II.txt
+
+################## FINISH ###############################################
+
+]
+
+

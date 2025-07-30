@@ -1,0 +1,723 @@
+# Last amended: 19th May, 2023
+# Myfolder: /home/ashok/Documents/mongodb/mongodb_class_exercises
+
+
+
+	
+ sudo rm -r /var/log/mongodb
+ sudo rm -r /var/lib/mongo
+ sudo mkdir -p /var/lib/mongo
+ sudo mkdir -p /var/log/mongodb
+ sudo chmod -R 777 /var/lib/mongo
+ sudo chmod -R 777 /var/log/mongodb
+ 
+# 0.2 mongodb conf file is here:
+#     It lists default log and data storage paths
+
+ gedit /etc/mongod.conf
+
+
+##    ===================
+##    Start mongod server
+##    ===================
+
+# 1.0 Start mongodb and ALSO NOTE its pid
+#    
+cd ~
+mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
+
+
+
+##  1.Aggregation
+##    ===========
+# Aggregation operations group values from multiple documents,
+# and can perform a variety of operations on the grouped data
+# to return a single result. MongoDB provides three ways to 
+# perform aggregation:
+#    i) The aggregation pipeline,	=> Preferred method for data aggregation
+#   ii) The map-reduce function,
+#  iii) Single purpose aggregation methods.
+
+
+	
+## 1.1 Aggregation through Pipeline
+##     ============================
+## Ref: Aggregation pipeline operators:
+##      https://docs.mongodb.com/manual/reference/operator/aggregation/
+##
+##	https://www.codeproject.com/Articles/1096142/MongoDB-Tutorial-Day-Aggregation
+##	https://www.codeproject.com/Articles/1149682/Aggregation-in-MongoDB
+
+## 
+#    Aggregation in mongodb works as if database is passing through a pipe
+#    of operators.
+#    Documents ==> Filter (match) ==> Group ==> Aggregate
+
+#    db.orders.aggregate([                            ==> Pipeline is ARRAY of stages
+#			   { $match: {status : "A" }},
+#			   { $group: {_id: "$cust_id" , total:{ $sum : "$amount" }}}
+#
+#
+#
+#1.1.1    Synatx for match is:
+#	     { $match : {  $and : [ { }, { } ] }
+#         $match is NOT an array. For multiple match conditions
+#        use multiple '$match'
+#
+#1.1.2    Syntax for project is:
+#	     { $project : { field : 1 , field : 0 } }
+#1.1.3    Synatx for $group is:
+#            {  $group : { "_id"                          :  { "DisplayNameOfGroupColumn"   :   "$SpecifyfieldToGroupBy"     },
+#                          "DisplayNameOfSummaryColumn" :    { "$summaryFunction"           :   "$SpecifyfieldToBeSummaried" } 
+#                        }
+#            }
+#
+
+# Syntax for aggregate is:
+#    db.collection.aggregate( [ {"$match" : } , {"$match" : }, {"$project" : }  { "$group" :   }, { "$project" :  }, {"$sort" : } ] )
+
+
+# 1.2 Aggregation stages
+#     ===================
+#	SQL		Mongodb
+#	Select		$project (project which fields)
+#	Where		$match
+#	Limit		$limit
+#	GroupBy		$group
+#	OrderBy		$sort
+#	Sum		$sum
+#	join		$lookup (see #6.1 and #6.2)
+	
+#    1.3
+#    First pipe may perform matching, remaining documents may pass
+#    through another operator, say grouping operator, the grouped documents
+#    may then pass through another operator, say 'sum' on some field.
+#    In the db.collection.aggregate() method, pipeline stages appear in an array.
+#    Documents pass through the stages in sequence.
+#    MongoDB introduced a new aggregation framework, modelled on the concept of
+#    data processing pipelines. Documents enter a multi-stage pipeline that
+#    transforms the documents into an aggregated result. Syntax is:
+
+	db.collection.aggregate(pipeline, options)
+	db.collection.aggregate( [ { <stage> }, ... ] )   // pipeline is an array of stages
+
+# 2. Data
+#    Insert some documents and look at the data:
+
+
+show dbs;
+use college; 
+db.dropDatabase()
+use college; 
+
+db.student.insert({studentname : "vijay" , "year"  : "2003" , section : "A", "fees" : {"cs" : 20, "cm" :30 }, marks:70, Subject:["hindi","english","maths"]})
+db.student.insert({studentname : "vijay" , "year"  : "2004" , section : "A", "fees" : {"cs" : 30, "cm" :40 }, marks:60, Subject:["hindi","english","maths"]})
+
+db.student.insert({studentname : "gaurav", "year"  : "2003" , section : "A", "fees" : {"cs" : 60, "cm" :50 }, marks:90, Subject:["english"]})
+db.student.insert({studentname : "gaurav", "year"  : "2004" , section : "A", "fees" : {"cs" : 80, "cm" :90 }, marks:95, Subject:["english"]})
+
+db.student.insert({studentname : "ajay"  , "year"  : "2003" , section : "A", "fees" : {"cs" : 70, "cm" :90 }, marks:70, Subject:["maths"]})
+db.student.insert({studentname : "ajay"  , "year"  : "2004" , section : "A", "fees" : {"cs" : 74, "cm" :91 }, marks:75, Subject:["maths"]})
+
+db.student.insert({studentname : "ankur" , "year"  : "2003" , section : "B", "fees" : {"cs" : 80, "cm" :70 }, marks:10, Subject:["hindi"]})
+db.student.insert({studentname : "ankur" , "year"  : "2004" , section : "B", "fees" : {"cs" : 50, "cm" :30 }, marks:30, Subject:["hindi"]})
+
+db.student.insert({studentname : "sunil" , "year"  : "2003" , section : "B", "fees" : {"cs" : 30, "cm" :82 }, marks:78, Subject:["maths"]})
+db.student.insert({studentname : "sunil" , "year"  : "2004" , section : "B", "fees" : {"cs" : 90, "cm" :80 }, marks:70, Subject:["maths"]})
+
+db.student.insert({studentname : "preeti", "year"  : "2003" , section : "C", "fees" : {"cs" : 50, "cm" :80 }, marks:70, Subject:["hindi","english"]})
+db.student.insert({studentname : "preeti", "year"  : "2004" , section : "C", "fees" : {"cs" : 30, "cm" :40 }, marks:80, Subject:["hindi","english"]})
+
+db.student.insert({studentname : "anuj"  , "year"  : "2003" , section : "C", "fees" : {"cs" : 34, "cm" :76 }, marks:80, Subject:["english"]})
+db.student.insert({studentname : "anuj"  , "year"  : "2004" , section : "C", "fees" : {"cs" : 30, "cm" :70 }, marks:50, Subject:["english"]})
+
+db.student.insert({studentname : "palka" , "year"  : "2003" , section : "A", "fees" : {"cs" : 57, "cm" :39 }, marks:70, Subject:["maths"]})
+db.student.insert({studentname : "palka" , "year"  : "2004" , section : "A", "fees" : {"cs" : 50, "cm" :30 }, marks:40, Subject:["maths"]})
+
+db.student.insert({studentname : "akshay", "year"  : "2003" , section : "B", "fees" : {"cs" : 66, "cm" :88 }, marks:80, Subject:["english","maths"]})
+db.student.insert({studentname : "akshay", "year"  : "2004" , section : "B", "fees" : {"cs" : 60, "cm" :80 }, marks:20, Subject:["english","maths"]})
+
+db.student.insert({studentname : "ahobit", "year"  : "2003" , section : "C", "fees" : {"cs" : 67, "cm" :86 }, marks:45, Subject:["english","maths"]})
+db.student.insert({studentname : "ahobit", "year"  : "2004" , section : "C", "fees" : {"cs" : 70, "cm" :90 }, marks:20, Subject:["english","maths"]})
+
+db.student.insert({studentname : "puniya", "year"  : "2003" , section : "D", "fees" : {"cs" : 50, "cm" :30 }, marks:90, Subject:["english","maths"]})
+db.student.insert({studentname : "puniya", "year"  : "2004" , section : "D", "fees" : {"cs" : 80, "cm" :20 }, marks:20, Subject:["english","maths"]})
+
+db.student.insert({studentname : "sunil" , "year"  : "2003" , section : "A", "fees" : {"cs" : 80, "cm" :12 }, marks:80,Subject:["english","maths"]})
+db.student.insert({studentname : "sunil" , "year"  : "2004" , section : "A", "fees" : {"cs" : 40, "cm" :10 }, marks:100,Subject:["english","maths"]})
+
+// Check
+db.student.find().pretty()
+db.student.find().count()    # 24
+
+
+# 2.1 Problems
+#     ========
+# 2.1.1	Filter data for section "A"
+# 2.1.2 Filter data for section "A" but limit results to three documents
+# 2.1.3 Filter data for section "A" but sample the result set to get just 3-documents
+# 2.1.4	Filter data for section "A" and also for section "B". Use "$in" operator.
+# 2.1.5	Filter where section is A and marks > 80
+# 2.1.6 Filtet when section is 'A' and marks are less than 80
+# 2.1.7 Display only studentname,section and marks from student collection.
+# 2.1.8 Display just studentname,and marks from student Collection where section is 'A':
+# 2.1.9 Display just studentname,and marks from student Collection where section is 'A' but no id.
+# 2.1.10 Group by section and get total of marks.
+# 2.1.11 Get average of marks for only section 'A'.
+# 2.1.12 Multiple Aggregations: We want to fetch, section wise, count of students,Total marks & avg marks
+# 2.1.13 For every student find year-wise multiplication of fees
+# 2.1.14 For every student find year-wise multiplication of fees
+#        wherever this result exceeds 10000
+# 3.1.1  JOINS: Given two collections as at #6.1 and #6.2, how do you join them at "item" and "sku" fields
+#               and what are the results?
+
+
+# 3. Aggregation pipeline--Stage by stage 
+
+#    $match stage
+#    ============
+
+# 3.1 Aggregate without any argument:
+
+	db.student.aggregate( )      // Matches everyting
+
+
+
+# 3.1	Filter data for section "A"
+
+	db.student.aggregate ( [
+	                          { 
+	                          $match : {section : "A" }
+	                          }
+	                        ]
+	                      )
+
+# 3.1.1 Limit output to 3-records. Use $limit stage.
+	                      
+	db.student.aggregate ( [
+	                          { 
+	                          $match : {section : "A" }
+	                          },
+	                          {
+	                          "$limit" : 3 
+	                          }
+	                        ]
+	                      )
+	                      
+	                      
+	                      
+
+# 3.2	Filter data for section "A" and also for section "B"
+#       Note the use of "$in" operator:
+
+
+	db.student.aggregate( [
+	                        { "$match" : 
+	                                     { "section" : 
+	                                                   { 
+	                                                     "$in" : ["A", "B"]
+	                                                    } 
+	                                      } 
+	                          } 
+	                        ]
+	                      )
+
+
+
+
+
+# 3.2	Filter where section is A and marks > 80
+
+db.student.aggregate ( [
+	                 { 
+	                  $match : { $and : [
+	                                     {section : "A" },
+	                                     {marks : { "$gt" : 80}  }
+	                                     ]
+	                             }
+	                  }
+	                ]
+	              )
+	              
+# 3.2.1 To simplify, you can break the above in pieces, as:
+
+
+AND = { $and : [
+	         {section : "A" },
+	         {marks : { "$gt" : 80}  }
+	       ]
+      }
+
+
+
+db.student.aggregate ( [
+	                 {
+	                  "$match" :  AND
+	                  }
+	                ]
+	              )	              
+	              
+	              
+	              
+
+# 3.3 There can be more than one $match in Aggregate Function, as below:
+#     Filtet when section is 'A' and marks are less than 80
+
+db.student.aggregate ( [
+	                 { 
+	                  $match : {section : "A" }
+	                  },
+	                  { 
+	                   $match : {marks : {"$gt" : 80} }
+	                   }
+	                 ]
+	               )
+
+	               
+# 4. $project stage
+#    ==============	               
+#    Display only studentname,section and marks from student collection:
+
+	db.student.aggregate([
+				{
+				  $project : { studentname: 1, marks:1 }
+				}
+			      ]
+			     )	
+			     
+			     
+# 4.1 Display just studentname,and marks from student Collection where section is 'A':
+ 
+
+	db.student.aggregate ( [
+	                          { 
+	                          $match : {section : "A" }
+	                          },
+	                          {
+				  $project : { studentname: 1, marks:1 }
+				  }
+	                        ]
+	                      )
+	                      
+
+# 4.2	NOTE : _id will be visible by default. Display only studentname and marks
+#       from the dataset:
+#
+	
+	"$project":{studentname : 1, marks:1, _id:0 }
+	
+
+# 5. $group stage
+#    ============	
+#       Use $group to group the documents by some specified expression.
+#	$group is similar to Group clause in SQL. Group in SQL is not
+#	possible without any Aggregate Function and the same is here.
+#	We can not group in MongoDB without Aggregate Functions.
+
+# 5.1 Group by section and get total of marks:
+
+#        In this query _id Field is mandatory.
+#        In _id we pass the field(s) on which we want to group. 
+#	 Fieldnames are prefixed with '$' so also operators '$sum"
+
+#    NOTE: When to prefix fieldname with "$":
+#          Use the $ prefix to a fieldname whenever you're providing 
+#          a field name as the value in an object (i.e. to the right
+#          of the colon).
+#	   JSON syntax is key:value ; thus value is on the right and
+#          variable, 'key', on the left (example: "section" : "A" ). 
+#	   But if variable is to be written on the right and should 
+#	   not be taken to mean constant, prefix with "$", as:
+#		{ "$sum" : "$section" }
+#          Ref: https://stackoverflow.com/a/53785219
+
+
+
+db.student.aggregate ( [
+			{
+			 $group : { 
+			            "_id" :  {
+			                      "sectionName" : "$section" 
+			                     },
+			             "TotalMarks" : {
+			                              "$sum" : "$marks"
+			                             }
+			            }
+			 }
+			]
+		      ) 
+
+		      
+# 5.2 Get average of marks for only section 'A':
+
+#     Other aggregate operators:  $avg, $max, $min, $stdDevPop (population std deviation),
+#                                 $stdDevSamp (sample std deviation)
+#   
+			                      
+db.student.aggregate ( [
+			{
+			$match : { section : "A"}
+			},
+			{
+			 $group : { 
+			            "_id" :  {
+			                      "sectionName" : "$section" 
+			                     },
+			             "TotalMarks" : {
+			                              "$sum" : "$marks"
+			                             }
+			            }
+			 }
+			]
+		      ) 
+
+# 5.3  Multiple Aggregations: We want to fetch, section wise, count of students, Total marks and average marks
+db.student.aggregate ( [
+			{
+			 $group : { 
+			            "_id" :  {
+			                      "sectionName" : "$section" 
+			                     },
+			             "TotalMarks" : {
+			                              "$sum" : "$marks"
+			                             },
+			              "AverageMarks" : {
+			                               "$avg" : "$marks"
+			                               },
+			               "CountOfstudents" : {
+			                                    "$sum" : 1
+			                                   }
+			            }
+			 }
+			]
+		      ) 
+
+
+
+# 6.0 Joins: Collection joins using $lookup
+#     https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/#examples
+
+
+# 6.1 Create a collection 'orders' with the following three documents:    
+
+
+use join
+db.orders.insert(
+                  [
+			{ "_id" : 1, "item" : "almonds", "price" : 12, "quantity" : 2 },
+			{ "_id" : 2, "item" : "pecans", "price" : 20, "quantity" : 1 },
+			{ "_id" : 3  }
+		  ]
+		)
+
+# 6.2 Create another collection 'inventory' with the following six documents:
+
+db.inventory.insert(
+	    	      [
+			{ "_id" : 1, "sku" : "almonds", "description": "product 1", "instock" : 120 },
+			{ "_id" : 2, "sku" : "bread", "description": "product 2", "instock" : 80 },
+			{ "_id" : 3, "sku" : "cashews", "description": "product 3", "instock" : 60 },
+			{ "_id" : 4, "sku" : "pecans", "description": "product 4", "instock" : 70 },
+			{ "_id" : 5, "sku": null, "description": "Incomplete" },
+			{ "_id" : 6 }
+			]
+		   )
+		   
+# 6.3 The following aggregation operation on the orders collection joins
+#     the documents from orders with the documents from the inventory 
+#     collection using the fields item from the orders collection and 
+#     the sku field from the inventory collection:
+
+db.orders.aggregate(
+			[
+			   {
+			     $lookup:
+				       {
+				         from: "inventory",
+				         localField: "item",
+				         foreignField: "sku",
+				         as: "inventory_docs"
+				       }
+			  }
+			]
+		  ).pretty()
+		  
+# 6.4 The operation returns the following sample document:
+
+{
+   "_id" : 1,
+   "item" : "almonds",
+   "price" : 12,
+   "quantity" : 2,
+   "inventory_docs" : [
+      { "_id" : 1, "sku" : "almonds", "description" : "product 1", "instock" : 120 }
+   ]
+}		  
+
+#..... and two others.
+	
+		      
+# 7.0 Create new fields from manipulation of existing fields:
+#     For every student find year-wise multiplication of fees
+#     More grouping examples:
+#     https://docs.mongodb.com/manual/reference/operator/aggregation/group/#examples
+	
+		      
+db.student.aggregate(
+  [
+    // First Stage
+    {
+      $group :
+        {
+          _id : "$studentname",
+          totalfeesAmount: { $sum: { $multiply: [ "$fees.cs", "$fees.cm" ] } }
+        }
+     }])
+
+
+# 7.1 Create new fields from manipulation of existing fields:
+#     For every student find year-wise multiplication of fees
+#     wherever this result exceeds 10000
+
+
+db.student.aggregate(
+  [
+    // First Stage
+    {
+      $group :
+        {
+          _id : "$studentname",
+          "totalfeesAmount" : { $sum: { $multiply: [ "$fees.cs", "$fees.cm" ] } }
+        }
+     },
+     // Second Stage
+     {
+       $match: { "totalfeesAmount": { $gte: 10000 } }
+     }
+   ]
+ )
+
+
+################### FINISH ########################################
+
+
+# Example:
+
+# 15. Copy all the following 10 JSON documents in gedit and
+#     save as file: /home/ashok/Documents/mongodb/website.json
+
+{ "_id" : 1, "domainName" : "test1.com", "hosting" : "hostgator.com" }
+{ "_id" : 2, "domainName" : "test2.com", "hosting" : "aws.amazon.com"}
+{ "_id" : 3, "domainName" : "test3.com", "hosting" : "aws.amazon.com" }
+{ "_id" : 4, "domainName" : "test4.com", "hosting" : "hostgator.com" }
+{ "_id" : 5, "domainName" : "test5.com", "hosting" : "aws.amazon.com" }
+{ "_id" : 6, "domainName" : "test6.com", "hosting" : "cloud.google.com" }
+{ "_id" : 7, "domainName" : "test7.com", "hosting" : "aws.amazon.com" }
+{ "_id" : 8, "domainName" : "test8.com", "hosting" : "hostgator.com" }
+{ "_id" : 9, "domainName" : "test9.com", "hosting" : "cloud.google.com" }
+{ "_id" : 10, "domainName" : "test10.com", "hosting" : "godaddy.com" }
+
+# 16. Import this file into mongodb
+#     Create database: testdb and
+#       collection: website
+	
+	$ cd ~/Documents/mongodb
+	$ mongoimport -d testdb -c website --file website.json
+	
+# 16.1 Repeat the above insertion command again:
+
+	$ mongoimport -d testdb -c website --file website.json
+
+  -->> You will get keyerror	
+
+# 16.2 To overwrite, use --upsert, as below. An upsert updates
+#      the document if found or inserts it if not.
+
+	$ mongoimport -d testdb -c website --file website.json --upsert
+
+	
+# 17. Following example groups by the “hosting” field, 
+#      and displays the total sum of each hosting.
+	
+		
+db.website.aggregate(
+{
+$group : {_id : "$hosting", total : { $sum : 1 }} 		// Group by hosting and sum 
+}
+).pretty();
+
+# 17.1 Sort on total, descending:	    
+	
+db.website.aggregate(
+     {
+	$group : {_id : "$hosting", total : { $sum : 1 }}	// Geoup by hosting
+     },
+     {
+	$sort : {total : -1}
+     }
+  );
+
+# 17.2 Add $match condition, groups by “hosting” for “aws.amazon.com” only.
+
+ db.website.aggregate(
+    {
+	$match : {hosting : "aws.amazon.com"}
+    },
+    {
+	$group : { _id : "$hosting", total : { $sum : 1 } }
+    }
+  );
+ 
+#  17.3 Single purpose aggregation: distinct()
+
+
+ db.website.distinct("hosting") 
+ db.website.count()
+ 
+ 
+## G. Text Search
+##    ===========
+
+# Ref: https://docs.mongodb.com/manual/text-search/
+
+#  18. MongoDB supports query operations that perform a text search
+#       of string content. To perform text search, MongoDB uses two things:
+#        one a text-index and second the $text operator.
+
+#  18.1 Create a collection stores with the following documents:
+
+db.stores.insert(
+   [
+     { _id: 1, name: "Java Hut", description: "Coffee and cakes" },
+     { _id: 2, name: "Burger Buns", description: "Gourmet hamburgers" },
+     { _id: 3, name: "Coffee Shop", description: "Just coffee" },
+     { _id: 4, name: "Clothes Clothes Clothes", description: "Discount clothing" },
+     { _id: 5, name: "Java Shopping", description: "Indonesian goods" },
+     { _id: 6, name: "Java", description: "Indonesian goods" }
+  ]
+)
+
+#  18.2 MongoDB provides text indexes to support text search
+#        queries on string content. text indexes can include any
+#         field whose value is a string or an array of string elements.
+#           A collection can only have one text search index, but that
+#            index can cover multiple fields.
+#  For example you can run the following in a mongo shell to allow
+#    text search over the 'name' and 'description' fields:
+  
+	db.stores.createIndex( { name: "text", description: "text" } )
+
+
+#  18.3 Use the $text query operator to perform text searches on a collection
+#        with a text index. $text will tokenize the search string using 
+#         whitespace and most punctuation as delimiters, and perform a logical
+#          OR of all such tokens in the search string.
+#   For example, you could use the following query to find all stores
+#    containing any terms from the list “coffee”, “shop”, and “java”:
+
+db.stores.find( { $text: { $search: "java coffee shop" } } )
+
+# 18.4 You can also search for exact phrases by wrapping them in
+#       double-quotes. For example, the following will find all
+#        documents containing “coffee shop”:
+
+db.stores.find( { $text: { $search: "\"coffee shop\"" } } )	// Case insensitive
+
+# 18.5 To exclude a word, you can prepend a “-” character. For example,
+#       to find all stores containing “java” or “shop” but not “coffee”,
+#        use the following:
+
+db.stores.find( { $text: { $search: "java shop -coffee" } } )
+
+
+# 18.6 Relevance Score: MongoDB will return its results in unsorted order  
+#  by default. However, text search queries will compute a relevance score
+#   for each document that specifies how well a document matches the query.
+#    To sort the results in order of relevance score, you must explicitly
+#      project the $meta textScore field and sort on it:
+
+db.stores.find(
+   { $text: { $search: "java coffee shop" } },
+   { score: { $meta: "textScore" } }
+).sort( { score: { $meta: "textScore" } } )
+
+
+## 
+## H. Statistics/Backup/Restore
+##    =========================
+
+
+# 19. One can obtain statistics on a database by typing db.stats(). 
+#      Most of the information deals with the size of database. 
+
+db.stats()
+
+# One can also get statistics on a collection, say stores,
+# by typing db.unicorns.stats(). Most of this
+# information relates to the size of your collection and its indexes.
+
+# 20. From bash prompt, Backup personal database to a
+#      folder 'backup', in the home directory
+#       (existing backup, if any, will be overwritten) 
+
+cd ~
+mongodump --db personal --out backup
+
+# 20.1 Next, in mongo shell, drop 'personal' database
+
+use personal
+db.dropDatabase()
+db
+show collections               // No collection name will appear
+
+# 20.2 Now, from bash prompt restore, 'stores' collection
+
+cd ~
+mongorestore --db personal backup/personal/stores.bson
+rm -rf backup                   # Clear this folder to save space in VM
+
+# 20.3 From mongoshell check that stores collection now appears:
+
+show collections
+
+# 20.4 From bashprompt, export collection to a csv file
+
+mongoexport --db personal \
+--collection stores \
+--csv --fields name,description --out stores.csv
+
+# Check the exported collection
+
+cat stores.csv
+
+
+## I. Drop objects
+##    ============
+
+
+# 21. Drop Collection users
+
+	> db.users.drop()
+
+# 22. Drop database. Drops database in use:
+#    'personal' database will be dropped
+
+	>  use personal
+	>  db.dropDatabase()
+
+# 23. Quit mongod, as:
+
+	> quit()
+
+## J. Stop mongod
+##    ===========
+
+
+# 24. Stop mongod as root user
+
+	$ sudo service mongod stop
+	
+
+
+################## FINISH ###############################################
+

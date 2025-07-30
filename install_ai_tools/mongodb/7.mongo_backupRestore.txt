@@ -1,0 +1,116 @@
+# Last amended: 1st Nov, 2018
+# Myfolder: /home/ashok/Documents/mongodb/mongodb_class_exercises
+
+## 
+##    Statistics/Backup/Restore
+##    =========================
+
+
+# 1. One can obtain statistics on a database by typing db.stats(). 
+#      Most of the information deals with the size of database. 
+
+use restaurants ;
+db.stats()
+
+# One can also get statistics on a collection, say 'rest',
+# by typing db.rest.stats(). Most of this
+# information relates to the size of your collection and its indexes.
+
+# 2.   From bash prompt, Backup 'restaurants' database to a
+#      folder 'backup', in the home directory
+#      (existing backup, if any, will be overwritten) 
+
+	EXIT mongo SHELL	
+	$ cd ~
+	$ rm -rf /home/ashok/backup
+	$ mongodump --db restaurants --out /home/ashok/backup
+	$ ls -la /home/ashok/backup
+	$ ls -la /home/ashok/backup/restaurants
+	
+
+# 2.1 Next, in mongo shell, drop 'restaurants' database
+
+	use restaurants
+	show collections               // Two collections
+	db.dropDatabase()
+	db
+	show collections               // No collection name will appear
+
+# 2.2 Now, from bash prompt restore, 'messages' and 'rest' collections
+
+	$ cd ~
+	$ mongorestore --db restaurants /home/ashok/backup/restaurants/
+	$ rm -rf /home/ashok/backup/backup                   # Clear this folder to save space in VM
+
+# 2.3 From mongoshell check that restuarnts.messages collection now appears:
+
+	use restaurants
+	show collections
+
+# 2.4 From bashprompt, export collection to a csv file
+
+        $ mongoexport --db restaurants \
+                      --collection rest \
+                      --csv   \
+                      --fields subject,content,likes,year,language \
+                      --out /home/ashok/messages.csv 
+
+
+# Check the exported collection:
+
+	$ cat /home/ashok/messages.csv
+
+
+## CSV Import
+## ============
+# General CSV Import
+# In the following example, 'mongoimport' imports the csv formatted data
+# in the /opt/backups/contacts.csv file into the collection contacts in
+# the 'users' database on the MongoDB instance running on the localhost
+# port numbered 27017.
+#   Specifying --headerline instructs mongoimport to determine the name of
+#   the fields using the first line in the CSV file.
+
+# Both database and collection need not exist beforehand.
+
+$ mongoimport --db hosp_data --collection bc  --type csv --headerline --file /cdata/breast_cancer/data1.csv
+
+# Now start mongo shell and check:
+$ mongo
+
+	> use hosp_data
+	> db.bc.find()
+	> db.bc.find()
+	
+
+
+## I. Drop objects
+##    ============
+
+
+# 21. Drop Collection users
+
+	> db.users.drop()
+
+# 22. Drop database. Drops database in use:
+#    'personal' database will be dropped
+
+	>  use personal
+	>  db.dropDatabase()
+
+# 23. Quit mongod, as:
+
+	> quit()
+
+## J. Stop mongod
+##    ===========
+
+
+# 24. Stop mongod as root user
+
+	$ sudo service mongod stop
+	
+
+
+################## FINISH ###############################################
+

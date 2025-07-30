@@ -1,0 +1,641 @@
+# Last amended: 19th May, 2023
+
+## 1. Full Text Search
+##    ================
+
+#     Text search is designed to index strings based on
+#     language heuristics. Text indexing involves two general 
+#     steps: tokenizing (converting a string into individual
+#     terms of interest) followed by stemming (converting each 
+#     term into a root form for indexing based on language-specific
+#     rules).
+#     During the tokenizing step certain characters (for example,
+#     punctuation symbols such as @) are classified as word 
+#     separators (aka delimiters) rather than text input and used
+#     to separate the original string into terms. Language-specific
+#     stop words (common words such as "the", "is", or "on" in English)
+#     are also excluded from a text index.
+
+## MongoDb vs ElasticSearch:
+#     MongoDB is a database. Elasticsearch is a search engine. Since 
+#     their aims are different, they have different priorities. MongoDB 
+#     is focused on storing data consistently with good performance and 
+#     to support different access patterns. Elasticsearch is focused on 
+#     building low-latency indexes for search specifically text search. 
+#     MongoDB does have full-text search (most databases do), but it's
+#     a feature, not the main focus of the database, so it may not have 
+#     as many options and it may not be as performant as Elasticsearch. 
+
+# Ref: https://docs.mongodb.com/manual/core/index-text/
+#      https://docs.mongodb.com/manual/text-search/
+#      https://code.tutsplus.com/tutorials/full-text-search-in-mongodb--cms-24835
+
+# 0.0 Start mongod:
+
+#0.1 Remove earlier i) contents of log directory 
+#    and ii)  contents of data storage directory (/var/lib/mongo)
+	
+ sudo rm -r /var/log/mongodb
+ sudo rm -r /var/lib/mongo
+ sudo mkdir -p /var/lib/mongo
+ sudo mkdir -p /var/log/mongodb
+ sudo chmod -R 777 /var/lib/mongo
+ sudo chmod -R 777 /var/log/mongodb
+ 
+# 0.2 mongodb conf file is here:
+#     It lists default log and data storage paths
+
+ gedit /etc/mongod.conf
+
+
+##    ===================
+##    Start mongod server
+##    ===================
+
+# 0.3 Start mongodb and ALSO NOTE its pid
+#    
+cd ~
+mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork
+
+
+# 0.4 Check, if you like, that mongod has started:
+
+ netstat -aunt | grep 27017
+
+#  1.1. MongoDB supports query operations that perform a text search
+#      of string content. To perform text search, MongoDB uses two things:
+#        i)  one, a text-index, and
+#       ii)  second, build the seatrch query with the $text operator.
+#      iii)  A collection can have at most one text index (even though with multiple fields).
+
+#  1.2 Create a database, 'textsearch' and collection, 'messages', 
+#       with the following documents:
+
+	> use textsearch;
+	> db.dropDatabase() ;                   // Drop current database
+	> use textsearch;
+
+
+	# Sample document schema
+	
+	{
+	    "subject":"Joe owns a dog", 
+	    "content":"Dogs are man's best friend", 
+	    "likes": 60, 
+	    "year":2015, 
+	    "language":"english"
+	}
+
+# 1.3 Insert some documents now:
+#     (Copy and paste)
+
+db.messages.insert({"subject":"Joe owns a dog", "content":"Dogs are man's best friend", "likes": 60, "year":2015, "language":"english"})
+db.messages.insert({"subject":"Dogs eat cats and dog eats pigeons too", "content":"Cats are not evil", "likes": 30, "year":2015, "language":"english"})
+db.messages.insert({"subject":"Cats eat rats", "content":"Rats do not cook food", "likes": 55, "year":2014, "language":"english", "other" : "dogs are here" })
+db.messages.insert({"subject":"Rats eat Joe", "content":"Joe ate a rat as a food", "likes": 75, "year":2014, "language":"english", "other" : "cat" })
+db.messages.insert({"subject":"Birds can cook", "content":"Birds do not eat rats", "likes": 12, "year":2013, location: "Chicago", "language":"english"})      
+db.messages.insert({"subject":"Birds from Chicago roost here", "content":"Birds fly long distances", "likes": 30, "year":2016, location: "Chicago", "language":"english"})      
+db.messages.insert({"subject":"He cooks his food here", "content":"She cannot cook", "likes": 30, "year":2016, location: "Chicago", "language":"english"})      
+
+
+# 1.3.1 Just see your documents:
+
+	db.messages.find({}).pretty()
+	db.messages.find({}).count()   # 7
+	
+
+
+## 1.4 Problems:
+##
+#    Q1: Create a text index on field "subject"
+#    Q2: Search for "dogs" in the using "$regex" operator
+#    Q3: Search for "dogs" using text search
+#    Q4: Search for "dogs" using text search and get relevancey score
+#    Q5: Search for  "dogs" using text search and get relevancey score and sort by relevancy score
+#    Q6: Drop earlier index. Create another text index on "subject" and "content"
+#    Q7: Search for word 'cat' in both the fields and get relevancy score.
+#    Q8: Perform wild-card indexing. That is, search the entire document
+#    Q9: Search for the word "chicago"
+#    Q10:Perform phrase search on "smart birds who cook"
+#    Q11:Perform an exact phrase search on "cook food"
+#    Q12:Negation Search: Search for lines where "rat" occurs but not "birds"
+#    Q13: Weighted wildcard text Search: Assign weight as: { subject: 3, content:1 }
+#         and then search for the word: 'cook' 
+#    Q14:Create a text search index on two fields: subject and content. Insert two
+#        records. One record has 'pendrive' in 'subject' and the other record has
+#	'pendrive' occurring in 'content'. Search on 'pendrive'. Even though 'pendrive'
+#	 occurs only once in both the records, the length of sentence also decides score.
+#        Next, drop this index and create another index on 'subject' and 'content' but
+#	 this time let it be a weighted index. Check score again. (See #5.2.2 below)
+
+
+
+# 1.5 We first need to define a text index on any field in the document whose value
+#     is a string or an array of strings. When we create a text index on a field,
+#     MongoDB tokenizes and stems the indexed field’s text content, and sets up
+#     the indexes accordingly.  
+#     There can be, at the maximum, only one text index aven though on multiple fields 
+
+
+# 1.6 Text Index
+#     ==========
+
+# 1.6.1 First issue a fulltext query without
+#       a text index:
+#       There will be error msg.
+
+ db.messages.find(
+                   {
+                    $text : 
+                            {$search: "dogs"}
+                   }
+                )
+
+
+
+
+# 1.6.2 Next, begin by creating index on only 'subject' field:
+
+	db.messages.createIndex(
+	                        {
+	                          "subject":"text"
+	                        }
+	                        )
+
+	                        
+# 1.6.3 Check if Index has been setup:
+#       Read the properties carefully.
+      
+
+	> db.messages.getIndexes()
+	
+	
+# Note:   "weights" : {
+#			"subject" : 1
+#		      },
+#	
+
+                        
+	                        
+# 1.7 Text Search ($text operator)
+#     ============================
+#     Start search using $text operator:
+
+	Since we are running a text search, we are also interested in
+	getting some statistics about how relevant the resultant documents
+	are. For this purpose, we will use the { $meta: "textScore" } expression,
+	which provides information on the processing of the $text operator.
+	We will also sort the documents by their textScore using the sort command.
+	A higher textScore indicates a more relevant match. 
+
+
+# 1.7.1 First initial simple text search:
+#       $text performs a text search on the content of the fields. A $text expression
+#       can be written inside db.collection.find(),
+#	Syntax:
+#		{
+#	 	 $text:
+#		 	   {
+#			      $search: <string>,       # String is parsed and tokenized.
+                                                       # For tokenization, delimiters are whitespace,
+                                                       # comma and most punctuation marks.
+                                                       # Each token is searched as logical OR fashion.
+                                                       # Else,specify the string as a phrase
+#			      $language: <string>,     # Default english
+#			      $caseSensitive: <boolean>,      # Default insensitive
+#			      $diacriticSensitive: <boolean>  # False. e & ë are same. o and õ are same
+#			    }
+#		}
+
+#   Full syntax:  db.collection.find ( { $text : { $search : <WhatToSearch> } } )
+
+
+# 1.7.2 Search for text 'dogs'
+
+#   Note that the third document which also contains "dogs" in "other" field is
+#   not returned. Fulltext search is carried out only in indexed field.
+
+
+db.messages.find(
+                 {
+                 $text: {$search: "dogs"}
+                 }
+                )
+
+
+# 1.7.3. Search for text 'dogs' and also get relevance search score:
+
+#        $meta is a projection operator. It returns the metadata (e.g. "textScore") 
+#           associated with the query.
+#          Syntax:   { $meta: <metaDataKeyword> }
+#         Or rather:    { <projectedFieldName>: { $meta: "textScore" } }  # textScore is inbuilt variable
+
+#   Full syntax:  db.collection.find (
+#                                       { $text :    { $search : <WhatToSearch> } } ,  # Search exp
+#                                       {  gameScore: { $meta :   "textScore"   } }    # Projection fields
+#                                     )
+
+
+db.messages.find(
+                 {
+                 $text: {$search: "dogs"}
+                 }, 
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                 ).pretty()
+
+
+# 1.7.4 Search for text 'dogs' and also get relevance search score. And also sort by score
+
+#	Syntax: db.collection.find().sort()
+#          OR : db.collection.find().sort().pretty()
+#       Exactly the same document which is in 'projection'
+#       part of find() will also be inside sort()
+#       This is only for $meta fields
+
+# While this sorting is allowed:
+                  
+db.messages.find(
+                 {
+                 $text: {$search: "dogs"}
+                 },
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                 ).sort(
+                       {
+                       "likes" : 1
+                       }
+                       ).pretty()
+
+
+# This one is not. 
+#  'score' being a meta field: 
+                                        
+db.messages.find(
+                 {
+                 $text: {$search: "dogs"}
+                 },
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                 ).sort(
+                       {
+                       "score" : 1
+                       }
+                       ).pretty()
+
+
+# This is correct:
+
+db.messages.find(
+                 {
+                 $text: {$search: "dogs"}
+                 },
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                 ).sort(
+                       {
+                       score:{$meta:"textScore"}
+                       }
+                       ).pretty()
+                       
+
+# 2    Automatic Stemming
+#      ==================
+# 	Note that if we are searching for the keyword dogs,
+#  	the search engine is also taking the keyword dog (without 's')
+#   	into consideration? Search keywords are being reduced to
+#    	their base (stemming). This is the reason why the keyword dogs
+#     	is reduced to dog.
+
+# 2.1  Drop earlier text index (see name in getIndexes()
+#      Create ONE text index BUT on two fields: 'subject' and 'content' :
+
+#     Multiple text indicies
+#     Search on two fields:                 
+
+db.messages.createIndex({
+                         "subject":"text",
+                         "content":"text"
+                          }) 
+
+
+# 2.1.1 Drop Index
+#       ==========
+# 2.2.1 Before we execute the above, we have to
+#       drop existing text index
+                          
+ db.messages.dropIndex("subject_text")     # If not specified the name of index is this
+
+
+# 2.2.2 Now create one ( default name will be: "subject_text_content_text")
+
+db.messages.createIndex(
+                        {"subject":"text","content":"text"}
+                       )
+                       
+# 2.2.3 Text Index Name
+#   find(    ===============
+
+#       Alternatively also specify name of this index:
+                       
+db.messages.createIndex(
+                        {"subject":"text","content":"text"},
+                        {name : "MyTextIndex"}
+
+                       )    
+                                            
+# 2.2.4 Search for text 'cat' :
+#       In full text search, we do not specify the field to search on.
+
+#       Now issue the query. Score of the first document, which contains the keyword cat
+#       in both subject and content fields, is higher.                        
+
+
+db.messages.find(
+                 { 
+                   $text: {$search: "cat"}
+                 },
+                 {
+                   score: {$meta: "textScore"}
+                 }
+                ).sort(
+                       { 
+                         score:{$meta:"textScore"}
+                        }
+                 ).pretty()
+                   
+
+
+# 3.0   Wildcard Indexing
+#       ==================  
+#      Indexing the Entire Document (Wildcard Indexing):
+
+db.messages.dropIndex("MyTextIndex")      	# OR: db.messages.dropIndex("subject_text_content_text")  
+ 
+# Or, get the value of name field in:
+
+db.messages.getIndexes()
+
+# And then drop that index:
+
+db.messages.dropIndex("subject_text_content_text") 
+                        
+#3.1 Create index. Drop it as: db.messages.dropIndex("$**_text")                       
+
+db.messages.createIndex(
+                        {"$**":"text"}           
+                       )                                   
+                          
+
+# 3.1.1 OR specify an index name
+
+db.messages.createIndex(
+                        {"$**" : "text"},
+                        {"name" : "wildcard"}
+                        )  
+                        
+# 3.2   Search for word: "chicago"
+#       The following query returns results on 'location' field also:
+
+
+db.messages.find(
+                 {
+                 $text: {$search: "chicago"}
+                 }, 
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                ).sort(
+                       {
+                       score:{$meta:"textScore"}
+                       }
+               ).pretty()
+                             
+
+# 4. Phrase Search
+#    =============
+#    One can search for phrases like “smart birds who love cooking” using
+#    text indexes. By default, the phrase search makes an OR search on all
+#    the specified keywords, i.e. it will look for documents which contains
+#    either the keywords smart, bird, love or cook.
+
+db.messages.find(
+                {
+                $text: {$search: "smart birds who cook"}
+                }, 
+                {
+                score: {$meta: "textScore"}
+                }
+                ).sort(
+                       {score:{$meta:"textScore"}
+                       }
+                       )
+
+                       
+# 4.1 For an exact phrase search (logical AND), one can specify
+#     double quotes in the search text. 
+
+
+db.messages.find(
+                {
+                $text: {$search: "\"cook food\""}
+                },
+                {
+                score: {$meta: "textScore"}
+                }
+                ).sort(
+                       {
+                         score:{$meta:"textScore"}
+                        }
+                       )
+
+# 4.2 Negation Search
+#     ===============
+#	Prefixing a search keyword with – (minus sign) excludes all
+#	the documents that contain the negated term. For example,
+#	try searching for any document which contains the keyword 
+#	rat but does not contain birds using the following query:                       
+
+
+db.messages.find(
+                {
+                $text: {$search: "rat -joe"}
+                },
+                {
+                score: {$meta: "textScore"}
+                }
+                ).sort(
+                        {
+                         score:{$meta:"textScore"}
+                        }
+                       )
+                       
+
+# 5. Weighted Text Search
+#    ===================
+#    When we have indexes on more than one field in our document,
+#    most of the times one field will be more important (i.e. more weight)
+#    than the other. For example, when you are searching across a blog,
+#    the title of the blog should be of highest weight, followed by the blog content.
+
+# 5.1	The default weight for every indexed field is 1. To assign relative weights
+#	for the indexed fields, one can include the weights option while using the
+#       createIndex command.
+
+
+# 5.2	If you try searching for the cook keyword with our
+#	current indexes, it will result in three documents,
+#	two of which have the same score.   
+
+
+db.messages.find(
+                 {
+                 $text: {$search: "cook"}
+                 },
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                 ).sort(
+                         {
+                         score:{$meta:"textScore"}
+                         }
+                        )
+
+                       
+
+# 5.2.1 Now let us modify our indexes to include weights; with the subject
+#       field having a weight of 3 against the content field having a
+#       weight of 1.
+
+
+db.messages.dropIndex("wildcard")
+
+# Or, as:
+
+db.messages.dropIndex("$**_text") 
+
+
+db.messages.createIndex(
+                        {"$**": "text"},
+                        {
+                        "weights": { subject: 3, content:1 }
+                        }
+                       )
+                       
+db.messages.find(
+                 {
+                 $text: {$search: "cook"}
+                 },
+                 {
+                 score: {$meta: "textScore"}
+                 }
+                 ).sort(
+                         {
+                         score:{$meta:"textScore"}
+                         }
+                        )
+                        
+                        
+# 5.2.2 A weighted text search index on 'subject' and 'content'
+#       would be:
+                        
+db.messages.createIndex(
+                          {
+                             "subject":"text",
+                             "content":"text"
+                          },
+                          {
+                             "weights": { subject: 3, content:1 }
+                          }
+                      ) 
+
+# 6. Search numbers/booleans
+#    =======================
+
+#   Mongodb has no text search facility to search data types
+#   other than strings.
+
+
+                     
+################## FINISH ###############################################
+#########################################################################
+
+db.stores.insert(
+   [
+     { _id: 1, name: "Java Hut", description: "Coffee and cakes" },
+     { _id: 2, name: "Burger Buns", description: "Gourmet hamburgers" },
+     { _id: 3, name: "Coffee Shop", description: "Just coffee" },
+     { _id: 4, name: "Clothes Clothes Clothes", description: "Discount clothing" },
+     { _id: 5, name: "Java Shopping", description: "Indonesian goods" },
+     { _id: 6, name: "Java", description: "Indonesian goods" }
+  ]
+)
+
+#  18.2 MongoDB provides text indexes to support text search
+#        queries on string content. text indexes can include any
+#         field whose value is a string or an array of string elements.
+#           A collection can only have one text search index, but that
+#            index can cover multiple fields.
+#  For example you can run the following in a mongo shell to allow
+#    text search over the 'name' and 'description' fields:
+  
+	db.stores.createIndex( { name: "text", description: "text" } )
+
+
+#  18.3 Use the $text query operator to perform text searches on a collection
+#        with a text index. $text will tokenize the search string using 
+#         whitespace and most punctuation as delimiters, and perform a logical
+#          OR of all such tokens in the search string.
+#   For example, you could use the following query to find all stores
+#    containing any terms from the list “coffee”, “shop”, and “java”:
+
+db.stores.find( { $text: { $search: "java coffee shop" } } )
+
+# 18.4 You can also search for exact phrases by wrapping them in
+#       double-quotes. For example, the following will find all
+#        documents containing “coffee shop”:
+
+db.stores.find( { $text: { $search: "\"coffee shop\"" } } )	// Case insensitive
+
+# 18.5 To exclude a word, you can prepend a “-” character. For example,
+#       to find all stores containing “java” or “shop” but not “coffee”,
+#        use the following:
+
+db.stores.find( { $text: { $search: "java shop -coffee" } } )
+
+
+# 18.6 Relevance Score: MongoDB will return its results in unsorted order  
+#  by default. However, text search queries will compute a relevance score
+#   for each document that specifies how well a document matches the query.
+#    To sort the results in order of relevance score, you must explicitly
+#      project the $meta textScore field and sort on it:
+
+db.stores.find(
+   { $text: { $search: "java coffee shop" } },
+   { score: { $meta: "textScore" } }
+).sort( { score: { $meta: "textScore" } } )
+
+#################################
+
+# Linux Shell commands:
+
+    cd ~
+    mongoimport --db books --collection lib --drop --file /home/ashok/Documents/mongodb/datasets/catalog.books.json
+	
+# See first record:
+
+mongo
+
+use books
+show collections
+
+db.lib.findOne()
+db.lib.ensureIndex({ "shortDescription" : "text"})
+db.lib.find( {"$text" : "lib", "search" : "Java" })
+	
+
+

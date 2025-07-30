@@ -1,0 +1,272 @@
+﻿Last amended: 10th Feb, 2022
+
+Access controls in mongodb
+==========================
+
+# Ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
+# For roles, see this link:
+# 		https://www.bmc.com/blogs/mongodb-role-based-access-control/
+
+Steps:
+	Open mongo shell
+	1. Under database 'admin' name/create an Administrator and its password
+	2. Close mongo shell
+	2. Only Administrator has a right to create users having authority
+	   over databases.
+	Open mongo shell   
+	3. So to inform mongo that Administrator is operating its shell,
+	   use 'admin' database and then authenticate as Administrator.
+	4. Once authentuication is completed, in the same shell for any database,
+	   users can be created having rights over this database.      
+
+
+Introduction
+------------
+Enabling access control on a MongoDB deployment enforces authentication,
+requiring users to identify themselves. When accessing a MongoDB deployment
+that has access control enabled, users can only perform actions as determined
+by their roles.
+
+With access control enabled, ensure you have a user with userAdmin or userAdminAnyDatabase
+role in the admin database. This user can administrate user and roles such as: create users,
+grant or revoke roles from users, and create or modify customs roles.
+
+You can create users either before or after enabling access control. If you enable access
+control before creating any user, MongoDB provides a localhost exception which allows you
+to create a user administrator in the admin database. Once created, you must authenticate
+as the user administrator to create additional users as needed.
+
+# The following procedure first adds a user administrator to a MongoDB instance running
+# without access control and then enables access control.
+
+
+##########
+# Step 0:
+# Prepare to start mongodb as normal user
+##########
+
+
+# 1. Start MongoDB without access control.
+#    the following starts a standalone mongod instance without access control.
+
+# 1.1 Remove mongod default database home and instead make another one:
+
+	sudo service mongod stop
+        rm -r -f /home/ashok/replica
+        rm -rf $HOME/data/n1
+        rm -rf $HOME/data/n2
+        rm -rf $HOME/data/n3
+        rm -rf $HOME/logs
+
+	sudo ls -la /var/lib/mongo
+	sudo rm -rf /var/lib/mongo
+	sudo mkdir /var/lib/mongo
+	sudo chmod -R 777 /var/lib/mongo
+	sudo ls -la /var/lib/mongo
+
+# 1.2 Create new mongodb data home 
+
+	sudo rm -rf /data/db1 
+	sudo mkdir -p /data/db1
+	sudo chmod -R 777 /data/db1
+
+# 1.3 User ashok: Start mongodb in this new datahome
+#                 but by user 'ashok'
+
+	$ mongod --port 27017 --dbpath /data/db1           // The terminal will not close.
+	$ mongod  --dbpath /data/db1                       // The terminal will not close.
+
+
+# 1.4 User ashok: Observe files created at this place
+
+	$ ls -la /data/db1 
+
+
+##########
+# Step 1:
+# Create an admin user on 'admin' database
+##########
+
+
+# 2. User ashok: On another terminal Connect to the instance as user 'ashok'
+#                Connect a mongo shell to the running instance.
+
+	$ mongo --port 27017
+	$ mongo
+
+# 2.1 Create database 'reporting'. We will need it later:
+
+	>use reporting
+	>db.foo.insert({ abc : 1, cde : 4 })
+
+
+# 2.2 Create the user administrator.
+#     In the admin database, add a user with the userAdminAnyDatabase role.
+#     For example, the following creates the user myUserAdmin in 
+#     the admin database:
+
+	> show dbs ;
+	> use admin
+
+	>db.createUser(
+                       {
+                        user: "myUserAdmin",
+                        pwd: "abc123",
+                        roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+		       }
+                     )
+
+# 2.3. Disconnect the mongo shell.
+
+	> quit()
+
+# 2.4. User ashok: kill the existing mongodb process, as user 'ashok'
+
+$ ps aux | grep mongod
+root      2937  1.2  2.9 1012472 56932 pts/0   SLl+ Jul08   0:18 mongod --auth --port 27017 --dbpath /data/db1
+root      3221  0.0  0.0 103316   844 pts/1    S+   00:01   0:00 grep mongod
+
+$ kill -9 2937    (OR ctrl+C)
+
+
+##########
+# Step 2:
+# Create a normal user on 'personal' database
+##########
+
+
+# 3. User ashok: Re-start the MongoDB instance with access control.
+#    		 Re-start the mongod instance with the --auth command line option or,
+#     		 if using a configuration file, the security.authorization setting.
+
+	$ mongod --auth --port 27017 --dbpath /data/db1
+	$ mongod --auth  --dbpath /data/db1
+	
+
+# 3.1. In terminal of user 'ashok', connect and authenticate directly
+#      as the user administrator.
+
+	$ mongo --port 27017 -u "myUserAdmin" -p "abc123" --authenticationDatabase "admin"
+
+# 3.2. User ashok: Or first connect and then authenticate:
+
+	$ mongo --port 27017
+	OR
+	$ mongo
+
+# 3.3 Switch to the authentication database (in this case, admin),
+#     and use db.auth(<username>, <pwd>) method to authenticate:
+
+	> use admin
+	> db.auth("myUserAdmin", "abc123" )
+
+
+# 3.4 Create additional users as needed for your deployment.
+#     Once authenticated as the user administrator, use db.createUser()
+#     to create additional users. You can assign any built-in roles or
+#      user-defined roles to the users.
+
+#  The myUserAdmin user only has privileges to manage users and roles.
+#    As myUserAdmin, if you attempt to perform any other operations,
+#     such as read from a foo collection in the test database, MongoDB
+#      returns an error.
+
+# The following operation adds a user myTester to the 'personal' database who
+#  has readWrite role in the 'personal' database as well as read role in
+#   the 'reporting' database.
+
+#  The database where you create the user (in this example, personal) is that
+#   user’s authentication database. Although the user would authenticate to this
+#    database, the user can have roles in other databases; i.e. the user’s
+#     authentication database does not limit the user’s privileges.
+
+use personal
+db.createUser(
+  {
+    user: "myTester",
+    pwd: "xyz123",
+    roles: [ { role: "readWrite", db: "personal" },
+             { role: "read", db: "reporting" } ]
+  }
+)
+
+
+
+# 3.5 Quit mongo
+
+	> quit()
+
+##########
+# Step 3:
+# Work on 'personal' database as normal user
+##########
+
+
+# 4.0. User ashok: Connect and authenticate as myTester.
+#      	          To authenticate during connection
+	
+	$ mongo --port 27017 -u "myTester" -p "xyz123" --authenticationDatabase "personal"
+
+# 4.1 OR to authenticate after connecting
+
+	$ mongo --port 27017
+
+# 4.2 Switch to the authentication database (in this case, personal),
+#       and use db.auth(<username>, <pwd>) method to authenticate:
+
+	> use personal ;
+	> db.foo.insert( { x: 1, y: 1 } )  ;     // Fails
+	> db.auth("myTester", "xyz123" )         // Authenticate
+
+
+# 4.3. Insert into a collection as myTester.
+#     As myTester, you have privileges to perform read and write operations
+#       in the personal database (as well as perform read operations in the
+#         reporting database). For example, you can peform the following
+#          insert operation in the personal database:
+
+	> use personal
+	> db.foo.insert( { x: 1, y: 1 } )         // Collection name is foo.
+
+
+# 4.4 Try to drop 'personal' databse:
+
+	>db.dropDatabase()			// It fails
+
+# 4,5 
+
+	>db.foo.find()				// Just to confirm database exists
+
+# 4.6  Quit
+	>quit()
+
+
+##########
+# Step 4:
+# Work on 'reporting' database as normal user
+##########
+
+# 5.0
+	$ mongo
+	> use reporting
+	> db.foo.insert( { x: 1, y: 1 } )		// It fails. Error
+	> show collections				// Unable to run listCollections command
+	> db.auth("myTester", "xyz123" )		// Authentication failed  
+	> use personal					// This is the correct authetication database for 'myTester'
+	> use reporting					// Succeeds
+	> show collections				// Succeeds
+	> db.foo.insert( { x: 1, y: 1 } ) 		// Fails 
+	> quit()
+
+
+####################### DONE #####################################
+
+
+
+
+
+
+
+
+
+

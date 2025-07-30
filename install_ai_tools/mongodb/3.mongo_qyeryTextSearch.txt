@@ -1,0 +1,464 @@
+# Last amended: 2nd April, 2022
+# Myfolder: /home/ashok/Documents/mongodb/mongodb_class_exercises
+# Ref: Query operators:
+#	https://docs.mongodb.com/manual/reference/operator/query/#query-and-projection-operators
+
+#
+########################
+## Querrying Monogodb
+########################
+#
+
+# 0.    QUIT mongo shell if it is open. Issue following commands
+
+### 1. Start mongodb: If not started from earlier exercise. To save space,
+#                   you may delete earlier log files before starting:
+
+#		Check mongod status
+                sudo service mongod status
+#                OR
+                sudo systemctl start mongod
+                
+#               If started stop it.
+
+                sudo service mongod stop
+#		OR
+		sudo systemctl stop mongod
+
+#               Then delete log files:
+				
+                sudo rm -f /var/log/mongodb/mongod.log
+
+#               Finally start it:
+
+                sudo service mongod start
+#                OR
+		sudo systemctl start mongod
+		
+
+###2.  Import primer-dataset.json, in 'restaurants' database in collection 'rest' 
+#      Copy and paste all three commands in a terminal
+	
+
+# 2.1 First have a look at the three files that we are going to import:
+#     They are pure json files. Any json file can be imported.
+
+export filePath="/home/ashok/Documents/mongodb/datasets"
+gedit $filePath/primer-dataset.json
+gedit $filePath/catalog.books.json
+gedit $filePath/credit_card_transactions.json
+
+
+# 2.2 Try man mongoimport for more details
+#  	--db : 		Specifies the name of the database on which to run the mongoimport.
+#  	--collection :  Specifies the collection to import.
+#  	--drop : 	Modifies import process so that the target instance drops
+                 	the collection before importing the data from the input.
+
+cd ~/
+
+# 2.2.1 File simple.json is a simple json file. You can open it
+#  	and perform expts as to what gets imported and what not.
+
+
+mongoimport    \
+     --db simple \
+     --collection rest \
+     --drop \
+     --host localhost:27017  \
+     --file /home/ashok/Documents/mongodb/datasets/simple.json
+
+
+
+mongoimport     \
+     --db restaurants \
+     --collection rest \
+     --drop \
+     --host localhost:27017  \
+     --file /home/ashok/Documents/mongodb/datasets/primer-dataset.json
+
+
+mongoimport \
+         --db books \
+         --collection lib \
+         --drop \
+         --file /home/ashok/Documents/mongodb/datasets/catalog.books.json
+
+
+mongoimport \
+         --db credit_card \
+         --collection trans \
+         --drop \
+         --file /home/ashok/Documents/mongodb/datasets/credit_card_transactions.json
+
+cd ~/
+
+
+# 2.3 Start mongod client:
+
+	mongo
+	>  use restaurants ;
+	>   show collections ; 
+	rest       # This should be the answer    
+	
+
+# 2.4 Get a list of fields in 'rest'
+#     collection. Write a small javascript program
+#     and run it in mongo:
+
+
+doc=db.rest.findOne();
+for (key in doc) print(key);    // _id, address, district, speciality, grades, name, restaurant_id
+for (key in doc.grades) print(key)	// What about keys of embedded documents
+for (key in doc.grades[0]) print(key)
+
+
+##**************************
+## Syntax: db.collection.find(query, projection)
+##         db.xyz.find({name : "ashok"}, { age : 1, address : 1, _id : 0 }) 
+##**************************
+
+## 2.5 Quick questions:
+# 	1.  Show all documents in a collection in a nice (pretty) format:
+# 	2.  Show all documents, but just two fields: name and grades
+# 	3.  Show all documents, but two fields, name and 'grade' from 'grades'
+#	4.  Show all documents and all fields except two fields, 'name' and 'grade' from 'grades'
+#	5.  Show all documents where street (in address) is  "3 Avenue"
+#	6.  Show those resturants which are on streets: "3 Avenue" or on  "Prospect Park West" (579)
+#	6a. Show resturants which are NOT on streets: "3 Avenue" or on  "Prospect Park West" (24782)
+#		(use "$nin" )
+#	7.  Show those records where grades.score is less than 15
+# 	8.  Count total number of records:
+
+#     Regular expressions
+#     ===================
+#     Note: For Learning Regular Expression, See 'regex' folder in 'ubuntu_database' VM
+#
+# 	1.  Search for all 'name' where 'G' occurs: (2687)
+#	2.  Search for all 'name' where 'G' DOES NOT occur (25209)
+# 	3.  Search for all 'name' where 'Gri' occurs: (705)	
+# 	4.  Search for all 'name' where 'Grill' occurs at the end of name (517)
+# 	    (The inverse question: Documents where 'Grill' is not at the end 
+#		of 'name' has a complex regular expression. .*[^G][^g][^i][^l].*[^l]$) 
+# 	5.  Search for all 'name' having 'Bar' word (anywhere) but word 'Grill' at the end of name: (118)
+# 	6.  Search for all 'name' where 'Gr' occurs at the beginning and 'ria' at the end of 'name' (7)
+#       6.1 Search for all 'name' where 'Gr' occurs at the beginning and 'ria' at the end of 'name' BUT no space  occurs in between.(1)
+# 	7. Search for 'name' where 'Grill' occurs at the beginning of name, and count how many:(10)
+# 		7.1 Find but limit records displayed:
+# 		7.2 Show only few fields:
+# 	8. Using "$regex" operator Find all records where Grill occurs at the beginning in 'name'
+# 	9. Find  'street' in address which is: "Morris Park Ave" (36)
+
+#	Logical Operators
+#	==================
+# 	1. Find that record where street in address is: Morris Park Ave and grade in grades is 'A': (8)
+# 	2. Find that record where street in address is: Morris Park Ave and grade in grades is 'A' and 'score' 
+#    	    in grades is less than 8. Use $and with $lt operators (5)    // Ops: $lt, $lte, $gt, $gte, $in, $nin        
+#				                                         // $ne, $in; name: {$in:['xyz','abc']}})
+
+# 	3. Find that record where street in address is: Morris Park Ave and grade in grades is 'A' but 'address' of 'building'
+#     	    is not "1000" (string) (7)
+# 	4. Search for records with district that is either 'Manhattan' or 'Brooklyn': (16347)
+# 	5. So how to write query for: (A AND B) OR (C AND D)
+# 	6. sort() syntax. Rank restaurant_id by "revenue" in descending order.
+#           (Note: "revenue" field is available in very few records.)
+
+
+##**************************
+
+
+## E. Retrieval
+##    =========
+# Ref: https://www.hacksparrow.com/the-mongodb-tutorial.html
+
+# 3.  Show all documents in a collection in a nice (pretty) format:
+	# Synatx of find():
+	# db.collection.find(query, projection)
+	#  	 	query: Specifies selection filter using query operators.
+	# 		projection: Specifies fields to return in the documents that match the query filter. 
+	# Syntax:				
+	# 		db.collection.find({ "field1" : val1, "field2" : val2 } , { "field1" : 1, "field2" :1 })
+	#     		db.collection.find({ "field1.subfield1" : { $operator : val1 }} , { "fieldx.subfieldy" : 1, "fieldz.subfieldn" :1 })
+	#		Operators:  $eq, $gt, $lt, $lte, $gte, $in, $nin, $ne
+	
+
+# 3.1 Show all documents:
+
+	db.rest.find()			// This command is like 'select * from db'
+	db.rest.find({})		// Same as above. Show all records ({})
+
+# 3.2 Show all documents, but just two fields: name and grades
+	
+	db.rest.find({},{"name":1,"grades":1})	 // Show all records {}
+	                                         //   but show two fields {"name":1,"grades":1}
+	db.rest.find({},{name : 1, grades : 1})	 // Same as above
+
+# 3.3 Show all documents, but two fields, name and 'grade' from 'grades'
+	
+	db.rest.find({},{"name":1,"grades.grade":1})	// Or narrow down further for embedded documents
+	db.rest.find({},{name: 1, grades.grade : 1})	// This DOES NOT work. Dot ('.') is an operator in mongodb
+	db.rest.find({},{"name" : 1,"grades.grade" : 1}) // This is OK
+	
+	db.rest.find().pretty()		// pretty 
+
+# 3.4 Show all documents, except two fields, name and 'grade' from 'grades'
+
+	db.rest.find({}, {name : 0 , "grades.grade" : 0 })
+
+# 3.5 Show all records where street in address is "3 Avenue"
+
+	 db.rest.find({ "address.street" : "3 Avenue" }).pretty()
+
+#     Using Comparison operators : $eq, $gt, $lt, $lte, $gte, $in, $nin, $ne
+	 
+	 db.rest.find({ "address.street" : {$eq : "3 Avenue" } }).pretty()
+
+
+# 3.6  Show those records where grades.score is less than 1
+
+	db.rest.find({ "grades.score" : { $lt : 1 }}).pretty()
+
+
+# 3.7 Show those resturants which are on streets: "3 Avenue" or on  "Prospect Park West" :
+
+	 db.rest.find({ "address.street" : {$in : ["3 Avenue",  "Prospect Park West" ] } }, {address :1 }).pretty()
+
+
+#4.	Count total number of records:
+
+	db.rest.count()                              // Count documents in 'rest' collection
+	db.rest.find().count()
+
+## 5. Regular Expressions Search:
+##################################
+
+	# Using regular expression in   find({}):
+	# Ref: https://docs.mongodb.com/manual/reference/operator/query/regex/
+	# For regex, see: http://203.122.28.230/moodle/mod/url/view.php?id=1842
+	#
+	# Syntax:
+	#	{ <field>: { $regex: /pattern/, $options: '<options>' } }
+	#	{ <field>: { $regex: 'pattern', $options: '<options>' } }
+	#	{ <field>: { $regex: /pattern/<options> } }
+	#	{ <field>: { $regex: /acme.*corp/, $options: "si" } }  # Options 's' and 'i' must be used as here
+	#
+	# Options are as follows:
+	# i: Case insensitivity 
+	# m: For patterns that include anchors (i.e. ^ for the start, $ for the end),
+	#    match at the beginning or end of each line for strings with multiline values.
+	#    Without this option, these anchors match at beginning or end of the string.
+	# x:“Extended” capability to ignore all white space characters in the $regex 
+	#     pattern unless escaped or included in a character class.
+	# s: Allows the dot character (i.e. .) to match all characters including newline
+	#    characters.
+	
+# 5.1 Search for all 'name' where 'G' occurs:
+
+	db.rest.find({name: /G/})  			// like '%G%'
+	db.rest.find({ name : { $regex : 'G'}  }, {name: 1 , _id : 0}).pretty()
+
+# Search for all 'name' where 'G' DOES NOT occur	
+
+	db.rest.find({"name" : { "$regex" : /.*[^G].*/ } }, {"name" : 1})	
+
+# 5.2 Search for all 'name' where 'Gri' occurs:	
+	
+db.rest.find({name: /Gri/})  			// like '%Gri%'
+
+# 5.3 Search for all 'name' where 'Grill' occurs at the end of name:	
+	
+	db.rest.find({name: /Grill$/})  		// ending in 'Grill'
+	
+# 5.4 Search for all 'name' which has 'Bar' word and 'Grill' at the end of name:
+	
+	db.rest.find({name: /(Bar).+Grill$/})  		// Has Bar and also Grill at the end
+	db.rest.find({ name : { $regex : '.*(Bar).*Grill$'}  }, {name: 1 , _id : 0}).pretty()
+
+
+# 5.5 Search for all 'name' where 'Gr' occurs at the beginning and 'ria' at the end of 'name':
+	
+	db.rest.find({ "name" : /^Gr.*ria$/ } )
+
+# 5.6 Search for 'name' where 'Grill' occurs at the beginning of name, and count how many:
+	
+	db.rest.find({name: /^Grill/})  		// ^abc => abc, abcdefg, abc123
+	db.rest.find({ name : { $regex : '^Grill'}  }, {name: 1 , _id : 0}).pretty()
+
+	db.rest.find({name: /^Grill/}).count() 		// Count them 10
+	
+# 5.7 Find but limit records displayed:
+
+	db.rest.find({name: /^Grill/}).limit(2).pretty() // Limit to two records
+	
+	# But try the following. There appears to be something not right:
+
+        db.rest.find({ }).limit(1).pretty()              // Only one record shown
+        db.rest.find({ }).limit(1).count()               // Answer is 25359
+        db.rest.find({name: /^Grill/}).limit(2).count()  // Answer is 10
+
+	
+# 5.8 Show only few fields:
+
+	db.rest.find({name: /^Grill/}, {"address":1})    // Display only address field; _id is always displayed
+	db.rest.find({name: /^Grill/}, {"address":1,_id : 0})   // Display address only but not _id
+	db.rest.find({name: /^Grill/}, {"address":1,_id : 0, "name":1})   // Display address and name
+	db.rest.find({name: /^Grill/}, {"address":1,_id : 0, "name":1}).limit(2).pretty() 
+	
+# 5.9 Use $regex operator
+
+	# https://docs.mongodb.com/manual/reference/operator/query/regex/
+	# Single fields no AND or OR
+
+# 5.9.1 Find all records where Grill occurs at the beginning in 'name':
+	
+	db.rest.find({name: {$regex: /^Grill/} }) 	// Same as: db.rest.find({name: /^Grill/})  
+	db.rest.find({name: {$regex: /^GRILL/} })	// No record matches
+	db.rest.find({name: {$regex: /^GRILL/i} })	// Case insensitive search
+	
+	# 5.9.1 Project only needed fields. Syntax is::
+	#       Syntax:
+	#         db.rest.find( {match_condition}, {field1: 1, field2: 1 ...}
+	
+	db.rest.find ( {}, {"name": 1, "points": 1})		// Return all records but display fields 'name' & 'points'
+	
+	# 5.9.2 Accessing nested fields (use dot operator):
+	
+		db.rest.find({ "address.street" : "Morris Park Ave" })
+		
+		# 3.6.1 Note the differences in output in the following three cases
+		db.rest.find({ "address.street" : "Morris Park Ave" },  {"address.street" : 1 , _id : 0})
+		db.rest.find({ "address.street" : /Morris Park Ave/ },  {"address.street" : 1 , _id : 0})
+		db.rest.find({ "address.street" : /Morris Park Ave$/ }, {"address.street" : 1 , _id : 0})
+		
+
+## 6. Logical Operators
+========================
+			
+# 6.1  AND operator: $and: Applies always over an array:
+	        Syntax:
+	        { $and: [ { <expression1> }, { <expression2> } , ...] }
+	
+
+# 6.2 Find that street in address that is: Morris Park Ave and grade in grades is 'A':
+
+		db.rest.find({ address.street : "Morris Park Ave" })
+	
+
+	#	$and operaor uses Polish prefix notation in which operators precede their operands
+	#	Examples:
+	#      (5 − 6) × 7 is written in Polish notation as:    × (− 5 6) 7 
+	#	5 − 6 × 7  is written as: − 5 × 6 7
+	
+	db.rest.find(
+	             { $and : [                                                       
+	                       {"address.street" : "Morris Park Ave" },
+	                       {"grades.grade" : "A"}
+	                       ]
+	              }
+	             )
+
+# 6.3 $and with $lt operator	     // Ops: $lt, $lte, $gt, $gte, $in, $nin        
+				     // $ne, $in; name: {$in:['xyz','abc']}})
+					     
+# 6.4  Find that street in address that is: Morris Park Ave and grade in grades is 'A' and 'score' 
+#      in grades is less than 8:
+
+	db.rest.find(
+	             { $and : [                                                       
+	                       {"address.street" : "Morris Park Ave" },
+	                       {"grades.grade" : "A"},
+	                       {"grades.score" : {
+	                                            $lt: 8
+	                                          }
+	                        }  
+	                       ]
+	              }
+	             )
+
+
+# 6.5  Find that street in address that is: Morris Park Ave and grade in grades is 'A' but 'address' of 'building'
+#      is not 1000:
+	
+	db.rest.find(
+	             { $and : [                                                       
+	                       {"address.street" : "Morris Park Ave" },
+	                       {"grades.grade" : "A"},
+	                       {"address.building" : {
+	                                            $ne : "1000"
+	                                          }
+	                        }  
+	                       ]
+	              }, {"address.building" : 1}
+	             )
+	             	
+# 6.6 $or operator. It has syntax similar to $and:
+	#       Syntax:
+	#       { $or: [ { <expression1> }, { <expression2> }, ...} ] }
+	
+
+# 6.7 Search for records with district which is either 'Manhattan' or 'Brooklyn':
+	
+		db.rest.find(
+		            { $or : 
+		                   [
+		                      { "district" :  "Manhattan" },
+		                      {"district" : "Brooklyn" }
+		                    ]
+		            }
+		            )  
+
+		                       	                         
+# 6.8  So how to write query for: (A AND B) OR (C AND D)
+#       As per Polish notation, it is:
+#           OR (AND A B) (AND C D)
+#       This is exactly the way we write in mongodb:
+	
+	
+		            { $or : 
+		                   [
+		                      { ------ 1st AND expression--------},
+		                      {--------IInd AND expression-------}
+		                   ]
+		            }
+
+## sort search
+#################		            
+		            
+# 7.0 sort() syntax:
+
+	db.rest.find().sort( { "field-to-sort" : 1 OR -1 })    # 1 for asc, -1 for desc
+		            
+
+
+## Optimizing query performance
+## Ref: https://docs.mongodb.com/manual/indexes/
+##################
+	
+# 8. Index creation
+#    Indexes support the efficient execution of queries in MongoDB.
+#    Without indexes, MongoDB must perform a collection scan, i.e.
+#    scan every document in a collection, to select those documents
+#    that match the query statement. If an appropriate index exists
+#    for a query, MongoDB can use the index to limit the number of 
+#    documents it must inspect.
+
+# 8.1 For commonly issued queries, create indexes. If a query searches
+#     multiple fields, create a compound index. Scanning an index is much
+#     faster than scanning a collection. 
+
+
+	db.rest.createIndex( { "name": 1 })
+	db.rest.createIndex( {"favorites.food": 1 } )  	// For an embedded field
+	db.rest.createIndex( { "name": 1 , "favorites.food": -1 })  // Compound index
+
+#	The value of the field in the index specification describes the kind of
+#	index for that field. For example, a value of 1 specifies an index that
+#	orders items in ascending order. A value of -1 specifies an index that 
+#	orders items in descending order
+
+# 8.2 To analyse how indexes improve performance, see:
+#	https://docs.mongodb.com/manual/tutorial/analyze-query-plan/
+	
+######################################
+
+

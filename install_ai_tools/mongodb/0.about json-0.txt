@@ -1,0 +1,123 @@
+# Last amended: 18th March, 2022
+# Ref: https://en.wikipedia.org/wiki/JSON
+
+
+# JavaScript Object Notation or JSON is an open-standard file
+#  format that uses human-readable text to transmit data objects
+#  consisting of attribute–value pairs and array data types. 
+#  It is a very common data format used for asynchronous 
+#  browser–server communication, including as a replacement for XML 
+#  For example, when chrome browser requests for data from mysql-server,
+#  the data is coded in JSON and transmitted to chrome. The transferred
+#  data may look like:
+#
+#  Original data
+# +------+-------+-------+--------+--------+
+# | PNUM | PNAME | COLOR | WEIGHT | CITY   |
+# +------+-------+-------+--------+--------+
+# |    1 | Nut   | Red   |   12.0 | London |
+# |    2 | Bolt  | Green |   17.0 | Paris  |
+# |    3 | Screw | Blue  |   17.0 | Oslo   |
+# +------+-------+-------+--------+--------+
+
+# Transferred data:
+#
+{ "Row1" : { "PNUM"  : 1,
+             "PNAME" : "Nut",
+             "COLOR" : "Red",
+             "WEIGHT": 12.0,
+             "CITY"  : "London"
+            }, 
+
+  "Row2" : { "PNUM"  : 2,
+             "PNAME" : "Bolt",
+             "COLOR" : "Green",
+             "WEIGHT": 17.0,
+             "CITY"  : "Paris"
+            },
+            
+   "Row3" : { "PNUM"  : 3,
+              "PNAME" : "Screw",
+              "COLOR" : "Blue",
+              "WEIGHT": 17.0,
+              "CITY"  : "Oslo"
+            }
+ }
+             
+
+# JSON's basic (five) data types are:
+
+#	Number: 	a signed decimal number 
+#	String: 	a sequence of zero or more Unicode characters.
+#	Boolean: 	either of the values true or false
+#	Array: 		an ordered list of zero or more values, each of which may be of any type. 
+# 	Object: 	an unordered collection of name–value pairs 
+#       null: 		An empty value, using the word null
+
+
+AA.
+===
+The following example shows a possible JSON representation describing a person.
+
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,                                    # Boolean
+  "age": 27,			                      # Number
+  "address": {
+           "streetAddress": "21 2nd Street",
+           "city": "New York",
+           "state": "NY",
+           "postalCode": "10021-3100"
+              },
+  "phoneNumbers": [                                     # Array of json objects
+                    {
+                    "type": "home",
+                    "number": "212 555-1234"
+                    },
+                    {
+                    "type": "office",
+                    "number": "646 555-4567"
+                    },
+                    {
+                    "type": "mobile",
+                   "number": "123 456-7890"
+                    }
+                ],
+  "children": ["john", "soni"],				# Array
+  "spouse": null					# null value
+}
+
+
+BB.
+===
+Mongodb supports a large number of datatypes. There are also
+called BSON types. Some of these are:
+(Ref: https://docs.mongodb.com/manual/reference/bson-types/#date )
+
+Number:
+	Double 
+	Integer		32-bit integer
+	long		64-bit integer
+
+String
+Boolean
+Object             # An embedded document
+Array		   # An array of numbers/strings/documents/images
+Binary Data        # Image
+null
+
+Date
+	Date
+	timestamp
+
+#####################################
+
+
+f
+JavaScript with scope 	15
+Integer 	16 and 18
+Timestamp 	10
+Min Key 	255
+Max Key
+
