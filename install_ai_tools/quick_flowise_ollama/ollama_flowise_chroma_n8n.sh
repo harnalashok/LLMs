@@ -454,6 +454,43 @@ if [[ $input == "Y" || $input == "y" ]]; then
  fi  
 
 
+#########################
+### Install mongodb and mongosh
+# https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+# Mongosh: https://www.mongodb.com/docs/mongodb-shell/install/
+#########################
+
+echo " "
+echo " "
+echo "------------"   
+echo "Shall I install mongodb db? [Y,n]"    # 
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    cd /home/$USER/
+    sudo apt-get install gnupg curl
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+            sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+            --dearmor
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+    sudo apt-get update
+    sudo apt-get install -y mongodb-org
+    sudo systemctl start mongod
+   #On error
+   #sudo systemctl daemon-reload
+   # Mongosh
+   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
+   sudo apt-get install gnupg
+   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
+   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+
+
+
+
+
+
+
+
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
