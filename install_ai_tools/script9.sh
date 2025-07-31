@@ -39,6 +39,7 @@ sleep 10
 
 echo "Installing milvus vector database using docker"       | tee -a /home/ashok/error.log
 echo "You will be asked for the password. Supply it..."     | tee -a /home/ashok/error.log
+echo "Installation will be quiet...takes time.."     | tee -a /home/ashok/error.log
 
 echo " "                                                    | tee -a /home/ashok/error.log
 sleep 3
