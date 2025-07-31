@@ -464,6 +464,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
 echo " "
 echo " "
 echo "------------"   
+echo "Mongodb install depends upon your ubuntu version"
+echo "Check (release or) version now:"
+echo "========"
+lsb_release -a
+echo "========"
 echo "Shall I install mongodb db for Ubuntu 22.04? [Y,n]"    # 
 read input
 input=${input:-Y}
@@ -498,6 +503,13 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "sudo systemctl start mongod"                                     >> /home/$USER/start_mongodb.sh  
    echo "sleep 2"                                                         >> /home/$USER/start_mongodb.sh  
    echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh  
+   # mongodb stop script
+   echo '#!/bin/bash'                                                      > /home/$USER/stop_mongodb.sh  
+   echo " "                                                               >> /home/$USER/stop_mongodb.sh  
+   echo "cd ~/"                                                           >> /home/$USER/stop_mongodb.sh  
+   echo "sudo systemctl stop mongod"                                     >> /home/$USER/stop_mongodb.sh  
+   echo "sleep 2"                                                         >> /home/$USER/stop_mongodb.sh  
+   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/stop_mongodb.sh  
    chmod +x /home/$USER/*.sh
    # Dowload some files
    mkdir -p /home/$USER/Documents/mongodb/datasets
@@ -522,7 +534,12 @@ fi
 
 echo " "
 echo " "
-echo "------------"   
+echo "------------"  
+echo "Mongodb install depends upon your ubuntu version"
+echo "Check (release or) version now:"
+echo "========"
+lsb_release -a
+echo "========"
 echo "Shall I install mongodb db for Ubuntu 24.04? [Y,n]"    # 
 read input
 input=${input:-Y}
@@ -556,7 +573,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
    echo "echo 'mongodb will be available on port 27017'"                  >> /home/$USER/start_mongodb.sh  
    echo "sudo systemctl start mongod"                                     >> /home/$USER/start_mongodb.sh  
    echo "sleep 2"                                                         >> /home/$USER/start_mongodb.sh  
-   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh  
+   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh 
+   # mongodb stop script
+   echo '#!/bin/bash'                                                      > /home/$USER/stop_mongodb.sh  
+   echo " "                                                               >> /home/$USER/stop_mongodb.sh  
+   echo "cd ~/"                                                           >> /home/$USER/stop_mongodb.sh  
+   echo "sudo systemctl stop mongod"                                     >> /home/$USER/stop_mongodb.sh  
+   echo "sleep 2"                                                         >> /home/$USER/stop_mongodb.sh  
+   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/stop_mongodb.sh  
    chmod +x /home/$USER/*.sh
    # Dowload some files
    mkdir -p /home/$USER/Documents/mongodb/datasets
