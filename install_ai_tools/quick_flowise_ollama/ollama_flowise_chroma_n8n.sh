@@ -125,14 +125,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
     echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
     echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
-    echo "docker run -d -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma chromadb/chroma:0.6.3 "   | tee -a /home/$USER/start_chroma.sh 
+    echo "docker run -d --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma chromadb/chroma:0.6.3 "   | tee -a /home/$USER/start_chroma.sh 
 
     # Pulling chromadb docker image  
     cd /home/$USER/
     echo " "                                       | tee -a /home/$USER/error.log
     echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
     # Refer: https://cookbook.chromadb.dev/strategies/cors/
-    docker run -d -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:0.6.3 
+    docker run -d --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:0.6.3 
     echo "------------"                            | tee -a /home/$USER/error.log
     echo " "                                       | tee -a /home/$USER/error.log
     sleep 3
