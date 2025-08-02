@@ -34,6 +34,7 @@ sleep 10
 
 ###############
 # Milvus install
+# Webui avaiable at: http://localhost:9091/webui
 ################
 # Ref: https://milvus.io/docs/install_standalone-docker.md
 
