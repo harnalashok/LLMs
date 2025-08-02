@@ -181,7 +181,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
     echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
     echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
-    echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_n8n.sh
+    echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
     echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
     echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
     #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
