@@ -1,4 +1,4 @@
-**Learning SQL in postgresql**     
+# Learning SQL in postgresql   
 >For quick experiments, in postgres, one can have any user and any database. Within that database s,p,sp tables are created.     
 >>Create tables and insert rows as in:  [sp.sql](https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/sqlFiles/sp.sql)     
 >>Sample queries are in file:               [sqlQueries.sql](https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/sqlFiles/sqlQueries.sql)
