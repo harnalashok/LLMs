@@ -51,7 +51,7 @@ Concepts
 	
 		postgres=> set role postgres ;
 
-	4. To create a database and a user, first loginto system user (and NOT postgres user) postgres :
+	4. To create a database and a user, first loginto 'postgres' system user (and NOT postgres user) postgres :
 
 		ashok@ashok:~$ sudo su postgres
            
@@ -64,12 +64,27 @@ Concepts
 
 		postgres=# 
 	
-	5. Create a user and create a database, as:
+	5. Create a linux system user with HOME folder, as:
+
+              sudo useradd -m joker
+	      sudo passwd joker
+
+       6. Then one can switch user, as follows. Then issue two commands
+          cd followd by pwd:
+
+            sudo su joker
+            $cd
+            $pwd
+
+        5. Once a Linux system user is created, loginto postgres system account 
+           and create a user and create a database, as:
 
 		postgres=# create user joker with password 'joker' ;
 		postgres=# CREATE DATABASE joker ;
-		postgres=# CREATE DATABASE king with owner ashok ; 
-		postgres=# GRANT ALL PRIVILEGES ON DATABASE joker TO ashok; 
+                # Hiterto, database, joker and user joker are unrelated.
+                # Grant privileges, as:
+		postgres=# CREATE DATABASE king with owner joker ; 
+		postgres=# GRANT ALL PRIVILEGES ON DATABASE joker TO joker; 
         
 	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
 	   Thus, this command fails:
