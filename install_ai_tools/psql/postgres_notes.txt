@@ -79,12 +79,21 @@ Concepts
         5. Once a Linux system user is created, loginto postgres system account 
            and create a user and create a database, as:
 
+              Create system user and password==>As postgres, create postgresql user and password
+                 ==>create a database==>grant all privilegs over database
+                     ==>Connect to database==>Grant usage over public schema
 		postgres=# create user joker with password 'joker' ;
 		postgres=# CREATE DATABASE joker ;
                 # Hiterto, database, joker and user joker are unrelated.
                 # Grant privileges, as:
 		postgres=# CREATE DATABASE king with owner joker ; 
 		postgres=# GRANT ALL PRIVILEGES ON DATABASE joker TO joker; 
+                # Also allow user joker all privileges over public schema within
+                # database joker.
+                # WITHOUT this schema privilege, table creation by user joker, over 
+                # database joker would fail. 
+                postgres=# \c joker
+                joker=# GRANT USAGE ON SCHEMA public TO joker;  
         
 	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
 	   Thus, this command fails:
