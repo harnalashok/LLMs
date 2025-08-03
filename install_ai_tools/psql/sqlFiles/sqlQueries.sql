@@ -4,6 +4,7 @@
 #
 # Sample SQL queries and answers. Mix of sp and spp databases
 # These SQL commands work in psql shell
+# See file: sp.sql
 */
 
 
@@ -524,6 +525,7 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
 
