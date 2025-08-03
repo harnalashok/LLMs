@@ -1,11 +1,11 @@
 -- Last amended: 3rd August, 2025
 -- Myfolder: /home/ashok/Documents/sampleDatabases/sd4
 -- VM: Ubuntu database VM
--- source /home/ashok/Documents/sampleDatabases/sd4/sp.sql
--- Within database, sp, we have a table 'sp'
+-- Within database, gandhi, we have a table 'sp'
+--Assuming user: gandhi and database: gandhi in postgresql
+--We create three tables within this database
+-- See queries in file: sqlQueries.sql
 
---Assuming gandhi database exists
---We create tables within this database
 
 --Connect to gandhi database
 
