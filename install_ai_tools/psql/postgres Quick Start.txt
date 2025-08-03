@@ -1,5 +1,4 @@
-<b>postgresql user/database</b>      
-> On installation, postgresql server has a user postgres and database postgres. This user has complete privileges. This user can create other users (or roles), create databases, grant users privileges over databases. 'postgres' is also a Linux system user but its password is NOT known.
-> For every user that you intend to create in postgresql server, first create a Linux system user by that name, as follows:
-> > sudo useradd king
-> > sudo passwd king
+1. SELECT * FROM customer;
+2. SELECT first_name || ' ' || last_name, email FROM  customer;
+3. SELECT first_name || ' ' || last_name AS full_name FROM customer;
+   SELECT first_name || ' ' || last_name  "full_name" FROM customer;
