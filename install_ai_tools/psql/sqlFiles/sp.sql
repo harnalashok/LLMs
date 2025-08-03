@@ -1,19 +1,17 @@
--- Last amended: 27th Dec, 2021
+-- Last amended: 3rd August, 2025
 -- Myfolder: /home/ashok/Documents/sampleDatabases/sd4
--- VM: Ubuntu VM
+-- VM: Ubuntu database VM
 -- source /home/ashok/Documents/sampleDatabases/sd4/sp.sql
--- Usage:
---        $ mysql -u ashok -p
---        mysql> source /home/ashok/Documents/sampleDatabases/sd4/sp.sql
-
 -- Within database, sp, we have a table 'sp'
 
-DROP DATABASE IF EXISTS sp;
-DROP DATABASE IF EXISTS SP;
+--Assuming gandhi database exists
+--We create tables within this database
 
-CREATE DATABASE IF NOT EXISTS sp;
-USE sp;
+--Connect to gandhi database
 
+gandhi=> \c gandhi
+
+--Create tables as follows:	
 CREATE TABLE s
   (
 	snum int NOT NULL PRIMARY KEY,
@@ -48,12 +46,14 @@ CREATE TABLE s
   INSERT INTO s VALUES (3, 'Blake', 30, 'Paris');
   INSERT INTO s VALUES (4, 'Clark', 20, 'London');
   INSERT INTO s VALUES (5, 'Adams', 30, 'Athens');
+
   INSERT INTO p VALUES (1, 'Nut', 'Red', 12, 'London');
   INSERT INTO p VALUES (2, 'Bolt', 'Green', 17, 'Paris');
   INSERT INTO p VALUES (3, 'Screw', 'Blue', 17, 'Oslo');
   INSERT INTO p VALUES (4, 'Screw', 'Red', 14, 'London');
   INSERT INTO p VALUES (5, 'Cam', 'Blue', 12, 'Paris');
   INSERT INTO P VALUES (6, 'Cog', 'Red', 19, 'London');
+
   INSERT INTO sp VALUES (1, 1, 300);
   INSERT INTO sp VALUES (1, 2, 200);
   INSERT INTO sp VALUES (1, 3, 400);
