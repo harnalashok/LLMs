@@ -82,6 +82,7 @@ Concepts
               Create system user and password==>As postgres, create postgresql user and password
                  ==>create a database==>grant all privilegs over database
                      ==>Connect to database==>Grant usage over public schema
+                      ==>Allow vector database extension to be created
 		postgres=# create user joker with password 'joker' ;
 		postgres=# CREATE DATABASE joker ;
                 # Hiterto, database, joker and user joker are unrelated.
@@ -94,6 +95,7 @@ Concepts
                 # database joker would fail. 
                 postgres=# \c joker
                 joker=# GRANT USAGE ON SCHEMA public TO joker;  
+                joker=# CREATE EXTENSION vector;
         
 	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
 	   Thus, this command fails:
