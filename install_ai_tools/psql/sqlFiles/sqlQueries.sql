@@ -1,15 +1,19 @@
-/* Last amended: 27th Dec, 2021
+/* Last amended: 3rd August, 2025
 # SQL queries on Supplier-Parts dataset
 # Ref: http://myslu.stlawu.edu/~ehar/Fall08/cs348/hw/hw3_solutions.html
 #
 # Sample SQL queries and answers. Mix of sp and spp databases
-
+# These SQL commands work in psql shell
 */
 
 
+--#############################
+---- Queries on sp tables
+-- Suppliers, parts tables
+--#############################
+
 -- 1.0 List all of the S numbers and the part numbers supplied by the s.
 
-    use sp ;	
     select snum,pnum from sp order by snum;
 
 -- 2.0 The "order by" clause is not strictly necessary.
@@ -79,7 +83,7 @@
          
 -- My answer but above is better:
 
-        select city, count('city') as  y  from s group by city having  y >= 2 ;
+         select city, count('city')   from s group by city having count('city') >=2 ;
      
 
 -- 9.0 Get all pairs of part numbers and a S name such that the S
@@ -177,7 +181,6 @@ HAVING COUNT(*) > 1 ;
 
 -- 17.0 Get S names for suppliers who supply part P2.
 
-
 SELECT sname
 FROM s
 WHERE snum IN
@@ -188,6 +191,12 @@ WHERE pnum = '2' ) ;
 -- my answer:
 
     select sname from s,sp where s.snum = sp.snum and sp.pnum = 2 ;
+
+--#############################
+---- Queries on spj tables
+-- Suppliers, Project, parts tables
+--#############################
+
 
 -- 18.0 Get s numbers for suppliers supplying at least
 --      one part supplied by at least one S who supplies
@@ -249,11 +258,7 @@ FROM spj
 GROUP BY pnum, jnum
 HAVING AVG(qty) > 320 ;
 
-
-     
--- ------------------------------------------------
--- ------------------------------------------------
-
+   
 -- SQL queries on Supplier-Parts-projects:
 -- Ref: https://www.cs.odu.edu/~ibl/450/sql/q-07sql.html
 
@@ -519,5 +524,6 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
