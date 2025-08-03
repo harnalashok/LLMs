@@ -1,4 +1,7 @@
+# Ref: https://neon.com/postgresql/postgresql-tutorial/postgresql-select-distinct
 1. SELECT * FROM customer;
 2. SELECT first_name || ' ' || last_name, email FROM  customer;
 3. SELECT first_name || ' ' || last_name AS full_name FROM customer;
    SELECT first_name || ' ' || last_name  "full_name" FROM customer;
+4. SELECT first_name,last_name, LENGTH(first_name) len FROM customer ORDER BY len DESC, last_name ASC ;
+5. SELECT DISTINCT bcolor, fcolor FROM colors ORDER BY bcolor, fcolor;
