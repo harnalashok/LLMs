@@ -1,122 +1,161 @@
 #!/bin/bash
 
-# LAst amended: 26th Jan, 2025
+################
+# Update Ubuntu
+# Also install postgresql
+################
 
-# These sscripts run in sequence.
-#     script0.sh
-#     script1.sh
-#     script2.sh
-#     docker_install.sh
-#     script3.sh
-#     script4.sh
-#     script5.sh
-
-
-##########################
-###  Docker install using snap
-##########################
-
-# Install docker engine on Ubuntu
-# Better follow this reference:
-# Ref:    https://docs.docker.com/engine/install/ubuntu/
-
-
-# Use as: 
-#   sudo bash docker_install.sh
-#   OR
-#   sudo ./docker_install.sh
-
-
-
-echo "========script2=============="
-echo "Will install docker engine using snap"
-echo "Will reboot machine"
-echo "Call ./script3.sh after rebooting"
-echo "==========================="
-sleep 10
-
-
-
-
-
-cd ~
-echo " "                                      | tee -a /home/ashok/error.log
-echo "*********"                              | tee -a /home/ashok/error.log
-echo "Script: docker_install.sh"              | tee -a /home/ashok/error.log
-echo "**********"                             | tee -a /home/ashok/error.log
-echo " "                                      | tee -a /home/ashok/error.log
-
-# If not started as sudo then inform:
-# ref: https://askubuntu.com/a/30157/8698
-if ! [ $(id -u) = 0 ]; then
-   echo "The script need to be run as root. Example: sudo ./docker_install.sh" >&2
-   exit 1
+cd /home/$USER
+if [ ! -f /home/$USER/foo.txt ]; then
+    echo "  "
+    echo "------------"                            
+    echo " Will update Ubuntu"                     
+    echo " You will be asked for password...supply it..."
+    echo "----------"                              
+    echo " "
+    sleep 2
+    sudo apt update
+    sudo apt upgrade -y
+    # To get multiple python versions, install repo
+    # See: https://askubuntu.com/a/1538589
+    sudo add-apt-repository ppa:deadsnakes/ppa -y
+    sudo apt update 
+    # pipx to install poetry
+    sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
+    sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
+    sudo apt-get install python3-tk -y
+    sudo apt-get install libssl-dev libcurl4-openssl-dev -y
+    echo "Ubuntu being updated" > /home/$USER/foo.txt   # To avoid repeat updation
+    # Download docker installation scripts
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
+    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
+    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
+    chmod +x /home/$USER/*.sh
+    echo " "
+    echo "Ubuntu upgraded ......"               
+    # Script to stop all dockers
+    echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
+    echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
+    echo " "                                                   | tee -a /home/$USER/stop_alldockers.sh
+    echo "cd /home/$USER/"                                     | tee -a /home/$USER/stop_alldockers.sh
+    echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
+    echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
+    chmod +x *.sh   
+    # Folders for start/stop scripts
+    mkdir /home/$USER/start
+    mkdir /home/$USER/stop
+    echo " "
+    echo " "
+    if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+        echo "====NOTE====="
+        echo "Ubuntu shell will be closed. Then reopen it and execute following three scripts in sequence:"
+        echo "And, after executing EACH script, close ubuntu shell again."
+        echo " "
+        echo "1=>   ./ubuntu_docker1.sh "
+        echo "2=>   ./ubuntu_docker2.sh "
+        echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+        echo "=========="
+        sleep 15
+        wsl.exe --shutdown
+    else
+        echo "====NOTE====="
+        echo "Machine will be rebooted. After reboot, execute following three scripts in sequence:"
+        echo "And, after executing EACH script, reboot the machine"
+        echo " "
+        echo "1=>   ./ubuntu_docker1.sh "
+        echo "2=>   ./ubuntu_docker2.sh "
+        echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+        echo "=========="
+        sleep 15
+        reboot
+    fi
 fi
-
-
-# Who is the user?
-if [ $SUDO_USER ]; then
-    real_user=$SUDO_USER
+# Check if docker is installed
+if command -v docker &> /dev/null; then
+    echo "Docker is installed."
 else
-    real_user=$(whoami)
-fi
+    echo "Docker is not installed."
+    echo "====NOTE====="
+    echo "Execute following scripts in sequence"
+    echo " "
+    echo "1=>   ./ubuntu_docker1.sh "
+    echo "2=>   ./ubuntu_docker2.sh "
+    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+    echo "=========="
+    sleep 15
+ fi
 
+################
+# Install postgresql and sqlite3
+################
 
-# Does docker engine already exist?
-if [[ `which docker` == "/usr/bin/docker" ]]; then
-   echo "Docker appears to be already installed"
-   echo "Recheck. Break this script by pressing ctrl+c"
-   sleep 40
-fi
-
-
-# Ref: https://stackoverflow.com/a/73455413
-echo "Installing docker repo and its Certificate"
-cd ~
-apt install ca-certificates curl gnupg lsb-release  -y
-mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -f -o /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-echo "Updating Ubuntu packages list.."
-apt update -y
-sleep 2
-
-echo "Downloading and installing docker engine"    | tee -a /home/ashok/error.log
-echo "============"                                | tee -a /home/ashok/error.log
-echo " "                                           | tee -a /home/ashok/error.log
-snap install docker
-apt  install docker-compose  -y
-echo " "                                           | tee -a /home/ashok/error.log
-echo "============"                                | tee -a /home/ashok/error.log
 echo " "
-echo "Docker engine installed."                    | tee -a /home/ashok/error.log
-echo "Adding user 'ashok' to 'docker' group"       | tee -a /home/ashok/error.log
-echo "to enable running docker commands by 'ashok' without sudo"     | tee -a /home/ashok/error.log
+echo " "
+echo "------------"   
+echo "Shall I install postgres  db and pgvector? [Y,n]"    # 
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    cd /home/$USER/
+    echo "Installing postgresql and sqlite3"
+    sudo apt install postgresql postgresql-contrib sqlite3   -y
+    # Postgresql start/stop script
+    echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
+    echo " "                                                               >> /home/$USER/start_postgresql.sh  
+    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
+    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
+    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
+    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
+    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
+    # Stop script
+    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
+    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
+    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
+    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
+    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
+    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
+    cd /home/$USER/psql
+    # A small help script
+    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+    chmod +x *.sh
+    #############
+    chmod +x /home/$USER/*.sh
+    # Create links
+    ###########
+    ## Add postgres vector storage capability
+    ############
+    # Add vector storage capability to postgres
+    # My version of postgres db is 14.
+    # (Check as: pg_config --version)
+    # Install a needed package (depending upon your version of postgres)
+    # Check version as: pg_config --version
+    # Assuming version 16
+    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
+    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+    sudo apt install postgresql-server-dev-$version  -y
+    #sudo apt install postgresql-server-dev-16  -y
+    # Ref: https://github.com/pgvector/pgvector
+    cd /tmp
+    git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
+    cd pgvector
+    make
+    sudo make install 
+    cd /home/$USER/
+else
+   echo "Postgres not installed"
+ fi  
 
-echo "Docker engine installed."                                      | tee -a /home/ashok/info.log
-echo "Added user 'ashok' to 'docker' group"                          | tee -a /home/ashok/info.log
-echo "to enable running docker commands by 'ashok' without sudo"     | tee -a /home/ashok/info.log
-
-sleep 9
-groupadd docker
-usermod -aG docker ashok
-echo " "                                                             | tee -a /home/ashok/error.log
-
-echo "Docker installation process completed"                         | tee -a /home/ashok/error.log
-
-echo " "                                                             | tee -a /home/ashok/error.log
-
-
-# Move script file to done folder
-mv /home/ashok/docker_install.sh /home/ashok/done
-mv /home/ashok/next/script3.sh  /home/ashok/
-
-echo "Machine will be rebooted "
-echo "After restart, execute:"
-echo "    ./script3.sh"
-sleep 10
-reboot
 
 
 
