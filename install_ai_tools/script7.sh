@@ -108,12 +108,10 @@ if [[ $input == "Y" || $input == "y" ]]; then
       pip install -U "autogen-agentchat" "autogen-ext[openai]"
       # Install AutoGen Studio for no-code GUI
       pip install -U "autogenstudio"
-      
-      
       # Run AutoGen Studio on http://localhost:8080
       autogenstudio ui --port 8080 --appdir ./my-app
-      
-       # Script to start llama.cpp server
+      #      
+      # Script to start llama.cpp server
       echo '#!/bin/bash'                                                       | tee    /home/$USER/start/start_autogenStudio.sh
       echo " "                                                                 | tee -a /home/$USER/start/start_autogenStudio.sh
       echo "cd ~/"                                                             | tee -a /home/$USER/start/start_autogenStudio.sh
