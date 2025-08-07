@@ -1,4 +1,4 @@
-# LAst amended: 14th April, 2025
+# LAst amended: 7th August, 2025
 
 echo "========script1=============="
 echo "Updates Ubuntu"
