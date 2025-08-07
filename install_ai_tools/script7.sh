@@ -98,17 +98,35 @@ sudo apt install pyqt5-dev-tools
 # Ref: https://github.com/microsoft/autogen?tab=readme-ov-file
 #################
 
-# Install AgentChat and OpenAI client from Extensions
-pip install -U "autogen-agentchat" "autogen-ext[openai]"
-# Install AutoGen Studio for no-code GUI
-pip install -U "autogenstudio"
-
-
-# Run AutoGen Studio on http://localhost:8080
-autogenstudio ui --port 8080 --appdir ./my-app
-
-
-
+echo " "
+echo " "
+echo "Shall I install autogen studio. You must be in langchain venv if you want to install? [Y,n]"
+read input
+input=${input:-n}
+if [[ $input == "Y" || $input == "y" ]]; then
+      # Install AgentChat and OpenAI client from Extensions
+      pip install -U "autogen-agentchat" "autogen-ext[openai]"
+      # Install AutoGen Studio for no-code GUI
+      pip install -U "autogenstudio"
+      
+      
+      # Run AutoGen Studio on http://localhost:8080
+      autogenstudio ui --port 8080 --appdir ./my-app
+      
+       # Script to start llama.cpp server
+      echo '#!/bin/bash'                                                       | tee    /home/$USER/start/start_autogenStudio.sh
+      echo " "                                                                 | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo "cd ~/"                                                             | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo " "                                                                 | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo "echo 'autogen studio will be available at port: 8080'"             | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo " "                                                                 | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo "sleep 10"                                                          | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo "autogenstudio ui --port 8080 --appdir ./my-app"                    | tee -a /home/$USER/start/start_autogenStudio.sh
+      echo "netstat -aunt | grep 8080"                                         | tee -a /home/$USER/start/start_autogenStudio.sh
+      chmod +x /home/$USER/start/*.sh
+   else
+      echo "Autogen Studio not installed"
+   fi   
 
 #################
 # litellm
