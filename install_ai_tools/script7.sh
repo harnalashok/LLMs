@@ -8,6 +8,7 @@ echo "Will install LangGraph"
 echo "Will install LangServe"
 echo "Will install LangChain CLI"
 echo "Will install LlamaIndex"
+echo "Will install autogen studio"
 echo "Will install litellm"
 echo "Will install Open WebUI--needs ollama behind the scenes (Optional)"
 echo "Will install python3.13 venv (optional)
@@ -90,6 +91,23 @@ pip install notebook
 pip install streamlit
 # Required for spyder:
 sudo apt install pyqt5-dev-tools
+
+#################
+# Autogen studio
+# To be installed in langchain virtual environment
+#################
+
+# Install AgentChat and OpenAI client from Extensions
+pip install -U "autogen-agentchat" "autogen-ext[openai]"
+# Install AutoGen Studio for no-code GUI
+pip install -U "autogenstudio"
+
+
+# Run AutoGen Studio on http://localhost:8080
+autogenstudio ui --port 8080 --appdir ./my-app
+
+
+
 
 #################
 # litellm
