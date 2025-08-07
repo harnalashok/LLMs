@@ -1,5 +1,5 @@
 #!/bin/bash
-# Last amended: 8th July, 2025
+# Last amended: 7th August,2025
 
       
 echo "========script7=============="
@@ -25,8 +25,8 @@ cd ~/
 # Create python environment at 'langchain'
 #  for installing langchain and llama-index
 
-python3 -m venv /home/ashok/langchain
-source /home/ashok/langchain/bin/activate
+python3 -m venv /home/$USER/langchain
+source /home/$USER/langchain/bin/activate
 pip install langchain
 pip install langchain-openai
 pip install langchain-community
@@ -90,36 +90,36 @@ pip install 'litellm[proxy]'
 # Make a folder to store config.yaml files
 #  for various LLMs 
 # 
-cd /home/ashok/
-mkdir /home/ashok/litellm
+cd /home/$USER/
+mkdir /home/$USER/litellm
 # Download config file for using ollama
 #  as if they are OpenAI models
 # (Refer: https://docs.litellm.ai/docs/providers/ollama)
 # Start litellm server as: litellm --config /path/to/config.yaml
 # Use it in flowise: https://docs.flowiseai.com/integrations/litellm
-cd /home/ashok/litellm
+cd /home/$USER/litellm
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/litellm/config_ollama.yaml
-cd /home/ashok
+cd /home/$USER
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/litellm/start_ollama_openai.sh
-chmod +x /home/ashok/*.sh
+chmod +x /home/$USER/*.sh
 
 #################
 # Visual Studio Code install
 #################
 # Activate python virtual environment
-# source /home/ashok/langchain/bin/activate
+# source /home/$USER/langchain/bin/activate
 
 # 1.8 Install visual studio code
 # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
-mkdir /home/ashok/1234
-cd /home/ashok/1234
+mkdir /home/$USER/1234
+cd /home/$USER/1234
 # Direct download link
 wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 # Fill in filename from above
 mv * code.deb
-sudo apt install /home/ashok/1234/code.deb  -y
-cd /home/ashok
-rm -rf /home/ashok/1234/
+sudo apt install /home/$USER/1234/code.deb  -y
+cd /home/$USER
+rm -rf /home/$USER/1234/
 
 sleep 5
 
@@ -127,20 +127,20 @@ sleep 5
 deactivate
 
 # Create script to activate 'langchain' env
-echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/ashok/activate_langchain_venv.sh
-echo "echo 'source /home/ashok/langchain/bin/activate' "                   >>  /home/ashok/activate_langchain_venv.sh
-echo "echo '(Note the change in prompt after activating)' "                >>  /home/ashok/activate_langchain_venv.sh
-echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/ashok/activate_langchain_venv.sh
-echo "source /home/ashok/langchain/bin/activate"                           >>  /home/ashok/activate_langchain_venv.sh
-chmod +x /home/ashok/*.sh
+echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+chmod +x /home/$USER/*.sh
 sleep 2
 
-cp /home/ashok/activate_langchain_venv.sh  /home/ashok/start/activate_langchain_venv.sh
-cp /home/ashok/activate_langchain_venv.sh  /home/ashok/stop/activate_langchain_venv.sh
+cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
 
 # Move scripts
-mv /home/ashok/script7.sh        /home/ashok/done/
-mv /home/ashok/next/script8.sh   /home/ashok/
+mv /home/$USER/script7.sh        /home/$USER/done/
+mv /home/$USER/next/script8.sh   /home/$USER/
 
 #################
 # openwebui
@@ -202,11 +202,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
       # Create python virtual env at openwebui
       echo "Creating python virtual env at openwebui"
       # Using python3.11 package
-      python3.11 -m venv /home/ashok/openwebui
+      python3.11 -m venv /home/$USER/openwebui
       
       echo "Activating the new python env"
       # Activate the python env
-      source /home/ashok/openwebui/bin/activate
+      source /home/$USER/openwebui/bin/activate
       sleep 2
       
       echo "--------------"
@@ -232,12 +232,12 @@ if [[ $input == "Y" || $input == "y" ]]; then
       
       # Create script to start openwebui thenext time
       # Activate the env
-      echo "source /home/ashok/openwebui/bin/activate" >  /home/ashok/start/start_openwebui.sh
-      echo "open-webui serve"                          >> /home/ashok/start/start_openwebui.sh
+      echo "source /home/$USER/openwebui/bin/activate" >  /home/$USER/start/start_openwebui.sh
+      echo "open-webui serve"                          >> /home/$USER/start/start_openwebui.sh
       
-      chmod +x /home/ashok/*.sh
-      chmod +x /home/ashok/start/*.sh
-      chmod +x /home/ashok/stop/*.sh
+      chmod +x /home/$USER/*.sh
+      chmod +x /home/$USER/start/*.sh
+      chmod +x /home/$USER/stop/*.sh
     
       echo "Will start open-webui server"
       # Start open-webui once
@@ -264,18 +264,18 @@ if [[ $input == "Y" || $input == "y" ]]; then
       sleep 5
       sudo apt install python3.13 -y
       sudo apt-get install python3.13-venv -y
-      python3.13 -m venv /home/ashok/python313
+      python3.13 -m venv /home/$USER/python313
       # Create script to activate 'python313' env
-      echo "echo 'To activate python3.13 virtual envs, activate as:' "            > /home/ashok/activate_python313_venv.sh
-      echo "echo 'source /home/ashok/python313/bin/activate' "                   >>  /home/ashok/activate_python313_venv.sh
-      echo "echo '(Note the change in prompt after activating)' "                >> /home/ashok/activate_python313_venv.sh
-      echo "echo '(To deactivate, just enter the command: deactivate)' "         >> /home/ashok/activate_python313_venv.sh
-      echo "source /home/ashok/python313/bin/activate"                           >> /home/ashok/activate_python313_venv.sh
-      chmod +x /home/ashok/*.sh
+      echo "echo 'To activate python3.13 virtual envs, activate as:' "            > /home/$USER/activate_python313_venv.sh
+      echo "echo 'source /home/$USER/python313/bin/activate' "                   >>  /home/$USER/activate_python313_venv.sh
+      echo "echo '(Note the change in prompt after activating)' "                >> /home/$USER/activate_python313_venv.sh
+      echo "echo '(To deactivate, just enter the command: deactivate)' "         >> /home/$USER/activate_python313_venv.sh
+      echo "source /home/$USER/python313/bin/activate"                           >> /home/$USER/activate_python313_venv.sh
+      chmod +x /home/$USER/*.sh
       sleep 2
       
-      cp /home/ashok/activate_python313_venv.sh  /home/ashok/start/activate_python313_venv.sh
-      cp /home/ashok/activate_python313_venv.sh  /home/ashok/stop/activate_python313_venv.sh
+      cp /home/$USER/activate_python313_venv.sh  /home/$USER/start/activate_python313_venv.sh
+      cp /home/$USER/activate_python313_venv.sh  /home/$USER/stop/activate_python313_venv.sh
 else
         echo "Skipping install of python3.11 virtual env"
 fi
