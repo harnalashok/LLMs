@@ -95,6 +95,7 @@ sudo apt install pyqt5-dev-tools
 #################
 # Autogen studio
 # To be installed in langchain virtual environment
+# Ref: https://github.com/microsoft/autogen?tab=readme-ov-file
 #################
 
 # Install AgentChat and OpenAI client from Extensions
