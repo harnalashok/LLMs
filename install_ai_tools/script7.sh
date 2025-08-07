@@ -35,8 +35,22 @@ pip install langgraph
 pip install "langserve[all]"
 pip install langchain-cli
 
+
+# Create script to activate 'langchain' env
+echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+chmod +x /home/$USER/*.sh
+sleep 2
+
+cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
+
 #################
 # llamaindex
+# To be installed ONLY in langchain virtual env
 #################
 
 # 1.0 LLamaindex install
@@ -126,17 +140,6 @@ sleep 5
 # Deactivate the environment
 deactivate
 
-# Create script to activate 'langchain' env
-echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
-echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
-echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
-echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
-chmod +x /home/$USER/*.sh
-sleep 2
-
-cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
-cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
 
 # Move scripts
 mv /home/$USER/script7.sh        /home/$USER/done/
