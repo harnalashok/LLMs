@@ -613,6 +613,10 @@ else
     echo "Mongodb for Ubuntu24.04 not installed"
 fi   
 
+# Prevent docker restarts on OS reboot
+docker update --restart=no $(docker ps -a -q)
+
+
 
 ##########################
 ### Install RAGflow
@@ -670,4 +674,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
      echo "Ragflow will not be installed"
 fi    
+# Prevent docker restarts on OS reboot
+docker update --restart=no $(docker ps -a -q)
+
+docker update --restart=no $(docker ps -a -q)
 
