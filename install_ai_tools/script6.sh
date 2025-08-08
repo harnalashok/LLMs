@@ -125,6 +125,8 @@ chmod +x /home/ashok/*.sh
 chmod +x /home/ashok/start/*.sh
 chmod +x /home/ashok/stop/*.sh
 
+# Prevent automatic docker restart on OS reboot
+docker update --restart=no $(docker ps -a -q)
 
 
 # Move script file to done folder
