@@ -255,7 +255,7 @@ echo "Installinh portrainer docker in directory portrainer"  | tee -a /home/$USE
 cd ~/
 mkdir /home/$USER/portainer
 cd /home/$USER/portainer/
-sudo docker volume create portainer_data
+docker volume create portainer_data
 # This is one long line command
 # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
 
@@ -263,11 +263,13 @@ sudo docker volume create portainer_data
 cd /home/$USER/portainer
 docker rm portainer
 docker volume create portainer_data
-#sudo docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
-sudo docker run -d -p 8888:8000 -p 9443:9443 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+#docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+docker run -d -p 8888:8000 -p 9443:9443 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
 comment
 
-sudo docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+# Install portainer community edition
+#docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 cd ~/
 # Script to start portainer container
 
