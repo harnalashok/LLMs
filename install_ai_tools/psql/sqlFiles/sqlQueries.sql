@@ -75,6 +75,8 @@
 --    My answer:
         
         select sname,pnum from sp, s where s.snum = sp.snum AND s.city <> 'London' ;
+        // OR
+	    select sp.pnum, s.sname from sp, s, p where (sp.pnum = p.pnum) and (sp.snum = s.snum) and (s.city != 'London') ;
 
 
 -- 8.0 Get city names for cities in which at least two suppliers
@@ -527,6 +529,7 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
 
