@@ -66,3 +66,34 @@ CREATE TABLE s
   INSERT INTO sp VALUES (4, 2, 200);
   INSERT INTO sp VALUES (4, 4, 300);
   INSERT INTO sp VALUES (4, 5, 400);
+
+--Questions
+--#############################
+---- Queries on sp tables
+-- Suppliers, parts tables
+--#############################
+
+-- 1.0 List all of the S numbers and the part numbers supplied by the s.
+-- 2.0 The "order by" clause is not strictly necessary.
+-- 3.0 Get S numbers for suppliers who supply part 1. 
+-- 4.0 Get S names and status for all suppliers who have a
+--     status between 15 and 25 inclusive.
+-- 5.0 Get all part numbers and the S names for P
+-- 	supplied by a S in London. 
+-- 6.0 Get all pno and the sname for part
+-- 	supplied by a supplier to London city
+-- 7.0 Find the average status for all the suppliers. 
+-- 8.0 Get part numbers for P not supplied by any 
+--      S staying in London. 
+-- 9.0 Get city names for cities in which at least two suppliers
+--     are located. ANswer has one attribute (city).
+
+ -- 10.0 Get the total number of different P supplied by S one. Answer is scalar.
+-- 11.0 Get the part # and total shipment quantity for each part.
+-- 12.0 Get S numbers for suppliers with a status lower than that of S 1. 
+--  13.0 Get S numbers for suppliers whose city is first in the 
+--  	 lexicographic order of cities. Answer has one attribute (sno).
+-- 14.0 Get part numbers for P supplied by all suppliers in London. Answer has one attribute (pno).
+--###########
+     
+
