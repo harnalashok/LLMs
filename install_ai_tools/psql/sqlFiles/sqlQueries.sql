@@ -41,7 +41,7 @@
          s inner join sp using (snum)
          where s.city = 'London';
 
--- 5a.0 Get all pnum and the sname for part
+-- 6.0 Get all pnum and the sname for part
 -- 	supplied by a supplier to London city
 -- 	Answer should have two attributes (pnum,sname).
 
@@ -50,17 +50,18 @@
 	sp.pnum in (select pnum from p where city = 'London'
 	) ;
     // OR
+		
     select sp.pnum, s.sname from sp, s, p where (sp.pnum = p.pnum) and (sp.snum = s.snum) and (p.city = 'London') ;
 
 
 
--- 6.0 Find the average status for all the suppliers. 
+-- 7.0 Find the average status for all the suppliers. 
 -- 	Answer is scalar (a table with one row and one column).
 
      select avg(status) from s;
      
 
--- 7.0 Get part numbers for P not supplied by any 
+-- 8.0 Get part numbers for P not supplied by any 
 --      S staying in London. 
 --     Answer should have one attribute (pnum).
 
@@ -80,7 +81,7 @@
 	    select sp.pnum, s.sname from sp, s, p where (sp.pnum = p.pnum) and (sp.snum = s.snum) and (s.city != 'London') ;
 
 
--- 8.0 Get city names for cities in which at least two suppliers
+-- 9.0 Get city names for cities in which at least two suppliers
 --     are located. ANswer has one attribute (city).
 
        select city from s
@@ -103,16 +104,14 @@
 	select sname , count(pnum) from s,sp where s.snum = sp.snum group by sname ;
 
 
--- 15.0 Get the part # and total shipment quantity for each part.
+-- 11.0 Get the part # and total shipment quantity for each part.
 
 		SELECT pnum, SUM(qty)
 		FROM sp
 		GROUP BY pnum ;
 
 
-
-
--- 11.0 Get S numbers for suppliers with a status lower than that of S 1. 
+-- 12.0 Get S numbers for suppliers with a status lower than that of S 1. 
 -- 	Answer has one attribute (snum).
 
       select snum from s 
@@ -120,7 +119,7 @@
     	                where snum=1) ;
      
 
---  12.0 Get S numbers for suppliers whose city is first in the 
+--  13.0 Get S numbers for suppliers whose city is first in the 
 --  	 lexicographic order of cities. Answer has one attribute (snum).
 
        select snum from s
@@ -135,7 +134,7 @@
           
     
 
--- 13.0 Get part numbers for P supplied by all suppliers in London. Answer has one attribute (pnum).
+-- 14.0 Get part numbers for P supplied by all suppliers in London. Answer has one attribute (pnum).
 
        select distinct pnum from 
          s inner join sp using (snum)
@@ -545,6 +544,7 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
 
