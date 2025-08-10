@@ -90,11 +90,12 @@ Concepts
 		postgres=# CREATE DATABASE king with owner joker ; 
 		postgres=# GRANT ALL PRIVILEGES ON DATABASE joker TO joker; 
                 # Also allow user joker all privileges over public schema within
-                # database joker.
+                # database joker. Two grant statements are needed for this.
                 # WITHOUT this schema privilege, table creation by user joker, over 
                 # database joker would fail. 
                 postgres=# \c joker
                 joker=# GRANT USAGE ON SCHEMA public TO joker;  
+                joker=# GRANT CREATE ON SCHEMA public TO joker;
                 joker=# CREATE EXTENSION vector;
         
 	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
