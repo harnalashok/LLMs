@@ -145,13 +145,21 @@
          select distinct pnum from sp, s where sp.snum = s.snum AND s.city = 'London' ;         
      
 
+--#############
+--Agregate functions
+--https://www.postgresql.org/docs/9.1/functions-aggregate.html
+--Maths functions
+--https://www.postgresql.org/docs/9.1/functions-math.html
+--String functions
+--https://www.postgresql.org/docs/9.1/functions-string.html
+--##############
+
+avg(x) ; count(x) ; DISTINCT col1,col2, max(x), min(x), sum(x), stddev(x) 
 
 
-
-
-
-
-
+--###########
+--Tougher questions on sp table
+--###########	
 
 -- 9.0 Get all pairs of part numbers and a S name such that the S
 --     supplies both of the p. Don't include trivial pairs of part numbers.
@@ -544,6 +552,7 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
 
