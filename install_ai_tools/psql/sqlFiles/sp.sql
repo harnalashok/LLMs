@@ -1,4 +1,4 @@
--- Last amended: 3rd August, 2025
+-- Last amended: 10th August, 2025
 -- Myfolder: /home/ashok/Documents/sampleDatabases/sd4
 -- VM: Ubuntu database VM
 -- Within database, gandhi, we have a table 'sp'
