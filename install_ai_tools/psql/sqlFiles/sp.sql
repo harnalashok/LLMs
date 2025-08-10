@@ -71,6 +71,7 @@ CREATE TABLE s
 --#############################
 ---- Queries on sp tables
 -- Suppliers, parts tables
+--For answers see file: sqlQueries.sql
 --#############################
 
 -- 1.0 List all of the S numbers and the part numbers supplied by the s.
