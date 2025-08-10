@@ -5,6 +5,7 @@
 # Sample SQL queries and answers. Mix of sp and spp databases
 # These SQL commands work in psql shell
 # See file: sp.sql
+
 */
 
 
@@ -91,24 +92,7 @@
          select city, count('city')   from s group by city having count('city') >=2 ;
      
 
--- 9.0 Get all pairs of part numbers and a S name such that the S
---     supplies both of the p. Don't include trivial pairs of part numbers.
--- 	For example don't list the tuple Smith 1 1. That's obvious. For ease,
--- 	you can list symmetric tuples, for example, Smith 1 2 and Smith 2 1. 
--- 	Your answer schema should have three attributes (sname,pnum,pnum).
-
-     select distinct sname,pnum1,pnum2 from 
-        s,  
-        (
-          select sp1.snum, sp1.pnum as pnum1, sp2.pnum as pnum2
-            from sp as sp1,
-                 sp as sp2
-            where sp1.snum=sp2.snum and
-                  sp1.pnum != sp2.pnum
-        ) as temp
-      where s.snum=temp.snum
-      order by sname,pnum1;
-     
+   
 
 -- 10.0 Get the total number of different P supplied by S one. Answer is scalar.
 
@@ -117,6 +101,15 @@
 -- My answer:
 
 	select sname , count(pnum) from s,sp where s.snum = sp.snum group by sname ;
+
+
+-- 15.0 Get the part # and total shipment quantity for each part.
+
+		SELECT pnum, SUM(qty)
+		FROM sp
+		GROUP BY pnum ;
+
+
 
 
 -- 11.0 Get S numbers for suppliers with a status lower than that of S 1. 
@@ -137,8 +130,10 @@
 --  another answer:
 
        select snum from s where city = (select city from s order by city limit 1) ;
+-- another answer
+       select snum,city from s order by city limit 1 ;
           
-     
+    
 
 -- 13.0 Get part numbers for P supplied by all suppliers in London. Answer has one attribute (pnum).
 
@@ -151,6 +146,32 @@
          select distinct pnum from sp, s where sp.snum = s.snum AND s.city = 'London' ;         
      
 
+
+
+
+
+
+
+
+
+-- 9.0 Get all pairs of part numbers and a S name such that the S
+--     supplies both of the p. Don't include trivial pairs of part numbers.
+-- 	For example don't list the tuple Smith 1 1. That's obvious. For ease,
+-- 	you can list symmetric tuples, for example, Smith 1 2 and Smith 2 1. 
+-- 	Your answer schema should have three attributes (sname,pnum,pnum).
+
+     select distinct sname,pnum1,pnum2 from 
+        s,  
+        (
+          select sp1.snum, sp1.pnum as pnum1, sp2.pnum as pnum2
+            from sp as sp1,
+                 sp as sp2
+            where sp1.snum=sp2.snum and
+                  sp1.pnum != sp2.pnum
+        ) as temp
+      where s.snum=temp.snum
+      order by sname,pnum1;
+
 -- 14.0 Get S number, S name, and part number such that the S does 
 --      not supply the part. Answer has three attributes (snum,sname,pnum).
 
@@ -162,11 +183,6 @@
                   sp.snum = s.snum)
        order by sname,pnum;
 
--- 15.0 Get the part # and total shipment quantity for each part.
-
-SELECT pnum, SUM(qty)
-FROM sp
-GROUP BY pnum ;
 
 
 --  16.0 Get part numbers for all P supplied by more than one S:
@@ -529,6 +545,7 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
 
