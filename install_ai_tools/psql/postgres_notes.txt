@@ -1,5 +1,5 @@
 # Postgres notes:  
-# Last amended: 25th July, 2025  
+# Last amended: 10th August, 2025
 
 Concepts
 =========
@@ -81,7 +81,7 @@ Concepts
 
               Create system user and password==>As postgres, create postgresql user and password
                  ==>create a database==>grant all privilegs over database
-                     ==>Connect to database==>Grant usage over public schema
+                     ==>Connect to database==>Grant usage over public schema==:Grant create over public schema
                       ==>Allow vector database extension to be created
 		postgres=# create user joker with password 'joker' ;
 		postgres=# CREATE DATABASE joker ;
@@ -96,6 +96,7 @@ Concepts
                 postgres=# \c joker
                 joker=# GRANT USAGE ON SCHEMA public TO joker;  
                 joker=# GRANT CREATE ON SCHEMA public TO joker;
+                joker=# GRANT all ON SCHEMA public TO joker;         /*This is better than the above two grant statments*/
                 joker=# CREATE EXTENSION vector;
         
 	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
