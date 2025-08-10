@@ -48,6 +48,8 @@
 	select sname, pnum from sp, s where s.snum = sp.snum AND
 	sp.pnum in (select pnum from p where city = 'London'
 	) ;
+    // OR
+    select sp.pnum, s.sname from sp, s, p where (sp.pnum = p.pnum) and (sp.snum = s.snum) and (p.city = 'London') ;
 
 
 
@@ -525,6 +527,7 @@ WHERE s.snum = spj.snum AND s.city = 'Shanghai' AND J.jnum = spj.jnum ;
 
 -- ---------------------------------------------------
 -- --------------------------------------------
+
 
 
 
