@@ -5,4 +5,8 @@
 >>
 >><img width="829" height="566" alt="image" src="https://github.com/user-attachments/assets/abc75c97-755b-43e2-aabe-d3dfb5c7c2f5" />
 
+### Same dataset in Excel
+
+>><img width="829" height="566" alt="image" src="https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/psql/sqlFiles/sp.png" />
+
 
