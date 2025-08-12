@@ -45,24 +45,21 @@ if [[ $input == "Y" || $input == "y" ]]; then
   cd llama.cpp
   cmake -B build
   cmake --build build --config Release
-  cd ~
+  cd /home/$USER
   sleep 2
   # Create a symlink to models and to gguf folder
   ln -s /home/$USER/llama.cpp/models/ /home/$USER/
   ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
-  
   echo "PATH=\$PATH:/home/$USER/llama.cpp/build/bin" >> .bashrc
   echo " "                                        | tee -a /home/$USER/error.log
   echo "-------"                                  | tee -a /home/$USER/error.log
   echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
   echo "10. llama.cpp installed"                  | tee -a /home/$USER/info.log
   echo "-------"                                  | tee -a /home/$USER/error.log
-  
-  
   # Script to start llama.cpp server
   echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_llamacpp_server.sh
   echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "cd ~/"                                               | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "cd /home/$USER"                                               | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/$USER/start/start_llamacpp_server.sh
