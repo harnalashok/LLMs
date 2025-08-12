@@ -91,7 +91,7 @@ pip install ipython
 pip install notebook
 pip install streamlit
 # Required for spyder:
-sudo apt install pyqt5-dev-tools
+sudo apt install pyqt5-dev-tools -y
 
 #################
 # Autogen studio
