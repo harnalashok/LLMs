@@ -47,12 +47,15 @@ cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_v
 
 ###################
 # llama.cpp install
+# python env remains activated
+# source /home/$USER/langchain/bin/activate
 ###################
 
 echo "Shall I install llama.cpp (Can be safely skipped)? [Y,n]"    # Else docker chromadb may be installed
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
   # Installing llama.cpp
+  source /home/$USER/langchain/bin/activate
   echo " "                                         | tee -a /home/$USER/error.log
   echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
   echo "------------"                              | tee -a /home/$USER/error.log
@@ -82,6 +85,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "source /home/$USER/langchain/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
   mkdir /home/$USER/gguf
   cd /home/$USER/gguf
