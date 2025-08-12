@@ -67,6 +67,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
   echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
+  mkdir /home/$USER/gguf
+  cd /home/$USER/gguf
+  echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
+  sleep 4
+  wget -c https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
+  mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
+  echo "Done...."
+  cd /home/$USER
 else
   echo "Skipping install of llama.cpp"
 fi
