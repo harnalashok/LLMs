@@ -40,6 +40,7 @@ echo "Will install redis-stack-server docker"
 echo "==========================="
 
 echo "========script7=============="
+echo "Install python virtual env"
 echo "Will install langchain"
 echo "Will install LangGraph"
 echo "Will install LangServe"
