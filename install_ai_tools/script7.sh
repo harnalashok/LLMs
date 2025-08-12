@@ -3,7 +3,6 @@
 
       
 echo "========script7=============="
-echo "Install python virtual env"
 echo "Will install langchain"
 echo "Will install LangGraph"
 echo "Will install LangServe"
@@ -24,10 +23,9 @@ cd ~/
 #################
 
 
-# Create python environment at 'langchain'
+# Activate python environment at 'langchain'
 #  for installing langchain and llama-index
 
-python3 -m venv /home/$USER/langchain
 source /home/$USER/langchain/bin/activate
 pip install langchain
 pip install langchain-openai
@@ -36,19 +34,6 @@ pip install langchain-experimental
 pip install langgraph
 pip install "langserve[all]"
 pip install langchain-cli
-
-
-# Create script to activate 'langchain' env
-echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
-echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
-echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
-echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
-chmod +x /home/$USER/*.sh
-sleep 2
-
-cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
-cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
 
 #################
 # llamaindex
@@ -84,15 +69,6 @@ pip install llama-index-llms-groq
 pip install llama-index-llms-together
 pip install llama-index-llms-mistralai
 
-# 1.6 Essentials/Misc
-pip install spyder numpy scipy pandas matplotlib sympy cython
-pip install jupyterlab
-pip install ipython
-pip install notebook
-pip install streamlit
-# Required for spyder:
-sudo apt install pyqt5-dev-tools -y
-
 #################
 # Autogen studio
 # To be installed in langchain virtual environment
@@ -105,6 +81,7 @@ echo "Shall I install autogen studio. You must be in langchain venv if you want 
 read input
 input=${input:-n}
 if [[ $input == "Y" || $input == "y" ]]; then
+      source /home/$USER/langchain/bin/activate
       # Install AgentChat and OpenAI client from Extensions
       pip install -U "autogen-agentchat" "autogen-ext[openai]"
       # Install AutoGen Studio for no-code GUI
@@ -157,7 +134,7 @@ chmod +x /home/$USER/*.sh
 # Visual Studio Code install
 #################
 # Activate python virtual environment
-# source /home/$USER/langchain/bin/activate
+source /home/$USER/langchain/bin/activate
 
 # 1.8 Install visual studio code
 # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
