@@ -3,6 +3,7 @@
 # Last amended: 14th June, 2025
 
 echo "========script2=============="
+echo "Create python virtual env"
 echo "Will install llama.cpp directly"
 echo "Will install Node.js"
 echo "   What is Node.js--See the end of this file"
@@ -19,15 +20,20 @@ echo "Script: script2.sh"                     | tee -a /home/$USER/error.log
 echo "**********"                             | tee -a /home/$USER/error.log
 echo " "                                      | tee -a /home/$USER/error.log
 
-# Check if llama.cpp is already installed?
+##############
+# Create python virtual env
+##############
+python3 -m venv /home/$USER/langchain
+source /home/$USER/langchain/bin/activate
+# 1.6 Essentials software
+pip install spyder numpy scipy pandas matplotlib sympy cython
+pip install jupyterlab
+pip install ipython
+pip install notebook
+pip install streamlit
+# Required for spyder:
+sudo apt install pyqt5-dev-tools -y
 
-DIRECTORY="/home/$USER/llama.cpp"
-if [ -d "$DIRECTORY" ]; then
-  echo "$DIRECTORY does exist."
-  echo "Recheck if script2.sh was executed earlier"
-  echo "Press ctrl+c to terminate this job"
-  sleep 40
-fi
 
 ###################
 # llama.cpp install
