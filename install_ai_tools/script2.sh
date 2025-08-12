@@ -33,7 +33,17 @@ pip install notebook
 pip install streamlit
 # Required for spyder:
 sudo apt install pyqt5-dev-tools -y
+# Create script to activate 'langchain' env
+echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+chmod +x /home/$USER/*.sh
+sleep 2
 
+cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
 
 ###################
 # llama.cpp install
@@ -72,7 +82,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "llama-server -m ~/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
   mkdir /home/$USER/gguf
   cd /home/$USER/gguf
   echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
@@ -96,7 +106,7 @@ chmod +x /home/$USER/start/*.sh
 # You can then issue the command to use a gguf model within ollama:
 # See file help.txt for more details.
 
-echo "FROM ~/gguf/llama-2-13b-chat.Q4_K_M.gguf"  > /home/$USER/Modelfile
+echo "FROM /home/$USER/gguf/llama-thinker-3b-preview.q8_0.gguf"  > /home/$USER/Modelfile
 
 #  ollama create <YourModelName> -f /home/$USER/Modelfile
 # Note ollama blobs are stored at:  /usr/share/ollama/.ollama/models/blobs/
