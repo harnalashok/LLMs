@@ -1,49 +1,18 @@
 #!/bin/bash
 
-# Last amended: 26th July, 2025
+# Last amended: 12th August,2025
 
-#------ Steps ---------
-#     i) Download this file in Ubuntu, and
-#        execute the three commands:
-
-
-#            wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/script0.sh
-#            perl -pi -e 's/\r\n/\n/g' /home/$USER/script0.sh
-#            chmod +x *.sh
-
-#     ii) Then, execute this file as:
-#           ./script0.sh
-#        OR,as
-#            bash script0.sh
-#     iii) This file will call script1.sh also
-#          to change hostname to 'master'
 
 #------ Steps ---------
 
 echo "========script0=============="
-echo "Hostname is irrelevant "
-echo "User name must be 'ashok'"
-echo "Will check these."
 echo "Will download all scripts and place them in the 'next' folder"
 echo "Any scripts executed will be placed in 'done' folder"
 echo "Will call script1.sh"
 echo "==========================="
 sleep 10
 
-cd ~/
-
-# Check user and hostnames
-#if [[ `hostname` != 'master' ]]; then
-#    echo "First change host name to 'master'"   |  tee -a /home/$USER/error.log
-#    sleep 9
-#    exit
-#fi
-
-if [[ $USER != 'ashok' ]]; then
-    echo "First change user name to 'ashok'"   |  tee -a /home/$USER/error.log
-    sleep 9
-    exit
-fi
+cd /home/$USER
 
 
 
@@ -141,5 +110,3 @@ mv  /home/$USER/next/script1.sh  /home/$USER/
 
 # Execute the bnext script
 bash script1.sh
-
-
