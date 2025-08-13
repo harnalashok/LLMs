@@ -15,7 +15,7 @@ cd ~/
 # pip install mistral_common
 
 
-# 3.0 Downloading repo files from huggigface
+# 3.0 Downloading medgamma repo files from huggingface
 
 from huggingface_hub import snapshot_download
 from huggingface_hub import login
