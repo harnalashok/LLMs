@@ -15,7 +15,7 @@ cd ~/
 # pip install mistral_common
 
 
-# 3.0 Downloading medgamma repo files from huggingface
+# 3.0 Downloading repo files from huggigface
 
 from huggingface_hub import snapshot_download
 from huggingface_hub import login
@@ -47,6 +47,14 @@ cd ~/
 ./activate_langchain_venv.sh
 cd llama.cpp/
 python convert_hf_to_gguf.py /home/$USER/downloaded_safetensors/ --outfile medgemma-2_fp16.gguf
+
+# Quantize the above fp16 model, as:
+# (The last Q8_0 is deliberate and indicates the type of quantization. 
+#   Name of quantized model can be anythng)
+cd llama.cpp/
+llama-quantize medgemma-2_fp16.gguf  medgemma-2-q8_0.gguf Q8_0
+# Try this also:
+llama-quantize medgemma-2_fp16.gguf medgemma-2-q4_0.gguf Q4_0
 
 """
 
