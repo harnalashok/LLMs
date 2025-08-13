@@ -25,7 +25,7 @@ sleep 2
 ################
 
 cd /home/$USER
-if [ ! -f /home/$USER/foo.txt ]; then
+if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "  "
     echo "------------"                            
     echo " Will update Ubuntu"                     
@@ -44,7 +44,7 @@ if [ ! -f /home/$USER/foo.txt ]; then
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
-    echo "Ubuntu being updated" > /home/$USER/foo.txt   # To avoid repeat updation
+    echo "Ubuntu is updated" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
@@ -104,6 +104,14 @@ else
     echo "=========="
     sleep 15
  fi
+
+
+
+
+
+
+
+ 
 
 
 
