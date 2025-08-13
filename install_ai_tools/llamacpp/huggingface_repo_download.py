@@ -36,24 +36,25 @@ snapshot_download(repo_id=repo_id, local_dir=local_dir, allow_patterns=["*.safet
 ######### DONE ##########
 
 """
-Converting safetensors to gguf format
+# 5.0 Converting safetensors to gguf format
 
-Ref:
-1. https://medium.com/@kevin.lopez.91/simple-tutorial-to-quantize-models-using-llama-cpp-from-safetesnsors-to-gguf-c42acf2c537d
+# 5.1 Ref:
+# 1. https://medium.com/@kevin.lopez.91/simple-tutorial-to-quantize-models-using-llama-cpp-from-safetesnsors-to-gguf-c42acf2c537d
 
-2. https://qwen.readthedocs.io/en/latest/quantization/llama.cpp.html
+# 2. https://qwen.readthedocs.io/en/latest/quantization/llama.cpp.html
 
+# 5.2
 cd ~/
 ./activate_langchain_venv.sh
 cd llama.cpp/
 python convert_hf_to_gguf.py /home/$USER/downloaded_safetensors/ --outfile medgemma-2_fp16.gguf
 
-# Quantize the above fp16 model, as:
-# (The last Q8_0 is deliberate and indicates the type of quantization. 
-#   Name of quantized model can be anythng)
+# 5.3 Quantize the above fp16 model, as:
+#     (The last Q8_0 is deliberate and indicates the type of quantization. 
+#     Name of quantized model can be anythng)
 cd llama.cpp/
 llama-quantize medgemma-2_fp16.gguf  medgemma-2-q8_0.gguf Q8_0
-# Try this also:
+# 5.4 Try this also:
 llama-quantize medgemma-2_fp16.gguf medgemma-2-q4_0.gguf Q4_0
 
 """
