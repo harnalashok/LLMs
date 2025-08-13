@@ -716,6 +716,7 @@ docker update --restart=no $(docker ps -a -q)
 
 echo "Shall I install llama.cpp (Can be safely skipped)? [Y,n]"   
 read input
+input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
   # Installing llama.cpp
   source /home/$USER/langchain/bin/activate
