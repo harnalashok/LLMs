@@ -106,6 +106,45 @@ else
  fi
 
 
+
+##############
+# Create python virtual env
+##############
+
+cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
+echo "Shall I create python virtual env? [Y,n]"    # Else docker chromadb may be installed
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    python3 -m venv /home/$USER/langchain
+    source /home/$USER/langchain/bin/activate
+    # 1.6 Essentials software
+    pip install spyder numpy scipy pandas matplotlib sympy cython
+    pip install jupyterlab
+    pip install ipython
+    pip install notebook
+    pip install streamlit
+    # Required for spyder:
+    sudo apt install pyqt5-dev-tools -y
+    # Create script to activate 'langchain' env
+    echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+    echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+    echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+    echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+    echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+    chmod +x /home/$USER/*.sh
+    sleep 2
+    
+    cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+    cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
+ else
+    echo "Python venv not installed"
+ fi   
+
+
 #####################3
 # portrainer docker
 ######################
@@ -195,6 +234,7 @@ fi
 
 chmod +x /home/$USER/*.sh
 
+
 ##########################
 ### n8n docker
 ##########################
@@ -240,8 +280,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
     #echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
     echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
- 
-    
     # n8n start script for WSL
     echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
     echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
@@ -670,6 +708,62 @@ fi
 docker update --restart=no $(docker ps -a -q)
 
 
+###################
+# llama.cpp install
+# python env remains activated
+# source /home/$USER/langchain/bin/activate
+###################
+
+echo "Shall I install llama.cpp (Can be safely skipped)? [Y,n]"   
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+  # Installing llama.cpp
+  source /home/$USER/langchain/bin/activate
+  echo " "                                         | tee -a /home/$USER/error.log
+  echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
+  echo "------------"                              | tee -a /home/$USER/error.log
+  echo " "                                         | tee -a /home/$USER/error.log
+  git clone https://github.com/ggerganov/llama.cpp
+  cd llama.cpp
+  cmake -B build
+  cmake --build build --config Release
+  cd /home/$USER
+  sleep 2
+  # Create a symlink to models and to gguf folder
+  ln -s /home/$USER/llama.cpp/models/ /home/$USER/
+  ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
+  echo "PATH=\$PATH:/home/$USER/llama.cpp/build/bin" >> .bashrc
+  echo " "                                        | tee -a /home/$USER/error.log
+  echo "-------"                                  | tee -a /home/$USER/error.log
+  echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
+  echo "10. llama.cpp installed"                  | tee -a /home/$USER/info.log
+  echo "-------"                                  | tee -a /home/$USER/error.log
+  # Script to start llama.cpp server
+  echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_llamacpp_server.sh
+  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "cd /home/$USER"                                               | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "source /home/$USER/langchain/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
+  mkdir /home/$USER/gguf
+  cd /home/$USER/gguf
+  echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
+  sleep 4
+  wget -c https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
+  mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
+  echo "Done...."
+  cd /home/$USER
+else
+  echo "Skipping install of llama.cpp"
+fi
+  
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/*.sh
 
 ##########################
 ### Install RAGflow
