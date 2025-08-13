@@ -33,6 +33,7 @@ pip install notebook
 pip install streamlit
 # Required for spyder:
 sudo apt install pyqt5-dev-tools -y
+pip install huggingface_hub
 # Create script to activate 'langchain' env
 echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
 echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
