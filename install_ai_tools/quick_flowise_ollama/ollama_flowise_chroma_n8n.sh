@@ -211,6 +211,7 @@ docker update --restart=no $(docker ps -a -q)
 
 ##############
 # Create python virtual env
+# source /home/$USER/langchain/bin/activate
 ##############
 
 cd /home/$USER
@@ -820,8 +821,16 @@ docker update --restart=no $(docker ps -a -q)
 # python env remains activated
 # source /home/$USER/langchain/bin/activate
 ###################
-
-echo "Shall I install llama.cpp (Can be safely skipped)? [Y,n]"   
+cuda_version=$(nvidia-smi | grep CUDA | awk '{print $9}')
+echo " "
+echo "==========="
+echo "Your installed CUDA version is: $cuda_version"
+echo "If this version is different from 12.4, you will have to first"
+echo "change cu124, to say, cu127 for version 12.7 before installing"
+echo "llama.cpp."
+echo "==========="
+echo " "
+echo "Shall I now install llama.cpp (if your CUDA version is correct)? [Y,n]"   
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
