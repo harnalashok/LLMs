@@ -10,6 +10,9 @@ cd ~/
 """
 
 # 2.0 Install libraries
+
+# Huggingface and llama.cpp related
+#pip install huggingface_hub
 # cu124==>Cuda version 12.4 Check your installed cuda version using nvidia-smi
 # pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 # pip install mistral_common
