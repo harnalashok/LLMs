@@ -232,7 +232,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     pip install streamlit
     # Required for spyder:
     sudo apt install pyqt5-dev-tools -y
-    # Huggingface and llama.cpp related
+    # Huggingface and  related
     #pip install huggingface_hub
     # cu124: is as per cuda version. Get cuda version from nvidia-smi
     #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
@@ -838,9 +838,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
   source /home/$USER/langchain/bin/activate
    # Huggingface and llama.cpp related
   pip install huggingface_hub
+  pip install transformers
   #cu124: is as per cuda version. Get cuda version from nvidia-smi
-  pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-  pip install huggingface_hub
+  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
   echo " "                                         | tee -a /home/$USER/error.log
   echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
   echo "------------"                              | tee -a /home/$USER/error.log
