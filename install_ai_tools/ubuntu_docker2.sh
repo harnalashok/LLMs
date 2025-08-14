@@ -26,8 +26,8 @@ sudo systemctl disable docker.service
 sudo systemctl disable containerd.service
 
 # Move script file to done folder
-mv /home/ashok/ubuntu_docker2.sh       /home/ashok/done
-mv /home/ashok/next/script3.sh  /home/ashok/
+mv /home/$USER/ubuntu_docker2.sh       /home/$USER/done
+mv /home/$USER/next/script3.sh  /home/$USER/
 
 
 # PReparing docker for GPU
@@ -52,12 +52,12 @@ sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 
 # Store docker help files
-mkdir /home/ashok/Documents/dockers
-cd /home/ashok/Documents/dockers
+mkdir /home/$USER/Documents/dockers
+cd /home/$USER/Documents/dockers
 wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/Understanding%20docker%20technology.pdf?raw=true
 wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/docker%20commands.txt?raw=true
 wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
-cd /home/ashok/
+cd /home/$USER/
 
 echo "Machine will be rebooted "
 #echo "After restart, execute:"
