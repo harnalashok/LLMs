@@ -117,6 +117,8 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
     # Add Docker's official GPG key:
+    echo "Installing docker.."
+    sleep 2
     sudo apt-get update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
@@ -150,6 +152,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
+    echo "Run docker without root privilegs.."
+    sleep 2
     # Check if docker installed
     sudo docker run hello-world
     # Run docker witout root privileges
