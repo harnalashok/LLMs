@@ -152,7 +152,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
-    echo "Run docker without root privilegs.."
+    echo "Testing if docker is properly installed"
+    echo "AND running docker without root privilegs.."
     sleep 2
     # Check if docker installed
     sudo docker run hello-world
