@@ -827,6 +827,11 @@ input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
   # Installing llama.cpp
   source /home/$USER/langchain/bin/activate
+   # Huggingface and llama.cpp related
+  pip install huggingface_hub
+  #cu124: is as per cuda version. Get cuda version from nvidia-smi
+  pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+  pip install huggingface_hub
   echo " "                                         | tee -a /home/$USER/error.log
   echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
   echo "------------"                              | tee -a /home/$USER/error.log
