@@ -92,20 +92,21 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         reboot
     fi
 fi
+
 # Check if docker is installed
-if command -v docker &> /dev/null; then
-    echo "Docker is installed."
-else
-    echo "Docker is not installed."
-    echo "====NOTE====="
-    echo "Execute following scripts in sequence"
-    echo " "
-    echo "1=>   ./ubuntu_docker1.sh "
-    echo "2=>   ./ubuntu_docker2.sh "
-    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
-    echo "=========="
-    sleep 15
- fi
+#if command -v docker &> /dev/null; then
+#    echo "Docker is installed."
+#else
+#    echo "Docker is not installed."
+#    echo "====NOTE====="
+#    echo "Execute following scripts in sequence"
+#    echo " "
+#    echo "1=>   ./ubuntu_docker1.sh "
+#    echo "2=>   ./ubuntu_docker2.sh "
+#    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
+#    echo "=========="
+#    sleep 15
+# fi
 
 ##################
 # Docker installation-I
@@ -236,7 +237,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
     chmod +x /home/$USER/*.sh
     sleep 2
-    
+  
     cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
     cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
  else
@@ -270,14 +271,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
    #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
    echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
    echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
-   
+   #
    echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
    echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
    echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
    #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
    echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
    echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
-
+   #
    cd /home/$USER
    docker volume create portainer_data
    # This is one long line command
@@ -330,7 +331,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
     echo "Skipping install of chromadb docker"
 fi   
-
+#
 chmod +x /home/$USER/*.sh
 
 
