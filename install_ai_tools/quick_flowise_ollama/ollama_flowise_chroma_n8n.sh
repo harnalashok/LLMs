@@ -839,6 +839,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    # Huggingface and llama.cpp related
   pip install huggingface_hub
   pip install transformers
+  pip install accelerate
   #cu124: is as per cuda version. Get cuda version from nvidia-smi
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
   echo " "                                         | tee -a /home/$USER/error.log
