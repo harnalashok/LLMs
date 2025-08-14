@@ -7,6 +7,7 @@
 echo "========script=============="
 echo "Will update Ubuntu"
 echo "Will install docker"
+echo "Will install python venv"
 echo "Install portainer"
 echo "Will install flowise docker"
 echo "Will install ollama docker for gpu"
