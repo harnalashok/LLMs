@@ -224,10 +224,10 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # Required for spyder:
     sudo apt install pyqt5-dev-tools -y
     # Huggingface and llama.cpp related
-    pip install huggingface_hub
+    #pip install huggingface_hub
     # cu124: is as per cuda version. Get cuda version from nvidia-smi
-    pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-    pip install huggingface_hub
+    #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+    #pip install huggingface_hub
     # Create script to activate 'langchain' env
     echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
     echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
