@@ -201,6 +201,8 @@ else
     echo "Docker installation process completed"
 fi    
 
+# Prevent any docker restarts on OS reboot
+docker update --restart=no $(docker ps -a -q)
 
 ##############
 # Create python virtual env
