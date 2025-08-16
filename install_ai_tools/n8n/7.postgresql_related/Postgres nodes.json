@@ -1,0 +1,246 @@
+{
+  "name": "Postgres nodes",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -16
+      ],
+      "id": "c67aad3e-b181-4851-8dcf-9183658e6905",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from acars ;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        48,
+        0
+      ],
+      "id": "6d8a8f83-ad45-4f5c-9f07-772cebcd5dbf",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "vDuN5JO5ydPuVAFP",
+          "name": "gandhi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "acars",
+          "mode": "list",
+          "cachedResultName": "acars"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "brand": "'fiat'",
+            "model": "'old'",
+            "year": 1971
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "brand",
+              "displayName": "brand",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "model",
+              "displayName": "model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "year",
+              "displayName": "year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        32,
+        -192
+      ],
+      "id": "63a15711-d431-4e15-a4c5-e103430939ca",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "vDuN5JO5ydPuVAFP",
+          "name": "gandhi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "acars",
+          "mode": "list",
+          "cachedResultName": "acars"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "year",
+              "value": "1971"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        64,
+        144
+      ],
+      "id": "4c1fd978-bb5a-48e5-ab10-aa03456b97bd",
+      "name": "Delete table or rows",
+      "credentials": {
+        "postgres": {
+          "id": "vDuN5JO5ydPuVAFP",
+          "name": "gandhi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from acars ;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        256,
+        144
+      ],
+      "id": "210a2556-1ceb-4dae-81ba-a6fc3e6fb818",
+      "name": "Execute a SQL query1",
+      "credentials": {
+        "postgres": {
+          "id": "vDuN5JO5ydPuVAFP",
+          "name": "gandhi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from acars ;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        240,
+        -192
+      ],
+      "id": "963fe5d6-336c-4282-9ef1-7075ff65bbd8",
+      "name": "Execute a SQL query2",
+      "credentials": {
+        "postgres": {
+          "id": "vDuN5JO5ydPuVAFP",
+          "name": "gandhi"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Delete table or rows",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete table or rows": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "99508004-c1da-4919-b390-3df14222e0f6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aafa3183cefb634c6512f5c338c33298747002c284a4d6885bf9ecb1dd68eaf6"
+  },
+  "id": "GqyvM6mNVVi0zTcb",
+  "tags": []
+}
