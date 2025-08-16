@@ -1,0 +1,147 @@
+{
+  "name": "check website status",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "84fa9d4e-26d1-41e6-9d16-5a1f402ac721",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "url": "http://master.foreschool.com:80/index1.html",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "3a541f05-64fd-4c09-a13b-3bf940138f08",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        280,
+        0
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "from": "+17342945743",
+        "to": "+918750893093",
+        "message": "Service Down",
+        "options": {}
+      },
+      "id": "17f4b308-0830-4f50-8d00-91c8f7ea4069",
+      "name": "Twilio",
+      "type": "n8n-nodes-base.twilio",
+      "position": [
+        760,
+        20
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "twilioApi": {
+          "id": "4ZNLjU0fX1za4Vn9",
+          "name": "Twilio account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "75b05c45-447e-407b-847f-5ed909b3c325",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 400
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d016b635-466b-404f-87ba-978e880edb5b",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        480,
+        0
+      ],
+      "typeVersion": 2.2
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9c95ff3d-23f6-4ef2-8448-1e439f88e9ec",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "06a3151434cc8b739528c085f688bf3459edf37e722e5f319eb89945e08947f0"
+  },
+  "id": "qugvoQDsmBYunqrR",
+  "tags": []
+}
