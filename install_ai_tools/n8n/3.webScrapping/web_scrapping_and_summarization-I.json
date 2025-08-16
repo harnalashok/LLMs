@@ -1,0 +1,225 @@
+{
+  "name": "web scrapping and summarization",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c39093b8-7d97-480c-82de-d358112deb2f",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        -1440,
+        300
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "https://paulgraham.com/woke.html",
+        "options": {}
+      },
+      "id": "9cac56ea-63c9-4e88-b4f9-a5577297b947",
+      "name": "Fetch essay list",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -1220,
+        300
+      ],
+      "typeVersion": 4.1
+    },
+    {
+      "parameters": {
+        "content": "## Scrape anyone Paul Graham essay",
+        "height": 586,
+        "width": 1332
+      },
+      "id": "c962c861-60f7-43d1-950a-47fe228dfc3b",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1520,
+        220
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "4c3f19a7-a589-4446-967a-04a522fc777e",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "position": [
+        -900,
+        480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1c2cba8a-8778-4688-96dc-e21799425158",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "position": [
+        -800,
+        640
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -1060,
+        540
+      ],
+      "id": "6dd6faf6-b4b4-4618-8e6f-e581eaaf5d56",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "9tSEDThFF7wxKwT9",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operationMode": "documentLoader",
+        "options": {}
+      },
+      "id": "97e0b693-fca4-426d-9fb4-c7366439e981",
+      "name": "Summarization Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "position": [
+        -1000,
+        300
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -620,
+        300
+      ],
+      "id": "b5a3b33f-f1b0-4593-8120-320b901137d4",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/ashok/file.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        300
+      ],
+      "id": "acc6339e-3330-47eb-8001-947e627bd9ae",
+      "name": "Read/Write Files from Disk"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Fetch essay list": {
+      "main": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Fetch essay list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "080c8e27-f75c-4c60-81a3-d8188f3b3eb2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1f1c1087d1ccc2fb7eef41d8142d9734decd43e66fac3879998fbe35b36c571b"
+  },
+  "id": "RQa4nLaE2E8gROd1",
+  "tags": []
+}
