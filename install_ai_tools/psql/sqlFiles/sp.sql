@@ -102,10 +102,14 @@ CREATE TABLE s
 -- 	   supplied by a S in London. 
 -- 9.0 Get all part numbers and the S names for P
 -- 	   supplied by a S not in London. 
--- 6.0 Get all pno and the sname for part
--- 	   supplied by a supplier to London city
--- 7.0 Find the average status for all the suppliers. 
--- 8.0 Get part numbers for P not supplied by any 
+-- 10.0 Get all pno and the sname for part
+-- 	    supplied by a supplier to London city
+-- 10.0 Get all pno and the sname for part
+-- 	    supplied by a supplier to all cities BUT London city
+
+
+-- 11.0 Find the average status for all the suppliers. 
+-- 12.0 Get part numbers for P not supplied by any 
 --      S staying in London. 
 -- 9.0 Get city names for cities in which at least two suppliers
 --     are located. ANswer has one attribute (city).
