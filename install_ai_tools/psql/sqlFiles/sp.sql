@@ -94,12 +94,16 @@ CREATE TABLE s
 -- 3.0 Get S numbers for suppliers who supply part 1. 
 -- 4.0 Get S names and status for all suppliers who have a
 --     status between 15 and 25 inclusive.
--- 4a.0 Get S names and status for all suppliers who have a
+-- 5.0 Get S names and status for all suppliers who have a
 --     status between 15 and 25 exclusive.
--- 5.0 Get all part numbers and the S names for P
--- 	supplied by a S in London. 
+-- 6.0 List all suppliers which are NOT supplying any part
+-- 7.0 List those suppliers which are supplying parts
+-- 8.0 Get all part numbers and the S names for P
+-- 	   supplied by a S in London. 
+-- 9.0 Get all part numbers and the S names for P
+-- 	   supplied by a S not in London. 
 -- 6.0 Get all pno and the sname for part
--- 	supplied by a supplier to London city
+-- 	   supplied by a supplier to London city
 -- 7.0 Find the average status for all the suppliers. 
 -- 8.0 Get part numbers for P not supplied by any 
 --      S staying in London. 
