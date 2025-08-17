@@ -88,7 +88,7 @@ CREATE TABLE s
 --#############################
 
 -- 1.0 List all of the S numbers and the part numbers supplied by the s.
--- 2.0 The "order by" clause is not strictly necessary.
+-- 2.0 Order the above output by qty.The "order by" clause is not strictly necessary.
 -- 3.0 Get S numbers for suppliers who supply part 1. 
 -- 4.0 Get S names and status for all suppliers who have a
 --     status between 15 and 25 inclusive.
