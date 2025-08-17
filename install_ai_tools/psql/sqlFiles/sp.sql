@@ -111,13 +111,12 @@ CREATE TABLE s
 --      S staying in London. 
 -- 14.0 Get city names for cities in which at least two suppliers
 --      are located. ANswer has one attribute (city).
-
- -- 10.0 Get the total number of different P supplied by S one. Answer is scalar.
--- 11.0 Get the part # and total shipment quantity for each part.
--- 12.0 Get S numbers for suppliers with a status lower than that of S 1. 
---  13.0 Get S numbers for suppliers whose city is first in the 
+-- 15.0 Get the total number of different P supplied by S one. Answer is scalar.
+-- 16.0 Get the part # and total shipment quantity for each part.
+-- 17.0 Get S numbers for suppliers with a status lower than that of S 1. 
+-- 18.0 Get S numbers for suppliers whose city is first in the 
 --  	 lexicographic order of cities. Answer has one attribute (sno).
--- 14.0 Get part numbers for P supplied by all suppliers in London. Answer has one attribute (pno).
+-- 19.0 Get part numbers for P supplied by all suppliers in London. Answer has one attribute (pno).
 --###########
      
 
