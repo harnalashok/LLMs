@@ -6,7 +6,10 @@
 --We create three tables within this database
 -- See queries in file: sqlQueries.sql
 
-
+--Assumuing user gandhi has ALL privileges over
+-- databasw gandhi and public schema gandhi,
+--Proceed by first logging into Ubuntu as gandhi
+--and then logging into psql (as user gandhi).
 --Connect to gandhi database
 
 gandhi=> \c gandhi
