@@ -70,6 +70,16 @@ CREATE TABLE s
   INSERT INTO sp VALUES (4, 4, 300);
   INSERT INTO sp VALUES (4, 5, 400);
 
+--psql shortcuts
+--  \dt: List tables
+--  \d tableName : List tableName structure
+--  \du: List all users
+--  \du+:Extended version of \du
+--  \c database :  Connect to named database 
+--  \dn List schemas
+
+
+
 --Questions
 --#############################
 ---- Queries on sp tables
