@@ -92,6 +92,8 @@ CREATE TABLE s
 -- 3.0 Get S numbers for suppliers who supply part 1. 
 -- 4.0 Get S names and status for all suppliers who have a
 --     status between 15 and 25 inclusive.
+-- 4a.0 Get S names and status for all suppliers who have a
+--     status between 15 and 25 exclusive.
 -- 5.0 Get all part numbers and the S names for P
 -- 	supplied by a S in London. 
 -- 6.0 Get all pno and the sname for part
