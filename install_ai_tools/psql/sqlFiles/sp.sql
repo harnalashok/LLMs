@@ -49,6 +49,8 @@ CREATE TABLE s
   INSERT INTO s VALUES (3, 'Blake', 30, 'Paris');
   INSERT INTO s VALUES (4, 'Clark', 20, 'London');
   INSERT INTO s VALUES (5, 'Adams', 30, 'Athens');
+  INSERT INTO s VALUES (6, 'Amit', 25, 'Delhi');
+  INSERT INTO s VALUES (7, 'debashis', 15, 'Delhi');
 
   INSERT INTO p VALUES (1, 'Nut', 'Red', 12, 'London');
   INSERT INTO p VALUES (2, 'Bolt', 'Green', 17, 'Paris');
