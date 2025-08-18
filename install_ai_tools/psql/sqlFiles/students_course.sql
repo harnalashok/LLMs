@@ -65,7 +65,12 @@ insert into st_c values
 --5. Which all students (mention names)) have subscribed to the course floated by faculty smith
 --6. Which courses have been subscribed by students of age less than 24
 --7. What is the average age of students in the class of smith
---8.
+--8. What is the overall average age of students
+--9. What is the max age and min age
+--10.Which courses have no takers
+--11.What are the names of students who are not enrolled in any course
+--12.Students who are between the age of 23 and 25 (inclusive), have taken which courses	
+--13.How many students have taken IT course	
 
 
 
