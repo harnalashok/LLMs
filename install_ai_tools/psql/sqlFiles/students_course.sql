@@ -1,4 +1,12 @@
--- students-course table
+--User creation
+--=============
+
+--create user edu, database edu in postgres
+--grant all privileges to user edu over database edu
+--grant all on public schema of database edu to user edu
+
+
+--students-course table
 
 create table st(
 		rollno   char(4) primary key,
@@ -46,5 +54,19 @@ insert into st_c values
 ('a002','c5',1986),
 ('a003','c6',1986),
 ('a003','c1',1986);
+
+
+--Questions
+
+--1. Show all available courses
+--2. Show all student details
+--3. Show the courses taken by student with rollno a003
+--4. Show the course being taught by faculty smith
+--5. Which all students (mention names)) have subscribed to the course floated by faculty smith
+--6. Which courses have been subscribed by students of age less than 24
+--7. What is the average age of students in the class of smith
+--8.
+
+
 
 
