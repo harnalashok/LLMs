@@ -71,7 +71,7 @@ insert into st_c values
 --11.What are the names of students who are not enrolled in any course
 --12.Students who are between the age of 23 and 25 (inclusive), have taken which courses	
 --13.How many students have taken IT course	
---14. Faculty, jones, is teachinh which all students	
+--14. Faculty, jones, is teachinh which all students (give names of students)
 
 
 
