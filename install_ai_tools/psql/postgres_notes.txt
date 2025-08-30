@@ -169,8 +169,20 @@ Concepts
 		joker=# 
 
 ---------------------------------------------------------------
-Here is the clean code for tables of departments and employees:
+-- Here is the clean code for tables of departments and employees:
 ---------------------------------------------------------------
+	--Create user directly in linux shell:
+    sudo useradd -m kumar
+	sudo passwd kumar
+	sudo -u postgres psql -c 'create database kumar;'
+	sudo -u postgres psql -c 'create user kumar;'
+	sudo -u postgres psql -c 'grant all privileges on database kumar to kumar;' -d kumar
+	sudo -u postgres psql -c "alter user kumar with encrypted password 'kumar';"
+	sudo -u postgres psql -c " GRANT ALL ON SCHEMA public TO kumar;" -d kumar 
+	sudo -u postgres psql -c " CREATE EXTENSION vector;" -d kumar
+	sudo su kumar
+	psql kumar
+	kumar=> \c kumar
 
 	CREATE TABLE departments (
 			    		department_id int PRIMARY KEY,
@@ -196,6 +208,9 @@ Here is the clean code for tables of departments and employees:
 	(2,'Bob',50.8, 10),
 	(3,'sudha', 39.0, 20),
 	(4,'Charlie',34.0, 30);
+
+---------------------------------------------------------------
+---------------------------------------------------------------
 
 	9. Schemas in postgresql:
 		In PostgreSQL, a schema is a named collection or logical grouping of database objects within a single database. 
