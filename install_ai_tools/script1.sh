@@ -30,6 +30,14 @@ sleep 10
 #    container at 172.17.0.1 and Ollama must also bind itself to
 #    172.17.0.1. To make it bind to this port, see my detailed 
 #    reply at this link: https://github.com/khoj-ai/khoj/issues/1100#issuecomment-3245404212.
+#    Briefly, start ollama only as: ollama serve. But before that export:
+#       $ export OLLAMA_HOST="http://0.0.0.0:11434"   
+#       $ ollama serve
+#       Now open docker and issue curl command, as:
+#      docker exec -it ragflow-server /bin/bash
+#      root@a194a08af435:/ragflow#  curl 172.17.0.1:11434
+#      It should show connection.
+#      Access ollama as: host.docker.internal:11434 where required
 
 
 cd ~/
