@@ -925,7 +925,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "docker compose -f docker-compose-gpu.yml stop "     >> /home/$USER/stop_ragflow.sh
     chmod +x /home/$USER/*.sh
     chmod +x /home/$USER/*.sh
-    sudo sysctl -w vm.max_map_count=262144
+    #sudo sysctl -w vm.max_map_count=262144
+    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
     git clone https://github.com/infiniflow/ragflow.git
     cd ragflow/docker
     sed -i 's/80:80/800:80/' docker-compose-gpu.yml
