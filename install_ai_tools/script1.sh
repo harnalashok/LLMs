@@ -17,6 +17,20 @@ echo "Reboot machine and call script2.sh"
 echo "==========================="
 sleep 10
 
+# 1. Ollama on localhost:
+# IF you start ollama as: ollama serve
+#    models are stored within /home/ashok/.ollama folder
+# IF you start ollama as: sudo systemctl start ollama:
+#    downloaded models are saved to: /usr/share/ollama/.ollama/models
+# IF ollama is installed as docker service,
+#    downloaded models are stored at different place
+# 2. Ollama on start binds itself to 127.0.0.1:11434 and NOT
+#    at any other IP. But if anyother app on docker is to access
+#    ollama, then that app generally creates a bridge within the
+#    container at 172.17.0.1 and Ollama must also bind itself to
+#    172.17.0.1. To make it bind to this port, see my detailed 
+#    reply at this link: https://github.com/khoj-ai/khoj/issues/1100#issuecomment-3245404212.
+
 
 cd ~/
 
