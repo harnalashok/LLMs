@@ -149,10 +149,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "echo 'Look for ollama models in folder:'"            | tee -a /home/$USER/start/start_ollama_serve.sh  
-    echo "echo '       sudo ls -la ~/.ollama'"                 | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo '    /home/$USER/.ollama'"                      | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "sleep 4"                                             | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "export OLLAMA_HOST='http://0.0.0.0:11434' "          | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "ollama serve"                                        | tee -a /home/$USER/start/start_ollama_serve.sh  
        
     # Ollama stop script
