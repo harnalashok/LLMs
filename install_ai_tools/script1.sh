@@ -138,31 +138,23 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "sleep 4"                                             | tee -a /home/$USER/start/start_ollama.sh  
     echo "sudo systemctl start ollama"                         | tee -a /home/$USER/start/start_ollama.sh  
     echo "netstat -aunt | grep 11434"                          | tee -a /home/$USER/start/start_ollama.sh  
-==========================
+
     # Ollama start script-II:
-    echo '#!/bin/bash'                                         | tee  /home/$USER/start/start_ollama.sh  
-    echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama.sh  
-    echo "cd /home/$USER"                                               | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo 'Ollama will be started as: ollama serve'"  | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo 'Look for ollama models in folder:'"           | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo '       sudo ls -la /usr/share/ollama/.ollama/models/manifests/registry.ollama.ai/library/'"  | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama.sh  
-    echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama.sh  
-    echo "sleep 4"                                             | tee -a /home/$USER/start/start_ollama.sh  
-    echo "sudo systemctl start ollama"                         | tee -a /home/$USER/start/start_ollama.sh  
-    echo "netstat -aunt | grep 11434"                          | tee -a /home/$USER/start/start_ollama.sh  
-
-
-===========================
-
-
-
-
-
-    
+    echo '#!/bin/bash'                                         | tee  /home/$USER/start/start_ollama_serve.sh  
+    echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "cd /home/$USER"                                      | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo 'Ollama will be available at port 11434'"       | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo 'Ollama will be started as: ollama serve'"      | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo 'This terminal will remain engaged....'"        | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo 'Look for ollama models in folder:'"            | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo '       sudo ls -la ~/.ollama'"                 | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "sleep 4"                                             | tee -a /home/$USER/start/start_ollama_serve.sh  
+    echo "ollama serve"                                        | tee -a /home/$USER/start/start_ollama_serve.sh  
+       
     # Ollama stop script
     echo '#!/bin/bash'                                         | tee -a /home/$USER/stop/stop_ollama.sh  
     echo " "                                                   | tee -a /home/$USER/stop/stop_ollama.sh  
