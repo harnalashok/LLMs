@@ -153,6 +153,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '========'"                                     | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "echo ' ' "                                           | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "sleep 4"                                             | tee -a /home/$USER/start/start_ollama_serve.sh  
+    # Allow ollama to bind at addresses other than 127.0.0.1
     echo "export OLLAMA_HOST='http://0.0.0.0:11434' "          | tee -a /home/$USER/start/start_ollama_serve.sh  
     echo "ollama serve"                                        | tee -a /home/$USER/start/start_ollama_serve.sh  
        
