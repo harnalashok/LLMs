@@ -891,7 +891,7 @@ chmod +x /home/$USER/*.sh
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
-   
+#      https://github.com/infiniflow/ragflow/issues/9866   
 ##########################
 
 echo " "
