@@ -903,7 +903,7 @@ input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/$USER/
     echo "Installing RagFlow docker"
-    echo "After installation, access ragflow, as: http://<hostIP>:800"
+    echo "After installation, access ragflow, as: http://<hostIP>:80"
     sleep 5
     # Start script
     echo '#!/bin/bash'                                         >  /home/$USER/start_ragflow.sh
@@ -915,7 +915,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
-    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
+    echo "netstat -aunt | grep 80"                             >> /home/$USER/start_ragflow.sh
     # Stop script
     echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
     echo " "                                                  >> /home/$USER/stop_ragflow.sh
