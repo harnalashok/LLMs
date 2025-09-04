@@ -934,7 +934,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     #docker compose -f docker-compose-gpu.yml up -d
     #docker pull infiniflow/ragflow:nightly-slim
     #docker run   infiniflow/ragflow:nightly
-    docker build --platform linux/amd64 --build-arg LIGHTEN=1 -f Dockerfile -t infiniflow/ragflow:nightly-slim 
+    docker build --platform linux/amd64 --build-arg LIGHTEN=1 -f Dockerfile -t infiniflow/ragflow:nightly-slim . 
     # docker update --restart=no [container_name_or_id]
     echo " "
     echo " "
