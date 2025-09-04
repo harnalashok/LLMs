@@ -38,7 +38,7 @@ sleep 10
 #      root@a194a08af435:/ragflow#  curl 172.17.0.1:11434
 #      It should show connection.
 #      Access ollama as: host.docker.internal:11434 where required
-
+#      For RAGFlow: https://github.com/infiniflow/ragflow/issues/9866
 
 cd ~/
 
