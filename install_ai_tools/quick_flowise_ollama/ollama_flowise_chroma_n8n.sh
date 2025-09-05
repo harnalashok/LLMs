@@ -906,37 +906,41 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "After installation, access ragflow, as: http://<hostIP>:80"
     sleep 5
     # Start script
+    #--------------
     echo '#!/bin/bash'                                         >  /home/$USER/start_ragflow.sh
     echo " "                                                   >> /home/$USER/start_ragflow.sh
     echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
-    echo "echo 'RagFlow port is 80'"                          >> /home/$USER/start_ragflow.sh
-    echo "echo 'Access ragflow, as: http://<hostIP>:80'"       >> /home/$USER/start_ragflow.sh
+    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
+    echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
+    echo "echo 'Check docker logs as: docker logs -f ragflow-server'"       >> /home/$USER/start_ragflow.sh
     echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
     echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
-    echo "netstat -aunt | grep 80"                             >> /home/$USER/start_ragflow.sh
+    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
+    #
     # Stop script
+    #-------------
     echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
     echo " "                                                  >> /home/$USER/stop_ragflow.sh
     echo "cd ~/"                                              >> /home/$USER/stop_ragflow.sh
     echo "echo 'ragflow Stopping'"                            >> /home/$USER/stop_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                      >> /home/$USER/stop_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml stop "     >> /home/$USER/stop_ragflow.sh
+    #
     chmod +x /home/$USER/*.sh
     chmod +x /home/$USER/*.sh
-    #sudo sysctl -w vm.max_map_count=262144
+    #
+    sudo sysctl -w vm.max_map_count=262144
     echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
     git clone https://github.com/infiniflow/ragflow.git
-    #cd ragflow/docker
-    #sed -i 's/80:80/800:80/' docker-compose-gpu.yml
-    #sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
-    #docker compose -f docker-compose-gpu.yml up -d
-    #docker pull infiniflow/ragflow:nightly-slim
-    #docker run   infiniflow/ragflow:nightly
-    cd ragflow/
-    docker build --platform linux/amd64 --build-arg LIGHTEN=1 -f Dockerfile -t infiniflow/ragflow:nightly-slim . 
-    # docker update --restart=no [container_name_or_id]
+    cd ragflow/docker
+    sed -i 's/80:80/800:80/' docker-compose-gpu.yml
+    sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
+    # Replace in .env  the line 'RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim' with 'RAGFLOW_IMAGE=infiniflow/ragflow:nightly-slim'
+    # This change should be temporary
+    sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
+    docker compose -f docker-compose-gpu.yml up -d
     echo " "
     echo " "
     echo "==========="
@@ -952,5 +956,4 @@ fi
 # Prevent docker restarts on OS reboot
 docker update --restart=no $(docker ps -a -q)
 
-docker update --restart=no $(docker ps -a -q)
 
