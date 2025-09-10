@@ -899,6 +899,17 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
     echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
+
+    echo '#!/bin/bash'                                          > /home/$USER/ragflow_logs.sh
+    echo " "                                                   >> /home/$USER/ragflow_logs.sh
+    echo "echo '======'"                                       >> /home/$USER/ragflow_logs.sh
+    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/ragflow_logs.sh
+    echo "echo 'Access ragflow, as: http://<hostIP>:800'"      >> /home/$USER/ragflow_logs.sh
+    echo "echo '======'"                                       >> /home/$USER/ragflow_logs.sh
+    echo "sleep 4"                                             >> /home/$USER/ragflow_logs.sh
+    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/ragflow_logs.sh
+    echo "docker logs -f ragflow-server"                       >> /home/$USER/ragflow_logs.sh
+       
     #
     # Stop script
     #-------------
@@ -920,7 +931,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
     # Replace in .env  the line 'RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim' with 'RAGFLOW_IMAGE=infiniflow/ragflow:nightly-slim'
     # This change should be temporary
-    sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
+    # RagFlow version is 10.5
+    #sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
     docker compose -f docker-compose-gpu.yml up -d
     echo " "
     echo " "
