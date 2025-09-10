@@ -125,6 +125,8 @@ else
    echo "Docker is installed"
 fi  
 
+wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
+
 ##################
 # Docker installation-II
 #################
