@@ -70,7 +70,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo " "
     if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
         echo "====NOTE====="
-        echo "Ubuntu shell will be closed. Then reopen it and execute again the following script:"
+        echo "Ubuntu shell will be closed several times. After each closure, reopen it and execute again the following script:"
         echo " "
         echo "=>   ./ollama_flowise_chroma_n8n.sh"
         echo "=========="
@@ -78,7 +78,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         wsl.exe --shutdown
     else
         echo "====NOTE====="
-        echo "Machine will be rebooted. After reboot, execute the following script:"
+        echo "Machine will be rebooted several times. After each reboot, execute the following script:"
         echo " "
         echo "=>   ./ollama_flowise_chroma_n8n.sh"
         echo "=========="
@@ -87,20 +87,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     fi
 fi
 
-# Check if docker is installed
-#if command -v docker &> /dev/null; then
-#    echo "Docker is installed."
-#else
-#    echo "Docker is not installed."
-#    echo "====NOTE====="
-#    echo "Execute following scripts in sequence"
-#    echo " "
-#    echo "1=>   ./ubuntu_docker1.sh "
-#    echo "2=>   ./ubuntu_docker2.sh "
-#    echo "3=>   ./ollama_flowise_chroma_n8n.sh"
-#    echo "=========="
-#    sleep 15
-# fi
+
 
 ##################
 # Docker installation-I
