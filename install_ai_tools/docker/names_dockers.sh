@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /home/$USER
 echo Listing names of all docker containers
 echo "==========="
 echo " "
