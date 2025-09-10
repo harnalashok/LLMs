@@ -24,10 +24,14 @@ echo "RagFlow Containers aloing with imageIDs"
 echo " "
 docker compose images  | awk  '{print $1 "\t"  $5 "\t"  $2}'
 cd /home/$USER
+echo " "
 echo "You can delete containers (by first stopping ragflow), as:"
-echo "docker rm <container_name or container_id"
+echo " "
+echo "       docker rm <container_name or container_id"
+echo " "
 echo "Delete images as:"
-echo "docker rmi <imageID"
+echo "       docker rmi <imageID"
+echo " "
 
 
 
