@@ -895,22 +895,22 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
     echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
     echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
-    echo "echo 'Check docker logs as: docker logs -f ragflow-server'"       >> /home/$USER/start_ragflow.sh
+    echo "echo 'Check docker logs as: docker logs -f ragflow-server'" >> /home/$USER/start_ragflow.sh
     echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
     echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
     echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
 
-    echo '#!/bin/bash'                                          > /home/$USER/ragflow_logs.sh
-    echo " "                                                   >> /home/$USER/ragflow_logs.sh
-    echo "echo '======'"                                       >> /home/$USER/ragflow_logs.sh
-    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/ragflow_logs.sh
-    echo "echo 'Access ragflow, as: http://<hostIP>:800'"      >> /home/$USER/ragflow_logs.sh
-    echo "echo '======'"                                       >> /home/$USER/ragflow_logs.sh
-    echo "sleep 4"                                             >> /home/$USER/ragflow_logs.sh
-    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/ragflow_logs.sh
-    echo "docker logs -f ragflow-server"                       >> /home/$USER/ragflow_logs.sh
+    echo '#!/bin/bash'                                          > /home/$USER/logs_ragflow.sh
+    echo " "                                                   >> /home/$USER/logs_ragflow.sh
+    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
+    echo "echo 'This terminal will remain engaged'"            >> /home/$USER/logs_ragflow.sh
+    echo "echo 'You can come out of it by pressing ctrl+c'"      >> /home/$USER/logs_ragflow.sh
+    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
+    echo "sleep 6"                                             >> /home/$USER/logs_ragflow.sh
+    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/logs_ragflow.sh
+    echo "docker logs -f ragflow-server"                       >> /home/$USER/logs_ragflow.sh
        
     #
     # Stop script
