@@ -886,7 +886,7 @@ input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/$USER/
     echo "Installing RagFlow docker"
-    echo "After installation, access ragflow, as: http://<hostIP>:80"
+    echo "After installation, access ragflow, as: http://<hostIP>:800"
     sleep 5
     # Start script
     #--------------
