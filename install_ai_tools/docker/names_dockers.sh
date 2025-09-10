@@ -30,7 +30,7 @@ echo " "
 echo "       docker rm <container_name or container_id"
 echo " "
 echo "Delete images as:"
-echo "       docker rmi <imageID"
+echo "       docker rmi <imageID>"
 echo " "
 
 
