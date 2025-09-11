@@ -926,6 +926,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/logs_ragflow.sh
     echo "docker logs -f ragflow-server"                       >> /home/$USER/logs_ragflow.sh
 
+
     echo '#!/bin/bash'                                          > /home/$USER/docker/del_rf_containers.sh
     echo "echo 'Will delete RagFlow dockers'"                  >> /home/$USER/docker/del_rf_containers.sh
     echo "echo 'Press ctrl+c to exit now'"                     >> /home/$USER/docker/del_rf_containers.sh
@@ -959,6 +960,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "echo 'Deleting images..'"                            >> /home/$USER/docker/del_rf_containers.sh
     echo "docker compose down --rmi all"                       >> /home/$USER/docker/del_rf_containers.sh
+    echo "echo '  '"                                           >> /home/$USER/docker/del_rf_containers.sh
+    echo "echo 'Next, delete folder: /home/$USER/ragflow/'"     >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
