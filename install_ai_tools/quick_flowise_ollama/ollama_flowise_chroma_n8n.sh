@@ -952,6 +952,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     #
     echo "echo '5.Deleting ragflow-es-01'"                     >> /home/$USER/docker/del_rf_containers.sh
     echo "docker rm ragflow-es-01"                             >> /home/$USER/docker/del_rf_containers.sh
+    echo "echo 'Delete volumes'"                               >> /home/$USER/docker/del_rf_containers.sh 
+    echo "docker compose down --volumes"                       >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "echo 'Use: docker rmi <imageID> to delete images'"    >> /home/$USER/docker/del_rf_containers.sh
