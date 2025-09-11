@@ -910,7 +910,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
     echo "echo 'RagFlow docker volumes'"                        > /home/$USER/volumes_ragflow.sh
     echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
-    echo "echo 'esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
+    echo "echo 'Should be: esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
     echo "sudo ls -la /var/lib/docker/volumes/"                 >> /home/$USER/volumes_ragflow.sh
     ln -T /home/$USER/volumes_ragflow.sh  /home/$USER/about_ragflow.sh
 
@@ -961,11 +961,12 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'Next, use: docker rmi <imageID> to delete images'"    >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-        
+    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
+    echo "./volumes_ragflow.sh"                                >> /home/$USER/docker/del_rf_containers.sh   
     cd /home/$USER/docker
     chmod +x *.sh
     cd /home/$USER
-      
+    chmod +x *.sh  
     #
     # Stop script
     #-------------
