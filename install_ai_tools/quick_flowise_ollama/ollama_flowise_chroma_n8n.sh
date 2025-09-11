@@ -911,6 +911,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'RagFlow docker volumes'"                        > /home/$USER/volumes_ragflow.sh
     echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
     echo "echo 'esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
+    echo "sudo ls -la /var/lib/docker/volumes/"                 >> /home/$USER/volumes_ragflow.sh
+    ln -T /home/$USER/volumes_ragflow.sh  /home/$USER/about_ragflow.sh
+
     
     echo '#!/bin/bash'                                          > /home/$USER/logs_ragflow.sh
     echo " "                                                   >> /home/$USER/logs_ragflow.sh
