@@ -912,6 +912,26 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "sleep 10"                                             >> /home/$USER/logs_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/logs_ragflow.sh
     echo "docker logs -f ragflow-server"                       >> /home/$USER/logs_ragflow.sh
+
+    echo '#!/bin/bash'                                          > /home/$USER/del_rf_containers.sh
+    echo "cd /home/$USER"                                      >> /home/$USER/logs_ragflow.sh
+    echo " "                                                   >> /home/$USER/del_rf_containers.sh
+    echo "echo '======'"                                       >> /home/$USER/del_rf_containers.sh
+    echo "echo 'Stopping RagFlow'"                             >> /home/$USER/del_rf_containers.sh
+    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
+    echo "./stop_ragflow.sh"                                             >> /home/$USER/logs_ragflow.sh
+    echo "docker rm ragflow-server"                       >> /home/$USER/del_rf_containers.sh
+    echo "docker rm ragflow-mysql"                       >> /home/$USER/del_rf_containers.sh
+    echo "docker rm ragflow-mysql"                       >> /home/$USER/del_rf_containers.sh
+    echo "docker rm ragflow-mysql"                       >> /home/$USER/del_rf_containers.sh
+    echo "docker rm ragflow-mysql"                       >> /home/$USER/del_rf_containers.sh
+
+
+
+
+
+
+
        
     #
     # Stop script
