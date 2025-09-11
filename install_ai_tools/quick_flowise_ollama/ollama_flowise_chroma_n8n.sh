@@ -957,8 +957,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/docker/del_rf_containers.sh
     echo "docker compose down --volumes"                       >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Next, use: docker rmi <imageID> to delete images'"    >> /home/$USER/docker/del_rf_containers.sh
+    echo "echo 'Deleting images..'"                            >> /home/$USER/docker/del_rf_containers.sh
+    echo "docker compose down --rmi all"                       >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
     echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
