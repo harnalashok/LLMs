@@ -919,8 +919,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "docker logs -f ragflow-server"                       >> /home/$USER/logs_ragflow.sh
 
     echo '#!/bin/bash'                                          > /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Will delete RagFlow dockers'"                         >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Press ctrl+c to exit now'"                            >> /home/$USER/docker/del_rf_containers.sh
+    echo "echo 'Will delete RagFlow dockers'"                  >> /home/$USER/docker/del_rf_containers.sh
+    echo "echo 'Press ctrl+c to exit now'"                     >> /home/$USER/docker/del_rf_containers.sh
     echo "sleep 8"                                             >> /home/$USER/docker/del_rf_containers.sh
     echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
     echo " "                                                   >> /home/$USER/docker/del_rf_containers.sh
@@ -929,11 +929,22 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/docker/del_rf_containers.sh
     echo "./stop_ragflow.sh"                                   >> /home/$USER/docker/del_rf_containers.sh
     echo "echo 'Deleting containers now...'"                   >> /home/$USER/docker/del_rf_containers.sh
+    #
+    echo "echo '1.Deleting ragflow-server'"                    >> /home/$USER/docker/del_rf_containers.sh
     echo "docker rm ragflow-server"                            >> /home/$USER/docker/del_rf_containers.sh
+    #
+    echo "echo '2.Deleting ragflow-mysql'"                     >> /home/$USER/docker/del_rf_containers.sh
     echo "docker rm ragflow-mysql"                             >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker rm ragflow-redis"                             >> /home/$USER/docker/del_rf_containers.sh
+    #
+    echo "echo '3.Deleting ragflow-redis'"                      >> /home/$USER/docker/del_rf_containers.sh
+    echo "docker rm ragflow-redis"                              >> /home/$USER/docker/del_rf_containers.sh
+    #
+    echo "echo '4.Deleting ragflow-minio'"                     >> /home/$USER/docker/del_rf_containers.sh
     echo "docker rm ragflow-minio"                             >> /home/$USER/docker/del_rf_containers.sh
+    #
+    echo "echo '5.Deleting ragflow-es-01'"                     >> /home/$USER/docker/del_rf_containers.sh
     echo "docker rm ragflow-es-01"                             >> /home/$USER/docker/del_rf_containers.sh
+    
     cd /home/$USER/docker
     chmod +x *.sh
     cd /home/$USER
