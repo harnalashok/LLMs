@@ -907,6 +907,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
     echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
 
+    echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
+    echo "echo 'RagFlow docker volumes'"                        > /home/$USER/volumes_ragflow.sh
+    echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
+    echo "echo 'esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
+    
     echo '#!/bin/bash'                                          > /home/$USER/logs_ragflow.sh
     echo " "                                                   >> /home/$USER/logs_ragflow.sh
     echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
