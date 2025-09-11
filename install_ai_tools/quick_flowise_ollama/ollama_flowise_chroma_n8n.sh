@@ -127,6 +127,7 @@ fi
 
 mkdir /home/$USER/docker
 cd /home/$USER/docker
+echo "Download script to print names of docker containers"
 wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
 chmod +x *.sh
 cd /home/$USER
