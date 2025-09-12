@@ -16,6 +16,7 @@ echo "Will install n8n docker"
 echo "Will install dify docker"
 echo "Will install mongodb and mongosh:"
 echo "Installs postgres db and pgvector"
+echo "Installs xinference"
 echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
@@ -880,6 +881,34 @@ chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/*.sh
 
 ##########################
+### Install xinference
+# Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
+##########################
+
+cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
+echo "Shall I install xinference? [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+   source /home/$USER/langchain/bin/activate
+   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
+   sleep 3
+   pip install "xinference[llama_cpp]"
+   sleep 3
+   pip install "xinference[vllm]"
+   sleep 3
+   pip install "xinference[transformers]"
+   sleep 3
+else
+     echo "xinference will not be installed"
+fi   
+
+
+
+##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
 #      https://github.com/infiniflow/ragflow/issues/9866   
@@ -1012,29 +1041,5 @@ fi
 # Prevent docker restarts on OS reboot
 docker update --restart=no $(docker ps -a -q)
 
-##########################
-### Install xinference
-# Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
-##########################
-
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I install xinference? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-   source /home/$USER/langchain/bin/activate
-   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
-   sleep 3
-   pip install "xinference[llama_cpp]"
-   sleep 3
-   pip install "xinference[vllm]"
-   sleep 3
-   pip install "xinference[transformers]"
-   sleep 3
-else
-     echo "xinference will not be installed"
-fi    
+ 
 
