@@ -85,6 +85,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         sleep 15
         reboot
     fi
+    wsl.exe --shutdown
 fi
 
 
@@ -120,6 +121,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
         wsl.exe --shutdown
     else
         reboot
+        wsl.exe --shutdown
     fi  
 else
    echo "Docker is installed"
@@ -189,6 +191,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
         wsl.exe --shutdown
     else
         reboot
+        wsl.exe --shutdown
     fi  
 else
     echo "Docker installation process completed"
