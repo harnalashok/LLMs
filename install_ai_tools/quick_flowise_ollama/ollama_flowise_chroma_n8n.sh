@@ -909,6 +909,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
     echo "echo 'xinference port is 9997'"                          >> /home/$USER/start_xinference.sh
     echo "echo 'Access xinference, as: http://<hostIP>:9997'"       >> /home/$USER/start_xinference.sh
+    echo "echo 'Models are stored in folder ~/.xinference'"   >> /home/$USER/start_xinference.sh
+    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_xinference.sh
+    echo "echo 'See file LLMs/xinference.ipynb'"             >> /home/$USER/start_xinference.sh
     echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
     echo "sleep 4"                                             >> /home/$USER/start_xinference.sh
     echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
