@@ -902,6 +902,19 @@ if [[ $input == "Y" || $input == "y" ]]; then
    sleep 3
    pip install "xinference[transformers]"
    sleep 3
+    # Start script
+    #--------------
+    echo '#!/bin/bash'                                         >  /home/$USER/start_xinference.sh
+    echo " "                                                   >> /home/$USER/start_xinference.sh
+    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
+    echo "echo 'xinference port is 9997'"                          >> /home/$USER/start_xinference.sh
+    echo "echo 'Access xinference, as: http://<hostIP>:9997'"       >> /home/$USER/start_xinference.sh
+    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
+    echo "sleep 4"                                             >> /home/$USER/start_xinference.sh
+    echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
+    echo "source /home/$USER/langchain/bin/activate"          >> /home/$USER/start_xinference.sh
+    echo "xinference-local --host 0.0.0.0 --port 9997"        >> /home/$USER/start_xinference.sh
+    chmod +x *.sh
 else
      echo "xinference will not be installed"
 fi   
