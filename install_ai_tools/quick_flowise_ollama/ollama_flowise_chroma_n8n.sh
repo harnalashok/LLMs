@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 11th Sep, 2025
+# Last amended: 13th Sep, 2025
 
 
 
@@ -907,13 +907,13 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo '#!/bin/bash'                                         >  /home/$USER/start_xinference.sh
     echo " "                                                   >> /home/$USER/start_xinference.sh
     echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
-    echo "echo 'xinference port is 9997'"                          >> /home/$USER/start_xinference.sh
-    echo "echo 'Access xinference, as: http://<hostIP>:9997'"       >> /home/$USER/start_xinference.sh
+    echo "echo 'This terminal will remain engaged'"            >> /home/$USER/start_xinference.sh
+    echo "echo 'Access xinference, as: http://<hostIP>:9997'"  >> /home/$USER/start_xinference.sh
     echo "echo 'Models are stored in folder ~/.xinference'"   >> /home/$USER/start_xinference.sh
     echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_xinference.sh
     echo "echo 'See file LLMs/xinference.ipynb'"             >> /home/$USER/start_xinference.sh
     echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
-    echo "sleep 4"                                             >> /home/$USER/start_xinference.sh
+    echo "sleep 5"                                             >> /home/$USER/start_xinference.sh
     echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
     echo "source /home/$USER/langchain/bin/activate"          >> /home/$USER/start_xinference.sh
     echo "xinference-local --host 0.0.0.0 --port 9997"        >> /home/$USER/start_xinference.sh
