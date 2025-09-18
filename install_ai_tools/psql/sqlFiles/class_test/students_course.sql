@@ -152,6 +152,15 @@ JOIN st_c AS T2 ON T1.rollno = T2.rollno
 JOIN c AS T3 ON T2.cid = T3.cid
 WHERE T3.faculty = 'smith';
 
+-- OR
+
+select name
+from st,st_c,c
+where st_c.cid = c. cid 
+and st_c.rollno = st.rollno
+and c.faculty = 'smith' ; 
+
+
 /*
  name
 ------
@@ -166,26 +175,77 @@ WHERE T3.faculty = 'smith';
 --SQL code & output
 
 
+SELECT DISTINCT T3.cname
+FROM St AS T1
+JOIN st_C AS T2 ON T1.Rollno = T2.Rollno
+JOIN C AS T3 ON T2.cid = T3.cid
+WHERE T1.age < 24;
 
+-- OR
+
+select distinct cname
+from st,st_c,c
+where st_c.cid = c. cid 
+and st_c.rollno = st.rollno
+and st.age < 24; 
+
+/*
+   cname
+-----------
+ marketing
+ genmgt
+ finance
+ sales
+ IT
+(5 rows)
+*/
 
 --7. What is the average age of students in the class of smith
 --SQL code & output
 
+SELECT AVG(T1.age)
+FROM st AS T1
+JOIN st_C AS T2 ON T1.rollno = T2.rollno
+JOIN c AS T3 ON T2.cid = T3.cid
+WHERE T3.faculty = 'smith';
 
+--OR
 
+select avg(age)
+from st,st_c,c
+where st_c.cid = c. cid 
+and st_c.rollno = st.rollno
+and c.faculty < 'smith' ; 
+
+/* Answer
+         avg
+---------------------
+ 22.5000000000000000
+(1 row)
+*/
 
 --8. What is the overall average age of students
 --SQL code & output
 
-
-
+SELECT AVG(age) FROM st ;
+/*
+         avg
+---------------------
+ 23.4000000000000000
+(1 row)
+*/
 
 --9. What is the max age and min age
 --SQL code & output
 
+SELECT MAX(age), MIN(age)
+FROM st;
 
-
-
+/*
+ max | min
+-----+-----
+  25 |  22
+*/
 
 --10.Which courses have no takers
 --SQL code & output
