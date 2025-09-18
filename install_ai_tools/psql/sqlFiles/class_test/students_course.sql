@@ -6,37 +6,41 @@
 
 Q1. Create a user chrome in Linux with password chrome
 Write your code here:
-
+	
+sudo useradd -m chrome
+[sudo] password for ashok: 
+ashok@ashok:~$ sudo passwd chrome
 
 Q2. Create user chrome with password chrome in postgresql
 Write your code here:
 
+sudo su postgres
+psql
+postgres=# create user chrome;
 
 Q3. Create database chrome in postgresql
 Write your code here:
 
+create database chrome ;	
 
 
 Q4. Grant all necessary privileges over database chrome to user chrome
     to create tables
 Write your code here:
 
+psql
+postgres=# grant all privileges on database chrome to chrome ;
+\c chrome
+grant all on schema public to chrome ;
 	
 Q5. Create three tables for students-courses database as per the given diagram	
 Write your code here:
 
+sudo su chrome
+psql
+\c chrome
+chrome=# grant all on schema public to chrome ;
 
-
-
-
-
-
---User creation
---=============
-
---create user edu, database edu in postgres
---grant all privileges to user edu over database edu
---grant all on public schema of database edu to user edu
 
 
 --students-course table
@@ -73,7 +77,7 @@ insert into st values
 ('a005','geet',25,'phd');
 
 insert into c values
-('c1','IT,'smith'),
+('c1','IT','smith'),
 ('c2','finance','jones'),
 ('c3','mgt','clark'),
 ('c4','genmgt','adams'),
@@ -95,7 +99,7 @@ insert into st_c values
 
 --1. Show all available courses
 --SQL code & output
-
+select * from c;
 
 
 
