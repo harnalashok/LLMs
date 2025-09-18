@@ -41,8 +41,6 @@ psql
 \c chrome
 chrome=# grant all on schema public to chrome ;
 
-
-
 --students-course table
 
 create table st(
@@ -67,8 +65,7 @@ create table st_c(
 		  primary key(rollno,cid)
 		  );
 
-
-
+-- Insert data
 insert into st values 
 ('a001','amit',23,'mba'),
 ('a002','joker',23,'eng'),
@@ -90,7 +87,8 @@ insert into st_c values
 ('a001','c4',1984),
 ('a002','c5',1986),
 ('a003','c6',1986),
-('a003','c1',1986);
+('a003','c1',1986),
+('a003','c2',1986),	
 
 
 --SQL queries Questions
@@ -106,24 +104,61 @@ select * from c;
 --2. Show all student details
 --SQL code & output
 
+select * from st ;
 
 
 
 --3. Show the courses taken by student with rollno a003
 --SQL code & output
 
+SELECT T2.cname
+FROM st_c AS T1
+JOIN c AS T2 ON T1.cid = T2.cid
+WHERE T1.rollno = 'a003';
 
+-- OR
 
+select cname
+from st_c, c where st_c.cid = c.cid and rollno = 'a003' ; 
+
+/*
+ cname
+-----------
+ IT
+ finance
+ marketing
+(3 rows)
+*/
 
 --4. Show the course being taught by faculty smith
 --SQL code & output
 
-
-
+SELECT cname
+FROM c      
+WHERE faculty = 'smith';
+/*
+ cname
+-------
+ IT
+(1 row)
+*/
 
 --5. Which all students (mention names)) have subscribed to the course floated by faculty smith
 --SQL code & output
 
+SELECT T1.name
+FROM st AS T1
+JOIN st_c AS T2 ON T1.rollno = T2.rollno
+JOIN c AS T3 ON T2.cid = T3.cid
+WHERE T3.faculty = 'smith';
+
+/*
+ name
+------
+ amit
+ king
+(2 rows)
+*/
 
 
 
