@@ -175,11 +175,11 @@ and c.faculty = 'smith' ;
 --SQL code & output
 
 
-SELECT DISTINCT T3.cname
-FROM St AS T1
-JOIN st_C AS T2 ON T1.Rollno = T2.Rollno
-JOIN C AS T3 ON T2.cid = T3.cid
-WHERE T1.age < 24;
+SELECT DISTINCT cname
+FROM st
+JOIN st_c  ON st_c.rollno = st.rollno
+JOIN c ON c.cid = st_c.cid
+WHERE age < 24;
 
 -- OR
 
@@ -203,11 +203,11 @@ and st.age < 24;
 --7. What is the average age of students in the class of smith
 --SQL code & output
 
-SELECT AVG(T1.age)
-FROM st AS T1
-JOIN st_C AS T2 ON T1.rollno = T2.rollno
-JOIN c AS T3 ON T2.cid = T3.cid
-WHERE T3.faculty = 'smith';
+SELECT AVG(age)
+FROM st 
+JOIN st_c ON st_c.rollno = st.rollno
+JOIN c  ON c.cid = st_c.cid
+WHERE faculty = 'smith';
 
 --OR
 
@@ -280,11 +280,11 @@ WHERE rollno NOT IN (SELECT DISTINCT rollno FROM st_c);
 --12.Students who are between the age of 23 and 25 (inclusive), have taken which courses	
 --SQL code & output
 
-SELECT DISTINCT T3.cname
-FROM st AS T1
-JOIN st_c AS T2 ON T1.rollno = T2.rollno
-JOIN c AS T3 ON T2.cid = T3.cid
-WHERE T1.age BETWEEN 23 AND 25;
+SELECT DISTINCT cname
+FROM st
+JOIN st_c ON st_c.rollno = st.rollno
+JOIN c  ON c.cid = st_c.cid
+WHERE age BETWEEN 23 AND 25;
 
 --OR
 
@@ -348,6 +348,13 @@ WHERE year = 1986;
 
 --16.What is the average age of students who passed out in 1986
 --SQL code& output
+
+
+SELECT AVG(age)
+FROM St AS T1
+JOIN St_C AS T2 ON T1.Rollno = T2.Rollno
+WHERE T2.year = 1986;
+
 
 
 
