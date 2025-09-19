@@ -250,35 +250,99 @@ FROM st;
 --10.Which courses have no takers
 --SQL code & output
 
+SELECT cname             
+FROM c     
+WHERE cid NOT IN (SELECT DISTINCT cid FROM st_c);
 
+/*
+ cname
+-------
+ mgt
+(1 row)
+*/
 
 
 --11.What are the names of students who are not enrolled in any course
 --SQL code & output
 
+SELECT name
+FROM st      
+WHERE rollno NOT IN (SELECT DISTINCT rollno FROM st_c);
 
+/*
+ name
+-------
+ queen
+ geet
+(2 rows)
+*/
 
 --12.Students who are between the age of 23 and 25 (inclusive), have taken which courses	
 --SQL code & output
 
+SELECT DISTINCT T3.cname
+FROM st AS T1
+JOIN st_c AS T2 ON T1.rollno = T2.rollno
+JOIN c AS T3 ON T2.cid = T3.cid
+WHERE T1.age BETWEEN 23 AND 25;
 
+--OR
 
+select distinct cname
+from st,st_c,c
+where st_c.cid = c. cid 
+and st_c.rollno = st.rollno
+and st.age between 23 and 25 ; 
+
+/*
+  cname
+---------
+ IT
+ finance
+ genmgt
+ sales
+(4 rows)
+*/
 
 
 --13.How many students have taken IT course	
 --SQL code & output
 
+SELECT COUNT(rollno)
+FROM st_c
+JOIN c  ON c.cid = st_c.cid
+WHERE cname = 'IT' ;
 
+/*
+ count
+-------
+     2
+(1 row)
+*/
 
-
---14. Faculty, jones, is teachinh which all students (give names of students)
+--14. Faculty, jones, is teaching which all students (give names of students)
 --SQL code & output
+
 
 
 
 --15. In the year 1986, whcih all faculty have taught courses
 --SQL code & output
 
+SELECT DISTINCT faculty
+FROM st_c
+JOIN c ON c.cid = st_c.cid
+WHERE year = 1986;
+
+/*
+ faculty
+---------
+ ashok
+ jones
+ kavita
+ smith
+(4 rows)
+*/
 
 
 
