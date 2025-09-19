@@ -351,19 +351,34 @@ WHERE year = 1986;
 
 
 SELECT AVG(age)
-FROM St AS T1
-JOIN St_C AS T2 ON T1.Rollno = T2.Rollno
-WHERE T2.year = 1986;
+FROM st
+JOIN st_c ON st_c.rollno = st.rollno
+WHERE year = 1986;
 
-
-
-
+/*
+WHERE year = 1986;
+         avg
+---------------------
+ 22.2500000000000000
+(1 row)
+*/
 
 --17.What is the average age of students, degree-wise
 --SQL code& output
 
+SELECT deg, AVG(age)
+FROM st      
+GROUP BY deg;
 
-
+/*
+ deg |         avg
+-----+---------------------
+ eng | 23.5000000000000000
+ phd | 25.0000000000000000
+ ba  | 22.0000000000000000
+ mba | 23.0000000000000000
+(4 rows)
+*/
 
 --18.What is the average age of students who have taken IT course
 --SQL code& output
@@ -375,8 +390,19 @@ WHERE T2.year = 1986;
 --19.What is the average age of students who have taken IT course earlier to year 1985
 --SQL code& output
 
+SELECT AVG(age)
+FROM st
+JOIN st_c ON st_c.rollno = st.rollno
+JOIN c ON st_c.cid = c.cid
+WHERE cname = 'IT';
 
+/*
+         avg
+---------------------
+ 22.5000000000000000
+(1 row)
 
+*/
 
 --20.What are the names of faculty under whom roll numbers a001 and roll number a003 have enrolled
 --SQL code& output
