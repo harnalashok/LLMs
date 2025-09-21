@@ -121,6 +121,10 @@ WHERE T1.rollno = 'a003';
 select cname
 from st_c, c where st_c.cid = c.cid and rollno = 'a003' ; 
 
+--OR
+
+select cname from c where cid in (select cid from st_c where rollno='a003');
+
 /*
  cname
 -----------
