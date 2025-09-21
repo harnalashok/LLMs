@@ -327,6 +327,17 @@ WHERE cname = 'IT' ;
 --14. Faculty, jones, is teaching which all students (give names of students)
 --SQL code & output
 
+select name from st,c,st_c 
+	where st.rollno=st_c.rollno and st_c.cid=c.cid 
+	and faculty='jones';
+
+/*
+	 name
+------
+ amit
+ king
+(2 rows)
+*/	
 
 
 
@@ -337,6 +348,12 @@ SELECT DISTINCT faculty
 FROM st_c
 JOIN c ON c.cid = st_c.cid
 WHERE year = 1986;
+
+--OR
+
+select faculty from c 
+	where cid in 
+	(select distinct(cid) from st_c where year=1986);
 
 /*
  faculty
@@ -358,6 +375,12 @@ SELECT AVG(age)
 FROM st
 JOIN st_c ON st_c.rollno = st.rollno
 WHERE year = 1986;
+
+--OR
+
+select avg(age) from st 
+	where rollno in 
+	(select distinct(rollno) from st_c where year=1986);
 
 /*
 WHERE year = 1986;
@@ -387,23 +410,33 @@ GROUP BY deg;
 --18.What is the average age of students who have taken IT course
 --SQL code& output
 
+select avg(age),cname 
+	from st,c,st_c 
+	where st.rollno=st_c.rollno and st_c.cid=c.cid 
+	group by cname having cname='IT';
 
+/*
+         avg         | cname
+---------------------+-------
+ 22.5000000000000000 | IT
+(1 row)
+*/
 
 
 
 --19.What is the average age of students who have taken IT course earlier to year 1985
 --SQL code& output
 
-SELECT AVG(age)
-FROM st
-JOIN st_c ON st_c.rollno = st.rollno
-JOIN c ON st_c.cid = c.cid
-WHERE cname = 'IT';
+select avg(age),cname
+	from st,c,st_c 
+	where st.rollno=st_c.rollno and st_c.cid=c.cid 
+	and year<1985 
+	group by cname having cname='IT';
 
 /*
-         avg
----------------------
- 22.5000000000000000
+         avg         | cname
+---------------------+-------
+ 23.0000000000000000 | IT
 (1 row)
 
 */
@@ -411,7 +444,18 @@ WHERE cname = 'IT';
 --20.What are the names of faculty under whom roll numbers a001 and roll number a003 have enrolled
 --SQL code& output
 
+select faculty from st,c,st_c
+	where st.rollno=st_c.rollno and st_c.cid=c.cid 
+	and st.rollno in ('a001','a002');
 
-
+/*
+ faculty
+---------
+ smith
+ jones
+ adams
+ ashok
+(4 rows)
+*/
 
 
