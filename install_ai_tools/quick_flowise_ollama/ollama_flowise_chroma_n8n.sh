@@ -946,14 +946,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo " "                                                   >> /home/$USER/start_autogenstudio.sh
     echo "echo '======'"                                       >> /home/$USER/start_autogenstudio.sh
     echo "echo 'This terminal will remain engaged'"            >> /home/$USER/start_autogenstudio.sh
-    echo "echo 'Access AutoGen Studio, as: http://<hostIP>:8081'"  >> /home/$USER/start_autogenstudio.sh
+    echo "echo 'Access AutoGen Studio, as: http://localhost:8081'"  >> /home/$USER/start_autogenstudio.sh
     echo "echo 'Project folder is: /home/$USER/autogenProject'"  >> /home/$USER/start_autogenstudio.sh
     echo "echo 'Delete earlier project folder as: rm -rf ~/autogenProject'"  >> /home/$USER/start_autogenstudio.sh
     echo "echo '======'"                                       >> /home/$USER/start_autogenstudio.sh
     echo "sleep 5"                                             >> /home/$USER/start_autogenstudio.sh
     echo "cd /home/$USER"                                      >> /home/$USER/start_autogenstudio.sh
     echo "source /home/$USER/langchain/bin/activate"           >> /home/$USER/start_autogenstudio.sh
-    echo "autogenstudio ui --port 8081 --appdir ./autogenProject"       >> /home/$USER/start_autogenstudio.sh
+    echo "autogenstudio ui --host 127.0.0.1 --port 8081 --appdir ./autogenProject"       >> /home/$USER/start_autogenstudio.sh
     chmod +x *.sh
 else
      echo "AutoGen Studio will not be installed!"
