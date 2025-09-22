@@ -17,6 +17,7 @@ echo "Will install dify docker"
 echo "Will install mongodb and mongosh:"
 echo "Installs postgres db and pgvector"
 echo "Installs xinference"
+echo "Installs AutoGen Studio"
 echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
@@ -925,6 +926,7 @@ fi
 ##########################
 ### Install AutoGen Studio
 # Ref: https://microsoft.github.io/autogen/stable/user-guide/autogenstudio-user-guide/index.html
+# Video: https://www.youtube.com/watch?v=oum6EI7wohM
 ##########################
 
 cd /home/$USER
@@ -952,7 +954,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "autogenstudio ui --port 8081 --appdir ./mydir"       >> /home/$USER/start_autogenstudio.sh
     chmod +x *.sh
 else
-     echo "AutoGen Studio will not be installed"
+     echo "AutoGen Studio will not be installed!"
 fi 
 
 ##########################
