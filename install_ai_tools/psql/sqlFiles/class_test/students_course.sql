@@ -88,7 +88,7 @@ insert into st_c values
 ('a002','c5',1986),
 ('a003','c6',1986),
 ('a003','c1',1986),
-('a003','c2',1986),	
+('a003','c2',1986);	
 
 
 --SQL queries Questions
