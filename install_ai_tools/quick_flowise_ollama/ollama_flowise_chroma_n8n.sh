@@ -127,6 +127,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "  4.Select System Information from the dropdown menu. "
     echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
     sleep 8
+    wsl.exe --shutdown
 else
    echo "No installation of cuda toolkit"
 fi   
@@ -150,6 +151,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    sudo apt-get -y install cuda-toolkit-13-0
    sudo apt autoremove -y
    sleep 3
+   reboot
 else
    echo "No installation of cuda toolkit"
 fi   
@@ -173,6 +175,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    sudo apt-get -y install cuda-toolkit-13-0
    sudo apt autoremove -y
    sleep 3
+   reboot
 else
    echo "No installation of cuda toolkit"
 fi   
