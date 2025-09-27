@@ -98,7 +98,7 @@ cd /home/$USER
 echo " "
 echo " "
 echo "------------"        
-echo "Shall I install NVIDIA Toolkit? [Y,n]"    
+echo "Shall I install NVIDIA Toolkit for WSL Ubuntu? [Y,n]"    
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
