@@ -91,13 +91,14 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 fi
 
 ##################
-# Install wsl toolkit
+# Install CUDA toolkit
 #################
 
 cd /home/$USER
 echo " "
 echo " "
 echo "------------"        
+echo "==>For WSL-Ubuntu ONLY<=="
 echo "Shall I install NVIDIA Toolkit for WSL Ubuntu? [Y,n]"    
 read input
 input=${input:-Y}
@@ -116,6 +117,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
     sudo apt-get update
     sudo apt-get -y install cuda-toolkit-13-0
+    sudo apt autoremove -y
     echo "Which NVIDIA driver I have:"
     echo "============================"
     echo "Step-by-step guide for Windows 11:"
@@ -128,6 +130,53 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
    echo "No installation of cuda toolkit"
 fi   
+
+echo "==>For Ubuntu 24.04 ONLY<=="
+echo "Shall I install NVIDIA Toolkit for Ubuntu-24.04? [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+   # Remove old gpg key
+    sudo apt-key del 7fa2af80
+    # Now follow the instructions as on this page:
+    #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+    # Added on 27th Sep, 2025
+   wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
+   sudo mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
+   wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2404-13-0-local_13.0.1-580.82.07-1_amd64.deb
+   sudo dpkg -i cuda-repo-ubuntu2404-13-0-local_13.0.1-580.82.07-1_amd64.deb
+   sudo cp /var/cuda-repo-ubuntu2404-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+   sudo apt-get update
+   sudo apt-get -y install cuda-toolkit-13-0
+   sudo apt autoremove -y
+   sleep 3
+else
+   echo "No installation of cuda toolkit"
+fi   
+
+echo "==>For Ubuntu 22.04 ONLY<=="
+echo "Shall I install NVIDIA Toolkit for Ubuntu-22.04? [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+   # Remove old gpg key
+    sudo apt-key del 7fa2af80
+    # Now follow the instructions as on this page:
+    #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+    # Added on 27th Sep, 2025
+   wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+   sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+   wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+   sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+   sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+   sudo apt-get update
+   sudo apt-get -y install cuda-toolkit-13-0
+   sudo apt autoremove -y
+   sleep 3
+else
+   echo "No installation of cuda toolkit"
+fi   
+
 
 ##################
 # Docker installation-I
