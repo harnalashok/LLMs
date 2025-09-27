@@ -95,6 +95,20 @@ fi
 #################
 
 $$$$$$
+https://learn.microsoft.com/en-us/windows/ai/directml/gpu-cuda-in-wsl
+https://docs.nvidia.com/cuda/wsl-user-guide/index.html#getting-started-with-cuda-on-wsl
+https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+Which NVIDIA driver I have:
+
+
+Step-by-step guide for Windows 11:
+
+    Right-click: on an empty area of your Windows 11 desktop. 
+
+From the context menu, select NVIDIA Control Panel. 
+In the NVIDIA Control Panel, click on the Help menu in the top-left corner. 
+Select System Information from the dropdown menu. 
+A "Details" window will open. The driver version will be listed under the Driver Version field. 
 
 
 ##################
