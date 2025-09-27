@@ -90,6 +90,11 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     wsl.exe --shutdown
 fi
 
+##################
+# Install wsl toolkit
+#################
+
+$$$$$$
 
 
 ##################
