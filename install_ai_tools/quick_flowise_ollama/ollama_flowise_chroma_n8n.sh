@@ -134,7 +134,7 @@ else
    echo "No installation of cuda toolkit"
 fi   
 
-echo " "
+echo "  "
 echo "  "
 echo "==>For Ubuntu 24.04 ONLY<=="
 echo "Shall I install NVIDIA Toolkit for Ubuntu-24.04? [Y,n]"    
@@ -160,7 +160,7 @@ else
    echo "No installation of cuda toolkit"
 fi   
 
-echo " "
+echo "  "
 echo "  "
 echo "==>For Ubuntu 22.04 ONLY<=="
 echo "Shall I install NVIDIA Toolkit for Ubuntu-22.04? [Y,n]"    
