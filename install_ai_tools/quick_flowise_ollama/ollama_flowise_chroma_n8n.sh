@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 22nd Sep, 2025
+# Last amended: 28th Sep, 2025
 
 
 
@@ -520,7 +520,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
       echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start_ollama.sh
       echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
       echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
-      echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh                                                                             
+      echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
+      # Script to stop ollama
+      echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
+      echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
+      echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
       chmod +x /home/$USER/*.sh
       # For model storage local folder ollama is mounted.
       echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
