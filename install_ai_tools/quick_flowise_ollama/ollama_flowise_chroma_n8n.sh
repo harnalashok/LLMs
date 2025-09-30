@@ -1071,6 +1071,13 @@ echo "Shall I install RAGFlow docker? [Y,n]"    #
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
+    echo " "
+    echo " "
+    echo "============"
+    echo "Will also set memory for ragflow docker container. It should be large enough"
+    echo "You can press ctrl+c just now to review it."
+     echo "============"
+    sleep 10
     cd /home/$USER/
     echo "Installing RagFlow docker"
     echo "After installation, access ragflow, as: http://<hostIP>:800"
@@ -1176,6 +1183,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # RagFlow version is 10.5
     #sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
     # Increase memory available for docker as files may be large (20gb)
+    echo "Will now set memory for ragflow docker container. It should be large enough"
+    sleep 4
     sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
     docker compose -f docker-compose-gpu.yml up -d
     echo " "
