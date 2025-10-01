@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# Last amended: 28th Sep, 2025
-
-
+# Last amended: 01st Oct, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu"
