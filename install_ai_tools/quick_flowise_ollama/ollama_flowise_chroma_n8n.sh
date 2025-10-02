@@ -103,7 +103,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo " "
     echo "  "
     echo "==>For WSL-Ubuntu ONLY<=="
-    echo "Shall I install NVIDIA Toolkit for WSL Ubuntu? [Y,n]"    
+    echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
     read input
     input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
@@ -140,7 +140,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "  "
     echo "  "
     echo "==>For Ubuntu 24.04 ONLY<=="
-    echo "Shall I install NVIDIA Toolkit for Ubuntu-24.04? [Y,n]"    
+    echo "Shall I install NVIDIA Toolkit (cuda-13)  for Ubuntu-24.04? [Y,n]"    
     read input
     input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
@@ -167,7 +167,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "  "
     echo "  "
     echo "==>For Ubuntu 22.04 ONLY<=="
-    echo "Shall I install NVIDIA Toolkit for Ubuntu-22.04? [Y,n]"    
+    echo "Shall I install NVIDIA Toolkit (cuda-13) for Ubuntu-22.04? [Y,n]"    
     read input
     input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
