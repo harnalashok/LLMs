@@ -333,6 +333,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     #pip install huggingface_hub
     # Create script to activate 'venv' env
     echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+    echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
     echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
     echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
     echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
