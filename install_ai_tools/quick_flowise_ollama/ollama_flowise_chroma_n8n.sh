@@ -311,11 +311,12 @@ cd /home/$USER
 echo " "
 echo " "
 echo "------------"        
-echo "Shall I create python virtual env? [Y,n]"    # Else docker chromadb may be installed
+echo "Shall I create python virtual env by name of langchain? [Y,n]"    
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
-    python3 -m venv /home/$USER/langchain
+    # Clear earlier directory, if it exists
+    python3 -m venv --clear /home/$USER/langchain
     source /home/$USER/langchain/bin/activate
     # 1.6 Essentials software
     pip install spyder numpy scipy pandas matplotlib sympy cython
