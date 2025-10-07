@@ -304,20 +304,20 @@ docker update --restart=no $(docker ps -a -q)
 
 ##############
 # Create python virtual env
-# source /home/$USER/langchain/bin/activate
+# source /home/$USER/venv/bin/activate
 ##############
 
 cd /home/$USER
 echo " "
 echo " "
 echo "------------"        
-echo "Shall I create python virtual env by name of langchain? [Y,n]"    
+echo "Shall I create python virtual env by name of venv? [Y,n]"    
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     # Clear earlier directory, if it exists
-    python3 -m venv --clear /home/$USER/langchain
-    source /home/$USER/langchain/bin/activate
+    python3 -m venv --clear /home/$USER/venv
+    source /home/$USER/venv/bin/activate
     # 1.6 Essentials software
     pip install spyder numpy scipy pandas matplotlib sympy cython
     pip install jupyterlab
@@ -331,17 +331,18 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # cu124: is as per cuda version. Get cuda version from nvidia-smi
     #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
     #pip install huggingface_hub
-    # Create script to activate 'langchain' env
-    echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-    echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
-    echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
-    echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
-    echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+    # Create script to activate 'venv' env
+    echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+    echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+    echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+    echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+    echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+    echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
     chmod +x /home/$USER/*.sh
     sleep 2
   
-    cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
-    cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
+    cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+    cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
  else
     echo "Python venv not installed"
  fi   
@@ -917,7 +918,7 @@ docker update --restart=no $(docker ps -a -q)
 ###################
 # llama.cpp install
 # python env remains activated
-# source /home/$USER/langchain/bin/activate
+# source /home/$USER/venv/bin/activate
 ###################
 cuda_version=$(nvidia-smi | grep CUDA | awk '{print $9}')
 echo " "
@@ -933,7 +934,7 @@ read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
   # Installing llama.cpp
-  source /home/$USER/langchain/bin/activate
+  source /home/$USER/venv/bin/activate
    # Huggingface and llama.cpp related
   pip install huggingface_hub
   pip install transformers
@@ -969,7 +970,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "source /home/$USER/langchain/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
+  echo "source /home/$USER/venv/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
   echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
   mkdir /home/$USER/gguf
   cd /home/$USER/gguf
@@ -999,7 +1000,7 @@ echo "Shall I install xinference? [Y,n]"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
-   source /home/$USER/langchain/bin/activate
+   source /home/$USER/venv/bin/activate
    pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
    sleep 3
    pip install "xinference[llama_cpp]"
@@ -1021,7 +1022,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
     echo "sleep 5"                                             >> /home/$USER/start_xinference.sh
     echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
-    echo "source /home/$USER/langchain/bin/activate"          >> /home/$USER/start_xinference.sh
+    echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/start_xinference.sh
     echo "xinference-local --host 0.0.0.0 --port 9997"        >> /home/$USER/start_xinference.sh
     chmod +x *.sh
 else
@@ -1042,7 +1043,7 @@ echo "Shall I install AutoGen Studio? [Y,n]"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
-   source /home/$USER/langchain/bin/activate
+   source /home/$USER/venv/bin/activate
    pip install -U autogenstudio
    sleep 3
    # Start script
@@ -1057,7 +1058,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/start_autogenstudio.sh
     echo "sleep 5"                                             >> /home/$USER/start_autogenstudio.sh
     echo "cd /home/$USER"                                      >> /home/$USER/start_autogenstudio.sh
-    echo "source /home/$USER/langchain/bin/activate"           >> /home/$USER/start_autogenstudio.sh
+    echo "source /home/$USER/venv/bin/activate"           >> /home/$USER/start_autogenstudio.sh
     echo "autogenstudio ui --host 127.0.0.1 --port 8081 --appdir ./autogenProject"       >> /home/$USER/start_autogenstudio.sh
     chmod +x *.sh
 else
