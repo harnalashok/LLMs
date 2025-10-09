@@ -1066,6 +1066,39 @@ else
      echo "AutoGen Studio will not be installed!"
 fi 
 
+
+echo "Shall I install Visual Studio Coder? [Y,n]"    # 
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    echo " "
+    echo " "
+    # Activate python virtual environment
+    source /home/$USER/venv/bin/activate
+    # 1.8 Install visual studio code
+    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+    mkdir /home/$USER/1234
+    cd /home/$USER/1234
+    # Direct download link
+    wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+    # Fill in filename from above
+    mv * code.deb
+    sudo apt install /home/$USER/1234/code.deb  -y
+    cd /home/$USER
+    rm -rf /home/$USER/1234/
+    #    
+    sleep 5
+    #
+    # Deactivate the environment
+    deactivate
+else
+    echo "OK. Visual code coder not installed."
+fi    
+
+
+
+
+
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
