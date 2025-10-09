@@ -17,6 +17,7 @@ echo "Will install mongodb and mongosh:"
 echo "Installs postgres db and pgvector"
 echo "Installs xinference"
 echo "Installs AutoGen Studio"
+echo "Install Visual Studio Coder"
 echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
@@ -1066,8 +1067,13 @@ else
      echo "AutoGen Studio will not be installed!"
 fi 
 
+##########################
+### Install Visual Studio Coder
+### Only install it in Ubuntu and NOT in WSL 
+##########################
 
-echo "Shall I install Visual Studio Coder? [Y,n]"    # 
+echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
+echo "It is NOT installable on WSL Windows. If you are in WSL environment, then answer n"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
