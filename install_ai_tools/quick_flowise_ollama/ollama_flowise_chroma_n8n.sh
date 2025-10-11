@@ -22,6 +22,13 @@ echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
 
+# Are we having wsl system
+WSL=$(cat /proc/version)
+WSLSYSTEM=
+if echo "$WSL" | grep -qi wsl ; then
+    WSLSYSTEM="yes"
+fi
+
 
 ################
 # Update Ubuntu
@@ -94,7 +101,6 @@ fi
 # Install CUDA toolkit
 #################
 
-
 cd /home/$USER
 if [ ! -f /home/$USER/cuda_installed.txt ]; then
     cd /home/$USER
@@ -103,40 +109,42 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "------------"        
     echo " "
     echo "  "
-    echo "==>For WSL-Ubuntu ONLY<=="
-    echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-       # Update wsl
-        wsl.exe --update
-        # Remove old gpg key
-        sudo apt-key del 7fa2af80
-        # Now follow the instructions as on this page:
-        #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-        # Added on 27th Sep, 2025
-        wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-        sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-        wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-        sudo dpkg -i cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-        sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-        sudo apt-get update
-        sudo apt-get -y install cuda-toolkit-13-0
-        sudo apt autoremove -y
-        echo "Which NVIDIA driver I have:"
-        echo "============================"
-        echo "Step-by-step guide for Windows 11:"
-        echo "  1.Right-click: on an empty area of your Windows 11 desktop." 
-        echo "  2.From the context menu, select NVIDIA Control Panel. "
-        echo "  3.In the NVIDIA Control Panel, click on the Help menu in the top-left corner. "
-        echo "  4.Select System Information from the dropdown menu. "
-        echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
-        sleep 8
-        echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-        wsl.exe --shutdown
-    else
-       echo "No installation of cuda toolkit"
-    fi   
+    if echo "$WSLSYSTEM" ; then
+        echo "==>For WSL-Ubuntu ONLY<=="
+        echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
+        read input
+        input=${input:-Y}
+        if [[ $input == "Y" || $input == "y" ]]; then
+           # Update wsl
+            wsl.exe --update
+            # Remove old gpg key
+            sudo apt-key del 7fa2af80
+            # Now follow the instructions as on this page:
+            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+            # Added on 27th Sep, 2025
+            wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+            sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+            wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
+            sudo dpkg -i cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
+            sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+            sudo apt-get update
+            sudo apt-get -y install cuda-toolkit-13-0
+            sudo apt autoremove -y
+            echo "Which NVIDIA driver I have:"
+            echo "============================"
+            echo "Step-by-step guide for Windows 11:"
+            echo "  1.Right-click: on an empty area of your Windows 11 desktop." 
+            echo "  2.From the context menu, select NVIDIA Control Panel. "
+            echo "  3.In the NVIDIA Control Panel, click on the Help menu in the top-left corner. "
+            echo "  4.Select System Information from the dropdown menu. "
+            echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
+            sleep 8
+            echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
+            wsl.exe --shutdown
+        else
+           echo "No installation of cuda toolkit on wsl"
+        fi
+    fi
 
     OUTPUT=$(lsb_release -a)
     if echo "$OUTPUT" | grep -q noble ; then
