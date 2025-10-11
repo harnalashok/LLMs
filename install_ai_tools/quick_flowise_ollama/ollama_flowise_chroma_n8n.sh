@@ -77,7 +77,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     mkdir /home/$USER/stop
     echo " "
     echo " "
-    if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+    if echo "$WSLSYSTEM" ; then
         echo "====NOTE====="
         echo "Ubuntu shell will be closed several times. After each closure, reopen it and execute again the following script:"
         echo " "
@@ -233,7 +233,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Ubuntu will be closed/rebooted "
     echo "After opening/restart, execute:"
     sleep 9
-    if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+    if echo "$WSLSYSTEM" ; then
         wsl.exe --shutdown
     else
         reboot
@@ -303,7 +303,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
     echo "Machine will be rebooted "
-    if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+   if echo "$WSLSYSTEM" ; then
         wsl.exe --shutdown
     else
         reboot
