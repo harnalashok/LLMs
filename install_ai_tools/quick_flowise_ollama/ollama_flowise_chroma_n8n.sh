@@ -376,17 +376,22 @@ echo "Shall I latest anaconda? [Y,n]"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
-    CONTREPO=https://repo.continuum.io/archive/
-    # Stepwise filtering of the html at $CONTREPO
-    # Get the topmost line that matches our requirements, extract the file name.
-    ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-    wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-    bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
-    rm ~/Downloads/anaconda.sh
-    echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
-    # Reload default profile
-    source ~/.bashrc
-    conda update conda
+    DIRECTORY=/home/$USER/anaconda3
+    if [ ! -d "$DIRECTORY" ]; then
+        CONTREPO=https://repo.continuum.io/archive/
+        # Stepwise filtering of the html at $CONTREPO
+        # Get the topmost line that matches our requirements, extract the file name.
+        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+        wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+        bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
+        rm ~/Downloads/anaconda.sh
+        echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
+        # Reload default profile
+        source ~/.bashrc
+        conda update conda
+     else
+        echo "Anaconda is already installed in /home/$USER/anaconda3"
+     fi   
  else
     echo "Anaconda not installed"
  fi
