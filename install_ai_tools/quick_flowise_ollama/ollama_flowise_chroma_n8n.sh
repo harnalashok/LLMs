@@ -17,6 +17,7 @@ echo "Will install mongodb and mongosh:"
 echo "Installs postgres db and pgvector"
 echo "Installs xinference"
 echo "Installs AutoGen Studio"
+echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Will install Ragflow docker"
 echo "==========================="
@@ -362,7 +363,34 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "Python venv not installed"
  fi   
 
+###########################
+# Install latest anaconda
+# https://askubuntu.com/a/841224
+###########################
 
+cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
+echo "Shall I latest anaconda? [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    CONTREPO=https://repo.continuum.io/archive/
+    # Stepwise filtering of the html at $CONTREPO
+    # Get the topmost line that matches our requirements, extract the file name.
+    ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+    wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+    bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
+    rm ~/Downloads/anaconda.sh
+    echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
+    # Reload default profile
+    source ~/.bashrc
+    conda update conda
+ else
+    echo "Anaconda not installed"
+ fi
+ 
 #####################3
 # portrainer docker
 ######################
