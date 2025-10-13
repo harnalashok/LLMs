@@ -388,7 +388,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
         echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
         # Reload default profile
         source ~/.bashrc
-        conda update conda
+        conda update conda -y
      else
         echo "Anaconda is already installed in /home/$USER/anaconda3"
      fi   
