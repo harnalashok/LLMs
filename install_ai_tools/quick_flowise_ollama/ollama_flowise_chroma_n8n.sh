@@ -1168,6 +1168,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo " "
     echo "============"
     echo "Will also set memory for ragflow docker container. It should be large enough"
+    echo "Memory parameter is MEM_LIMIT in ragflow/docker/.env file"
     echo "You can press ctrl+c just now to review it."
      echo "============"
     sleep 10
@@ -1183,6 +1184,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
     echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
     echo "echo 'Check docker logs as: docker logs -f ragflow-server'" >> /home/$USER/start_ragflow.sh
+    echo "echo 'Memory parameter: MEM_LIMIT is in ragflow/docker/.env file'" >> /home/$USER/start_ragflow.sh
     echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
     echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
@@ -1273,7 +1275,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
     # Replace in .env  the line 'RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim' with 'RAGFLOW_IMAGE=infiniflow/ragflow:nightly-slim'
     # This change should be temporary
-    # RagFlow version is 10.5
     #sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
     # Increase memory available for docker as files may be large (20gb)
     echo "Will now set memory for ragflow docker container. It should be large enough"
