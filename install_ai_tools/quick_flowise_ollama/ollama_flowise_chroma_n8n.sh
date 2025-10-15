@@ -1204,6 +1204,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
     echo "echo 'This terminal will remain engaged'"            >> /home/$USER/logs_ragflow.sh
     echo "echo 'logs will continue to flow into this terminal'"      >> /home/$USER/logs_ragflow.sh
+    echo "echo 'logs will also be saved to ~/logs_ragflow.txt'"      >> /home/$USER/logs_ragflow.sh
     echo "echo 'You can come out of it by pressing ctrl+c'"      >> /home/$USER/logs_ragflow.sh
     echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
     echo "sleep 10"                                             >> /home/$USER/logs_ragflow.sh
