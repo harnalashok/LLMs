@@ -86,6 +86,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         echo "=========="
         sleep 15
         wsl.exe --shutdown
+        reboot
     else
         echo "====NOTE====="
         echo "Machine will be rebooted several times. After each reboot, execute the following script:"
@@ -96,6 +97,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         reboot
     fi
     wsl.exe --shutdown
+    reboot
 fi
 
 ##################
@@ -322,46 +324,49 @@ docker update --restart=no $(docker ps -a -q)
 # source /home/$USER/venv/bin/activate
 ##############
 
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I create python virtual env by name of venv? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    # Clear earlier directory, if it exists
-    python3 -m venv --clear /home/$USER/venv
-    source /home/$USER/venv/bin/activate
-    # 1.6 Essentials software
-    pip install spyder numpy scipy pandas matplotlib sympy cython
-    pip install jupyterlab
-    pip install ipython
-    pip install notebook
-    pip install streamlit
-    # Required for spyder:
-    sudo apt install pyqt5-dev-tools -y
-    # Huggingface and  related
-    #pip install huggingface_hub
-    # cu124: is as per cuda version. Get cuda version from nvidia-smi
-    #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-    #pip install huggingface_hub
-    # Create script to activate 'venv' env
-    echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-    echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-    echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-    echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-    echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-    echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-    echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-    chmod +x /home/$USER/*.sh
-    sleep 2
-  
-    cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-    cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
- else
-    echo "Python venv not installed"
- fi   
+if [ ! -f /home/$USER/venv_installed.txt ]; then
+    cd /home/$USER
+    echo " "
+    echo " "
+    echo "------------"        
+    echo "Shall I create python virtual env by name of venv? [Y,n]"    
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
+        # Clear earlier directory, if it exists
+        python3 -m venv --clear /home/$USER/venv
+        source /home/$USER/venv/bin/activate
+        # 1.6 Essentials software
+        pip install spyder numpy scipy pandas matplotlib sympy cython
+        pip install jupyterlab
+        pip install ipython
+        pip install notebook
+        pip install streamlit
+        echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+        # Required for spyder:
+        sudo apt install pyqt5-dev-tools -y
+        # Huggingface and  related
+        #pip install huggingface_hub
+        # cu124: is as per cuda version. Get cuda version from nvidia-smi
+        #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+        #pip install huggingface_hub
+        # Create script to activate 'venv' env
+        echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+        echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+        echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+        echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+        echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+        echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+        echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+        chmod +x /home/$USER/*.sh
+        sleep 2
+      
+        cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+        cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+     else
+        echo "Python venv not installed"
+     fi   
+fi   
 
 ###########################
 # Install latest anaconda
