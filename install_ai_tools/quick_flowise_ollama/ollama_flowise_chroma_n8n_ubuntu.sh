@@ -23,13 +23,6 @@ echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
 
-# Are we having wsl system
-WSL=$(cat /proc/version)
-WSLSYSTEM=
-if echo "$WSL" | grep -qi wsl ; then
-    WSLSYSTEM="yes"
-fi
-
 
 ################
 # Update Ubuntu
@@ -78,26 +71,12 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     mkdir /home/$USER/stop
     echo " "
     echo " "
-    if [[ ! -n "$WSLSYSTEM" ]] ; then
-        # WSL installed
-        echo "====NOTE====="
-        echo "Ubuntu shell will be closed several times. After each closure, reopen it and execute again the following script:"
-        echo " "
-        echo "=>   ./ollama_flowise_chroma_n8n.sh"
-        echo "=========="
-        sleep 15
-        wsl.exe --shutdown
-        reboot
-    else
-        echo "====NOTE====="
-        echo "Machine will be rebooted several times. After each reboot, execute the following script:"
-        echo " "
-        echo "=>   ./ollama_flowise_chroma_n8n.sh"
-        echo "=========="
-        sleep 15
-        reboot
-    fi
-    wsl.exe --shutdown
+    echo "====NOTE====="
+    echo "Machine will be rebooted several times. After each reboot, execute the following script:"
+    echo " "
+    echo "=>   ./ollama_flowise_chroma_n8n.sh"
+    echo "=========="
+    sleep 15
     reboot
 fi
 
@@ -113,101 +92,30 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "------------"        
     echo " "
     echo "  "
-    if [[  -n "$WSLSYSTEM" ]] ; then
-        echo "==>For WSL-Ubuntu ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
-           # Update wsl
-            wsl.exe --update
-            # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
-            wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-            sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-            wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-            sudo dpkg -i cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-            sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-            sudo apt-get update
-            sudo apt-get -y install cuda-toolkit-13-0
-            sudo apt autoremove -y
-            echo "Which NVIDIA driver I have:"
-            echo "============================"
-            echo "Step-by-step guide for Windows 11:"
-            echo "  1.Right-click: on an empty area of your Windows 11 desktop." 
-            echo "  2.From the context menu, select NVIDIA Control Panel. "
-            echo "  3.In the NVIDIA Control Panel, click on the Help menu in the top-left corner. "
-            echo "  4.Select System Information from the dropdown menu. "
-            echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
-            sleep 8
-            echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-            wsl.exe --shutdown
-        else
-           echo "No installation of cuda toolkit on wsl"
-        fi
-    fi
-
-    OUTPUT=$(lsb_release -a)
-    if echo "$OUTPUT" | grep -q noble ; then
-        echo "  "
-        echo "  "
-        echo "==>For Ubuntu 24.04 ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13)  for Ubuntu-24.04? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
-           # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
-           wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
-           sudo mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
-           wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2404-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo dpkg -i cuda-repo-ubuntu2404-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo cp /var/cuda-repo-ubuntu2404-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-           sudo apt-get update
-           sudo apt-get -y install cuda-toolkit-13-0
-           sudo apt autoremove -y
-           sleep 3
-           echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-           reboot
-        else
-           echo "No installation of cuda toolkit"
-        fi  
-    fi
-
-    if echo "$OUTPUT" | grep -q Jellyfish ; then
-        echo "  "
-        echo "  "
-        echo "==>For Ubuntu 22.04 ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13) for Ubuntu-22.04? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
-           # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
-           wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-           sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-           wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-           sudo apt-get update
-           sudo apt-get -y install cuda-toolkit-13-0
-           sudo apt autoremove -y
-           sleep 3
-           echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-           reboot
-        else
-           echo "No installation of cuda toolkit"
-        fi  
-    fi
+    echo "==>For Ubuntu 22.04 ONLY<=="
+    echo "Shall I install NVIDIA Toolkit (cuda-13) for Ubuntu-22.04? [Y,n]"    
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
+       # Remove old gpg key
+        sudo apt-key del 7fa2af80
+        # Now follow the instructions as on this page:
+        #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+        # Added on 27th Sep, 2025
+       wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+       sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+       wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+       sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+       sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+       sudo apt-get update
+       sudo apt-get -y install cuda-toolkit-13-0
+       sudo apt autoremove -y
+       sleep 3
+       echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
+       reboot
+    else
+       echo "No installation of cuda toolkit"
+    fi  
 fi
 
 ##################
@@ -237,12 +145,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Ubuntu will be closed/rebooted "
     echo "After opening/restart, execute:"
     sleep 9
-    if [[ ! -n "$WSLSYSTEM" ]] ; then
-        wsl.exe --shutdown
-    else
-        reboot
-        wsl.exe --shutdown
-    fi  
+    reboot
 else
    echo "Docker is installed"
 fi  
@@ -307,12 +210,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
     echo "Machine will be rebooted "
-   if [[ ! -n "$WSLSYSTEM" ]] ; then
-        wsl.exe --shutdown
-    else
-        reboot
-        wsl.exe --shutdown
-    fi  
+    reboot
 else
     echo "Docker installation process completed"
 fi    
