@@ -78,7 +78,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     mkdir /home/$USER/stop
     echo " "
     echo " "
-    if echo "$WSLSYSTEM" ; then
+    if [[ ! n "$WSLSYSTEM" ]] ; then
+        # WSL installed
         echo "====NOTE====="
         echo "Ubuntu shell will be closed several times. After each closure, reopen it and execute again the following script:"
         echo " "
@@ -112,7 +113,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "------------"        
     echo " "
     echo "  "
-    if echo "$WSLSYSTEM" ; then
+    if [[  -n "$WSLSYSTEM" ]] ; then
         echo "==>For WSL-Ubuntu ONLY<=="
         echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
         read input
@@ -236,7 +237,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Ubuntu will be closed/rebooted "
     echo "After opening/restart, execute:"
     sleep 9
-    if echo "$WSLSYSTEM" ; then
+    if [[ ! -n "$WSLSYSTEM" ]] ; then
         wsl.exe --shutdown
     else
         reboot
@@ -306,7 +307,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
     echo "Machine will be rebooted "
-   if echo "$WSLSYSTEM" ; then
+   if [[ ! -n "$WSLSYSTEM" ]] ; then
         wsl.exe --shutdown
     else
         reboot
