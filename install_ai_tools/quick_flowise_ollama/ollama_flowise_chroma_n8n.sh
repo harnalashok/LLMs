@@ -78,7 +78,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     mkdir /home/$USER/stop
     echo " "
     echo " "
-    if [[ ! n "$WSLSYSTEM" ]] ; then
+    if [[ ! -n "$WSLSYSTEM" ]] ; then
         # WSL installed
         echo "====NOTE====="
         echo "Ubuntu shell will be closed several times. After each closure, reopen it and execute again the following script:"
