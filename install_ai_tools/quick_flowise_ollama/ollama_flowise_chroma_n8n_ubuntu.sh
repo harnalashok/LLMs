@@ -1092,7 +1092,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
     echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
-    echo "docker compose -f docker-compose-gpu.yml up -d"       >> /home/$USER/start_ragflow.sh
+    echo "docker compose -f docker-compose.yml up -d"       >> /home/$USER/start_ragflow.sh
     echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
 
     echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
@@ -1167,7 +1167,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd ~/"                                              >> /home/$USER/stop_ragflow.sh
     echo "echo 'ragflow Stopping'"                            >> /home/$USER/stop_ragflow.sh
     echo "cd /home/$USER/ragflow/docker"                      >> /home/$USER/stop_ragflow.sh
-    echo "docker compose -f docker-compose-gpu.yml stop "     >> /home/$USER/stop_ragflow.sh
+    echo "docker compose -f docker-compose.yml stop "     >> /home/$USER/stop_ragflow.sh
     #
     chmod +x /home/$USER/*.sh
     chmod +x /home/$USER/*.sh
@@ -1176,16 +1176,17 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
     git clone https://github.com/infiniflow/ragflow.git
     cd ragflow/docker
-    sed -i 's/80:80/800:80/' docker-compose-gpu.yml
-    sed -i 's/443:443/1443:443/' docker-compose-gpu.yml
+    sed -i 's/80:80/800:80/' docker-compose.yml
+    sed -i 's/443:443/1443:443/' docker-compose.yml
     # Replace in .env  the line 'RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim' with 'RAGFLOW_IMAGE=infiniflow/ragflow:nightly-slim'
     # This change should be temporary
     #sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
     # Increase memory available for docker as files may be large (20gb)
     echo "Will now set memory for ragflow docker container. It should be large enough"
     sleep 4
+    sed -i '1i DEVICE=gpu' .env
     sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
-    docker compose -f docker-compose-gpu.yml up -d
+    docker compose -f docker-compose.yml up -d
     echo " "
     echo " "
     echo "==========="
