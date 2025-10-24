@@ -1184,7 +1184,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     # Increase memory available for docker as files may be large (20gb)
     echo "Will now set memory for ragflow docker container. It should be large enough"
     sleep 4
+    # Use GPU
     sed -i '1i DEVICE=gpu' .env
+    # Change RAM available
     sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
     docker compose -f docker-compose.yml up -d
     echo " "
