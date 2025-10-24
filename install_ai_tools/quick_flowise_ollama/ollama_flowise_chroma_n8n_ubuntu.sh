@@ -976,6 +976,15 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
     echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/start_xinference.sh
     echo "xinference-local --host 0.0.0.0 --port 9997"        >> /home/$USER/start_xinference.sh
+    #
+    #--------------
+    echo '#!/bin/bash'                                         >  /home/$USER/launch_xinference.sh
+    echo " "                                                   >> /home/$USER/launch_xinference.sh
+    echo "Launching xinference bge-reranker-base"              >> /home/$USER/launch_xinference.sh
+    echo "cd /home/$USER"                                     >> /home/$USER/launch_xinference.sh
+    echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/launch_xinference.sh
+    echo "xinference launch --model-name bge-reranker-base --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "     >> /home/$USER/launch_xinference.sh
+    #    
     chmod +x *.sh
 else
      echo "xinference will not be installed"
