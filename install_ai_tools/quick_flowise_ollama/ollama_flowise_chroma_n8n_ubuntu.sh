@@ -1022,6 +1022,10 @@ fi
 ### Only install it in Ubuntu and NOT in WSL 
 ##########################
 
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER/
 echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
 echo "It is NOT installable on WSL Windows. If you are in WSL environment, then answer n"
 read input
