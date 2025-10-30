@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 23rd Oct, 2025
+# Last amended: 30th Oct, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu"
@@ -1192,12 +1192,11 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo sysctl -w vm.max_map_count=262144
     echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
     git clone https://github.com/infiniflow/ragflow.git
+    
     cd ragflow/docker
-    sed -i 's/80:80/800:80/' docker-compose.yml
-    sed -i 's/443:443/1443:443/' docker-compose.yml
-    # Replace in .env  the line 'RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim' with 'RAGFLOW_IMAGE=infiniflow/ragflow:nightly-slim'
-    # This change should be temporary
-    #sed -i 's/RAGFLOW_IMAGE=infiniflow\/ragflow:v0.20.4-slim/RAGFLOW_IMAGE=infiniflow\/ragflow:nightly-slim/' .env
+    sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
+    sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
+    #
     # Increase memory available for docker as files may be large (20gb)
     echo "Will now set memory for ragflow docker container. It should be large enough"
     sleep 4
