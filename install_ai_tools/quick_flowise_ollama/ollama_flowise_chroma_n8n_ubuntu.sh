@@ -109,6 +109,8 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
        sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
        sudo apt-get update
        sudo apt-get -y install cuda-toolkit-13-0
+       # NVIDIA Driver Instructions
+       sudo apt-get install -y nvidia-open
        sudo apt autoremove -y
        sleep 3
        echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
