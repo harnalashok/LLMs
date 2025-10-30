@@ -240,9 +240,11 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         # 1.6 Essentials software
         pip install spyder numpy scipy pandas matplotlib sympy cython
         pip install jupyterlab
+        pip install wheel
         pip install ipython
         pip install notebook
         pip install streamlit
+        pip install --upgrade setuptools
         echo "venv_installed.txt" > /home/$USER/venv_installed.txt
         # Required for spyder:
         sudo apt install pyqt5-dev-tools -y
