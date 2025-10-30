@@ -1212,7 +1212,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "==========="
     echo " "
     echo " "
-    sleep 5
     docker logs -f docker-ragflow-gpu-1
 else
      echo "Ragflow will not be installed"
