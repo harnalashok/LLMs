@@ -3,7 +3,7 @@
 See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20uninstall%20and%20misc.txt) for installing/uninstalling ubuntu from wsl      
 
 To begin installing all packages, execute the following five commands in *Ubuntu* console (whether Ubuntu machine or WSL).<br>
-Press <F2> at boot time to change bios settings if you have a problem with UEFI (secure boot).
+Press <b>F2</b> at boot time to change bios settings if you have a problem with UEFI (secure boot).      
 We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is installed from which script is [here](https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/whatiswhere.sh).
 
 
