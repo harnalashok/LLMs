@@ -24,9 +24,6 @@ We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is inst
    bash script0.sh
    cd ~/   
 ```
-Scripts assume that username is *'ashok'*. If that is not so, you can either replace */home/ashok/* with */home/\<username\>/* or with ~/.
-
-
 File, `error.log`, in Ubutnu home folder, will indicate any errors in execution of scripts as also progress in installation. It is helpful to browse contents of error.log or info.log in another terminal (`cat error.log`)
 And file, info.log, keeps information about what all is installed.      
 File <b><i>['help.txt'](https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/help.txt)</i></b> contains information about ports, packages etc      
