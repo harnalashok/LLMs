@@ -74,7 +74,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "====NOTE====="
     echo "Machine will be rebooted several times. After each reboot, execute the following script:"
     echo " "
-    echo "=>   ./ollama_flowise_chroma_n8n.sh"
+    echo "=>   ./ollama_flowise_chroma_n8n_ubuntu.sh"
     echo "=========="
     sleep 15
     reboot
