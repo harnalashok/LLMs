@@ -668,7 +668,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
     chmod +x /home/$USER/*.sh
     # Create links
-    mkdir /home/$USER/psql
     cd /home/$USER/psql
     ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
     ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
