@@ -943,6 +943,65 @@ fi
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/*.sh
 
+
+
+##########################
+### Install xinference docker
+# Ref: https://inference.readthedocs.io/en/latest/getting_started/using_docker_image.html
+##########################
+
+cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
+echo "Shall I build and install xinference docker? [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+	# clone git repo
+	git clone https://github.com/xorbitsai/inference.git
+	cd inference
+	echo "Building docker image...takes time...."
+	sleep 3
+	# Build docker image
+	docker build --progress=plain -t test -f xinference/deploy/docker/Dockerfile .
+	# Our cached models would be downloaded and stored here	
+	mkdir /home/$USER/xmodels
+	cd /home/$USER/inference/xinference/deploy/docker/
+	# Run docker
+	docker run --name xinference -d -p 9997:9997 -e XINFERENCE_HOME=/data -v /home/$USER/xmodels:/data \
+	           --gpus all xprobe/xinference:latest xinference-local -H 0.0.0.0
+
+    # Start script
+    #--------------
+    echo '#!/bin/bash'                                         >  /home/$USER/start_docker_xinference.sh
+    echo " "                                                   >> /home/$USER/start_docker_xinference.sh
+    echo "echo '======'"                                       >> /home/$USER/start_docker_xinference.sh
+    echo "echo 'Access xinference, as: http://<hostIP>:9997'"  >> /home/$USER/start_docker_xinference.sh
+    echo "echo 'Models are stored in folder ~/xmodels'"        >> /home/$USER/start_docker_xinference.sh
+    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_docker_xinference.sh
+    echo "echo 'See file LLMs/xinference.ipynb'"             >> /home/$USER/start_docker_xinference.sh
+    echo "echo '======'"                                       >> /home/$USER/start_docker_xinference.sh
+    echo "sleep 5"                                             >> /home/$USER/start_docker_xinference.sh
+    echo "cd /home/$USER/inference/xinference/deploy/docker/"  >> /home/$USER/start_docker_xinference.sh
+    echo "docker start xinference"        			>> /home/$USER/start_docker_xinference.sh
+    #
+    #--------------
+    echo '#!/bin/bash'                                         >  /home/$USER/launch_xinference.sh
+    echo " "                                                   >> /home/$USER/launch_xinference.sh
+    echo "Launching xinference bge-reranker-v2-m3"             >> /home/$USER/launch_xinference.sh
+    echo "cd /home/$USER"                                     >> /home/$USER/launch_xinference.sh
+    echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/launch_xinference.sh
+    echo "xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "     >> /home/$USER/launch_xinference.sh
+    #    
+    chmod +x *.sh
+else
+     echo "xinference will not be installed"
+fi   
+
+
+
+
 ##########################
 ### Install xinference
 # Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
