@@ -640,6 +640,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
     echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
     echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
+	mkdir /home/$USER/psql
     cd /home/$USER/psql
     # A small help script
     echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
