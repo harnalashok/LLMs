@@ -1025,9 +1025,9 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    # Model launch script
 	    #--------------
 	    echo '#!/bin/bash'                                         >  /home/$USER/launch_dockerXinference_model.sh
-	    echo " "                                                   >> /home/$USER/start_docker_xinference.sh
-	    echo "echo '======'"                                       >> /home/$USER/start_docker_xinference.sh
-	    echo "echo 'Will download and launch the model'"  >> /home/$USER/launch_dockerXinference_model.sh
+	    echo " "                                                   >> /home/$USER/launch_dockerXinference_model.sh
+	    echo "echo '======'"                                       >> /home/$USER/launch_dockerXinference_model.sh
+	    echo "echo 'Will download and launch bge-reranker-v2-m3'"  >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "echo 'Models are cached in folder ~/xmodels'"        >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "echo '======'"                                       >> /home/$USER/launch_dockerXinference_model.sh
@@ -1046,11 +1046,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 		echo "xinference installed" > /home/$USER/xinference_installed.txt
 	else
 	     echo "xinference will not be installed"
-	fi   
-
-
-
-	
+	fi   	
 	##########################
 	### Install xinference directly on machine
 	# Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
