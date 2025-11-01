@@ -498,11 +498,40 @@ if [[ $input == "Y" || $input == "y" ]]; then
       #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
       # network host would be local mashine
       docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+	  sleep 4
+	  reboot
 else
         echo "Skipping install of ollama docker"
 fi
 
 chmod +x /home/$USER/*.sh
+
+
+##########################
+### Download some minimum ollama models
+##########################
+
+echo " "
+echo " "
+echo "------------"   
+echo "Shall I download a few ollama models? [Y,n]"
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+      cd /home/$USER/
+      # Start ollama docker in future
+      docker start ollama 
+      ollama pull bge-m3
+	  ollama pull llama3.2:latest
+else
+        echo "Skipping download of ollama models"
+fi
+
+chmod +x /home/$USER/*.sh
+
+
+
+
 
 
 #####################3
@@ -955,7 +984,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I build and install xinference docker? [Y,n]"    
+	echo "Shall I build and install xinference docker. Takes time..? [Y,n]"    
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -963,19 +992,19 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 		git clone https://github.com/xorbitsai/inference.git
 		cd inference
 		echo " "
-		echo "Building docker image...takes time...."
-		sleep 3
 		# Build docker image
 		docker build --progress=plain -t test -f xinference/deploy/docker/Dockerfile .
-		# Our cached models would be downloaded and stored here	
+		# Our models would be downloaded and cached here	
 		mkdir /home/$USER/xmodels
 		cd /home/$USER/inference/xinference/deploy/docker/
 		# Run docker
 		echo "  "
+		echo "xinference installed" > /home/$USER/xinference_installed.txt
 		echo "Starting docker at port 9997....."
 		sleep 3
-		echo "xinference installed" > /home/$USER/xinference_installed.txt
-		docker run --name xinference -d -p 9997:9997 -e XINFERENCE_HOME=/data -v /home/$USER/xmodels:/data \
+		docker run --name xinference -d \
+		            -p 9997:9997 \
+					-e XINFERENCE_HOME=/data -v /home/$USER/xmodels:/data \
 		           --gpus all xprobe/xinference:latest xinference-local -H 0.0.0.0
 	    #
 	    # Start script
