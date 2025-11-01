@@ -1030,7 +1030,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    echo "echo 'Will download and launch bge-reranker-v2-m3'"  >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "echo 'Models are cached in folder ~/xmodels'"        >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/launch_dockerXinference_model.sh
-		echo "echo '==>Edit model name in this script to launch another model<=='"  >> /home/$USER/launch_dockerXinference_model.sh
+		echo "echo '=**=>Edit model name and type in this script to launch another model<=**='"  >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "echo '======'"                                       >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "sleep 5"                                             >> /home/$USER/launch_dockerXinference_model.sh
 	    echo "docker exec -it   xinference  xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "  	>> /home/$USER/launch_dockerXinference_model.sh
