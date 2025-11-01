@@ -521,8 +521,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
       cd /home/$USER/
       # Start ollama docker in future
       docker start ollama 
-      ollama pull bge-m3
-	  ollama pull llama3.2:latest
+      docker exec -it ollama ollama pull bge-m3
+	  docker exec -it ollama ollama pull llama3.2:latest
 else
         echo "Skipping download of ollama models"
 fi
