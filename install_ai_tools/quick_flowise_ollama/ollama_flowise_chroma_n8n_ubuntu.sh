@@ -1009,35 +1009,35 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    #
 	    # Start script
 	    #--------------
-	    echo '#!/bin/bash'                                         >  /home/$USER/start_docker_xinference.sh
-	    echo " "                                                   >> /home/$USER/start_docker_xinference.sh
-	    echo "echo '======'"                                       >> /home/$USER/start_docker_xinference.sh
-	    echo "echo 'Access xinference, as: http://<hostIP>:9997'"  >> /home/$USER/start_docker_xinference.sh
-	    echo "echo 'Models are stored in folder ~/xmodels'"        >> /home/$USER/start_docker_xinference.sh
-	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_docker_xinference.sh
-	    echo "echo 'See file LLMs/xinference.ipynb'"             	>> /home/$USER/start_docker_xinference.sh
-	    echo "echo '======'"                                       >> /home/$USER/start_docker_xinference.sh
-	    echo "sleep 5"                                             >> /home/$USER/start_docker_xinference.sh
-	    echo "cd /home/$USER/inference/xinference/deploy/docker/"  >> /home/$USER/start_docker_xinference.sh
-	    echo "docker start xinference"        						>> /home/$USER/start_docker_xinference.sh
+	    echo '#!/bin/bash'                                         >  /home/$USER/start_xinference.sh
+	    echo " "                                                   >> /home/$USER/start_xinference.sh
+	    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
+	    echo "echo 'Access xinference, as: http://<hostIP>:9997'"  >> /home/$USER/start_xinference.sh
+	    echo "echo 'Models are stored in folder ~/xmodels'"        >> /home/$USER/start_xinference.sh
+	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_xinference.sh
+	    echo "echo 'See file LLMs/xinference.ipynb'"             	>> /home/$USER/start_xinference.sh
+	    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
+	    echo "sleep 5"                                             >> /home/$USER/start_xinference.sh
+	    echo "cd /home/$USER/inference/xinference/deploy/docker/"  >> /home/$USER/start_xinference.sh
+	    echo "docker start xinference"        						>> /home/$USER/start_xinference.sh
 	    #
         #
 	    # Model launch script
 	    #--------------
-	    echo '#!/bin/bash'                                         >  /home/$USER/launch_dockerXinference_model.sh
-	    echo " "                                                   >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "echo '======'"                                       >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "echo 'Will download and launch bge-reranker-v2-m3'"  >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "echo 'Models are cached in folder ~/xmodels'"        >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/launch_dockerXinference_model.sh
-		echo "echo '=**=>Edit model name and type in this script to launch another model<=**='"  >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "echo '======'"                                       >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "sleep 5"                                             >> /home/$USER/launch_dockerXinference_model.sh
-	    echo "docker exec -it   xinference  xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "  	>> /home/$USER/launch_dockerXinference_model.sh
-		echo "echo '  '"                                       >> /home/$USER/launch_dockerXinference_model.sh
-		echo "echo '  '"                                       >> /home/$USER/launch_dockerXinference_model.sh
-		echo "echo 'List of launched models'"                  >> /home/$USER/launch_dockerXinference_model.sh
-		echo "docker exec -it   xinference  xinference list"   >> /home/$USER/launch_dockerXinference_model.sh
+	    echo '#!/bin/bash'                                         >  /home/$USER/launch_xinference_model.sh
+	    echo " "                                                   >> /home/$USER/launch_xinference_model.sh
+	    echo "echo '======'"                                       >> /home/$USER/launch_xinference_model.sh
+	    echo "echo 'Will download and launch bge-reranker-v2-m3'"  >> /home/$USER/launch_xinference_model.sh
+	    echo "echo 'Models are cached in folder ~/xmodels'"        >> /home/$USER/launch_xinference_model.sh
+	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/launch_xinference_model.sh
+		echo "echo '=**=>Edit model name and type in this script to launch another model<=**='"  >> /home/$USER/launch_xinference_model.sh
+	    echo "echo '======'"                                       >> /home/$USER/launch_xinference_model.sh
+	    echo "sleep 5"                                             >> /home/$USER/launch_xinference_model.sh
+	    echo "docker exec -it   xinference  xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "  	>> /home/$USER/launch_xinference_model.sh
+		echo "echo '  '"                                       >> /home/$USER/launch_xinference_model.sh
+		echo "echo '  '"                                       >> /home/$USER/launch_xinference_model.sh
+		echo "echo 'List of launched models'"                  >> /home/$USER/launch_xinference_model.sh
+		echo "docker exec -it   xinference  xinference list"   >> /home/$USER/launch_xinference_model.sh
 
 	    #---Following commented script works-----------
 	    #echo '#!/bin/bash'                                         >  /home/$USER/launch_xinference.sh
