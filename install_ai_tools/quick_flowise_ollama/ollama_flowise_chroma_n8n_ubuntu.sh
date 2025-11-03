@@ -1038,15 +1038,6 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 		echo "echo '  '"                                       >> /home/$USER/launch_xinference_model.sh
 		echo "echo 'List of launched models'"                  >> /home/$USER/launch_xinference_model.sh
 		echo "docker exec -it   xinference  xinference list"   >> /home/$USER/launch_xinference_model.sh
-
-	    #---Following commented script works-----------
-	    #echo '#!/bin/bash'                                         >  /home/$USER/launch_xinference.sh
-	    #echo " "                                                   >> /home/$USER/launch_xinference.sh
-	    #echo "Launching xinference bge-reranker-v2-m3"             >> /home/$USER/launch_xinference.sh
-	    #echo "cd /home/$USER"                                     >> /home/$USER/launch_xinference.sh
-	    #echo "source /home/$USER/venv/bin/activate"               >> /home/$USER/launch_xinference.sh
-	    #echo "xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "     >> /home/$USER/launch_xinference.sh
-	    #    
 	    chmod +x *.sh
 		echo "xinference installed" > /home/$USER/xinference_installed.txt
 	else
