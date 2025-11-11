@@ -94,6 +94,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "  "
     echo "==>For Ubuntu 22.04 ONLY<=="
 	echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
+	echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
     echo "Shall I install NVIDIA Toolkit (cuda-13) for Ubuntu-22.04? [Y,n]"    
     read input
     input=${input:-Y}
