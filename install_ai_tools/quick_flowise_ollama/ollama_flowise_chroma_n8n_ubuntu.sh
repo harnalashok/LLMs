@@ -978,6 +978,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
   mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
   echo "Done...."
   cd /home/$USER
+  echo "Will reboot system now"
+  sleep 5
+  reboot
 else
   echo "Skipping install of llama.cpp"
 fi
@@ -1053,6 +1056,9 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 		echo "docker exec -it   xinference  xinference list"   >> /home/$USER/launch_xinference_model.sh
 	    chmod +x *.sh
 		echo "xinference installed" > /home/$USER/xinference_installed.txt
+		echo "Will reboot system now"
+	    sleep 5
+		reboot
 	else
 	     echo "xinference will not be installed"
 	fi   	
@@ -1104,6 +1110,9 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    echo "xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "     >> /home/$USER/launch_xinference.sh
 	    #    
 	    chmod +x *.sh
+		echo "Will reboot system now"
+	    sleep 5
+		reboot
 	else
 	     echo "xinference will not be installed"
 	fi   
@@ -1141,6 +1150,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "source /home/$USER/venv/bin/activate"           >> /home/$USER/start_autogenstudio.sh
     echo "autogenstudio ui --host 127.0.0.1 --port 8081 --appdir ./autogenProject"       >> /home/$USER/start_autogenstudio.sh
     chmod +x *.sh
+	echo "Will reboot system now"
+	sleep 5
+	reboot
 else
      echo "AutoGen Studio will not be installed!"
 fi 
@@ -1179,6 +1191,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     #
     # Deactivate the environment
     deactivate
+	echo "Will reboot system now"
+	sleep 5
+	reboot
 else
     echo "OK. Visual code coder not installed."
 fi    
