@@ -32,9 +32,11 @@ sleep 2
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "  "
-    echo "------------"                            
-    echo " Will update Ubuntu"                     
-    echo " You will be asked for password...supply it..."
+    echo "------------"    
+	nvidia_driver_version=`modinfo nvidia | grep ^version`
+    echo " Will update Ubuntu and also NVIDIA driver for GPU"                     
+    echo " NVIDIA driver is: $nvidia_driver_version"
+	echo " You will be asked for password...supply it..."
     echo "----------"                              
     echo " "
     sleep 2
@@ -66,12 +68,16 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
     echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
     chmod +x *.sh   
-    # Folders for start/stop scripts
+    now_nvidia_driver_version=`modinfo nvidia | grep ^version`
+	# Folders for start/stop scripts
     mkdir /home/$USER/start
     mkdir /home/$USER/stop
     echo " "
     echo " "
     echo "====NOTE====="
+	echo " NVIDIA driver ver was: $nvidia_driver_version"        
+    echo " NVIDIA driver ver  is: $now_nvidia_driver_version"
+	echo "==>> You may like to search for cuda-toolkit compatible with this driver ==<<"
     echo "Machine will be rebooted several times. After each reboot, execute the following script:"
     echo " "
     echo "=>   ./ollama_flowise_chroma_n8n_ubuntu.sh"
