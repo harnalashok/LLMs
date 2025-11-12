@@ -537,15 +537,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
       docker exec -it ollama ollama pull bge-m3
 	  echo "Pulling llama3.2"
 	  docker exec -it ollama ollama pull llama3.2:latest
+	  echo " "
+	  echo " "
+	  ollama list
 else
         echo "Skipping download of ollama models"
 fi
 
 chmod +x /home/$USER/*.sh
-
-
-
-
 
 
 #####################3
