@@ -99,10 +99,13 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo " "
     echo "  "
     echo "==>For Ubuntu 22.04 ONLY<=="
+	nvidia-settings
 	echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
 	echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
-    echo "Shall I install NVIDIA Toolkit (cuda-13) for Ubuntu-22.04? [Y,n]"    
-    read input
+    echo "cuda-toolkit does not change GPU drivers."
+	echo "But higher versions of cuda-toolkit may have installation problems"
+	echo "Shall I install NVIDIA Toolkit (cuda-13.0.1) for Ubuntu-22.04? [Y,n]" 
+	read input
     input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
        # Remove old gpg key
@@ -120,7 +123,8 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
         # NVIDIA Driver Instructions
         sudo apt-get install -y nvidia-open
         sudo apt autoremove -y
-        sleep 3
+		nvidia-settings
+        sleep 8
         echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
         reboot
     else
