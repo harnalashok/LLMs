@@ -1237,142 +1237,146 @@ fi
 
 echo " "
 echo " "
-echo "------------"   
-echo "Shall I install RAGFlow docker? [Y,n]"    # 
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    echo " "
-    echo " "
-    echo "============"
-    echo "Will also set memory for ragflow docker container. It should be large enough"
-    echo "Memory parameter is MEM_LIMIT in ragflow/docker/.env file"
-    echo "You can press ctrl+c just now to review it."
-     echo "============"
-    sleep 10
-    cd /home/$USER/
-    echo "Installing RagFlow docker"
-    echo "After installation, access ragflow, as: http://<hostIP>:800"
-    sleep 5
-    # Start script
-    #--------------
-    echo '#!/bin/bash'                                         >  /home/$USER/start_ragflow.sh
-    echo " "                                                   >> /home/$USER/start_ragflow.sh
-    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
-    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
-    echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
-    echo "echo 'Check docker logs as: docker logs -f ragflow-server'" >> /home/$USER/start_ragflow.sh
-    echo "echo 'Memory parameter: MEM_LIMIT is in ragflow/docker/.env file'" >> /home/$USER/start_ragflow.sh
-    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
-    echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
-    echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
-    echo "docker compose -f docker-compose.yml up -d"       >> /home/$USER/start_ragflow.sh
-    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
-
-    echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
-    echo "echo 'RagFlow docker volumes'"                        > /home/$USER/volumes_ragflow.sh
-    echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
-    echo "echo 'Should be: esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
-    echo "sudo ls -la /var/lib/docker/volumes/"                 >> /home/$USER/volumes_ragflow.sh
-    ln -T /home/$USER/volumes_ragflow.sh  /home/$USER/about_ragflow.sh
-
-    
-    echo '#!/bin/bash'                                          > /home/$USER/logs_ragflow.sh
-    echo " "                                                   >> /home/$USER/logs_ragflow.sh
-    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
-    echo "echo 'This terminal will remain engaged'"            >> /home/$USER/logs_ragflow.sh
-    echo "echo 'logs will continue to flow into this terminal'"      >> /home/$USER/logs_ragflow.sh
-    echo "echo 'logs will also be saved to ~/logs_ragflow.txt'"      >> /home/$USER/logs_ragflow.sh
-    echo "echo 'You can come out of it by pressing ctrl+c'"      >> /home/$USER/logs_ragflow.sh
-    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
-    echo "sleep 10"                                             >> /home/$USER/logs_ragflow.sh
-    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/logs_ragflow.sh
-    echo "docker logs -f docker-ragflow-gpu-1"                       >> /home/$USER/logs_ragflow.sh
-
-
-    echo '#!/bin/bash'                                          > /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Will delete RagFlow dockers'"                  >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Press ctrl+c to exit now'"                     >> /home/$USER/docker/del_rf_containers.sh
-    echo "sleep 8"                                             >> /home/$USER/docker/del_rf_containers.sh
-    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
-    echo " "                                                   >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo '======'"                                       >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Stopping RagFlow'"                             >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo '======'"                                       >> /home/$USER/docker/del_rf_containers.sh
-    echo "./stop_ragflow.sh"                                   >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Deleting containers now...'"                   >> /home/$USER/docker/del_rf_containers.sh
-    #
-    echo "echo '1.Deleting ragflow-server'"                    >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker rm docker-ragflow-gpu-1"                      >> /home/$USER/docker/del_rf_containers.sh
-    #
-    echo "echo '2.Deleting ragflow-mysql'"                     >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker rm docker-mysql-1"                             >> /home/$USER/docker/del_rf_containers.sh
-    #
-    echo "echo '3.Deleting ragflow-redis'"                      >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker rm docker-redis-1"                              >> /home/$USER/docker/del_rf_containers.sh
-    #
-    echo "echo '4.Deleting ragflow-minio'"                     >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker rm docker-minio-1"                             >> /home/$USER/docker/del_rf_containers.sh
-    #
-    echo "echo '5.Deleting ragflow-es-01'"                     >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker rm docker-es01-1"                             >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Deleting volumes'"                             >> /home/$USER/docker/del_rf_containers.sh 
-    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker compose down --volumes"                       >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Deleting images..'"                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "docker compose down --rmi all"                       >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo '  '"                                           >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo 'Next, delete folder: /home/$USER/ragflow/'"     >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
-    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
-    echo "./volumes_ragflow.sh"                                >> /home/$USER/docker/del_rf_containers.sh   
-    cd /home/$USER/docker
-    chmod +x *.sh
-    cd /home/$USER
-    chmod +x *.sh  
-    #
-    # Stop script
-    #-------------
-    echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
-    echo " "                                                  >> /home/$USER/stop_ragflow.sh
-    echo "cd ~/"                                              >> /home/$USER/stop_ragflow.sh
-    echo "echo 'ragflow Stopping'"                            >> /home/$USER/stop_ragflow.sh
-    echo "cd /home/$USER/ragflow/docker"                      >> /home/$USER/stop_ragflow.sh
-    echo "docker compose -f docker-compose.yml stop "     >> /home/$USER/stop_ragflow.sh
-    #
-    chmod +x /home/$USER/*.sh
-    chmod +x /home/$USER/*.sh
-    #
-    sudo sysctl -w vm.max_map_count=262144
-    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
-    git clone https://github.com/infiniflow/ragflow.git
-    
-    cd ragflow/docker
-    sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
-    sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
-    #
-    # Increase memory available for docker as files may be large (20gb)
-    echo "Will now set memory for ragflow docker container. It should be large enough"
-    sleep 4
-    # Use GPU
-    sed -i '1i DEVICE=gpu' .env
-    # Change RAM available
-    sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
-    docker compose -f docker-compose.yml up -d
-    echo " "
-    echo " "
-    echo "==========="
-    echo "Will Initialise ragflow. Use ctrl+c to break AFTER process has started."
-    echo "==========="
-    echo " "
-    echo " "
-    docker logs -f docker-ragflow-gpu-1
-else
-     echo "Ragflow will not be installed"
-fi    
+cd /home/$USER
+if [ ! -f /home/$USER/ragflow_installed.txt ]; then
+	echo "------------"   
+	echo "Shall I install RAGFlow docker? [Y,n]"    # 
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+	    echo "============"
+	    echo "Will also set memory for ragflow docker container. It should be large enough"
+	    echo "Memory parameter is MEM_LIMIT in ragflow/docker/.env file"
+	    echo "You can press ctrl+c just now to review it."
+	     echo "============"
+	    sleep 10
+	    cd /home/$USER/
+	    echo "Installing RagFlow docker"
+	    echo "After installation, access ragflow, as: http://<hostIP>:800"
+	    sleep 5
+	    # Start script
+	    #--------------
+	    echo '#!/bin/bash'                                         >  /home/$USER/start_ragflow.sh
+	    echo " "                                                   >> /home/$USER/start_ragflow.sh
+	    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
+	    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
+	    echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
+	    echo "echo 'Check docker logs as: docker logs -f ragflow-server'" >> /home/$USER/start_ragflow.sh
+	    echo "echo 'Memory parameter: MEM_LIMIT is in ragflow/docker/.env file'" >> /home/$USER/start_ragflow.sh
+	    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
+	    echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
+	    echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
+	    echo "docker compose -f docker-compose.yml up -d"       >> /home/$USER/start_ragflow.sh
+	    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
+	
+	    echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
+	    echo "echo 'RagFlow docker volumes'"                        > /home/$USER/volumes_ragflow.sh
+	    echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
+	    echo "echo 'Should be: esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
+	    echo "sudo ls -la /var/lib/docker/volumes/"                 >> /home/$USER/volumes_ragflow.sh
+	    ln -T /home/$USER/volumes_ragflow.sh  /home/$USER/about_ragflow.sh
+	
+	    
+	    echo '#!/bin/bash'                                          > /home/$USER/logs_ragflow.sh
+	    echo " "                                                   >> /home/$USER/logs_ragflow.sh
+	    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
+	    echo "echo 'This terminal will remain engaged'"            >> /home/$USER/logs_ragflow.sh
+	    echo "echo 'logs will continue to flow into this terminal'"      >> /home/$USER/logs_ragflow.sh
+	    echo "echo 'logs will also be saved to ~/logs_ragflow.txt'"      >> /home/$USER/logs_ragflow.sh
+	    echo "echo 'You can come out of it by pressing ctrl+c'"      >> /home/$USER/logs_ragflow.sh
+	    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
+	    echo "sleep 10"                                             >> /home/$USER/logs_ragflow.sh
+	    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/logs_ragflow.sh
+	    echo "docker logs -f docker-ragflow-gpu-1"                       >> /home/$USER/logs_ragflow.sh
+	
+	
+	    echo '#!/bin/bash'                                          > /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Will delete RagFlow dockers'"                  >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Press ctrl+c to exit now'"                     >> /home/$USER/docker/del_rf_containers.sh
+	    echo "sleep 8"                                             >> /home/$USER/docker/del_rf_containers.sh
+	    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
+	    echo " "                                                   >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo '======'"                                       >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Stopping RagFlow'"                             >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo '======'"                                       >> /home/$USER/docker/del_rf_containers.sh
+	    echo "./stop_ragflow.sh"                                   >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Deleting containers now...'"                   >> /home/$USER/docker/del_rf_containers.sh
+	    #
+	    echo "echo '1.Deleting ragflow-server'"                    >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker rm docker-ragflow-gpu-1"                      >> /home/$USER/docker/del_rf_containers.sh
+	    #
+	    echo "echo '2.Deleting ragflow-mysql'"                     >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker rm docker-mysql-1"                             >> /home/$USER/docker/del_rf_containers.sh
+	    #
+	    echo "echo '3.Deleting ragflow-redis'"                      >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker rm docker-redis-1"                              >> /home/$USER/docker/del_rf_containers.sh
+	    #
+	    echo "echo '4.Deleting ragflow-minio'"                     >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker rm docker-minio-1"                             >> /home/$USER/docker/del_rf_containers.sh
+	    #
+	    echo "echo '5.Deleting ragflow-es-01'"                     >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker rm docker-es01-1"                             >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Deleting volumes'"                             >> /home/$USER/docker/del_rf_containers.sh 
+	    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker compose down --volumes"                       >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Deleting images..'"                            >> /home/$USER/docker/del_rf_containers.sh
+	    echo "docker compose down --rmi all"                       >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo '  '"                                           >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Next, delete folder: /home/$USER/ragflow/'"     >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
+	    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
+	    echo "./volumes_ragflow.sh"                                >> /home/$USER/docker/del_rf_containers.sh   
+	    cd /home/$USER/docker
+	    chmod +x *.sh
+	    cd /home/$USER
+	    chmod +x *.sh  
+	    #
+	    # Stop script
+	    #-------------
+	    echo '#!/bin/bash'                                        >  /home/$USER/stop_ragflow.sh
+	    echo " "                                                  >> /home/$USER/stop_ragflow.sh
+	    echo "cd ~/"                                              >> /home/$USER/stop_ragflow.sh
+	    echo "echo 'ragflow Stopping'"                            >> /home/$USER/stop_ragflow.sh
+	    echo "cd /home/$USER/ragflow/docker"                      >> /home/$USER/stop_ragflow.sh
+	    echo "docker compose -f docker-compose.yml stop "     >> /home/$USER/stop_ragflow.sh
+	    #
+	    chmod +x /home/$USER/*.sh
+	    chmod +x /home/$USER/*.sh
+	    #
+	    sudo sysctl -w vm.max_map_count=262144
+	    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
+	    git clone https://github.com/infiniflow/ragflow.git
+	    
+	    cd ragflow/docker
+	    sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
+	    sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
+	    #
+	    # Increase memory available for docker as files may be large (20gb)
+	    echo "Will now set memory for ragflow docker container. It should be large enough"
+	    sleep 4
+	    # Use GPU
+	    sed -i '1i DEVICE=gpu' .env
+	    # Change RAM available
+	    sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
+	    docker compose -f docker-compose.yml up -d
+	    echo " "
+	    echo " "
+	    echo "==========="
+	    echo "Will Initialise ragflow. Use ctrl+c to break AFTER process has started."
+	    echo "==========="
+	    echo " "
+	    echo " "
+		echo "ragflow_installed.txt" > /home/$USER/ragflow_installed.txt
+	    docker logs -f docker-ragflow-gpu-1
+	else
+	     echo "Ragflow will not be installed"
+	fi  
+fi
 # Prevent docker restarts on OS reboot
 docker update --restart=no $(docker ps -a -q)
 
