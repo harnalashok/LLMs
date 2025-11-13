@@ -377,34 +377,37 @@ chmod +x /home/$USER/stop/*.sh
 ##########################
 
 cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    # Write chroma start script
-    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
-    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
-    echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
-    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
-    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
-    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
-    echo "docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma chromadb/chroma:0.6.3 "   | tee -a /home/$USER/start_chroma.sh 
-
-    # Pulling chromadb docker image  
-    cd /home/$USER/
-    echo " "                                       | tee -a /home/$USER/error.log
-    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
-    # Refer: https://cookbook.chromadb.dev/strategies/cors/
-    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:0.6.3 
-    echo "------------"                            | tee -a /home/$USER/error.log
-    echo " "                                       | tee -a /home/$USER/error.log
-    sleep 3
-else
-    echo "Skipping install of chromadb docker"
-fi   
+if [ ! -f /home/$USER/chromadb_installed.txt ]; then
+	echo " "
+	echo " "
+	echo "------------"        
+	echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    # Write chroma start script
+	    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
+	    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
+	    echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
+	    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
+	    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
+	    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
+	    echo "docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='[\"http://localhost:3000\"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma chromadb/chroma:0.6.3 "   | tee -a /home/$USER/start_chroma.sh 
+	
+	    # Pulling chromadb docker image  
+	    cd /home/$USER/
+	    echo " "                                       | tee -a /home/$USER/error.log
+	    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
+	    # Refer: https://cookbook.chromadb.dev/strategies/cors/
+	    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:0.6.3 
+	    echo "------------"                            | tee -a /home/$USER/error.log
+	    echo " "                                       | tee -a /home/$USER/error.log
+		echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
+	    sleep 3
+	else
+	    echo "Skipping install of chromadb docker"
+	fi   
+fi
 #
 chmod +x /home/$USER/*.sh
 
@@ -549,7 +552,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	  docker exec -it ollama ollama pull llama3.2:latest
 	  echo " "
 	  echo " "
-	  ollama list
+	  #ollama list
 else
         echo "Skipping download of ollama models"
 fi
