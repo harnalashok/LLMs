@@ -1058,7 +1058,9 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    echo "echo 'Access xinference, as: http://<hostIP>:9997'"  >> /home/$USER/start_xinference.sh
 	    echo "echo 'Models are stored in folder ~/xmodels'"        >> /home/$USER/start_xinference.sh
 	    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_xinference.sh
-	    echo "echo 'See file LLMs/xinference.ipynb'"             	>> /home/$USER/start_xinference.sh
+	    echo "echo 'To download and LAUNCH a model use: '"         >> /home/$USER/start_xinference.sh
+		echo "echo '  ./launch_xinference_model.sh ' "             >> /home/$USER/start_xinference.sh
+		echo "echo 'See file LLMs/xinference.ipynb'"               >> /home/$USER/start_xinference.sh
 	    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
 	    echo "sleep 5"                                             >> /home/$USER/start_xinference.sh
 	    echo "cd /home/$USER/inference/xinference/deploy/docker/"  >> /home/$USER/start_xinference.sh
