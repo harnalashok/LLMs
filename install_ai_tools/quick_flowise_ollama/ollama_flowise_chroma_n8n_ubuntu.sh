@@ -289,31 +289,34 @@ fi
 ###########################
 
 cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I latest anaconda? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    DIRECTORY=/home/$USER/anaconda3
-    if [ ! -d "$DIRECTORY" ]; then
-        CONTREPO=https://repo.continuum.io/archive/
-        # Stepwise filtering of the html at $CONTREPO
-        # Get the topmost line that matches our requirements, extract the file name.
-        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-        wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-        bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
-        rm ~/Downloads/anaconda.sh
-        echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
-        # Reload default profile
-        source ~/.bashrc
-        conda update conda -y
-     else
-        echo "Anaconda is already installed in /home/$USER/anaconda3"
-     fi   
- else
-    echo "Anaconda not installed"
+if [ ! -f /home/$USER/anaconda_installed.txt ]; then
+	echo " "
+	echo " "
+	echo "------------"        
+	echo "Shall I latest anaconda? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    DIRECTORY=/home/$USER/anaconda3
+	    if [ ! -d "$DIRECTORY" ]; then
+	        CONTREPO=https://repo.continuum.io/archive/
+	        # Stepwise filtering of the html at $CONTREPO
+	        # Get the topmost line that matches our requirements, extract the file name.
+	        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+	        wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+	        bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
+	        rm ~/Downloads/anaconda.sh
+	        echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
+	        # Reload default profile
+	        source ~/.bashrc
+	        conda update conda -y
+			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
+	     else
+	        echo "Anaconda is already installed in /home/$USER/anaconda3"
+	     fi   
+	 else
+	    echo "Anaconda not installed"
+	 fi
  fi
  
 #####################3
@@ -414,58 +417,61 @@ chmod +x /home/$USER/*.sh
 # Workflow automation with n8n:
 #                https://community.n8n.io/tags/c/tutorials/28/course-beginner
 
-
 cd /home/$USER
 echo " "
 echo " "
-echo "------------"   
-echo "Shall I install n8n docker? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    cd ~/
-    mkdir /home/$USER/n8n  # Redundant step
-    #cd /home/$USER/n8n
-    # Volumes are automatically created below: /var/lib/docker/volumes/
-    docker volume create n8n_data
-    #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
-    #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
-    # Access at localhost:5678
-    # --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
-    # docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
-    # Access at localhost:5678
-    docker run -it -d --rm \
-                --name n8n \
-                 -p 5678:5678 \
-                 -e NODE_OPTIONS="--max-old-space-size=4096" \
-                --network host   \
-                 -v n8n_data:/home/node/.n8n \
-                    docker.n8n.io/n8nio/n8n
-    # n8n start script for Ubuntu
-    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
-    echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
-    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
-    echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
-    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
-    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
-    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
-    #echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-    # n8n start script for WSL
-    echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
-    echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
-    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
-    #echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
-    echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
-    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
-    # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
-    #echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
-    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
-    cd ~/
-    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
-    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
-else
-    echo "n8n docker will not be installed"
+cd /home/$USER
+if [ ! -f /home/$USER/n8n_installed.txt ]; then
+	echo "------------"   
+	echo "Shall I install n8n docker? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    cd ~/
+	    mkdir /home/$USER/n8n  # Redundant step
+	    #cd /home/$USER/n8n
+	    # Volumes are automatically created below: /var/lib/docker/volumes/
+	    docker volume create n8n_data
+	    #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+	    #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
+	    # Access at localhost:5678
+	    # --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
+	    # docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+	    # Access at localhost:5678
+	    docker run -it -d --rm \
+	                --name n8n \
+	                 -p 5678:5678 \
+	                 -e NODE_OPTIONS="--max-old-space-size=4096" \
+	                --network host   \
+	                 -v n8n_data:/home/node/.n8n \
+	                    docker.n8n.io/n8nio/n8n
+	    # n8n start script for Ubuntu
+	    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
+	    echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
+	    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
+	    echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
+	    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
+	    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
+	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
+	    #echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	    # n8n start script for WSL
+	    echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
+	    echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
+	    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
+	    #echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
+	    echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
+	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
+	    # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
+	    #echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
+	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
+	    cd ~/
+	    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
+	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
+		echo "n8n_installed" > /home/$USER/n8n_installed.txt
+	else
+	    echo "n8n docker will not be installed"
+	fi
 fi
 
 chmod +x /home/$USER/*.sh
@@ -476,44 +482,48 @@ chmod +x /home/$USER/*.sh
 
 echo " "
 echo " "
-echo "------------"   
-echo "Shall I install ollama docker? [Y,n]"
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-      cd /home/$USER/
-      # Start ollama docker in future
-      echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
-      echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-      echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
-      echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
-      echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
-      echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
-      echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
-      echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
-      echo "echo '6. Test ollama, as: http://host.docker.internal:11434'"                                       >> /home/$USER/start_ollama.sh
-      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start_ollama.sh
-      echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
-      echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
-      echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
-      # Script to stop ollama
-      echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
-      echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
-      echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
-      chmod +x /home/$USER/*.sh
-      # For model storage local folder ollama is mounted.
-      echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
-      echo "Will install ollama for GPU..."
-      sleep 4
-      # Creating alias for command: docker exec -it ollama
-      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
-      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
-      # network host would be local mashine
-      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
-	  sleep 4
-	  reboot
-else
-        echo "Skipping install of ollama docker"
+cd /home/$USER
+if [ ! -f /home/$USER/ollama_installed.txt ]; then
+	echo "------------"   
+	echo "Shall I install ollama docker? [Y,n]"
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	      cd /home/$USER/
+	      # Start ollama docker in future
+	      echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
+	      echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	      echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
+	      echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
+	      echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
+	      echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
+	      echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
+	      echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
+	      echo "echo '6. Test ollama, as: http://host.docker.internal:11434'"                                       >> /home/$USER/start_ollama.sh
+	      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start_ollama.sh
+	      echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
+	      echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
+	      echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
+	      # Script to stop ollama
+	      echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
+	      echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
+	      echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
+	      chmod +x /home/$USER/*.sh
+	      # For model storage local folder ollama is mounted.
+	      echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
+	      echo "Will install ollama for GPU..."
+	      sleep 4
+	      # Creating alias for command: docker exec -it ollama
+	      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
+	      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+	      # network host would be local mashine
+	      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+		  echo "ollama_installed" > /home/$USER/ollama_installed.txt
+		  sleep 4
+		  reboot
+	else
+	        echo "Skipping install of ollama docker"
+	fi
 fi
 
 chmod +x /home/$USER/*.sh
@@ -553,50 +563,54 @@ chmod +x /home/$USER/*.sh
 
 echo " "
 echo " "
-echo "------------"   
-echo "Shall I install flowise docker? [Y,n]"    # Default is yes
-read input
-# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
-input=${input:-y}
-if [[ $input == "Y" || $input == "y" ]]; then
-   cd /home/$USER/
-   # Install Flowise through docker"
-   # Ref: https://docs.flowiseai.com/getting-started
-   echo "Installing flowise docker. Takes time.."             
-   # Start script
-   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
-   echo " "                                                   >> /home/$USER/start_flowise.sh
-   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
-   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
-   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
-   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
-   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-   # Stop script
-   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
-   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
-   echo "cd ~/"                                              >> /home/$USER/stop_docker_flowise.sh
-   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
-   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
-   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
-   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
-   sleep 4
-   cd ~/
-   git clone https://github.com/FlowiseAI/Flowise.git
-   cd Flowise/
-   sudo docker build --no-cache -t flowise .
-   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
-   #    docker run -d --name flowise -p 3000:3000 --network host flowise
-   echo "In future to start/stop containers, proceed, as:"
-   echo "            cd /home/$USER/Flowise"                  
-   echo "            docker start flowise"                    
-   echo "            docker stop flowise"                     
-   echo " Also, check all containers available, as:"
-   echo "             docker ps -a "     
-   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
-   #ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
- else
-   echo "Flowise docker will not be installed"
- fi  
+cd /home/$USER
+if [ ! -f /home/$USER/flowise_installed.txt ]; then
+	echo "------------"   
+	echo "Shall I install flowise docker? [Y,n]"    # Default is yes
+	read input
+	# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
+	input=${input:-y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	   cd /home/$USER/
+	   # Install Flowise through docker"
+	   # Ref: https://docs.flowiseai.com/getting-started
+	   echo "Installing flowise docker. Takes time.."             
+	   # Start script
+	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
+	   echo " "                                                   >> /home/$USER/start_flowise.sh
+	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
+	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
+	   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
+	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
+	   # Stop script
+	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
+	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
+	   echo "cd ~/"                                              >> /home/$USER/stop_docker_flowise.sh
+	   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
+	   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
+	   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
+	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
+	   sleep 4
+	   cd ~/
+	   git clone https://github.com/FlowiseAI/Flowise.git
+	   cd Flowise/
+	   sudo docker build --no-cache -t flowise .
+	   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+	   #    docker run -d --name flowise -p 3000:3000 --network host flowise
+	   echo "In future to start/stop containers, proceed, as:"
+	   echo "            cd /home/$USER/Flowise"                  
+	   echo "            docker start flowise"                    
+	   echo "            docker stop flowise"                     
+	   echo " Also, check all containers available, as:"
+	   echo "             docker ps -a "     
+	   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
+	   #ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
+	   echo "flowise installed" > /home/$USER/flowise_installed.txt
+	 else
+	   echo "Flowise docker will not be installed"
+	 fi  
+ fi
 
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/*.sh
