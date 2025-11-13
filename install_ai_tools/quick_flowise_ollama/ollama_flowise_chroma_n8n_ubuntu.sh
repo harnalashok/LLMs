@@ -672,6 +672,7 @@ chmod +x /home/$USER/*.sh
 
 ################
 # Install postgresql and sqlite3
+# https://stackoverflow.com/questions/18223665/postgresql-query-from-bash-script-as-database-user-postgres
 ################
 
 echo " "
