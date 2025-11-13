@@ -676,107 +676,110 @@ chmod +x /home/$USER/*.sh
 
 echo " "
 echo " "
-echo "------------"   
-echo "Shall I install postgres  db and pgvector? [Y,n]"    # 
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    cd /home/$USER/
-    echo "Installing postgresql and sqlite3"
-    sudo apt install postgresql postgresql-contrib sqlite3   -y
-    # Postgresql start/stop script
-    echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
-    echo " "                                                               >> /home/$USER/start_postgresql.sh  
-    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
-    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
-    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
-    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
-    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
-    # Stop script
-    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
-    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
-    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
-    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
-    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
-    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
-	mkdir /home/$USER/psql
-    cd /home/$USER/psql
-    # A small help script
-    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
-    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
-    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
-    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
-    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
-    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
-    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
-    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-    chmod +x *.sh
-    #############
-    # psql related
-    # Download scripts that will inturn, help create user and password
-    # in postgresql
-    ##############
-    cd /home/$USER/
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-    chmod +x /home/$USER/*.sh
-    # Create links
-    cd /home/$USER/psql
-    ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
-    ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
-    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
-    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
-    ln -sT /home/$USER/psql.sh                       psql.sh
-    cd ~/
-    ###########
-    ## Add postgres vector storage capability
-    ############
-    # Add vector storage capability to postgres
-    # My version of postgres db is 14.
-    # (Check as: pg_config --version)
-    # Install a needed package (depending upon your version of postgres)
-    # Check version as: pg_config --version
-    # Assuming version 16
-    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
-    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
-    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-    sudo apt install postgresql-server-dev-$version  -y
-    #sudo apt install postgresql-server-dev-16  -y
-    # Ref: https://github.com/pgvector/pgvector
-    cd /tmp
-    git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
-    cd pgvector
-    make
-    sudo make install 
-    cd /home/$USER/
-    # Creating user 'ashok', and database 'ashok'. 
-    # User 'ashok' has full authority over database 'ashok'
-    echo " "
-    echo " "
-    echo "========="
-    echo "Creating user 'ashok' and database 'askok'"
-    echo "User 'ashok' has full authority over database 'ashok'"
-    echo "User 'ashok' has password: ashok"
-    echo "Database 'ashok' can also be used as vector database"
-    echo "========="
-    echo " "
-    echo " "
-    sleep 5
-    sudo -u postgres psql -c 'create database ashok;'
-    sudo -u postgres psql -c 'create user ashok;'
-    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
-    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
-    sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
- else
-   echo "Postgres not installed"
- fi  
-
+cd /home/$USER
+if [ ! -f /home/$USER/postgresql_installed.txt ]; then
+	echo "------------"   
+	echo "Shall I install postgres  db and pgvector? [Y,n]"    # 
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    cd /home/$USER/
+	    echo "Installing postgresql and sqlite3"
+	    sudo apt install postgresql postgresql-contrib sqlite3   -y
+	    # Postgresql start/stop script
+	    echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
+	    echo " "                                                               >> /home/$USER/start_postgresql.sh  
+	    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
+	    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
+	    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
+	    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
+	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
+	    # Stop script
+	    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
+	    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
+	    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
+	    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
+	    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
+	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
+		mkdir /home/$USER/psql
+	    cd /home/$USER/psql
+	    # A small help script
+	    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	    chmod +x *.sh
+	    #############
+	    # psql related
+	    # Download scripts that will inturn, help create user and password
+	    # in postgresql
+	    ##############
+	    cd /home/$USER/
+	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+	    chmod +x /home/$USER/*.sh
+	    # Create links
+	    cd /home/$USER/psql
+	    ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
+	    ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
+	    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
+	    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
+	    ln -sT /home/$USER/psql.sh                       psql.sh
+	    cd ~/
+	    ###########
+	    ## Add postgres vector storage capability
+	    ############
+	    # Add vector storage capability to postgres
+	    # My version of postgres db is 14.
+	    # (Check as: pg_config --version)
+	    # Install a needed package (depending upon your version of postgres)
+	    # Check version as: pg_config --version
+	    # Assuming version 16
+	    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
+	    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+	    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+	    sudo apt install postgresql-server-dev-$version  -y
+	    #sudo apt install postgresql-server-dev-16  -y
+	    # Ref: https://github.com/pgvector/pgvector
+	    cd /tmp
+	    git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git
+	    cd pgvector
+	    make
+	    sudo make install 
+	    cd /home/$USER/
+	    # Creating user 'ashok', and database 'ashok'. 
+	    # User 'ashok' has full authority over database 'ashok'
+	    echo " "
+	    echo " "
+	    echo "========="
+	    echo "Creating user 'ashok' and database 'askok'"
+	    echo "User 'ashok' has full authority over database 'ashok'"
+	    echo "User 'ashok' has password: ashok"
+	    echo "Database 'ashok' can also be used as vector database"
+	    echo "========="
+	    echo " "
+	    echo " "
+	    sleep 5
+	    sudo -u postgres psql -c 'create database ashok;'
+	    sudo -u postgres psql -c 'create user ashok;'
+	    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+	    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+	    sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
+		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+	 else
+	   echo "Postgres not installed"
+	 fi  
+ fi
 
 #########################
 ### Install mongodb and mongosh
