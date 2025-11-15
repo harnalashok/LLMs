@@ -306,9 +306,13 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	        wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
 	        bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
 	        rm ~/Downloads/anaconda.sh
-	        echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
+	        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
+            # Accept terms of service of conda channels
+			# Refer: StackOverflow: https://stackoverflow.com/a/79702898
+			conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
+               && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 	        # Reload default profile
-	        source ~/.bashrc
+	        source /home/$USER/.bashrc
 	        conda update conda -y
 			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
 	     else
