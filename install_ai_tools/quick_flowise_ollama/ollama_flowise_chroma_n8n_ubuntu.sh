@@ -1234,9 +1234,9 @@ else
 fi    
 
 ##########################
-### Install flatpak
+### Install flatpak and JASP
 # Ref: https://jasp-stats.org/linux-installation-guide/
-#      
+# JASP is biostatistics software    
 ##########################
 
 cd /home/$USER
