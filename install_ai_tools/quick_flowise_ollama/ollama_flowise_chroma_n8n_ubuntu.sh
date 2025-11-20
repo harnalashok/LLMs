@@ -1232,9 +1232,34 @@ else
     echo "OK. Visual code coder not installed."
 fi    
 
+##########################
+### Install flatpak
+# Ref: https://jasp-stats.org/linux-installation-guide/
+#      
+##########################
 
-
-
+cd /home/$USER
+if [ ! -f /home/$USER/flatpak_installed.txt ]; then
+	echo "Shall I install flatpak for JASP and also JASP? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    # Install flatpak
+		sudo apt install flatpak -y
+		# The GNOME Software plugin makes it possible to install apps without needing the command line. 
+		sudo apt install gnome-software-plugin-flatpak -y
+		# Add repo
+		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+		echo "Download and install JASP. Takes time..." 
+	    flatpak install flathub org.jaspstats.JASP
+	    echo "flatpak installed" > /home/$USER/flatpak_installed.txt
+		echo "Run as: flatpak run org.jaspstats.JASP "  >> /home/$USER/flatpak_installed.txt
+		echo "Run as: flatpak run org.jaspstats.JASP "
+		sleep 5
+	else
+	  echo "flatpak not installed"
+	fi
+fi
 
 ##########################
 ### Install RAGflow
