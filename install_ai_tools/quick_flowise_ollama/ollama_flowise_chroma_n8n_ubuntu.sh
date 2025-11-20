@@ -317,6 +317,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	        source /home/$USER/.bashrc
 	        conda update conda -y
 			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
+			reboot
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
 	     fi   
