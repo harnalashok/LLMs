@@ -19,6 +19,7 @@ echo "Installs xinference"
 echo "Installs AutoGen Studio"
 echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
+echo "Install flatpak and JASP"
 echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
