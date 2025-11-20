@@ -20,6 +20,7 @@ echo "Installs AutoGen Studio"
 echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Install flatpak and JASP"
+echo "TorchStudio installation for deeplearning"
 echo "Will install Ragflow docker"
 echo "==========================="
 sleep 2
@@ -1241,6 +1242,7 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/flatpak_installed.txt ]; then
+    echo "JASP is a biostatistics software? [Y,n]"
 	echo "Shall I install flatpak for JASP and also JASP? [Y,n]"    
 	read input
 	input=${input:-Y}
@@ -1260,6 +1262,37 @@ if [ ! -f /home/$USER/flatpak_installed.txt ]; then
 	else
 	  echo "flatpak not installed"
 	fi
+fi
+
+##########################
+### Install torchstudio
+# Ref: https://github.com/Emad2018/torchstudio/tree/main
+#      https://www.torchstudio.ai/download/
+##########################
+
+cd /home/$USER
+if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
+    echo "TorchStudio is a software for deeplearning?"
+	echo "Anaconda must have been installed earlier"
+	echo "Shall I install torchstudio? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		git clone https://github.com/Emad2018/torchstudio.git
+		cd torchstudio
+	    conda env create -f environment.yml
+		sudo apt-get install graphviz
+	    wget -c https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
+		sudo dpkg -i  TorchStudio_0.9.19-Linux_Installer.deb
+		rm TorchStudio_0.9.19-Linux_Installer.deb
+		echo "To run torchstudio:"
+		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"
+		echo "To run torchstudio:"    >                            /home/$USER/torchstudio_installed.txt 
+		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"   >> /home/$USER/torchstudio_installed.txt 
+		sleep 5
+	else
+		   echo "TorchStudio not installed"
+	fi   
 fi
 
 ##########################
