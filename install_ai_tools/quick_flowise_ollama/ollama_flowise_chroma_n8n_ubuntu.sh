@@ -1292,6 +1292,8 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	    wget -c https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
 		sudo dpkg -i  TorchStudio_0.9.19-Linux_Installer.deb
 		rm TorchStudio_0.9.19-Linux_Installer.deb
+		cd /home/$USER/Documents
+		wget -c https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv
 		cd /home/$USER
 		echo "To run torchstudio:"
 		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"
