@@ -1282,13 +1282,16 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
+	    # Install necessary packages
 		git clone https://github.com/Emad2018/torchstudio.git
 		cd torchstudio
 	    conda env create -f environment.yml
+		#
 		sudo apt-get install graphviz
 	    wget -c https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
 		sudo dpkg -i  TorchStudio_0.9.19-Linux_Installer.deb
 		rm TorchStudio_0.9.19-Linux_Installer.deb
+		cd /home/$USER
 		echo "To run torchstudio:"
 		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"
 		echo "To run torchstudio:"    >                            /home/$USER/torchstudio_installed.txt 
