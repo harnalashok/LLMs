@@ -1257,8 +1257,12 @@ if [ ! -f /home/$USER/flatpak_installed.txt ]; then
 	    flatpak install flathub org.jaspstats.JASP
 	    echo "flatpak installed" > /home/$USER/flatpak_installed.txt
 		echo "Run as: flatpak run org.jaspstats.JASP "  >> /home/$USER/flatpak_installed.txt
-		echo "Run as: flatpak run org.jaspstats.JASP "
+		echo '#!/bin/bash'                                          > /home/$USER/start_JSAP.sh
+	    echo "echo 'Start JSAP as:'"                                >> /home/$USER/start_JSAP.sh
+	    echo "echo 'flatpak run org.jaspstats.JASP'"                >> /home/$USER/start_JSAP.sh
+		chmod +x *.sh
 		sleep 5
+		reboot
 	else
 	  echo "flatpak not installed"
 	fi
@@ -1289,7 +1293,13 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"
 		echo "To run torchstudio:"    >                            /home/$USER/torchstudio_installed.txt 
 		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"   >> /home/$USER/torchstudio_installed.txt 
+        echo '#!/bin/bash'                                          > /home/$USER/start_torchstudio.sh
+	    echo "echo 'To run torchstudio:'"                           >> /home/$USER/start_torchstudio.sh
+		echo "echo ' First, start TorchStudio and then,'"                           >> /home/$USER/start_torchstudio.sh
+	    echo "echo '   In the dialogbox, select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python'"    >> /home/$USER/start_torchstudio.sh
+		chmod +x *.sh
 		sleep 5
+		reboot
 	else
 		   echo "TorchStudio not installed"
 	fi   
@@ -1338,7 +1348,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
 	
 	    echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
-	    echo "echo 'RagFlow docker volumes'"                        > /home/$USER/volumes_ragflow.sh
+	    echo "echo 'RagFlow docker volumes'"                        >> /home/$USER/volumes_ragflow.sh
 	    echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
 	    echo "echo 'Should be: esdata01, mysql_data, minio_data, redis_data'"  >> /home/$USER/volumes_ragflow.sh
 	    echo "sudo ls -la /var/lib/docker/volumes/"                 >> /home/$USER/volumes_ragflow.sh
