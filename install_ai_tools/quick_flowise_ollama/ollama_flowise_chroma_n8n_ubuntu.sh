@@ -1352,10 +1352,10 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	git checkout -f v0.22.1
 	#
 	# Update ragflow/docker/.env:
+	cd /home/$USER/ragflow/docker
     RAGFLOW_IMAGE=infiniflow/ragflow:v0.22.1
 	# Update the RAGFlow image and restart RAGFlow:
-	cd /home/$USER/ragflow/docker
-    docker compose -f docker/docker-compose.yml pull
+	docker compose -f docker/docker-compose.yml pull
     docker compose -f docker/docker-compose.yml up -d
 	cd /home/$USER
 else
