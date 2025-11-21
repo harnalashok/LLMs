@@ -1262,6 +1262,7 @@ if [ ! -f /home/$USER/flatpak_installed.txt ]; then
 	    echo "echo 'Start JSAP as:'"                                >> /home/$USER/start_JSAP.sh
 	    echo "echo 'flatpak run org.jaspstats.JASP'"                >> /home/$USER/start_JSAP.sh
 		chmod +x *.sh
+		echo "After rebooting, look for 'JASP App' in Show Applications to put it in Favourites ribbon" 
 		sleep 5
 		reboot
 	else
