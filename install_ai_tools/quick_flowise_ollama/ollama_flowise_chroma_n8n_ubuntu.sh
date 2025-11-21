@@ -22,6 +22,7 @@ echo "Install Visual Studio Coder"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
 echo "Will install Ragflow docker"
+echo "Will upgrade Ragflow"
 echo "==========================="
 sleep 2
 
