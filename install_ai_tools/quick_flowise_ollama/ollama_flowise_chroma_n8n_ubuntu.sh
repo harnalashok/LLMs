@@ -1321,6 +1321,43 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	fi   
 fi
 
+
+##########################
+### Upgrade RAGflow
+# Ref: https://ragflow.io/docs/dev/upgrade_ragflow
+##########################
+
+echo " "
+echo " "
+cd /home/$USER
+echo "Shall I upgrade RAGFlow docker? [Y,n]"   
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+	echo " "
+	echo " "
+	# Stop ragflow
+	bash /home/$USER/stop_ragflow.sh
+	sleep 2
+	echo "1.0 Moving earlier ragflow folder"
+	mv /home/$USER/ragflow  /home/$USER/ragflow.old
+	echo "2.0 Cloning git repo"
+	git clone https://github.com/infiniflow/ragflow.git
+	# https://ragflow.io/docs/dev/upgrade_ragflow#upgrade-ragflow-to-the-most-recent-officially-published-release
+	# Switch to the latest, officially published release, e.g., v0.22.1:
+	echo "3.0 Will upgrade to ver 0.22.1"
+	sleep 5
+	git checkout -f v0.22.1
+	#
+	# Update ragflow/docker/.env:
+    RAGFLOW_IMAGE=infiniflow/ragflow:v0.22.1
+	# Update the RAGFlow image and restart RAGFlow:
+    docker compose -f docker/docker-compose.yml pull
+    docker compose -f docker/docker-compose.yml up -d
+else
+    echo "RagFlow Not upgraded"
+fi	
+
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
