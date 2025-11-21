@@ -1025,7 +1025,7 @@ chmod +x /home/$USER/*.sh
 
 
 ##########################
-### Install xinference docker
+### Build and Install xinference docker
 # Ref: https://inference.readthedocs.io/en/latest/getting_started/using_docker_image.html
 ##########################
 
@@ -1035,7 +1035,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I build and install xinference docker. Takes time..? [Y,n]"    
+	echo "Shall I build and install xinference docker. Building takes time..? [Y,n]"    
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -1100,7 +1100,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	     echo "xinference will not be installed"
 	fi   	
 	##########################
-	### Install xinference directly on machine
+	### Install xinference on machine
 	# Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
 	##########################
 	
@@ -1108,7 +1108,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install xinference directly on machine? [Y,n]"    
+	echo "Shall I install xinference on machine? [Y,n]"    
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -1202,38 +1202,41 @@ fi
 echo " "
 echo " "
 echo "-----"
-cd /home/$USER/
-echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
-echo "It is NOT installable on WSL Windows. If you are in WSL environment, then answer n"
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    echo " "
-    echo " "
-    # Activate python virtual environment
-    source /home/$USER/venv/bin/activate
-    # 1.8 Install visual studio code
-    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
-    mkdir /home/$USER/1234
-    cd /home/$USER/1234
-    # Direct download link
-    wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-    # Fill in filename from above
-    mv * code.deb
-    sudo apt install /home/$USER/1234/code.deb  -y
-    cd /home/$USER
-    rm -rf /home/$USER/1234/
-    #    
-    sleep 5
-    #
-    # Deactivate the environment
-    deactivate
-	echo "Will reboot system now"
-	sleep 5
-	reboot
-else
-    echo "OK. Visual code coder not installed."
-fi    
+cd /home/$USER
+if [ ! -f /home/$USER/vscode_installed.txt ]; then
+	echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
+	echo "It is NOT installable on WSL Windows. For WSL environment answer no"
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+	    # Activate python virtual environment
+	    source /home/$USER/venv/bin/activate
+	    # 1.8 Install visual studio code
+	    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+	    mkdir /home/$USER/1234
+	    cd /home/$USER/1234
+	    # Direct download link
+	    wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+	    # Fill in filename from above
+	    mv * code.deb
+	    sudo apt install /home/$USER/1234/code.deb  -y
+	    cd /home/$USER
+	    rm -rf /home/$USER/1234/
+		echo "vscode_installed" > /home/$USER/vscode_installed.txt
+	    #    
+	    sleep 5
+	    #
+	    # Deactivate the environment
+	    deactivate
+		echo "Will reboot system now"
+		sleep 5
+		reboot
+	else
+	    echo "OK. Visual Studio coder not installed."
+	fi 
+fi
 
 ##########################
 ### Install flatpak and JASP
