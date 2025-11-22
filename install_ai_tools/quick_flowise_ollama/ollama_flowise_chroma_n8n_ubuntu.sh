@@ -1342,7 +1342,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	bash /home/$USER/stop_ragflow.sh
 	sleep 2
 	echo "1.0 Moving earlier ragflow folder"
-	rm -rf /home/$USER/ragflow.old
+	sudo rm -rf /home/$USER/ragflow.old
 	mv /home/$USER/ragflow  /home/$USER/ragflow.old
 	echo "2.0 Cloning git repo"
 	git clone https://github.com/infiniflow/ragflow.git
@@ -1370,6 +1370,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	# Update the RAGFlow image and restart RAGFlow:
 	docker compose -f docker-compose.yml pull
     docker compose -f docker-compose.yml up -d
+	docker logs -f docker-ragflow-gpu-1
 else
     echo "RagFlow Not upgraded"
 fi	
@@ -1408,7 +1409,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
 	    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
 	    echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
-	    echo "echo 'Check docker logs as: docker logs -f ragflow-server'" >> /home/$USER/start_ragflow.sh
+	    echo "echo 'Check docker logs as: docker-ragflow-gpu-1'"   >> /home/$USER/start_ragflow.sh
 	    echo "echo 'Memory parameter: MEM_LIMIT is in ragflow/docker/.env file'" >> /home/$USER/start_ragflow.sh
 	    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
 	    echo "sleep 4"                                             >> /home/$USER/start_ragflow.sh
