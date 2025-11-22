@@ -1356,10 +1356,19 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	# Update ragflow/docker/.env:
 	cd /home/$USER/ragflow/docker
     RAGFLOW_IMAGE=infiniflow/ragflow:v0.22.1
+	sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
+	sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
+	#
+	# Increase memory available for docker as files may be large (20gb)
+	echo "Will now set memory for ragflow docker container. It should be large enough"
+	sleep 4
+	# Use GPU
+	sed -i '1i DEVICE=gpu' .env
+	# Change RAM available
+	sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
 	# Update the RAGFlow image and restart RAGFlow:
 	docker compose -f docker/docker-compose.yml pull
     docker compose -f docker/docker-compose.yml up -d
-	cd /home/$USER
 else
     echo "RagFlow Not upgraded"
 fi	
