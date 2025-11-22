@@ -1444,9 +1444,23 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
 	    echo "sleep 10"                                             >> /home/$USER/logs_ragflow.sh
 	    echo "cd /home/$USER/ragflow/docker"                       >> /home/$USER/logs_ragflow.sh
-	    echo "docker logs -f docker-ragflow-gpu-1"                       >> /home/$USER/logs_ragflow.sh
-	
-	
+	    echo "docker logs -f docker-ragflow-gpu-1"                 >> /home/$USER/logs_ragflow.sh
+        #
+	    # Start all
+	    #--------------
+	    echo '#!/bin/bash'                                         >  /home/$USER/start_all.sh
+	    echo " "                                                   >> /home/$USER/start_all.sh
+	    echo "echo '======'"                                       >> /home/$USER/start_all.sh
+	    echo "echo 'Starting ollama, ragflow, xinference'"         >> /home/$USER/start_all.sh
+	    echo "echo '======'"                                       >> /home/$USER/start_all.sh
+	    echo "sleep 3"                                             >> /home/$USER/start_all.sh
+	    echo "bash start_ollama.sh"                                >> /home/$USER/start_all.sh
+		echo "sleep 1"                                             >> /home/$USER/start_all.sh
+	    echo "bash start_xinference.sh"                            >> /home/$USER/start_all.sh
+		echo "sleep 1"                                             >> /home/$USER/start_all.sh
+	    echo "bash start_ragflow.sh"                               >> /home/$USER/start_all.sh
+		echo "bash launch_xinference_model.sh"                     >> /home/$USER/start_all.sh
+	    #
 	    echo '#!/bin/bash'                                          > /home/$USER/docker/del_rf_containers.sh
 	    echo "echo 'Will delete RagFlow dockers'"                  >> /home/$USER/docker/del_rf_containers.sh
 	    echo "echo 'Press ctrl+c to exit now'"                     >> /home/$USER/docker/del_rf_containers.sh
