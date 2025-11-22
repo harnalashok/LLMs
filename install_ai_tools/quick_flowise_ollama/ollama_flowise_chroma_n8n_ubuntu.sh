@@ -1405,7 +1405,17 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "cd /home/$USER/ragflow/docker"                        >> /home/$USER/start_ragflow.sh
 	    echo "docker compose -f docker-compose.yml up -d"       >> /home/$USER/start_ragflow.sh
 	    echo "netstat -aunt | grep 800"                             >> /home/$USER/start_ragflow.sh
-	
+        # ReStart script
+	    #--------------
+	    echo '#!/bin/bash'                                         >  /home/$USER/restart_ragflow.sh
+	    echo " "                                                   >> /home/$USER/restart_ragflow.sh
+	    echo "echo '======'"                                       >> /home/$USER/restart_ragflow.sh
+	    echo "echo 'RagFlow will be restarted'"                    >> /home/$USER/restart_ragflow.sh
+	    echo "echo '======'"                                       >> /home/$USER/restart_ragflow.sh
+	    echo "sleep 4"                                             >> /home/$USER/restart_ragflow.sh
+	    echo "bash stop_ragflow.sh"                                >> /home/$USER/restart_ragflow.sh
+	    echo "sleep 3"                                             >> /home/$USER/restart_ragflow.sh
+	    echo "bash start_ragflow.sh"                               >> /home/$USER/restart_ragflow.sh
 	    echo '#!/bin/bash'                                          > /home/$USER/volumes_ragflow.sh
 	    echo "echo 'RagFlow docker volumes'"                        >> /home/$USER/volumes_ragflow.sh
 	    echo "echo 'Located under /var/lib/docker/volumes/'"        >> /home/$USER/volumes_ragflow.sh
@@ -1413,7 +1423,6 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "sudo ls -la /var/lib/docker/volumes/"                 >> /home/$USER/volumes_ragflow.sh
 	    ln -T /home/$USER/volumes_ragflow.sh  /home/$USER/about_ragflow.sh
 	
-	    
 	    echo '#!/bin/bash'                                          > /home/$USER/logs_ragflow.sh
 	    echo " "                                                   >> /home/$USER/logs_ragflow.sh
 	    echo "echo '======'"                                       >> /home/$USER/logs_ragflow.sh
