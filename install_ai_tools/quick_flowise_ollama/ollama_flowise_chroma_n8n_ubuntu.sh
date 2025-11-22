@@ -1342,6 +1342,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	bash /home/$USER/stop_ragflow.sh
 	sleep 2
 	echo "1.0 Moving earlier ragflow folder"
+	rm -rf /home/$USER/ragflow.old
 	mv /home/$USER/ragflow  /home/$USER/ragflow.old
 	echo "2.0 Cloning git repo"
 	git clone https://github.com/infiniflow/ragflow.git
