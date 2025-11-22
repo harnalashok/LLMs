@@ -1332,6 +1332,7 @@ echo " "
 echo " "
 cd /home/$USER
 echo "Shall I upgrade RAGFlow docker? [Y,n]"   
+echo "The upgarde does not touch your data files"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
@@ -1349,6 +1350,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	# Switch to the latest, officially published release, e.g., v0.22.1:
 	echo "3.0 Will upgrade to ver 0.22.1"
 	sleep 5
+	# Switch working directory of git
 	git checkout -f v0.22.1
 	#
 	# Update ragflow/docker/.env:
