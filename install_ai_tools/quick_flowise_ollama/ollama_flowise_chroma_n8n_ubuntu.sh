@@ -1367,8 +1367,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	# Change RAM available
 	sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
 	# Update the RAGFlow image and restart RAGFlow:
-	docker compose -f docker/docker-compose.yml pull
-    docker compose -f docker/docker-compose.yml up -d
+	docker compose -f docker-compose.yml pull
+    docker compose -f docker-compose.yml up -d
 else
     echo "RagFlow Not upgraded"
 fi	
