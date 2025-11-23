@@ -1504,6 +1504,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "echo ' '"                                            >> /home/$USER/docker/del_rf_containers.sh
 	    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
 	    echo "./volumes_ragflow.sh"                                >> /home/$USER/docker/del_rf_containers.sh   
+		echo "rm /home/$USER/ragflow_installed.txt"                >> /home/$USER/docker/del_rf_containers.sh  
 	    cd /home/$USER/docker
 	    chmod +x *.sh
 	    cd /home/$USER
