@@ -1460,10 +1460,14 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 		echo "sleep 1"                                             >> /home/$USER/start_all.sh
 	    echo "bash start_ragflow.sh"                               >> /home/$USER/start_all.sh
 		echo "bash launch_xinference_model.sh"                     >> /home/$USER/start_all.sh
-	    #
+		# -------------------------
+	    # Delete/Remove ragflow containers, images and volumes
+		#---------------
 	    echo '#!/bin/bash'                                          > /home/$USER/docker/del_rf_containers.sh
-	    echo "echo 'Will delete RagFlow dockers'"                  >> /home/$USER/docker/del_rf_containers.sh
-	    echo "echo 'Press ctrl+c to exit now'"                     >> /home/$USER/docker/del_rf_containers.sh
+		echo "echo '=============='"           >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Will delete RagFlow containers, images and volumes'"      >> /home/$USER/docker/del_rf_containers.sh
+	    echo "echo 'Press ctrl+c to exit now. Will wait for 8secs'"           >> /home/$USER/docker/del_rf_containers.sh
+		echo "echo '================'"           >> /home/$USER/docker/del_rf_containers.sh
 	    echo "sleep 8"                                             >> /home/$USER/docker/del_rf_containers.sh
 	    echo "cd /home/$USER"                                      >> /home/$USER/docker/del_rf_containers.sh
 	    echo " "                                                   >> /home/$USER/docker/del_rf_containers.sh
@@ -1503,6 +1507,9 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    cd /home/$USER/docker
 	    chmod +x *.sh
 	    cd /home/$USER
+		ln -sT /home/$USER/docker/del_rf_containers.sh   delete_ragflow.sh
+		ln -sT /home/$USER/docker/del_rf_containers.sh   rm_ragflow.sh
+		#
 	    chmod +x *.sh  
 	    #
 	    # Stop script
