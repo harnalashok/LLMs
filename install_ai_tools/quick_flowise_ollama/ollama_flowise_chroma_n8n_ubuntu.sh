@@ -1205,6 +1205,9 @@ echo " "
 echo "-----"
 cd /home/$USER
 if [ ! -f /home/$USER/vscode_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
 	echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
 	echo "It is NOT installable on WSL Windows. For WSL environment answer no"
 	read input
@@ -1247,6 +1250,9 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/flatpak_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
     echo "JASP is a biostatistics software? [Y,n]"
 	echo "Shall I install flatpak for JASP and also JASP? [Y,n]"    
 	read input
@@ -1282,6 +1288,9 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
     echo "TorchStudio is a software for deeplearning?"
 	echo "Anaconda must have been installed earlier"
 	echo "Shall I install torchstudio? [Y,n]"    
@@ -1331,8 +1340,13 @@ fi
 echo " "
 echo " "
 cd /home/$USER
+echo " "
+echo " "
+echo "======="
 echo "Shall I upgrade RAGFlow docker? [Y,n]"   
 echo "The upgarde does not touch your data files"
+echo "After upgrade, RESET your broswer cookies"
+echo "========"
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
@@ -1385,6 +1399,8 @@ echo " "
 echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/ragflow_installed.txt ]; then
+    echo " "
+    echo " "
 	echo "------------"   
 	echo "Shall I install RAGFlow docker? [Y,n]"    # 
 	read input
