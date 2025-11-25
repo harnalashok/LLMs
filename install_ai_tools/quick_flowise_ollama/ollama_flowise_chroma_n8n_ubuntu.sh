@@ -3,7 +3,7 @@
 # Last amended: 12th Nov, 2025
 
 echo "========script=============="
-echo "Will update Ubuntu"
+echo "Will update Ubuntu and also install nodeJS"
 echo "Will install cuda toolkit"
 echo "Will install docker"
 echo "Will install python venv"
@@ -54,7 +54,26 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
-    echo "Ubuntu is updated" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
+	echo "  "
+	echo "  "
+	echo "===="
+	echo "Installing nodejs ver 22.x"
+	echo "===="
+	echo "  "
+	sleep 4
+	# First, update your package list
+    sudo apt update
+    # Install curl if you don't have it
+    sudo apt install curl -y
+    # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
+    # Replace '22.x' with the desired major version if needed
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    # Now install Node.js and npm
+    sudo apt install nodejs -y
+	echo "NodeJS installed"
+	echo " "
+	sleep 3
+    echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
