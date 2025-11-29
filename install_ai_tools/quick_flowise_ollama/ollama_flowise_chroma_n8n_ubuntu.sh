@@ -550,6 +550,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	echo "echo 'where, 11434, is your example web-app ip'"                      >> /home/$USER/ngrok_config.sh
 	echo "echo 'This command, if successful, will also output'"                 >> /home/$USER/ngrok_config.sh
 	echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
+	echo "echo 'ngrok ref: https://ngrok.com/docs/agent/cli'"                   >> /home/$USER/ngrok_config.sh
 	echo "echo '========'"                                                      >> /home/$USER/ngrok_config.sh
 	chmod +x *.sh
 		# My remote url is:
