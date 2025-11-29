@@ -21,6 +21,7 @@ echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
+echo "Install ngrok to tunnel access of local website"
 echo "Will install Ragflow docker"
 echo "Will upgrade Ragflow"
 echo "==========================="
@@ -509,6 +510,45 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 fi
 
 chmod +x /home/$USER/*.sh
+
+
+##########################
+### Install ngrok 
+#   ngrok helps in remotely accessing 
+#   your local web-apps
+#   Refer: What is ngrok:
+#      https://ngrok.com/docs/what-is-ngrok
+##########################
+
+
+echo "ngrok is used to make local web-apps accessible remotely through tunneling"
+echo "Shall I ngrok to access web-app remotely ? [Y,n]"    # Else docker chromadb may be installed
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+	# Install ngrok
+	# https://dashboard.ngrok.com/get-started/setup/linux
+	
+	curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+	  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+	  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
+	  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+	  && sudo apt update \
+	  && sudo apt install ngrok
+	
+	# Run the following command to add your authtoken to the default ngrok.yml configuration file.
+	ngrok config add-authtoken <ngrok token>
+	
+	# Run the following in the command line.
+	# To access port 11434 remotely
+	ngrok http 11434
+	
+	# My remote url is:
+	# https://connivently-unhusked-carri.ngrok-free.dev
+else
+   echo "ngrok not installed"
+fi   
+
 
 ##########################
 ### ollama docker
