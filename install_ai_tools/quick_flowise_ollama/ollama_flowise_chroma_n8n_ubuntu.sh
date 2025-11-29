@@ -1,6 +1,6 @@
-#!/bin/bash
+ho#!/bin/bash
 
-# Last amended: 25th Nov, 2025
+# Last amended: 29th Nov, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -515,11 +515,11 @@ chmod +x /home/$USER/*.sh
 ##########################
 ### Install ngrok 
 #   ngrok helps in remotely accessing 
-#   your local web-apps
+#     your local web-apps
 #   Refer: What is ngrok:
 #      https://ngrok.com/docs/what-is-ngrok
+#      https://ngrok.com/docs/agent/cli
 ##########################
-
 
 echo "ngrok is used to make local web-apps accessible remotely through tunneling"
 echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
@@ -528,33 +528,35 @@ input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
 	# Install ngrok
 	# https://dashboard.ngrok.com/get-started/setup/linux
-	
+	echo "Installing ngrok..."
+	sleep 3
 	curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 	  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
 	  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
 	  | sudo tee /etc/apt/sources.list.d/ngrok.list \
 	  && sudo apt update \
 	  && sudo apt install ngrok
-	echo "ngrok is installed"
-	
+	echo " "
+	echo "======"
+	echo "ngrok is installed. Next use: ./ngrok_config.sh"
+	echo "======"
+	sleep 4
 	# Run the following command to add your authtoken to the default ngrok.yml configuration file.
-	echo "echo '========'" > /home/$USER/ngrok_config.sh
-	echo "echo 'You will have to amend config file: ngrok.yml'"  >> /home/$USER/ngrok_config.sh
-	echo "echo 'and write your ngrok auth token there'"  >> /home/$USER/ngrok_config.sh
+	echo "echo '========'"  >  /home/$USER/ngrok_config.sh
+	echo "echo 'You will have to amend config file: ngrok.yml'"                 >> /home/$USER/ngrok_config.sh
+	echo "echo 'and write your ngrok auth token there'"                         >> /home/$USER/ngrok_config.sh
 	echo "echo 'Issue command: ngrok config add-authtoken <your ngrok token>'"  >> /home/$USER/ngrok_config.sh
-	echo "echo 'Then, run the command: ngrok http 11434' "   >> /home/$USER/ngrok_config.sh 
-	echo "echo 'where, 11434, is your example web-app ip'"   >> /home/$USER/ngrok_config.sh
-	echo "echo 'This command, if successful, will also output'"  >> /home/$USER/ngrok_config.sh
+	echo "echo 'Then, run the command: ngrok http 11434' "                      >> /home/$USER/ngrok_config.sh 
+	echo "echo 'where, 11434, is your example web-app ip'"                      >> /home/$USER/ngrok_config.sh
+	echo "echo 'This command, if successful, will also output'"                 >> /home/$USER/ngrok_config.sh
 	echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
-	echo "echo '========'" >> /home/$USER/ngrok_config.sh
+	echo "echo '========'"                                                      >> /home/$USER/ngrok_config.sh
 	chmod +x *.sh
-	
-	# My remote url is:
+		# My remote url is:
 	# https://connivently-unhusked-carri.ngrok-free.dev
 else
    echo "ngrok not installed"
 fi   
-
 
 ##########################
 ### ollama docker
