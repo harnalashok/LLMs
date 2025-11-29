@@ -21,7 +21,7 @@ echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
-echo "Install ngrok to tunnel access of local website"
+echo "Install  to tunnel access of local website"
 echo "Will install Ragflow docker"
 echo "Will upgrade Ragflow"
 echo "==========================="
@@ -522,7 +522,7 @@ chmod +x /home/$USER/*.sh
 
 
 echo "ngrok is used to make local web-apps accessible remotely through tunneling"
-echo "Shall I ngrok to access web-app remotely ? [Y,n]"    # Else docker chromadb may be installed
+echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
@@ -535,13 +535,19 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	  | sudo tee /etc/apt/sources.list.d/ngrok.list \
 	  && sudo apt update \
 	  && sudo apt install ngrok
+	echo "ngrok is installed"
 	
 	# Run the following command to add your authtoken to the default ngrok.yml configuration file.
-	ngrok config add-authtoken <ngrok token>
-	
-	# Run the following in the command line.
-	# To access port 11434 remotely
-	ngrok http 11434
+	echo "echo '========'" > /home/$USER/ngrok_config.sh
+	echo "echo 'You will have to amend config file: ngrok.yml'"  >> /home/$USER/ngrok_config.sh
+	echo "echo 'and write your ngrok auth token there'"  >> /home/$USER/ngrok_config.sh
+	echo "echo 'Issue command: ngrok config add-authtoken <your ngrok token>'"  >> /home/$USER/ngrok_config.sh
+	echo "echo 'Then, run the command: ngrok http 11434' "   >> /home/$USER/ngrok_config.sh 
+	echo "echo 'where, 11434, is your example web-app ip'"   >> /home/$USER/ngrok_config.sh
+	echo "echo 'This command, if successful, will also output'"  >> /home/$USER/ngrok_config.sh
+	echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
+	echo "echo '========'" >> /home/$USER/ngrok_config.sh
+	chmod +x *.sh
 	
 	# My remote url is:
 	# https://connivently-unhusked-carri.ngrok-free.dev
