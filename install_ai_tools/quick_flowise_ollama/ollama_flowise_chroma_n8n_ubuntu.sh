@@ -373,6 +373,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			sudo apt update -y
 			# Install Google Antigravity
 			sudo apt install antigravity
+			sudo apt autoremove -y
 			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
 		else	
 			echo "Google antigravity not installed"
