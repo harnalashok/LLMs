@@ -358,7 +358,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 cd /home/$USER
 # Only if anaconda is installed:
 if [  -f /home/$USER/anaconda_installed.txt ]; then
-	if [  -f /home/$USER/antigravity_installed.txt ]; then
+	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
 		echo "Shall I latest Google Antigravity? [Y,n]"    
 		read input
 		input=${input:-Y}
