@@ -375,6 +375,15 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			sudo apt install antigravity
 			sudo apt autoremove -y
 			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
+			echo " "
+			echo "  "
+			echo "==========="
+			echo "Google antigravity is installed"
+			echo "It will now be available in Ubuntu Start/Application Menu"
+			echo "You can also launch it by command: antigravity"
+			echo "============"
+			echo " "
+			sleep 5
 		else	
 			echo "Google antigravity not installed"
 		fi	
