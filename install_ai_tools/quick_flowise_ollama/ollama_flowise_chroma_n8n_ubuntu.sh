@@ -19,6 +19,7 @@ echo "Installs xinference"
 echo "Installs AutoGen Studio"
 echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
+echo "Install Google antigravity"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
 echo "Install  to tunnel access of local website"
@@ -316,6 +317,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
+	echo "To install Google Antigravity one does need anaconda"
 	echo "Shall I latest anaconda? [Y,n]"    
 	read input
 	input=${input:-Y}
@@ -346,6 +348,39 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	    echo "Anaconda not installed"
 	 fi
  fi
+
+###########################
+# Install Google Antigravity
+#   Anaconda installation is a must
+# https://askubuntu.com/a/841224
+###########################
+
+cd /home/$USER
+# Only if anaconda is installed:
+if [  -f /home/$USER/anaconda_installed.txt ]; then
+	if [  -f /home/$USER/antigravity_installed.txt ]; then
+		echo "Shall I latest Google Antigravity? [Y,n]"    
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+			#  create a directory for keyrings
+			sudo mkdir -p /etc/apt/keyrings
+			# Download and add Google's signing key
+			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/antigravity-repo-key.gpg
+			# Add the Antigravity repository to your sources list
+			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
+			# Update your package cach
+			sudo apt update -y
+			# Install Google Antigravity
+			sudo apt install antigravity
+			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
+		else	
+			echo "Google antigravity not installed"
+		fi	
+	fi
+fi
+
+
  
 #####################3
 # portrainer docker
