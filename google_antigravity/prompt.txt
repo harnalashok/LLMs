@@ -1,0 +1,3 @@
+Prompt used in antigravity	
+============
+	Read the dataset healthcare.csv. Description about the dataset is given in the file aboutData.txt. Apply RandomForest to perform predictive analysis on this dataset to make predictions about Disease. You can use among others scikit, pandas and numpy libraries. After analysis has been performed and model created, develop a user interface where when patents age, symptopms and gender are inputted, the interface uses the model to predict the disease the patent is having.
