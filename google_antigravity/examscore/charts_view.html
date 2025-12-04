@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Score Analysis Charts</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .chart-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .chart-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exam Score Analysis Results</h1>
+
+    <div class="container">
+        <!-- Q1 -->
+        <div class="chart-card">
+            <h2>Q1: Sleep Hours vs Exam Score</h2>
+            <img src="charts/q1_sleep_hours_vs_score.png" alt="Sleep Hours vs Exam Score">
+        </div>
+        <div class="chart-card">
+            <h2>Q1: Sleep Quality vs Exam Score</h2>
+            <img src="charts/q1_sleep_quality_vs_score.png" alt="Sleep Quality vs Exam Score">
+        </div>
+
+        <!-- Q2 -->
+        <div class="chart-card">
+            <h2>Q2: Sleep Hours vs Exam Score (by Gender)</h2>
+            <img src="charts/q2_gender_sleep_hours_vs_score.png" alt="Sleep Hours vs Exam Score by Gender">
+        </div>
+        <div class="chart-card">
+            <h2>Q2: Sleep Quality vs Exam Score (by Gender)</h2>
+            <img src="charts/q2_gender_sleep_quality_vs_score.png" alt="Sleep Quality vs Exam Score by Gender">
+        </div>
+
+        <!-- Q3 -->
+        <div class="chart-card">
+            <h2>Q3: Attendance vs Sleep Hours</h2>
+            <img src="charts/q3_attendance_vs_sleep_hours.png" alt="Attendance vs Sleep Hours">
+        </div>
+        <div class="chart-card">
+            <h2>Q3: Attendance vs Sleep Quality</h2>
+            <img src="charts/q3_attendance_vs_sleep_quality.png" alt="Attendance vs Sleep Quality">
+        </div>
+
+        <!-- Q4 -->
+        <div class="chart-card">
+            <h2>Q4: Internet Access vs Exam Score</h2>
+            <img src="charts/q4_internet_access_vs_score.png" alt="Internet Access vs Exam Score">
+        </div>
+
+        <!-- Q5 -->
+        <div class="chart-card">
+            <h2>Q5: Class Attendance by Course</h2>
+            <img src="charts/q5_course_attendance.png" alt="Class Attendance by Course">
+        </div>
+    </div>
+
+</body>
+</html>
