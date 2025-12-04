@@ -1,0 +1,16 @@
+Task
+=====
+Examine the dataset 'exam_score_prediction.csv'. Use python graph libraries such as seaborn, plotly, Matplotlib and others, as needed, to answer the following questions through charts. For every question first plan which chart-type or chart-types would be appropriate. Then, draw as many charts as are needed to answer the question. Write your interpretation of the chart after each visual. Display all the charts with interpretation in a browser window.
+
+Questions:
+==========
+	1.How does sleep_hours and sleep_quality affect exam_score?
+	2.Carry out the above analysis but gender-wise.
+	3.Is there any relationship between class_attendance and overall sleep behaviour?
+	4.How does internet_access impact exam_score?
+	5.Analyse class_attendance pattern course wise
+	
+	
+
+
+
