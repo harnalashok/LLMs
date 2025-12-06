@@ -1684,6 +1684,8 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo " "
 		echo "ragflow_installed.txt" > /home/$USER/ragflow_installed.txt
 	    docker logs -f docker-ragflow-gpu-1
+		# Prevent docker restarts on OS reboot
+        docker update --restart=no $(docker ps -a -q)
 	else
 	     echo "Ragflow will not be installed"
 	fi  
