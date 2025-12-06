@@ -1455,52 +1455,56 @@ echo " "
 cd /home/$USER
 echo " "
 echo " "
-echo "======="
-echo "Shall I upgrade RAGFlow docker? [Y,n]"   
-echo "The upgarde does not touch your data files"
-echo "After upgrade, RESET your broswer cookies"
-echo "========"
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-	echo " "
-	echo " "
-	# Stop ragflow
-	bash /home/$USER/stop_ragflow.sh
-	sleep 2
-	echo "1.0 Moving earlier ragflow folder"
-	sudo rm -rf /home/$USER/ragflow.old
-	mv /home/$USER/ragflow  /home/$USER/ragflow.old
-	echo "2.0 Cloning git repo"
-	git clone https://github.com/infiniflow/ragflow.git
-	cd /home/$USER/ragflow
-	# https://ragflow.io/docs/dev/upgrade_ragflow#upgrade-ragflow-to-the-most-recent-officially-published-release
-	# Switch to the latest, officially published release, e.g., v0.22.1:
-	echo "3.0 Will upgrade to ver 0.22.1"
-	sleep 5
-	# Switch working directory of git
-	git checkout -f v0.22.1
-	#
-	# Update ragflow/docker/.env:
-	cd /home/$USER/ragflow/docker
-    RAGFLOW_IMAGE=infiniflow/ragflow:v0.22.1
-	sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
-	sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
-	#
-	# Increase memory available for docker as files may be large (20gb)
-	echo "Will now set memory for ragflow docker container. It should be large enough"
-	sleep 4
-	# Use GPU
-	sed -i '1i DEVICE=gpu' .env
-	# Change RAM available
-	sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
-	# Update the RAGFlow image and restart RAGFlow:
-	docker compose -f docker-compose.yml pull
-    docker compose -f docker-compose.yml up -d
-	docker logs -f docker-ragflow-gpu-1
-else
-    echo "RagFlow Not upgraded"
-fi	
+# Upgrade only if earlier ragflow was installed
+cd /home/$USER
+if [  -f /home/$USER/ragflow_installed.txt ]; then
+	echo "======="
+	echo "Shall I upgrade RAGFlow docker? [Y,n]"   
+	echo "The upgarde does not touch your data files"
+	echo "After upgrade, RESET your broswer cookies"
+	echo "========"
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		echo " "
+		echo " "
+		# Stop ragflow
+		bash /home/$USER/stop_ragflow.sh
+		sleep 2
+		echo "1.0 Moving earlier ragflow folder"
+		sudo rm -rf /home/$USER/ragflow.old
+		mv /home/$USER/ragflow  /home/$USER/ragflow.old
+		echo "2.0 Cloning git repo"
+		git clone https://github.com/infiniflow/ragflow.git
+		cd /home/$USER/ragflow
+		# https://ragflow.io/docs/dev/upgrade_ragflow#upgrade-ragflow-to-the-most-recent-officially-published-release
+		# Switch to the latest, officially published release, e.g., v0.22.1:
+		echo "3.0 Will upgrade to ver 0.22.1"
+		sleep 5
+		# Switch working directory of git
+		git checkout -f v0.22.1
+		#
+		# Update ragflow/docker/.env:
+		cd /home/$USER/ragflow/docker
+	    RAGFLOW_IMAGE=infiniflow/ragflow:v0.22.1
+		sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
+		sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
+		#
+		# Increase memory available for docker as files may be large (20gb)
+		echo "Will now set memory for ragflow docker container. It should be large enough"
+		sleep 4
+		# Use GPU
+		sed -i '1i DEVICE=gpu' .env
+		# Change RAM available
+		sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
+		# Update the RAGFlow image and restart RAGFlow:
+		docker compose -f docker-compose.yml pull
+	    docker compose -f docker-compose.yml up -d
+		docker logs -f docker-ragflow-gpu-1
+	else
+	    echo "RagFlow Not upgraded"
+	fi	
+fi
 
 ##########################
 ### Install RAGflow
