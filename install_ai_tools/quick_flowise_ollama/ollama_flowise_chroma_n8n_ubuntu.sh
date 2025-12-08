@@ -1203,6 +1203,8 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    echo "docker exec -it   xinference  xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "  	>> /home/$USER/launch_xinference_model.sh
 		echo "echo '  '"                                       >> /home/$USER/launch_xinference_model.sh
 		echo "echo '  '"                                       >> /home/$USER/launch_xinference_model.sh
+		echo "echo '#Run following command to download qwen3'" >> /home/$USER/launch_xinference_model.sh
+		echo "#docker exec -it   xinference  xinference launch --model-name qwen3 --model-type LLM --model-engine vllm --model-format ggufv2 --size-in-billions 8 --quantization Q4_K_M --replica 1 --gpu_memory_utilization 0.7 "  	>> /home/$USER/launch_xinference_model.sh
 		echo "echo 'List of launched models'"                  >> /home/$USER/launch_xinference_model.sh
 		echo "docker exec -it   xinference  xinference list"   >> /home/$USER/launch_xinference_model.sh
 	    chmod +x *.sh
