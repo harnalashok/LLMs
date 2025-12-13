@@ -1,4 +1,4 @@
-ho#!/bin/bash
+#!/bin/bash
 
 # Last amended: 29th Nov, 2025
 
