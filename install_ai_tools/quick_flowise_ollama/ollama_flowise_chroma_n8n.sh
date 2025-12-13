@@ -64,7 +64,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
     chmod +x /home/$USER/*.sh
     echo " "
-    echo "Ubuntu upgraded ......"               
+    echo "Ubuntu upgraded ......"  
+    # Install uv
+	curl -LsSf https://astral.sh/uv/install.sh | sh
     # Script to stop all dockers
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
     echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
