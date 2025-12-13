@@ -91,6 +91,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "cd /home/$USER/"                                     | tee -a /home/$USER/stop_alldockers.sh
     echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
     echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
+	# Download script to create a new python venv
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh
     chmod +x *.sh   
     now_nvidia_driver_version=`modinfo nvidia | grep ^version`
 	# Folders for start/stop scripts
