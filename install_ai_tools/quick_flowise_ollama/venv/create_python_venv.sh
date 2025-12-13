@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /home/$USER
+
 # LAst amended: 13th Dec, 2025
 
 ##############
@@ -53,4 +55,5 @@ sleep 2
 
 cp /home/$USER/activate_$env_name.sh  /home/$USER/start/activate_$env_name.sh
 cp /home/$USER/activate_$env_name.sh  /home/$USER/stop/activate_$env_name.sh
+
  
