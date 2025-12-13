@@ -346,6 +346,9 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         echo "venv_installed.txt" > /home/$USER/venv_installed.txt
         # Required for spyder:
         sudo apt install pyqt5-dev-tools -y
+        # Download file that creates a fresh python enviroemnet
+        wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+        chmod +x *.sh   
         # Huggingface and  related
         #pip install huggingface_hub
         # cu124: is as per cuda version. Get cuda version from nvidia-smi
