@@ -3,7 +3,7 @@
 # Last amended: 23rd Oct, 2025
 
 echo "========script=============="
-echo "Will update Ubuntu"
+echo "Will update Ubuntu and install nodejs"
 echo "Will install cuda toolkit"
 echo "Will install docker"
 echo "Will install python venv"
@@ -65,7 +65,26 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     chmod +x /home/$USER/*.sh
     echo " "
     echo "Ubuntu upgraded ......"  
-    # Install uv
+    echo "  "
+	echo "  "
+	echo "===="
+	echo "Installing nodejs ver 22.x"
+	echo "===="
+	echo "  "
+	sleep 4
+	# First, update your package list
+    sudo apt update
+    # Install curl if you don't have it
+    sudo apt install curl -y
+    # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
+    # Replace '22.x' with the desired major version if needed
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    # Now install Node.js and npm
+    sudo apt install nodejs -y
+	echo "NodeJS installed"
+	echo " "
+	sleep 3
+	# Install uv
 	curl -LsSf https://astral.sh/uv/install.sh | sh
     # Script to stop all dockers
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
