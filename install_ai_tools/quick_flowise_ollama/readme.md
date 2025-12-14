@@ -1,5 +1,5 @@
 To quickly install dockers for flowise+ollama+chromadb+n8n follow this script       
-Press <b>F2</b> at boot time to change bios settings for secure boot (UEFI). Also use <b>Audit Mode</b>
+Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios settings screen) for secure boot (UEFI). Also use <b>Audit Mode</b>
 
 ```
   DIRECTORY=/home/$USER/Documents
