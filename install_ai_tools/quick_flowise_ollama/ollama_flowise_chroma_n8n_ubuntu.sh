@@ -1349,6 +1349,9 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	    sudo apt install /home/$USER/1234/code.deb  -y
 	    cd /home/$USER
 	    rm -rf /home/$USER/1234/
+		mkdir /home/$USER/Documents/vscode
+		cd /home/$USER/Documents/vscode
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
 		echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	    #    
 	    sleep 5
