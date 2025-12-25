@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 29th Nov, 2025
+# Last amended: 25th Dec, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -91,10 +91,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "cd /home/$USER/"                                     | tee -a /home/$USER/stop_alldockers.sh
     echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
     echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
-	# Download script to create a new python venv
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
-	chmod +x *.sh   
 	# Install uv
 	curl -LsSf https://astral.sh/uv/install.sh | sh
     now_nvidia_driver_version=`modinfo nvidia | grep ^version`
@@ -302,7 +298,9 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
         echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
         echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-        chmod +x /home/$USER/*.sh
+		# Download script to create python venv
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	    chmod +x /home/$USER/*.sh
         sleep 2
       
         cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
@@ -344,6 +342,9 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	        # Reload default profile
 	        source /home/$USER/.bashrc
 	        conda update conda -y
+			# Download script to create conda venv
+		    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+	        chmod +x *.sh  
 			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
 			reboot
 	     else
