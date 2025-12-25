@@ -84,10 +84,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
-	# Download script to create a new python venv
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
-	chmod +x *.sh  
 	# Install uv
 	curl -LsSf https://astral.sh/uv/install.sh | sh
     # Script to stop all dockers
@@ -373,7 +369,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         sudo apt install pyqt5-dev-tools -y
         # Download file that creates a fresh python enviroemnet
         wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-        chmod +x *.sh   
+		chmod +x *.sh   
         # Huggingface and  related
         #pip install huggingface_hub
         # cu124: is as per cuda version. Get cuda version from nvidia-smi
@@ -425,6 +421,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
         # Reload default profile
         source /home/$USER/.bashrc
         conda update conda -y
+		# Download script to create conda venv
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+	    chmod +x *.sh  
      else
         echo "Anaconda is already installed in /home/$USER/anaconda3"
      fi   
