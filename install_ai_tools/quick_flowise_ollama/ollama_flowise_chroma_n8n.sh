@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 14th Dec, 2025
+# Last amended: 25th Dec, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu and install nodejs"
@@ -409,15 +409,17 @@ if [[ $input == "Y" || $input == "y" ]]; then
     DIRECTORY=/home/$USER/anaconda3
     if [ ! -d "$DIRECTORY" ]; then
         CONTREPO=https://repo.continuum.io/archive/
+		# In WSL Downloads folder does not exist
+		mkdir /home/$USER/Downloads
         # Stepwise filtering of the html at $CONTREPO
         # Get the topmost line that matches our requirements, extract the file name.
         ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-        wget -O ~/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-        bash ~/Downloads/anaconda.sh -b -p $HOME/anaconda3
-        rm ~/Downloads/anaconda.sh
-        echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bashrc 
+        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+        bash /home/$USER//Downloads/anaconda.sh -b -p $HOME/anaconda3
+        rm /home/$USER/Downloads/anaconda.sh
+        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
         # Reload default profile
-        source ~/.bashrc
+        source /home/$USER/.bashrc
         conda update conda -y
      else
         echo "Anaconda is already installed in /home/$USER/anaconda3"
