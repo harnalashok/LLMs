@@ -305,6 +305,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
       
         cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
         cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+		reboot
      else
         echo "Python venv not installed"
      fi   
@@ -390,6 +391,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "============"
 			echo " "
 			sleep 5
+			reboot
 		else	
 			echo "Google antigravity not installed"
 		fi	
@@ -442,6 +444,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
+	   reboot
 	else
 	   echo "Portainer not installed"
 	fi 
@@ -487,6 +490,7 @@ if [ ! -f /home/$USER/chromadb_installed.txt ]; then
 	    echo " "                                       | tee -a /home/$USER/error.log
 		echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
 	    sleep 3
+		reboot
 	else
 	    echo "Skipping install of chromadb docker"
 	fi   
@@ -506,7 +510,6 @@ chmod +x /home/$USER/*.sh
 cd /home/$USER
 echo " "
 echo " "
-cd /home/$USER
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "------------"   
 	echo "Shall I install n8n docker? [Y,n]"    
@@ -555,6 +558,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
 	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
 		echo "n8n_installed" > /home/$USER/n8n_installed.txt
+		reboot
 	else
 	    echo "n8n docker will not be installed"
 	fi
@@ -573,42 +577,51 @@ chmod +x /home/$USER/*.sh
 ##########################
 
 echo "ngrok is used to make local web-apps accessible remotely through tunneling"
-echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-	# Install ngrok
-	# https://dashboard.ngrok.com/get-started/setup/linux
-	echo "Installing ngrok..."
-	sleep 3
-	curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
-	  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-	  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
-	  | sudo tee /etc/apt/sources.list.d/ngrok.list \
-	  && sudo apt update \
-	  && sudo apt install ngrok
-	echo " "
-	echo "======"
-	echo "ngrok is installed. Next use: ./ngrok_config.sh"
-	echo "======"
-	sleep 4
-	# Run the following command to add your authtoken to the default ngrok.yml configuration file.
-	echo "echo '========'"  >  /home/$USER/ngrok_config.sh
-	echo "echo 'You will have to amend config file: ngrok.yml'"                 >> /home/$USER/ngrok_config.sh
-	echo "echo 'and write your ngrok auth token there'"                         >> /home/$USER/ngrok_config.sh
-	echo "echo 'Issue command: ngrok config add-authtoken <your ngrok token>'"  >> /home/$USER/ngrok_config.sh
-	echo "echo 'Then, run the command: ngrok http 11434' "                      >> /home/$USER/ngrok_config.sh 
-	echo "echo 'where, 11434, is your example web-app ip'"                      >> /home/$USER/ngrok_config.sh
-	echo "echo 'This command, if successful, will also output'"                 >> /home/$USER/ngrok_config.sh
-	echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
-	echo "echo 'ngrok ref: https://ngrok.com/docs/agent/cli'"                   >> /home/$USER/ngrok_config.sh
-	echo "echo '========'"                                                      >> /home/$USER/ngrok_config.sh
-	chmod +x *.sh
-		# My remote url is:
-	# https://connivently-unhusked-carri.ngrok-free.dev
+cd /home/$USER
+echo " "
+echo " "
+if [ ! -f /home/$USER/ngrok_installed.txt ]; then
+	echo "------------"   
+    echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		# Install ngrok
+		# https://dashboard.ngrok.com/get-started/setup/linux
+		echo "Installing ngrok..."
+		sleep 3
+		curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+		  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+		  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
+		  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+		  && sudo apt update \
+		  && sudo apt install ngrok
+		echo " "
+		echo "======"
+		echo "ngrok is installed. Next use: ./ngrok_config.sh"
+		echo "======"
+		sleep 4
+		# Run the following command to add your authtoken to the default ngrok.yml configuration file.
+		echo "echo '========'"  >  /home/$USER/ngrok_config.sh
+		echo "echo 'You will have to amend config file: ngrok.yml'"                 >> /home/$USER/ngrok_config.sh
+		echo "echo 'and write your ngrok auth token there'"                         >> /home/$USER/ngrok_config.sh
+		echo "echo 'Issue command: ngrok config add-authtoken <your ngrok token>'"  >> /home/$USER/ngrok_config.sh
+		echo "echo 'Then, run the command: ngrok http 11434' "                      >> /home/$USER/ngrok_config.sh 
+		echo "echo 'where, 11434, is your example web-app ip'"                      >> /home/$USER/ngrok_config.sh
+		echo "echo 'This command, if successful, will also output'"                 >> /home/$USER/ngrok_config.sh
+		echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
+		echo "echo 'ngrok ref: https://ngrok.com/docs/agent/cli'"                   >> /home/$USER/ngrok_config.sh
+		echo "echo '========'"                                                      >> /home/$USER/ngrok_config.sh
+		chmod +x *.sh
+			# My remote url is:
+		# https://connivently-unhusked-carri.ngrok-free.dev
+		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
+	else
+	   echo "ngrok not installed"
+	fi  
 else
-   echo "ngrok not installed"
-fi   
+   echo "ngrok is installed"
+fi
 
 ##########################
 ### ollama docker
