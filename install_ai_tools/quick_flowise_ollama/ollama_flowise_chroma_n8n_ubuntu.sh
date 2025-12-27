@@ -763,12 +763,15 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
 	   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
+	   chmod +x /home/$USER/*.sh
+       sleep 2
+	   reboot
 	 else
 	   echo "Flowise docker will not be installed"
 	 fi  
  fi
 
-chmod +x /home/$USER/*.sh
+
 chmod +x /home/$USER/*.sh
 
 
