@@ -730,8 +730,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo " "                                                   >> /home/$USER/start_flowise.sh
 	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
 	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+	   echo "Access flowise as: http://localhost:3000'"           >> /home/$USER/start_flowise.sh
 	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
 	   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
+	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
 	   # Stop script
 	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
@@ -746,6 +748,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   git clone https://github.com/FlowiseAI/Flowise.git
 	   cd Flowise/
 	   sudo docker build --no-cache -t flowise .
+	   # The '--network host' option removes network isolation between the container and
+	   #   the Docker host machine, meaning the container directly shares the host's networking stack
+	   # The container operates as if it were a process running directly on the host machine,
+	   #   using the host's IP address and network interfaces.  
 	   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
 	   #    docker run -d --name flowise -p 3000:3000 --network host flowise
 	   echo "In future to start/stop containers, proceed, as:"
@@ -755,7 +761,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo " Also, check all containers available, as:"
 	   echo "             docker ps -a "     
 	   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
-	   #ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
+	   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
 	 else
 	   echo "Flowise docker will not be installed"
