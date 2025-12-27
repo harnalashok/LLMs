@@ -769,8 +769,8 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	 else
 	   echo "Flowise docker will not be installed"
 	 fi  
+	  echo "Flowise docker already installed"
  fi
-
 
 chmod +x /home/$USER/*.sh
 
