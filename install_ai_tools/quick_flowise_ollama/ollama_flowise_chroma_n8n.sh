@@ -905,6 +905,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
     sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
     sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
+	sleep 3
+	wsl.exe --shutdown
  else
    echo "Postgres not installed"
  fi  
