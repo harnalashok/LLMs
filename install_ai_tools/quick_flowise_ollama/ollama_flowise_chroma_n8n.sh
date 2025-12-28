@@ -650,23 +650,21 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   # Install Flowise through docker"
 	   # Ref: https://docs.flowiseai.com/getting-started
 	   echo "Installing flowise docker. Takes time.."             
-	   # Start script
-	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
-	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
-	   echo "Access flowise as: http://localhost:3000'"           >> /home/$USER/start_flowise.sh
-	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
-	   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
-	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	   # Stop script
+	    # logs script
+	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
+	   echo " "                                                   >> /home/$USER/logs_flowise.sh
+	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
+	   #echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
+	   #echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
+	   #echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
+	   echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
+ 	   # Stop script
 	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
 	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
 	   echo "cd ~/"                                              >> /home/$USER/stop_docker_flowise.sh
 	   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
 	   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
-	   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
+	   echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
 	   sleep 4
 	   cd ~/
@@ -677,12 +675,15 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   #   the Docker host machine, meaning the container directly shares the host's networking stack
 	   # The container operates as if it were a process running directly on the host machine,
 	   #   using the host's IP address and network interfaces.  
-	   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
-	   #    docker run -d --name flowise -p 3000:3000 --network host flowise
+	   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+	   #      docker run -d --name flowise -p 3000:3000 --network host flowise
+	   cd Flowise/docker
+	   cp .env.example .env
+	   docker compose up -d
 	   echo "In future to start/stop containers, proceed, as:"
 	   echo "            cd /home/$USER/Flowise"                  
-	   echo "            docker start flowise"                    
-	   echo "            docker stop flowise"                     
+	   echo "            docker start docker-flowise-1"                    
+	   echo "            docker stop docker-flowise-1"                     
 	   echo " Also, check all containers available, as:"
 	   echo "             docker ps -a "     
 	   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
@@ -693,9 +694,9 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   wsl --shutdown
 	 else
 	   echo "Flowise docker will not be installed"
-	 fi 
-	 echo "Flowise docker already installed"
- fi 
+	 fi  
+	  echo "Flowise docker already installed"
+ fi
 
 chmod +x /home/$USER/*.sh
 
