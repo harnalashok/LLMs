@@ -116,7 +116,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         echo "=>   ./ollama_flowise_chroma_n8n.sh"
         echo "=========="
         sleep 15
-        reboot
+        wsl.exe --shutdown
     fi
     wsl.exe --shutdown
     reboot
