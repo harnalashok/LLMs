@@ -630,11 +630,46 @@ if [[ $input == "Y" || $input == "y" ]]; then
       #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
       # network host would be local mashine
       docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+	  sleep 2
+	  wsl.exe --shutdown
 else
         echo "Skipping install of ollama docker"
 fi
 
 chmod +x /home/$USER/*.sh
+
+##########################
+### Download some minimum ollama models
+##########################
+
+echo " "
+echo " "
+if [ ! -f /home/$USER/models_installed.txt ]; then
+echo "------------"   
+echo "Shall I download a few ollama models? [Y,n]"
+read input
+input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	      cd /home/$USER/
+	      # Start ollama docker in future
+	      docker start ollama 
+		  echo "Pulling bge-m3"
+	      docker exec -it ollama ollama pull bge-m3
+		  echo "Pulling llama3.2"
+		  docker exec -it ollama ollama pull llama3.2:latest
+		  echo " "
+		  echo " "
+		  #ollama list
+		  echo "models installed" > /home/$USER/models_installed.txt
+		  sleep 2
+		  wsl.exe --shutdown
+	else
+	        echo "Skipping download of ollama models"
+	fi
+fi
+
+chmod +x /home/$USER/*.sh
+
 
 
 #####################3
