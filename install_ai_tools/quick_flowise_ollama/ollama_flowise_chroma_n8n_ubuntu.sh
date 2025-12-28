@@ -736,7 +736,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
  	   # Stop script
 	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
 	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
-	   echo "cd ~/"                                              >> /home/$USER/stop_docker_flowise.sh
+	   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
 	   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
 	   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
 	   echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
@@ -752,9 +752,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   #   using the host's IP address and network interfaces.  
 	   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
 	   #      docker run -d --name flowise -p 3000:3000 --network host flowise
-	   cd Flowise/docker
+	   cd /home/$USER/Flowise/docker
 	   cp .env.example .env
 	   docker compose up -d
+	   cd /home/$USER/
 	   echo "In future to start/stop containers, proceed, as:"
 	   echo "            cd /home/$USER/Flowise"                  
 	   echo "            docker start docker-flowise-1"                    
@@ -765,7 +766,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
 	   chmod +x /home/$USER/*.sh
-       sleep 2
+	   sleep 2
 	   reboot
 	 else
 	   echo "Flowise docker will not be installed"
