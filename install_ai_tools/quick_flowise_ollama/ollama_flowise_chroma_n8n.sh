@@ -388,6 +388,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
       
         cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
         cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+		wsl.exe --shutdown
      else
         echo "Python venv not installed"
      fi   
@@ -424,6 +425,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 		# Download script to create conda venv
 		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
 	    chmod +x *.sh  
+		wsl.exe --shutdown
      else
         echo "Anaconda is already installed in /home/$USER/anaconda3"
      fi   
@@ -514,6 +516,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "------------"                            | tee -a /home/$USER/error.log
     echo " "                                       | tee -a /home/$USER/error.log
     sleep 3
+	wsl.exe --shutdown
 else
     echo "Skipping install of chromadb docker"
 fi   
@@ -579,6 +582,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
     cd ~/
     #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
     #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
+	sleep 3
+	wsl.exe --shutdown
 else
     echo "n8n docker will not be installed"
 fi
