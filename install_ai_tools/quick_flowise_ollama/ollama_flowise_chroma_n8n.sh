@@ -682,7 +682,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   #   using the host's IP address and network interfaces.  
 	   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
 	   #      docker run -d --name flowise -p 3000:3000 --network host flowise
-	   cd Flowise/docker
+	   cd /home/$USER/Flowise/docker
 	   cp .env.example .env
 	   docker compose up -d
 	   echo "In future to start/stop containers, proceed, as:"
