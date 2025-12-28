@@ -725,17 +725,15 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   # Install Flowise through docker"
 	   # Ref: https://docs.flowiseai.com/getting-started
 	   echo "Installing flowise docker. Takes time.."             
-	   # Start script
-	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
-	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
-	   echo "Access flowise as: http://localhost:3000'"           >> /home/$USER/start_flowise.sh
-	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
-	   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
-	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	   # Stop script
+	    # logs script
+	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
+	   echo " "                                                   >> /home/$USER/logs_flowise.sh
+	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
+	   echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
+	   echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
+	   echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
+	   echo "docker logs flowise"                                >> /home/$USER/logs_flowise.sh
+ 	   # Stop script
 	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
 	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
 	   echo "cd ~/"                                              >> /home/$USER/stop_docker_flowise.sh
