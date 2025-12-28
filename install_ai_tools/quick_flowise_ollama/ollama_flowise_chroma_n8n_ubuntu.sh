@@ -724,7 +724,17 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   cd /home/$USER/
 	   # Install Flowise through docker"
 	   # Ref: https://docs.flowiseai.com/getting-started
-	   echo "Installing flowise docker. Takes time.."             
+	   echo "Installing flowise docker. Takes time.."          
+	   # Start script
+	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
+	   echo " "                                                   >> /home/$USER/start_flowise.sh
+	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
+	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+	   echo "echo 'Access flowise as: http://localhost:3000'"           >> /home/$USER/start_flowise.sh
+	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
+	   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
+	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
+	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
 	    # logs script
 	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
 	   echo " "                                                   >> /home/$USER/logs_flowise.sh
