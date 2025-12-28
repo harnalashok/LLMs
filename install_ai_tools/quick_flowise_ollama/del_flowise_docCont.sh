@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+docker stop flowise
 # Delete container
 docker rm flowise
 # Delete image
