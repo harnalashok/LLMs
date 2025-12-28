@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# LAst amended: 28th Dec, 2025
+
 docker stop flowise
 # Delete container
 docker rm flowise
