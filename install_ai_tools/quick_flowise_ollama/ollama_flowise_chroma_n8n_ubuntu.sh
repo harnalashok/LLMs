@@ -750,8 +750,11 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   #   the Docker host machine, meaning the container directly shares the host's networking stack
 	   # The container operates as if it were a process running directly on the host machine,
 	   #   using the host's IP address and network interfaces.  
-	   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
-	   #    docker run -d --name flowise -p 3000:3000 --network host flowise
+	   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+	   #      docker run -d --name flowise -p 3000:3000 --network host flowise
+	   cd Flowise/docker
+	   cp .env.example .env
+	   docker compose up -d
 	   echo "In future to start/stop containers, proceed, as:"
 	   echo "            cd /home/$USER/Flowise"                  
 	   echo "            docker start flowise"                    
