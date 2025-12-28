@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 25th Dec, 2025
+# Last amended: 28th Dec, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu and install nodejs"
