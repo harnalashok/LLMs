@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 28th Dec, 2025
+# Last amended: 29th Dec, 2025
 
 echo "========script=============="
 echo "Will update Ubuntu and install nodejs"
@@ -604,18 +604,26 @@ if [[ $input == "Y" || $input == "y" ]]; then
       cd /home/$USER/
       # Start ollama docker in future
       echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
-      echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-      echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
-      echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
-      echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
-      echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
-      echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
-      echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
-      echo "echo '6. Test ollama, as: http://host.docker.internal:11434'"                                       >> /home/$USER/start_ollama.sh
-      echo "echo '   Or, as: http://hostip:11434 (hostip maybe: 172.17.0.1 but NOT 127.0.0.1)'"                 >> /home/$USER/start_ollama.sh
-      echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
-      echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
-      echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
+	  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	  echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
+	  echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
+	  echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
+	  echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
+	  echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
+	  echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
+	  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	  echo "echo '========'"                                                                                     >> /home/$USER/start_ollama.sh
+	  echo "echo '6. Access ollama, as:'"                                                                       >> /home/$USER/start_ollama.sh
+	  echo "echo '       http://host.docker.internal:11434'"                                                    >> /home/$USER/start_ollama.sh
+	  echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
+	  echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
+	  echo "echo '    Get your IP as:'"                                                                         >> /home/$USER/start_ollama.sh
+	  echo "echo '         hostnae -I'"                                                                         >> /home/$USER/start_ollama.sh
+	  echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
+	  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	  echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
+	  echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
+	  echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh    
       # Script to stop ollama
       echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
       echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
