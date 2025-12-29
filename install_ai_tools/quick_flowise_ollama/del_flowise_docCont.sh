@@ -20,6 +20,7 @@ sleep 2
 docker start docker-flowise-1
 sleep 2
 netstat -aunt | grep 3000
+ 
 
 
 # Create files
@@ -49,3 +50,4 @@ echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_do
 echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
 echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
 echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
+ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
