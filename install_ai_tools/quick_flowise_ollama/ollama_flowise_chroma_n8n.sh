@@ -696,11 +696,17 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
 	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
 	   echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
+	   echo " "                                                   >> /home/$USER/start_flowise.sh
+	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+	   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
+	   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
+	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+	   echo " "                                                   >> /home/$USER/start_flowise.sh
 	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
 	   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
 	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	    # logs script
+	   # logs script
 	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
 	   echo " "                                                   >> /home/$USER/logs_flowise.sh
 	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
