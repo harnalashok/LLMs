@@ -51,4 +51,4 @@ echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_do
 echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
 echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
 ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
-chmdo +x *.sh
+chmod +x *.sh
