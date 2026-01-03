@@ -298,7 +298,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     sudo systemctl disable docker.service
     sudo systemctl disable containerd.service
     #
-    # PReparing docker for GPU
+    # Preparing docker for GPU
     # Ref StackOverflow: https://stackoverflow.com/a/77269071
     # Ref: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation
     # 1.0 Configure the repository (it is one command):
@@ -617,7 +617,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	  echo "echo '       http://host.docker.internal:11434'"                                                    >> /home/$USER/start_ollama.sh
 	  echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
 	  echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
-	  echo "echo '    Get your IP as:'"                                                                         >> /home/$USER/start_ollama.sh
+	  echo "echo '    Get your IP (in either WSL or in ubuntu) as the Ist address of:'"                         >> /home/$USER/start_ollama.sh
 	  echo "echo '         hostnae -I'"                                                                         >> /home/$USER/start_ollama.sh
 	  echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
 	  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
