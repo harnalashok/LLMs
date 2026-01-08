@@ -1744,6 +1744,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    # Change RAM available
 	    sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
 	    docker compose -f docker-compose.yml up -d
+		sleep 80
 	    echo " "
 	    echo " "
 	    echo "==========="
