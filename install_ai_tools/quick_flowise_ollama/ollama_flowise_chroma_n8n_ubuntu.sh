@@ -1602,8 +1602,8 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
 	    echo "echo 'RagFlow port is 800'"                          >> /home/$USER/start_ragflow.sh
 	    echo "echo 'Access ragflow, as: http://<hostIP>:800'"       >> /home/$USER/start_ragflow.sh
-		echo "echo 'Your IP is'"                                   >> /home/$USER/start_ragflow.sh
-		echo "hostname -I | awk ' {print \$1 } '                   >> /home/$USER/start_ragflow.sh
+		echo "echo 'Your IP is' "                                   >> /home/$USER/start_ragflow.sh
+		echo "hostname -I | awk ' {print \$1 } '"                   >> /home/$USER/start_ragflow.sh
 	    echo "echo 'Check docker logs as: docker-ragflow-gpu-1'"   >> /home/$USER/start_ragflow.sh
 	    echo "echo 'Memory parameter: MEM_LIMIT is in ragflow/docker/.env file'" >> /home/$USER/start_ragflow.sh
 	    echo "echo '======'"                                       >> /home/$USER/start_ragflow.sh
