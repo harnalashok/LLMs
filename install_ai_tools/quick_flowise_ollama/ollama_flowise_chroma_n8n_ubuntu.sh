@@ -1506,7 +1506,7 @@ fi
 
 
 ##########################
-### Upgrade 
+### Upgrade ragflow
 # Ref: https://ragflow.io/docs/dev/upgrade_ragflow
 ##########################
 
@@ -1538,15 +1538,15 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 		git clone https://github.com/infiniflow/ragflow.git
 		cd /home/$USER/ragflow
 		# https://ragflow.io/docs/dev/upgrade_ragflow#upgrade-ragflow-to-the-most-recent-officially-published-release
-		# Switch to the latest, officially published release, e.g., v0.22.1:
-		echo "3.0 Will upgrade to ver 0.22.1"
+		# Switch to the latest, officially published release, e.g., v0.23.1:
+		echo "3.0 Will upgrade to ver 0.23.1"
 		sleep 5
 		# Switch working directory of git
-		git checkout -f v0.22.1
+		git checkout -f v0.23.1
 		#
 		# Update ragflow/docker/.env:
 		cd /home/$USER/ragflow/docker
-	    RAGFLOW_IMAGE=infiniflow/ragflow:v0.22.1
+	    RAGFLOW_IMAGE=infiniflow/ragflow:v0.23.1
 		sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
 		sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
 		#
