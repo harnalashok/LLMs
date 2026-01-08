@@ -23,8 +23,8 @@ echo "Install Google antigravity"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
 echo "Install  to tunnel access of local website"
-echo "Will install Ragflow docker"
-echo "Will upgrade Ragflow"
+echo "Will install  docker"
+echo "Will upgrade "
 echo "==========================="
 sleep 2
 
@@ -1506,7 +1506,7 @@ fi
 
 
 ##########################
-### Upgrade RAGflow
+### Upgrade 
 # Ref: https://ragflow.io/docs/dev/upgrade_ragflow
 ##########################
 
@@ -1722,19 +1722,22 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    #
 	    chmod +x /home/$USER/*.sh
 	    chmod +x /home/$USER/*.sh
-	    #
+	    # Installation script
 	    sudo sysctl -w vm.max_map_count=262144
 	    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 	    git clone https://github.com/infiniflow/ragflow.git
 	    
 	    cd ragflow/docker
+		# which version to install
+		git checkout v0.23.1
+		# Change some port numbers as per our conveience
 	    sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
 	    sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
 	    #
 	    # Increase memory available for docker as files may be large (20gb)
 	    echo "Will now set memory for ragflow docker container. It should be large enough"
 	    sleep 4
-	    # Use GPU
+	    # Use GPU for deepdoc
 	    sed -i '1i DEVICE=gpu' .env
 	    # Change RAM available
 	    sed -i '/MEM_LIMIT=8073741824/c\MEM_LIMIT=20073741824' /home/$USER/ragflow/docker/.env
