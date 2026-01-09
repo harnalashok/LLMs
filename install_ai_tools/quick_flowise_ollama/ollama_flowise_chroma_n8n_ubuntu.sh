@@ -23,8 +23,8 @@ echo "Install Google antigravity"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
 echo "Install  to tunnel access of local website"
-echo "Will install  docker"
-echo "Will upgrade "
+echo "Will install ragflow docker"
+echo "Will upgrade ragflow"
 echo "==========================="
 sleep 2
 
