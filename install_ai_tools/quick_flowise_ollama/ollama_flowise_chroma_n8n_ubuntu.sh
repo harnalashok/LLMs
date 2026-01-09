@@ -653,7 +653,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 		  echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
 	      echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
 		  echo "echo '    Get your IP as:'"                                                                         >> /home/$USER/start_ollama.sh
-		  echo "echo '         hostnae -I'"                                                                         >> /home/$USER/start_ollama.sh
+		  echo "echo '         hostname -I'"                                                                        >> /home/$USER/start_ollama.sh
 		  echo "echo '    Your IP is:' "                                   										    >> /home/$USER/start_ollama.sh
 		  echo "hostname -I | awk ' {print \$1 } '"                  												>> /home/$USER/start_ollama.sh
 		  echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
