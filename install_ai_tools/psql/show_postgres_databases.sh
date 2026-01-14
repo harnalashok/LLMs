@@ -1,5 +1,17 @@
 #!/bin/bash
+echo " " 
+echo " "
+echo "============="
+echo 'Existing postgresql users are:.'
+echo "============="
 
+sudo -u postgres psql -c "\du" 
+echo " " 
+echo " "
+echo "============="
+echo 'Existing postgresql database owners are:.'
+echo "============="
+sudo -u postgres psql -c "\l"
 echo " " 
 echo " "
 echo "============="
