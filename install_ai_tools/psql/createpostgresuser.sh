@@ -26,9 +26,14 @@ echo " "
 echo "BBB."
 echo "Create database as:"
 echo '          CREATE DATABASE mydatabase WITH OWNER = myuser;'
-echo " "
-echo "++++++++++++++++++++"
+echo "  "
 echo "CCC."
+echo "Enable pgvector on your database directly from command line as:"
+echo '          sudo -u postgres psql -c "CREATE EXTENSION vector;" -d mydatabase;'
+echo " "
+echo "  "
+echo "++++++++++++++++++++"
+echo "DDD."
 echo "Within a database, you can create a schema, as:"
 echo '          a. First, connect to database:  \c mydatabase  '
 echo "          b. Then,  "
