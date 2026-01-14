@@ -1,6 +1,6 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-echo "Change postgresql.conf and pg_hba.conf and make them highly permissive"
+echo "Change postgresql.conf and pg_hba.conf and make postgresql highly permissive"
 sleep 4
 version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')')
 cd /etc/postgresql/$version/main
