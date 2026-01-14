@@ -921,6 +921,7 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
 	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
 	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
 	    chmod +x /home/$USER/*.sh
 	    
 		# Create symlinks
@@ -930,6 +931,7 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
 	    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
 	    ln -sT /home/$USER/psql.sh                       psql.sh
+		ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
 	    cd /home/$USER
 	    
 		###########
