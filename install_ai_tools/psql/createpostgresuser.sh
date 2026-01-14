@@ -1,9 +1,5 @@
 #!/bin/bash
- 
-echo " "
-echo 'Ref: https://stackoverflow.com/a/2172588'
-echo "https://www.postgresql.org/docs/current/ddl-schemas.html"
-echo " "
+# echo "https://www.postgresql.org/docs/current/ddl-schemas.html"
 echo "  "
 echo "========="
 echo "User 'ashok' and database 'askok' already exist"
@@ -15,44 +11,37 @@ echo " "
 sleep 5
 echo "============"
 echo 'Open psql shell for operations'
-echo '  And enter commands AAA, BBB
-echo '    Then, on command line, execute CCC
+echo '  And enter commands AAA, BBB'
+echo '    Then, on command line, execute CCC'
 echo "============"
 echo " "
-echo 'Enter SQL command in psql shell as in example below to create a user LOGIN'
-echo ' and his password, mypass (password be within single inverted commas)'
+echo 'AAA. Change myuser and mypass (password be within single inverted commas):'
 echo " "
-echo "AAA."
 echo "Example:  CREATE ROLE myuser LOGIN PASSWORD 'mypass' ; "
 echo " "
-echo "BBB."
-echo "Create database as:"
+echo "BBB. Create database as:"
 echo '          CREATE DATABASE mydatabase WITH OWNER = myuser;'
 echo "  "
-echo "CCC."
-echo "Enable pgvector on your database directly from command line as:"
+echo "CCC. Enable pgvector on your database directly from command line as:"
 echo '          sudo -u postgres psql -c "CREATE EXTENSION vector;" -d mydatabase;'
-echo 'Else, try, in shell '
-echo " \c mydatabase"
-echo "CREATE EXTENSION vector;"
-echo " "
+echo '     Else, execute, in psql shell '
+echo "          \c mydatabase"
+echo "             CREATE EXTENSION vector;"
 echo "  "
 echo "++++++++++++++++++++"
-echo "DDD."
-echo "Within a database, you can create a schema, as:"
+echo "DDD. Within a database, you can create a schema, as:"
 echo '          a. First, connect to database:  \c mydatabase  '
 echo "          b. Then,  "
 echo "                    CREATE schema myschema ; "
 echo "(Every database has a default schema created by name of: public)"
-echo " "
-echo "DDD."
-echo "Finally create table, as:"
+echo "++++++++++++++++++++"
+echo "EEE."
+echo "Finally, if required, create a table, as:"
 echo "     CREATE TABLE mydatabase.myschema.distributors ( "
 echo "                                                   did  integer PRIMARY KEY,"
 echo "                                                   name    varchar(40), "
 echo "                                                   designation char(5)   "                          
 echo "                                                   ); "
-echo " "
 echo "+++++++++++++++++++++++++++"
 echo " "
 echo 'To quit psql shell enter \q'
