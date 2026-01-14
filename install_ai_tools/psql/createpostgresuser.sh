@@ -14,10 +14,12 @@ echo "  "
 echo " "
 sleep 5
 echo "============"
-echo 'Will open psql shell for operations'
+echo 'Open psql shell for operations'
+echo '  And enter commands AAA, BBB
+echo '    Then, on command line, execute CCC
 echo "============"
 echo " "
-echo 'Enter SQL command as in example below to create  a user LOGIN id'
+echo 'Enter SQL command in psql shell as in example below to create a user LOGIN'
 echo ' and his password, mypass (password be within single inverted commas)'
 echo " "
 echo "AAA."
@@ -30,6 +32,9 @@ echo "  "
 echo "CCC."
 echo "Enable pgvector on your database directly from command line as:"
 echo '          sudo -u postgres psql -c "CREATE EXTENSION vector;" -d mydatabase;'
+echo 'Else, try, in shell '
+echo " \c mydatabase"
+echo "CREATE EXTENSION vector;"
 echo " "
 echo "  "
 echo "++++++++++++++++++++"
