@@ -1206,7 +1206,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   cd /home/$USER/gguf
   echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
   sleep 4
-  wget -c https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
+  wget -Nc https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
   mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
   echo "Done...."
   cd /home/$USER
@@ -1422,7 +1422,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	    mkdir /home/$USER/1234
 	    cd /home/$USER/1234
 	    # Direct download link
-	    wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+	    wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 	    # Fill in filename from above
 	    mv * code.deb
 	    sudo apt install /home/$USER/1234/code.deb  -y
@@ -1430,7 +1430,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	    rm -rf /home/$USER/1234/
 		mkdir /home/$USER/Documents/vscode
 		cd /home/$USER/Documents/vscode
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
+		wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
 		echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	    #    
 	    sleep 5
@@ -1506,7 +1506,7 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	    conda env create -f environment.yml
 		#
 		sudo apt-get install graphviz
-	    wget -c https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
+	    wget -Nc https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
 		sudo dpkg -i  TorchStudio_0.9.19-Linux_Installer.deb
 		rm TorchStudio_0.9.19-Linux_Installer.deb
 		echo " "
@@ -1516,7 +1516,7 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 		echo "  "
 		sleep 5
 		cd /home/$USER/Documents
-		wget -c https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv
+		wget -Nc https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv
 		cd /home/$USER
 		echo "To run torchstudio:"
 		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"
