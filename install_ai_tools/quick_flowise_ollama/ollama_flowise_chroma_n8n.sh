@@ -58,8 +58,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
     echo "Ubuntu is updated" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
+    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
+    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
     perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
     perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
     chmod +x /home/$USER/*.sh
@@ -271,7 +271,7 @@ fi
 mkdir /home/$USER/docker
 cd /home/$USER/docker
 echo "Download script to print names of docker containers"
-wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
+wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
 chmod +x *.sh
 cd /home/$USER
 
@@ -321,9 +321,9 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Store docker help files
     mkdir /home/$USER/Documents/dockers
     cd /home/$USER/Documents/dockers
-    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/Understanding%20docker%20technology.pdf?raw=true
-    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/docker%20commands.txt?raw=true
-    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
+    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/Understanding%20docker%20technology.pdf?raw=true
+    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/docker%20commands.txt?raw=true
+    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
     cd /home/$USER/
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
@@ -368,7 +368,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         # Required for spyder:
         sudo apt install pyqt5-dev-tools -y
         # Download file that creates a fresh python enviroemnet
-        wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
 		chmod +x *.sh   
         # Huggingface and  related
         #pip install huggingface_hub
@@ -423,7 +423,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
         source /home/$USER/.bashrc
         conda update conda -y
 		# Download script to create conda venv
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
 	    chmod +x *.sh  
 		wsl.exe --shutdown
      else
@@ -883,13 +883,13 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    # in postgresql
 	    ##############
 	    cd /home/$USER/
-	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
-	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
-	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
-	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
-	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
-	    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
 	    chmod +x /home/$USER/*.sh
 	    
 		# Create symlinks
