@@ -4,19 +4,12 @@
 
 echo "========script=============="
 echo "Will update Ubuntu and install nodejs"
-echo "Will install cuda toolkit"
 echo "Will install docker"
-echo "Will install python venv"
-echo "Install portainer"
 echo "Will install flowise docker"
 echo "Will install ollama docker for gpu"
 echo "Will install chromadb docker"
 echo "Will install n8n docker"
-echo "Will install dify docker"
-echo "Will install mongodb and mongosh:"
 echo "Installs postgres db and pgvector"
-echo "Installs xinference"
-echo "Installs AutoGen Studio"
 echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Will install Ragflow docker"
@@ -108,7 +101,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         echo "=========="
         sleep 15
         wsl.exe --shutdown
-        reboot
     else
         echo "====NOTE====="
         echo "Machine will be rebooted several times. After each reboot, execute the following script:"
@@ -119,116 +111,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         wsl.exe --shutdown
     fi
     wsl.exe --shutdown
-    reboot
-fi
-
-##################
-# Install CUDA toolkit
-#################
-
-cd /home/$USER
-if [ ! -f /home/$USER/cuda_installed.txt ]; then
-    cd /home/$USER
-    echo " "
-    echo " "
-    echo "------------"        
-    echo " "
-    echo "  "
-    if [[  -n "$WSLSYSTEM" ]] ; then
-        echo "==>For WSL-Ubuntu ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
-           # Update wsl
-            wsl.exe --update
-            # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
-            wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-            sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-            wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-            sudo dpkg -i cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-            sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-            sudo apt-get update
-            sudo apt-get -y install cuda-toolkit-13-0
-            sudo apt autoremove -y
-            echo "Which NVIDIA driver I have:"
-            echo "============================"
-            echo "Step-by-step guide for Windows 11:"
-            echo "  1.Right-click: on an empty area of your Windows 11 desktop." 
-            echo "  2.From the context menu, select NVIDIA Control Panel. "
-            echo "  3.In the NVIDIA Control Panel, click on the Help menu in the top-left corner. "
-            echo "  4.Select System Information from the dropdown menu. "
-            echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
-            sleep 8
-            echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-            wsl.exe --shutdown
-        else
-           echo "No installation of cuda toolkit on wsl"
-        fi
-    fi
-
-    OUTPUT=$(lsb_release -a)
-    if echo "$OUTPUT" | grep -q noble ; then
-        echo "  "
-        echo "  "
-        echo "==>For Ubuntu 24.04 ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13)  for Ubuntu-24.04? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
-           # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
-           wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
-           sudo mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
-           wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2404-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo dpkg -i cuda-repo-ubuntu2404-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo cp /var/cuda-repo-ubuntu2404-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-           sudo apt-get update
-           sudo apt-get -y install cuda-toolkit-13-0
-           sudo apt autoremove -y
-           sleep 3
-           echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-           reboot
-        else
-           echo "No installation of cuda toolkit"
-        fi  
-    fi
-
-    if echo "$OUTPUT" | grep -q Jellyfish ; then
-        echo "  "
-        echo "  "
-        echo "==>For Ubuntu 22.04 ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13) for Ubuntu-22.04? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
-           # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
-           wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-           sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-           wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
-           sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-           sudo apt-get update
-           sudo apt-get -y install cuda-toolkit-13-0
-           sudo apt autoremove -y
-           sleep 3
-           echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-           reboot
-        else
-           echo "No installation of cuda toolkit"
-        fi  
-    fi
 fi
 
 ##################
@@ -261,7 +143,6 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     if [[ ! -n "$WSLSYSTEM" ]] ; then
         wsl.exe --shutdown
     else
-        reboot
         wsl.exe --shutdown
     fi  
 else
@@ -297,25 +178,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     sudo systemctl disable docker.service
     sudo systemctl disable containerd.service
-    #
-    # Preparing docker for GPU
-    # Ref StackOverflow: https://stackoverflow.com/a/77269071
-    # Ref: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation
-    # 1.0 Configure the repository (it is one command):
-    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey |sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-    && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list \
-    && sudo apt-get update
-    #
-    # 2.0 Install the NVIDIA Container Toolkit packages:
-    #
-    sudo apt-get install -y nvidia-container-toolkit
-    #
-    # 3.0  Configure the container runtime by using the nvidia-ctk command:
-    #
-    sudo nvidia-ctk runtime configure --runtime=docker
-    #
     # 4.0 Restart the Docker daemon:
-    #
     sudo systemctl restart docker
     #
     # Store docker help files
@@ -331,7 +194,6 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
    if [[ ! -n "$WSLSYSTEM" ]] ; then
         wsl.exe --shutdown
     else
-        reboot
         wsl.exe --shutdown
     fi  
 else
@@ -394,94 +256,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
      fi   
 fi   
 
-###########################
-# Install latest anaconda
-# https://askubuntu.com/a/841224
-###########################
 
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I latest anaconda? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    DIRECTORY=/home/$USER/anaconda3
-    if [ ! -d "$DIRECTORY" ]; then
-        CONTREPO=https://repo.continuum.io/archive/
-		# In WSL Downloads folder does not exist
-		mkdir /home/$USER/Downloads
-        # Stepwise filtering of the html at $CONTREPO
-        # Get the topmost line that matches our requirements, extract the file name.
-        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-        bash /home/$USER//Downloads/anaconda.sh -b -p $HOME/anaconda3
-        rm /home/$USER/Downloads/anaconda.sh
-        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
-        # Reload default profile
-        source /home/$USER/.bashrc
-        conda update conda -y
-		# Download script to create conda venv
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
-	    chmod +x *.sh  
-		wsl.exe --shutdown
-     else
-        echo "Anaconda is already installed in /home/$USER/anaconda3"
-     fi   
- else
-    echo "Anaconda not installed"
- fi
- 
-#####################3
-# portrainer docker
-######################
-
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-   # Installing portrainer
-   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
-   # Script to start portainer container
-   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
-   echo " "                                                       >> /home/$USER/start/start_portainer.sh
-   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
-   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
-   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
-   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
-   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
-   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
-   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
-   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
-   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
-   #
-   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
-   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
-   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
-   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
-   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
-   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
-   #
-   cd /home/$USER
-   docker volume create portainer_data
-   # This is one long line command
-   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
-   # Install portainer community edition (ce)
-   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
-   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-else
-   echo "Portainer not installed"
-fi   
-   
-
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
  
 
 ##########################
@@ -770,57 +545,94 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 
 chmod +x /home/$USER/*.sh
 
+###########################
+# Install latest anaconda
+# https://askubuntu.com/a/841224
+###########################
 
-##########################
-### Install dify
-# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
-##########################
-  
-    echo " "
-    echo " "
-    echo "------------"   
-    echo "Shall I install dify docker? [Y,n]"    # 
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-        cd /home/$USER/
-        echo " "
-        echo "======"                                             
-        echo "Installing dify docker"
-        echo "Access it at: http://localhost:8887/install"
-        echo "======"                                              
-        echo " "
-        sleep 5
-        cd /home/$USER
-        git clone https://github.com/langgenius/dify.git
-        cd /home/$USER/dify/docker
-        cp .env.example .env
-        sed -i 's/NGINX_PORT=80/NGINX_PORT=8887/' .env
-        sed -i 's/EXPOSE_NGINX_PORT=80/EXPOSE_NGINX_PORT=8887/' .env
-        sed -i 's/NGINX_SSL_PORT=443/NGINX_SSL_PORT=4443/' .env
-        docker compose up -d
-        # Start script
-        echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
-        echo " "                                                   >> /home/$USER/start_dify.sh
-        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
-        echo "echo 'dify port is 8887'"                            >> /home/$USER/start_dify.sh
-        echo "echo 'Access it at: http://localhost:8887/install'"  >> /home/$USER/start_dify.sh
-        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
-        echo "sleep 4"                                             >> /home/$USER/start_dify.sh
-        echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
-        echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
-        echo "netstat -aunt | grep 8887"                           >> /home/$USER/start_dify.sh
-        # Stop script
-        echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
-        echo " "                                                  >> /home/$USER/stop_dify.sh
-        echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
-        echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
-        echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
-        sleep 4
-    else
-        echo "dify not installed"
-    fi
+cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
+echo "Shall I latest anaconda? [Y,n]"    
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+    DIRECTORY=/home/$USER/anaconda3
+    if [ ! -d "$DIRECTORY" ]; then
+        CONTREPO=https://repo.continuum.io/archive/
+		# In WSL Downloads folder does not exist
+		mkdir /home/$USER/Downloads
+        # Stepwise filtering of the html at $CONTREPO
+        # Get the topmost line that matches our requirements, extract the file name.
+        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+        bash /home/$USER//Downloads/anaconda.sh -b -p $HOME/anaconda3
+        rm /home/$USER/Downloads/anaconda.sh
+        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
+        # Reload default profile
+        source /home/$USER/.bashrc
+        conda update conda -y
+		# Download script to create conda venv
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+	    chmod +x *.sh  
+		wsl.exe --shutdown
+     else
+        echo "Anaconda is already installed in /home/$USER/anaconda3"
+     fi   
+ else
+    echo "Anaconda not installed"
+ fi
+ 
+#####################3
+# portrainer docker
+######################
 
+cd /home/$USER
+echo " "
+echo " "
+echo "------------"        
+echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
+read input
+input=${input:-Y}
+if [[ $input == "Y" || $input == "y" ]]; then
+   # Installing portrainer
+   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
+   # Script to start portainer container
+   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
+   echo " "                                                       >> /home/$USER/start/start_portainer.sh
+   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
+   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
+   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
+   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
+   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
+   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
+   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
+   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
+   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
+   #
+   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
+   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
+   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
+   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
+   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
+   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
+   #
+   cd /home/$USER
+   docker volume create portainer_data
+   # This is one long line command
+   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
+   # Install portainer community edition (ce)
+   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+else
+   echo "Portainer not installed"
+fi   
+   
+
+chmod +x /home/$USER/*.sh
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/stop/*.sh
 
 ################
 # Install postgresql and sqlite3
@@ -962,308 +774,6 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	 fi  
  fi
 
-#########################
-### Install mongodb and mongosh
-# https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
-# Mongosh: https://www.mongodb.com/docs/mongodb-shell/install/
-#########################
-
-echo " "
-echo " "
-echo "------------"   
-echo "Mongodb install depends upon your ubuntu version"
-echo "Check (release or) version now:"
-echo "========"
-lsb_release -a
-echo "========"
-echo "Shall I install mongodb db for Ubuntu 22.04? [Y,n]"    # 
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    cd /home/$USER/
-    sudo apt-get install gnupg curl
-    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
-            sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
-            --dearmor
-    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-    sudo apt-get update
-    sudo apt-get install -y mongodb-org
-    sudo systemctl start mongod
-    #On error
-    #sudo systemctl daemon-reload
-   # Mongosh
-   echo "Will install mongosh"
-   sleep 4
-   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
-   sudo apt-get install gnupg
-   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
-   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-   sudo apt-get update
-   sudo apt-get install -y mongodb-mongosh
-   mongosh --version
-   netstat a-aunt | grep 27017
-   # mongodb start script
-   echo '#!/bin/bash'                                                      > /home/$USER/start_mongodb.sh  
-   echo " "                                                               >> /home/$USER/start_mongodb.sh  
-   echo "cd ~/"                                                           >> /home/$USER/start_mongodb.sh  
-   echo "echo 'mongodb will be available on port 27017'"                  >> /home/$USER/start_mongodb.sh  
-   echo "sudo systemctl start mongod"                                     >> /home/$USER/start_mongodb.sh  
-   echo "sleep 2"                                                         >> /home/$USER/start_mongodb.sh  
-   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh  
-   # mongodb stop script
-   echo '#!/bin/bash'                                                      > /home/$USER/stop_mongodb.sh  
-   echo " "                                                               >> /home/$USER/stop_mongodb.sh  
-   echo "cd ~/"                                                           >> /home/$USER/stop_mongodb.sh  
-   echo "sudo systemctl stop mongod"                                     >> /home/$USER/stop_mongodb.sh  
-   echo "sleep 2"                                                         >> /home/$USER/stop_mongodb.sh  
-   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/stop_mongodb.sh  
-   chmod +x /home/$USER/*.sh
-   # Dowload some files
-   mkdir -p /home/$USER/Documents/mongodb/datasets
-   cd /home/$USER/Documents/mongodb/datasets
-   wget -Nc  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
-   cd /home/$USER/Documents/mongodb
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
-else
-    echo "Mongodb for Ubuntu 22.04 not installed"
-fi    
-
-echo " "
-echo " "
-echo "------------"  
-echo "Mongodb install depends upon your ubuntu version"
-echo "Check (release or) version now:"
-echo "========"
-lsb_release -a
-echo "========"
-echo "Shall I install mongodb db for Ubuntu 24.04? [Y,n]"    # 
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    cd /home/$USER/
-    sudo apt-get install gnupg curl
-    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
-            sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
-            --dearmor
-    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-    sudo apt-get update
-    sudo apt-get install -y mongodb-org
-    sudo systemctl start mongod
-    #On error
-    #sudo systemctl daemon-reload
-   # Mongosh
-   echo "Will install mongosh"
-   sleep 4
-   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
-   sudo apt-get install gnupg
-   wget -qO- https://www.mongodb.org/static/pgp/server-8.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-8.0.asc
-   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-   sudo apt-get update
-   sudo apt-get install -y mongodb-mongosh
-   mongosh --version
-   netstat a-aunt | grep 27017
-   # mongodb start script
-   echo '#!/bin/bash'                                                      > /home/$USER/start_mongodb.sh  
-   echo " "                                                               >> /home/$USER/start_mongodb.sh  
-   echo "cd ~/"                                                           >> /home/$USER/start_mongodb.sh  
-   echo "echo 'mongodb will be available on port 27017'"                  >> /home/$USER/start_mongodb.sh  
-   echo "sudo systemctl start mongod"                                     >> /home/$USER/start_mongodb.sh  
-   echo "sleep 2"                                                         >> /home/$USER/start_mongodb.sh  
-   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/start_mongodb.sh 
-   # mongodb stop script
-   echo '#!/bin/bash'                                                      > /home/$USER/stop_mongodb.sh  
-   echo " "                                                               >> /home/$USER/stop_mongodb.sh  
-   echo "cd ~/"                                                           >> /home/$USER/stop_mongodb.sh  
-   echo "sudo systemctl stop mongod"                                     >> /home/$USER/stop_mongodb.sh  
-   echo "sleep 2"                                                         >> /home/$USER/stop_mongodb.sh  
-   echo "netstat -aunt | grep 27017"                                      >> /home/$USER/stop_mongodb.sh  
-   chmod +x /home/$USER/*.sh
-   # Dowload some files
-   mkdir -p /home/$USER/Documents/mongodb/datasets
-   cd /home/$USER/Documents/mongodb/datasets
-   wget -Nc  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
-   cd /home/$USER/Documents/mongodb
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
-else
-    echo "Mongodb for Ubuntu24.04 not installed"
-fi   
-
-# Prevent docker restarts on OS reboot
-docker update --restart=no $(docker ps -a -q)
-
-
-###################
-# llama.cpp install
-# python env remains activated
-# source /home/$USER/venv/bin/activate
-###################
-cuda_version=$(nvidia-smi | grep CUDA | awk '{print $9}')
-echo " "
-echo "==========="
-echo "Your installed CUDA version is: $cuda_version"
-echo "If this version is different from 12.4, you will have to first"
-echo "change cu124, to say, cu127 for version 12.7 before installing"
-echo "llama.cpp."
-echo "==========="
-echo " "
-echo "Shall I now install llama.cpp (if your CUDA version is correct)? [Y,n]"   
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-  # Installing llama.cpp
-  source /home/$USER/venv/bin/activate
-   # Huggingface and llama.cpp related
-  pip install huggingface_hub
-  pip install transformers
-  pip install accelerate
-  #cu124: is as per cuda version. Get cuda version from nvidia-smi
-  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-  echo " "                                         | tee -a /home/$USER/error.log
-  echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
-  echo "------------"                              | tee -a /home/$USER/error.log
-  echo " "                                         | tee -a /home/$USER/error.log
-  git clone https://github.com/ggerganov/llama.cpp
-  cd llama.cpp
-  cmake -B build
-  cmake --build build --config Release
-  cd /home/$USER
-  sleep 2
-  # Create a symlink to models and to gguf folder
-  ln -s /home/$USER/llama.cpp/models/ /home/$USER/
-  ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
-  echo "PATH=\$PATH:/home/$USER/llama.cpp/build/bin" >> .bashrc
-  echo " "                                        | tee -a /home/$USER/error.log
-  echo "-------"                                  | tee -a /home/$USER/error.log
-  echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
-  echo "10. llama.cpp installed"                  | tee -a /home/$USER/info.log
-  echo "-------"                                  | tee -a /home/$USER/error.log
-  # Script to start llama.cpp server
-  echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_llamacpp_server.sh
-  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "cd /home/$USER"                                               | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "source /home/$USER/venv/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
-  mkdir /home/$USER/gguf
-  cd /home/$USER/gguf
-  echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
-  sleep 4
-  wget -c https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
-  mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
-  echo "Done...."
-  cd /home/$USER
-else
-  echo "Skipping install of llama.cpp"
-fi
-  
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/*.sh
-
-##########################
-### Install xinference
-# Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
-##########################
-
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I install xinference? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-   source /home/$USER/venv/bin/activate
-   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
-   sleep 3
-   pip install "xinference[llama_cpp]"
-   sleep 3
-   pip install "xinference[vllm]"
-   sleep 3
-   pip install "xinference[transformers]"
-   sleep 3
-    # Start script
-    #--------------
-    echo '#!/bin/bash'                                         >  /home/$USER/start_xinference.sh
-    echo " "                                                   >> /home/$USER/start_xinference.sh
-    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
-    echo "echo 'This terminal will remain engaged'"            >> /home/$USER/start_xinference.sh
-    echo "echo 'Access xinference, as: http://<hostIP>:9997'"  >> /home/$USER/start_xinference.sh
-    echo "echo 'Models are stored in folder ~/.xinference'"   >> /home/$USER/start_xinference.sh
-    echo "echo 'Even cached models must first be LAUNCHED to become available'"   >> /home/$USER/start_xinference.sh
-    echo "echo 'See file LLMs/xinference.ipynb'"             >> /home/$USER/start_xinference.sh
-    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
-    echo "sleep 5"                                             >> /home/$USER/start_xinference.sh
-    echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
-    echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/start_xinference.sh
-    echo "xinference-local --host 0.0.0.0 --port 9997"        >> /home/$USER/start_xinference.sh
-    chmod +x *.sh
-else
-     echo "xinference will not be installed"
-fi   
-
-##########################
-### Install AutoGen Studio
-# Ref: https://microsoft.github.io/autogen/stable/user-guide/autogenstudio-user-guide/index.html
-# Video: https://www.youtube.com/watch?v=oum6EI7wohM
-##########################
-
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-echo "Shall I install AutoGen Studio? [Y,n]"    
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-   source /home/$USER/venv/bin/activate
-   pip install -U autogenstudio
-   sleep 3
-   # Start script
-    #--------------
-    echo '#!/bin/bash'                                         >  /home/$USER/start_autogenstudio.sh
-    echo " "                                                   >> /home/$USER/start_autogenstudio.sh
-    echo "echo '======'"                                       >> /home/$USER/start_autogenstudio.sh
-    echo "echo 'This terminal will remain engaged'"            >> /home/$USER/start_autogenstudio.sh
-    echo "echo 'Access AutoGen Studio, as: http://localhost:8081'"  >> /home/$USER/start_autogenstudio.sh
-    echo "echo 'Project folder is: /home/$USER/autogenProject'"  >> /home/$USER/start_autogenstudio.sh
-    echo "echo 'Delete earlier project folder as: rm -rf ~/autogenProject'"  >> /home/$USER/start_autogenstudio.sh
-    echo "echo '======'"                                       >> /home/$USER/start_autogenstudio.sh
-    echo "sleep 5"                                             >> /home/$USER/start_autogenstudio.sh
-    echo "cd /home/$USER"                                      >> /home/$USER/start_autogenstudio.sh
-    echo "source /home/$USER/venv/bin/activate"           >> /home/$USER/start_autogenstudio.sh
-    echo "autogenstudio ui --host 127.0.0.1 --port 8081 --appdir ./autogenProject"       >> /home/$USER/start_autogenstudio.sh
-    chmod +x *.sh
-else
-     echo "AutoGen Studio will not be installed!"
-fi 
-
 ##########################
 ### Install Visual Studio Coder
 ### Only install it in Ubuntu and NOT in WSL 
@@ -1297,9 +807,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
     echo "OK. Visual code coder not installed."
 fi    
-
-
-
 
 
 ##########################
