@@ -20,6 +20,6 @@ Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios 
    chmod +x  ~/*.sh   
    #bash ollama_flowise_chroma_n8n_ubuntu.sh
    #bash ollama_wsl.sh
-   bash ollama_wsl_nocuda.sh
+   bash ollama_wsl_nogpu.sh
    cd ~/   
 ```
