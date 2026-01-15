@@ -15,6 +15,7 @@ echo "================"
 echo "   "
 echo "   "
 echo "    "
+echo -en "\007"
 sleep 15
 
 echo "========script=============="
@@ -44,6 +45,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "----------"                              
     echo " "
     sleep 2
+	echo -en "\007"
     sudo apt update
     sudo apt upgrade -y
     # To get multiple python versions, install repo
@@ -130,6 +132,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     # Add Docker's official GPG key:
     echo "Installing docker.."
     sleep 2
+	echo -en "\007"
     sudo apt-get update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
@@ -174,6 +177,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     echo "AND running docker without root privilegs.."
     sleep 2
     # Check if docker installed
+	echo -en "\007"
     sudo docker run hello-world
     # Run docker witout root privileges
     sudo groupadd docker
@@ -236,6 +240,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         # Required for spyder:
 		echo " "
 		echo " "
+		echo -en "\007"
         sudo apt install pyqt5-dev-tools -y
         # Download file that creates a fresh python enviroemnet
         wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
