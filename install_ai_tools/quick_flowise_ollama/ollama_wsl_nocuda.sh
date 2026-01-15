@@ -414,7 +414,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
       chmod +x /home/$USER/*.sh
       # For model storage local folder ollama is mounted.
       echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
-      echo "Will install ollama for GPU..."
+      echo "Will install ollama for CPU..."
       sleep 4
       # Creating alias for command: docker exec -it ollama
       echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
