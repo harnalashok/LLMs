@@ -228,6 +228,8 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         pip install streamlit
         echo "venv_installed.txt" > /home/$USER/venv_installed.txt
         # Required for spyder:
+		echo " "
+		echo " "
         sudo apt install pyqt5-dev-tools -y
         # Download file that creates a fresh python enviroemnet
         wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
