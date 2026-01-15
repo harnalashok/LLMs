@@ -4,7 +4,6 @@
 
 clear
 echo "  "
-echo "  "
 echo "=====***======"
 echo "WSL ubuntu window will close many times during installation"
 echo "Each time, double click to open it, and each time "
@@ -14,7 +13,9 @@ echo "   Answer Y to most questions"
 echo "      till, all software is installed."
 echo "================"
 echo "   "
-sleep 10
+echo "   "
+echo "    "
+sleep 15
 
 echo "========script=============="
 echo "Will update Ubuntu and install nodejs"
