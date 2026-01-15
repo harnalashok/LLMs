@@ -985,8 +985,17 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
         echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
         echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
         sudo systemctl restart postgresql
-        
-		cd /home/$USER
+
+		# Download RAG data files
+        mkdir -p /home/$USER/Documents/data
+        cd /home/$USER/Documents/data
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/bertrandRusselEssays.txt
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/goodWriting.txt
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/iWorkedOnEssay.txt
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/sherlockHolmes.txt
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/slyFox.txt
+        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
+        cd /home/$USER
 		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
 	 else
 	   echo "Postgres not installed"
