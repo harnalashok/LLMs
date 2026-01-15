@@ -39,7 +39,7 @@ cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "  "
     echo "------------"                            
-    echo " Will update Ubuntu"                     
+    echo " Will update Ubuntu. Takes time..."                     
     echo " You will be asked for password...supply it..."
     echo "----------"                              
     echo " "
