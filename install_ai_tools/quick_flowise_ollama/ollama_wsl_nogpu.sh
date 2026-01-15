@@ -438,6 +438,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
 	      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 	      # network host would be local mashine
+		  echo -en "\007"
 	      docker run -d  -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
 		  echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
 		  sleep 2
@@ -535,6 +536,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   cd ~/
 	   git clone https://github.com/FlowiseAI/Flowise.git
 	   cd Flowise/
+	   echo -en "\007"
 	   sudo docker build --no-cache -t flowise .
 	   # The '--network host' option removes network isolation between the container and
 	   #   the Docker host machine, meaning the container directly shares the host's networking stack
@@ -630,6 +632,7 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    # Install postgresql
 	    cd /home/$USER/
 	    echo "Installing postgresql and sqlite3"
+		echo -en "\007"
 	    sudo apt install postgresql postgresql-contrib sqlite3   -y
 		
 		# Postgresql start/stop script
@@ -871,6 +874,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    chmod +x /home/$USER/*.sh
 	    chmod +x /home/$USER/*.sh
 	    #
+		echo -en "\007"
 	    sudo sysctl -w vm.max_map_count=262144
 	    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 	    git clone https://github.com/infiniflow/ragflow.git
