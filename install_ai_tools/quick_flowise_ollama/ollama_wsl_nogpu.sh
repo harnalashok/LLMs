@@ -445,10 +445,10 @@ chmod +x /home/$USER/*.sh
 echo " "
 echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
-echo "------------"   
-echo "Shall I download a few ollama models? [Y,n]"
-read input
-input=${input:-Y}
+	echo "------------"   
+	echo "Shall I download a few ollama models? [Y,n]"
+	read input
+	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	      cd /home/$USER/
 	      # Start ollama docker in future
@@ -610,14 +610,13 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
-	    
-		# Install postgresql
+	
+	    # Install postgresql
 	    cd /home/$USER/
 	    echo "Installing postgresql and sqlite3"
 	    sudo apt install postgresql postgresql-contrib sqlite3   -y
 		
-	    # Postgresql start/stop script
-
+		# Postgresql start/stop script
 		# Start script
 		echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
 	    echo " "                                                               >> /home/$USER/start_postgresql.sh  
@@ -626,7 +625,7 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
 	    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
 	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
-	    
+	   
 		# Stop script
 	    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
 	    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
@@ -723,8 +722,8 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 		sudo -u postgres psql -c "\l"
 
 		# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
-		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')')
-        cd /etc/postgresql/$version/main
+		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+		cd /etc/postgresql/$version/main
         echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
         echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
         sudo systemctl restart postgresql
