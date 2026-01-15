@@ -18,18 +18,24 @@ echo "    "
 echo -en "\007"
 sleep 15
 
-echo "========script=============="
-echo "Will update Ubuntu and install nodejs"
-echo "Will install docker"
-echo "Will install flowise docker"
-echo "Will install ollama docker without gpu"
-echo "Will install chromadb docker"
-echo "Will install n8n docker"
-echo "Installs postgres db and pgvector"
-echo "Install latest anaconda"
-echo "Will install Ragflow docker"
-echo "==========================="
-sleep 5
+cd /home/$USER
+if [ ! -f /home/$USER/first_time.txt ]; then
+    echo "  "
+    echo "------------"                            
+	echo "========script=============="
+	echo "Will update Ubuntu and install nodejs"
+	echo "Will install docker"
+	echo "Will install flowise docker"
+	echo "Will install ollama docker without gpu"
+	echo "Will install chromadb docker"
+	echo "Will install n8n docker"
+	echo "Installs postgres db and pgvector"
+	echo "Install latest anaconda"
+	echo "Will install Ragflow docker"
+	echo "==========================="
+	sleep 5
+	echo "first_time.txt" > /home/$USER/first_time.txt
+fi	
 
 ################
 # Update Ubuntu
