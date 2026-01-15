@@ -257,8 +257,6 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 fi   
 
 
- 
-
 ##########################
 ### Install chromadb docker
 # Ref: https://docs.trychroma.com/production/containers/docker
@@ -422,7 +420,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	  sleep 2
 	  wsl.exe --shutdown
 else
-        echo "Skipping install of ollama docker"
+      echo "Skipping install of ollama docker"
 fi
 
 chmod +x /home/$USER/*.sh
