@@ -2,6 +2,18 @@
 
 # Last amended: 15th Jan, 2026
 
+clear
+echo "  "
+echo "  "
+echo "=====***======"
+echo "WSL ubuntu window will close many times during installation"
+echo "Each time, double click to open it, and issue the command:"
+echo "        ./ollama_wsl_nogpu.sh"
+echo "   till, all software is installed."
+echo "================"
+echo "   "
+sleep 10
+
 echo "========script=============="
 echo "Will update Ubuntu and install nodejs"
 echo "Will install docker"
@@ -11,18 +23,9 @@ echo "Will install chromadb docker"
 echo "Will install n8n docker"
 echo "Installs postgres db and pgvector"
 echo "Install latest anaconda"
-echo "Install Visual Studio Coder"
 echo "Will install Ragflow docker"
 echo "==========================="
-sleep 2
-
-# Are we having wsl system
-WSL=$(cat /proc/version)
-WSLSYSTEM=
-if echo "$WSL" | grep -qi wsl ; then
-    WSLSYSTEM="yes"
-fi
-
+sleep 5
 
 ################
 # Update Ubuntu
@@ -372,7 +375,7 @@ fi
 chmod +x /home/$USER/*.sh
 
 ##########################
-### ollama docker
+### ollama docker for CPU
 ##########################
 
 echo " "
