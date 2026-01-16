@@ -774,7 +774,7 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	echo "------------"   
-	echo "Shall I install RAGFlow docker? [Y,n]"    # 
+	echo "Shall I install RAGFlow docker? Avoid installation: Gives error. [Y,n]"    # 
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
