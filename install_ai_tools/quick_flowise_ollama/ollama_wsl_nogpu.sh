@@ -16,10 +16,10 @@ echo "   "
 echo "   "
 echo "    "
 echo -en "\007"
-sleep 15
 
 cd /home/$USER
 if [ ! -f /home/$USER/first_time.txt ]; then
+    sleep 15
     echo "  "
     echo "------------"                            
 	echo "========script=============="
@@ -35,6 +35,8 @@ if [ ! -f /home/$USER/first_time.txt ]; then
 	echo "==========================="
 	sleep 5
 	echo "first_time.txt" > /home/$USER/first_time.txt
+else 
+    sleep 5
 fi	
 
 ################
