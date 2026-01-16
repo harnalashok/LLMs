@@ -152,8 +152,8 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     sudo apt-get update -y
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin  -y
     echo "Docker is installed" > /home/$USER/docker_installed.txt   # To avoid repeat installation
-    echo "Ubuntu will be closed/rebooted "
-    echo "After opening/restart, execute:"
+    echo "WSL-Ubuntu will be closed"
+    echo "Open the shell and execute:    ./ollama_wsl_nogpu.sh:"
     sleep 9
     if [[ ! -n "$WSLSYSTEM" ]] ; then
         wsl.exe --shutdown
