@@ -1,5 +1,6 @@
 To quickly install dockers for flowise+ollama+chromadb+n8n follow this script       
 Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios settings screen) for secure boot (UEFI). Also use <b>Audit Mode</b>
+From Windows machines having Symantic anti-virus, stop it,
 
 ## Script for wsl-noGpu
 ```
