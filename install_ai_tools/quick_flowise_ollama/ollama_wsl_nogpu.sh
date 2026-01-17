@@ -473,6 +473,9 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	      cd /home/$USER/
 	      # Start ollama docker in future
 	      docker start ollama 
+		  sleep 2
+		  ollama list
+		  sleep 2
 		  echo "Pulling bge-m3"
 	      docker exec -it ollama ollama pull bge-m3
 		  echo "Pulling llama3.2"
