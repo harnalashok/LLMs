@@ -444,6 +444,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	      sleep 4
 	      # Creating alias for command: docker exec -it ollama
 	      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
+		  echo "docker start ollama"                          >> /home/$USER/.bashrc
 	      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 	      # network host would be local mashine
 		  echo -en "\007"
