@@ -17,11 +17,10 @@ Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios 
       mkdir -p $DIRECTORY
    fi
 
-
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
+   wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n_ubuntu.sh
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/docker%20commands.txt -P /home/$USER/Documents/docker/
+   wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
    perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
@@ -43,21 +42,28 @@ Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios 
    if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
    fi
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
+
+   DIRECTORY=/home/$USER/Documents/docker
+   if [ ! -d "$DIRECTORY" ]; then
+      mkdir -p $DIRECTORY
+   fi
+
+   #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
+   wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n_ubuntu.sh
-   #wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
-   #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/docker%20commands.txt -P /home/$USER/Documents/docker/
+   wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
    perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
-   perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nopu.sh
+   perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh   
    #bash ollama_flowise_chroma_n8n_ubuntu.sh
-   #bash ollama_wsl_gpu.sh
+   #bash ollama_wsl.sh
    bash ollama_wsl_nogpu.sh
    cd ~/   
 ```
 
 ## Script for ubuntu machine (gpu)
+
 ```
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
@@ -67,13 +73,19 @@ Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios 
    if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
    fi
+
+   DIRECTORY=/home/$USER/Documents/docker
+   if [ ! -d "$DIRECTORY" ]; then
+      mkdir -p $DIRECTORY
+   fi
+
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
+   wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n_ubuntu.sh
-   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
-   #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/docker%20commands.txt -P /home/$USER/Documents/docker/
+   wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
    perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n.sh
-   perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl.sh
-   perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nocuda.sh
+   perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
+   perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh   
    #bash ollama_flowise_chroma_n8n_ubuntu.sh
    #bash ollama_wsl.sh
