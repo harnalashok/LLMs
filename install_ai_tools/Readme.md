@@ -1,6 +1,6 @@
-## Installing a bundle of AI tools and packages
-
-See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20uninstall%20and%20misc.txt) for installing/uninstalling ubuntu from wsl      
+## (outdated scripts) Installing a bundle of AI tools and packages 
+Updated installation script is [here](https://github.com/harnalashok/LLMs/tree/main/install_ai_tools/quick_flowise_ollama)     
+See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20uninstall%20and%20misc.txt) for installing/uninstalling ubuntu from wsl         
 
 To begin installing all packages, execute the following five commands in *Ubuntu* console (whether Ubuntu machine or WSL).<br>
 Press <b>F2</b> at boot time to change bios settings if you have a problem with UEFI (secure boot).  Also use <b>Audit mode</b>             
