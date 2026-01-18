@@ -745,13 +745,28 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
 	   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
 	   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
+	   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
 	   echo " "                                                   >> /home/$USER/start_flowise.sh
 	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
 	   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
 	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	    # logs script
+	   # Reset flowise password
+  	   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
+	   echo " "                                                   >> /home/$USER/reset_flowise.sh
+	   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
+	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
+	   echo "docker stop docker-flowise-1"                        >> /home/$USER/reset_flowise.sh
+	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+	   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
+	   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
+	   echo " "                                                   >> /home/$USER/reset_flowise.sh
+	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
+	   echo "docker start docker-flowise-1"                       >> /home/$USER/reset_flowise.sh
+	   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
+	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
+       # logs script
 	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
 	   echo " "                                                   >> /home/$USER/logs_flowise.sh
 	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
