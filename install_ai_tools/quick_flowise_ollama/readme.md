@@ -1,9 +1,11 @@
-To quickly install dockers for flowise+ollama+chromadb+n8n follow this script       
-Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios settings screen) for secure boot (UEFI). Also use <b>Audit Mode</b>
-From Windows machines having Symantic anti-virus, stop it,
+To quickly install dockers for flowise+ollama+chromadb+n8n follow these scripts. Copy and paste as per where you are installing.     
+<b>NOTE:</b>  In CR1 lab (and possibly in <ins>Gurugram</ins> lab) where Symantic anti-virus is installed on Windows machines, this anti-virus must be stopped before working on WSL-ubuntu machines.    
+(<b>For CR2 only</b>: Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios settings screen) for secure boot (UEFI). Also use <b>Audit Mode</b>)
 
 ## Script for wsl-noGpu
-### For CR1 and For Gurugram labs
+### For CR1 and For Gurugram labs     
+Stop Symantic anti-virus first       
+(copy and paste in WSL-Ubuntu terminal)
 ```
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
@@ -36,7 +38,8 @@ From Windows machines having Symantic anti-virus, stop it,
 ```
 
 ## Script for wsl-Gpu
-### For laptops with GPUs
+### For laptops with GPUs     
+(copy and paste in WSL-Ubuntu terminal)
 
 ```
   DIRECTORY=/home/$USER/Documents
@@ -70,7 +73,8 @@ From Windows machines having Symantic anti-virus, stop it,
 ```
 
 ## Script for ubuntu machine (gpu)
-### For CR2 on Ubuntu machines
+### For CR2 on Ubuntu machines     
+(copy and paste in Ubuntu terminal)
 
 ```
   DIRECTORY=/home/$USER/Documents
