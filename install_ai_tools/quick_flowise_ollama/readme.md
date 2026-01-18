@@ -3,6 +3,7 @@ Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios 
 From Windows machines having Symantic anti-virus, stop it,
 
 ## Script for wsl-noGpu
+### For CR1 and For Gurugram labs
 ```
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
@@ -35,6 +36,7 @@ From Windows machines having Symantic anti-virus, stop it,
 ```
 
 ## Script for wsl-Gpu
+### For laptops with GPUs
 
 ```
   DIRECTORY=/home/$USER/Documents
@@ -68,6 +70,7 @@ From Windows machines having Symantic anti-virus, stop it,
 ```
 
 ## Script for ubuntu machine (gpu)
+### For CR2 on Ubuntu machines
 
 ```
   DIRECTORY=/home/$USER/Documents
