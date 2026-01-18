@@ -1,6 +1,7 @@
 To quickly install dockers for flowise+ollama+chromadb+n8n follow these scripts. Copy and paste as per where you are installing.     
 <b>NOTE:</b>  In CR1 lab (and possibly in <ins>Gurugram</ins> lab) where Symantic anti-virus is installed on Windows machines, this anti-virus must be stopped before working on WSL-ubuntu machines.    
-(<b>For CR2 only</b>: Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios settings screen) for secure boot (UEFI). Also use <b>Audit Mode</b>)
+(<b>For CR2 only</b>: Press <b>F2</b> at boot time to change 'Bios settings' (scroll down in the bios settings screen) for secure boot (UEFI). Also use <b>Audit Mode</b>)      
+See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20uninstall%20and%20misc.txt) for installing/uninstalling ubuntu from wsl         
 
 ## Script for wsl-noGpu
 ### For CR1 and For Gurugram labs     
