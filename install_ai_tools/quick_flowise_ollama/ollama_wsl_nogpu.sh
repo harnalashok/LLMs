@@ -511,7 +511,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   cd /home/$USER/
 	   # Install Flowise through docker"
 	   # Ref: https://docs.flowiseai.com/getting-started
-	   echo "Installing flowise docker. Takes time.."        
+	   echo "Installing flowise docker. Takes time.."          
 	   # Start script
 	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
 	   echo " "                                                   >> /home/$USER/start_flowise.sh
@@ -522,13 +522,28 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
 	   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
 	   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
+	   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
 	   echo " "                                                   >> /home/$USER/start_flowise.sh
 	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
 	   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
 	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	   # logs script
+	   # Reset flowise password
+  	   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
+	   echo " "                                                   >> /home/$USER/reset_flowise.sh
+	   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
+	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
+	   echo "docker stop docker-flowise-1"                        >> /home/$USER/reset_flowise.sh
+	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+	   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
+	   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
+	   echo " "                                                   >> /home/$USER/reset_flowise.sh
+	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
+	   echo "docker start docker-flowise-1"                       >> /home/$USER/reset_flowise.sh
+	   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
+	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
+       # logs script
 	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
 	   echo " "                                                   >> /home/$USER/logs_flowise.sh
 	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
@@ -539,7 +554,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
  	   # Stop script
 	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
 	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
-	   echo "cd ~/"                                              >> /home/$USER/stop_docker_flowise.sh
+	   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
 	   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
 	   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
 	   echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
@@ -548,7 +563,6 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   cd ~/
 	   git clone https://github.com/FlowiseAI/Flowise.git
 	   cd Flowise/
-	   echo -en "\007"
 	   sudo docker build --no-cache -t flowise .
 	   # The '--network host' option removes network isolation between the container and
 	   #   the Docker host machine, meaning the container directly shares the host's networking stack
@@ -559,6 +573,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   cd /home/$USER/Flowise/docker
 	   cp .env.example .env
 	   docker compose up -d
+	   cd /home/$USER/
 	   echo "In future to start/stop containers, proceed, as:"
 	   echo "            cd /home/$USER/Flowise"                  
 	   echo "            docker start docker-flowise-1"                    
@@ -569,8 +584,8 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
 	   chmod +x /home/$USER/*.sh
-       sleep 2
-	   wsl --shutdown
+	   sleep 2
+	   wsl.exe --shutdown
 	 else
 	   echo "Flowise docker will not be installed"
 	 fi  
