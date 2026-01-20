@@ -51,6 +51,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     # See: https://askubuntu.com/a/1538589
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt update 
+	# For reading markdown documents
+	sudo apt install retext  -y
     # pipx to install poetry
     sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
