@@ -714,6 +714,7 @@ input=${input:-Y}
 		  mkdir -p /home/$USER/Documents/huggingface
 		  cd /home/$USER/Documents/huggingface
 		  wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/Huggingface%20access%20token.pdf
+		  mv 'Huggingface access token.pdf' Huggingface_access_token.pdf
 		  cd /home/$USER/
 		  echo "models installed" > /home/$USER/models_installed.txt
 	else
