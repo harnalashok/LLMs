@@ -812,6 +812,9 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "             docker ps -a "     
 	   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
 	   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
+	   mkdir -p /home/$USER/Documents/flowise
+	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf
+	   cd /home/$USER
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
 	   chmod +x /home/$USER/*.sh
 	   sleep 2
