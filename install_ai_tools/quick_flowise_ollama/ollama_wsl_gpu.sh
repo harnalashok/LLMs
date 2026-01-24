@@ -775,6 +775,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   ln -sT /home/$USER/stop_docker_flowise.sh stop_flowise.sh
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
 	   chmod +x /home/$USER/*.sh
+	   mkdir -p /home/$USER/Documents/flowise
+	   cd /home/$USER/Documents/flowise
+	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf
+	   cd /home/$USER
 	   sleep 2
 	  wsl.exe --shutdown
 	 else
