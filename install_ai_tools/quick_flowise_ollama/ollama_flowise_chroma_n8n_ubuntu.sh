@@ -815,6 +815,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   mkdir -p /home/$USER/Documents/flowise
 	   cd /home/$USER/Documents/flowise
 	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf
+	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
 	   cd /home/$USER
 	   echo "flowise installed" > /home/$USER/flowise_installed.txt
 	   chmod +x /home/$USER/*.sh
