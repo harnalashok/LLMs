@@ -711,6 +711,10 @@ input=${input:-Y}
 		  echo " "
 		  echo " "
 		  #ollama list
+		  mkdir -p /home/$USER/Documents/huggingface
+		  cd /home/$USER/Documents/huggingface
+		  wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/Huggingface%20access%20token.pdf
+		  cd /home/$USER/
 		  echo "models installed" > /home/$USER/models_installed.txt
 	else
 	        echo "Skipping download of ollama models"
