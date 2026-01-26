@@ -5,14 +5,17 @@ echo "========="
 echo "User 'ashok' and database 'askok' already exist"
 echo "User 'ashok' has full authority over database 'ashok'"
 echo "User 'ashok' has password: ashok"
+echo "Check with \du"
 echo "========="
 echo "  "
 echo " "
 sleep 5
 echo "============"
-echo 'Open psql shell for operations'
-echo '  And enter commands AAA, BBB'
-echo '    Then, on command line, execute CCC'
+echo "Follow 3-steps sequentially:"
+echo '       In psql shell: '
+echo '            First execute AAA'
+echo '            Then, BBB
+echo '            Lstly CCC'
 echo "============"
 echo " "
 echo 'AAA. Change myuser and mypass (password be within single inverted commas):'
