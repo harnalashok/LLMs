@@ -10,6 +10,7 @@ echo "========="
 echo "  "
 echo " "
 sleep 5
+clear
 echo "============"
 echo "Follow 3-steps sequentially:"
 echo '       In psql shell: '
@@ -18,6 +19,7 @@ echo '            Then, BBB'
 echo '            Lstly CCC'
 echo "============"
 echo " "
+sleep 4
 echo 'AAA. Change myuser and mypass (password be within single inverted commas):'
 echo " "
 echo "Example:  CREATE ROLE myuser LOGIN PASSWORD 'mypass' ; "
