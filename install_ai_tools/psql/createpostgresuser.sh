@@ -2,10 +2,10 @@
 # echo "https://www.postgresql.org/docs/current/ddl-schemas.html"
 echo "  "
 echo "========="
-echo "User 'ashok' and database 'askok' already exist"
+echo "User 'ashok' and database 'ashok' may already exist"
 echo "User 'ashok' has full authority over database 'ashok'"
 echo "User 'ashok' has password: ashok"
-echo "Check with \du"
+echo "Check with \du  and  \l"
 echo "========="
 echo "  "
 echo " "
@@ -13,8 +13,8 @@ sleep 5
 echo "============"
 echo "Follow 3-steps sequentially:"
 echo '       In psql shell: '
-echo '            First execute AAA'
-echo '            Then, BBB
+echo '            First, execute AAA'
+echo '            Then, BBB'
 echo '            Lstly CCC'
 echo "============"
 echo " "
