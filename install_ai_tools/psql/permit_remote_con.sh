@@ -23,5 +23,9 @@ echo "================="
 echo "  "
 sleep 4
 sudo tail /etc/postgresql/$version/main/postgresql.conf
+sleep 2
+echo "Restarting postgresql.."
+sudo systemctl restart postgresql
+echo "Done..."
 cd /home/$USER
         
