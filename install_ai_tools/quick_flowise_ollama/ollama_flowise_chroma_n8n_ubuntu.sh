@@ -487,8 +487,8 @@ if [ ! -f /home/$USER/chromadb_installed.txt ]; then
 	    echo " "                                       | tee -a /home/$USER/error.log
 	    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
 	    # Refer: https://cookbook.chromadb.dev/strategies/cors/
-	    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:0.6.3 
-	    echo "------------"                            | tee -a /home/$USER/error.log
+	    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
+		echo "------------"                            | tee -a /home/$USER/error.log
 	    echo " "                                       | tee -a /home/$USER/error.log
 		echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
 	    sleep 3
