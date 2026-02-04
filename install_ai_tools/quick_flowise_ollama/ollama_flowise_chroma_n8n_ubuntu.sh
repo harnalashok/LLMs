@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 15th Jan, 2026
+# Last amended: 04th Feb, 2026
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -54,7 +54,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# For reading markdown documents
 	sudo apt install retext  -y
     # pipx to install poetry
-    sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
+    sudo apt install zip p7zip-full unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
