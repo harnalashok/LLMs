@@ -69,6 +69,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt update
     # Install curl if you don't have it
     sudo apt install curl -y
+	# I(nstall filezilla for ssh access to bridged network 
+	sudo apt install filezilla -y
     # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
     # Replace '22.x' with the desired major version if needed
     curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
