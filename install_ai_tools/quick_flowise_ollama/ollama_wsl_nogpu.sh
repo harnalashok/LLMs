@@ -496,6 +496,7 @@ chmod +x /home/$USER/*.sh
 
 #####################3
 # flowise docker
+# https://docs.flowiseai.com/getting-started#docker-compose
 ######################
 
 echo " "
@@ -573,7 +574,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   cd ~/
 	   git clone https://github.com/FlowiseAI/Flowise.git
 	   cd Flowise/
-	   sudo docker build --no-cache -t flowise .
+	   # sudo docker build --no-cache -t flowise .
 	   # The '--network host' option removes network isolation between the container and
 	   #   the Docker host machine, meaning the container directly shares the host's networking stack
 	   # The container operates as if it were a process running directly on the host machine,
