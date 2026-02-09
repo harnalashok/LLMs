@@ -716,6 +716,11 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
 	   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+       echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+       echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
+       echo "echo '   userid:   ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
+       echo "echo '   password: Ashok@12345'"   >> /home/$USER/start_flowise.sh
+       echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
 	   echo " "                                                   >> /home/$USER/start_flowise.sh
 	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
 	   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
@@ -735,6 +740,11 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "docker start docker-flowise-1"                       >> /home/$USER/reset_flowise.sh
 	   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
+       echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
+       echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
+       echo "echo '   userid:   ashok@fsm.ac.in'"                 >> /home/$USER/reset_flowise.sh
+       echo "echo '   password: Ashok@12345'"                     >> /home/$USER/reset_flowise.sh
+       echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
        # logs script
 	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
 	   echo " "                                                   >> /home/$USER/logs_flowise.sh
