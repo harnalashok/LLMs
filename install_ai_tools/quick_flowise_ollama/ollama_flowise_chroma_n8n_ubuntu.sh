@@ -22,6 +22,7 @@ echo "Install Visual Studio Coder"
 echo "Install Google antigravity"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
+echo "Install OpenNotebook"
 echo "Install  to tunnel access of local website"
 echo "Will install ragflow docker"
 echo "Will upgrade ragflow"
@@ -1645,6 +1646,39 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 	else
 	    echo "RagFlow Not upgraded"
 	fi	
+fi
+
+##########################
+### Install OpenNotebook
+# Ref: https://github.com/lfnovo/open-notebook/blob/main/docs/1-INSTALLATION/docker-compose.md
+##########################
+
+echo " "
+echo " "
+cd /home/$USER
+if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"   
+	echo "Shall I install OpenNotebook docker? [Y,n]"    # 
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+		mkdir /home/$USER/opennotebook
+		cd /home/$USER/opennotebook
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
+		docker compose up -d
+		sleep 4
+		# Check health of system
+		curl http://localhost:5055/health
+		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
+		cd /home/$USER
+		echo "Open browser to: http://localhost:8502"
+	else
+	    echo "OpenNotebook not installed"
+	fi
 fi
 
 ##########################
