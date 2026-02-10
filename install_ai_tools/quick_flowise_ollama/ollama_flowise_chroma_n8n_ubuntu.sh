@@ -612,8 +612,9 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
        echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
        echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
-       echo "echo '   userid:   ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
-       echo "echo '   password: Ashok@12345'"   >> /home/$USER/start_flowise.sh
+	   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
+       echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
+       echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
        echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
 	   echo " "                                                   >> /home/$USER/start_flowise.sh
 	   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
@@ -636,8 +637,9 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
        echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
        echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
-       echo "echo '   userid:   ashok@fsm.ac.in'"                 >> /home/$USER/reset_flowise.sh
-       echo "echo '   password: Ashok@12345'"                     >> /home/$USER/reset_flowise.sh
+       echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
+       echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
+       echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
        echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
        # logs script
 	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
