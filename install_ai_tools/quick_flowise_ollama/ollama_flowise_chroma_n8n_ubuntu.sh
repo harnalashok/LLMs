@@ -361,100 +361,6 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	 fi
  fi
 
-###########################
-# Install Google Antigravity
-#   Anaconda installation is a must
-# https://askubuntu.com/a/841224
-###########################
-
-cd /home/$USER
-# Install only if anaconda is installed:
-if [  -f /home/$USER/anaconda_installed.txt ]; then
-	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
-		echo "Shall I latest Google Antigravity? [Y,n]"    
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-			#  create a directory for keyrings
-			sudo mkdir -p /etc/apt/keyrings
-			# Download and add Google's signing key
-			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/antigravity-repo-key.gpg
-			# Add the Antigravity repository to your sources list
-			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
-			# Update your package cach
-			sudo apt update -y
-			# Install Google Antigravity
-			sudo apt install antigravity
-			sudo apt autoremove -y
-			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
-			echo " "
-			echo "  "
-			echo "==========="
-			echo "Google antigravity is installed"
-			echo "It will now be available in Ubuntu Start/Application Menu"
-			echo "You can also launch it by command: antigravity"
-			echo "============"
-			echo " "
-			sleep 5
-			reboot
-		else	
-			echo "Google antigravity not installed"
-		fi	
-	fi
-fi
-
-
- 
-#####################3
-# portrainer docker
-######################
-
-cd /home/$USER
-echo " "
-echo " "
-cd /home/$USER
-if [ ! -f /home/$USER/portainer_installed.txt ]; then
-	echo "------------"        
-	echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	   # Installing portrainer
-	   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
-	   # Script to start portainer container
-	   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
-	   echo " "                                                       >> /home/$USER/start/start_portainer.sh
-	   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
-	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
-	   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
-	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
-	   #
-	   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
-	   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
-	   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
-	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
-	   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
-	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
-	   #
-	   cd /home/$USER
-	   docker volume create portainer_data
-	   # This is one long line command
-	   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
-	   # Install portainer community edition (ce)
-	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
-	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
-	   reboot
-	else
-	   echo "Portainer not installed"
-	fi 
-fi
-   
 
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
@@ -572,61 +478,6 @@ fi
 chmod +x /home/$USER/*.sh
 
 
-##########################
-### Install ngrok 
-#   ngrok helps in remotely accessing 
-#     your local web-apps
-#   Refer: What is ngrok:
-#      https://ngrok.com/docs/what-is-ngrok
-#      https://ngrok.com/docs/agent/cli
-##########################
-
-echo "ngrok is used to make local web-apps accessible remotely through tunneling"
-cd /home/$USER
-echo " "
-echo " "
-if [ ! -f /home/$USER/ngrok_installed.txt ]; then
-	echo "------------"   
-    echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-		# Install ngrok
-		# https://dashboard.ngrok.com/get-started/setup/linux
-		echo "Installing ngrok..."
-		sleep 3
-		curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
-		  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-		  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
-		  | sudo tee /etc/apt/sources.list.d/ngrok.list \
-		  && sudo apt update \
-		  && sudo apt install ngrok
-		echo " "
-		echo "======"
-		echo "ngrok is installed. Next use: ./ngrok_config.sh"
-		echo "======"
-		sleep 4
-		# Run the following command to add your authtoken to the default ngrok.yml configuration file.
-		echo "echo '========'"  >  /home/$USER/ngrok_config.sh
-		echo "echo 'You will have to amend config file: ngrok.yml'"                 >> /home/$USER/ngrok_config.sh
-		echo "echo 'and write your ngrok auth token there'"                         >> /home/$USER/ngrok_config.sh
-		echo "echo 'Issue command: ngrok config add-authtoken <your ngrok token>'"  >> /home/$USER/ngrok_config.sh
-		echo "echo 'Then, run the command: ngrok http 11434' "                      >> /home/$USER/ngrok_config.sh 
-		echo "echo 'where, 11434, is your example web-app ip'"                      >> /home/$USER/ngrok_config.sh
-		echo "echo 'This command, if successful, will also output'"                 >> /home/$USER/ngrok_config.sh
-		echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
-		echo "echo 'ngrok ref: https://ngrok.com/docs/agent/cli'"                   >> /home/$USER/ngrok_config.sh
-		echo "echo '========'"                                                      >> /home/$USER/ngrok_config.sh
-		chmod +x *.sh
-			# My remote url is:
-		# https://connivently-unhusked-carri.ngrok-free.dev
-		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
-	else
-	   echo "ngrok not installed"
-	fi  
-else
-   echo "ngrok is installed"
-fi
 
 ##########################
 ### ollama docker
@@ -845,57 +696,6 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 chmod +x /home/$USER/*.sh
 
 
-##########################
-### Install dify
-# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
-##########################
-  
-    echo " "
-    echo " "
-    echo "------------"   
-    echo "Shall I install dify docker? [Y,n]"    # 
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-        cd /home/$USER/
-        echo " "
-        echo "======"                                             
-        echo "Installing dify docker"
-        echo "Access it at: http://localhost:8887/install"
-        echo "======"                                              
-        echo " "
-        sleep 5
-        cd /home/$USER
-        git clone https://github.com/langgenius/dify.git
-        cd /home/$USER/dify/docker
-        cp .env.example .env
-        sed -i 's/NGINX_PORT=80/NGINX_PORT=8887/' .env
-        sed -i 's/EXPOSE_NGINX_PORT=80/EXPOSE_NGINX_PORT=8887/' .env
-        sed -i 's/NGINX_SSL_PORT=443/NGINX_SSL_PORT=4443/' .env
-        docker compose up -d
-        # Start script
-        echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
-        echo " "                                                   >> /home/$USER/start_dify.sh
-        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
-        echo "echo 'dify port is 8887'"                            >> /home/$USER/start_dify.sh
-        echo "echo 'Access it at: http://localhost:8887/install'"  >> /home/$USER/start_dify.sh
-        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
-        echo "sleep 4"                                             >> /home/$USER/start_dify.sh
-        echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
-        echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
-        echo "netstat -aunt | grep 8887"                           >> /home/$USER/start_dify.sh
-        # Stop script
-        echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
-        echo " "                                                  >> /home/$USER/stop_dify.sh
-        echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
-        echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
-        echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
-        sleep 4
-    else
-        echo "dify not installed"
-    fi
-
-
 ################
 # Install postgresql and sqlite3
 # https://stackoverflow.com/questions/18223665/postgresql-query-from-bash-script-as-database-user-postgres
@@ -1044,6 +844,263 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	   echo "Postgres not installed"
 	 fi  
  fi
+
+ ##########################
+### Install Visual Studio Coder
+### Only install it in Ubuntu and NOT in WSL 
+##########################
+
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/vscode_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
+	echo "It is NOT installable on WSL Windows. For WSL environment answer no"
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+	    # Activate python virtual environment
+	    source /home/$USER/venv/bin/activate
+	    # 1.8 Install visual studio code
+	    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+	    mkdir /home/$USER/1234
+	    cd /home/$USER/1234
+	    # Direct download link
+	    wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+	    # Fill in filename from above
+	    mv * code.deb
+	    sudo apt install /home/$USER/1234/code.deb  -y
+	    cd /home/$USER
+	    rm -rf /home/$USER/1234/
+		mkdir /home/$USER/Documents/vscode
+		cd /home/$USER/Documents/vscode
+		wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
+		echo "vscode_installed" > /home/$USER/vscode_installed.txt
+	    #    
+	    sleep 5
+	    #
+	    # Deactivate the environment
+	    deactivate
+		echo "Will reboot system now"
+		sleep 5
+		reboot
+	else
+	    echo "OK. Visual Studio coder not installed."
+	fi 
+fi
+
+
+###########################
+# Install Google Antigravity
+#   Anaconda installation is a must
+# https://askubuntu.com/a/841224
+###########################
+
+echo "  "
+echo "  "
+cd /home/$USER
+# Install only if anaconda is installed:
+if [  -f /home/$USER/anaconda_installed.txt ]; then
+	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
+		echo "Shall I latest Google Antigravity? [Y,n]"    
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+			#  create a directory for keyrings
+			sudo mkdir -p /etc/apt/keyrings
+			# Download and add Google's signing key
+			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/antigravity-repo-key.gpg
+			# Add the Antigravity repository to your sources list
+			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
+			# Update your package cach
+			sudo apt update -y
+			# Install Google Antigravity
+			sudo apt install antigravity
+			sudo apt autoremove -y
+			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
+			echo " "
+			echo "  "
+			echo "==========="
+			echo "Google antigravity is installed"
+			echo "It will now be available in Ubuntu Start/Application Menu"
+			echo "You can also launch it by command: antigravity"
+			echo "============"
+			echo " "
+			sleep 5
+			reboot
+		else	
+			echo "Google antigravity not installed"
+		fi	
+	fi
+fi
+
+
+ 
+#####################3
+# portrainer docker
+######################
+
+cd /home/$USER
+echo " "
+echo " "
+cd /home/$USER
+if [ ! -f /home/$USER/portainer_installed.txt ]; then
+	echo "------------"        
+	echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	   # Installing portrainer
+	   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
+	   # Script to start portainer container
+	   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
+	   echo " "                                                       >> /home/$USER/start/start_portainer.sh
+	   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
+	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
+	   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
+	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
+	   #
+	   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
+	   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
+	   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
+	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
+	   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
+	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
+	   #
+	   cd /home/$USER
+	   docker volume create portainer_data
+	   # This is one long line command
+	   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
+	   # Install portainer community edition (ce)
+	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
+	   reboot
+	else
+	   echo "Portainer not installed"
+	fi 
+fi
+   
+
+
+##########################
+### Install ngrok 
+#   ngrok helps in remotely accessing 
+#     your local web-apps
+#   Refer: What is ngrok:
+#      https://ngrok.com/docs/what-is-ngrok
+#      https://ngrok.com/docs/agent/cli
+##########################
+
+echo "ngrok is used to make local web-apps accessible remotely through tunneling"
+cd /home/$USER
+echo " "
+echo " "
+if [ ! -f /home/$USER/ngrok_installed.txt ]; then
+	echo "------------"   
+    echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		# Install ngrok
+		# https://dashboard.ngrok.com/get-started/setup/linux
+		echo "Installing ngrok..."
+		sleep 3
+		curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+		  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+		  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
+		  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+		  && sudo apt update \
+		  && sudo apt install ngrok
+		echo " "
+		echo "======"
+		echo "ngrok is installed. Next use: ./ngrok_config.sh"
+		echo "======"
+		sleep 4
+		# Run the following command to add your authtoken to the default ngrok.yml configuration file.
+		echo "echo '========'"  >  /home/$USER/ngrok_config.sh
+		echo "echo 'You will have to amend config file: ngrok.yml'"                 >> /home/$USER/ngrok_config.sh
+		echo "echo 'and write your ngrok auth token there'"                         >> /home/$USER/ngrok_config.sh
+		echo "echo 'Issue command: ngrok config add-authtoken <your ngrok token>'"  >> /home/$USER/ngrok_config.sh
+		echo "echo 'Then, run the command: ngrok http 11434' "                      >> /home/$USER/ngrok_config.sh 
+		echo "echo 'where, 11434, is your example web-app ip'"                      >> /home/$USER/ngrok_config.sh
+		echo "echo 'This command, if successful, will also output'"                 >> /home/$USER/ngrok_config.sh
+		echo "echo 'your public-ip from where remotely you can access youir local web-app'"  >> /home/$USER/ngrok_config.sh
+		echo "echo 'ngrok ref: https://ngrok.com/docs/agent/cli'"                   >> /home/$USER/ngrok_config.sh
+		echo "echo '========'"                                                      >> /home/$USER/ngrok_config.sh
+		chmod +x *.sh
+			# My remote url is:
+		# https://connivently-unhusked-carri.ngrok-free.dev
+		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
+	else
+	   echo "ngrok not installed"
+	fi  
+else
+   echo "ngrok is installed"
+fi
+
+
+##########################
+### Install dify
+# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
+##########################
+  
+    echo " "
+    echo " "
+    echo "------------"   
+    echo "Shall I install dify docker? [Y,n]"    # 
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
+        cd /home/$USER/
+        echo " "
+        echo "======"                                             
+        echo "Installing dify docker"
+        echo "Access it at: http://localhost:8887/install"
+        echo "======"                                              
+        echo " "
+        sleep 5
+        cd /home/$USER
+        git clone https://github.com/langgenius/dify.git
+        cd /home/$USER/dify/docker
+        cp .env.example .env
+        sed -i 's/NGINX_PORT=80/NGINX_PORT=8887/' .env
+        sed -i 's/EXPOSE_NGINX_PORT=80/EXPOSE_NGINX_PORT=8887/' .env
+        sed -i 's/NGINX_SSL_PORT=443/NGINX_SSL_PORT=4443/' .env
+        docker compose up -d
+        # Start script
+        echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
+        echo " "                                                   >> /home/$USER/start_dify.sh
+        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
+        echo "echo 'dify port is 8887'"                            >> /home/$USER/start_dify.sh
+        echo "echo 'Access it at: http://localhost:8887/install'"  >> /home/$USER/start_dify.sh
+        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
+        echo "sleep 4"                                             >> /home/$USER/start_dify.sh
+        echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
+        echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
+        echo "netstat -aunt | grep 8887"                           >> /home/$USER/start_dify.sh
+        # Stop script
+        echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
+        echo " "                                                  >> /home/$USER/stop_dify.sh
+        echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
+        echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
+        echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
+        sleep 4
+    else
+        echo "dify not installed"
+    fi
+
 
 #########################
 ### Install mongodb and mongosh
@@ -1447,55 +1504,6 @@ else
      echo "AutoGen Studio will not be installed!"
 fi 
 
-##########################
-### Install Visual Studio Coder
-### Only install it in Ubuntu and NOT in WSL 
-##########################
-
-echo " "
-echo " "
-echo "-----"
-cd /home/$USER
-if [ ! -f /home/$USER/vscode_installed.txt ]; then
-    echo " "
-    echo " "
-	echo "------------"  
-	echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
-	echo "It is NOT installable on WSL Windows. For WSL environment answer no"
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo " "
-	    echo " "
-	    # Activate python virtual environment
-	    source /home/$USER/venv/bin/activate
-	    # 1.8 Install visual studio code
-	    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
-	    mkdir /home/$USER/1234
-	    cd /home/$USER/1234
-	    # Direct download link
-	    wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-	    # Fill in filename from above
-	    mv * code.deb
-	    sudo apt install /home/$USER/1234/code.deb  -y
-	    cd /home/$USER
-	    rm -rf /home/$USER/1234/
-		mkdir /home/$USER/Documents/vscode
-		cd /home/$USER/Documents/vscode
-		wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
-		echo "vscode_installed" > /home/$USER/vscode_installed.txt
-	    #    
-	    sleep 5
-	    #
-	    # Deactivate the environment
-	    deactivate
-		echo "Will reboot system now"
-		sleep 5
-		reboot
-	else
-	    echo "OK. Visual Studio coder not installed."
-	fi 
-fi
 
 ##########################
 ### Install flatpak and JASP
@@ -1588,6 +1596,40 @@ fi
 
 
 ##########################
+### Install OpenNotebook
+# Ref: https://github.com/lfnovo/open-notebook/blob/main/docs/1-INSTALLATION/docker-compose.md
+##########################
+
+echo " "
+echo " "
+cd /home/$USER
+if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"   
+	echo "Shall I install OpenNotebook docker? [Y,n]"    # 
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+		mkdir /home/$USER/opennotebook
+		cd /home/$USER/opennotebook
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
+		docker compose up -d
+		sleep 4
+		# Check health of system
+		curl http://localhost:5055/health
+		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
+		cd /home/$USER
+		echo "Open browser to: http://localhost:8502"
+	else
+	    echo "OpenNotebook not installed"
+	fi
+fi
+
+
+##########################
 ### Upgrade ragflow
 # Ref: https://ragflow.io/docs/dev/upgrade_ragflow
 ##########################
@@ -1648,38 +1690,7 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 	fi	
 fi
 
-##########################
-### Install OpenNotebook
-# Ref: https://github.com/lfnovo/open-notebook/blob/main/docs/1-INSTALLATION/docker-compose.md
-##########################
 
-echo " "
-echo " "
-cd /home/$USER
-if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
-    echo " "
-    echo " "
-	echo "------------"   
-	echo "Shall I install OpenNotebook docker? [Y,n]"    # 
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo " "
-	    echo " "
-		mkdir /home/$USER/opennotebook
-		cd /home/$USER/opennotebook
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
-		docker compose up -d
-		sleep 4
-		# Check health of system
-		curl http://localhost:5055/health
-		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
-		cd /home/$USER
-		echo "Open browser to: http://localhost:8502"
-	else
-	    echo "OpenNotebook not installed"
-	fi
-fi
 
 ##########################
 ### Install RAGflow
