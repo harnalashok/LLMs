@@ -895,7 +895,10 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	fi 
 fi
 
-
+chmod +x /home/$USER/*.sh
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/stop/*.sh
+ 
 ###########################
 # Install Google Antigravity
 #   Anaconda installation is a must
