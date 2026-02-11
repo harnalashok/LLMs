@@ -900,7 +900,93 @@ fi
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/stop/*.sh
- 
+
+#################
+# langchain & langraph
+#################
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/langchain_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install langchain and llamaindex? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		# Activate python environment at 'langchain'
+		#  for installing langchain and llama-index
+		##############
+		# Create python virtual env
+		##############
+		python3 -m venv /home/$USER/langchain
+		source /home/$USER/langchain/bin/activate
+		# 1.6 Essentials software
+		pip install spyder numpy scipy pandas matplotlib sympy cython
+		pip install jupyterlab
+		pip install ipython
+		pip install notebook
+		pip install streamlit
+		# Required for spyder:
+		sudo apt install pyqt5-dev-tools -y
+		# Huggingface and llama.cpp related
+		pip install huggingface_hub
+		# Create script to activate 'langchain' env
+		echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+		echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+		echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+		echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+		echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+		chmod +x /home/$USER/*.sh
+		sleep 2
+		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
+		source /home/$USER/langchain/bin/activate
+		pip install langchain
+		pip install langchain-openai
+		pip install langchain-community
+		pip install langchain-experimental
+		pip install langgraph
+		pip install "langserve[all]"
+		pip install langchain-cli
+		#################
+		# llamaindex
+		# To be installed ONLY in langchain virtual env
+		#################
+		# 1.0 LLamaindex install
+		# Mostly openai related
+		echo "Installing llama-index"
+		echo "  "
+		pip install llama-index
+		# 1,1 Ollama, huggingface and localai (openailike) oriented
+		pip install --upgrade transformers
+		pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
+		pip install llama-index-readers-file llama-index-embeddings-fastembed
+		# Needed inspite of code repeated above
+		pip install --upgrade transformers
+		# 1.2 Vector stores
+		pip infistall faiss-cpu
+		pip install qdrant-client llama-index-vector-stores-chroma 
+		pip install llama-index-vector-stores-qdrant fastembed
+		# 1.3 Web access site
+		pip install tavily-python
+		# 1.4 Yahoo finance data
+		pip install yfinance
+		# 1.5 For groq, together, mistralAI access
+		pip install llama-index-llms-groq
+		pip install llama-index-llms-together
+		pip install llama-index-llms-mistralai
+		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
+	else
+		echo "Langchain and llama index not installed"
+	fi		
+fi	
+chmod +x /home/$USER/*.sh
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/stop/*.sh
+
 ###########################
 # Install Google Antigravity
 #   Anaconda installation is a must
