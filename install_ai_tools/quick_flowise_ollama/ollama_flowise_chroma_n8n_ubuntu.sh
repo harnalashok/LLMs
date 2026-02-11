@@ -978,6 +978,17 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		pip install llama-index-llms-groq
 		pip install llama-index-llms-together
 		pip install llama-index-llms-mistralai
+		# Download llamaindex tutorials
+		mkdir -p /home/$USER/Documents/llamaindex
+		cd /home/$USER/Documents/llamaindex
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	else
 		echo "Langchain and llama index not installed"
