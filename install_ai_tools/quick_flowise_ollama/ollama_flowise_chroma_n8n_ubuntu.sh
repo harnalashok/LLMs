@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 05th Feb, 2026
+# Last amended: 11th Feb, 2026
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -19,6 +19,8 @@ echo "Installs xinference"
 echo "Installs AutoGen Studio"
 echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
+echo "Install FAISS vector store"
+echo "Install langchain+llamaIndex"
 echo "Install Google antigravity"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
@@ -409,7 +411,6 @@ fi
 #
 chmod +x /home/$USER/*.sh
 
-
 ##########################
 ### n8n docker
 ##########################
@@ -708,16 +709,15 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	echo "------------"   
-	echo "Shall I install postgres  db and pgvector? [Y,n]"    # 
+	echo "Shall I install postgres db and pgvector? [Y,n]"    # 
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
-	    
-		# Install postgresql
+	  	# Install postgresql
 	    cd /home/$USER/
 	    echo "Installing postgresql and sqlite3"
 	    sudo apt install postgresql postgresql-contrib sqlite3   -y
-		
+	
 	    # Postgresql start/stop script
 
 		# Start script
@@ -997,6 +997,60 @@ fi
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/stop/*.sh
+
+
+##########################
+### Install FAISS library
+##########################
+
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/faiss_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install FAISS vector store? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		echo " "
+		echo "============"
+		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
+		echo "is of the folder where data files will be saved. Consider this as the "
+		echo "location of FAISS database for that application."
+		echo "=============="
+		echo " "
+		sleep 8
+		# Create venv for FAISS
+		python3 -m venv /home/$USER/faiss
+		source /home/$USER/faiss/bin/activate
+		pip3 install faiss-cpu
+		deactivate
+		## Script to activate FAISS library
+		echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
+		echo " "                                                                >> /home/$USER/start/activate_faiss.sh
+		echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
+		echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
+		echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
+		echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
+		echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
+		deactivate
+		echo "FAISS library installed at /home/$USER/faiss/"
+		echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
+		# FAISS download data-cleaning script
+		cd /home/$USER/
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
+		chmod +x *.sh
+		chmod +x /home/$USER/start/*.sh
+		sleep 4
+		cd /homne/$USER/
+	else
+		echo "FAISS not installed"
+	fi	
+fi
+
 
 ###########################
 # Install Google Antigravity
