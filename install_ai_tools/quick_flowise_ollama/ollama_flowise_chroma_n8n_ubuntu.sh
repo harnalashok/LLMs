@@ -1847,7 +1847,6 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 fi
 
 
-
 ##########################
 ### Install RAGflow
 # Ref: https://github.com/infiniflow/ragflow
@@ -2010,10 +2009,9 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    sudo sysctl -w vm.max_map_count=262144
 	    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 	    git clone https://github.com/infiniflow/ragflow.git
-	    
 	    cd ragflow/docker
 		# which version to install
-		git checkout v0.23.1
+		git checkout v0.24.0
 		# Change some port numbers as per our conveience
 	    sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
 	    sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
