@@ -967,7 +967,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		# Needed inspite of code repeated above
 		pip install --upgrade transformers
 		# 1.2 Vector stores
-		pip infistall faiss-cpu
+		pip install faiss-cpu
 		pip install qdrant-client llama-index-vector-stores-chroma 
 		pip install llama-index-vector-stores-qdrant fastembed
 		# 1.3 Web access site
