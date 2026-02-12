@@ -1819,10 +1819,10 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 		cd /home/$USER/ragflow
 		# https://ragflow.io/docs/dev/upgrade_ragflow#upgrade-ragflow-to-the-most-recent-officially-published-release
 		# Switch to the latest, officially published release, e.g., v0.23.1:
-		echo "3.0 Will upgrade to ver 0.23.1"
+		echo "3.0 Will upgrade to ver 0.24.0"
 		sleep 5
 		# Switch working directory of git
-		git checkout -f v0.23.1
+		git checkout v0.24.0
 		#
 		# Update ragflow/docker/.env:
 		cd /home/$USER/ragflow/docker
@@ -1845,7 +1845,6 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 	    echo "RagFlow Not upgraded"
 	fi	
 fi
-
 
 ##########################
 ### Install RAGflow
