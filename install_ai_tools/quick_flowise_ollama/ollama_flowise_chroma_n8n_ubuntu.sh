@@ -1052,6 +1052,48 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 fi
 
 
+##########################
+### Install OpenNotebook
+# Ref: https://github.com/lfnovo/open-notebook/blob/main/docs/1-INSTALLATION/docker-compose.md
+##########################
+
+echo " "
+echo " "
+cd /home/$USER
+if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"   
+	echo "Shall I install OpenNotebook docker? [Y,n]"    # 
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+		mkdir /home/$USER/opennotebook
+		cd /home/$USER/opennotebook
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
+		docker compose up -d
+		sleep 4
+		echo "  "
+		echo "  "
+		# Check health of system
+		echo " ==== "
+		echo "Checking health of installed system"
+		curl http://localhost:5055/health
+		echo " ==== "
+		echo  "  "
+		echo  "  "
+		echo "Open browser to: http://localhost:8502"
+		sleep 4
+		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
+		cd /home/$USER
+	else
+	    echo "OpenNotebook not installed"
+	fi
+fi
+
+
 ###########################
 # Install Google Antigravity
 #   Anaconda installation is a must
@@ -1564,7 +1606,9 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 		reboot
 	else
 	     echo "xinference will not be installed"
-	fi   	
+	fi   
+
+	
 	##########################
 	### Install xinference on machine
 	# Ref: https://github.com/harnalashok/LLMs/blob/main/xinference.ipynb
@@ -1749,41 +1793,6 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 		   echo "TorchStudio not installed"
 	fi   
 fi
-
-
-##########################
-### Install OpenNotebook
-# Ref: https://github.com/lfnovo/open-notebook/blob/main/docs/1-INSTALLATION/docker-compose.md
-##########################
-
-echo " "
-echo " "
-cd /home/$USER
-if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
-    echo " "
-    echo " "
-	echo "------------"   
-	echo "Shall I install OpenNotebook docker? [Y,n]"    # 
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo " "
-	    echo " "
-		mkdir /home/$USER/opennotebook
-		cd /home/$USER/opennotebook
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
-		docker compose up -d
-		sleep 4
-		# Check health of system
-		curl http://localhost:5055/health
-		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
-		cd /home/$USER
-		echo "Open browser to: http://localhost:8502"
-	else
-	    echo "OpenNotebook not installed"
-	fi
-fi
-
 
 ##########################
 ### Upgrade ragflow
