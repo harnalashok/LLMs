@@ -804,6 +804,59 @@ chmod +x /home/$USER/*.sh
 
 
 ##########################
+### Install FAISS library
+##########################
+
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/faiss_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install FAISS vector store? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		echo " "
+		echo "============"
+		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
+		echo "is of the folder where data files will be saved. Consider this as the "
+		echo "location of FAISS database for that application."
+		echo "=============="
+		echo " "
+		sleep 8
+		# Create venv for FAISS
+		python3 -m venv /home/$USER/faiss
+		source /home/$USER/faiss/bin/activate
+		pip3 install faiss-cpu
+		deactivate
+		## Script to activate FAISS library
+		echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
+		echo " "                                                                >> /home/$USER/start/activate_faiss.sh
+		echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
+		echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
+		echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
+		echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
+		echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
+		deactivate
+		echo "FAISS library installed at /home/$USER/faiss/"
+		echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
+		# FAISS download data-cleaning script
+		cd /home/$USER/
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
+		chmod +x *.sh
+		chmod +x /home/$USER/start/*.sh
+		sleep 4
+		cd /homne/$USER/
+	else
+		echo "FAISS not installed"
+	fi	
+fi
+
+
+##########################
 ### Install dify
 # Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
 ##########################
