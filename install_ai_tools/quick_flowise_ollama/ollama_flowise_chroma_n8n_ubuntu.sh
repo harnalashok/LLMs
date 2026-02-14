@@ -1652,7 +1652,7 @@ docker update --restart=no $(docker ps -a -q)
 
 
 ###################
-# llama.cpp install
+# llama.cpp install--I
 # python env remains activated
 # source /home/$USER/venv/bin/activate
 ###################
@@ -1665,7 +1665,7 @@ echo "change cu124, to say, cu127 for version 12.7 before installing"
 echo "llama.cpp."
 echo "==========="
 echo " "
-echo "Shall I now install llama.cpp (if your CUDA version is correct)? [Y,n]"   
+echo "Shall I now BUILD AND install llama.cpp (if your CUDA version is correct)? [Y,n]"   
 read input
 input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
@@ -1726,6 +1726,31 @@ fi
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/*.sh
 
+###################
+# llama.cpp install--II
+# python env remains activated
+# source /home/$USER/venv/bin/activate
+# https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md
+###################
+echo "  "
+echo " "
+echo "Shall I now install llama.cpp using homebrew ? [Y,n]"   
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	  # Installing llama.cpp
+	  source /home/$USER/venv/bin/activate
+	   # Huggingface and llama.cpp related
+	  pip install huggingface_hub
+	  pip install transformers
+	  pip install accelerate
+	  brew install llama.cpp
+	  echo "export PATH=/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"  >> /home/$USER/.bashrc
+	  echo "llama.cpp installed"
+	else
+	   echo "llama-cpp not installed"
+	fi
+fi	
 
 ##########################
 ### Build and Install xinference docker
