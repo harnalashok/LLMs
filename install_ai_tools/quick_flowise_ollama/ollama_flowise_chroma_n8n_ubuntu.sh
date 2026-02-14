@@ -363,7 +363,6 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	 fi
  fi
 
-
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/stop/*.sh
@@ -396,38 +395,40 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "Ports used are: 9091 and 19530."                       
 		echo "To restart/stop docker use the following commands:"            
 		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
-		echo "To delete the database, use the following command:"    
-		echo "--------------------"                                  
-		
 		mkdir /home/$USER/milvus
 		mv standalone_embed.sh /home/$USER/milvus/
 		echo "PATH=$PATH:/home/$USER/milvus/" >> .bashrc
-		
-		
-		
+		# Our milvus start script		
 		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
 		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
 		echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
 		echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Access in flowise as: http://localhost:19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
+		echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
+		echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
 		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
 		echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
+		echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
 		echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
-		
-		
+		# Stop script		
 		echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
 		echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "bash standalone_embed.sh stop"                       | tee -a /home/$USER/stop/stop_milvus.sh 
+		echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "netstat -aunt | grep 9091"                           | tee -a /home/$USER/stop/stop_milvus.sh 
 		
-		
-		echo "cd /home/$USER/milvus"                    > /home/$USER/delete_milvus_db.sh
-		echo "bash standalone_embed.sh delete"         >> /home/$USER/delete_milvus_db.sh
+		# Delete milvus data
+		echo "cd /home/$USER/milvus"                    > /home/$USER/start/delete_milvus_db.sh
+		echo "echo 'Will delete milvus database'"       >> /home/$USER/start/delete_milvus_db.sh 
+		echo "echo 'Data is in /home/$USER/volumes/milvus/'"  >> /home/$USER/start/delete_milvus.sh
+		echo "sudo bash standalone_embed.sh delete"         >> /home/$USER/start/delete_milvus_db.sh
 		sleep 3
 
- 
+
+chmod +x /home/$USER/*.sh
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/stop/*.sh
 
 ##########################
 ### Install chromadb docker
