@@ -132,12 +132,11 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo "------------"        
     echo " "
     echo "  "
-    if [[  -n "$WSLSYSTEM" ]] ; then
-        echo "==>For WSL-Ubuntu ONLY<=="
-        echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
-        read input
-        input=${input:-Y}
-        if [[ $input == "Y" || $input == "y" ]]; then
+    echo "==>For WSL-Ubuntu ONLY<=="
+    echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
            # Update wsl
             wsl.exe --update
             # Remove old gpg key
