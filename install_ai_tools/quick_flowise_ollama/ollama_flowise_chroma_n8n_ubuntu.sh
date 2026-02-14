@@ -375,54 +375,57 @@ chmod +x /home/$USER/stop/*.sh
 # Webui avaiable at: http://localhost:9091/webui
 ################
 # Ref: https://milvus.io/docs/install_standalone-docker.md
-
-echo "Installing milvus vector database using docker"       | tee -a /home/$USER/error.log
-echo "You will be asked for the password. Supply it..."     | tee -a /home/$USER/error.log
-echo "Installation will be quiet...takes time.."     | tee -a /home/$USER/error.log
-
-echo " "                                                    | tee -a /home/$USER/error.log
-sleep 3
-
-curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-bash standalone_embed.sh start  2>> /home/$USER/error.log
-
-echo " "
-echo "Milvus vector database installed"                      | tee -a /home/$USER/error.log
-echo "Milvus vector database installed"                      | tee -a /home/$USER/info.log
-echo "Ports used are: 9091 and 19530."                       | tee -a /home/$USER/info.log
-echo "To stop docker use the following commands:"            | tee -a /home/$USER/info.log
-echo "      ./standalone_embed.sh stop"                      | tee -a /home/$USER/info.log
-echo "To delete the database, use the following command:"    | tee -a /home/$USER/info.log
-echo "      ./standalone_embed.sh delete"                    | tee -a /home/$USER/info.log
-echo "--------------------"                                  | tee -a /home/$USER/info.log
-
-mkdir /home/$USER/milvus
-mv standalone_embed.sh /home/$USER/milvus/
-echo "PATH=$PATH:/home/$USER/milvus/" >> .bashrc
-
-
-
-echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
-echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
-echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
-echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-echo "echo 'Access in flowise as: http://localhost:19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
-echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
-echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
-
-
-echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
-echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
-echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
-echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
-echo "bash standalone_embed.sh stop"                       | tee -a /home/$USER/stop/stop_milvus.sh 
-echo "netstat -aunt | grep 9091"                           | tee -a /home/$USER/stop/stop_milvus.sh 
-
-
-echo "cd /home/$USER/milvus"                    > /home/$USER/delete_milvus_db.sh
-echo "bash standalone_embed.sh delete"         >> /home/$USER/delete_milvus_db.sh
-sleep 3
+cd /home/$USER
+if [ ! -f /home/$USER/milvus_installed.txt ]; then
+	echo " "
+	echo " "
+	echo "------------"        
+	echo "Shall I install mulvus docker? [Y,n]"    # Else docker milvus may be installed
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo "====  "    
+		echo "Installing milvus vector database using docker"       
+		echo "You may be asked for the password. Supply it..."     
+		echo "====  "                                                   
+		sleep 3
+		curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+		bash standalone_embed.sh start
+		echo " "
+		echo "Milvus vector database installed"                      
+		echo "Ports used are: 9091 and 19530."                       
+		echo "To restart/stop docker use the following commands:"            
+		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
+		echo "To delete the database, use the following command:"    
+		echo "--------------------"                                  
+		
+		mkdir /home/$USER/milvus
+		mv standalone_embed.sh /home/$USER/milvus/
+		echo "PATH=$PATH:/home/$USER/milvus/" >> .bashrc
+		
+		
+		
+		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
+		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
+		echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
+		echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
+		echo "echo 'Access in flowise as: http://localhost:19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
+		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
+		echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
+		echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
+		
+		
+		echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
+		echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
+		echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
+		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
+		echo "bash standalone_embed.sh stop"                       | tee -a /home/$USER/stop/stop_milvus.sh 
+		echo "netstat -aunt | grep 9091"                           | tee -a /home/$USER/stop/stop_milvus.sh 
+		
+		
+		echo "cd /home/$USER/milvus"                    > /home/$USER/delete_milvus_db.sh
+		echo "bash standalone_embed.sh delete"         >> /home/$USER/delete_milvus_db.sh
+		sleep 3
 
  
 
