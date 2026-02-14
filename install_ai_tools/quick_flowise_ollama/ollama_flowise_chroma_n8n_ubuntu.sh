@@ -443,6 +443,45 @@ chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/stop/*.sh
 
+###############
+# Meilisearch install
+# Ref: https://www.meilisearch.com/docs/guides/docker
+################
+
+echo "Installing mellisearch vector database using docker"       | tee -a /home/$USER/error.log
+docker pull getmeili/meilisearch:v1.15
+docker run -d --rm \
+  -p 7700:7700 \
+  -v $(pwd)/meili_data:/meili_data \
+  getmeili/meilisearch:v1.15
+
+  echo "Mellisearch installed"
+
+
+echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
+echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
+echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
+echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
+echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
+echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
+echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
+echo "echo 'Access in flowise as: http://localhost:7700'"  |   tee -a /home/$USER/start/start_meilisearch.sh
+echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
+echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
+echo "sleep 8"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
+echo "docker run -d --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee  -a  /home/$USER/start/start_meilisearch.sh
+
+
+
+
+
+
+
+
+
+
+
+
 ##########################
 ### Install chromadb docker
 # Ref: https://docs.trychroma.com/production/containers/docker
