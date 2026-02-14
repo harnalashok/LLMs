@@ -1463,19 +1463,19 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
-	  # Installing llama.cpp
-	  source /home/$USER/venv/bin/activate
-	   # Huggingface and llama.cpp related
-	  pip install huggingface_hub
-	  pip install transformers
-	  pip install accelerate
-	  brew install llama.cpp
-	  echo "export PATH=/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"  >> /home/$USER/.bashrc
-	  echo "llama.cpp installed"
-	  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
-	  wsl.exe --shutdown
+		  # Installing llama.cpp
+		  source /home/$USER/venv/bin/activate
+		   # Huggingface and llama.cpp related
+		  pip install huggingface_hub
+		  pip install transformers
+		  pip install accelerate
+		  brew install llama.cpp
+		  echo "export PATH=/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"  >> /home/$USER/.bashrc
+		  echo "llama.cpp installed"
+		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
+		  wsl.exe --shutdown
 	else
-	   echo "llama-cpp not installed"
+		   echo "llama-cpp not installed"
 	fi
 fi	
 
