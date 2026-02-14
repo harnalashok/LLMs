@@ -84,7 +84,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
-    echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
+	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
     wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
     wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
@@ -106,6 +106,14 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Folders for start/stop scripts
     mkdir /home/$USER/start
     mkdir /home/$USER/stop
+	echo "  "
+	echo "   "
+	echo "Will install homebrew"
+	sudo apt update
+    sudo apt install build-essential procps curl file git
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/$USER/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo " "
     echo " "
     echo "====NOTE====="
