@@ -425,7 +425,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
 		echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
 		echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
-		echo "sudo bash standalone_embed.sh delete             >> /home/$USER/start/delete_milvus_db.sh
+		echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
         #
         ln -sT /home/$USER/start_milvus.sh       /home/$USER/start_milvus.sh  
 		ln -sT /home/$USER/stop_milvus.sh        /home/$USER/stop_milvus.sh  
@@ -448,39 +448,51 @@ chmod +x /home/$USER/stop/*.sh
 # Ref: https://www.meilisearch.com/docs/guides/docker
 ################
 
-echo "Installing mellisearch vector database using docker"       | tee -a /home/$USER/error.log
-docker pull getmeili/meilisearch:v1.15
-docker run -d --rm \
-  -p 7700:7700 \
-  -v $(pwd)/meili_data:/meili_data \
-  getmeili/meilisearch:v1.15
+echo "  "
+echo "   "
+cd /home/$USER/
+if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
+	echo " "
+	echo " "
+	echo "------------"        
+	echo "Shall I install meilisearch docker? [Y,n]"    # Else docker milvus may be installed
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo "====  "    
+		echo "Installing meilisearch vector database using docker"       
+		echo "You may be asked for the password. Supply it..."     
+		echo "====  "                                                   
+		sleep 3
+		echo "Installing mellisearch vector database using docker"       
+		docker pull getmeili/meilisearch:latest
+		docker run -d --rm \
+		           -p 7700:7700 \
+		           -v $(pwd)/meili_data:/meili_data \
+		             getmeili/meilisearch:latest
+		echo "Mellisearch installed"
+		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
+		echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
+		echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
+		echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
+		echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
+		echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
+		echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
+		echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
+		echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
+		echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
+		echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
+		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
+		ln -sT /home/$USER/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
+		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+    else
+	    echo "Meilisearch not installedd"
+	fi
+fi	
 
-  echo "Mellisearch installed"
-
-
-echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
-echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
-echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
-echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
-echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
-echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
-echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
-echo "echo 'Access in flowise as: http://localhost:7700'"  |   tee -a /home/$USER/start/start_meilisearch.sh
-echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
-echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
-echo "sleep 8"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
-echo "docker run -d --rm   -p 7700:7700   -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:v1.15"  | tee  -a  /home/$USER/start/start_meilisearch.sh
-
-
-
-
-
-
-
-
-
-
-
+chmod +x /home/$USER/*.sh
+chmod +x /home/$USER/start/*.sh
+chmod +x /home/$USER/stop/*.sh
 
 ##########################
 ### Install chromadb docker
