@@ -429,15 +429,16 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
 		wsl.exe --shutdown
 		sleep 3
+		chmod +x /home/$USER/*.sh
+        chmod +x /home/$USER/start/*.sh
+        chmod +x /home/$USER/stop/*.sh
 	else
 		echo "Milvus db not installed"
 	fi
 	echo "Milvus db is installed"
 fi	
 
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
+
 
 ###############
 # Meilisearch install
