@@ -361,12 +361,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "Anaconda not installed"
  fi
  
-
-   
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/stop/*.sh
-
 
 ###############
 # Milvus install
@@ -431,6 +428,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		ln -sT /home/$USER/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
 		#
 		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+		wsl.exe --shutdown
 		sleep 3
 	else
 		echo "Milvus db not installed"
@@ -484,6 +482,7 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
 		ln -sT /home/$USER/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
 		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+		wsl.exe --shutdown
     else
 	    echo "Meilisearch not installedd"
 	fi
@@ -860,6 +859,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		chmod +x /home/$USER/start/*.sh
 		sleep 4
 		cd /homne/$USER/
+		wsl.exe --shutdown
 	else
 		echo "FAISS not installed"
 	fi	
@@ -954,6 +954,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
+		wsl.exe --shutdown
 	else
 		echo "Langchain and llama index not installed"
 	fi		
@@ -1018,13 +1019,11 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		echo "netstat -aunt | grep 7860"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
 		chmod +x /home/$USER/start/*.sh
 		sleep 2
+		wsl.exe --shutdown
 	else
 		echo "langflow NOT installed"
 	fi
 fi	
-
-
-
 
 
 ##########################
@@ -1073,6 +1072,7 @@ fi
         echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
         echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
         sleep 4
+		wsl.exe --shutdown
     else
         echo "dify not installed"
     fi
@@ -1435,6 +1435,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
   echo "Done...."
   cd /home/$USER
+  wsl.exe --shutdown
 else
   echo "Skipping install of llama.cpp"
 fi
@@ -1463,6 +1464,7 @@ echo "Shall I now install llama.cpp using homebrew ? [Y,n]"
 	  brew install llama.cpp
 	  echo "export PATH=/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"  >> /home/$USER/.bashrc
 	  echo "llama.cpp installed"
+	  wsl.exe --shutdown
 	else
 	   echo "llama-cpp not installed"
 	fi
@@ -1545,40 +1547,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
      echo "AutoGen Studio will not be installed!"
 fi 
-
-##########################
-### Install Visual Studio Coder
-### Only install it in Ubuntu and NOT in WSL 
-##########################
-
-echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
-echo "It is NOT installable on WSL Windows. If you are in WSL environment, then answer n"
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-    echo " "
-    echo " "
-    # Activate python virtual environment
-    source /home/$USER/venv/bin/activate
-    # 1.8 Install visual studio code
-    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
-    mkdir /home/$USER/1234
-    cd /home/$USER/1234
-    # Direct download link
-    wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-    # Fill in filename from above
-    mv * code.deb
-    sudo apt install /home/$USER/1234/code.deb  -y
-    cd /home/$USER
-    rm -rf /home/$USER/1234/
-    #    
-    sleep 5
-    #
-    # Deactivate the environment
-    deactivate
-else
-    echo "OK. Visual code coder not installed."
-fi    
 
 
 ##########################
