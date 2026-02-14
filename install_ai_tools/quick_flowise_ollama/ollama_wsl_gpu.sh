@@ -871,6 +871,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		chmod +x /home/$USER/start/*.sh
 		sleep 4
 		cd /homne/$USER/
+		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 		wsl.exe --shutdown
 	else
 		echo "FAISS not installed"
