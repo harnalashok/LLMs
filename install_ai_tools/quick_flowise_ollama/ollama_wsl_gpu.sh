@@ -99,6 +99,16 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     # Folders for start/stop scripts
     mkdir /home/$USER/start
     mkdir /home/$USER/stop
+	echo "  "
+	echo "   "
+	echo "Will install homebrew"
+	sudo apt update
+    sudo apt install build-essential procps curl file git
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/$USER/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    echo " "
+    echo " "
     echo " "
     echo " "
     if [[ ! -n "$WSLSYSTEM" ]] ; then
