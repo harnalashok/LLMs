@@ -1090,14 +1090,12 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		echo "source .venv/bin/activate"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
 		echo "uv run langflow run"                                 			| tee -a /home/$USER/start/start_uv_langflow.sh  
 		echo "netstat -aunt | grep 7860"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
-		
 		chmod +x /home/$USER/start/*.sh
-		
 		sleep 2
-
-
-
-
+	else
+		echo "langflow NOT installed"
+	fi
+fi	
 
 
 #################
