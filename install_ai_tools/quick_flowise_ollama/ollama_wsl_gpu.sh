@@ -1080,6 +1080,65 @@ chmod +x /home/$USER/start/*.sh
 chmod +x /home/$USER/stop/*.sh
 
 
+#####################
+## langflow install
+####################
+
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/langflow_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install langflow? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+		# Install langflow
+		echo " "                                      | tee -a /home/$USER/error.log
+		echo "Installing langflow..."                 | tee -a /home/$USER/error.log
+		echo "------"                                 | tee -a /home/$USER/error.log
+		echo " "                                      | tee -a /home/$USER/error.log
+		sleep 2
+		# Create default .venv environment in the current folder
+		# Existing environment is first deleted
+		uv venv
+		# Install in the default environment ie .venv
+		uv pip install langflow  2>> /home/$USER/error.log
+		sleep 2
+		echo "  "                                    | tee -a /home/$USER/error.log
+		echo "  "                                    | tee -a /home/$USER/info.log
+		echo "langflow installed"                    | tee -a /home/$USER/error.log
+		echo "langflow installed"                    | tee -a /home/$USER/info.log
+		# https://docs.langflow.org/configuration-cli
+		echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a /home/$USER/info.log
+		# 		
+		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_uv_langflow.sh  
+		echo " "                                                   | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "cd ~/"                                               | tee -a /home/$USER/start/start_uv_langflow.sh  
+        echo "echo 'Run following command to get langflow CLI options:'"    | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '        uv run langflow'"                               | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'Generate api-key, as: '"                                | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '        uv run langflow api-key'"                       | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'Run langflow, as: '"                                     | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '        uv run langflow run'"                           | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '---------- '"                                           | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "  "                                                      		| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'Langflow will be available at port 7860'"     		     | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'deactivate venv with, deactivate, command'"    			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "source .venv/bin/activate"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "uv run langflow run"                                 			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "netstat -aunt | grep 7860"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		chmod +x /home/$USER/start/*.sh
+		sleep 2
+	else
+		echo "langflow NOT installed"
+	fi
+fi	
 
 
 
