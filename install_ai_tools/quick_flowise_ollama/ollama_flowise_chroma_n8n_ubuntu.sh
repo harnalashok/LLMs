@@ -372,14 +372,16 @@ chmod +x /home/$USER/stop/*.sh
 ###############
 # Milvus install
 # Webui avaiable at: http://localhost:9091/webui
-################
 # Ref: https://milvus.io/docs/install_standalone-docker.md
-cd /home/$USER
+################
+echo "  "
+echo "   "
+cd /home/$USER/
 if [ ! -f /home/$USER/milvus_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install mulvus docker? [Y,n]"    # Else docker milvus may be installed
+	echo "Shall I install milvus docker? [Y,n]"    # Else docker milvus may be installed
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -414,17 +416,28 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "bash standalone_embed.sh stop"                       | tee -a /home/$USER/stop/stop_milvus.sh 
+		echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
 		echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "netstat -aunt | grep 9091"                           | tee -a /home/$USER/stop/stop_milvus.sh 
-		
-		# Delete milvus data
-		echo "cd /home/$USER/milvus"                    > /home/$USER/start/delete_milvus_db.sh
-		echo "echo 'Will delete milvus database'"       >> /home/$USER/start/delete_milvus_db.sh 
-		echo "echo 'Data is in /home/$USER/volumes/milvus/'"  >> /home/$USER/start/delete_milvus.sh
-		echo "sudo bash standalone_embed.sh delete"         >> /home/$USER/start/delete_milvus_db.sh
+		echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
+		#
+		# Delete milvus database as also the container
+		echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
+		echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
+		echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
+		echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
+		echo "sudo bash standalone_embed.sh delete             >> /home/$USER/start/delete_milvus_db.sh
+        #
+        ln -sT /home/$USER/start_milvus.sh       /home/$USER/start_milvus.sh  
+		ln -sT /home/$USER/stop_milvus.sh        /home/$USER/stop_milvus.sh  
+		ln -sT /home/$USER/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
+		#
+		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
 		sleep 3
-
+	else
+		echo "Milvus db not installed"
+	fi
+	echo "Milvus db is installed"
+fi	
 
 chmod +x /home/$USER/*.sh
 chmod +x /home/$USER/start/*.sh
