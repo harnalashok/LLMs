@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 14th Feb, 2026
+# Last amended: 15th Feb, 2026
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -409,7 +409,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
 		mkdir /home/$USER/milvus
 		mv standalone_embed.sh /home/$USER/milvus/
-		echo "PATH=$PATH:/home/$USER/milvus/" >> .bashrc
+		echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
 		# Our milvus start script		
 		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
 		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
@@ -1688,7 +1688,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   # Create a symlink to models and to gguf folder
   ln -s /home/$USER/llama.cpp/models/ /home/$USER/
   ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
-  echo "PATH=\$PATH:/home/$USER/llama.cpp/build/bin" >> .bashrc
+  echo 'export PATH="$PATH:/home/$USER/llama.cpp/build/bin"' >> /home/$USER/.bashrc
   echo " "                                        | tee -a /home/$USER/error.log
   echo "-------"                                  | tee -a /home/$USER/error.log
   echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
@@ -1743,7 +1743,7 @@ echo "Shall I now install llama.cpp using homebrew ? [Y,n]"
 	  pip install transformers
 	  pip install accelerate
 	  brew install llama.cpp
-	  echo "export PATH=/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"  >> /home/$USER/.bashrc
+	  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
 	  echo "llama.cpp installed"
 	else
 	   echo "llama-cpp not installed"
