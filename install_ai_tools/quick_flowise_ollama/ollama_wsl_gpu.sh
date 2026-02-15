@@ -1461,14 +1461,14 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 		  echo "Done...."
 		  cd /home/$USER
 		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
+		  chmod +x /home/$USER/start/*.sh
+		  chmod +x /home/$USER/*.sh
 		  wsl.exe --shutdown
 	else
 		  echo "Skipping install of llama.cpp"
 	fi
 fi	
   
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/*.sh
 
 ###################
 # llama.cpp install--II
@@ -1606,7 +1606,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		sleep 4
 		# Check health of system
 		curl http://localhost:5055/health
-		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
+		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		echo "Open browser to: http://localhost:8502"
 		sleep 4
@@ -1621,48 +1621,53 @@ fi
 # portrainer docker
 ######################
 
-cd /home/$USER
 echo " "
 echo " "
-echo "------------"        
-echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-   # Installing portrainer
-   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
-   # Script to start portainer container
-   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
-   echo " "                                                       >> /home/$USER/start/start_portainer.sh
-   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
-   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
-   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
-   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
-   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
-   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
-   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
-   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
-   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
-   #
-   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
-   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
-   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
-   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
-   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
-   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
-   #
-   cd /home/$USER
-   docker volume create portainer_data
-   # This is one long line command
-   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
-   # Install portainer community edition (ce)
-   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
-   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-   sleep 4
-   wsl.exe --shutdown
-else
-   echo "Portainer not installed"
-fi  
+if [ ! -f /home/$USER/portainer_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"        
+	echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	   cd /home/$USER
+	   # Installing portrainer
+	   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
+	   # Script to start portainer container
+	   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
+	   echo " "                                                       >> /home/$USER/start/start_portainer.sh
+	   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
+	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
+	   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
+	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
+	   #
+	   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
+	   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
+	   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
+	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
+	   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
+	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
+	   #
+	   cd /home/$USER
+	   docker volume create portainer_data
+	   # This is one long line command
+	   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
+	   # Install portainer community edition (ce)
+	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+	   sleep 4
+	   echo "portainer_installed.txt"  >  /home/$USER/portainer_installed.txt
+	   wsl.exe --shutdown
+	else
+	   echo "Portainer not installed"
+	fi  
+fi	
 
 
 ##########################
