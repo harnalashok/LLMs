@@ -397,16 +397,15 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
 		echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
 		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
-		ln -sT /home/$USER/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
+		ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
 		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
     else
 	    echo "Meilisearch not installedd"
 	fi
 fi	
-
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
 
 
 
