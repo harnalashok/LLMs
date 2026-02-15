@@ -351,7 +351,9 @@ if [[ $input == "Y" || $input == "y" ]]; then
         conda update conda -y
 		# Download script to create conda venv
 		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
-	    chmod +x *.sh  
+	   	chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
 		wsl.exe --shutdown
      else
         echo "Anaconda is already installed in /home/$USER/anaconda3"
@@ -360,9 +362,6 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "Anaconda not installed"
  fi
  
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
 
 ###############
 # Milvus install
@@ -432,6 +431,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		chmod +x /home/$USER/*.sh
         chmod +x /home/$USER/start/*.sh
         chmod +x /home/$USER/stop/*.sh
+		wsl.exe --shutdown
 	else
 		echo "Milvus db not installed"
 	fi
@@ -482,16 +482,16 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
 		ln -sT /home/$USER/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
 		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+ 
 		wsl.exe --shutdown
     else
 	    echo "Meilisearch not installedd"
 	fi
 fi	
 
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
- 
 
 ##########################
 ### Install chromadb docker
@@ -525,12 +525,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
     echo "------------"                            | tee -a /home/$USER/error.log
     echo " "                                       | tee -a /home/$USER/error.log
     sleep 3
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
 	wsl.exe --shutdown
 else
     echo "Skipping install of chromadb docker"
 fi   
-#
-chmod +x /home/$USER/*.sh
+
 
 
 ##########################
@@ -594,7 +596,9 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
 		sleep 3
 		chmod +x /home/$USER/*.sh
-		echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+ 		echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
 		wsl.exe --shutdown
 	else
 	    echo "n8n docker will not be installed"
@@ -674,7 +678,6 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 fi	
 
 
-
 ##########################
 ### Download some minimum ollama models
 ##########################
@@ -705,7 +708,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	fi
 fi
 
-chmod +x /home/$USER/*.sh
+
 
 #####################3
 # flowise docker
@@ -814,14 +817,15 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
 	   cd /home/$USER
 	   sleep 2
-	  wsl.exe --shutdown
+	   chmod +x /home/$USER/*.sh
+	   chmod +x /home/$USER/start/*.sh
+	   chmod +x /home/$USER/stop/*.sh
+	   wsl.exe --shutdown
 	 else
 	   echo "Flowise docker will not be installed"
 	 fi  
 	  echo "Flowise docker already installed"
  fi
-
-chmod +x /home/$USER/*.sh
 
 
 ##########################
@@ -967,129 +971,14 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
 		wsl.exe --shutdown
 	else
 		echo "Langchain and llama index not installed"
 	fi		
 fi	
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
-
-
-#####################
-## langflow install
-####################
-
-echo " "
-echo " "
-echo "-----"
-cd /home/$USER
-if [ ! -f /home/$USER/langflow_installed.txt ]; then
-    echo " "
-    echo " "
-	echo "------------"  
-	echo "Shall I install langflow? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo " "
-	    echo " "
-		# Install langflow
-		echo " "                                      | tee -a /home/$USER/error.log
-		echo "Installing langflow..."                 | tee -a /home/$USER/error.log
-		echo "------"                                 | tee -a /home/$USER/error.log
-		echo " "                                      | tee -a /home/$USER/error.log
-		sleep 2
-		# Create default .venv environment in the current folder
-		# Existing environment is first deleted
-		uv venv
-		# Install in the default environment ie .venv
-		uv pip install langflow  2>> /home/$USER/error.log
-		sleep 2
-		echo "  "                                    | tee -a /home/$USER/error.log
-		echo "  "                                    | tee -a /home/$USER/info.log
-		echo "langflow installed"                    | tee -a /home/$USER/error.log
-		echo "langflow installed"                    | tee -a /home/$USER/info.log
-		# https://docs.langflow.org/configuration-cli
-		echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a /home/$USER/info.log
-		# 		
-		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_uv_langflow.sh  
-		echo " "                                                   | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "cd ~/"                                               | tee -a /home/$USER/start/start_uv_langflow.sh  
-        echo "echo 'Run following command to get langflow CLI options:'"    | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo '        uv run langflow'"                               | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo 'Generate api-key, as: '"                                | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo '        uv run langflow api-key'"                       | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo 'Run langflow, as: '"                                     | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo '        uv run langflow run'"                           | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo '---------- '"                                           | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "  "                                                      		| tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo 'Langflow will be available at port 7860'"     		     | tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "echo 'deactivate venv with, deactivate, command'"    			| tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "source .venv/bin/activate"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "uv run langflow run"                                 			| tee -a /home/$USER/start/start_uv_langflow.sh  
-		echo "netstat -aunt | grep 7860"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
-		chmod +x /home/$USER/start/*.sh
-		sleep 2
-		wsl.exe --shutdown
-	else
-		echo "langflow NOT installed"
-	fi
-fi	
-
-
-##########################
-### Install dify
-# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
-##########################
-  
-    echo " "
-    echo " "
-    echo "------------"   
-    echo "Shall I install dify docker? [Y,n]"    # 
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-        cd /home/$USER/
-        echo " "
-        echo "======"                                             
-        echo "Installing dify docker"
-        echo "Access it at: http://localhost:8887/install"
-        echo "======"                                              
-        echo " "
-        sleep 5
-        cd /home/$USER
-        git clone https://github.com/langgenius/dify.git
-        cd /home/$USER/dify/docker
-        cp .env.example .env
-        sed -i 's/NGINX_PORT=80/NGINX_PORT=8887/' .env
-        sed -i 's/EXPOSE_NGINX_PORT=80/EXPOSE_NGINX_PORT=8887/' .env
-        sed -i 's/NGINX_SSL_PORT=443/NGINX_SSL_PORT=4443/' .env
-        docker compose up -d
-        # Start script
-        echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
-        echo " "                                                   >> /home/$USER/start_dify.sh
-        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
-        echo "echo 'dify port is 8887'"                            >> /home/$USER/start_dify.sh
-        echo "echo 'Access it at: http://localhost:8887/install'"  >> /home/$USER/start_dify.sh
-        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
-        echo "sleep 4"                                             >> /home/$USER/start_dify.sh
-        echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
-        echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
-        echo "netstat -aunt | grep 8887"                           >> /home/$USER/start_dify.sh
-        # Stop script
-        echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
-        echo " "                                                  >> /home/$USER/stop_dify.sh
-        echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
-        echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
-        echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
-        sleep 4
-		wsl.exe --shutdown
-    else
-        echo "dify not installed"
-    fi
-
 
 ################
 # Install postgresql and sqlite3
@@ -1229,6 +1118,125 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	   echo "Postgres not installed"
 	 fi  
  fi
+
+
+
+#####################
+## langflow install
+####################
+
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/langflow_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install langflow? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	    echo " "
+	    echo " "
+		# Install langflow
+		echo " "                                      | tee -a /home/$USER/error.log
+		echo "Installing langflow..."                 | tee -a /home/$USER/error.log
+		echo "------"                                 | tee -a /home/$USER/error.log
+		echo " "                                      | tee -a /home/$USER/error.log
+		sleep 2
+		# Create default .venv environment in the current folder
+		# Existing environment is first deleted
+		uv venv
+		# Install in the default environment ie .venv
+		uv pip install langflow  2>> /home/$USER/error.log
+		sleep 2
+		echo "  "                                    | tee -a /home/$USER/error.log
+		echo "  "                                    | tee -a /home/$USER/info.log
+		echo "langflow installed"                    | tee -a /home/$USER/error.log
+		echo "langflow installed"                    | tee -a /home/$USER/info.log
+		# https://docs.langflow.org/configuration-cli
+		echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a /home/$USER/info.log
+		# 		
+		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_uv_langflow.sh  
+		echo " "                                                   | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "cd ~/"                                               | tee -a /home/$USER/start/start_uv_langflow.sh  
+        echo "echo 'Run following command to get langflow CLI options:'"    | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '        uv run langflow'"                               | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'Generate api-key, as: '"                                | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '        uv run langflow api-key'"                       | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'Run langflow, as: '"                                     | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '        uv run langflow run'"                           | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo '---------- '"                                           | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "  "                                                      		| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'Langflow will be available at port 7860'"     		     | tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "echo 'deactivate venv with, deactivate, command'"    			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "source .venv/bin/activate"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "uv run langflow run"                                 			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		echo "netstat -aunt | grep 7860"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		chmod +x /home/$USER/start/*.sh
+		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
+		sleep 2
+		wsl.exe --shutdown
+	else
+		echo "langflow NOT installed"
+	fi
+fi	
+
+
+##########################
+### Install dify
+# Ref: https://github.com/langgenius/dify?tab=readme-ov-file#quick-start
+##########################
+  
+    echo " "
+    echo " "
+    echo "------------"   
+    echo "Shall I install dify docker? [Y,n]"    # 
+    read input
+    input=${input:-Y}
+    if [[ $input == "Y" || $input == "y" ]]; then
+        cd /home/$USER/
+        echo " "
+        echo "======"                                             
+        echo "Installing dify docker"
+        echo "Access it at: http://localhost:8887/install"
+        echo "======"                                              
+        echo " "
+        sleep 5
+        cd /home/$USER
+        git clone https://github.com/langgenius/dify.git
+        cd /home/$USER/dify/docker
+        cp .env.example .env
+        sed -i 's/NGINX_PORT=80/NGINX_PORT=8887/' .env
+        sed -i 's/EXPOSE_NGINX_PORT=80/EXPOSE_NGINX_PORT=8887/' .env
+        sed -i 's/NGINX_SSL_PORT=443/NGINX_SSL_PORT=4443/' .env
+        docker compose up -d
+        # Start script
+        echo '#!/bin/bash'                                          >  /home/$USER/start_dify.sh
+        echo " "                                                   >> /home/$USER/start_dify.sh
+        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
+        echo "echo 'dify port is 8887'"                            >> /home/$USER/start_dify.sh
+        echo "echo 'Access it at: http://localhost:8887/install'"  >> /home/$USER/start_dify.sh
+        echo "echo '======'"                                       >> /home/$USER/start_dify.sh
+        echo "sleep 4"                                             >> /home/$USER/start_dify.sh
+        echo "cd /home/$USER/dify/docker"                          >> /home/$USER/start_dify.sh
+        echo "docker compose up -d"                                >> /home/$USER/start_dify.sh
+        echo "netstat -aunt | grep 8887"                           >> /home/$USER/start_dify.sh
+        # Stop script
+        echo '#!/bin/bash'                                         >  /home/$USER/stop_dify.sh
+        echo " "                                                  >> /home/$USER/stop_dify.sh
+        echo "echo 'dify Stopping'"                               >> /home/$USER/stop_dify.sh
+        echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
+        echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
+        sleep 4
+		wsl.exe --shutdown
+    else
+        echo "dify not installed"
+    fi
+
+
+
 
 #########################
 ### Install mongodb and mongosh
