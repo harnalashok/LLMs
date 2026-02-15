@@ -394,7 +394,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
 		mkdir /home/$USER/milvus
 		mv standalone_embed.sh /home/$USER/milvus/
-		echo "export PATH=/home/$USER/milvus/:$PATH" >> /home/$USER/.bashrc
+		echo 'export PATH="/home/$USER/milvus/:$PATH"' >> /home/$USER/.bashrc
 		# Our milvus start script		
 		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
 		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
