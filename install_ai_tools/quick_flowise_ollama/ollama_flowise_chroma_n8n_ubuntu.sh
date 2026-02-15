@@ -339,49 +339,50 @@ fi
 ###########################
 
 cd /home/$USER
-if [ ! -f /home/$USER/anaconda_installed.txt ]; then
-	echo " "
-	echo " "
-	echo "------------"        
-	echo "To install Google Antigravity one does need anaconda"
-	echo "Shall I latest anaconda? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    DIRECTORY=/home/$USER/anaconda3
-	    if [ ! -d "$DIRECTORY" ]; then
-	        CONTREPO=https://repo.continuum.io/archive/
-	        # Stepwise filtering of the html at $CONTREPO
-	        # Get the topmost line that matches our requirements, extract the file name.
-	        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-	        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-	        bash /home/$USER/Downloads/anaconda.sh -b -p $HOME/anaconda3
-	        rm /home/$USER/Downloads/anaconda.sh
-	        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
-            # Accept terms of service of conda channels
-			# Refer: StackOverflow: https://stackoverflow.com/a/79702898
-			conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
-               && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-	        # Reload default profile
-	        source /home/$USER/.bashrc
-	        conda update conda -y
-			# Download script to create conda venv
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
-	        chmod +x *.sh  
-			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
-			reboot
-	     else
-	        echo "Anaconda is already installed in /home/$USER/anaconda3"
-	     fi   
-	 else
-	    echo "Anaconda not installed"
+DIRECTORY=/home/$USER/anaconda3
+if [ ! -d "$DIRECTORY" ]; then
+	if [ ! -f /home/$USER/anaconda_installed.txt ]; then
+		echo " "
+		echo " "
+		echo "------------"        
+		echo "To install Google Antigravity one does need anaconda"
+		echo "Shall I latest anaconda? [Y,n]"    
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+		    DIRECTORY=/home/$USER/anaconda3          # Redundant
+		    if [ ! -d "$DIRECTORY" ]; then
+		        CONTREPO=https://repo.continuum.io/archive/
+		        # Stepwise filtering of the html at $CONTREPO
+		        # Get the topmost line that matches our requirements, extract the file name.
+		        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+		        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+		        bash /home/$USER/Downloads/anaconda.sh -b -p $HOME/anaconda3
+		        rm /home/$USER/Downloads/anaconda.sh
+		        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
+	            # Accept terms of service of conda channels
+				# Refer: StackOverflow: https://stackoverflow.com/a/79702898
+				conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
+	               && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+		        # Reload default profile
+		        source /home/$USER/.bashrc
+		        conda update conda -y
+				# Download script to create conda venv
+			    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+		        chmod +x *.sh  
+				echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
+				chmod +x /home/$USER/*.sh
+				chmod +x /home/$USER/start/*.sh
+				chmod +x /home/$USER/stop/*.sh
+				reboot
+		     else
+		        echo "Anaconda is already installed in /home/$USER/anaconda3"
+		     fi   
+		 else
+		    echo "Anaconda not installed"
+		 fi
 	 fi
- fi
-
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
-
+fi	 
 
 
 ###############
