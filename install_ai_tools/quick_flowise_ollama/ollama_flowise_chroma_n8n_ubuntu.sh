@@ -443,9 +443,9 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
 		echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
         #
-        ln -sT /home/$USER/start_milvus.sh       /home/$USER/start_milvus.sh  
-		ln -sT /home/$USER/stop_milvus.sh        /home/$USER/stop_milvus.sh  
-		ln -sT /home/$USER/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
+        ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
+		ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
+		ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
 		#
 		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
 		sleep 3
