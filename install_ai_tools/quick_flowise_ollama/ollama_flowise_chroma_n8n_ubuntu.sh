@@ -100,9 +100,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "cd /home/$USER/"                                     | tee -a /home/$USER/stop_alldockers.sh
     echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
     echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
-	# Install uv
-	curl -LsSf https://astral.sh/uv/install.sh | sh
-    now_nvidia_driver_version=`modinfo nvidia | grep ^version`
+	now_nvidia_driver_version=`modinfo nvidia | grep ^version`
 	# Folders for start/stop scripts
     mkdir /home/$USER/start
     mkdir /home/$USER/stop
@@ -116,6 +114,13 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo " "
     echo " "
+	echo "  "
+	echo "===="
+	# Install uv
+	echo "===="
+	echo "  "
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	sleep 3
     echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
     echo " NVIDIA driver ver  is: $now_nvidia_driver_version"
