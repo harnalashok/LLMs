@@ -1669,6 +1669,7 @@ echo "change cu124, to say, cu127 for version 12.7 before installing"
 echo "llama.cpp."
 echo "==========="
 echo " "
+echo "Recomended way to install is using homebrew"
 echo "Shall I now BUILD AND install llama.cpp (if your CUDA version is correct)? [Y,n]"   
 read input
 input=${input:-Y}
