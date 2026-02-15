@@ -1063,7 +1063,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 	    echo " "
 		# Install langflow
 		echo " "                                      | tee -a /home/$USER/error.log
-		echo "Installing langflow..."                 | tee -a /home/$USER/error.log
+		echo "Installing langflow...takes time ..."   | tee -a /home/$USER/error.log
 		echo "------"                                 | tee -a /home/$USER/error.log
 		echo " "                                      | tee -a /home/$USER/error.log
 		sleep 2
