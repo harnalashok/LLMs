@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 15th Jan, 2026
+# Last amended: 15th Feb, 2026
 
 clear
 echo "  "
@@ -308,7 +308,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
 		mkdir /home/$USER/milvus
 		mv standalone_embed.sh /home/$USER/milvus/
-		echo "PATH=$PATH:/home/$USER/milvus/" >> .bashrc
+		echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
 		# Our milvus start script		
 		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
 		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
