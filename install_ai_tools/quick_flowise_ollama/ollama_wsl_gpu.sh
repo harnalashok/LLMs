@@ -1426,7 +1426,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 		  # Create a symlink to models and to gguf folder
 		  ln -s /home/$USER/llama.cpp/models/ /home/$USER/
 		  ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
-		  echo "PATH=\$PATH:/home/$USER/llama.cpp/build/bin" >> .bashrc
+		  echo 'export PATH="$PATH:/home/$USER/llama.cpp/build/bin"' >> /home/$USER/.bashrc
 		  echo " "                                        | tee -a /home/$USER/error.log
 		  echo "-------"                                  | tee -a /home/$USER/error.log
 		  echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
@@ -1483,7 +1483,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 		  pip install transformers
 		  pip install accelerate
 		  brew install llama.cpp
-		  echo "export PATH=/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"  >> /home/$USER/.bashrc
+		  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
 		  echo "llama.cpp installed"
 		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
 		  wsl.exe --shutdown
