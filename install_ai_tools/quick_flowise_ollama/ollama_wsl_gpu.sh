@@ -86,14 +86,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
-	echo "  "
-	echo "  "
-	echo "===="
-	# Install uv
-	echo "===="
-	echo "  "
-	curl -LsSf https://astral.sh/uv/install.sh | sh
-    # Script to stop all dockers
+	# Script to stop all dockers
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
     echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
     echo " "                                                   | tee -a /home/$USER/stop_alldockers.sh
@@ -116,7 +109,14 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/$USER/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo " "
-    echo " "
+	echo "  "
+	echo "  "
+	echo "===="
+	# Install uv
+	echo "===="
+	echo "  "
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	sleep 3
     wsl.exe --shutdown
  fi
 
