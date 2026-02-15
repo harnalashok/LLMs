@@ -1411,7 +1411,8 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	echo "llama.cpp."
 	echo "==========="
 	echo " "
-	echo "Shall I now install llama.cpp (if your CUDA version is correct)? [Y,n]"   
+	echo "Recomended way to install is using homebrew"
+	echo "Shall I now BUILD llama.cpp (if your CUDA version is correct)? [Y,n]"   
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
