@@ -121,12 +121,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "  "
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 	sleep 3
-	####
-	# Install pdfminer to extract text from pdf
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	####
-    echo "====NOTE====="
+	echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
     echo " NVIDIA driver ver  is: $now_nvidia_driver_version"
 	echo "==>> You may like to search for cuda-toolkit compatible with this driver ==<<"
@@ -319,6 +314,15 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         # cu124: is as per cuda version. Get cuda version from nvidia-smi
         #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
         #pip install huggingface_hub
+		echo "####"
+		echo "Install pdfminer to extract text from pdf"
+		# Ref: https://github.com/pdfminer/pdfminer.six
+		pip install pdfminer.six
+		echo "####"
+		echo "Install pymupdf4llm to extract text/json"
+		# Ref: https://github.com/pymupdf/pymupdf4llm
+		pip install pymupdf4llm
+		echo "####"
         # Create script to activate 'venv' env
         echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
         echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
