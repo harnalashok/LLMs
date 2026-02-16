@@ -448,7 +448,11 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
 		#
 		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
 		sleep 3
+		reboot
 	else
 		echo "Milvus db not installed"
 	fi
@@ -501,14 +505,16 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
 		ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
 		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+		sleep 3
+		reboot
     else
 	    echo "Meilisearch not installedd"
 	fi
 fi	
 
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
 
 ##########################
 ### Install chromadb docker
@@ -543,14 +549,15 @@ if [ ! -f /home/$USER/chromadb_installed.txt ]; then
 		echo "------------"                            | tee -a /home/$USER/error.log
 	    echo " "                                       | tee -a /home/$USER/error.log
 		echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
 	    sleep 3
 		reboot
 	else
 	    echo "Skipping install of chromadb docker"
 	fi   
 fi
-#
-chmod +x /home/$USER/*.sh
 
 ##########################
 ### n8n docker
@@ -611,13 +618,17 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
 	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
 		echo "n8n_installed" > /home/$USER/n8n_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+		sleep 3
 		reboot
 	else
 	    echo "n8n docker will not be installed"
 	fi
 fi
 
-chmod +x /home/$USER/*.sh
+
 
 
 
@@ -677,13 +688,15 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
 		  echo "ollama_installed" > /home/$USER/ollama_installed.txt
 		  sleep 4
+	      chmod +x /home/$USER/*.sh
+		  chmod +x /home/$USER/start/*.sh
+		  chmod +x /home/$USER/stop/*.sh
+		  sleep 3
 		  reboot
 	else
 	        echo "Skipping install of ollama docker"
 	fi
 fi
-
-chmod +x /home/$USER/*.sh
 
 
 ##########################
@@ -983,6 +996,11 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
         wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
         cd /home/$USER
 		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+		sleep 3
+		reboot
 	 else
 	   echo "Postgres not installed"
 	 fi  
@@ -1062,10 +1080,10 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 	    echo " "
 	    echo " "
 		# Install langflow
-		echo " "                                      | tee -a /home/$USER/error.log
-		echo "Installing langflow...takes time ..."   | tee -a /home/$USER/error.log
-		echo "------"                                 | tee -a /home/$USER/error.log
-		echo " "                                      | tee -a /home/$USER/error.log
+		echo " "                                      
+		echo "Installing langflow...takes time ..."   
+		echo "------"                                 
+		echo " "                                      
 		sleep 2
 		# Create default .venv environment in the current folder
 		# Existing environment is first deleted
@@ -1073,12 +1091,12 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		# Install in the default environment ie .venv
 		uv pip install langflow  2>> /home/$USER/error.log
 		sleep 2
-		echo "  "                                    | tee -a /home/$USER/error.log
-		echo "  "                                    | tee -a /home/$USER/info.log
-		echo "langflow installed"                    | tee -a /home/$USER/error.log
-		echo "langflow installed"                    | tee -a /home/$USER/info.log
+		echo "  "                                    
+		echo "  "                                    
+		echo "langflow installed"                    
+		echo "langflow installed"                    
 		# https://docs.langflow.org/configuration-cli
-		echo "Ref: https://docs.langflow.org/configuration-cli"      | tee -a /home/$USER/info.log
+		echo "Ref: https://docs.langflow.org/configuration-cli"     
 		# 		
 		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_uv_langflow.sh  
 		echo " "                                                   | tee -a /home/$USER/start/start_uv_langflow.sh  
@@ -1096,8 +1114,11 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		echo "source .venv/bin/activate"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
 		echo "uv run langflow run"                                 			| tee -a /home/$USER/start/start_uv_langflow.sh  
 		echo "netstat -aunt | grep 7860"                           			| tee -a /home/$USER/start/start_uv_langflow.sh  
+		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
 		sleep 2
+		reboot
 	else
 		echo "langflow NOT installed"
 	fi
@@ -1193,6 +1214,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
+		sleep 3
+		reboot
 	else
 		echo "Langchain and llama index not installed"
 	fi		
@@ -1248,7 +1271,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		chmod +x *.sh
 		chmod +x /home/$USER/start/*.sh
 		sleep 4
-		cd /homne/$USER/
+		reboot
 	else
 		echo "FAISS not installed"
 	fi	
@@ -1289,8 +1312,10 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo  "  "
 		echo "Open browser to: http://localhost:8502"
 		sleep 4
-		touch "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
+		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
+		sleep 3
+		reboot
 	else
 	    echo "OpenNotebook not installed"
 	fi
@@ -1669,7 +1694,7 @@ echo "change cu124, to say, cu127 for version 12.7 before installing"
 echo "llama.cpp."
 echo "==========="
 echo " "
-echo "Recomended way to install is using homebrew"
+echo "NOTE: Recomended way to install is using homebrew. AVOID BUILDING"
 echo "Shall I now BUILD AND install llama.cpp (if your CUDA version is correct)? [Y,n]"   
 read input
 input=${input:-Y}
@@ -1722,14 +1747,14 @@ if [[ $input == "Y" || $input == "y" ]]; then
   echo "Done...."
   cd /home/$USER
   echo "Will reboot system now"
+  chmod +x /home/$USER/start/*.sh
+  chmod +x /home/$USER/*.sh
   sleep 5
   reboot
 else
   echo "Skipping install of llama.cpp"
 fi
   
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/*.sh
 
 ###################
 # llama.cpp install--II
@@ -1752,6 +1777,8 @@ echo "Shall I now install llama.cpp using homebrew ? [Y,n]"
 	  brew install llama.cpp
 	  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
 	  echo "llama.cpp installed"
+	  sleep 3
+	  reboot
 	else
 	   echo "llama-cpp not installed"
 	fi
