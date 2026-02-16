@@ -111,11 +111,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "===="
 	echo "  "
 	curl -LsSf https://astral.sh/uv/install.sh | sh
-	####
-	# Install pdfminer to extract text from pdf
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	####
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
