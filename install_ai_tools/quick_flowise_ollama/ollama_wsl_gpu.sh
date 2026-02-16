@@ -116,6 +116,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "===="
 	echo "  "
 	curl -LsSf https://astral.sh/uv/install.sh | sh
+	# Print IP of machine while opening terminal
+	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
     wsl.exe --shutdown
  fi
