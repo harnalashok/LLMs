@@ -1471,6 +1471,8 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 			# My remote url is:
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
+		sleep 2
+		reboot
 	else
 	   echo "ngrok not installed"
 	fi  
@@ -1525,6 +1527,7 @@ fi
         echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
         echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
         sleep 4
+		reboot
     else
         echo "dify not installed"
     fi
@@ -1674,6 +1677,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
+   sleep 2
+   reboot
 else
     echo "Mongodb for Ubuntu24.04 not installed"
 fi   
