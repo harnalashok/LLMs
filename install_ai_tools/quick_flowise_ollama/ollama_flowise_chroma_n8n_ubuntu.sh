@@ -126,7 +126,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo " NVIDIA driver ver  is: $now_nvidia_driver_version"
 	echo "==>> You may like to search for cuda-toolkit compatible with this driver ==<<"
     echo "Machine will be rebooted several times. After each reboot, execute the following script:"
-	echo "hostname -I | awk '{print $1}'  " > .bashrc
+	# Print IP of machine while opening terminal
+	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
     echo " "
     echo "=>   ./ollama_flowise_chroma_n8n_ubuntu.sh"
     echo "=========="
