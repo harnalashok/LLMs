@@ -261,6 +261,15 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 		echo " "
 		echo -en "\007"
         sudo apt install pyqt5-dev-tools -y
+		echo "####"
+		echo "Install pdfminer to extract text from pdf"
+		# Ref: https://github.com/pdfminer/pdfminer.six
+		pip install pdfminer.six
+		echo "####"
+		echo "Install pymupdf4llm to extract text/json"
+		# Ref: https://github.com/pymupdf/pymupdf4llm
+		pip install pymupdf4llm
+		echo "####"
         # Download file that creates a fresh python enviroemnet
         wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
 		chmod +x *.sh   
