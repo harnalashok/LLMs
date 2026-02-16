@@ -121,6 +121,11 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "  "
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 	sleep 3
+	####
+	# Install pdfminer to extract text from pdf
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	####
     echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
     echo " NVIDIA driver ver  is: $now_nvidia_driver_version"
