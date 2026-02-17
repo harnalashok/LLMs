@@ -288,6 +288,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 		# Ref: https://github.com/pdfminer/pdfminer.six
 		pip install pdfminer.six
 		echo "####"
+		sudo apt install pyqt5-dev-tools -y
 		echo "Install pymupdf4llm to extract text/json"
 		# Ref: https://github.com/pymupdf/pymupdf4llm
 		pip install pymupdf4llm pymupdf4llm[layout]
