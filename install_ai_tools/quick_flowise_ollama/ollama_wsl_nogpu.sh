@@ -622,8 +622,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	      docker run -d  -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
 		  echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
 		  sleep 2
-		  wsl.exe --shutdown
 		  chmod +x /home/$USER/*.sh
+		  wsl.exe --shutdown
 	else
 	      echo "Skipping install of ollama docker"
 	fi
@@ -780,7 +780,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	  echo "Flowise docker already installed"
  fi
 
-chmod +x /home/$USER/*.sh
+
 
 ###########################
 # Install latest anaconda
@@ -816,7 +816,9 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 			# Download script to create conda venv
 			wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
 			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
-		    chmod +x *.sh  
+			chmod +x /home/$USER/*.sh
+			chmod +x /home/$USER/start/*.sh
+			chmod +x /home/$USER/stop/*.sh
 			wsl.exe --shutdown
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
@@ -826,10 +828,6 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	 fi
 fi	 
  
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
-
 ################
 # Install postgresql and sqlite3
 ################
@@ -964,6 +962,7 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
         
 		cd /home/$USER
 		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+		sleep 3
 		wsl.exe --shutdown
 	 else
 	   echo "Postgres not installed"
@@ -1018,6 +1017,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		chmod +x /home/$USER/start/*.sh
 		sleep 4
 		cd /homne/$USER/
+		wsl.exe --shutdown
 	else
 		echo "FAISS not installed"
 	fi	
