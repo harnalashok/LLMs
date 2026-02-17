@@ -322,7 +322,11 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 		echo "Install pymupdf4llm to extract text/json"
 		# Ref: https://github.com/pymupdf/pymupdf4llm
 	    pip install pymupdf4llm pymupdf4llm[layout]
-
+		mkdir -p /home/$USER/Documents/samples/in
+		mkdir -p /home/$USER/Documents/samples/out
+		cd /home/$USER/Documents/samples
+        wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+		cd /home/$USER
 		echo "####"
         # Create script to activate 'venv' env
         echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
