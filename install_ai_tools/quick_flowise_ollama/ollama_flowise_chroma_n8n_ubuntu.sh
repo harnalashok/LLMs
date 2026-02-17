@@ -1281,6 +1281,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
 		chmod +x *.sh
 		chmod +x /home/$USER/start/*.sh
+		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 		sleep 4
 		reboot
 	else
