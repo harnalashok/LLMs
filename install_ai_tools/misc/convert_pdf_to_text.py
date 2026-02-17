@@ -45,8 +45,8 @@ def convert_pdfs_to_text(input_folder, output_folder, output_format='txt'):
 
 # Example Usage:
 # Define your input and output folder paths
-input_folder_path = '/home/ashok/Documents/expt/in'
-output_folder_path = '/home/ashok/Documents/expt/out'
+input_folder_path = '/home/ashok/Documents/samples/in'
+output_folder_path = '/home/ashok/Documents/samples/out'
 
 # Run the conversion (defaulting to markdown for better structure retention)
 convert_pdfs_to_text(input_folder_path, output_folder_path, output_format='md')
