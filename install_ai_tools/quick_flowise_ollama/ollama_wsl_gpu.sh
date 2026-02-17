@@ -1850,7 +1850,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    
 	    cd ragflow/docker
 		# which version to install
-		git checkout v0.24.0
+		git checkout v0.23.1
 		# Change some port numbers as per our conveience
 	    sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
 	    sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
