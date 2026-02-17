@@ -23,7 +23,7 @@ if [ ! -f /home/$USER/first_time.txt ]; then
     echo "  "
     echo "------------"                            
 	echo "========script=============="
-	echo "Will update Ubuntu and install nodejs"
+	echo "Will update Ubuntu and install nodejs and uv"
 	echo "Will install docker"
 	echo "Will install flowise docker"
 	echo "Will install ollama docker without gpu"
