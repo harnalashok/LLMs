@@ -1226,14 +1226,14 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 		sleep 3
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
 		reboot
 	else
 		echo "Langchain and llama index not installed"
 	fi		
 fi	
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
 
 
 ##########################
