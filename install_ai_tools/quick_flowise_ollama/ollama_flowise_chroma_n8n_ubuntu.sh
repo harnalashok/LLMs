@@ -2320,8 +2320,6 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	     echo "Ragflow will not be installed"
 	fi  
 fi
-# Prevent docker restarts on OS reboot
-docker update --restart=no $(docker ps -a -q)
 
  
 
