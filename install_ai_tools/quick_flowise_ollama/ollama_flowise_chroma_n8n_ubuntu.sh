@@ -2107,7 +2107,7 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 		#
 		# Update ragflow/docker/.env:
 		cd /home/$USER/ragflow/docker
-	    RAGFLOW_IMAGE=infiniflow/ragflow:v0.23.1
+	    RAGFLOW_IMAGE=infiniflow/ragflow:v0.24.0
 		sed -i 's/SVR_WEB_HTTP_PORT=80/SVR_WEB_HTTP_PORT=800/' .env
 		sed -i 's/SVR_WEB_HTTPS_PORT=443/SVR_WEB_HTTPS_PORT=1443/' .env
 		#
