@@ -1798,7 +1798,7 @@ echo "Shall I now install llama.cpp using homebrew ? [Y,n]"
 	else
 	   echo "llama-cpp not installed"
 	fi
-fi	
+
 
 ##########################
 ### Build and Install xinference docker
