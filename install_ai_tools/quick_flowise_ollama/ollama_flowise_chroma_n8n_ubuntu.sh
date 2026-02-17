@@ -308,13 +308,14 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         pip install --upgrade setuptools
         echo "venv_installed.txt" > /home/$USER/venv_installed.txt
         # Required for spyder:
-        sudo apt install pyqt5-dev-tools -y
         # Huggingface and  related
         #pip install huggingface_hub
         # cu124: is as per cuda version. Get cuda version from nvidia-smi
         #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
         #pip install huggingface_hub
 		echo "####"
+		sudo apt install pyqt5-dev-tools -y
+		sudo apt install tesseract-ocr-all -y
 		echo "Install pdfminer to extract text from pdf"
 		# Ref: https://github.com/pdfminer/pdfminer.six
 		pip install pdfminer.six
