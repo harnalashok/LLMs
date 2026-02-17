@@ -382,15 +382,15 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		#
 		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
 		sleep 3
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+		wsl.exe --shutdown
 	else
 		echo "Milvus db not installed"
 	fi
 	echo "Milvus db is installed"
 fi	
-
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
 
 
 ###############
@@ -438,6 +438,8 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
+		sleep 3
+		wsl.exe --shutdown
     else
 	    echo "Meilisearch not installedd"
 	fi
@@ -479,12 +481,13 @@ if [ ! -f /home/$USER/chromadb_installed.txt ]; then
 	    echo " "                                       | tee -a /home/$USER/error.log
 		echo "chromadb_installed.txt"  > /home/$USER/chromadb_installed.txt
 	    sleep 3
+		chmod +x /home/$USER/*.sh
 		wsl.exe --shutdown
 	else
 	    echo "Skipping install of chromadb docker"
 	fi   
 fi
-chmod +x /home/$USER/*.sh
+
 
 
 ##########################
@@ -549,13 +552,13 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
 		echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
 		sleep 3
+		chmod +x /home/$USER/*.sh
 		wsl.exe --shutdown
 	else
 	    echo "n8n docker will not be installed"
 	fi
 fi	
 
-chmod +x /home/$USER/*.sh
 
 ##########################
 ### ollama docker for CPU
@@ -620,12 +623,12 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 		  echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
 		  sleep 2
 		  wsl.exe --shutdown
+		  chmod +x /home/$USER/*.sh
 	else
 	      echo "Skipping install of ollama docker"
 	fi
 fi	
 
-chmod +x /home/$USER/*.sh
 
 ##########################
 ### Download some minimum ollama models
@@ -654,13 +657,13 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 		  #ollama list
 		  echo "models installed" > /home/$USER/models_installed.txt
 		  sleep 2
+		  chmod +x /home/$USER/*.sh
 		  wsl.exe --shutdown
 	else
 	        echo "Skipping download of ollama models"
 	fi
 fi
 
-chmod +x /home/$USER/*.sh
 
 #####################3
 # flowise docker
@@ -695,6 +698,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
        echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
        echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
+	   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
        echo "echo '   userid:   ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
        echo "echo '   password: Ashok@12345'"   >> /home/$USER/start_flowise.sh
        echo "echo '==**====**====='"                              >> /home/$USER/start_flowise.sh
