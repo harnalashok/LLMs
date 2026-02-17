@@ -756,6 +756,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
        echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
        echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
+	   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
        echo "echo '   userid:   ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
        echo "echo '   password: Ashok@12345'"   >> /home/$USER/start_flowise.sh
        echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
