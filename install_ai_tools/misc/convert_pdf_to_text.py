@@ -1,3 +1,8 @@
+# Usage: Converts pdf files in the folder 'samples/in' to markdown format
+#        and places them in 'samples/out' folder
+# source /home/$USER/venv/bin/activate
+# python convert_pdf_to_text.py
+
 import os
 import pathlib
 # Optional: import pymupdf.layout before pymupdf4llm for improved layout detection
