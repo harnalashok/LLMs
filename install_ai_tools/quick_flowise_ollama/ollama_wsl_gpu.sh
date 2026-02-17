@@ -298,6 +298,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         # Required for spyder:
         sudo apt install pyqt5-dev-tools -y
 		echo "####"
+		sudo apt install pyqt5-dev-tools -y
 		echo "Install pdfminer to extract text from pdf"
 		# Ref: https://github.com/pdfminer/pdfminer.six
 		pip install pdfminer.six
