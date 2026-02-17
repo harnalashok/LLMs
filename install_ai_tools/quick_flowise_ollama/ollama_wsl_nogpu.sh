@@ -3,19 +3,44 @@
 # Last amended: 15th Feb, 2026
 
 clear
-echo "  "
-echo "=====***======"
-echo "WSL ubuntu window will close many times during installation"
-echo "Each time, double click to open it, and each time "
-echo "issue the command:"
-echo "            ./ollama_wsl_nogpu.sh"
-echo "   Answer Y to most questions"
-echo "      till, all software is installed."
-echo "================"
-echo "   "
-echo "   "
-echo "    "
-echo -en "\007"
+# Are we having wsl systems
+WSL=$(cat /proc/version)
+WSLSYSTEM="false"
+if echo "$WSL" | grep -qi wsl ; then
+    WSLSYSTEM="true"
+fi
+
+if [ "$WSLSYSTEM" = "true" ]; then
+	echo "  "
+	echo "=====***======"
+	echo "WSL ubuntu WINDOW will close many times during installation"
+	echo "Each time, double click to open it, and each time "
+	echo "issue the command:"
+	echo "            ./ollama_wsl_nogpu.sh"
+	echo "   Answer Y to most questions"
+	echo "      till, all software is installed."
+	echo "================"
+	echo "   "
+	echo "   "
+	echo "    "
+	echo -en "\007"
+else
+	echo "  "
+	echo "=====***======"
+	echo "Ubuntu will reboot many times during installation"
+	echo "Each time, double click to open it, and each time "
+	echo "issue the command:"
+	echo "            ./ollama_wsl_nogpu.sh"
+	echo "   Answer Y to most questions"
+	echo "      till, all software is installed."
+	echo "================"
+	echo "   "
+	echo "   "
+	echo "    "
+	echo -en "\007"
+fi
+
+
 
 cd /home/$USER
 if [ ! -f /home/$USER/first_time.txt ]; then
@@ -38,6 +63,7 @@ if [ ! -f /home/$USER/first_time.txt ]; then
 else 
     sleep 5
 fi	
+
 
 ################
 # Update Ubuntu
@@ -114,12 +140,14 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
-    if [[ ! -n "$WSLSYSTEM" ]] ; then
+    if [ "$WSLSYSTEM" = "true" ] ; then
         # WSL installed
         echo "====NOTE====="
-        echo "Ubuntu shell will be closed several times. After each closure, reopen it and execute again the following script:"
+        echo "Ubuntu shell will be closed several times. After each closure, double-click to reopen it."
+		echo  "  And reexcute the following script: "
+		echo  "  No need to reboot Windows machine"
         echo " "
-        echo "=>   ./ollama_wsl.sh"
+        echo "=>   ./ollama_wsl_nogpu.sh"
         echo "=========="
         sleep 15
         wsl.exe --shutdown
@@ -127,12 +155,11 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         echo "====NOTE====="
         echo "Machine will be rebooted several times. After each reboot, execute the following script:"
         echo " "
-        echo "=>   ./ollama_wsl.sh"
+        echo "=>   ./ollama_wsl_nogpu.sh"
         echo "=========="
         sleep 15
-        wsl.exe --shutdown
+        reboot
     fi
-    wsl.exe --shutdown
 fi
 
 ##################
@@ -163,21 +190,13 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "WSL-Ubuntu will be closed"
     echo "Open the shell and execute:    ./ollama_wsl_nogpu.sh:"
     sleep 9
-    if [[ ! -n "$WSLSYSTEM" ]] ; then
+    if [ "$WSLSYSTEM" = "true" ] ; then
         wsl.exe --shutdown
     else
-        wsl.exe --shutdown
+        reboot
     fi  
-else
-   echo "Docker is installed"
-fi  
+fi
 
-mkdir /home/$USER/docker
-cd /home/$USER/docker
-echo "Download script to print names of docker containers"
-wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
-chmod +x *.sh
-cd /home/$USER
 
 ##################
 # Docker installation-II
@@ -187,7 +206,13 @@ cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
-    echo "Testing if docker is properly installed"
+	mkdir /home/$USER/docker
+	cd /home/$USER/docker
+	echo "Download script to print names of docker containers"
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
+	chmod +x *.sh
+	cd /home/$USER
+	echo "Testing if docker is properly installed"
     echo "AND running docker without root privilegs.."
     sleep 2
     # Check if docker installed
@@ -215,17 +240,17 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
     echo "Machine will be rebooted "
-   if [[ ! -n "$WSLSYSTEM" ]] ; then
+   if [ "$WSLSYSTEM" = "true" ] ; then
         wsl.exe --shutdown
     else
-        wsl.exe --shutdown
+       reboot
     fi  
 else
     echo "Docker installation process completed"
+	# Prevent any docker restarts on OS reboot
+    docker update --restart=no $(docker ps -a -q)
 fi    
 
-# Prevent any docker restarts on OS reboot
-docker update --restart=no $(docker ps -a -q)
 
 ##############
 # Create python virtual env
