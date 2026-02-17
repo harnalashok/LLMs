@@ -321,7 +321,8 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 		echo "####"
 		echo "Install pymupdf4llm to extract text/json"
 		# Ref: https://github.com/pymupdf/pymupdf4llm
-		pip install pymupdf4llm
+	    pip install pymupdf4llm pymupdf4llm[layout]
+
 		echo "####"
         # Create script to activate 'venv' env
         echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
