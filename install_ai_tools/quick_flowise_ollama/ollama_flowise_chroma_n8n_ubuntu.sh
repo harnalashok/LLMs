@@ -1770,6 +1770,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
   echo "Done...."
   cd /home/$USER
+  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
   echo "Will reboot system now"
   chmod +x /home/$USER/start/*.sh
   chmod +x /home/$USER/*.sh
@@ -1788,7 +1789,11 @@ fi
 ###################
 echo "  "
 echo " "
-echo "Shall I now install llama.cpp using homebrew ? [Y,n]"   
+cd /home/$USER
+echo " "
+echo " "
+if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
+	echo "Shall I now install llama.cpp using homebrew ? [Y,n]"   
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -1800,12 +1805,14 @@ echo "Shall I now install llama.cpp using homebrew ? [Y,n]"
 	  pip install accelerate
 	  brew install llama.cpp
 	  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
-	  echo "llama.cpp installed"
+	  echo "llama.cpp installed"  
+	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
 	  reboot
 	else
 	   echo "llama-cpp not installed"
 	fi
+fi	
 
 
 ##########################
@@ -2075,7 +2082,7 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 fi
 
 ##########################
-### Upgrade ragflow
+### Upgrade/Repair ragflow
 # Ref: https://ragflow.io/docs/dev/upgrade_ragflow
 ##########################
 
@@ -2088,7 +2095,7 @@ echo " "
 cd /home/$USER
 if [  -f /home/$USER/ragflow_installed.txt ]; then
 	echo "======="
-	echo "Shall I upgrade RAGFlow docker? [Y,n]"   
+	echo "Shall I upgrade/Repair RAGFlow docker? [Y,n]"   
 	echo "The upgarde does not touch your data files"
 	echo "After upgrade, RESET your broswer cookies"
 	echo "========"
