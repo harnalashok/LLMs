@@ -958,8 +958,8 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
 	    sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 		
-		sudo -u postgres psql -c "\du" 
-		sudo -u postgres psql -c "\l"
+		#sudo -u postgres psql -c "\du" 
+		#sudo -u postgres psql -c "\l"
 
 		# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
 		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
