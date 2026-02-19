@@ -1093,7 +1093,31 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	reboot
 fi
 
-
+###################
+# llama.cpp install--II
+# python env remains activated
+# source /home/$USER/venv/bin/activate
+# https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md
+###################
+echo "  "
+echo " "
+cd /home/$USER
+echo " "
+echo " "
+if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
+	  # Installing llama.cpp
+	  source /home/$USER/venv/bin/activate
+	   # Huggingface and llama.cpp related
+	  pip install huggingface_hub
+	  pip install transformers
+	  pip install accelerate
+	  brew install llama.cpp
+	  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
+	  echo "llama.cpp installed"  
+	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
+	  sleep 3
+	  reboot
+fi	
 
 #####################
 ## langflow install
