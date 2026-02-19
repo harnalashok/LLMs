@@ -208,17 +208,18 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Ubuntu will be closed/rebooted "
     echo "After opening/restart, execute:"
     sleep 9
+	mkdir /home/$USER/docker
+	cd /home/$USER/docker
+	echo "Download script to print names of docker containers"
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
+	chmod +x *.sh
+	cd /home/$USER
     reboot
 else
    echo "Docker is installed"
 fi  
 
-mkdir /home/$USER/docker
-cd /home/$USER/docker
-echo "Download script to print names of docker containers"
-wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
-chmod +x *.sh
-cd /home/$USER
+
 
 ##################
 # Docker installation-II
@@ -278,8 +279,6 @@ else
     echo "Docker installation process completed"
 fi    
 
-# Prevent any docker restarts on OS reboot
-docker update --restart=no $(docker ps -a -q)
 
 ##############
 # Create python virtual env
@@ -401,180 +400,203 @@ if [ ! -d "$DIRECTORY" ]; then
 	 fi
 fi	 
 
+#########3
+# VectorDB install
+##########
 
-###############
-# Milvus install
-# Webui avaiable at: http://localhost:9091/webui
-# Ref: https://milvus.io/docs/install_standalone-docker.md
-################
 echo "  "
 echo "   "
 cd /home/$USER/
-if [ ! -f /home/$USER/milvus_installed.txt ]; then
+if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
-	echo "------------"        
-	echo "Shall I install milvus docker? [Y,n]"    # Else docker milvus may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo "====  "    
-		echo "Installing milvus vector database using docker"       
-		echo "You may be asked for the password. Supply it..."     
-		echo "====  "                                                   
-		sleep 3
-		curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-		bash standalone_embed.sh start
+	echo "------------" 
+
+	###############
+	# Milvus install
+	# Webui avaiable at: http://localhost:9091/webui
+	# Ref: https://milvus.io/docs/install_standalone-docker.md
+	################
+	echo "  "
+	echo "   "
+	cd /home/$USER/
+	if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo " "
-		echo "Milvus vector database installed"                      
-		echo "Ports used are: 9091 and 19530."                       
-		echo "To restart/stop docker use the following commands:"            
-		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
-		mkdir /home/$USER/milvus
-		mv standalone_embed.sh /home/$USER/milvus/
-		echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
-		# Our milvus start script		
-		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
-		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
-		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
-		echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
-		echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
-		echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
-		# Stop script		
-		echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
-		echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
-		#
-		# Delete milvus database as also the container
-		echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
-		echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
-		echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
-		echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
-		echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
-        #
-        ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
-		ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
-		ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
-		#
-		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
-		sleep 3
-		reboot
-	else
-		echo "Milvus db not installed"
+		echo " "
+		echo "------------"        
+		echo "Shall I install milvus docker? [Y,n]"    # Else docker milvus may be installed
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+		    echo "====  "    
+			echo "Installing milvus vector database using docker"       
+			echo "You may be asked for the password. Supply it..."     
+			echo "====  "                                                   
+			sleep 3
+			curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+			bash standalone_embed.sh start
+			echo " "
+			echo "Milvus vector database installed"                      
+			echo "Ports used are: 9091 and 19530."                       
+			echo "To restart/stop docker use the following commands:"            
+			echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
+			mkdir /home/$USER/milvus
+			mv standalone_embed.sh /home/$USER/milvus/
+			echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
+			# Our milvus start script		
+			echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
+			echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
+			echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
+			echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
+			echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
+			echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
+			echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
+			echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
+			echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
+			echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
+			# Stop script		
+			echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
+			echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
+			echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
+			echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
+			echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
+			echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
+			echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
+			#
+			# Delete milvus database as also the container
+			echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
+			echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
+			echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
+			echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
+			echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
+	        #
+	        ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
+			ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
+			ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
+			#
+			echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+			chmod +x /home/$USER/*.sh
+			chmod +x /home/$USER/start/*.sh
+			chmod +x /home/$USER/stop/*.sh
+			sleep 3
+		else
+			echo "Milvus db not installed"
+		fi
+		echo "Milvus db is installed"
+	fi	
+	
+	
+	###############
+	# Meilisearch install
+	# Ref: https://www.meilisearch.com/docs/guides/docker
+	################
+	
+	echo "  "
+	echo "   "
+	cd /home/$USER/
+	if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
+		echo " "
+		echo " "
+		echo "------------"        
+		echo "Shall I install meilisearch docker? [Y,n]"    # Else docker milvus may be installed
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+		    echo "====  "    
+			echo "Installing meilisearch vector database using docker"       
+			echo "You may be asked for the password. Supply it..."     
+			echo "====  "                                                   
+			sleep 3
+			echo "Installing mellisearch vector database using docker"       
+			docker pull getmeili/meilisearch:latest
+			docker run -d --rm \
+			           -p 7700:7700 \
+			           -v $(pwd)/meili_data:/meili_data \
+			             getmeili/meilisearch:latest
+			echo "Mellisearch installed"
+			echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
+			echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
+			echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
+			echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
+			echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
+			echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
+			echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
+			echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
+			echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
+			echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
+			echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
+			echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
+			ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
+			echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+			chmod +x /home/$USER/*.sh
+			chmod +x /home/$USER/start/*.sh
+			chmod +x /home/$USER/stop/*.sh
+			sleep 3
+		else
+		    echo "Meilisearch not installedd"
+		fi
+	fi	
+	
+	
+	##########################
+	### Install chromadb docker
+	# Ref: https://docs.trychroma.com/production/containers/docker
+	#      https://cookbook.chromadb.dev/strategies/cors/
+	##########################
+	
+	cd /home/$USER
+	if [ ! -f /home/$USER/chromadb_installed.txt ]; then
+		echo " "
+		echo " "
+		echo "------------"        
+		echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+		    # Write chroma start script
+		    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
+		    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
+		    echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
+		    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
+		    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
+		    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
+		    echo " docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 "   | tee -a /home/$USER/start_chroma.sh 
+		
+		    # Pulling chromadb docker image  
+		    cd /home/$USER/
+		    echo " "                                       | tee -a /home/$USER/error.log
+		    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
+		    # Refer: https://cookbook.chromadb.dev/strategies/cors/
+		    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
+			echo "------------"                            | tee -a /home/$USER/error.log
+		    echo " "                                       | tee -a /home/$USER/error.log
+			echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
+			chmod +x /home/$USER/*.sh
+			chmod +x /home/$USER/start/*.sh
+			chmod +x /home/$USER/stop/*.sh
+		    sleep 3
+		else
+		    echo "Skipping install of chromadb docker"
+		fi   
 	fi
-	echo "Milvus db is installed"
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	echo "vectordb_installed.txt" > /home$USER/vectordb_installed.txt
+	reboot
 fi	
 
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
+#############
+#
 
-###############
-# Meilisearch install
-# Ref: https://www.meilisearch.com/docs/guides/docker
-################
 
 echo "  "
 echo "   "
 cd /home/$USER/
-if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
+if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
-	echo "------------"        
-	echo "Shall I install meilisearch docker? [Y,n]"    # Else docker milvus may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo "====  "    
-		echo "Installing meilisearch vector database using docker"       
-		echo "You may be asked for the password. Supply it..."     
-		echo "====  "                                                   
-		sleep 3
-		echo "Installing mellisearch vector database using docker"       
-		docker pull getmeili/meilisearch:latest
-		docker run -d --rm \
-		           -p 7700:7700 \
-		           -v $(pwd)/meili_data:/meili_data \
-		             getmeili/meilisearch:latest
-		echo "Mellisearch installed"
-		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
-		echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
-		ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
-		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
-		sleep 3
-		reboot
-    else
-	    echo "Meilisearch not installedd"
-	fi
-fi	
-
-
-##########################
-### Install chromadb docker
-# Ref: https://docs.trychroma.com/production/containers/docker
-#      https://cookbook.chromadb.dev/strategies/cors/
-##########################
-
-cd /home/$USER
-if [ ! -f /home/$USER/chromadb_installed.txt ]; then
-	echo " "
-	echo " "
-	echo "------------"        
-	echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    # Write chroma start script
-	    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
-	    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
-	    echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
-	    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
-	    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
-	    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
-	    echo " docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 "   | tee -a /home/$USER/start_chroma.sh 
-	
-	    # Pulling chromadb docker image  
-	    cd /home/$USER/
-	    echo " "                                       | tee -a /home/$USER/error.log
-	    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
-	    # Refer: https://cookbook.chromadb.dev/strategies/cors/
-	    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
-		echo "------------"                            | tee -a /home/$USER/error.log
-	    echo " "                                       | tee -a /home/$USER/error.log
-		echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
-	    sleep 3
-		reboot
-	else
-	    echo "Skipping install of chromadb docker"
-	fi   
-fi
+	echo "------------" 
 
 ##########################
 ### n8n docker
