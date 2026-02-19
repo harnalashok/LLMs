@@ -149,7 +149,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo " "
 	echo "  "
 	echo "==>For Ubuntu 22.04 ONLY<=="
-	nvidia-settings
+	#nvidia-settings
 	echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
 	echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
 	echo "cuda-toolkit does not change GPU drivers."
@@ -169,7 +169,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	# NVIDIA Driver Instructions
 	sudo apt-get install -y nvidia-open
 	sudo apt autoremove -y
-	nvidia-settings
+	#nvidia-settings
 	sleep 8
 	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
 	reboot
