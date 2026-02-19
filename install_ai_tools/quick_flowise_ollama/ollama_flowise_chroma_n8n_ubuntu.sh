@@ -1061,43 +1061,38 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
 	echo "It is NOT installable on WSL Windows. For WSL environment answer no"
 	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    echo " "
-	    echo " "
-	    # Activate python virtual environment
-	    source /home/$USER/venv/bin/activate
-	    # 1.8 Install visual studio code
-	    # REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
-	    mkdir /home/$USER/1234
-	    cd /home/$USER/1234
-	    # Direct download link
-	    wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-	    # Fill in filename from above
-	    mv * code.deb
-	    sudo apt install /home/$USER/1234/code.deb  -y
-	    cd /home/$USER
-	    rm -rf /home/$USER/1234/
-		mkdir /home/$USER/Documents/vscode
-		cd /home/$USER/Documents/vscode
-		wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
-		echo "vscode_installed" > /home/$USER/vscode_installed.txt
-	    #    
-	    sleep 5
-	    #
-	    # Deactivate the environment
-	    deactivate
-		echo "Will reboot system now"
-		sleep 5
-		reboot
-	else
-	    echo "OK. Visual Studio coder not installed."
-	fi 
+	echo " "
+	echo " "
+	# Activate python virtual environment
+	source /home/$USER/venv/bin/activate
+	# 1.8 Install visual studio code
+	# REf: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+	mkdir /home/$USER/1234
+	cd /home/$USER/1234
+	# Direct download link
+	wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+	# Fill in filename from above
+	mv * code.deb
+	sudo apt install /home/$USER/1234/code.deb  -y
+	cd /home/$USER
+	rm -rf /home/$USER/1234/
+	mkdir /home/$USER/Documents/vscode
+	cd /home/$USER/Documents/vscode
+	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
+	echo "vscode_installed" > /home/$USER/vscode_installed.txt
+	#    
+	sleep 5
+	#
+	# Deactivate the environment
+	deactivate
+	echo "Will reboot system now"
+	chmod +x /home/$USER/*.sh
+    chmod +x /home/$USER/start/*.sh
+    chmod +x /home/$USER/stop/*.sh
+	sleep 5
+	reboot
 fi
 
-chmod +x /home/$USER/*.sh
-chmod +x /home/$USER/start/*.sh
-chmod +x /home/$USER/stop/*.sh
 
 
 #####################
