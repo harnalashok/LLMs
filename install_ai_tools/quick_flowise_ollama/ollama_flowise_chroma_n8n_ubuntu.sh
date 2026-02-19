@@ -832,26 +832,23 @@ fi
 echo " "
 echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
-echo "------------"   
-      cd /home/$USER/
-	      # Start ollama docker in future
-	      docker start ollama 
-		  echo "Pulling bge-m3"
-	      docker exec -it ollama ollama pull bge-m3
-		  echo "Pulling llama3.2"
-		  docker exec -it ollama ollama pull llama3.2:latest
-		  echo " "
-		  echo " "
-		  #ollama list
-		  mkdir -p /home/$USER/Documents/huggingface
-		  cd /home/$USER/Documents/huggingface
-		  wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
-		  mv 'Huggingface access token.pdf' Huggingface_access_token.pdf
-		  cd /home/$USER/
-		  echo "models installed" > /home/$USER/models_installed.txt
-	else
-	        echo "Skipping download of ollama models"
-	fi
+	echo "------------"   
+	cd /home/$USER/
+	# Start ollama docker in future
+	docker start ollama 
+	echo "Pulling bge-m3"
+	docker exec -it ollama ollama pull bge-m3
+	echo "Pulling llama3.2"
+	docker exec -it ollama ollama pull llama3.2:latest
+	echo " "
+	echo " "
+	#ollama list
+	mkdir -p /home/$USER/Documents/huggingface
+	cd /home/$USER/Documents/huggingface
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
+	mv 'Huggingface access token.pdf' Huggingface_access_token.pdf
+	cd /home/$USER/
+	echo "models installed" > /home/$USER/models_installed.txt
 fi
 
 
@@ -2234,10 +2231,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    docker logs -f docker-ragflow-gpu-1
 		# Prevent docker restarts on OS reboot
         docker update --restart=no $(docker ps -a -q)
-	else
-	     echo "Ragflow will not be installed"
-	fi  
-fi
+	fi
 
  
 
