@@ -863,63 +863,56 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
     echo " "
     echo " "
     echo "------------"        
-    echo "Shall I create python virtual env by name of venv? [Y,n]"    
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-        # Clear earlier directory, if it exists
-        python3 -m venv --clear /home/$USER/venv
-        source /home/$USER/venv/bin/activate
-        # 1.6 Essentials software
-        pip install spyder numpy scipy pandas matplotlib sympy cython
-        pip install jupyterlab
-        pip install wheel
-        pip install ipython
-        pip install notebook
-        pip install streamlit
-        pip install --upgrade setuptools
-        echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-        # Required for spyder:
-        # Huggingface and  related
-        #pip install huggingface_hub
-        # cu124: is as per cuda version. Get cuda version from nvidia-smi
-        #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-        #pip install huggingface_hub
-		echo "####"
-		sudo apt install pyqt5-dev-tools -y
-		sudo apt install tesseract-ocr-all -y
-		echo "Install pdfminer to extract text from pdf"
-		# Ref: https://github.com/pdfminer/pdfminer.six
-		pip install pdfminer.six
-		echo "####"
-		echo "Install pymupdf4llm to extract text/json"
-		# Ref: https://github.com/pymupdf/pymupdf4llm
-	    pip install pymupdf4llm pymupdf4llm[layout]
-		mkdir -p /home/$USER/Documents/samples/in
-		mkdir -p /home/$USER/Documents/samples/out
-		cd /home/$USER/Documents/samples
-        wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-		cd /home/$USER
-		echo "####"
-        # Create script to activate 'venv' env
-        echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-        echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-        echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-        echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-        echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-        echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-        echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-		# Download script to create python venv
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	    chmod +x /home/$USER/*.sh
-        sleep 2
-      
-        cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-        cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-		reboot
-     else
-        echo "Python venv not installed"
-     fi   
+   # Clear earlier directory, if it exists
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install wheel
+	pip install ipython
+	pip install notebook
+	pip install streamlit
+	pip install --upgrade setuptools
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	# Download script to create python venv
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x /home/$USER/*.sh
+	sleep 2
+  
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	reboot
 fi   
 
 ###########################
@@ -934,43 +927,30 @@ if [ ! -d "$DIRECTORY" ]; then
 		echo " "
 		echo " "
 		echo "------------"        
-		echo "To install Google Antigravity one does need anaconda"
-		echo "Shall I latest anaconda? [Y,n]"    
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		    DIRECTORY=/home/$USER/anaconda3          # Redundant
-		    if [ ! -d "$DIRECTORY" ]; then
-		        CONTREPO=https://repo.continuum.io/archive/
-		        # Stepwise filtering of the html at $CONTREPO
-		        # Get the topmost line that matches our requirements, extract the file name.
-		        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-		        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-		        bash /home/$USER/Downloads/anaconda.sh -b -p $HOME/anaconda3
-		        rm /home/$USER/Downloads/anaconda.sh
-		        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
-	            # Accept terms of service of conda channels
-				# Refer: StackOverflow: https://stackoverflow.com/a/79702898
-				conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
-	               && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-		        # Reload default profile
-		        source /home/$USER/.bashrc
-		        conda update conda -y
-				# Download script to create conda venv
-			    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
-		        chmod +x *.sh  
-				echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
-				chmod +x /home/$USER/*.sh
-				chmod +x /home/$USER/start/*.sh
-				chmod +x /home/$USER/stop/*.sh
-				reboot
-		     else
-		        echo "Anaconda is already installed in /home/$USER/anaconda3"
-		     fi   
-		 else
-		    echo "Anaconda not installed"
-		 fi
-	 fi
+		CONTREPO=https://repo.continuum.io/archive/
+		# Stepwise filtering of the html at $CONTREPO
+		# Get the topmost line that matches our requirements, extract the file name.
+		ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+		wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
+		bash /home/$USER/Downloads/anaconda.sh -b -p $HOME/anaconda3
+		rm /home/$USER/Downloads/anaconda.sh
+		echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
+		# Accept terms of service of conda channels
+		# Refer: StackOverflow: https://stackoverflow.com/a/79702898
+		conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
+		   && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+		# Reload default profile
+		source /home/$USER/.bashrc
+		conda update conda -y
+		# Download script to create conda venv
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+		chmod +x *.sh  
+		echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+		reboot
+	fi
 fi	
 
 
