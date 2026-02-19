@@ -592,7 +592,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	echo "vectordb_installed.txt" > /home$USER/vectordb_installed.txt
+	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
 	reboot
 fi	
 
