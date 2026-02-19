@@ -423,122 +423,94 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "  "
 	echo "   "
 	cd /home/$USER/
-	if [ ! -f /home/$USER/milvus_installed.txt ]; then
-		echo " "
-		echo " "
-		echo "------------"        
-		echo "Shall I install milvus docker? [Y,n]"    # Else docker milvus may be installed
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		    echo "====  "    
-			echo "Installing milvus vector database using docker"       
-			echo "You may be asked for the password. Supply it..."     
-			echo "====  "                                                   
-			sleep 3
-			curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-			bash standalone_embed.sh start
-			echo " "
-			echo "Milvus vector database installed"                      
-			echo "Ports used are: 9091 and 19530."                       
-			echo "To restart/stop docker use the following commands:"            
-			echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
-			mkdir /home/$USER/milvus
-			mv standalone_embed.sh /home/$USER/milvus/
-			echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
-			# Our milvus start script		
-			echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
-			echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
-			echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
-			echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-			echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
-			echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
-			echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
-			echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
-			echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
-			echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
-			# Stop script		
-			echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
-			echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
-			echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
-			echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
-			echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
-			echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
-			echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
-			#
-			# Delete milvus database as also the container
-			echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
-			echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
-			echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
-			echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
-			echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
-	        #
-	        ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
-			ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
-			ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
-			#
-			echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
-			chmod +x /home/$USER/*.sh
-			chmod +x /home/$USER/start/*.sh
-			chmod +x /home/$USER/stop/*.sh
-			sleep 3
-		else
-			echo "Milvus db not installed"
-		fi
-		echo "Milvus db is installed"
-	fi	
-		
+	echo "====  "    
+	echo "Installing milvus vector database using docker"       
+	echo "You may be asked for the password. Supply it..."     
+	echo "====  "                                                   
+	sleep 3
+	curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+	bash standalone_embed.sh start
+	echo " "
+	echo "Milvus vector database installed"                      
+	echo "Ports used are: 9091 and 19530."                       
+	echo "To restart/stop docker use the following commands:"            
+	echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
+	mkdir /home/$USER/milvus
+	mv standalone_embed.sh /home/$USER/milvus/
+	echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
+	# Our milvus start script		
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
+	echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
+	echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
+	echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
+	echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
+	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
+	echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
+	echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
+	echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
+	# Stop script		
+	echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
+	echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
+	#
+	# Delete milvus database as also the container
+	echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
+	echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
+	echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
+	echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
+	echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
+	#
+	ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
+	ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
+	ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
+	#
+	echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	sleep 3
+				
 	###############
 	# Meilisearch install
 	# Ref: https://www.meilisearch.com/docs/guides/docker
 	################
-	
-	echo "  "
-	echo "   "
-	cd /home/$USER/
-	if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
-		echo " "
-		echo " "
-		echo "------------"        
-		echo "Shall I install meilisearch docker? [Y,n]"    # Else docker milvus may be installed
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		    echo "====  "    
-			echo "Installing meilisearch vector database using docker"       
-			echo "You may be asked for the password. Supply it..."     
-			echo "====  "                                                   
-			sleep 3
-			echo "Installing mellisearch vector database using docker"       
-			docker pull getmeili/meilisearch:latest
-			docker run -d --rm \
-			           -p 7700:7700 \
-			           -v $(pwd)/meili_data:/meili_data \
-			             getmeili/meilisearch:latest
-			echo "Mellisearch installed"
-			echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
-			echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
-			echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
-			echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
-			echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
-			echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
-			echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
-			echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
-			echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
-			echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
-			echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
-			echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
-			ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
-			echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
-			chmod +x /home/$USER/*.sh
-			chmod +x /home/$USER/start/*.sh
-			chmod +x /home/$USER/stop/*.sh
-			sleep 2
-		else
-		    echo "Meilisearch not installedd"
-		fi
-	fi	
 		
+	echo "====  "    
+	echo "Installing meilisearch vector database using docker"       
+	echo "You may be asked for the password. Supply it..."     
+	echo "====  "                                                   
+	sleep 3
+	echo "Installing mellisearch vector database using docker"       
+	docker pull getmeili/meilisearch:latest
+	docker run -d --rm \
+			   -p 7700:7700 \
+			   -v $(pwd)/meili_data:/meili_data \
+				 getmeili/meilisearch:latest
+	echo "Mellisearch installed"
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
+	echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
+	ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
+	echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	sleep 2
+				
 	##########################
 	### Install chromadb docker
 	# Ref: https://docs.trychroma.com/production/containers/docker
@@ -546,92 +518,63 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	##########################
 	
 	cd /home/$USER
-	if [ ! -f /home/$USER/chromadb_installed.txt ]; then
-		echo " "
-		echo " "
-		echo "------------"        
-		echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		    # Write chroma start script
-		    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
-		    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
-		    echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
-		    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
-		    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
-		    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
-		    echo " docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 "   | tee -a /home/$USER/start_chroma.sh 
-		
-		    # Pulling chromadb docker image  
-		    cd /home/$USER/
-		    echo " "                                       | tee -a /home/$USER/error.log
-		    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
-		    # Refer: https://cookbook.chromadb.dev/strategies/cors/
-		    docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
-			echo "------------"                            | tee -a /home/$USER/error.log
-		    echo " "                                       | tee -a /home/$USER/error.log
-			echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
-			chmod +x /home/$USER/*.sh
-			chmod +x /home/$USER/start/*.sh
-			chmod +x /home/$USER/stop/*.sh
-			sleep 2
-		else
-		    echo "Skipping install of chromadb docker"
-		fi   
-	fi
+	# Write chroma start script
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
+	echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
+	echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
+	echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
+	echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
+	echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
+	echo " docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 "   | tee -a /home/$USER/start_chroma.sh 
 
+	# Pulling chromadb docker image  
+	cd /home/$USER/
+	echo " "                                       | tee -a /home/$USER/error.log
+	echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
+	# Refer: https://cookbook.chromadb.dev/strategies/cors/
+	docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
+	echo "------------"                            | tee -a /home/$USER/error.log
+	echo " "                                       | tee -a /home/$USER/error.log
+	echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+		
 	##########################
 	### Install FAISS library
 	##########################
 	
 	echo " "
 	echo " "
-	echo "-----"
-	cd /home/$USER
-	if [ ! -f /home/$USER/faiss_installed.txt ]; then
-	    echo " "
-	    echo " "
-		echo "------------"  
-		echo "Shall I install FAISS vector store? [Y,n]"    
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-			echo " "
-			echo "============"
-			echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
-			echo "is of the folder where data files will be saved. Consider this as the "
-			echo "location of FAISS database for that application."
-			echo "=============="
-			echo " "
-			sleep 8
-			# Create venv for FAISS
-			python3 -m venv /home/$USER/faiss
-			source /home/$USER/faiss/bin/activate
-			pip3 install faiss-cpu
-			deactivate
-			## Script to activate FAISS library
-			echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
-			echo " "                                                                >> /home/$USER/start/activate_faiss.sh
-			echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
-			echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
-			echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
-			echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
-			echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
-			deactivate
-			echo "FAISS library installed at /home/$USER/faiss/"
-			echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
-			# FAISS download data-cleaning script
-			cd /home/$USER/
-			wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
-			chmod +x *.sh
-			chmod +x /home/$USER/start/*.sh
-			echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
-		else
-			echo "FAISS not installed"
-		fi	
-	fi
-
+	echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
+	echo "is of the folder where data files will be saved. Consider this as the "
+	echo "location of FAISS database for that application."
+	echo "=============="
+	echo " "
+	sleep 8
+	# Create venv for FAISS
+	python3 -m venv /home/$USER/faiss
+	source /home/$USER/faiss/bin/activate
+	pip3 install faiss-cpu
+	deactivate
+	## Script to activate FAISS library
+	echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
+	echo " "                                                                >> /home/$USER/start/activate_faiss.sh
+	echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
+	echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
+	echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
+	echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
+	echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
+	deactivate
+	echo "FAISS library installed at /home/$USER/faiss/"
+	echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
+	# FAISS download data-cleaning script
+	cd /home/$USER/
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
+	chmod +x *.sh
+	chmod +x /home/$USER/start/*.sh
+	echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
+	
 	################
 	# Install postgresql and sqlite3
 	# https://stackoverflow.com/questions/18223665/postgresql-query-from-bash-script-as-database-user-postgres
@@ -639,150 +582,138 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	
 	echo " "
 	echo " "
+	cd /home/$USER/
+	echo "Installing postgresql and sqlite3"
+	sudo apt install postgresql postgresql-contrib sqlite3   -y
+
+	# Postgresql start/stop script
+
+	# Start script
+	echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
+	echo " "                                                               >> /home/$USER/start_postgresql.sh  
+	echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
+	echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
+	echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
+	echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
+	echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
+	
+	# Stop script
+	echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
+	echo " "                                                               >> /home/$USER/stop_postgresql.sh  
+	echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
+	echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
+	echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
+	echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
+	
+	mkdir /home/$USER/psql
+	cd /home/$USER/psql
+	
+	# Script to create sqlite database
+	# A small help script
+	echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+	echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+	echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+	echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	chmod +x *.sh
+	
+	#############
+	# psql related
+	# Download help scripts that will inturn, help create user and password
+	# in postgresql
+	##############
+	cd /home/$USER/
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
+	chmod +x /home/$USER/*.sh
+	
+	# Create symlinks
+	cd /home/$USER/psql
+	ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
+	ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
+	ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
+	ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
+	ln -sT /home/$USER/psql.sh                       psql.sh
+	ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
 	cd /home/$USER
-	if [ ! -f /home/$USER/postgresql_installed.txt ]; then
-		echo "------------"   
-		echo "Shall I install postgres db and pgvector? [Y,n]"    # 
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		  	# Install postgresql
-		    cd /home/$USER/
-		    echo "Installing postgresql and sqlite3"
-		    sudo apt install postgresql postgresql-contrib sqlite3   -y
-		
-		    # Postgresql start/stop script
 	
-			# Start script
-			echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
-		    echo " "                                                               >> /home/$USER/start_postgresql.sh  
-		    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
-		    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
-		    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
-		    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
-		    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
-		    
-			# Stop script
-		    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
-		    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
-		    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
-		    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
-		    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
-		    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
-			
-			mkdir /home/$USER/psql
-		    cd /home/$USER/psql
-			
-		    # Script to create sqlite database
-			# A small help script
-		    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
-		    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-		    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
-		    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
-		    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-		    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
-		    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
-		    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
-		    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
-		    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-		    chmod +x *.sh
-			
-		    #############
-		    # psql related
-		    # Download help scripts that will inturn, help create user and password
-		    # in postgresql
-		    ##############
-		    cd /home/$USER/
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
-		    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-			wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
-		    chmod +x /home/$USER/*.sh
-		    
-			# Create symlinks
-		    cd /home/$USER/psql
-		    ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
-		    ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
-		    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
-		    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
-		    ln -sT /home/$USER/psql.sh                       psql.sh
-			ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
-		    cd /home/$USER
-		    
-			###########
-		    ## Add postgres vector storage capability
-		    ############
-		    # Add vector storage capability to postgres
-		    # My version of postgres db is 14.
-		    # (Check as: pg_config --version)
-		    # Install a needed package (depending upon your version of postgres)
-		    # Check version as: pg_config --version
-		    # Assuming version 16
-		    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
-		    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
-		    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-		    sudo apt install postgresql-server-dev-$version  -y
-		    #sudo apt install postgresql-server-dev-16  -y
-		    # Ref: https://github.com/pgvector/pgvector
-		    cd /tmp
-		    git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
-		    cd pgvector
-		    make
-		    sudo make install 
+	###########
+	## Add postgres vector storage capability
+	############
+	# Add vector storage capability to postgres
+	# My version of postgres db is 14.
+	# (Check as: pg_config --version)
+	# Install a needed package (depending upon your version of postgres)
+	# Check version as: pg_config --version
+	# Assuming version 16
+	pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
+	psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+	version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+	sudo apt install postgresql-server-dev-$version  -y
+	#sudo apt install postgresql-server-dev-16  -y
+	# Ref: https://github.com/pgvector/pgvector
+	cd /tmp
+	git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
+	cd pgvector
+	make
+	sudo make install 
+
+	# Create user ashok and database ashok
+	cd /home/$USER/
+	# Creating user 'ashok', and database 'ashok'. 
+	# User 'ashok' has full authority over database 'ashok'
+	echo " "
+	echo " "
+	echo "========="
+	echo "Creating user 'ashok' and database 'askok'"
+	echo "User 'ashok' has full authority over database 'ashok'"
+	echo "User 'ashok' has password: ashok"
+	echo "Database 'ashok' can also be used as vector database"
+	echo "========="
+	echo " "
+	echo " "
+	sleep 5
+	sudo -u postgres psql -c 'create database ashok;'
+	sudo -u postgres psql -c 'create user ashok;'
+	sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+	sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 	
-			# Create user ashok and database ashok
-		    cd /home/$USER/
-		    # Creating user 'ashok', and database 'ashok'. 
-		    # User 'ashok' has full authority over database 'ashok'
-		    echo " "
-		    echo " "
-		    echo "========="
-		    echo "Creating user 'ashok' and database 'askok'"
-		    echo "User 'ashok' has full authority over database 'ashok'"
-		    echo "User 'ashok' has password: ashok"
-		    echo "Database 'ashok' can also be used as vector database"
-		    echo "========="
-		    echo " "
-		    echo " "
-		    sleep 5
-		    sudo -u postgres psql -c 'create database ashok;'
-		    sudo -u postgres psql -c 'create user ashok;'
-		    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
-		    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
-		    sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
-			
-			#sudo -u postgres psql -c "\du" 
-			#sudo -u postgres psql -c "\l"
-	
-			# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
-			version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-			cd /etc/postgresql/$version/main
-	        echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
-	        echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
-	        sudo systemctl restart postgresql
-	
-			# Download RAG data files
-	        mkdir -p /home/$USER/Documents/data
-	        cd /home/$USER/Documents/data
-	        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/bertrandRusselEssays.txt
-	        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/goodWriting.txt
-	        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/iWorkedOnEssay.txt
-	        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/sherlockHolmes.txt
-	        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/slyFox.txt
-	        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
-	        cd /home/$USER
-			echo "postgresql installed" > /home/$USER/postgresql_installed.txt
-			chmod +x /home/$USER/*.sh
-			chmod +x /home/$USER/start/*.sh
-			chmod +x /home/$USER/stop/*.sh
-			sleep 2
-		else
-		   echo "Postgres not installed"
-		 fi  
-	fi
+	#sudo -u postgres psql -c "\du" 
+	#sudo -u postgres psql -c "\l"
+
+	# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
+	version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+	cd /etc/postgresql/$version/main
+	echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
+	echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
+	sudo systemctl restart postgresql
+
+	# Download RAG data files
+	mkdir -p /home/$USER/Documents/data
+	cd /home/$USER/Documents/data
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/bertrandRusselEssays.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/goodWriting.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/iWorkedOnEssay.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/sherlockHolmes.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/slyFox.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
+	cd /home/$USER
+	echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	sleep 2
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
@@ -814,176 +745,148 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	#                https://community.n8n.io/tags/c/tutorials/28/course-beginner
 	
 	cd /home/$USER
-	echo " "
-	echo " "
-	if [ ! -f /home/$USER/n8n_installed.txt ]; then
-		echo "------------"   
-		echo "Shall I install n8n docker? [Y,n]"    
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		    cd ~/
-		    mkdir /home/$USER/n8n  # Redundant step
-		    #cd /home/$USER/n8n
-		    # Volumes are automatically created below: /var/lib/docker/volumes/
-		    docker volume create n8n_data
-		    #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
-		    #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
-		    # Access at localhost:5678
-		    # --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
-		    # docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
-		    # Access at localhost:5678
-		    docker run -it -d --rm \
-		                --name n8n \
-		                 -p 5678:5678 \
-		                 -e NODE_OPTIONS="--max-old-space-size=4096" \
-		                --network host   \
-		                 -v n8n_data:/home/node/.n8n \
-		                    docker.n8n.io/n8nio/n8n
-		    # n8n start script for Ubuntu
-		    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
-		    echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
-		    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
-		    echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
-		    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
-		    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
-		    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
-		    #echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-		    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-		    # n8n start script for WSL
-		    echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
-		    echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
-		    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
-		    #echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
-		    echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
-		    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
-		    # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
-		    #echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
-		    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
-		   	echo "n8n_installed" > /home/$USER/n8n_installed.txt
-		else
-		    echo "n8n docker will not be installed"
-		fi
-	fi
-
+	cd ~/
+	mkdir /home/$USER/n8n  # Redundant step
+	#cd /home/$USER/n8n
+	# Volumes are automatically created below: /var/lib/docker/volumes/
+	docker volume create n8n_data
+	#   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+	#   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
+	# Access at localhost:5678
+	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
+	# docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+	# Access at localhost:5678
+	docker run -it -d --rm \
+				--name n8n \
+				 -p 5678:5678 \
+				 -e NODE_OPTIONS="--max-old-space-size=4096" \
+				--network host   \
+				 -v n8n_data:/home/node/.n8n \
+					docker.n8n.io/n8nio/n8n
+	# n8n start script for Ubuntu
+	echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
+	echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
+	echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
+	echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
+	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
+	#echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	# n8n start script for WSL
+	echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
+	echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
+	echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
+	#echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
+	echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
+	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
+	# REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
+	#echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
+	echo "n8n_installed" > /home/$USER/n8n_installed.txt
+		
 	#####################3
 	# flowise docker
 	# Ref: https://docs.flowiseai.com/getting-started#docker-compose
 	######################
-	echo " "
-	echo " "
-	cd /home/$USER
-	if [ ! -f /home/$USER/flowise_installed.txt ]; then
-		echo "------------"   
-		echo "Shall I install flowise docker? [Y,n]"    # Default is yes
-		read input
-		# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
-		input=${input:-y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-		   cd /home/$USER/
-		   # Install Flowise through docker"
-		   # Ref: https://docs.flowiseai.com/getting-started
-		   echo "Installing flowise docker. Takes time.."          
-		   # Start script
-		   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
-		   echo " "                                                   >> /home/$USER/start_flowise.sh
-		   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
-		   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
-		   echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
-		   echo " "                                                   >> /home/$USER/start_flowise.sh
-		   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
-		   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
-		   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
-		   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
-		   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
-	       echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
-	       echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
-		   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
-	       echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
-	       echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
-	       echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
-		   echo " "                                                   >> /home/$USER/start_flowise.sh
-		   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
-		   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
-		   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
-		   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-		   # Reset flowise password
-	  	   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
-		   echo " "                                                   >> /home/$USER/reset_flowise.sh
-		   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
-		   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
-		   echo "docker stop docker-flowise-1"                        >> /home/$USER/reset_flowise.sh
-		   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-		   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
-		   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
-		   echo " "                                                   >> /home/$USER/reset_flowise.sh
-		   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
-		   echo "docker start docker-flowise-1"                       >> /home/$USER/reset_flowise.sh
-		   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
-		   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
-	       echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
-	       echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
-	       echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
-	       echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
-	       echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
-	       echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
-	       # logs script
-		   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
-		   echo " "                                                   >> /home/$USER/logs_flowise.sh
-		   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
-		   #echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
-		   #echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
-		   #echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
-		   echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
-	 	   # Stop script
-		   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
-		   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
-		   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
-		   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
-		   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
-		   echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
-		   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
-		   sleep 4
-		   cd ~/
-		   git clone https://github.com/FlowiseAI/Flowise.git
-		   cd Flowise/
-		   #sudo docker build --no-cache -t flowise .
-		   # The '--network host' option removes network isolation between the container and
-		   #   the Docker host machine, meaning the container directly shares the host's networking stack
-		   # The container operates as if it were a process running directly on the host machine,
-		   #   using the host's IP address and network interfaces.  
-		   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
-		   #      docker run -d --name flowise -p 3000:3000 --network host flowise
-		   cd /home/$USER/Flowise/docker
-		   cp .env.example .env
-		   docker compose up -d
-		   cd /home/$USER/
-		   echo "In future to start/stop containers, proceed, as:"
-		   echo "            cd /home/$USER/Flowise"                  
-		   echo "            docker start docker-flowise-1"                    
-		   echo "            docker stop docker-flowise-1"                     
-		   echo " Also, check all containers available, as:"
-		   echo "             docker ps -a "     
-		   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
-		   ln -sT /home/$USER/stop_docker_flowise.sh /home/$USER/stop_flowise.sh
-		   mkdir -p /home/$USER/Documents/flowise
-		   cd /home/$USER/Documents/flowise
-		   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf
-		   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
-		   cd /home/$USER
-		   echo "flowise installed" > /home/$USER/flowise_installed.txt
-		   chmod +x /home/$USER/*.sh
-		else
-		   echo "Flowise docker will not be installed"
-		 fi  
-		  echo "Flowise docker already installed"
-	 fi
-	 chmod +x /home/$USER/*.sh
-	 chmod +x /home/$USER/start/*.sh
-	 chmod +x /home/$USER/stop/*.sh
-	 echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
-	 sleep 3
-	 reboot
+   cd /home/$USER/
+   # Install Flowise through docker"
+   # Ref: https://docs.flowiseai.com/getting-started
+   echo "Installing flowise docker. Takes time.."          
+   # Start script
+   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
+   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+   echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
+   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
+   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
+   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
+   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
+   echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
+   echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
+   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
+   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
+   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
+   # Reset flowise password
+   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
+   echo " "                                                   >> /home/$USER/reset_flowise.sh
+   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
+   echo "docker stop docker-flowise-1"                        >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
+   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
+   echo " "                                                   >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
+   echo "docker start docker-flowise-1"                       >> /home/$USER/reset_flowise.sh
+   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
+   echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
+   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
+   echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
+   echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
+   echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
+   echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
+   # logs script
+   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
+   echo " "                                                   >> /home/$USER/logs_flowise.sh
+   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
+   #echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
+   #echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
+   #echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
+   echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
+   # Stop script
+   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
+   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
+   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
+   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
+   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
+   echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
+   sleep 4
+   cd ~/
+   git clone https://github.com/FlowiseAI/Flowise.git
+   cd Flowise/
+   #sudo docker build --no-cache -t flowise .
+   # The '--network host' option removes network isolation between the container and
+   #   the Docker host machine, meaning the container directly shares the host's networking stack
+   # The container operates as if it were a process running directly on the host machine,
+   #   using the host's IP address and network interfaces.  
+   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+   #      docker run -d --name flowise -p 3000:3000 --network host flowise
+   cd /home/$USER/Flowise/docker
+   cp .env.example .env
+   docker compose up -d
+   cd /home/$USER/
+   echo "In future to start/stop containers, proceed, as:"
+   echo "            cd /home/$USER/Flowise"                  
+   echo "            docker start docker-flowise-1"                    
+   echo "            docker stop docker-flowise-1"                     
+   echo " Also, check all containers available, as:"
+   echo "             docker ps -a "     
+   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
+   ln -sT /home/$USER/stop_docker_flowise.sh /home/$USER/stop_flowise.sh
+   mkdir -p /home/$USER/Documents/flowise
+   cd /home/$USER/Documents/flowise
+   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf
+   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
+   cd /home/$USER
+   echo "flowise installed" > /home/$USER/flowise_installed.txt
+   chmod +x /home/$USER/*.sh
+   chmod +x /home/$USER/start/*.sh
+   chmod +x /home/$USER/stop/*.sh
+   echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
+   sleep 3
+   reboot
 fi	 
 	
 
@@ -1087,9 +990,105 @@ input=${input:-Y}
 	fi
 fi
 
-chmod +x /home/$USER/*.sh
 
-
+#################
+# langchain & langraph
+#################
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+if [ ! -f /home/$USER/langchain_installed.txt ]; then
+    echo " "
+    echo " "
+	echo "------------"  
+	echo "Shall I install langchain and llamaindex? [Y,n]"    
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		# Activate python environment at 'langchain'
+		#  for installing langchain and llama-index
+		##############
+		# Create python virtual env
+		##############
+		python3 -m venv /home/$USER/langchain
+		source /home/$USER/langchain/bin/activate
+		# 1.6 Essentials software
+		pip install spyder numpy scipy pandas matplotlib sympy cython
+		pip install jupyterlab
+		pip install ipython
+		pip install notebook
+		pip install streamlit
+		# Required for spyder:
+		sudo apt install pyqt5-dev-tools -y
+		# Huggingface and llama.cpp related
+		pip install huggingface_hub
+		# Create script to activate 'langchain' env
+		echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+		echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+		echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+		echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+		echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+		chmod +x /home/$USER/*.sh
+		sleep 2
+		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
+		source /home/$USER/langchain/bin/activate
+		pip install langchain
+		pip install langchain-openai
+		pip install langchain-community
+		pip install langchain-experimental
+		pip install langgraph
+		pip install "langserve[all]"
+		pip install langchain-cli
+		#################
+		# llamaindex
+		# To be installed ONLY in langchain virtual env
+		#################
+		# 1.0 LLamaindex install
+		# Mostly openai related
+		echo "Installing llama-index"
+		echo "  "
+		pip install llama-index
+		# 1,1 Ollama, huggingface and localai (openailike) oriented
+		pip install --upgrade transformers
+		pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
+		pip install llama-index-readers-file llama-index-embeddings-fastembed
+		# Needed inspite of code repeated above
+		pip install --upgrade transformers
+		# 1.2 Vector stores
+		pip install faiss-cpu
+		pip install qdrant-client llama-index-vector-stores-chroma 
+		pip install llama-index-vector-stores-qdrant fastembed
+		# 1.3 Web access site
+		pip install tavily-python
+		# 1.4 Yahoo finance data
+		pip install yfinance
+		# 1.5 For groq, together, mistralAI access
+		pip install llama-index-llms-groq
+		pip install llama-index-llms-together
+		pip install llama-index-llms-mistralai
+		# Download llamaindex tutorials
+		mkdir -p /home/$USER/Documents/llamaindex
+		cd /home/$USER/Documents/llamaindex
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
+		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
+		sleep 3
+		chmod +x /home/$USER/*.sh
+		chmod +x /home/$USER/start/*.sh
+		chmod +x /home/$USER/stop/*.sh
+		reboot
+	else
+		echo "Langchain and llama index not installed"
+	fi		
+fi	
 
 ##########################
 ### Install Visual Studio Coder
@@ -1211,104 +1210,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 fi	
 
 
-#################
-# langchain & langraph
-#################
-echo " "
-echo " "
-echo "-----"
-cd /home/$USER
-if [ ! -f /home/$USER/langchain_installed.txt ]; then
-    echo " "
-    echo " "
-	echo "------------"  
-	echo "Shall I install langchain and llamaindex? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-		# Activate python environment at 'langchain'
-		#  for installing langchain and llama-index
-		##############
-		# Create python virtual env
-		##############
-		python3 -m venv /home/$USER/langchain
-		source /home/$USER/langchain/bin/activate
-		# 1.6 Essentials software
-		pip install spyder numpy scipy pandas matplotlib sympy cython
-		pip install jupyterlab
-		pip install ipython
-		pip install notebook
-		pip install streamlit
-		# Required for spyder:
-		sudo apt install pyqt5-dev-tools -y
-		# Huggingface and llama.cpp related
-		pip install huggingface_hub
-		# Create script to activate 'langchain' env
-		echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-		echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
-		echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
-		echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
-		echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
-		chmod +x /home/$USER/*.sh
-		sleep 2
-		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
-		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
-		source /home/$USER/langchain/bin/activate
-		pip install langchain
-		pip install langchain-openai
-		pip install langchain-community
-		pip install langchain-experimental
-		pip install langgraph
-		pip install "langserve[all]"
-		pip install langchain-cli
-		#################
-		# llamaindex
-		# To be installed ONLY in langchain virtual env
-		#################
-		# 1.0 LLamaindex install
-		# Mostly openai related
-		echo "Installing llama-index"
-		echo "  "
-		pip install llama-index
-		# 1,1 Ollama, huggingface and localai (openailike) oriented
-		pip install --upgrade transformers
-		pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
-		pip install llama-index-readers-file llama-index-embeddings-fastembed
-		# Needed inspite of code repeated above
-		pip install --upgrade transformers
-		# 1.2 Vector stores
-		pip install faiss-cpu
-		pip install qdrant-client llama-index-vector-stores-chroma 
-		pip install llama-index-vector-stores-qdrant fastembed
-		# 1.3 Web access site
-		pip install tavily-python
-		# 1.4 Yahoo finance data
-		pip install yfinance
-		# 1.5 For groq, together, mistralAI access
-		pip install llama-index-llms-groq
-		pip install llama-index-llms-together
-		pip install llama-index-llms-mistralai
-		# Download llamaindex tutorials
-		mkdir -p /home/$USER/Documents/llamaindex
-		cd /home/$USER/Documents/llamaindex
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
-		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
-		sleep 3
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
-		reboot
-	else
-		echo "Langchain and llama index not installed"
-	fi		
-fi	
+
 
 
 
