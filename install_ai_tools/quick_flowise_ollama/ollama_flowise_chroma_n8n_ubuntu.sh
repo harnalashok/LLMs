@@ -608,7 +608,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	echo " "
 	echo "------------" 
     echo "n8n and flowise would be installed"
-	sleep3
+	sleep 3
 	echo "  "
 	echo  "  "
 	##########################
