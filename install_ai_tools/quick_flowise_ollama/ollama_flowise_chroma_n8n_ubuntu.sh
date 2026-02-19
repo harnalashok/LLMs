@@ -267,8 +267,8 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     cd /home/$USER/
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
-    #echo "Machine will be rebooted "
-    #reboot
+    echo "Machine will be rebooted "
+    reboot
 else
     echo "Docker installation process completed"
 fi    
