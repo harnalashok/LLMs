@@ -287,7 +287,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo "------------" 
     echo "Vector DBs would be installed"
-	sleep3
+	sleep 3
 	echo "  "
 	echo  "  "
 	###############
