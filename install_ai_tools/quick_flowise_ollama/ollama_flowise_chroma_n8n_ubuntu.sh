@@ -2252,6 +2252,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 		# Prevent docker restarts on OS reboot
         docker update --restart=no $(docker ps -a -q)
 	fi
+fi	
 
  
 
