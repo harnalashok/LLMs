@@ -599,6 +599,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	bash start_chroma.sh  
 	bash start_meilisearch.sh
 	bash start_milvus.sh
+	echo "  "
+    echo "  "
 	echo "Postgresql started?"
 	netstat -aunt | grep 5432
 	echo "Chromadb started?"
@@ -607,8 +609,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	netstat -aunt | grep 7700
 	echo "milvus started"
 	netstat -aunt | grep 19530
-	sleep 5
-	reboot
+	sleep 8
+	sudo systemctl reboot -i
 fi	
 
 #############
@@ -777,9 +779,14 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
    bash reset_flowise.sh
    bash start_n8n.sh
+   echo "  "
+   echo "  "
+   echo "n8n started?"
    netstat -aunt | grep 5678
+   echo "flowise started?"
    netstat -aunt | grep 3000
-   sleep 5
+   echo "===="
+   sleep 8
    bash stop_n8n.sh
    bash stop_flowise.sh
    sleep 2
