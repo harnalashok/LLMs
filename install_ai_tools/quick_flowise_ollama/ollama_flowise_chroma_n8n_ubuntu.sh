@@ -404,12 +404,12 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 
 	# Pulling chromadb docker image  
 	cd /home/$USER/
-	echo " "                                       | tee -a /home/$USER/error.log
-	echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
+	echo " "                                       
+	echo " Pulling chromadb docker image"          
 	# Refer: https://cookbook.chromadb.dev/strategies/cors/
 	docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
-	echo "------------"                            | tee -a /home/$USER/error.log
-	echo " "                                       | tee -a /home/$USER/error.log
+	echo "------------"                            
+	echo " "                                       
 	echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
@@ -593,6 +593,21 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
+	# Start all vector databases to check
+	bash stop_milvus.sh
+    bash start_postgresql.sh
+	bash start_chroma.sh  
+	bash start_meilisearch.sh
+	bash start_milvus.sh
+	echo "Postgresql started?"
+	netstat -aunt | grep 5432
+	echo "Chromadb started?"
+	netstat -aunt | grep 8000
+	echo "meilisearch started"
+	netstat -aunt | grep 7700
+	echo "milvus started"
+	netstat -aunt | grep 19530
+	sleep 5
 	reboot
 fi	
 
