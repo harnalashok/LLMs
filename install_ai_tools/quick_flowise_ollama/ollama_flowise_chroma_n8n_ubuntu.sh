@@ -775,7 +775,14 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    chmod +x /home/$USER/start/*.sh
    chmod +x /home/$USER/stop/*.sh
    echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
-   sleep 3
+   bash reset_flowise.sh
+   bash start_n8n.sh
+   netstat -aunt | grep 5678
+   netstat -aunt | grep 3000
+   sleep 5
+   bash stop_n8n.sh
+   bash stop_flowise.sh
+   sleep 2
    reboot
 fi	 
 	
