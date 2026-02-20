@@ -850,7 +850,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  chmod +x /home/$USER/start/*.sh
 	  chmod +x /home/$USER/stop/*.sh
 	  sleep 3
-	  reboot
+	  sudo systemctl reboot -i
 fi
 
 
@@ -941,7 +941,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
   
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-	reboot
+	sudo systemctl reboot -i
 fi   
 
 ###########################
@@ -978,7 +978,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
-		reboot
+		sudo systemctl reboot -i
 	fi
 fi	
 
@@ -1071,7 +1071,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	reboot
+	sudo systemctl reboot -i
 fi	
 
 ##########################
@@ -1119,7 +1119,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     chmod +x /home/$USER/start/*.sh
     chmod +x /home/$USER/stop/*.sh
 	sleep 5
-	reboot
+	sudo systemctl reboot -i
 fi
 
 ###################
@@ -1145,7 +1145,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
-	  reboot
+	  sudo systemctl reboot -i
 fi	
 
 #####################
@@ -1206,7 +1206,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
 		sleep 2
-		reboot
+		sudo systemctl reboot -i
 	else
 		echo "langflow NOT installed"
 	fi
@@ -1254,7 +1254,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		sleep 3
-		reboot
+		sudo systemctl reboot -i
 	else
 	    echo "OpenNotebook not installed"
 	fi
@@ -1298,7 +1298,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "============"
 			echo " "
 			sleep 5
-			reboot
+			sudo systemctl reboot -i
 		else	
 			echo "Google antigravity not installed"
 		fi	
@@ -1351,7 +1351,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
-	   reboot
+	   sudo systemctl reboot -i
 	else
 	   echo "Portainer not installed"
 	fi 
@@ -1409,7 +1409,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
 		sleep 2
-		reboot
+		sudo systemctl reboot -i
 	else
 	   echo "ngrok not installed"
 	fi  
@@ -1464,7 +1464,7 @@ fi
         echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
         echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
         sleep 4
-		reboot
+		sudo systemctl reboot -i
     else
         echo "dify not installed"
     fi
@@ -1615,7 +1615,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
    sleep 2
-   reboot
+   sudo systemctl reboot -i
 else
     echo "Mongodb for Ubuntu24.04 not installed"
 fi   
@@ -1695,7 +1695,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
   chmod +x /home/$USER/start/*.sh
   chmod +x /home/$USER/*.sh
   sleep 5
-  reboot
+  sudo systemctl reboot -i
 else
   echo "Skipping install of llama.cpp"
 fi
@@ -1728,7 +1728,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
-	  reboot
+	  sudo systemctl reboot -i
 	else
 	   echo "llama-cpp not installed"
 	fi
@@ -1810,7 +1810,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 		echo "xinference installed" > /home/$USER/xinference_installed.txt
 		echo "Will reboot system now"
 	    sleep 5
-		reboot
+		sudo systemctl reboot -i
 	else
 	     echo "xinference will not be installed"
 	fi   
@@ -1866,7 +1866,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    chmod +x *.sh
 		echo "Will reboot system now"
 	    sleep 5
-		reboot
+		sudo systemctl reboot -i
 	else
 	     echo "xinference will not be installed"
 	fi   
@@ -1906,7 +1906,7 @@ if [[ $input == "Y" || $input == "y" ]]; then
     chmod +x *.sh
 	echo "Will reboot system now"
 	sleep 5
-	reboot
+	sudo systemctl reboot -i
 else
      echo "AutoGen Studio will not be installed!"
 fi 
@@ -1944,7 +1944,7 @@ if [ ! -f /home/$USER/flatpak_installed.txt ]; then
 		chmod +x *.sh
 		echo "After rebooting, look for 'JASP App' in Show Applications to put it in Favourites ribbon" 
 		sleep 5
-		reboot
+		sudo systemctl reboot -i
 	else
 	  echo "flatpak not installed"
 	fi
@@ -1995,7 +1995,7 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	    echo "echo '   In the dialogbox, select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python'"    >> /home/$USER/start_torchstudio.sh
 		chmod +x *.sh
 		sleep 5
-		reboot
+		sudo systemctl reboot -i
 	else
 		   echo "TorchStudio not installed"
 	fi   
