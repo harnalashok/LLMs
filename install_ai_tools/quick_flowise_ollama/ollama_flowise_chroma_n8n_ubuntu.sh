@@ -1108,7 +1108,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	rm -rf /home/$USER/1234/
 	mkdir /home/$USER/Documents/vscode
 	cd /home/$USER/Documents/vscode
-	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf
+	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
 	echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	#    
 	sleep 5
