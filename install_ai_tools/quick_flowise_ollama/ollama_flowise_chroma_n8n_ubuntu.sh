@@ -769,8 +769,9 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    ln -sT /home/$USER/stop_docker_flowise.sh /home/$USER/stop_flowise.sh
    mkdir -p /home/$USER/Documents/flowise
    cd /home/$USER/Documents/flowise
-   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf
-   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
+   # For .pdf file, add '?raw=true' to URL
+   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf?raw=true
+   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf?raw=true
    cd /home/$USER
    echo "flowise installed" > /home/$USER/flowise_installed.txt
    chmod +x /home/$USER/*.sh
