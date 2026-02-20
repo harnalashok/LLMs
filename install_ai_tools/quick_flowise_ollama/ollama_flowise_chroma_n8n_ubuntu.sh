@@ -783,7 +783,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    bash stop_n8n.sh
    bash stop_flowise.sh
    sleep 2
-   reboot
+   sudo systemctl reboot -i
 fi	 
 	
 
