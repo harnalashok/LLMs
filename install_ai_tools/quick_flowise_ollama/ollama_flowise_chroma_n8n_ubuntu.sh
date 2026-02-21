@@ -121,6 +121,10 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "===="
 	echo "  "
 	curl -LsSf https://astral.sh/uv/install.sh | sh
+	echo "  "
+	echo "------"
+	echo "Install httpd server"
+	sudo apt-get install apache2 -y
 	sleep 3
 	echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
