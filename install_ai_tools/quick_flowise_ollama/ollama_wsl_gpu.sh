@@ -116,6 +116,20 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "===="
 	echo "  "
 	curl -LsSf https://astral.sh/uv/install.sh | sh
+	echo "------"
+	echo "Install httpd server"
+	sudo apt-get install apache2 -y
+	cd /home/$USER
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
+	sudo mv /home/$USER/index.html  /var/www/html/index.html
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start_apache2.sh
+	echo " "                                                   | tee -a /home/$USER/start_apache2.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start_apache2.sh
+	echo "echo 'Port is 80.'"                                  | tee -a /home/$USER/start_apache2.sh
+	echo "echo 'Web server is at /var/www/html/'"              | tee -a /home/$USER/start_apache2.sh
+	echo "sudo systemctl restart apache2"                      | tee -a /home/$USER/start_apache2.sh
+	echo "cd /home/$USER"                                      | tee -a /home/$USER/start_apache2.sh 
+	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
