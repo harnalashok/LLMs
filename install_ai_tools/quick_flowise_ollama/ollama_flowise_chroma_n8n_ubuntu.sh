@@ -125,6 +125,17 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "------"
 	echo "Install httpd server"
 	sudo apt-get install apache2 -y
+	cd /home/$USER
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
+	sudo mv /home/$USER/index.html  /var/www/html/index.html
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start_apache2.sh
+	echo " "                                                   | tee -a /home/$USER/start_apache2.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start_apache2.sh
+	echo "echo 'Port is 80.'"                                  | tee -a /home/$USER/start_apache2.sh
+	echo "echo 'Web server is at /var/www/html/'"              | tee -a /home/$USER/start_apache2.sh
+	echo "sudo systemctl restart apache2"                      | tee -a /home/$USER/start_apache2.sh
+	echo "cd /home/$USER"                                      | tee -a /home/$USER/start_apache2.sh 
+	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
 	sleep 3
 	echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
@@ -326,7 +337,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
 	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
 	echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
-	echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
+	echo "cd /home/$USER"                                       | tee -a /home/$USER/start/start_milvus.sh 
 	echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
 	# Stop script		
 	echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
