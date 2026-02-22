@@ -1039,6 +1039,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	source /home/$USER/langchain/bin/activate
 	pip install langchain
 	pip install langchain-openai
+	 pip install langchain-ollama
 	pip install langchain-community
 	pip install langchain-experimental
 	pip install langgraph
