@@ -787,7 +787,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    # For .pdf file, add '?raw=true' to URL
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf?raw=true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf?raw=true
-   https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingface_datasets.pdf?raw-true
+   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingface_datasets.pdf?raw-true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/ExportDocumentStoreVectorStoreAndChatflow.pdf?raw=true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/RAGandToolAgent.pdf?raw=true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/huggingfaceAcessToken.pdf?raw=true
