@@ -787,6 +787,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    # For .pdf file, add '?raw=true' to URL
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf?raw=true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf?raw=true
+   https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingface_datasets.pdf?raw-true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/ExportDocumentStoreVectorStoreAndChatflow.pdf?raw=true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/RAGandToolAgent.pdf?raw=true
    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/huggingfaceAcessToken.pdf?raw=true
@@ -894,6 +895,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	mkdir -p /home/$USER/Documents/huggingface
 	cd /home/$USER/Documents/huggingface
 	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingface_datasets.pdf
 	mv 'Huggingface access token.pdf' Huggingface_access_token.pdf
 	cd /home/$USER/
 	echo "models installed" > /home/$USER/models_installed.txt
