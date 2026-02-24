@@ -1288,7 +1288,7 @@ fi
 ###########################
 # Install Google Antigravity
 #   Anaconda installation is a must
-# https://askubuntu.com/a/841224
+# https://antigravity.google/download/linux
 ###########################
 
 echo "  "
