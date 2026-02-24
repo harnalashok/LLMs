@@ -1304,9 +1304,11 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			#  create a directory for keyrings
 			sudo mkdir -p /etc/apt/keyrings
 			# Download and add Google's signing key
-			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/antigravity-repo-key.gpg
-			# Add the Antigravity repository to your sources list
-			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
+			sudo mkdir -p /etc/apt/keyrings
+			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | \
+  			sudo gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
+			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | \
+  			sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
 			# Update your package cach
 			sudo apt update -y
 			# Install Google Antigravity
