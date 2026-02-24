@@ -1323,6 +1323,11 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "You can also launch it by command: antigravity"
 			echo "============"
 			echo " "
+			echo '#!/bin/bash'                                         | tee    /home/$USER/start_antigravity.sh
+	 		echo " "                                                   | tee -a /home/$USER/start_antigravity.sh
+			echo "cd ~/"                                               | tee -a /home/$USER/start_antigravity.sh
+			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
+			chmod +x *.sh
 			sleep 5
 			sudo systemctl reboot -i
 		else	
