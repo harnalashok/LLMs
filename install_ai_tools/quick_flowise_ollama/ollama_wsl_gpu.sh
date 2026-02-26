@@ -1116,28 +1116,34 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	    sudo make install 
 
 		# Create user ashok and database ashok
-	    cd /home/$USER/
-	    # Creating user 'ashok', and database 'ashok'. 
-	    # User 'ashok' has full authority over database 'ashok'
-	    echo " "
-	    echo " "
-	    echo "========="
-	    echo "Creating user 'ashok' and database 'askok'"
-	    echo "User 'ashok' has full authority over database 'ashok'"
-	    echo "User 'ashok' has password: ashok"
-	    echo "Database 'ashok' can also be used as vector database"
-	    echo "========="
-	    echo " "
-	    echo " "
-	    sleep 5
-	    sudo -u postgres psql -c 'create database ashok;'
-	    sudo -u postgres psql -c 'create user ashok;'
-	    sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
-	    sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
-	    sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
+		cd /home/$USER/
+		# Creating user 'ashok', owning database 'ashok'. 
+		# Creating user 'harnal', owning database 'harnal'. 
+		echo " "
+		echo " "
+		echo "========="
+		echo "Creating user 'ashok' owning database 'askok'"
+		echo "Creating user 'harnal' and database 'harnal'"
+		echo "User 'ashok' has password: ashok"
+		echo "User 'harnal' has password: harnal"
+		echo "Database 'ashok' can also be used as vector database"
+		echo "Database 'harnal' can also be used as vector database"
+		echo "========="
+		echo " "
+		echo " "
+		sleep 5
+		sudo -u postgres psql -c 'create user harnal ;'
+		sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
+		sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
+		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
+		echo "===="
+		sudo -u postgres psql -c 'create user ashok ;'
+		sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
+		sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 		
-		sudo -u postgres psql -c "\du" 
-		sudo -u postgres psql -c "\l"
+		#sudo -u postgres psql -c "\du" 
+		#sudo -u postgres psql -c "\l"
 
 		# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
 		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
