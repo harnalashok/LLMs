@@ -1,0 +1,63 @@
+{
+  "name": "Basic twilio",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        360,
+        80
+      ],
+      "typeVersion": 1,
+      "id": "8b298c0d-a09b-42ad-abec-146efe84cd77"
+    },
+    {
+      "parameters": {
+        "from": "+17342945743",
+        "to": "+918750893093",
+        "message": "Test message",
+        "options": {}
+      },
+      "name": "Twilio",
+      "type": "n8n-nodes-base.twilio",
+      "position": [
+        680,
+        80
+      ],
+      "typeVersion": 1,
+      "id": "3fe7ee7d-8a47-448e-9d30-368420c337b4",
+      "credentials": {
+        "twilioApi": {
+          "id": "cJmtpvnZ8TkEQnsd",
+          "name": "Twilio account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f0d4cfba-e529-4c58-bf8b-543d9fa4b87e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "06a3151434cc8b739528c085f688bf3459edf37e722e5f319eb89945e08947f0"
+  },
+  "id": "hVpDkmXIe6SqIoMx",
+  "tags": []
+}
