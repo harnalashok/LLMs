@@ -1,0 +1,444 @@
+{
+  "name": "looping and data summarization",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "data",
+              "cssSelector": "body"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        160
+      ],
+      "id": "acc9380c-bd03-4c57-9f4d-56f4bb40f78e",
+      "name": "HTML"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        80,
+        -16
+      ],
+      "id": "5fa9e51a-0186-4da8-8566-1bbf425460db",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        416
+      ],
+      "id": "a670d817-417c-4ba4-930e-125420baba00",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 100,
+        "options": {
+          "splitCode": "html"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        624,
+        592
+      ],
+      "id": "826e0866-00f5-4dea-8c5d-ff758bf52501",
+      "name": "Recursive Character Text Splitter1"
+    },
+    {
+      "parameters": {
+        "operationMode": "documentLoader",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "typeVersion": 2.1,
+      "position": [
+        544,
+        160
+      ],
+      "id": "67318d9d-4c1e-4987-8209-42f4b40cb8a9",
+      "name": "Summarization Chain",
+      "alwaysOutputData": false,
+      "executeOnce": false
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        400
+      ],
+      "id": "849ba4fb-0afc-4a78-8a89-e3cdcd40ead6",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "content": "## Webscrapping and Data summarization \nAlso experiment with other nodes: Split, IF, LIMIT,LOOP",
+        "height": 112,
+        "width": 496
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -848,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "ac83369f-3feb-4863-a4d2-bb319e6d8a21",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "maxItems": 3
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        160
+      ],
+      "id": "d902d27c-e759-4518-a3b3-bd3034fcd5c5",
+      "name": "Limit to top-3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a9f80a86-6dbd-4667-be2c-1bcde026b236",
+              "leftValue": "={{ $json.process }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -544,
+        176
+      ],
+      "id": "de145a80-173f-49c4-874a-5e31bc48d29b",
+      "name": "If process is true"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        176
+      ],
+      "id": "ba1abd30-e08b-4523-9b08-c87f1d5fac5a",
+      "name": "click to start"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2950e50-c54f-4978-b42f-92f912980461",
+              "name": "urls",
+              "value": "={{[\n    {url: \"https://www.paulgraham.com/goodwriting.html\",\n     prompt: \"Summarize the text\",\n     process: true\n    },\n    {url: \"https://www.paulgraham.com/do.html\",\n     prompt : \"Summarise the text\",\n     process : true\n    },\n    {\n    url: \"https://www.paulgraham.com/foundermode.html\",\n    prompt : \"Summarize the text\" ,\n    process : false},\n    {\n    url: \"https://www.paulgraham.com/read.html\",\n    prompt : \"Summarize the text\",\n    process : true },\n    {\n    url: \"https://www.paulgraham.com/reddits.html\",\n    prompt : \"Summarize the text\",\n    process : true },\n   ]\n}}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -896,
+        176
+      ],
+      "id": "9db70779-65e1-48c9-8f2c-5082239c9150",
+      "name": "JSON list of URLs and prompts"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "urls",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        176
+      ],
+      "id": "572f27dd-c13e-490b-a4ae-092f3d9d342f",
+      "name": "Split Out json"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        128,
+        160
+      ],
+      "id": "0e5393cc-554d-4420-bb4e-ae92dad82045",
+      "name": "scrape web-pages"
+    },
+    {
+      "parameters": {
+        "content": "One item filtered out",
+        "height": 80,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "311637d1-b634-43a8-ba9f-61f3bda7c25e",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Top-3 items filtered out",
+        "height": 80,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "5c2b33fa-47ec-43de-8b36-d07540746909",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -112,
+        160
+      ],
+      "id": "01ca363a-2288-42d2-8aaf-d4b31f0feff4",
+      "name": "Loop Over each Item"
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmOllama",
+      "typeVersion": 1,
+      "position": [
+        448,
+        464
+      ],
+      "id": "9ffc75ee-3c64-405f-8981-760758d1cf84",
+      "name": "Ollama llama3.2",
+      "credentials": {
+        "ollamaApi": {
+          "id": "gtWoE8d1YTqAgxC1",
+          "name": "Ollama account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "Loop Over each Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter1": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit to top-3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over each Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If process is true": {
+      "main": [
+        [
+          {
+            "node": "Limit to top-3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "click to start": {
+      "main": [
+        [
+          {
+            "node": "JSON list of URLs and prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JSON list of URLs and prompts": {
+      "main": [
+        [
+          {
+            "node": "Split Out json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out json": {
+      "main": [
+        [
+          {
+            "node": "If process is true",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "scrape web-pages": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over each Item": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "scrape web-pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama llama3.2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2619a142-aa56-4acb-84fc-db74fc017b58",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cf29e2aa2886a334eec99eb8fae1cd91e60d1a3fc46bc75972faa283a4fb0032"
+  },
+  "id": "XmTKtq5YyoP6QNL0",
+  "tags": []
+}
