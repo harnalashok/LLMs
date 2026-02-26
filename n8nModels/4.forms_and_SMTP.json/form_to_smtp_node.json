@@ -1,0 +1,102 @@
+{
+  "name": "form to smtp node",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Email draft",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "emailAddress",
+              "fieldType": "email",
+              "placeholder": "xyz@gmail.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "subject",
+              "placeholder": "Write a subject here",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "body",
+              "placeholder": "This is email details",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -480,
+        -20
+      ],
+      "id": "2c9548b6-e92f-4967-b79d-2936ddf5ce5d",
+      "name": "On form submission",
+      "webhookId": "c6b5d811-a34e-4e04-bb64-a251e1ccdea1"
+    },
+    {
+      "parameters": {
+        "fromEmail": "=ccma@fsm.acin",
+        "toEmail": "={{ $json.emailAddress }}",
+        "subject": "={{ $json.subject }}",
+        "emailFormat": "text",
+        "text": "={{ $json.body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -100,
+        -20
+      ],
+      "id": "720b7689-fcb6-4ba8-a950-95b7b923a757",
+      "name": "Send Email",
+      "webhookId": "fbc9a594-9ed3-4719-b3f5-e913e8e822a0",
+      "credentials": {
+        "smtp": {
+          "id": "QREfTPUpDpZduVvC",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "emailAddress": "ashok@fsm.ac.in",
+          "subject": "Test email",
+          "body": "This is the test email",
+          "submittedAt": "2025-07-13T22:48:59.634-04:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1b548c54-a3a7-4534-945e-5b75d9639951",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "643c0f07c9b5486e1f186477774557d513d350a9281e13fdee220c7843b6a385"
+  },
+  "id": "uTFgdbPvx7l9VPgz",
+  "tags": []
+}
