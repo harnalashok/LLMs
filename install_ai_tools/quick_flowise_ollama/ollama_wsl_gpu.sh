@@ -627,6 +627,23 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    cd ~/
 	    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
 	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
+		mkdir -p /home/$USER/Documents/n8n
+		cd /home/$USER/Documents/n8n
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_with_smtp_III.json?raw=true
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_II.json?raw=true
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/2.twilio/quickstart-twilio.pdf?raw=true
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/2.twilio/checking%20website%20status%20using%20twilio.pdf?raw=true
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/2.twilio/check_website_status.json
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/4.forms_and_SMTP/form_to_smtp_node.json
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/6.looping/Simple%20RAG%20flow.json
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/6.looping/Rag%20Flow-I.json
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/7.postgresql_related/Postgres%20nodes.json
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/7.postgresql_related/Postgres%20with%20ai%20agent.json
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/Build%20Your%20Very%20First%20Workflow%20in%20n8n.pdf?raw=true
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/3.webScrapping/web_scrapping_and_summarization-I.json
+		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/3.webScrapping/web_scrapping.pdf?raw=true
+		echo "n8n_installed" > /home/$USER/n8n_installed.txt
+		cd /home/$USER
 		sleep 3
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
