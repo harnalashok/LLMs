@@ -634,6 +634,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	netstat -aunt | grep 19530
 	sleep 8
 	sudo systemctl reboot -i
+else
+    echo "All vector databases including postgresql installed"
 fi	
 
 #############
@@ -834,6 +836,8 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    bash stop_flowise.sh
    sleep 2
    sudo systemctl reboot -i
+else
+   echo "n8n and flowise installed"
 fi	 
 	
 
@@ -894,6 +898,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  chmod +x /home/$USER/stop/*.sh
 	  sleep 3
 	  sudo systemctl reboot -i
+else
+      echo "Ollama installed"
 fi
 
 
@@ -924,9 +930,9 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	mv 'Huggingface access token.pdf' Huggingface_access_token.pdf
 	cd /home/$USER/
 	echo "models installed" > /home/$USER/models_installed.txt
+else
+    echo "Ollama models downloaded"
 fi
-
-
 
 ##############
 # Create python virtual env
@@ -988,6 +994,8 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
 	sudo systemctl reboot -i
+else
+   echo "python virtual env created"
 fi   
 
 ###########################
@@ -1026,6 +1034,8 @@ if [ ! -d "$DIRECTORY" ]; then
 		chmod +x /home/$USER/stop/*.sh
 		sudo systemctl reboot -i
 	fi
+else
+    echo "Anaconda installed"
 fi	
 
 
@@ -1121,6 +1131,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sudo systemctl reboot -i
+else
+    echo "langchain and langgraph virtual env created"
 fi	
 
 ##########################
@@ -1136,11 +1148,6 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"  
-	echo "Shall I install Visual Studio Coder (not installable on WSL)? [Y,n]"    
-	echo "It is NOT installable on WSL Windows. For WSL environment answer no"
-	read input
-	echo " "
-	echo " "
 	# Activate python virtual environment
 	source /home/$USER/venv/bin/activate
 	# 1.8 Install visual studio code
@@ -1169,7 +1176,64 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     chmod +x /home/$USER/stop/*.sh
 	sleep 5
 	sudo systemctl reboot -i
+else
+   echo "VScode installed"
 fi
+
+
+###########################
+# Install Google Antigravity
+#   Anaconda installation is a must
+# https://antigravity.google/download/linux
+###########################
+
+echo "  "
+echo "  "
+cd /home/$USER
+# Install only if anaconda is installed:
+if [  -f /home/$USER/anaconda_installed.txt ]; then
+	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
+		echo "Shall I latest Google Antigravity? [Y,n]"    
+		read input
+		input=${input:-Y}
+		if [[ $input == "Y" || $input == "y" ]]; then
+			#  create a directory for keyrings
+			sudo mkdir -p /etc/apt/keyrings
+			# Download and add Google's signing key
+			sudo mkdir -p /etc/apt/keyrings
+			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | \
+  			sudo gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
+			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | \
+  			sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
+			# Update your package cach
+			sudo apt update -y
+			# Install Google Antigravity
+			sudo apt install antigravity
+			sudo apt autoremove -y
+			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
+			echo " "
+			echo "  "
+			echo "==========="
+			echo "Google antigravity is installed"
+			echo "It will now be available in Ubuntu Start/Application Menu"
+			echo "You can also launch it by command: antigravity"
+			echo "============"
+			echo " "
+			echo '#!/bin/bash'                                         | tee    /home/$USER/start_antigravity.sh
+	 		echo " "                                                   | tee -a /home/$USER/start_antigravity.sh
+			echo "cd ~/"                                               | tee -a /home/$USER/start_antigravity.sh
+			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
+			chmod +x *.sh
+			sleep 5
+			sudo systemctl reboot -i
+		else	
+			echo "Google antigravity not installed"
+		fi	
+	fi
+fi
+
+
+
 
 ###################
 # llama.cpp install--II
@@ -1195,6 +1259,8 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
 	  sudo systemctl reboot -i
+else
+   echo "LLamacpp installed"
 fi	
 
 #####################
@@ -1259,11 +1325,9 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 	else
 		echo "langflow NOT installed"
 	fi
+else
+    echo "langflow installed"
 fi	
-
-
-
-
 
 
 ##########################
@@ -1307,59 +1371,10 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 	else
 	    echo "OpenNotebook not installed"
 	fi
+else
+    echo "opennotebook installed"
 fi
 
-
-###########################
-# Install Google Antigravity
-#   Anaconda installation is a must
-# https://antigravity.google/download/linux
-###########################
-
-echo "  "
-echo "  "
-cd /home/$USER
-# Install only if anaconda is installed:
-if [  -f /home/$USER/anaconda_installed.txt ]; then
-	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
-		echo "Shall I latest Google Antigravity? [Y,n]"    
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-			#  create a directory for keyrings
-			sudo mkdir -p /etc/apt/keyrings
-			# Download and add Google's signing key
-			sudo mkdir -p /etc/apt/keyrings
-			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | \
-  			sudo gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
-			echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | \
-  			sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
-			# Update your package cach
-			sudo apt update -y
-			# Install Google Antigravity
-			sudo apt install antigravity
-			sudo apt autoremove -y
-			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
-			echo " "
-			echo "  "
-			echo "==========="
-			echo "Google antigravity is installed"
-			echo "It will now be available in Ubuntu Start/Application Menu"
-			echo "You can also launch it by command: antigravity"
-			echo "============"
-			echo " "
-			echo '#!/bin/bash'                                         | tee    /home/$USER/start_antigravity.sh
-	 		echo " "                                                   | tee -a /home/$USER/start_antigravity.sh
-			echo "cd ~/"                                               | tee -a /home/$USER/start_antigravity.sh
-			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
-			chmod +x *.sh
-			sleep 5
-			sudo systemctl reboot -i
-		else	
-			echo "Google antigravity not installed"
-		fi	
-	fi
-fi
 
 
  
