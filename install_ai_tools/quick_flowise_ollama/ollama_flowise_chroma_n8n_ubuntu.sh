@@ -1193,11 +1193,7 @@ cd /home/$USER
 # Install only if anaconda is installed:
 if [  -f /home/$USER/anaconda_installed.txt ]; then
 	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
-		echo "Shall I latest Google Antigravity? [Y,n]"    
-		read input
-		input=${input:-Y}
-		if [[ $input == "Y" || $input == "y" ]]; then
-			#  create a directory for keyrings
+		   #  create a directory for keyrings
 			sudo mkdir -p /etc/apt/keyrings
 			# Download and add Google's signing key
 			sudo mkdir -p /etc/apt/keyrings
@@ -1226,9 +1222,6 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			chmod +x *.sh
 			sleep 5
 			sudo systemctl reboot -i
-		else	
-			echo "Google antigravity not installed"
-		fi	
 	fi
 fi
 
