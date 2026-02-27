@@ -1,5 +1,3 @@
-Prompt:
-
 You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and the other a RAG performance evaluation sub-system. The code for the two sub-systems are to be written in python using preferably, LLamaIndex libraries else langchain libraries. The overall integration plan and the design of two sub-systems are broadly as below:
 
 Sub-system 1> Design RAG sub-system having the following features:
