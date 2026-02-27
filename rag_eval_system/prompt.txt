@@ -2,9 +2,9 @@ You have to design and write code for an integrated system that comprises two su
 
 Sub-system 1> Design RAG sub-system having the following features:
 
-	a. It uses large language models (LLMs) and embedding models available in Ollama environment. LLM is: llama3.2 and embedding model is: bge-m3. Ollama is hosted locally through docker.
-	b. It uses locally installed PostgreSQL database, ashok, as vector store. PostgreSQL user is 'ashok' with password 'ashok'. User 'ashok' owns the database 'harnal'. 
-	c. A number of markdown files are placed in the folder, 'dataFolder'. These files are to be read and vectorized using an ollama embedding model. Vectors are to be saved in the database of PostgreSQL named as 'harnal'. .
+	a. It uses large language models (LLMs) and embedding models available in Ollama environment. LLM is: llama3.2 and embedding model is: nomic-embed-text. Ollama is hosted locally through docker.
+	b. It uses locally installed PostgreSQL database, ashok, as vector store. PostgreSQL user is 'ashok' with password 'ashok'. User 'ashok' owns the database 'ashok'. 
+	c. A number of markdown files are placed in the folder, 'dataFolder'. These files are to be read and vectorized using an ollama embedding model. Vectors are to be saved in the database of PostgreSQL named as 'ashok'. .
 	d. Give a user-query, the RAG sub-system will give an answer based solely on the vectors stored in the PostgreSQL vector store and will not give any information from its own pre-trained knowledge-base.
 	
 Sub-system 2> Design an Evaluation sub-system for the above RAG sub-system that works in the following manner:
