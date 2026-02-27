@@ -148,7 +148,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "=>   ./ollama_flowise_chroma_n8n_ubuntu.sh"
     echo "=========="
     sleep 15
-    reboot
+    sudo systemctl reboot -i
 fi
 
 ##################
@@ -187,7 +187,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	#nvidia-settings
 	sleep 8
 	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-	reboot
+	sudo systemctl reboot -i
 fi
 
 ##################
@@ -223,7 +223,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
 	chmod +x *.sh
 	cd /home/$USER
-    reboot
+    sudo systemctl reboot -i
 else
    echo "Docker is installed"
 fi  
@@ -283,7 +283,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
     echo "Machine will be rebooted "
-    reboot
+    sudo systemctl reboot -i
 else
     echo "Docker installation process completed"
 fi    
