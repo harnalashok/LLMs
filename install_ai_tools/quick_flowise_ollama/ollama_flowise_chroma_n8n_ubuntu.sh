@@ -577,11 +577,13 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sleep 5
 	sudo -u postgres psql -c 'create user harnal ;'
 	sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
+	sudo -u postgres psql -c 'grant all privileges on database harnal to harnal;'
 	sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
 	echo "===="
 	sudo -u postgres psql -c 'create user ashok ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
+	sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
 	sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 	
