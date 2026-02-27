@@ -895,8 +895,10 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker start ollama 
 	echo "Pulling bge-m3"
 	docker exec -it ollama ollama pull bge-m3
+	docker exec -it ollama ollama pull nomic-embed-text
 	echo "Pulling llama3.2"
 	docker exec -it ollama ollama pull llama3.2:latest
+	docker exec -it ollama ollama pull gemma3:270m
 	echo " "
 	echo " "
 	#ollama list
