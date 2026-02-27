@@ -1,0 +1,185 @@
+
+######################################################################
+  EVALUATION RUN STARTED: 2026-02-27 12:14:45
+  Source CSV : /home/ashok/Documents/rag_eval_system/data.csv
+  Total rows : 8
+######################################################################
+
+======================================================================
+EVALUATION — Row 1
+Timestamp : 2026-02-27 12:15:55
+======================================================================
+
+QUESTION:
+When was Sputnik 1 launched and by which country?
+
+RAG RESPONSE:
+Sputnik 1 was launched on October 4, 1957, by the Soviet Union.
+
+IDEAL ANSWER:
+Sputnik 1 was launched on October 4, 1957 by the Soviet Union.
+
+JUDGE EVALUATION:
+CRITERIA: 1
+ANALYSIS: The RAG response provides the exact date (October 4, 1957) and country (Soviet Union) mentioned in the Ideal Answer, with no additional or omitted details.
+JUSTIFICATION: The RAG response fully matches the Ideal Answer in both content and completeness, containing no extra information and including all necessary details.
+======================================================================
+
+======================================================================
+EVALUATION — Row 2
+Timestamp : 2026-02-27 12:16:56
+======================================================================
+
+QUESTION:
+Who was the first human to travel to outer space and what was the name of his spacecraft?
+
+RAG RESPONSE:
+Yuri Alekseyevich Gagarin was the first human to journey into outer space. His spacecraft was called Vostok 1.
+
+IDEAL ANSWER:
+Yuri Gagarin was the first human to travel to outer space. His spacecraft was called Vostok 1 and his flight on April 12, 1961 lasted 108 minutes.
+
+JUDGE EVALUATION:
+CRITERIA: 2
+ANALYSIS: The RAG response correctly identifies Yuri Gagarin and his spacecraft Vostok 1, but omits the additional details about the date (April 12, 1961) and flight duration (108 minutes) present in the Ideal Answer. There is no extra or incorrect information in the RAG response.
+JUSTIFICATION: The RAG response is accurate and complete regarding the core information (who and what) but is incomplete as it lacks supplementary details from the Ideal Answer. It does not contain any extra or incorrect information, fitting Criteria 2.
+======================================================================
+
+======================================================================
+EVALUATION — Row 3
+Timestamp : 2026-02-27 12:17:59
+======================================================================
+
+QUESTION:
+Who were the astronauts on Apollo 11 and what were their roles?
+
+RAG RESPONSE:
+Neil Armstrong was the first person to walk on the Moon, and Buzz Aldrin joined him on the lunar surface. Michael Collins orbited above in the command module.
+
+IDEAL ANSWER:
+Neil Armstrong and Buzz Aldrin walked on the Moon on July 20, 1969, while Michael Collins orbited above in the command module.
+
+JUDGE EVALUATION:
+CRITERIA: 2
+ANALYSIS: The RAG response correctly identifies all three Apollo 11 astronauts (Neil Armstrong, Buzz Aldrin, Michael Collins) and their roles (Armstrong and Aldrin on the Moon, Collins in the command module). However, it omits the specific date (July 20, 1969) mentioned in the Ideal Answer. The response does not contain any extra or incorrect information.
+JUSTIFICATION: The RAG response is incomplete because it misses the date provided in the Ideal Answer, but it accurately covers all other information (astronauts and their roles) without adding any incorrect or extraneous details.
+======================================================================
+
+======================================================================
+EVALUATION — Row 4
+Timestamp : 2026-02-27 12:18:57
+======================================================================
+
+QUESTION:
+What is special about the Ingenuity helicopter on the Perseverance rover?
+
+RAG RESPONSE:
+The Ingenuity helicopter became the first aircraft to achieve powered, controlled flight on another planet.
+
+IDEAL ANSWER:
+Ingenuity became the first aircraft to achieve powered, controlled flight on another planet (Mars).
+
+JUDGE EVALUATION:
+CRITERIA: 2
+ANALYSIS: The RAG response correctly identifies the historic achievement of Ingenuity's flight but omits the specific planet (Mars) mentioned in the Ideal Answer. The Ideal Answer includes the location (Mars) while the RAG response does not.
+JUSTIFICATION: The RAG response is incomplete as it misses the crucial detail about the flight occurring on Mars, which is present in the Ideal Answer. However, it does not contain any extra or incorrect information, only omitting the location.
+======================================================================
+
+======================================================================
+EVALUATION — Row 5
+Timestamp : 2026-02-27 12:19:57
+======================================================================
+
+QUESTION:
+What are the three key types of machine learning?
+
+RAG RESPONSE:
+According to the provided context in the file_path: /home/ashok/Documents/rag_eval_system/dataFolder/ai_fundamentals.md, the three key types of Machine Learning (ML) are:
+
+1. **Supervised Learning**: The model is trained on labeled data.
+2. **Unsupervised Learning**: The model finds patterns in unlabeled data.
+3. **Reinforcement Learning**: The model learns by interacting with an environment and receiving rewards or penalties.
+
+IDEAL ANSWER:
+The three key types of machine learning are: Supervised Learning (trained on labeled data), Unsupervised Learning (finds patterns in unlabeled data), and Reinforcement Learning (learns by interacting with an environment and receiving rewards or penalties).
+
+JUDGE EVALUATION:
+CRITERIA: 3
+ANALYSIS: The RAG response lists the three key types of machine learning (Supervised, Unsupervised, and Reinforcement Learning) with definitions matching the Ideal Answer. The Ideal Answer does not include the reference to the file_path.
+JUSTIFICATION: The RAG response includes all the information from the Ideal Answer (the three types and their descriptions) and adds extra information (the reference to the file_path) not present in the Ideal Answer.
+======================================================================
+
+======================================================================
+EVALUATION — Row 6
+Timestamp : 2026-02-27 12:20:57
+======================================================================
+
+QUESTION:
+Give three examples of Large Language Models and who created them.
+
+RAG RESPONSE:
+Three examples of Large Language Models are:
+
+1. GPT-4 by OpenAI
+2. Gemini by Google
+3. Llama by Meta
+
+IDEAL ANSWER:
+Three examples of Large Language Models are: GPT-4 by OpenAI, Gemini by Google, and Claude by Anthropic.
+
+JUDGE EVALUATION:
+CRITERIA: 4
+ANALYSIS: The RAG response provides three examples but differs from the ideal answer by missing Claude by Anthropic and including Llama by Meta instead. It is missing Claude and has an extra model.
+JUSTIFICATION: The RAG response is deficient (missing Claude) and contains extra information (Llama) not present in the ideal answer, fitting Criteria 4.
+======================================================================
+
+======================================================================
+EVALUATION — Row 7
+Timestamp : 2026-02-27 12:21:56
+======================================================================
+
+QUESTION:
+What technologies are powered by deep learning?
+
+RAG RESPONSE:
+Voice assistants (Siri, Alexa), self-driving car perception systems, face recognition systems, large language models (ChatGPT, Gemini).
+
+IDEAL ANSWER:
+Deep learning powers voice assistants like Siri and Alexa, self-driving car perception systems, face recognition systems, and large language models like ChatGPT and Gemini.
+
+JUDGE EVALUATION:
+CRITERIA: 1
+ANALYSIS: The RAG response lists the same four examples of technologies powered by deep learning (voice assistants, self-driving car systems, face recognition, and large language models) as the Ideal Answer, though in a different order. There are no extra or missing elements.
+JUSTIFICATION: The RAG response contains exactly the same complete and accurate information as the Ideal Answer, with no additions or omissions, satisfying the conditions for Criteria 1.
+======================================================================
+
+======================================================================
+EVALUATION — Row 8
+Timestamp : 2026-02-27 12:23:08
+======================================================================
+
+QUESTION:
+What are the main ethical concerns raised by AI development?
+
+RAG RESPONSE:
+According to the provided context, the main ethical concerns raised by AI development include:
+
+1. Bias: AI systems can perpetuate or amplify biases present in training data.
+2. Privacy: Large-scale data collection for AI training raises privacy concerns.
+3. Job Displacement: Automation powered by AI may displace certain categories of jobs.
+4. Transparency: Many AI systems, especially deep learning models, are "black boxes" whose decision-making is difficult to interpret.
+5. Safety: Ensuring AI systems behave safely and as intended is a critical research area.
+
+IDEAL ANSWER:
+The main ethical concerns in AI development are: bias (AI can amplify biases in training data), privacy (large-scale data collection), job displacement (automation may displace jobs), transparency (AI systems are often black boxes), and safety (ensuring AI behaves as intended).
+
+JUDGE EVALUATION:
+CRITERIA: 1
+ANALYSIS: The RAG response lists five main ethical concerns (bias, privacy, job displacement, transparency, safety) with explanations that align with the Ideal Answer. Each point in the RAG response corresponds directly to a point in the Ideal Answer, and the Ideal Answer does not include any additional points not covered by the RAG response.
+JUSTIFICATION: The RAG response includes all the information present in the Ideal Answer without any missing or extra details, making it complete and accurate.
+======================================================================
+
+######################################################################
+  EVALUATION RUN COMPLETED: 2026-02-27 12:23:08
+  Total rows processed: 8
+######################################################################

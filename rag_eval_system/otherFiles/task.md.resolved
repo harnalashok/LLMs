@@ -1,0 +1,39 @@
+# RAG + Evaluation System Tasks
+
+## Planning
+- [x] Explore existing codebase & LlamaIndex examples
+- [x] Write implementation plan (implementation_plan.md)
+- [x] Get user approval
+
+## Project Structure Setup
+- [x] Create project directory `/home/ashok/Documents/rag_eval_system/`
+- [x] Create `dataFolder/` for markdown files
+- [x] Create sample markdown files for testing
+- [x] Create `data.csv` with question-answer pairs
+
+## Sub-system 1: RAG System (`rag_system.py`)
+- [x] Configure Ollama LLM (llama3.2) and embed model (bge-m3)
+- [x] Set up PostgreSQL vector store (pgvector) connection to 'harnal' DB
+- [x] Implement markdown file ingestion from `dataFolder/`
+- [x] Implement vector embedding and storage in PostgreSQL
+- [x] Implement query engine that restricts answers to vector store context only
+- [x] Add a CLI interface for user queries
+
+## Sub-system 2: Evaluation System (`evaluation_system.py`)
+- [x] Read `data.csv` with columns: text, question, idealAnswer
+- [x] Feed questions row-by-row to RAG sub-system
+- [x] Capture RAG responses
+- [x] Feed RAG response + idealAnswer to Judge LLM (deepseek-r1:latest)
+- [x] Judge LLM evaluates against 4 criteria
+- [x] Write/append evaluation results to `evaluation_results.txt`
+- [x] Repeat for all rows
+
+## Configuration / Utilities (`config.py`)
+- [x] Central config for DB connection, Ollama URLs, model names, paths
+
+## Verification
+- [ ] Test PostgreSQL connection
+- [ ] Test Ollama connectivity (llama3.2, bge-m3, deepseek-r1)
+- [ ] Test markdown ingestion
+- [ ] Test end-to-end RAG query
+- [ ] Test evaluation pipeline with sample CSV

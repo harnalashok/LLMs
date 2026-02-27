@@ -1,0 +1,126 @@
+# RAG + Evaluation System — Walkthrough
+
+## What Was Built
+
+An integrated two sub-system Python project under `/home/ashok/Documents/rag_eval_system/`.
+
+---
+
+## Files Created
+
+| File | Purpose |
+|------|---------|
+| [config.py](file:///home/ashok/Documents/rag_eval_system/config.py) | Central config: Ollama URL, models, PostgreSQL settings, paths |
+| [rag_system.py](file:///home/ashok/Documents/rag_eval_system/rag_system.py) | Sub-system 1: RAG ingestion & query engine |
+| [evaluation_system.py](file:///home/ashok/Documents/rag_eval_system/evaluation_system.py) | Sub-system 2: Evaluation pipeline with judge LLM |
+| [dataFolder/space_exploration.md](file:///home/ashok/Documents/rag_eval_system/dataFolder/space_exploration.md) | Sample document 1 |
+| [dataFolder/ai_fundamentals.md](file:///home/ashok/Documents/rag_eval_system/dataFolder/ai_fundamentals.md) | Sample document 2 |
+| [data.csv](file:///home/ashok/Documents/rag_eval_system/data.csv) | 8 sample Q&A pairs for evaluation testing |
+| [README.md](file:///home/ashok/Documents/rag_eval_system/README.md) | Full usage guide |
+
+---
+
+## How to Use
+
+### Step 1 — Ingest your markdown documents
+
+```bash
+cd /home/ashok/Documents/rag_eval_system
+
+# First-time ingest (or re-ingest with --reset to clear old vectors)
+python rag_system.py --ingest
+```
+
+This:
+- Reads all `.md` files from `dataFolder/`
+- Embeds them using `bge-m3` (Ollama at `192.240.1.27:11434`)
+- Stores vectors in the `harnal` PostgreSQL database (`rag_vectors` table)
+
+### Step 2 — Query the RAG system
+
+```bash
+# Interactive mode
+python rag_system.py
+
+# Single query
+python rag_system.py --query "Who was the first human in space?"
+```
+
+The system answers **only from the stored vector context** — never from the LLM's pre-trained knowledge.
+
+### Step 3 — Run the evaluation pipeline
+
+```bash
+python evaluation_system.py
+```
+
+This:
+1. Reads each row of `data.csv` (`text`, `question`, `idealAnswer`)
+2. Feeds the `question` to the RAG sub-system
+3. Sends the RAG response + `idealAnswer` to `deepseek-r1:latest` for judgment
+4. Appends results (criteria + analysis) to `evaluation_results.txt`
+
+---
+
+## Evaluation Output Format
+
+Each entry in `evaluation_results.txt` looks like:
+
+```
+======================================================================
+EVALUATION — Row 1
+Timestamp : 2026-02-26 21:00:00
+======================================================================
+
+QUESTION:
+When was Sputnik 1 launched and by which country?
+
+RAG RESPONSE:
+Sputnik 1 was launched on October 4, 1957 by the Soviet Union.
+
+IDEAL ANSWER:
+Sputnik 1 was launched on October 4, 1957 by the Soviet Union.
+
+JUDGE EVALUATION:
+CRITERIA: 1
+ANALYSIS: Both answers contain the same factual content...
+JUSTIFICATION: The RAG response exactly matches the ideal answer...
+```
+
+---
+
+## Architecture Overview
+
+```mermaid
+flowchart TD
+    A["Markdown Files (dataFolder/)"] -->|SimpleDirectoryReader| B[LlamaIndex Documents]
+    B -->|"OllamaEmbedding bge-m3"| C[bge-m3 Vectors]
+    C -->|PGVectorStore| D[("PostgreSQL harnal DB rag_vectors table")]
+
+    E[User Query] --> F[VectorStoreIndex Query Engine]
+    D --> F
+    F -->|"Top-K retrieval + strict RAG prompt"| G["Ollama LLM llama3.2"]
+    G --> H[RAG Response]
+
+    I["data.csv (question + idealAnswer)"] --> J[evaluation_system.py]
+    H --> J
+    J -->|Judge prompt| K["Ollama LLM deepseek-r1:latest"]
+    K -->|"Criteria 1-4 + analysis"| L[evaluation_results.txt]
+```
+
+---
+
+## Validation
+
+- ✅ All Python syntax verified: `config.py`, `rag_system.py`, `evaluation_system.py`
+- ✅ All packages installed: `llama-index`, `llama-index-llms-ollama`, `llama-index-embeddings-ollama`, `llama-index-vector-stores-postgres`, `psycopg2-binary`, `pandas`
+- ✅ Project directory structure confirmed
+- ✅ Sample data files created and verified
+
+---
+
+## Notes
+
+- **Add your own markdown files**: drop `.md` files into `dataFolder/` and re-run `python rag_system.py --ingest --reset`
+- **Add your own evaluation data**: add rows to `data.csv` with columns `text`, `question`, `idealAnswer`
+- **Config changes**: edit `config.py` to change models, DB settings, or timeouts

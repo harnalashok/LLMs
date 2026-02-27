@@ -1,0 +1,30 @@
+Prompt:
+
+You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and the other a RAG performance evaluation sub-system. The code for the two sub-systems are to be written in python using preferably, LLamaIndex libraries else langchain libraries. The overall integration plan and the design of two sub-systems are broadly as below:
+
+Sub-system 1> Design RAG sub-system having the following features:
+
+	a. It uses large language models (LLMs) and embedding models available in Ollama environment. LLM is: llama3.2 and embedding model is: bge-m3. Ollama is hosted locally through docker.
+	b. It uses locally installed PostgreSQL database, ashok, as vector store. PostgreSQL user is 'ashok' with password 'ashok'. User 'ashok' owns the database 'harnal'. 
+	c. A number of markdown files are placed in the folder, 'dataFolder'. These files are to be read and vectorized using an ollama embedding model. Vectors are to be saved in the database of PostgreSQL named as 'harnal'. .
+	d. Give a user-query, the RAG sub-system will give an answer based solely on the vectors stored in the PostgreSQL vector store and will not give any information from its own pre-trained knowledge-base.
+	
+Sub-system 2> Design an Evaluation sub-system for the above RAG sub-system that works in the following manner:
+
+	 i). A csv file, named as 'data' file contains question-answer pairs. The csv file has three columns: text,question,idealAnswer
+	ii). The 'question' column contains a series of questions, one in each row, to be fed to the RAG sub-system, one-by-one. The response of the RAG sub-system is noted. This response is to be compared to that under the column 'idealAnswer' of 'data' file. You may proceed in the following step-wise manner:
+	iii). One row of the  'data' file is read. Start with the top-row.
+		iii-a). The 'question' is read and fed to RAG sub-system as user query. The response of RAG sub-system to this question is then noted.
+		iii-b). This response of RAG sub-system is fed to a judge LLM (in local ollama environment). The Judge LLM is: deepseek-r1:latest. Judge LLM receives two inputs: one the output of RAG sub-system and the other the value under the 'idealAnswer' column in that row. It will compare both the RAG response and the 'idealAnswer' and output the results of this comparison. The evaluated results are to be written to a file, 'evaluation_results'. The Judge LLM makes comparisions as per the following four criteria:
+			criteria-1: Both the RAG response and idealAnswer hold the same information.
+			criteria-2: RAG response misses certain information present in the idealAnswer.
+			criteria-3: RAG response contains not only the information present in the idealAnswer but also contains certain extra information NOT present in the idealAnswer
+			criteria-4: RAG response is not only deficient as compared to the idealAnswer but also contains certain extra information NOT present in the idealAnswer 
+		
+		iii-c). After the Judge LLM has finished comparisons, next row of 'dataFile' is read and steps iii-a) and iii-b) are repeated till all rows of 'data' file are read. Each time' evaluation results are appended to file: 'evaluation_results'.
+		
+	
+	
+	  	
+
+
