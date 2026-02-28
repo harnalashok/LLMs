@@ -854,6 +854,10 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	        # Reload default profile
 	        source /home/$USER/.bashrc
 	        conda update conda -y
+			# Accept all conda channels
+			conda tos accept
+			# Install postgresql client
+	 		conda install -c conda-forge psycopg2  -y
 			# Download script to create conda venv
 			wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
 			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
