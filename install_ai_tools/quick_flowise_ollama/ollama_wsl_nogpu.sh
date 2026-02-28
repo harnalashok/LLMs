@@ -291,6 +291,8 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         pip install ipython
         pip install notebook
         pip install streamlit
+		# To connect to postgresql
+		pip install psycopg2
         echo "venv_installed.txt" > /home/$USER/venv_installed.txt
         # Required for spyder:
 		echo " "
