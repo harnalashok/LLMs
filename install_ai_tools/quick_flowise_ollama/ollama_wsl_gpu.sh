@@ -316,6 +316,8 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 		echo "Install pdfminer to extract text from pdf"
 		# Ref: https://github.com/pdfminer/pdfminer.six
 		pip install pdfminer.six
+		# To connect to postgresql
+	    pip install psycopg2
 		echo "####"
 		echo "Install pymupdf4llm to extract text/json"
 		# Ref: https://github.com/pymupdf/pymupdf4llm
@@ -961,6 +963,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		pip install ipython
 		pip install notebook
 		pip install streamlit
+		# To connect to postgresql
+	    pip install psycopg2
 		# Required for spyder:
 		sudo apt install pyqt5-dev-tools -y
 		# Huggingface and llama.cpp related
