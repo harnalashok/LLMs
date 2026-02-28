@@ -1,23 +1,29 @@
 #!/bin/bash
 # echo "https://www.postgresql.org/docs/current/ddl-schemas.html"
 echo "  "
-echo "========="
-echo "User 'ashok' and database 'ashok' may already exist"
+echo "   "
+echo "====**====="
+echo "Users 'ashok' and  'harnal' and databases 'ashok' and 'harnal' may already exist"
 echo "User 'ashok' has full authority over database 'ashok'"
-echo "User 'ashok' has password: ashok"
+echo "User 'harnal' has full authority over database 'harnal'"
+echo "User 'ashok' has password: ashok "
+echo "User 'harnal' has password: harnal "
 echo "Check with \du  and  \l"
-echo "========="
-echo "  "
+echo "OR, check as:         "
+echo "python -c \"import psycopg2; conn = psycopg2.connect('dbname=ashok user=ashok password=ashok host=localhost'); print('DB is OK'); conn.close()\" "  
+echo "python -c \"import psycopg2; conn = psycopg2.connect('dbname=harnal user=harnal password=harnal host=localhost'); print('DB is OK'); conn.close()\" "  
+echo "===**======"
 echo " "
-sleep 5
+sleep 7
 clear
-echo "============"
+echo "  "
+echo "=====Create new users======="
 echo "Follow 3-steps sequentially:"
 echo '       In psql shell: '
 echo '            First, execute AAA'
 echo '            Then, BBB'
 echo '            Lstly CCC'
-echo "============"
+echo "===================="
 echo " "
 sleep 4
 echo 'AAA. Change myuser and mypass (password be within single inverted commas):'
