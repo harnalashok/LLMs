@@ -596,7 +596,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
 	echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
 	sudo systemctl restart postgresql
-
+    
 	# Download RAG data files
 	mkdir -p /home/$USER/Documents/data
 	cd /home/$USER/Documents/data
@@ -968,6 +968,8 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	echo "Install pdfminer to extract text from pdf"
 	# Ref: https://github.com/pdfminer/pdfminer.six
 	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
 	echo "####"
 	echo "Install pymupdf4llm to extract text/json"
 	# Ref: https://github.com/pymupdf/pymupdf4llm
@@ -1066,6 +1068,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	sudo apt install pyqt5-dev-tools -y
 	# Huggingface and llama.cpp related
 	pip install huggingface_hub
+	# To connect to postgresql
+	pip install psycopg2
 	# Create script to activate 'langchain' env
 	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
 	echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
