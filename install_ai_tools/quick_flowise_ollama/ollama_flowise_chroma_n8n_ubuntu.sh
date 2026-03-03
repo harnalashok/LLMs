@@ -717,6 +717,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/3.webScrapping/web_scrapping.pdf?raw=true
 	echo "n8n_installed" > /home/$USER/n8n_installed.txt
 	cd /home/$USER
+	
 	#####################3
 	# flowise docker
 	# Ref: https://docs.flowiseai.com/getting-started#docker-compose
@@ -786,18 +787,20 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
    sleep 4
    cd ~/
+   rm -rf /home/$USER/Flowise
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
-   #sudo docker build --no-cache -t flowise .
+   sudo docker build --no-cache -t flowise .
+   
    # The '--network host' option removes network isolation between the container and
    #   the Docker host machine, meaning the container directly shares the host's networking stack
    # The container operates as if it were a process running directly on the host machine,
    #   using the host's IP address and network interfaces.  
-   # sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
    #      docker run -d --name flowise -p 3000:3000 --network host flowise
-   cd /home/$USER/Flowise/docker
-   cp .env.example .env
-   docker compose up -d
+   #cd /home/$USER/Flowise/docker
+   #cp .env.example .env
+   #docker compose up -d
    cd /home/$USER/
    echo "In future to start/stop containers, proceed, as:"
    echo "            cd /home/$USER/Flowise"                  
