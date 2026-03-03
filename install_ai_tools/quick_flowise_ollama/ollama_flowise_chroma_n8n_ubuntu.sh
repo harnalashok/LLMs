@@ -745,22 +745,22 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
    echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
    echo " "                                                   >> /home/$USER/start_flowise.sh
-   echo "cd /home/$USER/Flowise"                              >> /home/$USER/start_flowise.sh
-   echo "docker start docker-flowise-1"                       >> /home/$USER/start_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/start_flowise.sh
+   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
    echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
    # Reset flowise password
    echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
    echo " "                                                   >> /home/$USER/reset_flowise.sh
    echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
-   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
-   echo "docker stop docker-flowise-1"                        >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+   echo "docker stop flowise"                                 >> /home/$USER/reset_flowise.sh
    echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
    echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
    echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
    echo " "                                                   >> /home/$USER/reset_flowise.sh
-   echo "cd /home/$USER/Flowise"                              >> /home/$USER/reset_flowise.sh
-   echo "docker start docker-flowise-1"                       >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+   echo "docker start flowise"                                >> /home/$USER/reset_flowise.sh
    echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
    echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
@@ -782,12 +782,15 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
    echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
    echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
-   echo "cd /home/$USER/Flowise"                             >> /home/$USER/stop_docker_flowise.sh
-   echo "docker stop docker-flowise-1"                                >> /home/$USER/stop_docker_flowise.sh
+   echo "cd /home/$USER"                                     >> /home/$USER/stop_docker_flowise.sh
+   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
    echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
    sleep 4
    cd ~/
-   rm -rf /home/$USER/Flowise
+   FDIR="/home/$USER/Flowise"
+   if [ -d "$FDIR" ]; then
+       rm -rf /home/$USER/Flowise
+   fi	   
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
    sudo docker build --no-cache -t flowise .
