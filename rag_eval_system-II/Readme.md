@@ -59,7 +59,10 @@
 	python main.py --evaluate        # runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 
 # 6. One way to download this github folder 'rag_eval_system-II' from command line is:
-	
+
+	    source /home/ashok/langchain/bin/activate
+	    cd ~/
+	    rm -rf /home/$USER/ragsystem
 		mkdir /home/$USER/ragsystem
 		cd /home/ashok/ragsystem
 		git init
@@ -69,8 +72,10 @@
 		git pull origin main
 		find . -maxdepth 1 ! -name "rag_eval_system-II" ! -name "." ! -name ".." -delete
 	    ls -la
+	    cd rag_eval_system-II
+	       (and now populate your dataFolder and data.csv 
+	        and then execute python commands as in (5) above)
 	
-
 
 ################
 </pre>
