@@ -58,5 +58,19 @@
 	python main.py --query "your question here"
 	python main.py --evaluate        # runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 
+# 6. One way to download this github folder 'rag_eval_system-II' from command line is:
+	
+		mkdir /home/$USER/ragsystem
+		cd /home/ashok/ragsystem
+		git init
+		git remote add origin https://github.com/harnalashok/LLMs.git
+		git sparse-checkout init --cone
+		git sparse-checkout set rag_eval_system-II
+		git pull origin main
+		find . -maxdepth 1 ! -name "rag_eval_system-II" ! -name "." ! -name ".." -delete
+	    ls -la
+	
+
+
 ################
 </pre>
