@@ -52,7 +52,7 @@ source /home/ashok/langchain/bin/activate
 cd <yourFolder>
 
 source /home/ashok/langchain/bin/activate
-cd /home/ashok/Documents/data/rag_system
+cd <your Folder>
 
 python main.py --ingest          # (already done — skip unless you add new .md files)
 python main.py --query "your question here"
