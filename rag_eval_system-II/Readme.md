@@ -45,6 +45,11 @@ Antigravity AI used: Claude Sonnet 4.6 (Thinking)
 
 
 # 3. How to run the system
+#    Place all the files in ANY folder, not necessarily in ~/Documents/data/rag_system.
+#    And then begin executing python commands as below.    
+
+source /home/ashok/langchain/bin/activate
+cd <yourFolder>
 
 source /home/ashok/langchain/bin/activate
 cd /home/ashok/Documents/data/rag_system
