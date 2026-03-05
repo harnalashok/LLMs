@@ -58,10 +58,11 @@
 	python main.py --query "your question here"
 	python main.py --evaluate        # runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 
-# 6. One way to download this github folder 'rag_eval_system-II' from command line is:
+# 6. One way to download this github folder 'rag_eval_system-II' from command line is as below.
+	 Copy and paste all at once:
 
-	    source /home/ashok/langchain/bin/activate
-	    cd ~/
+		cd ~/    
+		source /home/ashok/langchain/bin/activate
 	    rm -rf /home/$USER/ragsystem
 		mkdir /home/$USER/ragsystem
 		cd /home/ashok/ragsystem
