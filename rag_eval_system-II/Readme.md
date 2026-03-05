@@ -49,10 +49,8 @@ Antigravity AI used: Claude Sonnet 4.6 (Thinking)
 #    And then begin executing python commands as below.    
 
 source /home/ashok/langchain/bin/activate
-cd <yourFolder>
+cd yourFolder
 
-source /home/ashok/langchain/bin/activate
-cd <your Folder>
 
 python main.py --ingest          # (already done — skip unless you add new .md files)
 python main.py --query "your question here"
