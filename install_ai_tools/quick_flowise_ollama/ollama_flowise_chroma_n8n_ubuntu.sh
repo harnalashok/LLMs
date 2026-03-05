@@ -57,7 +57,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt update 
 	# For reading markdown documents
-	sudo apt install retext  -y
+	# Instead use marktext (see antigravity installation below)
+	#sudo apt install retext  -y
     # pipx to install poetry
     sudo apt install zip p7zip-full unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
@@ -1217,6 +1218,9 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
   			sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
 			# Update your package cach
 			sudo apt update -y
+			# Install Markdown reader
+			echo "Installing marktext markdown reader"
+			sudo snap install marktext
 			# Install Google Antigravity
 			sudo apt install antigravity
 			sudo apt autoremove -y
