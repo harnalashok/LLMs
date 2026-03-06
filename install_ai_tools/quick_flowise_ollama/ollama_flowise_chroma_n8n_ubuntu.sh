@@ -934,7 +934,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	echo "Pulling llama3.2"
 	docker exec -it ollama ollama pull llama3.2:latest
 	docker exec -it ollama ollama pull gemma3:270m
-	docker exec -it ollama ollama pull qwen3.5
+	docker exec -it ollama ollama pull qwen3.5:latest
 	echo " "
 	echo " "
 	#ollama list
