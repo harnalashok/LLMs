@@ -1340,6 +1340,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
+		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
 		sleep 2
 		sudo systemctl reboot -i
 	else
