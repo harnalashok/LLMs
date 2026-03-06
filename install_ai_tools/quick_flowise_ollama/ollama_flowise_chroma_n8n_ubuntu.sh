@@ -1312,6 +1312,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		echo "echo '  Put your .md files in rag_eval_system-II/dataFolder, AND'"       | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '  place data.csv file in the rag_eval_system-II folder'"           | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '  data.csv has three columns: text,question,idealAnswer'"          | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  A dummy data.csv and dummy .md files are placed'"              | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
