@@ -1314,7 +1314,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		echo "echo '  data.csv has three columns: text,question,idealAnswer'"          | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
-		echo "echo 'Execute commands, as follows   '"                                | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '  source /home/ashok/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
 	    echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
 		# To ingest .md files in dataFolder
