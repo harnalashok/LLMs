@@ -150,6 +150,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "=========="
     sleep 15
     sudo systemctl reboot -i
+else 
+    echo "Ubuntu updated"
 fi
 
 ##################
@@ -189,6 +191,8 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	sleep 8
 	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
 	sudo systemctl reboot -i
+else
+    echo "CUDA installed"	
 fi
 
 ##################
@@ -636,7 +640,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sleep 8
 	sudo systemctl reboot -i
 else
-    echo "All vector databases including postgresql installed"
+    echo "milvus, Meilisearch, chromadb, FAISS and postgresql vector dbs installed"
 fi	
 
 #############
@@ -908,7 +912,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  sleep 3
 	  sudo systemctl reboot -i
 else
-      echo "Ollama installed"
+      echo "Ollama docker installed"
 fi
 
 
