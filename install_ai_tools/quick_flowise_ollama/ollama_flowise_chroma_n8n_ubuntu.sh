@@ -1252,10 +1252,8 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 fi
 
 
-
-
 ###################
-# llama.cpp install--II
+# llama.cpp install--I
 # python env remains activated
 # source /home/$USER/venv/bin/activate
 # https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md
@@ -1717,79 +1715,86 @@ docker update --restart=no $(docker ps -a -q)
 
 
 ###################
-# llama.cpp install--I
+# llama.cpp install--II
 # python env remains activated
 # source /home/$USER/venv/bin/activate
 ###################
-cuda_version=$(nvidia-smi | grep CUDA | awk '{print $9}')
+echo "  "
 echo " "
-echo "==========="
-echo "Your installed CUDA version is: $cuda_version"
-echo "If this version is different from 12.4, you will have to first"
-echo "change cu124, to say, cu127 for version 12.7 before installing"
-echo "llama.cpp."
-echo "==========="
+cd /home/$USER
 echo " "
-echo "NOTE: Recomended way to install is using homebrew. AVOID BUILDING"
-echo "Shall I now BUILD AND install llama.cpp (if your CUDA version is correct)? [Y,n]"   
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
-  # Installing llama.cpp
-  source /home/$USER/venv/bin/activate
-   # Huggingface and llama.cpp related
-  pip install huggingface_hub
-  pip install transformers
-  pip install accelerate
-  #cu124: is as per cuda version. Get cuda version from nvidia-smi
-  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-  echo " "                                         | tee -a /home/$USER/error.log
-  echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
-  echo "------------"                              | tee -a /home/$USER/error.log
-  echo " "                                         | tee -a /home/$USER/error.log
-  git clone https://github.com/ggerganov/llama.cpp
-  cd llama.cpp
-  cmake -B build
-  cmake --build build --config Release
-  cd /home/$USER
-  sleep 2
-  # Create a symlink to models and to gguf folder
-  ln -s /home/$USER/llama.cpp/models/ /home/$USER/
-  ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
-  echo 'export PATH="$PATH:/home/$USER/llama.cpp/build/bin"' >> /home/$USER/.bashrc
-  echo " "                                        | tee -a /home/$USER/error.log
-  echo "-------"                                  | tee -a /home/$USER/error.log
-  echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
-  echo "10. llama.cpp installed"                  | tee -a /home/$USER/info.log
-  echo "-------"                                  | tee -a /home/$USER/error.log
-  # Script to start llama.cpp server
-  echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_llamacpp_server.sh
-  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "cd /home/$USER"                                               | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "source /home/$USER/venv/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
-  echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
-  mkdir /home/$USER/gguf
-  cd /home/$USER/gguf
-  echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
-  sleep 4
-  wget -Nc https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
-  mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
-  echo "Done...."
-  cd /home/$USER
-  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
-  echo "Will reboot system now"
-  chmod +x /home/$USER/start/*.sh
-  chmod +x /home/$USER/*.sh
-  sleep 5
-  sudo systemctl reboot -i
-else
-  echo "Skipping install of llama.cpp"
+echo " "
+if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
+	cuda_version=$(nvidia-smi | grep CUDA | awk '{print $9}')
+	echo " "
+	echo "==========="
+	echo "Your installed CUDA version is: $cuda_version"
+	echo "If this version is different from 12.4, you will have to first"
+	echo "change cu124, to say, cu127 for version 12.7 before installing"
+	echo "llama.cpp."
+	echo "==========="
+	echo " "
+	echo "NOTE: Recomended way to install is using homebrew. AVOID BUILDING"
+	echo "Shall I now BUILD AND install llama.cpp (if your CUDA version is correct)? [Y,n]"   
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	  # Installing llama.cpp
+	  source /home/$USER/venv/bin/activate
+	   # Huggingface and llama.cpp related
+	  pip install huggingface_hub
+	  pip install transformers
+	  pip install accelerate
+	  #cu124: is as per cuda version. Get cuda version from nvidia-smi
+	  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	  echo " "                                         | tee -a /home/$USER/error.log
+	  echo "Installing llama.cpp"                      | tee -a /home/$USER/error.log
+	  echo "------------"                              | tee -a /home/$USER/error.log
+	  echo " "                                         | tee -a /home/$USER/error.log
+	  git clone https://github.com/ggerganov/llama.cpp
+	  cd llama.cpp
+	  cmake -B build
+	  cmake --build build --config Release
+	  cd /home/$USER
+	  sleep 2
+	  # Create a symlink to models and to gguf folder
+	  ln -s /home/$USER/llama.cpp/models/ /home/$USER/
+	  ln -s /home/$USER/llama.cpp/models/ /home/$USER/gguf
+	  echo 'export PATH="$PATH:/home/$USER/llama.cpp/build/bin"' >> /home/$USER/.bashrc
+	  echo " "                                        | tee -a /home/$USER/error.log
+	  echo "-------"                                  | tee -a /home/$USER/error.log
+	  echo "llama.cpp installed"                      | tee -a /home/$USER/error.log
+	  echo "10. llama.cpp installed"                  | tee -a /home/$USER/info.log
+	  echo "-------"                                  | tee -a /home/$USER/error.log
+	  # Script to start llama.cpp server
+	  echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_llamacpp_server.sh
+	  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "cd /home/$USER"                                               | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo " "                                                   | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "echo 'llama.cpp server will be available at port: 8080'"            | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "echo 'Script will use model: llama-thinker-3b-preview-q8_0.gguf'"   | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "echo 'Change it, if you like, by changing the script'"              | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo " "                                                                  | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "sleep 10"                                                           | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "source /home/$USER/venv/bin/activate"                          | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  echo "llama-server -m /home/$USER/gguf/llama-thinker-3b-preview-q8_0.gguf -c 2048"  | tee -a /home/$USER/start/start_llamacpp_server.sh
+	  mkdir /home/$USER/gguf
+	  cd /home/$USER/gguf
+	  echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
+	  sleep 4
+	  wget -Nc https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
+	  mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
+	  echo "Done...."
+	  cd /home/$USER
+	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
+	  echo "Will reboot system now"
+	  chmod +x /home/$USER/start/*.sh
+	  chmod +x /home/$USER/*.sh
+	  sleep 5
+	  sudo systemctl reboot -i
+	else
+	  echo "Skipping install of llama.cpp"
+	fi
 fi
   
 
