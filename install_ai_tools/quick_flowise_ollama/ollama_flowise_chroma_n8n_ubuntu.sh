@@ -24,6 +24,7 @@ echo "Install Visual Studio Coder"
 echo "Install FAISS vector store"
 echo "Install langchain+llamaIndex"
 echo "Install Google antigravity"
+echo "Install rag and rag performance eval system"
 echo "Install flatpak and JASP"
 echo "TorchStudio installation for deeplearning"
 echo "Install OpenNotebook"
@@ -1279,6 +1280,56 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 else
    echo "LLamacpp installed"
 fi	
+
+
+#############
+# Install RAG and RAG performance
+#  evaluation system.
+# Created using Google Antigravity
+############
+
+#  Download github folder 'rag_eval_system-II' using command line
+#  Can copy and paste all at once:
+echo "  "
+echo " "
+cd /home/$USER
+echo " "
+echo " "
+if [ ! -f /home/$USER/rageval_installed.txt ]; then
+		cd ~/    
+		source /home/ashok/langchain/bin/activate
+	    rm -rf /home/$USER/ragsystem
+		mkdir /home/$USER/ragsystem
+		cd /home/ashok/ragsystem
+		git init
+		git remote add origin https://github.com/harnalashok/LLMs.git
+		git sparse-checkout init --cone
+		git sparse-checkout set rag_eval_system-II
+		git pull origin main
+		find . -maxdepth 1 ! -name "rag_eval_system-II" ! -name "." ! -name ".." -delete
+	    ls -la
+        echo "echo 'Prepare as follows:'"                                            | tee    /home/$USER/start_ragEval.sh
+		echo "echo '  Put your .md files in rag_eval_system-II/dataFolder, AND'"       | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  place data.csv file in the rag_eval_system-II folder'"           | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  data.csv has three columns: text,question,idealAnswer'"          | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo 'Execute commands, as follows   '"                                | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  source /home/ashok/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
+	    echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
+		# To ingest .md files in dataFolder
+		echo "echo '  python main.py --ingest'"                                        | tee   -a /home/$USER/start_ragEval.sh     
+	    echo "echo '  python main.py --query \"your question here\"'"                  | tee   -a /home/$USER/start_ragEval.sh
+		# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
+	    echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
+		#
+	    echo "rageval_installed.txt"  > /home/$USER/rageval_installed.txt
+else
+	echo "RAG creation and RAG eval system installed"
+fi
+
+
+
 
 #####################
 ## langflow install
