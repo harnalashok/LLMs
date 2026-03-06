@@ -1299,7 +1299,8 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		echo " "                                      
 		sleep 2
 		# Create default .venv environment in the current folder
-		# Existing environment is first deleted
+		# We earlier created a virtual env: venv
+		# Existing environment, if it exists, is first deleted
 		uv venv
 		# Install in the default environment ie .venv
 		uv pip install langflow  2>> /home/$USER/error.log
