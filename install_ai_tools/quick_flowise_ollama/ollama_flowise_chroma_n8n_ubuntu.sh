@@ -1368,9 +1368,9 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "sleep 3"																		|   tee  -a  /home/$USER/start_agno.sh
 	echo "source /home/$USER/agno/.venvs/quickstart/bin/activate"										|   tee  -a  /home/$USER/start_agno.sh
 	echo "python  /home/$USER/Documents/agno_tools/agent_with_tools.py"                 |   tee  -a  /home/$USER/start_agno.sh
-	echo 
+	echo "sleep 5"																		|   tee  -a  /home/$USER/start_agno.sh
+	echo "python /home/$USER/agno/cookbook/00_quickstart/run.py"						 |   tee  -a  /home/$USER/start_agno.sh
 	chmod +x /home/$USER/*.sh
-	
 else
 	echo "agno installed"
 fi
