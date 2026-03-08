@@ -1315,6 +1315,27 @@ fi
 
 
 
+##################
+## Install agno
+###############
+
+deactivate
+rm -rf /home/$USER/agno
+git clone https://github.com/agno-agi/agno.git
+cd agno
+sleep 2
+uv venv .venvs/quickstart --python 3.12
+source .venvs/quickstart/bin/activate
+echo "openai" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
+echo "anthropic" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
+echo "ollama" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
+cd /home/$USER/agno/cookbook/00_quickstart/
+./generate_requirements.sh
+cat /home/$USER/agno/cookbook/00_quickstart/requirements.txt
+uv pip install -r /home/$USER/agno/cookbook/00_quickstart/requirements.txt
+cd
+python /home/$USER/agent_with_tools.py
+
 
 #####################
 ## langflow install
