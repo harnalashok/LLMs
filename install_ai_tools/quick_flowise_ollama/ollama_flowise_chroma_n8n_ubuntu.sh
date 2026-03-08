@@ -1357,6 +1357,7 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "echo 'Runtime			Serve your system in production with a stateless, session-scoped FastAPI backend.'"					|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo 'Control Plane	Test, monitor, and manage your system using the AgentOS UI.'"										|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo '-----------      ---------------'"										|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo 'Installed at: /home/$USER/agno'"										|   tee  -a  /home/$USER/start_agno.sh
 	
 	chmod +x /home/$USER/*.sh
 	python /home/$USER/agent_with_tools.py
