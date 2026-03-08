@@ -1363,12 +1363,14 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "echo 'Control Plane	Test, monitor, and manage your system using the AgentOS UI.'"										|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo '-----------      ---------------'"										|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo 'Installed at: /home/$USER/agno'"										|   tee  -a  /home/$USER/start_agno.sh
-	echo "echo 'Invoking agent with ollama llama3.2...'"										|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo 'Invoking agent with ollama llama3.2...'"								|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo 'Make changes, if you like here: ~/Documents/agno/agent_with_tools.py'"  |   tee  -a  /home/$USER/start_agno.sh
 	echo "sleep 3"																		|   tee  -a  /home/$USER/start_agno.sh
+	echo "source /home/$USER/agno/.venvs/quickstart/bin/activate"										|   tee  -a  /home/$USER/start_agno.sh
 	echo "python  /home/$USER/Documents/agno_tools/agent_with_tools.py"                 |   tee  -a  /home/$USER/start_agno.sh
-	
+	echo 
 	chmod +x /home/$USER/*.sh
-	python /home/$USER/agent_with_tools.py
+	
 else
 	echo "agno installed"
 fi
