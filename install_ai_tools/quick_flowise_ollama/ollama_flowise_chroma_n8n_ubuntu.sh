@@ -1319,6 +1319,7 @@ fi
 ##################
 ## Install agno
 #  https://github.com/agno-agi/agno/tree/main/cookbook/00_quickstart
+#  https://dineshr1493.medium.com/all-you-need-to-know-about-the-evolution-of-generative-ai-to-agentic-ai-part-9-agentic-ai-agno-74d74cd0d9f3
 ###############
 
 cd /home/$USER
@@ -1341,16 +1342,23 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	uv pip install -r /home/$USER/agno/cookbook/00_quickstart/requirements.txt
 	cd /home/$USER
 	echo "agno_installed.txt" > /home/$USER/agno_installed.txt
+	
 	echo "echo 'What is agno?'"         							| 	tee    /home/$USER/start_agno.sh
+	echo "echo '============'"         								| 	tee  -a  /home/$USER/start_agno.sh
 	echo "echo '  Agno is the runtime for agentic software.'" 		|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo '  Build agents, teams, and workflows. '" 			|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo '  Run them as scalable services. '"					|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo '  Monitor and manage them in production.'"			|   tee  -a  /home/$USER/start_agno.sh
-	echo "echo 'What it does"										|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo 'What it does'"										|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo '============'"         								| 	tee  -a  /home/$USER/start_agno.sh
 	echo "echo 'Layer			What it does'"						|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo '-----			------------'"         								| 	tee  -a  /home/$USER/start_agno.sh
 	echo "echo 'Framework 		Build agents, teams, and workflows with memory, knowledge, guardrails, and 100+ integrations.'"		|   tee  -a  /home/$USER/start_agno.sh
 	echo "echo 'Runtime			Serve your system in production with a stateless, session-scoped FastAPI backend.'"					|   tee  -a  /home/$USER/start_agno.sh
-	echo "echo 'Control Plane 	Test, monitor, and manage your system using the AgentOS UI.'"										|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo 'Control Plane	Test, monitor, and manage your system using the AgentOS UI.'"										|   tee  -a  /home/$USER/start_agno.sh
+	echo "echo '-----------      ---------------'"										|   tee  -a  /home/$USER/start_agno.sh
+	
+	chmod +x /home/$USER/*.sh
 	python /home/$USER/agent_with_tools.py
 else
 	echo "agno installed"
