@@ -23,6 +23,7 @@ echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Install FAISS vector store"
 echo "Install langchain+llamaIndex"
+echo "Install agno"
 echo "Install Google antigravity"
 echo "Install rag and rag performance eval system"
 echo "Install flatpak and JASP"
@@ -1319,22 +1320,31 @@ fi
 ## Install agno
 ###############
 
-deactivate
-rm -rf /home/$USER/agno
-git clone https://github.com/agno-agi/agno.git
-cd agno
-sleep 2
-uv venv .venvs/quickstart --python 3.12
-source .venvs/quickstart/bin/activate
-echo "openai" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
-echo "anthropic" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
-echo "ollama" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
-cd /home/$USER/agno/cookbook/00_quickstart/
-./generate_requirements.sh
-cat /home/$USER/agno/cookbook/00_quickstart/requirements.txt
-uv pip install -r /home/$USER/agno/cookbook/00_quickstart/requirements.txt
-cd
-python /home/$USER/agent_with_tools.py
+cd /home/$USER
+if [ ! -f /home/$USER/agno_installed.txt ]; then
+	cd ~/    
+	deactivate
+	rm -rf /home/$USER/agno
+	git clone https://github.com/agno-agi/agno.git
+	cd agno
+	sleep 2
+	uv venv .venvs/quickstart --python 3.12
+	source .venvs/quickstart/bin/activate
+	# Add more models for AGENTS
+	echo "openai" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
+	echo "anthropic" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
+	echo "ollama" >> /home/$USER/agno/cookbook/00_quickstart/requirements.in
+	cd /home/$USER/agno/cookbook/00_quickstart/
+	./generate_requirements.sh
+	cat /home/$USER/agno/cookbook/00_quickstart/requirements.txt
+	uv pip install -r /home/$USER/agno/cookbook/00_quickstart/requirements.txt
+	cd /home/$USER
+	echo "agno_installed.txt" > /home/$USER/agno_installed.txt
+	python /home/$USER/agent_with_tools.py
+else
+echo "agno installed"
+fi
+
 
 
 #####################
