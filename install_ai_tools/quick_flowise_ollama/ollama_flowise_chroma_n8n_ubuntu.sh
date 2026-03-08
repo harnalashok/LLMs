@@ -1318,6 +1318,7 @@ fi
 
 ##################
 ## Install agno
+#  https://github.com/agno-agi/agno/tree/main/cookbook/00_quickstart
 ###############
 
 cd /home/$USER
@@ -1342,7 +1343,7 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "agno_installed.txt" > /home/$USER/agno_installed.txt
 	python /home/$USER/agent_with_tools.py
 else
-echo "agno installed"
+	echo "agno installed"
 fi
 
 
