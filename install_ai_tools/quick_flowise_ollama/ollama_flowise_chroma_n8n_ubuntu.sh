@@ -57,6 +57,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     # See: https://askubuntu.com/a/1538589
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt update 
+	echo 'export HISTTIMEFORMAT="%F %T "'  >> /home/$USER/.bashrc
 	# For reading markdown documents
 	# Instead use marktext (see antigravity installation below)
 	#sudo apt install retext  -y
