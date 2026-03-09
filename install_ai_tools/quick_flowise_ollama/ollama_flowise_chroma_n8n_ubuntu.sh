@@ -1497,7 +1497,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 	echo "------------"  
 	echo "Shall I install langflow. Takes a lot of time..? [Y,n]"    
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo " "
 	    echo " "
@@ -1565,8 +1565,9 @@ cd /home/$USER
 if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
     echo " "
     echo " "
-	echo "------------"   
-	echo "Shall I install OpenNotebook docker? [Y,n]"    # 
+	echo "------------"  
+	echo "Shall I install OpenNotebook docker? [Y,n]"     
+	echo "Press ENTER to skip"
 	read input
 	input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -1613,8 +1614,9 @@ cd /home/$USER
 if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	echo "------------"        
 	echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	   # Installing portrainer
 	   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
@@ -1675,8 +1677,9 @@ echo " "
 if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 	echo "------------"   
     echo "Shall I install ngrok to access web-app remotely ? [Y,n]"    
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 		# Install ngrok
 		# https://dashboard.ngrok.com/get-started/setup/linux
@@ -1731,8 +1734,9 @@ fi
     echo " "
     echo "------------"   
     echo "Shall I install dify docker? [Y,n]"    # 
+	echo "Press ENTER to skip"
     read input
-    input=${input:-Y}
+    #input=${input:-Y}
     if [[ $input == "Y" || $input == "y" ]]; then
         cd /home/$USER/
         echo " "
@@ -1789,8 +1793,9 @@ echo "========"
 lsb_release -a
 echo "========"
 echo "Shall I install mongodb db for Ubuntu 22.04? [Y,n]"    # 
+echo "Press ENTER to skip"
 read input
-input=${input:-Y}
+#input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/$USER/
     sudo apt-get install gnupg curl
@@ -1950,8 +1955,9 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	echo " "
 	echo "NOTE: Recomended way to install is using homebrew. AVOID BUILDING"
 	echo "Shall I now BUILD AND install llama.cpp (if your CUDA version is correct)? [Y,n]"   
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	  # Installing llama.cpp
 	  source /home/$USER/venv/bin/activate
@@ -2024,9 +2030,10 @@ cd /home/$USER
 echo " "
 echo " "
 if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
-	echo "Shall I now install llama.cpp using homebrew ? [Y,n]"   
+	echo "Shall I now install llama.cpp using homebrew ? [Y,n]"  
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	  # Installing llama.cpp
 	  source /home/$USER/venv/bin/activate
@@ -2058,8 +2065,9 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo "------------"        
 	echo "Shall I build and install xinference docker. Building takes time..? [Y,n]"    
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 		# clone git repo
 		git clone https://github.com/xorbitsai/inference.git
@@ -2136,9 +2144,10 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install xinference on machine? [Y,n]"    
+	echo "Shall I install xinference on machine? [Y,n]"  
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	   source /home/$USER/venv/bin/activate
 	   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
@@ -2194,8 +2203,9 @@ echo " "
 echo " "
 echo "------------"        
 echo "Shall I install AutoGen Studio? [Y,n]"    
+echo "Press ENTER to skip"
 read input
-input=${input:-Y}
+#input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
    source /home/$USER/venv/bin/activate
    pip install -U autogenstudio
@@ -2235,9 +2245,10 @@ if [ ! -f /home/$USER/flatpak_installed.txt ]; then
     echo " "
 	echo "------------"  
     echo "JASP is a biostatistics software? [Y,n]"
-	echo "Shall I install flatpak for JASP and also JASP? [Y,n]"    
+	echo "Shall I install flatpak for JASP and also JASP? [Y,n]"   
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	    # Install flatpak
 		sudo apt install flatpak -y
@@ -2275,9 +2286,11 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
     echo "TorchStudio is a software for deeplearning?"
 	echo "Anaconda must have been installed earlier"
 	echo "Shall I install torchstudio? [Y,n]"    
+	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
+	
 	    # Install necessary packages
 		git clone https://github.com/Emad2018/torchstudio.git
 		cd torchstudio
@@ -2331,7 +2344,7 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 	echo "After upgrade, RESET your broswer cookies"
 	echo "========"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 		echo " "
 		echo " "
@@ -2386,9 +2399,10 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"   
-	echo "Shall I install RAGFlow docker? [Y,n]"    # 
+	echo "Shall I install RAGFlow docker? [Y,n]" 
+	echo "Press ENTER to skip"# 
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo " "
 	    echo " "
