@@ -1487,20 +1487,29 @@ else
 	echo "agno installed"
 fi
 
+##################
+## Install TradingAgent
+#  https://tradingagents-ai.github.io/
+###############
 
-git clone https://github.com/TauricResearch/TradingAgents.git
-cd TradingAgents
-conda create -n tradingagents python=3.13
-conda activate tradingagents
-conda activate tradingagents
-conda create -n tradingagents python=3.13
-conda activate tradingagents
-cd TradingAgents
-conda activate tradingagents
-pip install -r requirements.txt
-cp .env.example .env
-python -m cli.main
-
+cd /home/$USER
+if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
+	git clone https://github.com/TauricResearch/TradingAgents.git
+	cd TradingAgents
+	conda create -n tradingagents python=3.13
+	conda activate tradingagents
+	conda activate tradingagents
+	conda create -n tradingagents python=3.13
+	conda activate tradingagents
+	cd TradingAgents
+	conda activate tradingagents
+	pip install -r requirements.txt
+	cp .env.example .env
+	#python -m cli.main
+	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
+else
+    echo "Installed Trading Agent"
+fi
 
 
 
