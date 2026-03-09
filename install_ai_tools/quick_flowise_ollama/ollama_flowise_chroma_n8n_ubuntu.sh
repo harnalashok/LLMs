@@ -38,6 +38,8 @@ sleep 2
 FILE="/home/$USER/install_progerss.txt"
 LINE="Record of installation progress"
 if ! grep -qF "$LINE" "$FILE"; then
+    echo "   "       >> "$FILE"
+	echo "=========" >> "$FILE"
     echo "$LINE" >> "$FILE"
 	echo "=========" >> "$FILE"
 	echo "   "       >> "$FILE"
@@ -1490,6 +1492,8 @@ fi
 ##################
 ## Install TradingAgent
 #  https://tradingagents-ai.github.io/
+# https://github.com/TauricResearch/TradingAgents
+# https://www.digitalocean.com/resources/articles/tradingagents-llm-framework
 ###############
 
 cd /home/$USER
@@ -1507,14 +1511,15 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cp .env.example .env
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
+	LINE="  22. Trading Agent installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	conda deactivate
+	cd
 else
     echo "Installed Trading Agent"
 fi
-
-
-
-
-
 
 
 
@@ -1575,7 +1580,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
 		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
 		sleep 2
-		LINE="  22. Langflow installed"
+		LINE="  23. Langflow installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -1624,7 +1629,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		sleep 3
-		LINE="  23. OpenNotebook installed"
+		LINE="  24. OpenNotebook installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -1681,7 +1686,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
 	   
-	   LINE="  24. Portainer installed"
+	   LINE="  25. Portainer installed"
 	   if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	   fi
@@ -1744,7 +1749,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
 		sleep 2
-		LINE="  25. ngrok installed"
+		LINE="  26. ngrok installed"
 	    if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	    fi
