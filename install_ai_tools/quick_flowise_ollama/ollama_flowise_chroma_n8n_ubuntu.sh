@@ -1905,7 +1905,7 @@ lsb_release -a
 echo "========"
 echo "Shall I install mongodb db for Ubuntu 24.04? [Y,n]"    # 
 read input
-input=${input:-Y}
+#input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/$USER/
     sudo apt-get install gnupg curl
