@@ -1608,7 +1608,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 	echo "Shall I install OpenNotebook docker? [Y,n]"     
 	echo "Press ENTER to skip"
 	read input
-	input=${input:-Y}
+	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo " "
 	    echo " "
