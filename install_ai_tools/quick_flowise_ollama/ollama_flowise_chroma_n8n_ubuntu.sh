@@ -1508,6 +1508,8 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cd TradingAgents
 	conda activate tradingagents
 	pip install -r requirements.txt
+	sed -i '/qwen3:latest/a\("Qwen3.5:latest", "qwen3.5:latest"),' /home/$USER/TradingAgents/cli/utils.py
+	sed -i '/qwen3:latest/a\("llama3.2:latest", "llama3.2:latest"),' /home/$USER/TradingAgents/cli/utils.py
 	cp .env.example .env
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
