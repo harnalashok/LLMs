@@ -35,6 +35,12 @@ echo "Will upgrade ragflow"
 echo "==========================="
 sleep 2
 
+FILE="/home/$USER/install_progerss.txt"
+LINE="Record of installation progress"
+if ! grep -qF "$LINE" "$FILE"; then
+    echo "$LINE" >> "$FILE"
+fi
+cat /home/$USER/install_progerss.txt
 
 ################
 # Update Ubuntu
@@ -153,9 +159,16 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "=>   ./ollama_flowise_chroma_n8n_ubuntu.sh"
     echo "=========="
     sleep 15
+	LINE="Ubuntu updated"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
     sudo systemctl reboot -i
 else 
-    echo "Ubuntu updated"
+    LINE="Ubuntu updated"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 fi
 
 ##################
@@ -194,9 +207,16 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	#nvidia-settings
 	sleep 8
 	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
+	LINE="CUDA installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	sudo systemctl reboot -i
 else
-    echo "CUDA installed"	
+   	LINE="CUDA installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 fi
 
 ##################
@@ -232,9 +252,16 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
 	chmod +x *.sh
 	cd /home/$USER
+	LINE="Docker installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
     sudo systemctl reboot -i
 else
-   echo "Docker is installed"
+   LINE="Docker installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 fi  
 
 
@@ -291,10 +318,17 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     cd /home/$USER/
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
+	LINE="Docker configured to use normal user"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
     echo "Machine will be rebooted "
     sudo systemctl reboot -i
 else
-    echo "Docker installation process completed"
+    LINE="Docker configured to use normal user"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 fi    
 
  
@@ -371,6 +405,11 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 3
+	
+	LINE="Milvus installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 				
 	###############
 	# Meilisearch install
@@ -407,6 +446,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
+	LINE="Meilisearch installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 				
 	##########################
 	### Install chromadb docker
@@ -436,6 +479,11 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
+	sleep 2
+	LINE="chromadb installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 		
 	##########################
 	### Install FAISS library
@@ -471,6 +519,11 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x *.sh
 	chmod +x /home/$USER/start/*.sh
 	echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
+	sleep 2
+	LINE="FAISS installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	
 	################
 	# Install postgresql and sqlite3
@@ -640,6 +693,11 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "milvus started"
 	netstat -aunt | grep 19530
 	sleep 8
+
+	LINE="PostgreSQL installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	sudo systemctl reboot -i
 else
     echo "milvus, Meilisearch, chromadb, FAISS and postgresql vector dbs installed"
@@ -722,6 +780,11 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/3.webScrapping/web_scrapping.pdf?raw=true
 	echo "n8n_installed" > /home/$USER/n8n_installed.txt
 	cd /home/$USER
+	
+	LINE="n8n installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	
 	#####################3
 	# flowise docker
@@ -846,6 +909,10 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    bash stop_n8n.sh
    bash stop_flowise.sh
    sleep 2
+   LINE="Flowise installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
    sudo systemctl reboot -i
 else
    echo "n8n and flowise installed"
@@ -908,6 +975,10 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  chmod +x /home/$USER/start/*.sh
 	  chmod +x /home/$USER/stop/*.sh
 	  sleep 3
+	  LINE="Ollama installed"
+	  if ! grep -qF "$LINE" "$FILE"; then
+	     echo "$LINE" >> "$FILE"
+	  fi
 	  sudo systemctl reboot -i
 else
       echo "Ollama docker installed"
@@ -941,6 +1012,10 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	mv 'Huggingface access token.pdf' Huggingface_access_token.pdf
 	cd /home/$USER/
 	echo "models installed" > /home/$USER/models_installed.txt
+	LINE="Ollama models downloaded"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 else
     echo "Ollama models downloaded"
 fi
@@ -1006,6 +1081,10 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
   
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	LINE="python virtual env created at '~/venv'"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	sudo systemctl reboot -i
 else
    echo "python virtual env created at '~/venv'"
@@ -1049,9 +1128,14 @@ if [ ! -d "$DIRECTORY" ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
+		LINE="anaconda installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+	    	echo "$LINE" >> "$FILE"
+		fi
 		sudo systemctl reboot -i
 	fi
 else
+    conda init
     echo "Anaconda installed"
 fi	
 
@@ -1147,6 +1231,10 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
+	LINE="langchain and langgraph virtual env, 'langchain', created."
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	sudo systemctl reboot -i
 else
     echo "langchain and langgraph virtual env, 'langchain', created. "
@@ -1194,6 +1282,10 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
 			chmod +x *.sh
 			sleep 5
+			LINE="Google antigravity installed."
+			if ! grep -qF "$LINE" "$FILE"; then
+				echo "$LINE" >> "$FILE"
+			fi
 			sudo systemctl reboot -i
 	else
 	       echo "Google Antigravity installed"
@@ -1220,6 +1312,10 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
+	  LINE="llamacpp installed"
+	  if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	  fi
 	  sudo systemctl reboot -i
 else
    echo "LLamacpp installed"
@@ -1264,6 +1360,10 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     chmod +x /home/$USER/start/*.sh
     chmod +x /home/$USER/stop/*.sh
 	sleep 5
+	LINE="VSCode installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	sudo systemctl reboot -i
 else
    echo "VScode installed"
@@ -1308,6 +1408,11 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 	    echo "echo '  python main.py --query \"your question here\"'"                  | tee   -a /home/$USER/start_ragEval.sh
 		# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 	    echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
+		
+		LINE="RAG and RAG performance Eval system installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+			echo "$LINE" >> "$FILE"
+		fi
 		#
 	    echo "rageval_installed.txt"  > /home/$USER/rageval_installed.txt
 else
@@ -1371,6 +1476,10 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "sleep 5"																		|   tee  -a  /home/$USER/start_agno.sh
 	echo "python /home/$USER/agno/cookbook/00_quickstart/run.py"						 |   tee  -a  /home/$USER/start_agno.sh
 	chmod +x /home/$USER/*.sh
+	LINE="Agent Builder agno installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 else
 	echo "agno installed"
 fi
@@ -1434,6 +1543,10 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
 		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
 		sleep 2
+		LINE="Langflow installed"
+		  if ! grep -qF "$LINE" "$FILE"; then
+			echo "$LINE" >> "$FILE"
+		  fi
 		sudo systemctl reboot -i
 	else
 		echo "langflow NOT installed"
@@ -1478,6 +1591,10 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		sleep 3
+		LINE="OpenNotebook installed"
+		  if ! grep -qF "$LINE" "$FILE"; then
+			echo "$LINE" >> "$FILE"
+		  fi
 		sudo systemctl reboot -i
 	else
 	    echo "OpenNotebook not installed"
@@ -1529,6 +1646,11 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
+	   
+	   LINE="Portainer installed"
+	   if ! grep -qF "$LINE" "$FILE"; then
+		 echo "$LINE" >> "$FILE"
+	   fi
 	   sudo systemctl reboot -i
 	else
 	   echo "Portainer not installed"
@@ -1587,6 +1709,10 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
 		sleep 2
+		LINE="ngrok installed"
+	    if ! grep -qF "$LINE" "$FILE"; then
+		 echo "$LINE" >> "$FILE"
+	    fi
 		sudo systemctl reboot -i
 	else
 	   echo "ngrok not installed"
