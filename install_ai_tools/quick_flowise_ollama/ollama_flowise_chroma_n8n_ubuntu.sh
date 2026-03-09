@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 08th March, 2026
+# Last amended: 09th March, 2026
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -2018,41 +2018,6 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 fi
   
 
-###################
-# llama.cpp install--II
-# python env remains activated
-# source /home/$USER/venv/bin/activate
-# https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md
-###################
-echo "  "
-echo " "
-cd /home/$USER
-echo " "
-echo " "
-if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
-	echo "Shall I now install llama.cpp using homebrew ? [Y,n]"  
-	echo "Press ENTER to skip"
-	read input
-	#input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	  # Installing llama.cpp
-	  source /home/$USER/venv/bin/activate
-	   # Huggingface and llama.cpp related
-	  pip install huggingface_hub
-	  pip install transformers
-	  pip install accelerate
-	  brew install llama.cpp
-	  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
-	  echo "llama.cpp installed"  
-	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
-	  sleep 3
-	  sudo systemctl reboot -i
-	else
-	   echo "llama-cpp not installed"
-	fi
-fi	
-
-
 ##########################
 ### Build and Install xinference docker
 # Ref: https://inference.readthedocs.io/en/latest/getting_started/using_docker_image.html
@@ -2290,7 +2255,6 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	read input
 	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
-	
 	    # Install necessary packages
 		git clone https://github.com/Emad2018/torchstudio.git
 		cd torchstudio
