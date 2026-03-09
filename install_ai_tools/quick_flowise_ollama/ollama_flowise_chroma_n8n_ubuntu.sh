@@ -1004,6 +1004,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull llama3.2:latest
 	docker exec -it ollama ollama pull gemma3:270m
 	docker exec -it ollama ollama pull qwen3.5:latest
+	docker exec -it ollama ollama pull qwen3:latest
 	echo " "
 	echo " "
 	#ollama list
@@ -1485,6 +1486,26 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 else
 	echo "agno installed"
 fi
+
+
+git clone https://github.com/TauricResearch/TradingAgents.git
+cd TradingAgents
+conda create -n tradingagents python=3.13
+conda activate tradingagents
+conda activate tradingagents
+conda create -n tradingagents python=3.13
+conda activate tradingagents
+cd TradingAgents
+conda activate tradingagents
+pip install -r requirements.txt
+cp .env.example .env
+python -m cli.main
+
+
+
+
+
+
 
 
 
