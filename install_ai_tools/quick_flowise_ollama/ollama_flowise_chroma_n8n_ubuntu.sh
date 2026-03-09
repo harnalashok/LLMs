@@ -1140,8 +1140,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		sudo systemctl reboot -i
 	fi
 else
-    conda init
-    echo "Anaconda installed"
+   echo "Anaconda installed"
 fi	
 
 
@@ -1256,6 +1255,7 @@ cd /home/$USER
 # Install only if anaconda is installed:
 if [  -f /home/$USER/anaconda_installed.txt ]; then
 	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
+		   conda init
 		   #  create a directory for keyrings
 			sudo mkdir -p /etc/apt/keyrings
 			# Download and add Google's signing key
