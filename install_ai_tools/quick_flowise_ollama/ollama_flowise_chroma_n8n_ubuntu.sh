@@ -54,7 +54,9 @@ cat /home/$USER/install_progerss.txt
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "  "
-    echo "------------"    
+    echo "------------"   
+	echo "Updating Ubuntu.."
+    sleep 3
 	nvidia_driver_version=`modinfo nvidia | grep ^version`
     echo " Will update Ubuntu and also NVIDIA driver for GPU"                     
     echo " NVIDIA driver is: $nvidia_driver_version"
@@ -232,6 +234,8 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
     # Add Docker's official GPG key:
+	echo "  "
+	echo "   "
     echo "Installing docker.."
     sleep 2
     sudo apt-get update
@@ -278,9 +282,11 @@ cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
+	echo "  "
+	echo "  "
     echo "Testing if docker is properly installed"
     echo "AND running docker without root privilegs.."
-    sleep 2
+    sleep 3
     # Check if docker installed
     sudo docker run hello-world
     # Run docker witout root privileges
@@ -462,6 +468,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	##########################
 	
 	cd /home/$USER
+	echo "Installing chromadb.."
+    sleep 2
 	# Write chroma start script
 	echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
 	echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
@@ -493,7 +501,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	### Install FAISS library
 	##########################
 	
-	echo " "
+	echo "  "
+	echo  "   "
+	echo "Installing FAISS.."
+    sleep 3
 	echo " "
 	echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
 	echo "is of the folder where data files will be saved. Consider this as the "
@@ -538,8 +549,9 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	cd /home/$USER/
 	echo "Installing postgresql and sqlite3"
+	sleep 3
 	sudo apt install postgresql postgresql-contrib sqlite3   -y
-
+    
 	# Postgresql start/stop script
 
 	# Start script
@@ -797,7 +809,10 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    cd /home/$USER/
    # Install Flowise through docker"
    # Ref: https://docs.flowiseai.com/getting-started
-   echo "Installing flowise docker. Takes time.."          
+   echo  "   "
+   echo  "   "
+   echo "Installing flowise docker. Takes time.."   
+   sleep 3
    # Start script
    echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
    echo " "                                                   >> /home/$USER/start_flowise.sh
@@ -929,7 +944,11 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/ollama_installed.txt ]; then
+	  echo  "  "
+	  echo  "    "
 	  echo "------------"   
+	  echo "Installing ollama docker.."
+      sleep 3
 	  cd /home/$USER/
 	  # Start ollama docker in future
 	  echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
@@ -994,7 +1013,11 @@ fi
 ##########################
 
 if [ ! -f /home/$USER/models_installed.txt ]; then
+    echo  "    "
+	echo  "    "
 	echo "------------"   
+	echo "Downloading ollama models.."
+    sleep 3
 	cd /home/$USER/
 	# Start ollama docker in future
 	docker start ollama 
@@ -1032,6 +1055,10 @@ fi
 
 if [ ! -f /home/$USER/venv_installed.txt ]; then
     cd /home/$USER
+	echo  "    "
+	echo  "    "
+	echo "Creating python virtual env.."
+    sleep 3
     echo " "
     echo " "
     echo "------------"        
@@ -1104,8 +1131,12 @@ cd /home/$USER
 DIRECTORY=/home/$USER/anaconda3
 if [ ! -d "$DIRECTORY" ]; then
 	if [ ! -f /home/$USER/anaconda_installed.txt ]; then
-		echo " "
-		echo " "
+		echo "   "
+		echo "   "
+		echo "Installing Anaconda.."
+        sleep 3
+		echo "   "
+		echo "   "
 		echo "------------"        
 		CONTREPO=https://repo.continuum.io/archive/
 		# Stepwise filtering of the html at $CONTREPO
@@ -1152,6 +1183,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/langchain_installed.txt ]; then
     echo " "
     echo " "
+	echo "Installing langchain and langraph.."
+    sleep 3
 	# Activate python environment at 'langchain'
 	#  for installing langchain and llama-index
 	##############
@@ -1255,7 +1288,11 @@ cd /home/$USER
 # Install only if anaconda is installed:
 if [  -f /home/$USER/anaconda_installed.txt ]; then
 	if [ ! -f /home/$USER/antigravity_installed.txt ]; then
-		   conda init
+	        echo  "    "
+			echo  "    "
+		    echo "Installing Google Antigravity.."
+    		sleep 3
+           conda init
 		   #  create a directory for keyrings
 			sudo mkdir -p /etc/apt/keyrings
 			# Download and add Google's signing key
@@ -1306,6 +1343,10 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
+      echo "   "
+	  echo "    "
+	  echo "Installing llamacpp"
+	  sleep 3
 	  # Installing llama.cpp
 	  source /home/$USER/venv/bin/activate
 	   # Huggingface and llama.cpp related
@@ -1323,7 +1364,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  fi
 	  sudo systemctl reboot -i
 else
-   echo "LLamacpp installed"
+      echo "LLamacpp installed"
 fi	
 
 
@@ -1337,6 +1378,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/vscode_installed.txt ]; then
     echo " "
     echo " "
+	echo "Installing VSCode..."
+	sleep 3
 	echo "------------"  
 	# Activate python virtual environment
 	source /home/$USER/venv/bin/activate
@@ -1386,7 +1429,11 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/rageval_installed.txt ]; then
-		cd ~/    
+		cd ~/   
+		echo "  "
+		echo "   "
+		echo "Installing RAG and RAG performance eval system"
+		sleep 3
 		source /home/ashok/langchain/bin/activate
 	    rm -rf /home/$USER/ragsystem
 		mkdir /home/$USER/ragsystem
@@ -1434,7 +1481,11 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/agno_installed.txt ]; then
-	cd ~/    
+	cd ~/  
+	echo  "    "
+	echo "    "
+	echo "Installing agno"
+	sleep 3
 	deactivate
 	rm -rf /home/$USER/agno
 	git clone https://github.com/agno-agi/agno.git
@@ -1498,6 +1549,10 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
+    echo "   "
+	echo "    "
+	echo "Installing TradingAgents.."
+	sleep 3
 	git clone https://github.com/TauricResearch/TradingAgents.git
 	cd TradingAgents
 	conda create -n tradingagents python=3.13
