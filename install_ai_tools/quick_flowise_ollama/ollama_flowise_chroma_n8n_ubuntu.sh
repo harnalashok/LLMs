@@ -980,6 +980,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
 	  chmod +x /home/$USER/*.sh
 	  # For model storage local folder ollama is mounted.
+	  echo "   "
+	  echo  "    "
 	  echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
 	  echo "Will install ollama for GPU..."
 	  sleep 4
