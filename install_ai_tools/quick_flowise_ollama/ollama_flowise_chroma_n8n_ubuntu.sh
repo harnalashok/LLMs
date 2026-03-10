@@ -934,7 +934,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	fi
    sudo systemctl reboot -i
 else
-   echo "n8n and flowise installed"
+   echo " "
 fi	 
 	
 
@@ -1006,7 +1006,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  fi
 	  sudo systemctl reboot -i
 else
-      echo "Ollama docker installed"
+      echo " "
 fi
 
 
@@ -1047,7 +1047,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	    echo "$LINE" >> "$FILE"
 	fi
 else
-    echo "Ollama models downloaded"
+    echo "  "
 fi
 
 ##############
@@ -1121,7 +1121,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	fi
 	sudo systemctl reboot -i
 else
-   echo "python virtual env created at '~/venv'"
+   echo "  "
 fi   
 
 ###########################
@@ -1173,7 +1173,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		sudo systemctl reboot -i
 	fi
 else
-   echo "Anaconda installed"
+   echo "  "
 fi	
 
 
@@ -1276,7 +1276,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	fi
 	sudo systemctl reboot -i
 else
-    echo "langchain and langgraph virtual env, 'langchain', created. "
+    echo "  "
 fi	
 
 ###########################
@@ -1332,8 +1332,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			fi
 			sudo systemctl reboot -i
 	else
-	       echo "Google Antigravity installed"
-	fi
+	       echo " "
 fi
 
 ###################
@@ -1366,7 +1365,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  fi
 	  sudo systemctl reboot -i
 else
-      echo "LLamacpp installed"
+      echo "   "
 fi	
 
 
@@ -1416,7 +1415,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	fi
 	sudo systemctl reboot -i
 else
-   echo "VScode installed"
+   echo "    "
 fi
 
 
@@ -1470,7 +1469,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		#
 	    echo "rageval_installed.txt"  > /home/$USER/rageval_installed.txt
 else
-	    echo "RAG creation and RAG eval system installed"
+	    echo "   "
 fi
 
 
@@ -1540,7 +1539,7 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 		echo "$LINE" >> "$FILE"
 	fi
 else
-	echo "agno installed"
+	echo "   "
 fi
 
 ##################
@@ -1583,7 +1582,7 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	conda deactivate
 	cd
 else
-    echo "Installed Trading Agent"
+    echo "   "
 fi
 
 
@@ -1661,7 +1660,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		echo "langflow NOT installed"
 	fi
 else
-    echo "langflow installed"
+    echo "    "
 fi	
 
 
@@ -1710,7 +1709,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 	    echo "OpenNotebook not installed"
 	fi
 else
-    echo "opennotebook installed"
+    echo "    "
 fi
 
 
@@ -1830,7 +1829,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 	   echo "ngrok not installed"
 	fi  
 else
-   echo "ngrok is installed"
+   echo "   "
 fi
 
 
