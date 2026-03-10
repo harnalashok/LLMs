@@ -716,7 +716,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	fi
 	sudo systemctl reboot -i
 else
-    echo "milvus, Meilisearch, chromadb, FAISS and postgresql vector dbs installed"
+    echo "  "
 fi	
 
 #############
