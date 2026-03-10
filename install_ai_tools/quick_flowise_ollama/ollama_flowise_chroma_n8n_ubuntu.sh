@@ -1543,6 +1543,29 @@ else
 fi
 
 ##################
+## Install OpenBB
+#  https://github.com/OpenBB-finance/OpenBB
+
+###############
+
+cd /home/$USER
+if [ ! -f /home/$USER/openbb_installed.txt ]; then
+    echo "   "
+	echo "    "
+	echo "Installing TradingAgents.."
+	sleep 3
+	conda create --name openbb
+	conda activate openbb
+	pip install "openbb[all]"
+	pip install openbb-cli
+	# Start the server
+	openbb-api
+	echo "openbb_installed.txt"  >  /home/$USER/openbb_installed.txt
+	conda deactivate
+fi	
+
+
+##################
 ## Install TradingAgent
 #  https://tradingagents-ai.github.io/
 # https://github.com/TauricResearch/TradingAgents
