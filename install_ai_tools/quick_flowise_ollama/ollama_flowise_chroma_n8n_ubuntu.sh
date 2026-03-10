@@ -1479,6 +1479,7 @@ fi
 ## Install agno
 #  https://github.com/agno-agi/agno/tree/main/cookbook/00_quickstart
 #  https://dineshr1493.medium.com/all-you-need-to-know-about-the-evolution-of-generative-ai-to-agentic-ai-part-9-agentic-ai-agno-74d74cd0d9f3
+#  https://medium.com/@alexanddanik/building-multi-agent-trading-analysis-with-agno-framework-30a854cf1997
 ###############
 
 cd /home/$USER
