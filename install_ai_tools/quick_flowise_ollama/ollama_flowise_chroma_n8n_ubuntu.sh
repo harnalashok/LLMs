@@ -1589,6 +1589,7 @@ fi
 
 ##################
 ## Install Qlib
+# Open-source AI quantitative investment platform
 ## https://github.com/microsoft/qlib?tab=readme-ov-file
 ###############
 
