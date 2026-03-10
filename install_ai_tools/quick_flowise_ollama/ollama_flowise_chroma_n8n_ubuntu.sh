@@ -1587,6 +1587,12 @@ else
 fi
 
 
+##################
+## Install Qlib
+## https://github.com/microsoft/qlib?tab=readme-ov-file
+###############
+
+
 
 #####################
 ## langflow install
