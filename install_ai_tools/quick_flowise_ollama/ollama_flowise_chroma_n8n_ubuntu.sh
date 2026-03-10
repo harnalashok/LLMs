@@ -187,7 +187,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo "------------"        
 	echo " "
 	echo "  "
-	echo "==>For Ubuntu 22.04 ONLY<=="
+	echo "==>CUDA install for Ubuntu 22.04 ONLY<=="
 	#nvidia-settings
 	echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
 	echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
