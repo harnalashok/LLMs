@@ -1572,6 +1572,7 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cd /home/$USER/Documents/TradingAgents
 	wget -c https://arxiv.org/abs/2412.20138
 	mv 2412.20138  TradingAgents.pdf
+	cd /home/$USER
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
 	LINE="  22. Trading Agent installed"
