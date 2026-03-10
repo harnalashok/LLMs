@@ -1566,6 +1566,10 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	sed -i '/qwen3:latest/a\("Qwen3.5:latest", "qwen3.5:latest"),' /home/$USER/TradingAgents/cli/utils.py
 	sed -i '/qwen3:latest/a\("llama3.2:latest", "llama3.2:latest"),' /home/$USER/TradingAgents/cli/utils.py
 	cp .env.example .env
+	mkdir -p /home/$USER/Documents/TradingAgents
+	cd /home/$USER/Documents/TradingAgents
+	wget -c https://arxiv.org/abs/2412.20138
+	mv 2412.20138  TradingAgents.pdf
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
 	LINE="  22. Trading Agent installed"
