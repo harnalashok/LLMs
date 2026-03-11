@@ -1246,6 +1246,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install faiss-cpu
 	pip install qdrant-client llama-index-vector-stores-chroma 
 	pip install llama-index-vector-stores-qdrant fastembed
+	 pip install -U llama-index-vector-stores-postgres
 	# 1.3 Web access site
 	pip install tavily-python
 	# 1.4 Yahoo finance data
