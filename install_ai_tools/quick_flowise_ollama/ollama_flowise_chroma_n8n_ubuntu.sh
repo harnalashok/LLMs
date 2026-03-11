@@ -1254,6 +1254,9 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install llama-index-llms-groq
 	pip install llama-index-llms-together
 	pip install llama-index-llms-mistralai
+	pip install llama-index-llms-openrouter
+	# Install deepeval evaluation system
+	pip install -U deepeval
 	# Download llamaindex tutorials
 	mkdir -p /home/$USER/Documents/llamaindex
 	cd /home/$USER/Documents/llamaindex
