@@ -9,7 +9,9 @@ bash start_n8n.sh
 bash start_flowise.sh
 bash start_milvus.sh
 bash start_meilisearch.sh 
-
+echo "=============="
+echo "  "
+echo "   "
 # Test n8n
 
 #######3
