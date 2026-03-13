@@ -1,0 +1,34 @@
+You are a helpful coding assistant specializing in Python. You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and second a RAG performance evaluation sub-system. The code for the two sub-systems are to be written in python using preferably, LLamaIndex libraries else langchain libraries. The overall integration plan and the design of two sub-systems is broadly as below:
+
+Sub-system 1> Design RAG sub-system having the following features:
+=============
+
+	a. It uses large language models (LLMs) and embedding models available in Ollama environment. LLM is: llama3.2 and embedding model is: nomic-embed-text. Ollama is hosted through docker, locally on machine with IP: 192.240.1.27 .
+	b. It uses locally installed PostgreSQL database, gautam, as vector store. PostgreSQL user is 'gautam' with password 'gautam'. User 'gautam' owns the database 'gautam'. 
+	c. A number of markdown files are placed in the folder, 'dataFolder'. These files are to be read and vectorized using the specified ollama embedding model. Vectors are to be saved in the 'gautam' database of PostgreSQL. 
+	d. Given a user-query, the RAG sub-system should give an answer based solely on the vectors stored in the PostgreSQL vector store and will not give any information from its own pre-trained knowledge-base. 
+	e. The RAG subsystem has to output both the context, ie the information extracted from the vector store, and the answer to user-query.
+	
+Sub-system 2> Design an Evaluation sub-system for this RAG sub-system. The evaluation sub-sytem works in the following manner:
+===============
+
+	 i).  This sub-system utilizes a 'Judge LLM' for evaluation. The 'Judge LLM' functions in local ollama environment. The Judge LLM is: 'deepseek-r1:latest'. 
+	 ii). A csv file, named as 'data' file contains question-answer pairs. The csv file has three columns: text,question,idealAnswer
+	iii). The 'question' column contains a series of questions, one in each row, to be fed to the RAG sub-system, one-by-one. The 'idealAnswer' column contains the corresponding expected answers or the ground-truths.	
+	 iv). Proceed as follows: One row of the  'data' file is read. Start with the top-row.
+		iv-a). The 'question' is read and fed to RAG sub-system as user-query. The context and response of RAG sub-system to this question are then noted.
+		iv-b). At the same time the corresponding 'idealAnswer' is also read. 
+		iv-c). We now have four elements: user-query, outputted RAG context, outputted RAG response and the ground-truth ie the 'idealAnswer'.
+		iv-d). You are now to use llamaIndex evaluation modules along with the Judge-LLM to evaluate the metrics related to Correctness, Semantic Similarity, Faithfullness, Context Relevancy and Answer Relevancy. You may use these modules, as required, CorrectnessEvaluator, FaithfulnessEvaluator, RelevancyEvaluator, SemanticSimilarityEvaluator, PairwiseEvaluator and EvaluationResult.
+		iv-e). The 'Judge LLM' receives all these inputs and makes required evaluations. 
+		iv-f). The results of these evaluations are to be written to a file, 'evaluation_results'. 
+		iv-g). After the Judge LLM has finished all evaluations, the next row of 'dataFile' is read and steps iv-a) to iv-f) are repeated till all rows of 'data' file are read. Each time evaluation results are appended to file: 'evaluation_results'.
+
+Where and how to work
+==================
+A python virtual environment by name of 'langchain' already exists on the machine. You can activate that environment with the command: 'source /home/ashok/langchain/bin/activate'. Work in this envronment. This virtual environment has many llamaindex packages already installed. Any missing python libraries or packages can be installed here. 	
+		
+ 
+	  	
+
+

@@ -1,0 +1,208 @@
+timestamp,question,ideal_answer,rag_answer,context_used,correctness_score,correctness_passing,correctness_feedback,faithfulness_score,faithfulness_passing,faithfulness_feedback,relevancy_score,relevancy_passing,relevancy_feedback,semantic_similarity_score,semantic_similarity_passing
+2026-03-05T10:56:57,What is Artificial Intelligence and who coined the term?,"Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems, including learning, reasoning, and self-correction. The term was coined by John McCarthy in 1956 at the Dartmouth Conference.","Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems. These processes include learning, reasoning, and self-correction.
+
+The term ""Artificial Intelligence"" was coined by John McCarthy in 1956 at the Dartmouth Conference.","# Artificial Intelligence: An Overview
+
+## What is Artificial Intelligence?
+
+Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems.
+These processes include learning (the acquisition of information and rules for using the information),
+reasoning (using rules to reach approximate or definite conclusions), and self-correction.
+
+## History of AI
+
+The term ""Artificial Intelligence"" was coined by John McCarthy in 1956 at the Dartmouth Conference.
+Early AI research focused on symbolic methods and problem-solving. In the 1980s, machine learning
+became a popular approach, enabling systems to learn from data rather than following explicitly
+programmed rules.
+
+## Types of AI
+
+### Narrow AI (Weak AI)
+Narrow AI is designed to perform a specific task, such as voice recognition or image classification.
+All current AI systems, including large language models, fall into this category.
+
+### General AI (Strong AI)
+General AI, a theoretical concept, refers to a...",4.0,True,"The generated answer correctly defines AI as the simulation of human intelligence processes by computer systems, including learning, reasoning, and self-correction, and accurately attributes the coining of the term to John McCarthy in 1956 at the Dartmouth Conference. However, it is slightly less detailed than the reference answer in the definition part.",1.0,True,YES,1.0,True,YES,0.989508979765467,True
+2026-03-05T11:00:00,What are the three types of AI described in the documents?,"The three types of AI are: Narrow AI (Weak AI) designed for specific tasks; General AI (Strong AI), a theoretical concept for machines matching human intellect across all tasks; and Superintelligent AI, a speculative concept where machines surpass human intelligence.","Narrow AI (Weak AI), General AI (Strong AI), and Superintelligent AI.","- **Outdated knowledge**: Models have a training cutoff date and lack real-time information.
+- **Context window**: Models can only process a limited number of tokens at once.
+- **Bias**: Models may reproduce biases present in training data.
+
+## Retrieval-Augmented Generation (RAG)
+
+RAG is a technique that enhances LLMs by retrieving relevant documents from an external knowledge
+base before generating a response. This reduces hallucinations and keeps answers grounded in
+verified source documents. RAG systems typically use:
+1. An **embedding model** to encode documents and queries into vector representations.
+2. A **vector database** to store and retrieve document embeddings.
+3. An **LLM** to generate answers based on retrieved context.
+
+## Embeddings
+
+Embeddings are dense numerical representations of text. Models like **nomic-embed-text** convert
+sentences or paragraphs into high-dimensional vectors. Similar texts have vectors that are close
+together in the embedding space, enabling sem...",4.0,True,"The generated answer correctly identifies the three types of AI (Narrow AI, General AI, and Superintelligent AI) as described in the reference answer, making it relevant and fully correct in terms of content. However, it is less detailed than the reference answer.",1.0,True,YES,1.0,True,YES,0.7142727428099097,False
+2026-03-05T11:02:29,What ethical concerns are associated with AI?,"AI raises ethical concerns including bias (AI trained on biased data can amplify discrimination), privacy (large-scale data collection), job displacement (automation displacing workers), and accountability (difficulty in assigning responsibility for harmful AI decisions).","AI raises important ethical questions, including bias, privacy, job displacement, and accountability. Bias in AI models trained on biased data can perpetuate or amplify discrimination. Additionally, large-scale data collection for AI training can infringe on individual privacy, while automation powered by AI may displace workers in certain industries. Determining responsibility when an AI system makes a harmful decision is also complex.","- **Robotics**: Industrial automation, surgical robots, drones.
+
+## Ethical Considerations
+
+AI raises important ethical questions:
+- **Bias**: AI models trained on biased data can perpetuate or amplify discrimination.
+- **Privacy**: Large-scale data collection for AI training can infringe on individual privacy.
+- **Job displacement**: Automation powered by AI may displace workers in certain industries.
+- **Accountability**: When an AI system makes a harmful decision, determining responsibility is complex.
+
+## The Future of AI
+
+Researchers are working on making AI systems more interpretable, fair, and robust. Areas like
+Explainable AI (XAI), federated learning (to protect privacy), and AI alignment (ensuring AI
+systems pursue human-intended goals) are active research frontiers.
+
+---
+
+# Artificial Intelligence: An Overview
+
+## What is Artificial Intelligence?
+
+Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems.
+These processes include learn...",4.5,True,"The generated answer is highly relevant and fully correct, covering all the key ethical concerns mentioned in the reference answer. It provides additional context and examples for each point, enhancing clarity without introducing any inaccuracies.",1.0,True,YES,1.0,True,YES,0.9467476155610517,True
+2026-03-05T11:05:26,What is a Large Language Model and what architecture do most LLMs use?,"Large Language Models (LLMs) are deep learning models trained on massive text data capable of generating text, answering questions, summarizing, and translating. Most LLMs are based on the Transformer architecture, specifically using self-attention mechanisms, introduced in the 2017 paper 'Attention is All You Need'.","A Large Language Model (LLM) is a class of deep learning models trained on massive amounts of text data. Most LLMs are typically based on the Transformer architecture, introduced in the 2017 paper ""Attention is All You Need"" by Vaswani et al. The core mechanism used by most LLMs is self-attention, which allows the model to weigh the relevance of different words in a sentence relative to each other.","# Artificial Intelligence: An Overview
+
+## What is Artificial Intelligence?
+
+Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems.
+These processes include learning (the acquisition of information and rules for using the information),
+reasoning (using rules to reach approximate or definite conclusions), and self-correction.
+
+## History of AI
+
+The term ""Artificial Intelligence"" was coined by John McCarthy in 1956 at the Dartmouth Conference.
+Early AI research focused on symbolic methods and problem-solving. In the 1980s, machine learning
+became a popular approach, enabling systems to learn from data rather than following explicitly
+programmed rules.
+
+## Types of AI
+
+### Narrow AI (Weak AI)
+Narrow AI is designed to perform a specific task, such as voice recognition or image classification.
+All current AI systems, including large language models, fall into this category.
+
+### General AI (Strong AI)
+General AI, a theoretical concept, refers to a...",4.0,True,"The generated answer correctly defines an LLM as a deep learning model trained on large text datasets and accurately identifies the Transformer architecture and self-attention mechanism as central components, addressing the user's query comprehensively. It is fully correct and relevant, though slightly less detailed than the reference answer.",1.0,True,YES,1.0,True,YES,0.9636966451950401,True
+2026-03-05T11:08:30,What is Retrieval-Augmented Generation (RAG) and what are its three components?,"RAG is a technique that enhances LLMs by retrieving relevant documents from an external knowledge base before generating a response to reduce hallucinations. Its three components are: an embedding model to encode documents and queries into vectors, a vector database to store and retrieve embeddings, and an LLM to generate answers based on retrieved context.","Retrieval-Augmented Generation (RAG) is a technique that enhances Large Language Models (LLMs) by retrieving relevant documents from an external knowledge base before generating a response. The three main components of RAG systems are:
+
+1. An **embedding model** to encode documents and queries into vector representations.
+2. A **vector database** to store and retrieve document embeddings.
+3. An **LLM** to generate answers based on retrieved context.
+
+These components work together to reduce hallucinations and keep answers grounded in verified source documents.","# Artificial Intelligence: An Overview
+
+## What is Artificial Intelligence?
+
+Artificial Intelligence (AI) is the simulation of human intelligence processes by computer systems.
+These processes include learning (the acquisition of information and rules for using the information),
+reasoning (using rules to reach approximate or definite conclusions), and self-correction.
+
+## History of AI
+
+The term ""Artificial Intelligence"" was coined by John McCarthy in 1956 at the Dartmouth Conference.
+Early AI research focused on symbolic methods and problem-solving. In the 1980s, machine learning
+became a popular approach, enabling systems to learn from data rather than following explicitly
+programmed rules.
+
+## Types of AI
+
+### Narrow AI (Weak AI)
+Narrow AI is designed to perform a specific task, such as voice recognition or image classification.
+All current AI systems, including large language models, fall into this category.
+
+### General AI (Strong AI)
+General AI, a theoretical concept, refers to a...",4.5,True,"The generated answer correctly defines RAG and accurately lists and describes its three components, matching the reference answer. It adds a correct explanation about reducing hallucinations, which enhances the answer without introducing errors. However, it is slightly more verbose than the reference answer, but this does not detract from its correctness.",1.0,True,YES,1.0,True,YES,0.9454768256123384,True
+2026-03-05T11:12:12,What is the nomic-embed-text model used for?,"nomic-embed-text is an embedding model that converts sentences or paragraphs into high-dimensional vectors (dense numerical representations). Similar texts produce vectors that are close together in the embedding space, enabling semantic search.","The nomic-embed-text model is used to convert sentences or paragraphs into high-dimensional vectors, enabling semantic search. Similar texts have vectors that are close together in the embedding space.","- **Outdated knowledge**: Models have a training cutoff date and lack real-time information.
+- **Context window**: Models can only process a limited number of tokens at once.
+- **Bias**: Models may reproduce biases present in training data.
+
+## Retrieval-Augmented Generation (RAG)
+
+RAG is a technique that enhances LLMs by retrieving relevant documents from an external knowledge
+base before generating a response. This reduces hallucinations and keeps answers grounded in
+verified source documents. RAG systems typically use:
+1. An **embedding model** to encode documents and queries into vector representations.
+2. A **vector database** to store and retrieve document embeddings.
+3. An **LLM** to generate answers based on retrieved context.
+
+## Embeddings
+
+Embeddings are dense numerical representations of text. Models like **nomic-embed-text** convert
+sentences or paragraphs into high-dimensional vectors. Similar texts have vectors that are close
+together in the embedding space, enabling sem...",4.0,True,"The generated answer accurately describes the function of converting text to vectors and enabling semantic search, which aligns with the reference answer, though it omits the specific term ""embedding model"".",1.0,True,YES,1.0,True,YES,0.9702908717834189,True
+2026-03-05T11:15:10,What is a vector database and how does it differ from a traditional database?,"A vector database is a specialized database designed to store, index, and retrieve high-dimensional vector embeddings efficiently using approximate nearest-neighbor (ANN) search. Unlike traditional relational databases that search by exact value matches, vector databases perform similarity searches to find the most semantically related vectors.","A vector database is a specialized database designed to store, index, and retrieve high-dimensional vector embeddings efficiently. Unlike traditional relational databases that search by exact value matches, vector databases perform approximate nearest-neighbor (ANN) searches to find vectors most similar to a query vector.
+
+Traditional databases differ from vector databases in their approach to data retrieval. Traditional databases use indexing algorithms to facilitate fast query execution, but they do not specifically cater to similarity-based queries or high-dimensional vector data. In contrast, vector databases are optimized for efficient storage and retrieval of large amounts of high-dimensional vector data, making them suitable for applications such as semantic search, recommendation systems, and image and audio search.
+
+Vector databases typically use specialized index structures, such as HNSW, IVF, or Flat Index, to store and retrieve vectors efficiently. These indexes enable fast nearest-neighbor searches, allowing users to quickly find the most similar vectors to a query vector based on a distance metric (e.g., cosine similarity, dot product).","# Vector Databases
+
+## What is a Vector Database?
+
+A vector database is a specialized database designed to store, index, and retrieve high-dimensional
+vector embeddings efficiently. Unlike traditional relational databases that search by exact value
+matches, vector databases perform **approximate nearest-neighbor (ANN)** searches to find vectors
+most similar to a query vector.
+
+## Why Vector Databases?
+
+Traditional databases cannot efficiently handle similarity search over millions of high-dimensional
+vectors. Vector databases use specialized indexing algorithms to make this fast and scalable.
+
+## How They Work
+
+1. **Embedding**: Source documents (text, images, audio, etc.) are converted into vectors using
+   embedding models.
+2. **Indexing**: Vectors are stored in the database using specialized index structures (e.g., HNSW,
+   IVF, or Flat Index).
+3. **Querying**: A query is embedded using the same model. The database returns the top-K vectors
+   most similar to the query vector based ...",5.0,True,"The generated answer accurately defines a vector database and correctly explains its differences from traditional databases, including the use of ANN searches and specialized index structures. It fully addresses the user query and provides additional correct information about vector databases' suitability for similarity-based queries and applications.",1.0,True,YES,1.0,True,YES,0.9709866503406899,True
+2026-03-05T11:18:39,What is pgvector and what are its advantages?,"pgvector is a PostgreSQL extension that adds vector similarity search to the PostgreSQL relational database. It supports storing vectors as a native vector data type, exact and approximate nearest-neighbor search using HNSW and IVF indexes. Its advantages include no separate vector database infrastructure, combination of vector search with standard SQL queries, and good support by LlamaIndex.","pgvector is a PostgreSQL extension that adds vector similarity search capabilities to the PostgreSQL relational database. Its key feature is that it combines vector search with standard SQL queries (filtering, joins). The advantages of pgvector include no separate vector database infrastructure required and well-supported by LlamaIndex via `llama-index-vector-stores-postgres`.","# Vector Databases
+
+## What is a Vector Database?
+
+A vector database is a specialized database designed to store, index, and retrieve high-dimensional
+vector embeddings efficiently. Unlike traditional relational databases that search by exact value
+matches, vector databases perform **approximate nearest-neighbor (ANN)** searches to find vectors
+most similar to a query vector.
+
+## Why Vector Databases?
+
+Traditional databases cannot efficiently handle similarity search over millions of high-dimensional
+vectors. Vector databases use specialized indexing algorithms to make this fast and scalable.
+
+## How They Work
+
+1. **Embedding**: Source documents (text, images, audio, etc.) are converted into vectors using
+   embedding models.
+2. **Indexing**: Vectors are stored in the database using specialized index structures (e.g., HNSW,
+   IVF, or Flat Index).
+3. **Querying**: A query is embedded using the same model. The database returns the top-K vectors
+   most similar to the query vector based ...",4.0,True,"The generated answer correctly identifies pgvector as a PostgreSQL extension for vector similarity search and accurately lists two of its advantages. However, it omits the specific mention of HNSW and IVF index support and one of the advantages mentioned in the reference (though it implies good LlamaIndex support).",1.0,True,YES,1.0,True,YES,0.9831127754311224,True
+2026-03-05T11:21:07,What distance metrics does pgvector support?,"pgvector supports cosine similarity (measures angle between vectors, values from -1 to 1), L2 (Euclidean) distance (straight-line distance between vector endpoints), and dot product / inner product (useful when vectors are normalized).","pgvector supports cosine similarity, L2 (Euclidean) distance, and dot product (inner product) as distance metrics.","# Vector Databases
+
+## What is a Vector Database?
+
+A vector database is a specialized database designed to store, index, and retrieve high-dimensional
+vector embeddings efficiently. Unlike traditional relational databases that search by exact value
+matches, vector databases perform **approximate nearest-neighbor (ANN)** searches to find vectors
+most similar to a query vector.
+
+## Why Vector Databases?
+
+Traditional databases cannot efficiently handle similarity search over millions of high-dimensional
+vectors. Vector databases use specialized indexing algorithms to make this fast and scalable.
+
+## How They Work
+
+1. **Embedding**: Source documents (text, images, audio, etc.) are converted into vectors using
+   embedding models.
+2. **Indexing**: Vectors are stored in the database using specialized index structures (e.g., HNSW,
+   IVF, or Flat Index).
+3. **Querying**: A query is embedded using the same model. The database returns the top-K vectors
+   most similar to the query vector based ...",2.5,False,"The generated answer lists the correct metrics (cosine similarity, L2 distance, dot product) but incorrectly classifies cosine similarity as a ""distance metric"" when it is actually a similarity measure, which is a mistake. The other two are correctly identified as distance metrics.",1.0,True,YES,1.0,True,YES,0.9372803002439409,True
