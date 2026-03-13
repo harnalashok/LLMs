@@ -57,6 +57,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "------------"   
 	echo "Updating Ubuntu.."
     sleep 3
+	# Download test file
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test.sh
+	
 	nvidia_driver_version=`modinfo nvidia | grep ^version`
     echo " Will update Ubuntu and also NVIDIA driver for GPU"                     
     echo " NVIDIA driver is: $nvidia_driver_version"
