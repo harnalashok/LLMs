@@ -2,6 +2,13 @@
 
 # Last amended: 13th March, 2026
 
+echo "   "
+echo "    "
+echo "Starting services"
+echo "==========="
+echo "   "
+echo "    "
+
 # Start software
 bash start_ollama.sh
 bash start_postgresql.sh
