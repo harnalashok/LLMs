@@ -83,9 +83,9 @@ fi
 abc=
 abc=`nvidia-smi | grep 'Memory-Usage'`
 if [[ -n $abc ]]; then
-  echo "7. cuda is started."
+  echo "7. cuda is available."
 else
-   echo "7. cuda NOT installed"
+   echo "7. cuda NOT available"
 fi
 
 ###############3
