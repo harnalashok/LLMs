@@ -1574,7 +1574,7 @@ cd /home/$USER
 if [ ! -f /home/$USER/openbb_installed.txt ]; then
     echo "   "
 	echo "    "
-	echo "Installing TradingAgents.."
+	echo "Installing OpenBB.."
 	sleep 3
 	conda create --name openbb
 	conda activate openbb
