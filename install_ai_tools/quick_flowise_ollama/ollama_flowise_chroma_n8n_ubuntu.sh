@@ -1246,6 +1246,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install langchain-openai
 	 pip install langchain-ollama
 	pip install langchain-community
+	pip install langchain-classic
 	pip install langchain-experimental
 	pip install langgraph
 	pip install "langserve[all]"
