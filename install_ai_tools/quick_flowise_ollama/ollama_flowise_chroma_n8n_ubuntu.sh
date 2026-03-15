@@ -1354,6 +1354,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			sudo systemctl reboot -i
 	else
 	       echo " "
+	fi
 fi
 
 ###################
