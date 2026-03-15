@@ -2022,6 +2022,7 @@ echo "========"
 lsb_release -a
 echo "========"
 echo "Shall I install mongodb db for Ubuntu 24.04? [Y,n]"    # 
+echo "Press ENTER to skip"
 read input
 #input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
