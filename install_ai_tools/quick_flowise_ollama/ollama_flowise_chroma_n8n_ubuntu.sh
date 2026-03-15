@@ -1082,6 +1082,10 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
     echo " "
     echo "------------"        
    # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/venv: The destination path so the environment will be located in
+   #                   a folder named venv inside your home directory.
 	python3 -m venv --clear /home/$USER/venv
 	source /home/$USER/venv/bin/activate
 	# 1.6 Essentials software
@@ -2183,7 +2187,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo "------------"        
 	echo "Shall I build and install xinference docker. Building takes time..? [Y,n]"    
-	echo "Press ENTER to skip"
+	echo "(not recommended approach) Press ENTER to skip"
 	read input
 	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
@@ -2263,11 +2267,13 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	echo " "
 	echo "------------"        
 	echo "Shall I install xinference on machine? [Y,n]"  
-	echo "Press ENTER to skip"
+	echo "Recommended approach. Press ENTER to skip"
 	read input
 	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
-	   source /home/$USER/venv/bin/activate
+	   # Create a new virtual env
+	   python3 -m venv --clear /home/$USER/xinference
+	   source /home/$USER/venv/bin/xinference
 	   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
 	   sleep 3
 	   pip install "xinference[llama_cpp]"
@@ -2290,7 +2296,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    echo "echo '======'"                                       >> /home/$USER/start_xinference.sh
 	    echo "sleep 5"                                             >> /home/$USER/start_xinference.sh
 	    echo "cd /home/$USER"                                     >> /home/$USER/start_xinference.sh
-	    echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/start_xinference.sh
+	    echo "source /home/$USER/xinference/bin/activate"          >> /home/$USER/start_xinference.sh
 	    echo "xinference-local --host 0.0.0.0 --port 9997"        >> /home/$USER/start_xinference.sh
 	    #
 	    #--------------
@@ -2298,12 +2304,16 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	    echo " "                                                   >> /home/$USER/launch_xinference.sh
 	    echo "Launching xinference bge-reranker-v2-m3"              >> /home/$USER/launch_xinference.sh
 	    echo "cd /home/$USER"                                     >> /home/$USER/launch_xinference.sh
-	    echo "source /home/$USER/venv/bin/activate"          >> /home/$USER/launch_xinference.sh
+	    echo "source /home/$USER/xinference/bin/activate"          >> /home/$USER/launch_xinference.sh
 	    echo "xinference launch --model-name bge-reranker-v2-m3 --model-type rerank --model-engine vllm --model-format pytorch --quantization none --replica 1 --gpu_memory_utilization 0.7 "     >> /home/$USER/launch_xinference.sh
 	    #    
 	    chmod +x *.sh
 		echo "Will reboot system now"
 	    sleep 5
+		LINE="     Xinference installed in its virtual env"
+	    if ! grep -qF "$LINE" "$FILE"; then
+	       echo "$LINE" >> "$FILE"
+	    fi
 		sudo systemctl reboot -i
 	else
 	     echo "xinference will not be installed"
