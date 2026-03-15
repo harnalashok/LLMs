@@ -2279,7 +2279,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	   # Create a new virtual env
 	   rm -rf /home/$USER/xinference
 	   python3 -m venv --clear /home/$USER/xinference
-	   source /home/$USER/venv/bin/xinference
+	   source /home/$USER/xinference/bin/activate
 	   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
 	   sleep 3
 	   pip install "xinference[llama_cpp]"
