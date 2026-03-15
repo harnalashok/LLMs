@@ -99,6 +99,13 @@ fi
 
 ###############3
 
+abc=
+abc=`node --version | grep '22'`
+if [[ -n $abc ]]; then
+  echo "8. nodejs ver 22.x is installed"
+else
+   echo "8. nodejs ver 22.x not installed"
+fi
 
 
 
