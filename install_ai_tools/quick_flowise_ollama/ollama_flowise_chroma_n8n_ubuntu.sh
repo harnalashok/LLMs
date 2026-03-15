@@ -2272,6 +2272,7 @@ if [ ! -f /home/$USER/xinference_installed.txt ]; then
 	#input=${input:-Y}
 	if [[ $input == "Y" || $input == "y" ]]; then
 	   # Create a new virtual env
+	   rm -rf /home/$USER/xinference
 	   python3 -m venv --clear /home/$USER/xinference
 	   source /home/$USER/venv/bin/xinference
 	   pip install xllamacpp --force-reinstall --index-url https://xorbitsai.github.io/xllamacpp/whl/cu124 --extra-index-url https://pypi.org/simple
