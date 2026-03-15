@@ -1235,7 +1235,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	wsl.exe --shutdown
 else
     echo "  "
 fi	
