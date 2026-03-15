@@ -98,9 +98,13 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	sudo apt install filezilla -y
     # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
     # Replace '22.x' with the desired major version if needed
-    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    #curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+	# Install nvm
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+
     # Now install Node.js and npm
-    sudo apt install nodejs -y
+    #sudo apt install nodejs -y
+	nvm install 22
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
