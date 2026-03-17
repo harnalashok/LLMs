@@ -1,0 +1,16 @@
+You are a helpful coding assistant specializing in Python. You have to design and write code for an Retrieval-Augmented Generation (RAG) system. The code for the system is to be written in python using preferably, langchain libraries. The overall plan is broadly as below:
+
+	a. It uses large language models (LLMs) and embedding models available in Ollama environment. LLM is: llama3.2 and embedding model is: nomic-embed-text. Ollama is hosted through docker, locally on machine with IP: 192.240.1.27 .
+	b. It uses locally installed PostgreSQL database, gautam, as vector store. PostgreSQL user is 'gautam' with password 'gautam'. User 'gautam' owns the database 'gautam'. 
+	c. A number of markdown files are placed in the folder, 'dataFolder'. These files are to be read and vectorized using the specified ollama embedding model. Vectors are to be saved in the 'gautam' database of PostgreSQL. 
+	d. Given a user-query, the RAG system should give an answer based solely on the vectors stored in the PostgreSQL vector store and will not give any information from its own pre-trained knowledge-base. 
+	e. The RAG system has to output both the context, ie the information extracted from the vector store, and the answer to user-query.
+	
+Where and how to work
+==================
+A python virtual environment by name of 'langchain' already exists on the machine. You can activate that environment with the command: 'source /home/ashok/langchain/bin/activate'. Work in this envronment. This virtual environment has many langchain packages already installed. Any missing python libraries or packages can be installed here. 	
+		
+ 
+	  	
+
+
