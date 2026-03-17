@@ -1095,10 +1095,10 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	# 1.6 Essentials software
 	pip install spyder numpy scipy pandas matplotlib sympy cython
 	pip install jupyterlab
-	pip install wheel
+	pip install -U wheel
 	pip install ipython
 	pip install notebook
-	pip install streamlit
+	pip install -U streamlit
 	pip install --upgrade setuptools
 	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
 	# Required for spyder:
@@ -1224,11 +1224,11 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install jupyterlab
 	pip install ipython
 	pip install notebook
-	pip install streamlit
+	pip install -U streamlit
 	# Required for spyder:
 	sudo apt install pyqt5-dev-tools -y
 	# Huggingface and llama.cpp related
-	pip install huggingface_hub
+	pip install -U huggingface_hub
 	# To connect to postgresql
 	pip install psycopg2
 	# Create script to activate 'langchain' env
@@ -1242,17 +1242,17 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
 	cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
 	source /home/$USER/langchain/bin/activate
-	pip install langchain
-	pip install langchain-openai
-	 pip install langchain-ollama
-	pip install langchain-community
-	pip install langchain-classic
-	pip install langchain-experimental
-	pip install langgraph
-	pip install "langserve[all]"
-	pip install langchain-cli
-	pip install unstructured
-	pip install unstructured[md]
+	pip install -U langchain
+	pip install -U langchain-openai
+	 pip install -U langchain-ollama
+	pip install -U langchain-community
+	pip install -U langchain-classic
+	pip install -U langchain-experimental
+	pip install -U langgraph
+	pip install -U "langserve[all]"
+	pip install -U langchain-cli
+	pip install -U unstructured
+	pip install -U unstructured[md]
 	#################
 	# llamaindex
 	# To be installed ONLY in langchain virtual env
@@ -1264,14 +1264,14 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install llama-index
 	# 1,1 Ollama, huggingface and localai (openailike) oriented
 	pip install --upgrade transformers
-	pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
-	pip install llama-index-readers-file llama-index-embeddings-fastembed
+	pip install -U llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
+	pip install -U llama-index-readers-file llama-index-embeddings-fastembed
 	# Needed inspite of code repeated above
 	pip install --upgrade transformers
 	# 1.2 Vector stores
-	pip install faiss-cpu
-	pip install qdrant-client llama-index-vector-stores-chroma 
-	pip install llama-index-vector-stores-qdrant fastembed
+	pip install -U faiss-cpu
+	pip install -U qdrant-client llama-index-vector-stores-chroma 
+	pip install =U llama-index-vector-stores-qdrant fastembed
 	 pip install -U llama-index-vector-stores-postgres
 	# 1.3 Web access site
 	pip install tavily-python
