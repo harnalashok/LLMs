@@ -423,6 +423,17 @@ echo "DONE"														>> /home/$USER/start_antigravity.sh
 echo "Refer: Medium article:"									>> /home/$USER/start_antigravity.sh
 echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		>> /home/$USER/start_antigravity.sh
 echo "========="												>> /home/$USER/start_antigravity.sh
+echo "    "
+echo "     "
+echo "#######3 AntiGravity on WSL ###########" 					
+echo "To install antigravity on WSL, follow these steps"        
+echo "1. Install antigravity first in Windows"					
+echo "2. Press ctrl+shift+p and select WSL: Connect to WSL"		
+echo "3. Select a folder in WSL, say, /home/$USER/Documents"	
+echo "DONE"														
+echo "Refer: Medium article:"									
+echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		
+echo "===File ./start_antigravity.sh======"												
 sleep 5
 ####################
 
