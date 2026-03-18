@@ -13,5 +13,6 @@ insert into ravi.public.distributors values (105, 'ashok', 'manager');
 insert into ravi.public.distributors values (110, 'vikas', 'manager');
 insert into ravi.public.distributors values (20, 'vidur', 'srmgr');
 insert into ravi.public.distributors values (30, 'kapil', 'dymgr');
+select * from distributors ;
 
 
