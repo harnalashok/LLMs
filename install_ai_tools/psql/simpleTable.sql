@@ -55,7 +55,7 @@ CREATE TABLE ravi.public.spj (
   );
 
 
-  INSERT INTO ravi.public.s (snum,sname,status,city) VALUES ('S1', 'Smith', 20, 'London');
+   INSERT INTO ravi.public.s (snum,sname,status,city) VALUES ('S1', 'Smith', 20, 'London');
   INSERT INTO ravi.public.s VALUES ('S2', 'Jones', 10, 'Paris');
   INSERT INTO ravi.public.s VALUES ('S3', 'Blake', 30, 'Paris');
   INSERT INTO ravi.public.s VALUES ('S4', 'Clark', 20, 'London');
