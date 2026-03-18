@@ -21,7 +21,6 @@ drop table IF EXISTS ravi.public.s ;
 drop table IF EXISTS ravi.public.p ;
 drop table IF EXISTS ravi.public.j ;
 
-
 CREATE TABLE ravi.public.s (
 	snum CHAR(2) NOT NULL PRIMARY KEY,
 	sname varchar(16) NOT NULL UNIQUE,
@@ -99,7 +98,11 @@ CREATE TABLE ravi.public.spj (
   INSERT INTO spj VALUES('S5', 'P1', 'J4', 100) ;
   INSERT INTO spj VALUES('S5', 'P3', 'J4', 200) ;
   INSERT INTO spj VALUES('S5', 'P4', 'J4', 800) ;
-  INSERT INTO spj VALUES("S5", "P5", "J4", 400) ;
-  INSERT INTO spj VALUES("S5", "P6", "J4", 500) ;
+  INSERT INTO spj VALUES('S5', "P5", "J4", 400) ;
+  INSERT INTO spj VALUES('S5', "P6", "J4", 500) ;
 
+select * from s;
+select * from p
+select * from j
+select * from spj ;
 
