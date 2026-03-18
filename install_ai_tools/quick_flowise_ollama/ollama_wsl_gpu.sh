@@ -401,6 +401,18 @@ if [ ! -d "$DIRECTORY" ]; then
 	    echo "Anaconda not installed"
 	 fi
 fi	 
+
+
+###############
+# Google Antigravity install for WSL
+# Ref: https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3
+# 1. Install first in Windows from:
+#     https://antigravity.google/download
+# 2. 
+# 
+################
+
+
  
 
 ###############
