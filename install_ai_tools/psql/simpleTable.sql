@@ -18,8 +18,7 @@ select * from distributors ;
 
 
 drop table IF EXISTS ravi.public.s ;
-CREATE TABLE ravi.public.s
-  (
+CREATE TABLE ravi.public.s (
 	snum CHAR(2) NOT NULL PRIMARY KEY,
 	sname varchar(16) NOT NULL UNIQUE,
 	status int NOT NULL,
@@ -28,8 +27,7 @@ CREATE TABLE ravi.public.s
 
 
 drop table IF EXISTS ravi.public.p ;
-CREATE TABLE p
-  (
+CREATE TABLE ravi.public.p (
 	pnum CHAR(2) NOT NULL PRIMARY KEY,
 	pname varchar(18) NOT NULL,
 	color varchar(10) NOT NULL,
@@ -39,7 +37,8 @@ CREATE TABLE p
   );
 
 drop table IF EXISTS ravi.public.j ;
-  CREATE TABLE j
+
+  CREATE TABLE ravi.public.j
   (
 	jnum CHAR(2) NOT NULL PRIMARY KEY,
 	jname varchar(18) NOT NULL,
@@ -48,8 +47,8 @@ drop table IF EXISTS ravi.public.j ;
 
 
 drop table IF EXISTS ravi.public.spj ;
-CREATE TABLE spj
-  (
+
+CREATE TABLE ravi.public.spj (
 	snum CHAR(2) NOT NULL REFERENCES S,
 	pnum CHAR(2) NOT NULL REFERENCES P,
 	jnum CHAR(2)  NOT NULL REFERENCES J,
