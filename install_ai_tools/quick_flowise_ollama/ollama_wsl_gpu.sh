@@ -757,9 +757,11 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	      echo "Will install ollama for GPU..."
 	      sleep 4
 	      # Creating alias for command: docker exec -it ollama
-	      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
+		  hostip=`hostname -I | awk '{print $1}'`
+		  echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
 		  echo "docker start ollama"                          >> /home/$USER/.bashrc
-		  echo "echo 'Ollama docker started'"                  >> /home/$USER/.bashrc
+		  echo "echo 'Ollama docker started at port 11434'"   >> /home/$USER/.bashrc
+		  echo "echo 'Access as: http://$hostip:11434'"       >> /home/$USER/.bashrc
 	      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 	      # network host would be local mashine
 	      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
