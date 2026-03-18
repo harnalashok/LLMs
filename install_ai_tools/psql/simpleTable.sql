@@ -18,10 +18,6 @@ select * from distributors ;
 
 
 
-#CREATE DATABASE IF NOT EXISTS spp ;
-#\c spp ;
-
-
 CREATE TABLE s
   (
 	snum CHAR(2) NOT NULL PRIMARY KEY,
