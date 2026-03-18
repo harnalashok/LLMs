@@ -18,7 +18,7 @@ select * from distributors ;
 
 
 
-CREATE TABLE s
+CREATE TABLE ravi.public.s
   (
 	snum CHAR(2) NOT NULL PRIMARY KEY,
 	sname varchar(16) NOT NULL UNIQUE,
@@ -56,11 +56,12 @@ CREATE TABLE spj
   );
 
 
-  INSERT INTO s VALUES ("S1", 'Smith', 20, 'London');
-  INSERT INTO s VALUES ("S2", 'Jones', 10, 'Paris');
-  INSERT INTO s VALUES ("S3", 'Blake', 30, 'Paris');
-  INSERT INTO s VALUES ("S4", 'Clark', 20, 'London');
-  INSERT INTO s VALUES ("S5", 'Adams', 30, 'Athens');
+  INSERT INTO ravi.public.s VALUES ("S1", 'Smith', 20, 'London');
+  INSERT INTO ravi.public.s VALUES ("S2", 'Jones', 10, 'Paris');
+  INSERT INTO ravi.public.s VALUES ("S3", 'Blake', 30, 'Paris');
+  INSERT INTO ravi.public.s VALUES ("S4", 'Clark', 20, 'London');
+  INSERT INTO ravi.public.s VALUES ("S5", 'Adams', 30, 'Athens');
+
   INSERT INTO p VALUES ("P1", 'Nut', 'Red', 12, 'London');
   INSERT INTO p VALUES ("P2", 'Bolt', 'Green', 17, 'Paris');
   INSERT INTO p VALUES ("P3", 'Screw', 'Blue', 17, 'Oslo');
