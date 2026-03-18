@@ -433,7 +433,9 @@ echo "3. Select a folder in WSL, say, /home/$USER/Documents"
 echo "DONE"														
 echo "Refer: Medium article:"									
 echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		
-echo "===File ./start_antigravity.sh======"												
+echo "    "
+echo "===File ./start_antigravity.sh======"		
+echo  "     "
 sleep 5
 ####################
 
