@@ -16,8 +16,12 @@ insert into ravi.public.distributors values (20, 'vidur', 'srmgr');
 insert into ravi.public.distributors values (30, 'kapil', 'dymgr');
 select * from distributors ;
 
-
+drop table IF EXISTS ravi.public.spj ;
 drop table IF EXISTS ravi.public.s ;
+drop table IF EXISTS ravi.public.p ;
+drop table IF EXISTS ravi.public.j ;
+
+
 CREATE TABLE ravi.public.s (
 	snum CHAR(2) NOT NULL PRIMARY KEY,
 	sname varchar(16) NOT NULL UNIQUE,
@@ -26,7 +30,6 @@ CREATE TABLE ravi.public.s (
   );
 
 
-drop table IF EXISTS ravi.public.p ;
 CREATE TABLE ravi.public.p (
 	pnum CHAR(2) NOT NULL PRIMARY KEY,
 	pname varchar(18) NOT NULL,
@@ -36,8 +39,6 @@ CREATE TABLE ravi.public.p (
 	UNIQUE (pname, color, city)
   );
 
-drop table IF EXISTS ravi.public.j ;
-
   CREATE TABLE ravi.public.j
   (
 	jnum CHAR(2) NOT NULL PRIMARY KEY,
@@ -45,8 +46,6 @@ drop table IF EXISTS ravi.public.j ;
 	city varchar(18) NOT NULL
   );
 
-
-drop table IF EXISTS ravi.public.spj ;
 
 CREATE TABLE ravi.public.spj (
 	snum CHAR(2) NOT NULL REFERENCES S,
