@@ -685,6 +685,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "===="
 	echo "===="
 	echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
+	echo "In the same database, creating linked tables: s,p,j,spj with data"
+	echo "See as: ./psql.sh ; \c ravi ; select * from spj ; ' "
 	sleep 3
 	sudo -u postgres psql -c 'create user ravi ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
