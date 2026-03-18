@@ -408,9 +408,23 @@ fi
 # Ref: https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3
 # 1. Install first in Windows from:
 #     https://antigravity.google/download
-# 2. 
+# 2. PRess ctrl+shift+p and select WSL: Connect to WSL
+# 3. Select a folder in WSL, say, /home/ashok/Documents 
 # 
 ################
+echo "    "
+echo "     "
+echo "#######3 AntiGravity on WSL ###########" 					> /home/$USER/start_antigravity.sh
+echo "To install antigravity on WSL, follow these steps"        >> /home/$USER/start_antigravity.sh
+echo "1. Install antigravity first in Windows"					>> /home/$USER/start_antigravity.sh
+echo "2. Press ctrl+shift+p and select WSL: Connect to WSL"		>> /home/$USER/start_antigravity.sh
+echo "3. Select a folder in WSL, say, /home/$USER/Documents"	>> /home/$USER/start_antigravity.sh
+echo "DONE"														>> /home/$USER/start_antigravity.sh
+echo "Refer: Medium article:"									>> /home/$USER/start_antigravity.sh
+echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		>> /home/$USER/start_antigravity.sh
+echo "========="												>> /home/$USER/start_antigravity.sh
+sleep 5
+####################
 
 
  
