@@ -1208,7 +1208,18 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 		sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
 		sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
 		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
-		
+		echo "   "
+        echo "===="
+		echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
+		sleep 3
+		sudo -u postgres psql -c 'create user ravi ;'
+		sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
+		sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
+		#sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ravi
+		cd /home/$USER/psql
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
+		cd /home/$USER
+		PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
 		#sudo -u postgres psql -c "\du" 
 		#sudo -u postgres psql -c "\l"
 
