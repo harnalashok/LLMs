@@ -701,9 +701,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
     # Create chinook database and data
 	# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
 	echo "===="
-	echo "Create user chinook, password chinook, database chinook and a table, distributors, with many rows"
+	echo "Create user chinook, password chinook, database chinook with many rows"
 	echo "In the same database, creating multiple linked tables. Use pgAdmin4 to view data"
-	echo "See as: ./psql.sh ; \c chinook ; select * from Album ; ' "
+	echo "All table names and column names are in double quotes"
+	echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
 	sleep 3
 	sudo -u postgres psql -c 'create user chinook ;'
 	sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
