@@ -1060,6 +1060,26 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
 		cd /home/$USER
 		PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
+		 # Create chinook database and data
+		# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
+		echo "===="
+		echo "Create user chinook, password chinook, database chinook with many rows"
+		echo "In the same database, creating multiple linked tables. Use pgAdmin4 to view data"
+		echo "All table names and column names are in double quotes"
+		echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
+		sleep 3
+		sudo -u postgres psql -c 'create user chinook ;'
+		sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
+		sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
+		#
+		cd /home/$USER/psql
+		rm  /home/$USER/psql/chinook.sql
+		# Original is here: 
+		# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
+		# With double quotes removed
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
+		cd /home/$USER
+		PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
 		#sudo -u postgres psql -c "\du" 
 		#sudo -u postgres psql -c "\l"
 
