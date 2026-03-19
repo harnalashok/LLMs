@@ -691,7 +691,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'create user ravi ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
 	sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
-	#sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ravi
+	#
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/simpleTable.sql
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
@@ -708,16 +708,13 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'create user chinook ;'
 	sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
 	sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
-	
+	#
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/chinook.sql
 	wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
 	cd /home/$USER
 	PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
-
-
-	
-	
+			
 	#sudo -u postgres psql -c "\du" 
 	#sudo -u postgres psql -c "\l"
 
@@ -727,15 +724,16 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
 	echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
 	sudo systemctl restart postgresql
+	#
 	# Install pgadmin4 only in Ubuntu
+	echo "Installing pgadmin4.."
+	sleep 3
 	curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
 	# Create the repository configuration file:
 	sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 	# Install for both desktop and web modes:
-	sudo apt install pgadmin4
-
-
-    
+	sudo apt install pgadmin4 -y
+    #
 	# Download RAG data files
 	mkdir -p /home/$USER/Documents/data
 	cd /home/$USER/Documents/data
