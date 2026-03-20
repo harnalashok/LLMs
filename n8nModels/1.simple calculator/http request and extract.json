@@ -29,7 +29,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        720,
+        512,
         176
       ],
       "id": "94ae8cc2-52db-46b4-a021-814f4365603c",
@@ -49,11 +49,24 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        384,
+        288,
         176
       ],
       "id": "e081bcb1-7c19-492b-9a7f-9c54b980d184",
       "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "content": "HTTP Request node, as here, with HTML node can be used as a tool.\nRef: https://n8n.io/workflows/434-extract-post-titles-from-a-blog/"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        32
+      ],
+      "id": "a60e70c7-8e7c-427e-b385-cef3bf81b3ed",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -92,7 +105,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "f62550bd-9728-43f6-a46f-f50689d9faeb",
+  "versionId": "c8fe2761-6ad6-477f-a479-fa70ce0651c9",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "765b8bda8d7bc82847ca532c0fe800eb82cbd7e870204cc3fb1242a877bfe4b4"
