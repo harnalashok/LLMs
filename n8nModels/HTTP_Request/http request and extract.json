@@ -1,0 +1,115 @@
+{
+  "name": "http request and extract",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        64,
+        176
+      ],
+      "typeVersion": 1,
+      "id": "27e8057b-4396-4bb2-9e35-8469d4158cbb"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "item",
+              "cssSelector": "h2",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        512,
+        176
+      ],
+      "id": "94ae8cc2-52db-46b4-a021-814f4365603c",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "url": "https://hackernoon.com/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        288,
+        176
+      ],
+      "id": "e081bcb1-7c19-492b-9a7f-9c54b980d184",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "content": "HTTP Request node, as here, with HTML node can be used as a tool.\nRef: https://n8n.io/workflows/434-extract-post-titles-from-a-blog/"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        32
+      ],
+      "id": "a60e70c7-8e7c-427e-b385-cef3bf81b3ed",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c8fe2761-6ad6-477f-a479-fa70ce0651c9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "765b8bda8d7bc82847ca532c0fe800eb82cbd7e870204cc3fb1242a877bfe4b4"
+  },
+  "id": "UBAyBAidgfgtWP36",
+  "tags": []
+}
