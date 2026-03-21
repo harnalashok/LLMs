@@ -86,6 +86,19 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
+	echo "Install httpd server"
+	sudo apt-get install apache2 -y
+	cd /home/$USER
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
+	sudo mv /home/$USER/index.html  /var/www/html/index.html
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start_apache2.sh
+	echo " "                                                   | tee -a /home/$USER/start_apache2.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start_apache2.sh
+	echo "echo 'Port is 80.'"                                  | tee -a /home/$USER/start_apache2.sh
+	echo "echo 'Web server is at /var/www/html/'"              | tee -a /home/$USER/start_apache2.sh
+	echo "sudo systemctl restart apache2"                      | tee -a /home/$USER/start_apache2.sh
+	echo "cd /home/$USER"                                      | tee -a /home/$USER/start_apache2.sh 
+	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
 	# Script to stop all dockers
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
     echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
