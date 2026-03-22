@@ -1240,10 +1240,31 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
 	sleep 3
 	crawl4ai-setup
 	crawl4ai-doctor
+	# Create script to activate 'crawl4ai' env
+	echo '#!/bin/bash'                                                            | tee   /home/$USER/activate_crawl4ai.sh
+	echo "echo 'Execute this file as: source activate_crawl4ai.sh' "              | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'To use or install any python package, first activate python crawl4ai as:' "        | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'source /home/$USER/crawl4ai/bin/activate' "                       | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(Note the change in prompt after activating)' "                   | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "            | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "source /home/$USER/crawl4ai/bin/activate"                               | tee -a  /home/$USER/activate_crawl4ai.sh
+	#
 	# Pull and run the latest release
     docker pull unclecode/crawl4ai:latest
     docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
 	docker update --restart=no $(docker ps -a -q)
+	echo '#!/bin/bash'                                         >  /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd ~/"                                               >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'crawl4ai port 11235 onstarting'"                 >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'Access crawl4ai as: http://localhost:11235'"     >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
+    echo "docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest"    >> /home/$USER/start_crawl4ai.sh
+    echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
+    echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
+    chmod +x *.sh
 fi
 
 ###########################
