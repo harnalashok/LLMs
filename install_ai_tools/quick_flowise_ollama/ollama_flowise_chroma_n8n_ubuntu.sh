@@ -810,6 +810,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	cd ~/
 	mkdir /home/$USER/n8n  # Redundant step
 	# Volumes are automatically created below: /var/lib/docker/volumes/
+	#                                          /var/lib/docker/volumes/n8n_data/_data
 	docker volume create n8n_data
 	#   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
 	#   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
