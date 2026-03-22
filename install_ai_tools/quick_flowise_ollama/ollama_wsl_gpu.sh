@@ -1028,6 +1028,81 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 	fi	
 fi
 
+
+##################3
+# crawl4AI
+# https://github.com/unclecode/crawl4ai
+###################
+
+
+if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/crawl4ai: The destination path so the environment will be located in
+   #                     a folder named venv inside your home directory.
+	python3 -m venv --clear /home/$USER/crawl4ai
+	source /home/$USER/crawl4ai/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install --upgrade setuptools
+	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
+	# Required for spyder:
+	sudo apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	sleep 2
+	# Install the crew4AI
+    pip install -U crawl4ai
+	python -m playwright install --with-deps chromium
+	sleep 3
+	crawl4ai-setup
+	crawl4ai-doctor
+	# Create script to activate 'crawl4ai' env
+	echo '#!/bin/bash'                                                            | tee   /home/$USER/activate_crawl4ai.sh
+	echo "echo 'Execute this file as: source activate_crawl4ai.sh' "              | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'To use or install any python package, first activate python crawl4ai as:' "        | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'source /home/$USER/crawl4ai/bin/activate' "                       | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(Note the change in prompt after activating)' "                   | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "            | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "source /home/$USER/crawl4ai/bin/activate"                               | tee -a  /home/$USER/activate_crawl4ai.sh
+	#
+	# Pull and run the latest release
+    docker pull unclecode/crawl4ai:latest
+    docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
+	docker update --restart=no $(docker ps -a -q)
+	echo '#!/bin/bash'                                         >  /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd ~/"                                               >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'crawl4ai port 11235 onstarting'"                 >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'Access crawl4ai as: http://localhost:11235'"     >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
+    echo "docker start crawl4ai"                               >> /home/$USER/start_crawl4ai.sh
+    echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
+    echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
+    chmod +x *.sh
+	wsl.exe --shutdown
+fi
+
+
+
+
 #################
 # langchain & langraph
 #################
