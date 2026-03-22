@@ -1097,7 +1097,14 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
     echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
     echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
     chmod +x *.sh
+	sleep 2
+	LINE="  14. crawl4ai installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
+else
+    echo "   "
 fi
 
 
