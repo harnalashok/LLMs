@@ -1243,6 +1243,7 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
 	# Pull and run the latest release
     docker pull unclecode/crawl4ai:latest
     docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
+	docker update --restart=no $(docker ps -a -q)
 fi
 
 ###########################
