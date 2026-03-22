@@ -1261,7 +1261,7 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
     echo " "                                                   >> /home/$USER/start_crawl4ai.sh
     echo " "                                                   >> /home/$USER/start_crawl4ai.sh
     echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
-    echo "docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest"    >> /home/$USER/start_crawl4ai.sh
+    echo "docker start crawl4ai"                               >> /home/$USER/start_crawl4ai.sh
     echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
     echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
     chmod +x *.sh
