@@ -660,7 +660,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	                 -p 5678:5678 \
 	                 -e NODE_OPTIONS="--max-old-space-size=4096" \
 	                --network host   \
-	                 -v n8n_data:/home/node/.n8n \
+	                 -v n8n_data:/home/$USER/node/.n8n \
 	                    docker.n8n.io/n8nio/n8n
 	    # n8n start script for Ubuntu
 	    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
