@@ -704,8 +704,11 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 		  sleep 2
 		  echo "Pulling bge-m3"
 	      docker exec -it ollama ollama pull bge-m3
-		  echo "Pulling llama3.2"
+		  echo "Pulling llama3.2 and small models"
 		  docker exec -it ollama ollama pull llama3.2:latest
+		  docker exec -it ollama ollama pull llama3.2:1b
+		  docker exec -it ollama ollama pull deepseek-r1:1.5b
+		  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
 		  echo " "
 		  echo " "
 		  #ollama list
