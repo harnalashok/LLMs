@@ -1238,21 +1238,12 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
     pip install -U crawl4ai
 	python -m playwright install --with-deps chromium
 	sleep 3
+	crawl4ai-setup
 	crawl4ai-doctor
 	# Pull and run the latest release
     docker pull unclecode/crawl4ai:latest
     docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
-
-# Visit the monitoring dashboard at http://localhost:11235/dashboard
-# Or the playground at http://localhost:11235/playground
-fi	
-	
-
-
-
-
-
-
+fi
 
 ###########################
 # Install latest anaconda
