@@ -1197,6 +1197,63 @@ else
    echo "  "
 fi   
 
+##################3
+# crawl4AI
+# https://github.com/unclecode/crawl4ai
+###################
+
+
+if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/crawl4ai: The destination path so the environment will be located in
+   #                     a folder named venv inside your home directory.
+	python3 -m venv --clear /home/$USER/crawl4ai
+	source /home/$USER/crawl4ai/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install --upgrade setuptools
+	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
+	# Required for spyder:
+	sudo apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	sleep 2
+	# Install the crew4AI
+    pip install -U crawl4ai
+	python -m playwright install --with-deps chromium
+	sleep 3
+	crawl4ai-doctor
+	# Pull and run the latest release
+    docker pull unclecode/crawl4ai:latest
+    docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
+
+# Visit the monitoring dashboard at http://localhost:11235/dashboard
+# Or the playground at http://localhost:11235/playground
+fi	
+	
+
+
+
+
+
+
+
 ###########################
 # Install latest anaconda
 # https://askubuntu.com/a/841224
