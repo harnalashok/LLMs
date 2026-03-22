@@ -555,7 +555,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
 	    # Access at localhost:5678
 	    # --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
-	    # docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+	    # docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/n8n/node/.n8n docker.n8n.io/n8nio/n8n
 	    # Access at localhost:5678
 	    docker run -it -d --rm \
 	                --name n8n \
@@ -572,22 +572,15 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
 	    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
 	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
-	    #echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/$USER/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
 	    # n8n start script for WSL
 	    echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
 	    echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
 	    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
 	    #echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
 	    echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
-	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
-	    # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
-	    #echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
-	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
 	    cd ~/
-	    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
-	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
-		mkdir -p /home/$USER/Documents/n8n
+	    mkdir -p /home/$USER/Documents/n8n
 		cd /home/$USER/Documents/n8n
 		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_with_smtp_III.json?raw=true
 		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_II.json?raw=true
