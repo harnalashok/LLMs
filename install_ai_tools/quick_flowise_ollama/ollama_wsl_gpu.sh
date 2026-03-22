@@ -648,6 +648,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    mkdir /home/$USER/n8n  # Redundant step
 	    #cd /home/$USER/n8n
 	    # Volumes are automatically created below: /var/lib/docker/volumes/
+		#                                         /var/lib/docker/volumes/n8n_data/_data
 	    docker volume create n8n_data
 	    #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
 	    #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
