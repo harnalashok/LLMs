@@ -1265,6 +1265,8 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
     echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
     echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
     chmod +x *.sh
+	sleep 2
+	sudo systemctl reboot -i
 fi
 
 ###########################
