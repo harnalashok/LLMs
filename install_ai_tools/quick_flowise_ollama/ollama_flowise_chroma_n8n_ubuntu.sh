@@ -818,12 +818,12 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
 	# docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
 	# Access at localhost:5678
-	docker run -it -d --rm \
+	sudo docker run -it -d --rm \
 				--name n8n \
 				 -p 5678:5678 \
 				 -e NODE_OPTIONS="--max-old-space-size=4096" \
 				--network host   \
-				 -v n8n_data:/home/node/.n8n \
+				 -v n8n_data:/home/$USER/node/.n8n \
 					docker.n8n.io/n8nio/n8n
 	# n8n start script for Ubuntu
 	echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
@@ -834,7 +834,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
 	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
 	#echo "docker run -d -it --rm  --network host  --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\"  -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/$USER/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
 	# n8n start script for WSL
 	echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
 	echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
@@ -844,7 +844,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
 	# REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
 	#echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
-	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/$USER/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
 	mkdir /home/$USER/Documents/n8n
 	cd /home/$USER/Documents/n8n
 	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_with_smtp_III.json?raw=true
