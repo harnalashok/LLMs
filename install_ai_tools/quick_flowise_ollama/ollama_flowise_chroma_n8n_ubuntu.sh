@@ -14,6 +14,7 @@ echo "Will install milvus vector store"
 echo "Will install meilisearch vector store"
 echo "Will install chromadb docker"
 echo "Will install n8n docker"
+echo "Install crawl4ai"
 echo "Will install dify docker"
 echo "Will install mongodb and mongosh:"
 echo "Installs postgres db and pgvector"
@@ -1119,84 +1120,6 @@ else
     echo "  "
 fi
 
-##############
-# Create python virtual env
-# source /home/$USER/venv/bin/activate
-##############
-
-if [ ! -f /home/$USER/venv_installed.txt ]; then
-    cd /home/$USER
-	echo  "    "
-	echo  "    "
-	echo "Creating python virtual env.."
-    sleep 3
-    echo " "
-    echo " "
-    echo "------------"        
-   # Clear earlier directory, if it exists
-   # -m venv: Run the built-in venv module to create isolated environments.
-   # --clear: Delete the contents of the target directory if it already exists
-   # /home/$USER/venv: The destination path so the environment will be located in
-   #                   a folder named venv inside your home directory.
-	python3 -m venv --clear /home/$USER/venv
-	source /home/$USER/venv/bin/activate
-	# 1.6 Essentials software
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install -U wheel
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install --upgrade setuptools
-	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-	# Required for spyder:
-	# Huggingface and  related
-	#pip install huggingface_hub
-	# cu124: is as per cuda version. Get cuda version from nvidia-smi
-	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-	#pip install huggingface_hub
-	echo "####"
-	sudo apt install pyqt5-dev-tools -y
-	sudo apt install tesseract-ocr-all -y
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	# To connect to postgresql
-	pip install psycopg2
-	echo "####"
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	mkdir -p /home/$USER/Documents/samples/in
-	mkdir -p /home/$USER/Documents/samples/out
-	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-	cd /home/$USER
-	echo "####"
-	# Create script to activate 'venv' env
-	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-	# Download script to create python venv
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	chmod +x /home/$USER/*.sh
-	sleep 2
-  
-	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-	LINE="  14. python virtual env created at '~/venv'"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
-	sudo systemctl reboot -i
-else
-   echo "  "
-fi   
-
 ##################3
 # crawl4AI
 # https://github.com/unclecode/crawl4ai
@@ -1266,8 +1189,94 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
     echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
     chmod +x *.sh
 	sleep 2
+	LINE="  14. crawl4ai installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	sudo systemctl reboot -i
+else
+    echo "   "
 fi
+
+
+##############
+# Create python virtual env
+# source /home/$USER/venv/bin/activate
+##############
+
+if [ ! -f /home/$USER/venv_installed.txt ]; then
+    cd /home/$USER
+	echo  "    "
+	echo  "    "
+	echo "Creating python virtual env.."
+    sleep 3
+    echo " "
+    echo " "
+    echo "------------"        
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/venv: The destination path so the environment will be located in
+   #                   a folder named venv inside your home directory.
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install --upgrade setuptools
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	# Download script to create python venv
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x /home/$USER/*.sh
+	sleep 2
+  
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	LINE="  15. python virtual env created at '~/venv'"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sudo systemctl reboot -i
+else
+   echo "  "
+fi   
+
 
 ###########################
 # Install latest anaconda
@@ -1311,7 +1320,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
-		LINE="  15. anaconda installed"
+		LINE="  16. anaconda installed"
 		if ! grep -qF "$LINE" "$FILE"; then
 	    	echo "$LINE" >> "$FILE"
 		fi
@@ -1420,7 +1429,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  16. langchain and langgraph virtual env, 'langchain', created."
+	LINE="  17. langchain and langgraph virtual env, 'langchain', created."
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1476,7 +1485,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
 			chmod +x *.sh
 			sleep 5
-			LINE="  17. Google antigravity installed."
+			LINE="  18. Google antigravity installed."
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
@@ -1510,7 +1519,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
-	  LINE="  18. llamacpp installed"
+	  LINE="  19. llamacpp installed"
 	  if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	  fi
@@ -1560,7 +1569,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     chmod +x /home/$USER/start/*.sh
     chmod +x /home/$USER/stop/*.sh
 	sleep 5
-	LINE="  19. VSCode installed"
+	LINE="  20. VSCode installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1613,7 +1622,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 	    echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
 		
-		LINE="  20. RAG and RAG performance Eval system installed"
+		LINE="  21. RAG and RAG performance Eval system installed"
 		if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		fi
@@ -1685,7 +1694,7 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "sleep 5"																		|   tee  -a  /home/$USER/start_agno.sh
 	echo "python /home/$USER/agno/cookbook/00_quickstart/run.py"						 |   tee  -a  /home/$USER/start_agno.sh
 	chmod +x /home/$USER/*.sh
-	LINE="  21. Agent Builder agno installed"
+	LINE="  22. Agent Builder agno installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1749,7 +1758,7 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cd /home/$USER
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
-	LINE="  22. Trading Agent installed"
+	LINE="  23. Trading Agent installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1825,7 +1834,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
 		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
 		sleep 2
-		LINE="  23. Langflow installed"
+		LINE="  24. Langflow installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -1874,7 +1883,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		sleep 3
-		LINE="  24. OpenNotebook installed"
+		LINE="  25. OpenNotebook installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -1931,7 +1940,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
 	   
-	   LINE="  25. Portainer installed"
+	   LINE="  26. Portainer installed"
 	   if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	   fi
@@ -1994,7 +2003,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
 		sleep 2
-		LINE="  26. ngrok installed"
+		LINE="  27. ngrok installed"
 	    if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	    fi
