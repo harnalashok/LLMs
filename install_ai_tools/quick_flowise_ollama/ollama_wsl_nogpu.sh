@@ -576,7 +576,15 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
 	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
 	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-	    cd ~/
+		# n8n community nodes
+		echo '#!/bin/bash'                                                                                                        > /home/$USER/comm_node_n8n.sh
+		echo " "                                                                                                                  >> /home/$USER/comm_node_n8n.sh
+		echo "echo 'List of community nodes to install:'"                                                                         >> /home/$USER/comm_node_n8n.sh
+		echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/comm_node_n8n.sh
+		echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/comm_node_n8n.sh
+		echo "echo '  1. n8n-nodes-crawl4ai-enhanced'"                                                                             >> /home/$USER/comm_node_n8n.sh
+		echo "sleep 9"                                                                                                             >> /home/$USER/comm_node_n8n.sh
+		cd ~/
 	    mkdir -p /home/$USER/Documents/n8n
 		cd /home/$USER/Documents/n8n
 		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_with_smtp_III.json?raw=true
