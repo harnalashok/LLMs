@@ -1,0 +1,189 @@
+{
+  "name": "web_site_status with tvilio",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "http://192.240.1.27:80/abc",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "cccc1d47-9996-457f-8ba3-8f25c37e70af",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7e968995-c884-41c9-b231-1dcbe2403a6f",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 400,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "e043985b-2356-4f10-9083-8f8c53510aa8",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        80,
+        0
+      ],
+      "id": "bfd7eb20-f4fb-44c2-a56e-f57b77fb60af",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "from": "+14787074839",
+        "to": "+918750893093",
+        "message": "=output {{ $json.statusCode }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        336,
+        -16
+      ],
+      "id": "b5a354c2-4daf-4752-88c4-03e64ed970ae",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "4byOQWrgn5WzmzNo",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "To get a Bad Request from HTTP node, access this page as:\n**http://192.240.1.27/%** \nas against:\n**http://192.240.1.27**",
+        "height": 144,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -160,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "180bebc2-0588-4064-8ca6-8dfed0efb920",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "In HTTP node, select **Never Error** option to escape error if the site is NOT responding",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -160,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "89018915-44ed-41cf-a426-ba9a6c2a2df1",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -336,
+        0
+      ],
+      "id": "6e493fc8-a71e-4b5c-a32b-b059589d4bf5",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c82a8185-b305-479e-b751-0a3c747a80c7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "765b8bda8d7bc82847ca532c0fe800eb82cbd7e870204cc3fb1242a877bfe4b4"
+  },
+  "id": "lFX6pzuzX9VrrKE5",
+  "tags": []
+}
