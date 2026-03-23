@@ -570,6 +570,8 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	    echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
 	    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
 	    echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
+		echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
+	    echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
 	    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
 	    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
 	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
