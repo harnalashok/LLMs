@@ -1149,6 +1149,8 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
 	sleep 2
 	# Install the crew4AI
     pip install -U crawl4ai
+	sleep 2
+	playwright install
 	python -m playwright install --with-deps chromium
 	sleep 3
 	crawl4ai-setup
