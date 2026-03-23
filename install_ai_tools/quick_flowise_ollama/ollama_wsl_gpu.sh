@@ -1073,6 +1073,7 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
     pip install -U crawl4ai
 	sleep 2
 	playwright install
+	sleep 2
 	python -m playwright install --with-deps chromium
 	sleep 3
 	crawl4ai-setup
