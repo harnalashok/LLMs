@@ -134,6 +134,14 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "sudo systemctl restart apache2"                      | tee -a /home/$USER/start_apache2.sh
 	echo "cd /home/$USER"                                      | tee -a /home/$USER/start_apache2.sh 
 	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
+	echo '#!/bin/bash'                                         | tee    /home/$USER/stop_apache2.sh
+	echo " "                                                   | tee -a /home/$USER/stop_apache2.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/stop_apache2.sh
+	echo "echo 'Port is 80.'"                                  | tee -a /home/$USER/stop_apache2.sh
+	echo "echo 'Web server is at /var/www/html/'"              | tee -a /home/$USER/stop_apache2.sh
+	echo "sudo systemctl stop apache2"                         | tee -a /home/$USER/stop_apache2.sh
+	echo "cd /home/$USER"                                      | tee -a /home/$USER/stop_apache2.sh 
+	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/stop_apache2.sh
 	# Script to stop all dockers
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_alldockers.sh
     echo "echo 'Will stop all dockers:'"                       | tee -a /home/$USER/stop_alldockers.sh
