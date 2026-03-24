@@ -2047,6 +2047,15 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	fi
 fi	
 
+echo "   "
+echo "   "
+echo "==============="
+echo "You can skip rest of the install."
+echo "Press ctrl+c to do it"
+echo "=============="
+echo "   "
+echo "   "
+sleep 12
  
 #####################
 ## langflow install
