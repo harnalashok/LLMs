@@ -206,9 +206,10 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo " "
 	echo "  "
 	echo "==>CUDA install for Ubuntu 22.04 ONLY<=="
+	echo "  "
 	#nvidia-settings
-	echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
-	echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
+	#echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
+	#echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
 	echo "cuda-toolkit does not change GPU drivers."
 	echo "But higher versions of cuda-toolkit may have installation problems"
 	# Remove old gpg key
