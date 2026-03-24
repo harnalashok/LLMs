@@ -1804,14 +1804,13 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 	if [ ! -f /home/$USER/ragflowUpgraded_installed.txt ]; then
 	    echo "   "
 		echo "    "
-		echo "Installing TradingAgents.."
 		echo "======="
 		echo "Shall I upgrade/Repair RAGFlow docker? [Y,n]"   
 		echo "The upgarde does not touch your data files"
 		echo "After upgrade, RESET your broswer cookies"
 		echo "========"
 		read input
-		#input=${input:-Y}
+		input=${input:-Y}
 		if [[ $input == "Y" || $input == "y" ]]; then
 			echo " "
 			echo " "
