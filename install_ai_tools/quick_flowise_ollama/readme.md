@@ -27,13 +27,11 @@ Stop Symantic anti-virus first
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/install_ubuntu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
 
-   perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n_ubuntu.sh
+   perl -pi -e 's/\r\n/\n/g' ~/install_ubuntu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
 
-   #bash ollama_flowise_chroma_n8n_ubuntu.sh
-   #bash ollama_wsl_gpu.sh
    bash ollama_wsl_nogpu.sh
    cd ~/   
 ```
@@ -58,17 +56,13 @@ Stop Symantic anti-virus first
    fi
 
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
-   #wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
-   #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n_ubuntu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
 
-   perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n_ubuntu.sh
+   perl -pi -e 's/\r\n/\n/g' ~/install_ubuntu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
 
-   #bash ollama_flowise_chroma_n8n_ubuntu.sh
-   #bash ollama_wsl_nogpu.sh
    bash ollama_wsl_gpu.sh
    cd ~/   
 ```
@@ -94,15 +88,15 @@ Stop Symantic anti-virus first
 
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
    #wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n_ubuntu.sh
+   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/install_ubuntu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
 
-   perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n_ubuntu.sh
+   perl -pi -e 's/\r\n/\n/g' ~/install_ubuntu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
 
-   bash ollama_flowise_chroma_n8n_ubuntu.sh
+   bash install_ubuntu.sh
    #bash ollama_wsl_gpu.sh
    #bash ollama_wsl_nogpu.sh
    cd ~/   
