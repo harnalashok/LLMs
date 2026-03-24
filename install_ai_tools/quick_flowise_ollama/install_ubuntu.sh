@@ -2047,11 +2047,13 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	fi
 fi	
 
+docker update --restart=no $(docker ps -a -q)
+clear
 echo "   "
 echo "   "
 echo "==============="
 echo "You can skip rest of the install."
-echo "Press ctrl+c to do it"
+echo "Press ctrl+c now to do it"
 echo "=============="
 echo "   "
 echo "   "
