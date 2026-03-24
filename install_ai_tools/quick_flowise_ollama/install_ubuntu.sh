@@ -1732,6 +1732,10 @@ if [ ! -f /home/$USER/openbb_installed.txt ]; then
 	openbb-api
 	echo "openbb_installed.txt"  >  /home/$USER/openbb_installed.txt
 	conda deactivate
+	LINE="  23. OpenBB installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 fi	
 
 
@@ -1768,7 +1772,7 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cd /home/$USER
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
-	LINE="  23. Trading Agent installed"
+	LINE="  24. Trading Agent installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1848,6 +1852,10 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 		    docker compose -f docker-compose.yml up -d
 			docker logs -f docker-ragflow-gpu-1
 			echo "ragflowUpgraded_installed.txt" > /home/$USER/ragflowUpgraded_installed.txt
+			LINE="  25. RagFlow"
+			if ! grep -qF "$LINE" "$FILE"; then
+				echo "$LINE" >> "$FILE"
+			fi
 		else
 	    	echo "RagFlow Not upgraded"
 		fi
@@ -2117,7 +2125,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
 		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
 		sleep 2
-		LINE="  24. Langflow installed"
+		LINE="  26. Langflow installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -2166,7 +2174,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		sleep 3
-		LINE="  25. OpenNotebook installed"
+		LINE="  27. OpenNotebook installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -2223,7 +2231,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
 	   
-	   LINE="  26. Portainer installed"
+	   LINE="  28. Portainer installed"
 	   if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	   fi
@@ -2286,7 +2294,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
 		sleep 2
-		LINE="  27. ngrok installed"
+		LINE="  29. ngrok installed"
 	    if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	    fi
