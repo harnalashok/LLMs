@@ -178,7 +178,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
     echo " "
-    echo "=>   ./ollama_flowise_chroma_n8n_ubuntu.sh"
+    echo "=>   ./install_ubuntu.sh"
     echo "=========="
     sleep 15
 	LINE="  1. Ubuntu updated"
