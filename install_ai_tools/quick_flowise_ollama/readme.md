@@ -24,7 +24,7 @@ Stop Symantic anti-virus first
 
    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_nogpu.sh
-   #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_flowise_chroma_n8n_ubuntu.sh
+   #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/install_ubuntu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
 
    perl -pi -e 's/\r\n/\n/g' ~/ollama_flowise_chroma_n8n_ubuntu.sh
