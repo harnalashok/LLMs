@@ -2053,11 +2053,12 @@ echo "   "
 echo "   "
 echo "==============="
 echo "You can skip rest of the install."
-echo "Press ctrl+c now to do it"
+echo "Press ctrl+c now to skip"
+echo "Else, press ENTER to continue"
 echo "=============="
 echo "   "
 echo "   "
-sleep 12
+read x
  
 #####################
 ## langflow install
