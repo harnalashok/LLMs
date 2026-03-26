@@ -1,0 +1,530 @@
+{
+  "name": "Scrape web pages and summarize",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        16
+      ],
+      "id": "ae47e877-de7f-4589-9376-0f75a376dffc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "essays",
+        "include": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        16
+      ],
+      "id": "45ee201e-6dbc-4f44-98b2-add16219d5f6",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "maxItems": 3
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        16
+      ],
+      "id": "268b413f-be23-4e02-86e1-c7e277ecee7f",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:1b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmOllama",
+      "typeVersion": 1,
+      "position": [
+        240,
+        192
+      ],
+      "id": "5f1b2d9f-5f0b-44ea-bf73-8ce6dc46cfc4",
+      "name": "Ollama Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "mudPJ1oZ72EnJlyv",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        208
+      ],
+      "id": "44b805d0-3218-4137-b6c5-a9bc0470cc30",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 6000,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        560,
+        336
+      ],
+      "id": "fceed55a-1b0a-483b-b6ab-4344579e0366",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        560,
+        -16
+      ],
+      "id": "9591847d-7519-4a5c-8401-9417091c3095",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "content": "Keep Chunk Size: 6000 for quick summary",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        640,
+        352
+      ],
+      "typeVersion": 1,
+      "id": "be489c5c-cde9-467d-90ca-e45d51de74a5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Use llama3.2:1b for quick summary",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        336
+      ],
+      "typeVersion": 1,
+      "id": "46d49c1e-abd6-4f7b-996b-7c00f82f4b0e",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Use Document Loader option",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        192,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "f910a683-e107-4310-b2d0-2a08c4ecba14",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operationMode": "documentLoader",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "typeVersion": 2.1,
+      "position": [
+        192,
+        32
+      ],
+      "id": "5ef7adb5-9746-45f4-877a-e7b367f429d6",
+      "name": "Summarization Chain"
+    },
+    {
+      "parameters": {
+        "content": "Just write the paul graham [website address](https://paulgraham.com/articles.html)",
+        "height": 80,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1088,
+        160
+      ],
+      "typeVersion": 1,
+      "id": "26d0131e-422d-4431-b05b-1caa1b114dd2",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "url": "https://paulgraham.com/articles.html",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -992,
+        16
+      ],
+      "id": "1dffc8d7-e014-4d25-82ec-931f7bfded25",
+      "name": "Reach site"
+    },
+    {
+      "parameters": {
+        "content": "Press ctrl+shift+c in firefox to see site structure in html.\n\nJson Property: data\nKey: essays\nCSS Selector: table table a\nReturn Value->Attribute: href\nReturn array: Yes",
+        "height": 176,
+        "width": 256
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -880,
+        160
+      ],
+      "typeVersion": 1,
+      "id": "c2e77cb0-8274-430c-87bc-b6f8e1c9fefe",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "Split out:\nField to split out: essays",
+        "height": 80,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -672,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "aeb114a1-e119-42d0-a373-2a6a23de187b",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "Limit:\nMax items: 3",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -448,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "983e5dd3-e3f7-4fa5-b2e7-e691f527432d",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "Get three essays:\nJust set URL as: https://paulgraham.com/{{ $json.essays }}",
+        "height": 80,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -496,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "47735e43-f546-488f-ace7-63dcaa06d0ff",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "Clean up:\nSource Data: JSON\nJSON Property: data\nKey: essay\nCSS Selector: body\nReturn Value: Text\nSkip selectors: href"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -128,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "f6be1228-acff-4356-9368-82f7c10d22ac",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "url": "=https://paulgraham.com/{{ $json.essays }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -256,
+        16
+      ],
+      "id": "c189abb5-a8dc-4ea5-b78c-170990b80f13",
+      "name": "Get three essays"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "essays",
+              "cssSelector": "table table a",
+              "returnValue": "attribute",
+              "attribute": "href",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -832,
+        16
+      ],
+      "id": "d4aaba3c-629e-40cf-8365-aab00646e295",
+      "name": "extract essay file names"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "essay",
+              "cssSelector": "body",
+              "skipSelectors": "href "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -48,
+        16
+      ],
+      "id": "256e2347-546c-4f22-827d-52efb6499f60",
+      "name": "clean up"
+    },
+    {
+      "parameters": {
+        "content": "Get title\nSource Data: JSON\nJSON Property: data\nKey: title\nCSS Selector: title\nReturn Value: Text\n",
+        "height": 144
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "80438b3b-c85f-4d78-bc27-523c97ee8997",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "title",
+              "cssSelector": "title"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        -256
+      ],
+      "id": "6603c7a1-6107-45d1-8075-39304fd8cb10",
+      "name": "get title"
+    },
+    {
+      "parameters": {
+        "content": "### About css selectors and attributes\nIn the example <p font =23>, p is a selector, font is an attribute with value 25. In <a href=\"http//abc.com\"  /a> selector is ,a, attribute is href and value is the url.",
+        "height": 112,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1200,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "3d87da5f-6610-4331-8088-c14e6910f315",
+      "name": "Sticky Note10"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Reach site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Get three essays",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Reach site": {
+      "main": [
+        [
+          {
+            "node": "extract essay file names",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get three essays": {
+      "main": [
+        [
+          {
+            "node": "get title",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "clean up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extract essay file names": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean up": {
+      "main": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get title": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "866b52f8-5410-4f09-ab5f-57938592f356",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "902e785c32021c0bcc14053d93633c43f340fc597c1f8feeced84ef40971442a"
+  },
+  "id": "kislEl3TjZfAPOsw",
+  "tags": []
+}
