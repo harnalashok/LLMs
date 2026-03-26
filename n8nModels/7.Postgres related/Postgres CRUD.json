@@ -1,0 +1,262 @@
+{
+  "name": "Postgres CRUD",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        192
+      ],
+      "id": "ee27dc15-6c32-4d34-a8b7-55951227d1c9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from acars ;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        16,
+        176
+      ],
+      "id": "acc49440-3b61-4128-bd5c-28087b5eaa48",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "OtiOg2FXAD2k4djp",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "acars",
+          "mode": "list",
+          "cachedResultName": "acars"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "brand": "'fiat'",
+            "model": "'old'",
+            "year": 1971
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "brand",
+              "displayName": "brand",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "model",
+              "displayName": "model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "year",
+              "displayName": "year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        16
+      ],
+      "id": "8fed8e61-277a-41e0-a53b-9b8c0293b121",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "OtiOg2FXAD2k4djp",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "acars",
+          "mode": "list",
+          "cachedResultName": "acars"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "year",
+              "value": "1971"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        16,
+        368
+      ],
+      "id": "e0a0f6fe-a7d5-4dd4-b1a7-e8bbe54c3264",
+      "name": "Delete table or rows",
+      "credentials": {
+        "postgres": {
+          "id": "OtiOg2FXAD2k4djp",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from acars ;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        240,
+        336
+      ],
+      "id": "28f6c588-a417-4388-95ba-5d1c61d15765",
+      "name": "Execute a SQL query1",
+      "credentials": {
+        "postgres": {
+          "id": "OtiOg2FXAD2k4djp",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from acars ;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        208,
+        16
+      ],
+      "id": "2e33811d-d5ce-49c3-b6cb-7cb257d8b3d9",
+      "name": "Execute a SQL query2",
+      "credentials": {
+        "postgres": {
+          "id": "OtiOg2FXAD2k4djp",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "CRUD operations in postgresql database\nSee file: *'sql code from command line.txt'*",
+        "height": 112,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        64
+      ],
+      "typeVersion": 1,
+      "id": "3524fb5b-dc7b-41d3-bef4-a32da479616c",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Delete table or rows",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete table or rows": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ea4da4f2-4d44-41a2-9cff-dc93ec8e34e1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7edb78ce03a6824135cfb87d9a0d3a7d5599b351f3a3ab090e10f2c13a2b59a4"
+  },
+  "id": "ZZP7K075TVuWWjG2",
+  "tags": []
+}
