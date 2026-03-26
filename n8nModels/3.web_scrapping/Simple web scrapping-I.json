@@ -1,0 +1,254 @@
+{
+  "name": "Simple web scrapping-I",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "44e5cf4d-8caa-4ab4-95f3-8a4cf0e021ec",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        656,
+        16
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "https://paulgraham.com/woke.html",
+        "options": {}
+      },
+      "id": "ba4eccbe-7ff1-4b4d-bb96-33c2d0a6117c",
+      "name": "Fetch essay list",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        880,
+        16
+      ],
+      "typeVersion": 4.1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "764b774e-5f8d-4970-bfc2-d33119dbe5c3",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "position": [
+        1200,
+        160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chunkSize": 5000,
+        "options": {}
+      },
+      "id": "8391e1d6-aa17-4f03-ae4d-1eec6415c954",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "position": [
+        1328,
+        272
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:1b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        192
+      ],
+      "id": "81c28a9b-3147-49d7-855c-8f866274b152",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "mudPJ1oZ72EnJlyv",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operationMode": "documentLoader",
+        "options": {}
+      },
+      "id": "34fbfbae-294d-4bbb-a170-0b7663754fb7",
+      "name": "Summarization Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "position": [
+        1152,
+        16
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "60d0e86b-2bf2-41f7-a0be-36275dfc2185",
+              "name": "response",
+              "value": "={{ $json.response.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1504,
+        16
+      ],
+      "id": "dc4296e0-86bd-4189-b89f-ed0889cffb61",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "Get this [essay](https://paulgraham.com/woke.html) on woke",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        864,
+        160
+      ],
+      "typeVersion": 1,
+      "id": "04a27d3f-8258-4ed4-afa6-896bbf0f52fa",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "llama3.2:1b",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1040,
+        304
+      ],
+      "typeVersion": 1,
+      "id": "16932ae9-1c5d-40a2-8780-d766de82f28a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Chunk size: 5000",
+        "height": 80,
+        "width": 160
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1424,
+        304
+      ],
+      "typeVersion": 1,
+      "id": "d384cb2a-2936-4c69-8e52-454db50a9967",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Drag 'text' field to Add Field box",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1488,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "2e78cab2-ee4c-4d32-ba61-73b0f710d259",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Fetch essay list": {
+      "main": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Fetch essay list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "173f171a-c3be-48d5-8696-8d6f045cc1f5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "902e785c32021c0bcc14053d93633c43f340fc597c1f8feeced84ef40971442a"
+  },
+  "id": "BPwioMU79p9iIPRU",
+  "tags": []
+}
