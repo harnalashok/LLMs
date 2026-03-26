@@ -174,7 +174,9 @@ Concepts
 	--Create user directly in linux shell:
     sudo useradd -m kumar
 	sudo passwd kumar
+    sudo -u postgres psql -c 'drop database if exists kumar;'
 	sudo -u postgres psql -c 'create database kumar;'
+    sudo -u postgres psql -c 'drop user if exists kumar;'
 	sudo -u postgres psql -c 'create user kumar;'
 	sudo -u postgres psql -c 'grant all privileges on database kumar to kumar;' -d kumar
 	sudo -u postgres psql -c "alter user kumar with encrypted password 'kumar';"
