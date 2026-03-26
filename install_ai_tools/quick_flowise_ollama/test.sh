@@ -107,6 +107,14 @@ else
    echo "8. nodejs ver 22.x not installed"
 fi
 
+abc=
+abc=`node --version | grep '8'`
+if [[ -n $abc ]]; then
+  echo "9. npm ver 8.x is installed"
+else
+   echo "8. npm ver 8.x not installed"
+fi
+
 
 
 
