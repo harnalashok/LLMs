@@ -121,6 +121,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
+	sudo apt install npm
 	echo "Install httpd server"
 	sudo apt-get install apache2 -y
 	cd /home/$USER
