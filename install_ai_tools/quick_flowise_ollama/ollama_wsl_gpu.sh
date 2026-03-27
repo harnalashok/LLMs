@@ -86,6 +86,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
+	# Record date/time in history
+	echo 'export HISTTIMEFORMAT="%F %T "'  >> /home/$USER/.bashrc
 	sudo apt install npm
 	echo "Install httpd server"
 	sudo apt-get install apache2 -y
