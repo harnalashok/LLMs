@@ -31,7 +31,8 @@ Stop Symantic anti-virus first
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
-
+   # Assuming sudo password is ashok
+   sed -i 's/sudo/echo "ashok" | sudo -S /g' ollama_wsl_nogpu.sh
    bash ollama_wsl_nogpu.sh
    cd ~/   
 ```
@@ -62,7 +63,8 @@ Stop Symantic anti-virus first
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
-
+   # Assuming sudo password is ashok
+   sed -i 's/sudo/echo "ashok" | sudo -S /g' ollama_wsl_gpu.sh
    bash ollama_wsl_gpu.sh
    cd ~/   
 ```
@@ -95,7 +97,8 @@ Stop Symantic anti-virus first
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
-
+   # Assuming sudo password is ashok
+   sed -i 's/sudo/echo "ashok" | sudo -S /g' install_ubuntu.sh
    bash install_ubuntu.sh
    #bash ollama_wsl_gpu.sh
    #bash ollama_wsl_nogpu.sh
