@@ -680,6 +680,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 		echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
 	    echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
 	    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
+		echo "echo 'Next time start as: docker start n8n'"																		   >>  /home/$USER/start_n8n.sh
 	    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
 	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
 	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/$USER/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
