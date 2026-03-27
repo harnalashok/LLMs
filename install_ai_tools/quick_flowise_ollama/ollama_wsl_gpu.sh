@@ -565,7 +565,218 @@ cd /home/$USER/
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
  		
-    
+
+
+##########################
+### Install FAISS library
+##########################
+
+echo " "
+echo " "
+echo "-----"
+cd /home/$USER
+    echo " "
+    echo " "
+	echo "------------"  
+		echo " "
+		echo "============"
+		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
+		echo "is of the folder where data files will be saved. Consider this as the "
+		echo "location of FAISS database for that application."
+		echo "=============="
+		echo " "
+		sleep 8
+		# Create venv for FAISS
+		python3 -m venv /home/$USER/faiss
+		source /home/$USER/faiss/bin/activate
+		pip3 install faiss-cpu
+		deactivate
+		## Script to activate FAISS library
+		echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
+		echo " "                                                                >> /home/$USER/start/activate_faiss.sh
+		echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
+		echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
+		echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
+		echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
+		echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
+		deactivate
+		echo "FAISS library installed at /home/$USER/faiss/"
+		echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
+		# FAISS download data-cleaning script
+		cd /home/$USER/
+		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
+		chmod +x *.sh
+		chmod +x /home/$USER/start/*.sh
+		sleep 4
+		cd /homne/$USER/
+		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
+		
+################
+# Install postgresql and sqlite3
+################
+
+echo " "
+echo " "
+cd /home/$USER
+echo "------------"   
+		# Install postgresql
+	    cd /home/$USER/
+	    echo "Installing postgresql and sqlite3"
+	    sudo apt install postgresql postgresql-contrib sqlite3   -y
+		
+	    # Postgresql start/stop script
+
+		# Start script
+		echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
+	    echo " "                                                               >> /home/$USER/start_postgresql.sh  
+	    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
+	    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
+	    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
+	    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
+	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
+	    
+		# Stop script
+	    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
+	    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
+	    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
+	    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
+	    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
+	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
+		
+		mkdir /home/$USER/psql
+	    cd /home/$USER/psql
+		
+	    # Script to create sqlite database
+		# A small help script
+	    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+	    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	    chmod +x *.sh
+		
+	    #############
+	    # psql related
+	    # Download help scripts that will inturn, help create user and password
+	    # in postgresql
+	    ##############
+	    cd /home/$USER/
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
+	    chmod +x /home/$USER/*.sh
+	    
+		# Create symlinks
+	    cd /home/$USER/psql
+	    ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
+	    ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
+	    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
+	    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
+	    ln -sT /home/$USER/psql.sh                       psql.sh
+		ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
+	    cd /home/$USER
+	    
+		###########
+	    ## Add postgres vector storage capability
+	    ############
+	    # Add vector storage capability to postgres
+	    # My version of postgres db is 14.
+	    # (Check as: pg_config --version)
+	    # Install a needed package (depending upon your version of postgres)
+	    # Check version as: pg_config --version
+	    # Assuming version 16
+	    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
+	    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+	    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+	    sudo apt install postgresql-server-dev-$version  -y
+	    #sudo apt install postgresql-server-dev-16  -y
+	    # Ref: https://github.com/pgvector/pgvector
+	    cd /tmp
+	    git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
+	    cd pgvector
+	    make
+	    sudo make install 
+
+		# Create user ashok and database ashok
+		cd /home/$USER/
+		# Creating user 'ashok', owning database 'ashok'. 
+		# Creating user 'harnal', owning database 'harnal'. 
+		echo " "
+		echo " "
+		echo "========="
+		echo "Creating user 'ashok' owning database 'askok'"
+		echo "Creating user 'harnal' and database 'harnal'"
+		echo "User 'ashok' has password: ashok"
+		echo "User 'harnal' has password: harnal"
+		echo "Database 'ashok' can also be used as vector database"
+		echo "Database 'harnal' can also be used as vector database"
+		echo "========="
+		echo " "
+		echo " "
+		sleep 5
+		sudo -u postgres psql -c 'create user harnal ;'
+		sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
+		sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
+		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
+		echo "===="
+		sudo -u postgres psql -c 'create user ashok ;'
+		sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
+		sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
+		echo "   "
+        echo "===="
+		echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
+		sleep 3
+		sudo -u postgres psql -c 'create user ravi ;'
+		sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
+		sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
+		#sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ravi
+		cd /home/$USER/psql
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
+		cd /home/$USER
+		PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
+		 # Create chinook database and data
+		# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
+		echo "===="
+		echo "Create user chinook, password chinook, database chinook with many rows"
+		echo "In the same database, creating multiple linked tables. Use pgAdmin4 to view data"
+		echo "All table names and column names are in double quotes"
+		echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
+		sleep 3
+		sudo -u postgres psql -c 'create user chinook ;'
+		sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
+		sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
+		#
+		cd /home/$USER/psql
+		rm  /home/$USER/psql/chinook.sql
+		# Original is here: 
+		# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
+		# With double quotes removed
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
+		cd /home/$USER
+		PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
+		#sudo -u postgres psql -c "\du" 
+		#sudo -u postgres psql -c "\l"
+
+		# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
+		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+        cd /etc/postgresql/$version/main
+        echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
+        echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
+        sudo systemctl restart postgresql
+        cd /home/$USER
+		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+		
+	
 ##########################
 ### Install chromadb docker
 # Ref: https://docs.trychroma.com/production/containers/docker
@@ -935,136 +1146,6 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
  fi
 
 
-##########################
-### Install FAISS library
-##########################
-
-echo " "
-echo " "
-echo "-----"
-cd /home/$USER
-if [ ! -f /home/$USER/faiss_installed.txt ]; then
-    echo " "
-    echo " "
-	echo "------------"  
-		echo " "
-		echo "============"
-		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
-		echo "is of the folder where data files will be saved. Consider this as the "
-		echo "location of FAISS database for that application."
-		echo "=============="
-		echo " "
-		sleep 8
-		# Create venv for FAISS
-		python3 -m venv /home/$USER/faiss
-		source /home/$USER/faiss/bin/activate
-		pip3 install faiss-cpu
-		deactivate
-		## Script to activate FAISS library
-		echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
-		echo " "                                                                >> /home/$USER/start/activate_faiss.sh
-		echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
-		echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
-		echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
-		echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
-		echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
-		deactivate
-		echo "FAISS library installed at /home/$USER/faiss/"
-		echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
-		# FAISS download data-cleaning script
-		cd /home/$USER/
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
-		chmod +x *.sh
-		chmod +x /home/$USER/start/*.sh
-		sleep 4
-		cd /homne/$USER/
-		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
-		wsl.exe --shutdown
-fi
-
-
-##################3
-# crawl4AI
-# https://github.com/unclecode/crawl4ai
-###################
-
-
-if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
-   # Clear earlier directory, if it exists
-   # -m venv: Run the built-in venv module to create isolated environments.
-   # --clear: Delete the contents of the target directory if it already exists
-   # /home/$USER/crawl4ai: The destination path so the environment will be located in
-   #                     a folder named venv inside your home directory.
-	python3 -m venv --clear /home/$USER/crawl4ai
-	source /home/$USER/crawl4ai/bin/activate
-	# 1.6 Essentials software
-	pip install --upgrade pip
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install -U wheel
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install --upgrade setuptools
-	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
-	# Required for spyder:
-	sudo apt install pyqt5-dev-tools -y
-	sudo apt install tesseract-ocr-all -y
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	# To connect to postgresql
-	pip install psycopg2
-	echo "####"
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	sleep 2
-	# Install the crew4AI
-    pip install -U crawl4ai
-	sleep 2
-	playwright install
-	sleep 2
-	python -m playwright install --with-deps chromium
-	sleep 3
-	crawl4ai-setup
-	crawl4ai-doctor
-	# Create script to activate 'crawl4ai' env
-	echo '#!/bin/bash'                                                            | tee   /home/$USER/activate_crawl4ai.sh
-	echo "echo 'Execute this file as: source activate_crawl4ai.sh' "              | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo 'To use or install any python package, first activate python crawl4ai as:' "        | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo 'source /home/$USER/crawl4ai/bin/activate' "                       | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo '(Note the change in prompt after activating)' "                   | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "            | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "source /home/$USER/crawl4ai/bin/activate"                               | tee -a  /home/$USER/activate_crawl4ai.sh
-	#
-	# Pull and run the latest release
-    docker pull unclecode/crawl4ai:latest
-    docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
-	docker update --restart=no $(docker ps -a -q)
-	echo '#!/bin/bash'                                         >  /home/$USER/start_crawl4ai.sh
-    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
-    echo "cd ~/"                                               >> /home/$USER/start_crawl4ai.sh
-    echo "echo 'crawl4ai port 11235 onstarting'"                 >> /home/$USER/start_crawl4ai.sh
-    echo "echo 'Access crawl4ai as: http://localhost:11235'"     >> /home/$USER/start_crawl4ai.sh
-    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
-    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
-    echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
-    echo "docker start crawl4ai"                               >> /home/$USER/start_crawl4ai.sh
-    echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
-    echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
-    chmod +x *.sh
-	sleep 2
-	LINE="  14. crawl4ai installed"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
-	wsl.exe --shutdown
-else
-    echo "   "
-fi
-
-
 
 
 #################
@@ -1228,174 +1309,88 @@ else
 	echo "  "
 fi	
 
-################
-# Install postgresql and sqlite3
-################
 
-echo " "
-echo " "
-cd /home/$USER
-if [ ! -f /home/$USER/postgresql_installed.txt ]; then
-	echo "------------"   
-		# Install postgresql
-	    cd /home/$USER/
-	    echo "Installing postgresql and sqlite3"
-	    sudo apt install postgresql postgresql-contrib sqlite3   -y
-		
-	    # Postgresql start/stop script
 
-		# Start script
-		echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
-	    echo " "                                                               >> /home/$USER/start_postgresql.sh  
-	    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
-	    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
-	    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
-	    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
-	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
-	    
-		# Stop script
-	    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
-	    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
-	    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
-	    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
-	    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
-	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
-		
-		mkdir /home/$USER/psql
-	    cd /home/$USER/psql
-		
-	    # Script to create sqlite database
-		# A small help script
-	    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-	    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-	    chmod +x *.sh
-		
-	    #############
-	    # psql related
-	    # Download help scripts that will inturn, help create user and password
-	    # in postgresql
-	    ##############
-	    cd /home/$USER/
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
-	    chmod +x /home/$USER/*.sh
-	    
-		# Create symlinks
-	    cd /home/$USER/psql
-	    ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
-	    ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
-	    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
-	    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
-	    ln -sT /home/$USER/psql.sh                       psql.sh
-		ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
-	    cd /home/$USER
-	    
-		###########
-	    ## Add postgres vector storage capability
-	    ############
-	    # Add vector storage capability to postgres
-	    # My version of postgres db is 14.
-	    # (Check as: pg_config --version)
-	    # Install a needed package (depending upon your version of postgres)
-	    # Check version as: pg_config --version
-	    # Assuming version 16
-	    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
-	    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
-	    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-	    sudo apt install postgresql-server-dev-$version  -y
-	    #sudo apt install postgresql-server-dev-16  -y
-	    # Ref: https://github.com/pgvector/pgvector
-	    cd /tmp
-	    git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
-	    cd pgvector
-	    make
-	    sudo make install 
+##################3
+# crawl4AI
+# https://github.com/unclecode/crawl4ai
+###################
 
-		# Create user ashok and database ashok
-		cd /home/$USER/
-		# Creating user 'ashok', owning database 'ashok'. 
-		# Creating user 'harnal', owning database 'harnal'. 
-		echo " "
-		echo " "
-		echo "========="
-		echo "Creating user 'ashok' owning database 'askok'"
-		echo "Creating user 'harnal' and database 'harnal'"
-		echo "User 'ashok' has password: ashok"
-		echo "User 'harnal' has password: harnal"
-		echo "Database 'ashok' can also be used as vector database"
-		echo "Database 'harnal' can also be used as vector database"
-		echo "========="
-		echo " "
-		echo " "
-		sleep 5
-		sudo -u postgres psql -c 'create user harnal ;'
-		sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
-		sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
-		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
-		echo "===="
-		sudo -u postgres psql -c 'create user ashok ;'
-		sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
-		sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
-		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
-		echo "   "
-        echo "===="
-		echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
-		sleep 3
-		sudo -u postgres psql -c 'create user ravi ;'
-		sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
-		sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
-		#sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ravi
-		cd /home/$USER/psql
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
-		cd /home/$USER
-		PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
-		 # Create chinook database and data
-		# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
-		echo "===="
-		echo "Create user chinook, password chinook, database chinook with many rows"
-		echo "In the same database, creating multiple linked tables. Use pgAdmin4 to view data"
-		echo "All table names and column names are in double quotes"
-		echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
-		sleep 3
-		sudo -u postgres psql -c 'create user chinook ;'
-		sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
-		sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
-		#
-		cd /home/$USER/psql
-		rm  /home/$USER/psql/chinook.sql
-		# Original is here: 
-		# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
-		# With double quotes removed
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
-		cd /home/$USER
-		PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
-		#sudo -u postgres psql -c "\du" 
-		#sudo -u postgres psql -c "\l"
 
-		# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
-		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-        cd /etc/postgresql/$version/main
-        echo "listen_addresses = '*'" |  sudo tee -a /etc/postgresql/$version/main/postgresql.conf
-        echo "host    all             all             0.0.0.0/0               scram-sha-256" |  sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
-        sudo systemctl restart postgresql
-        cd /home/$USER
-		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
-		wsl.exe --shutdown
-	 
- fi
+if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/crawl4ai: The destination path so the environment will be located in
+   #                     a folder named venv inside your home directory.
+	python3 -m venv --clear /home/$USER/crawl4ai
+	source /home/$USER/crawl4ai/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install --upgrade setuptools
+	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
+	# Required for spyder:
+	sudo apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	sleep 2
+	# Install the crew4AI
+    pip install -U crawl4ai
+	sleep 2
+	playwright install
+	sleep 2
+	python -m playwright install --with-deps chromium
+	sleep 3
+	crawl4ai-setup
+	crawl4ai-doctor
+	# Create script to activate 'crawl4ai' env
+	echo '#!/bin/bash'                                                            | tee   /home/$USER/activate_crawl4ai.sh
+	echo "echo 'Execute this file as: source activate_crawl4ai.sh' "              | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'To use or install any python package, first activate python crawl4ai as:' "        | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'source /home/$USER/crawl4ai/bin/activate' "                       | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(Note the change in prompt after activating)' "                   | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "            | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "source /home/$USER/crawl4ai/bin/activate"                               | tee -a  /home/$USER/activate_crawl4ai.sh
+	#
+	# Pull and run the latest release
+    docker pull unclecode/crawl4ai:latest
+    docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
+	docker update --restart=no $(docker ps -a -q)
+	echo '#!/bin/bash'                                         >  /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd ~/"                                               >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'crawl4ai port 11235 onstarting'"                 >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'Access crawl4ai as: http://localhost:11235'"     >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
+    echo "docker start crawl4ai"                               >> /home/$USER/start_crawl4ai.sh
+    echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
+    echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
+    chmod +x *.sh
+	sleep 2
+	LINE="  14. crawl4ai installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	wsl.exe --shutdown
+else
+    echo "   "
+fi
 
 
 
