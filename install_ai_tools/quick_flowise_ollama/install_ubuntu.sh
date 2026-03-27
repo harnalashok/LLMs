@@ -1670,6 +1670,10 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	git sparse-checkout set llamaindex
 	git pull origin main
 	find . -maxdepth 1 ! -name "llamaindex" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mv llamaindexExamples/llamaindex/* .
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER
 	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
 else
 	echo "  "
