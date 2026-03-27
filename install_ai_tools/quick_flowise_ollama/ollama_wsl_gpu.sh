@@ -183,11 +183,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo " "
     echo "  "
     echo "==>For WSL-Ubuntu ONLY<=="
-    echo "Shall I install NVIDIA Toolkit (cuda-13) for WSL Ubuntu? [Y,n]"    
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
-           # Update wsl
+            # Update wsl
             wsl.exe --update
             # Remove old gpg key
             sudo apt-key del 7fa2af80
@@ -213,9 +209,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
             sleep 8
             echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
             wsl.exe --shutdown
-        else
-           echo "No installation of cuda toolkit on wsl"
-        fi
+       
     fi
 
    
@@ -329,10 +323,6 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
     echo " "
     echo " "
     echo "------------"        
-    echo "Shall I create python virtual env by name of venv? [Y,n]"    
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
         # Clear earlier directory, if it exists
         python3 -m venv --clear /home/$USER/venv
         source /home/$USER/venv/bin/activate
@@ -383,9 +373,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
         cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
 		wsl.exe --shutdown
-     else
-        echo "Python venv not installed"
-     fi   
+       
 fi   
 
 ###########################
@@ -399,10 +387,6 @@ echo " "
 DIRECTORY=/home/$USER/anaconda3
 if [ ! -d "$DIRECTORY" ]; then
 	echo "------------"        
-	echo "Shall I latest anaconda? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    DIRECTORY=/home/$USER/anaconda3       # Redundant
 	    if [ ! -d "$DIRECTORY" ]; then
 	        CONTREPO=https://repo.continuum.io/archive/
@@ -431,9 +415,7 @@ if [ ! -d "$DIRECTORY" ]; then
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
 	     fi   
-	 else
-	    echo "Anaconda not installed"
-	 fi
+	
 fi	 
 
 
@@ -484,14 +466,10 @@ sleep 5
 echo "  "
 echo "   "
 cd /home/$USER/
-if [ ! -f /home/$USER/milvus_installed.txt ]; then
+if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install milvus docker? [Y,n]"    # Else docker milvus may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo "====  "    
 		echo "Installing milvus vector database using docker"       
 		echo "You may be asked for the password. Supply it..."     
@@ -544,14 +522,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		chmod +x /home/$USER/*.sh
         chmod +x /home/$USER/start/*.sh
         chmod +x /home/$USER/stop/*.sh
-		wsl.exe --shutdown
-	else
-		echo "Milvus db not installed"
-	fi
-	echo "Milvus db is installed"
-fi	
-
-
+		echo "Milvus db is installed"
 
 ###############
 # Meilisearch install
@@ -561,14 +532,9 @@ fi
 echo "  "
 echo "   "
 cd /home/$USER/
-if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install meilisearch docker? [Y,n]"    # Else docker milvus may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo "====  "    
 		echo "Installing meilisearch vector database using docker"       
 		echo "You may be asked for the password. Supply it..."     
@@ -598,13 +564,8 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
- 		wsl.exe --shutdown
-    else
-	    echo "Meilisearch not installedd"
-	fi
-fi	
-
-
+ 		
+    
 ##########################
 ### Install chromadb docker
 # Ref: https://docs.trychroma.com/production/containers/docker
@@ -615,10 +576,6 @@ cd /home/$USER
 echo " "
 echo " "
 echo "------------"        
-echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
-read input
-input=${input:-Y}
-if [[ $input == "Y" || $input == "y" ]]; then
     # Write chroma start script
     echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
     echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
@@ -640,9 +597,8 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
+	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
 	wsl.exe --shutdown
-else
-    echo "Skipping install of chromadb docker"
 fi   
 
 
@@ -661,10 +617,6 @@ cd /home/$USER/
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo " "
 	echo " "
-	echo "Shall I install n8n docker? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    cd ~/
 	    mkdir /home/$USER/n8n  # Redundant step
 	    #cd /home/$USER/n8n
@@ -740,9 +692,6 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
  		echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
 		wsl.exe --shutdown
-	else
-	    echo "n8n docker will not be installed"
-	fi
 fi
 
 
@@ -759,10 +708,6 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"   
-	echo "Shall I install ollama docker? [Y,n]"
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	      cd /home/$USER/
 	      # Start ollama docker in future
 	      echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
@@ -814,9 +759,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 		  echo "ollama_installed.txt" > ollama_installed.txt
 		  chmod +x /home/$USER/*.sh
 		  wsl.exe --shutdown
-	else
-	        echo "Skipping install of ollama docker"
-	fi
+	
 fi	
 
 
@@ -828,10 +771,6 @@ echo " "
 echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
 	echo "------------"   
-	echo "Shall I download a few ollama models? [Y,n]"
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	      cd /home/$USER/
 	      # Start ollama docker in future
 	      docker start ollama 
@@ -850,9 +789,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 		  echo "models installed" > /home/$USER/models_installed.txt
 		  sleep 2
 		  wsl.exe --shutdown
-	else
-	        echo "Skipping download of ollama models"
-	fi
+	
 fi
 
 
@@ -867,11 +804,6 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	echo "------------"   
-	echo "Shall I install flowise docker? [Y,n]"    # Default is yes
-	read input
-	# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
-	input=${input:-y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	   cd /home/$USER/
 	   #####################3
 		# flowise docker
@@ -999,10 +931,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   chmod +x /home/$USER/start/*.sh
 	   chmod +x /home/$USER/stop/*.sh
 	   wsl.exe --shutdown
-	 else
-	   	echo "Flowise docker will not be installed"
-	 fi  
-	  echo "Flowise docker already installed"
+	   echo "Flowise docker already installed"
  fi
 
 
@@ -1018,10 +947,6 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"  
-	echo "Shall I install FAISS vector store? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 		echo " "
 		echo "============"
 		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
@@ -1055,9 +980,6 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		cd /homne/$USER/
 		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 		wsl.exe --shutdown
-	else
-		echo "FAISS not installed"
-	fi	
 fi
 
 
@@ -1156,10 +1078,6 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"  
-	echo "Shall I install langchain and llamaindex? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 		# Activate python environment at 'langchain'
 		#  for installing langchain and llama-index
 		##############
@@ -1240,9 +1158,6 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
 		wsl.exe --shutdown
-	else
-		echo "Langchain and llama index not installed"
-	fi		
 fi	
 
 #############
@@ -1322,11 +1237,6 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	echo "------------"   
-	echo "Shall I install postgres  db and pgvector? [Y,n]"    # 
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    
 		# Install postgresql
 	    cd /home/$USER/
 	    echo "Installing postgresql and sqlite3"
@@ -1484,9 +1394,7 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
         cd /home/$USER
 		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
 		wsl.exe --shutdown
-	 else
-	   echo "Postgres not installed"
-	 fi  
+	 
  fi
 
 
