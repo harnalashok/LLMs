@@ -1671,7 +1671,9 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	git pull origin main
 	find . -maxdepth 1 ! -name "llamaindex" ! -name "." ! -name ".." -delete
 	cd /home/$USER/Documents
-	mv llamaindexExamples/llamaindex/* .
+	mkdir llamaindex
+	cd llamaindex
+	mv /home/$USER/Documents/llamaindexExamples/llamaindex/* .
 	rm -rf /home/$USER/Documents/llamaindexExamples
 	cd /home/$USER
 	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
