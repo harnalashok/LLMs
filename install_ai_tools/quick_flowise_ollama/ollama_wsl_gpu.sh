@@ -32,6 +32,16 @@ if echo "$WSL" | grep -qi wsl ; then
     WSLSYSTEM="yes"
 fi
 
+FILE="/home/$USER/install_progerss.txt"
+LINE="Record of installation progress"
+if ! grep -qF "$LINE" "$FILE"; then
+    echo "   "       >> "$FILE"
+	echo "=========" >> "$FILE"
+    echo "$LINE" >> "$FILE"
+	echo "=========" >> "$FILE"
+	echo "   "       >> "$FILE"
+fi
+cat /home/$USER/install_progerss.txt
 
 ################
 # Update Ubuntu
