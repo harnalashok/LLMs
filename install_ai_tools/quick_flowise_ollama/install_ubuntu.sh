@@ -24,6 +24,7 @@ echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Install FAISS vector store"
 echo "Install langchain+llamaIndex"
+echo "Install llamaindex example files"
 echo "Install agno"
 echo "Install Google antigravity"
 echo "Install rag and rag performance eval system"
@@ -1643,6 +1644,34 @@ else
 	    echo "   "
 fi
 
+
+#############
+# Install llamaindex folder of examples
+# Installs the folder from github: LLM/llamaindex
+############
+
+#  Download github folder 'llamaindex' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing llamaindexExamples"
+	sleep 3
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	mkdir -p /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER/Documents/llamaindexExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set llamaindex
+	git pull origin main
+	find . -maxdepth 1 ! -name "llamaindex" ! -name "." ! -name ".." -delete
+	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
+else
+	echo "  "
+fi	
 
 
 ##################
