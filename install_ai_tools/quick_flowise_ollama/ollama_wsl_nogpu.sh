@@ -313,10 +313,6 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
     echo " "
     echo " "
     echo "------------"        
-    echo "Shall I create python virtual env by name of venv? [Y,n]"    
-    read input
-    input=${input:-Y}
-    if [[ $input == "Y" || $input == "y" ]]; then
         # Clear earlier directory, if it exists
         python3 -m venv --clear /home/$USER/venv
         source /home/$USER/venv/bin/activate
@@ -371,9 +367,6 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
         cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
         cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
 		wsl.exe --shutdown
-     else
-        echo "Python venv not installed"
-     fi   
 fi   
 
 
@@ -389,10 +382,6 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install milvus docker? [Y,n]"    # Else docker milvus may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo "====  "    
 		echo "Installing milvus vector database using docker"       
 		echo "You may be asked for the password. Supply it..."     
@@ -445,9 +434,7 @@ if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
 		wsl.exe --shutdown
-	else
-		echo "Milvus db not installed"
-	fi
+	
 	echo "Milvus db is installed"
 fi	
 
@@ -464,10 +451,6 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install meilisearch docker? [Y,n]"    # Else docker milvus may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    echo "====  "    
 		echo "Installing meilisearch vector database using docker"       
 		echo "You may be asked for the password. Supply it..."     
@@ -499,9 +482,7 @@ if [ ! -f /home/$USER/meilisearch_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
 		sleep 3
 		wsl.exe --shutdown
-    else
-	    echo "Meilisearch not installedd"
-	fi
+   
 fi	
 
 
@@ -517,10 +498,6 @@ if [ ! -f /home/$USER/chromadb_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"  
-	echo "Shall I install chromadb docker? [Y,n]"    # Else docker chromadb may be installed
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    # Write chroma start script
 	    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
 	    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
@@ -542,9 +519,7 @@ if [ ! -f /home/$USER/chromadb_installed.txt ]; then
 	    sleep 3
 		chmod +x /home/$USER/*.sh
 		wsl.exe --shutdown
-	else
-	    echo "Skipping install of chromadb docker"
-	fi   
+	  
 fi
 
 
@@ -564,10 +539,6 @@ echo " "
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "------------"   
 	echo "------------"   
-	echo "Shall I install n8n docker? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
 	    cd ~/
 	    mkdir /home/$USER/n8n  # Redundant step
 	    #cd /home/$USER/n8n
@@ -628,9 +599,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 		sleep 3
 		chmod +x /home/$USER/*.sh
 		wsl.exe --shutdown
-	else
-	    echo "n8n docker will not be installed"
-	fi
+	
 fi	
 
 
@@ -642,65 +611,54 @@ echo " "
 echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/ollama_installed.txt ]; then
-	echo "------------"   
-	echo "------------"   
-	echo "Shall I install ollama docker? [Y,n]"
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	      cd /home/$USER/
-	      # Start ollama docker in future
-	      echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
-		  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
-		  echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
-		  echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
-		  echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
-		  echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
-		  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '========'"                                                                                     >> /home/$USER/start_ollama.sh
-		  echo "echo '6. Access ollama, as:'"                                                                       >> /home/$USER/start_ollama.sh
-		  echo "echo '       http://host.docker.internal:11434'"                                                    >> /home/$USER/start_ollama.sh
-		  echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
-		  echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
-		  echo "echo '    Get your IP (in either WSL or in ubuntu) as the Ist address of:'"                         >> /home/$USER/start_ollama.sh
-		  echo "echo '         hostnae -I'"                                                                         >> /home/$USER/start_ollama.sh
-		  echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
-		  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
-		  echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo 'IP:  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo " hostname -I | awk '{ print \$1 }'"                                                                  >> /home/$USER/start_ollama.sh
-		  echo "sleep 3"                                                                                            >> /home/$USER/start_ollama.sh
-		  echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh    
-	      # Script to stop ollama
-	      echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
-	      echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
-	      echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
-	      chmod +x /home/$USER/*.sh
-	      # For model storage local folder ollama is mounted.
-	      echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
-	      echo "Will install ollama for CPU..."
-	      sleep 4
-	      # Creating alias for command: docker exec -it ollama
-	      echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
-		  echo "docker start ollama"                          >> /home/$USER/.bashrc
-		  echo "echo 'Ollama docker started'"                  >> /home/$USER/.bashrc
-	      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
-	      # network host would be local mashine
-		  echo -en "\007"
-	      docker run -d  -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
-		  echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
-		  sleep 2
-		  chmod +x /home/$USER/*.sh
-		  wsl.exe --shutdown
-	else
-	      echo "Skipping install of ollama docker"
-	fi
+  echo "------------"   
+  echo "------------"   
+  cd /home/$USER/
+ # Start ollama docker in future
+  echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
+  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+  echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
+  echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
+  echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
+  echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
+  echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
+  echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
+  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+  echo "echo '========'"                                                                                     >> /home/$USER/start_ollama.sh
+  echo "echo '6. Access ollama, as:'"                                                                       >> /home/$USER/start_ollama.sh
+  echo "echo '       http://host.docker.internal:11434'"                                                    >> /home/$USER/start_ollama.sh
+  echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
+  echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
+  echo "echo '    Get your IP as:'"                                                                         >> /home/$USER/start_ollama.sh
+  echo "echo '         hostname -I'"                                                                        >> /home/$USER/start_ollama.sh
+  echo "echo '    Your IP is:' "                                   										    >> /home/$USER/start_ollama.sh
+  echo "hostname -I | awk ' {print \$1 } '"                  												>> /home/$USER/start_ollama.sh
+  echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
+  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+  echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
+  echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
+  echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
+  # Script to stop ollama
+  echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
+  echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
+  echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
+  chmod +x /home/$USER/*.sh
+  # For model storage local folder ollama is mounted.
+  echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
+  echo "Will install ollama for CPU..."
+  sleep 4
+  # Creating alias for command: docker exec -it ollama
+  echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
+  echo "docker start ollama"                          >> /home/$USER/.bashrc
+  echo "echo 'Ollama docker started'"                  >> /home/$USER/.bashrc
+  #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+  # network host would be local mashine
+  echo -en "\007"
+  docker run -d  -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+  echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
+  sleep 2
+  chmod +x /home/$USER/*.sh
+  wsl.exe --shutdown
 fi	
 
 
@@ -711,34 +669,28 @@ fi
 echo " "
 echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
-	echo "------------"   
-	echo "Shall I download a few ollama models? [Y,n]"
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	      cd /home/$USER/
-	      # Start ollama docker in future
-	      docker start ollama 
-		  sleep 4
-		  ollama list
-		  sleep 2
-		  echo "Pulling bge-m3"
-	      docker exec -it ollama ollama pull bge-m3
-		  echo "Pulling llama3.2 and small models"
-		  docker exec -it ollama ollama pull llama3.2:latest
-		  docker exec -it ollama ollama pull llama3.2:1b
-		  docker exec -it ollama ollama pull deepseek-r1:1.5b
-		  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
-		  echo " "
-		  echo " "
-		  #ollama list
-		  echo "models installed" > /home/$USER/models_installed.txt
-		  sleep 2
-		  chmod +x /home/$USER/*.sh
-		  wsl.exe --shutdown
-	else
-	        echo "Skipping download of ollama models"
-	fi
+	 echo "------------"   
+	  cd /home/$USER/
+	  # Start ollama docker in future
+	  docker start ollama 
+	  sleep 4
+	  ollama list
+	  sleep 2
+	  echo "Pulling bge-m3"
+	  docker exec -it ollama ollama pull bge-m3
+	  docker exec -it ollama ollama pull nomic-embed-text
+	  echo "Pulling llama3.2 and small models"
+	  docker exec -it ollama ollama pull llama3.2:latest
+	  docker exec -it ollama ollama pull llama3.2:1b
+	  docker exec -it ollama ollama pull deepseek-r1:1.5b
+	  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
+	  echo " "
+	  echo " "
+	  #ollama list
+	  echo "models installed" > /home/$USER/models_installed.txt
+	  sleep 2
+	  chmod +x /home/$USER/*.sh
+	  wsl.exe --shutdown
 fi
 
 
@@ -751,89 +703,84 @@ echo " "
 echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/flowise_installed.txt ]; then
-	echo "------------"   
-	echo "Shall I install flowise docker? [Y,n]"    # Default is yes
-	read input
-	# Provide a default value of yes to 'input' 'https://stackoverflow.com/a/2642592
-	input=${input:-y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	   cd /home/$USER/
-	   #####################3
-		# flowise docker
-		# Ref: https://docs.flowiseai.com/getting-started#docker-compose
-		######################
-	   cd /home/$USER/
-	   # Install Flowise through docker"
-	   # Ref: https://docs.flowiseai.com/getting-started
-	   echo "Installing flowise docker. Takes time.."          
-	   # Start script
-	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
-	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
-	   echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
-	   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
-	   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
-	   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
-	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
-	   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
-	   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
-	   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
-	   echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
-	   echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
-	   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/start_flowise.sh
-	   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
-	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	   # Reset flowise password
-	   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
-	   echo " "                                                   >> /home/$USER/reset_flowise.sh
-	   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-	   echo "docker stop flowise"                                 >> /home/$USER/reset_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-	   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
-	   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
-	   echo " "                                                   >> /home/$USER/reset_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-	   echo "docker start flowise"                                >> /home/$USER/reset_flowise.sh
-	   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
-	   echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
-	   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
-	   echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
-	   echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
-	   echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
-	   echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
-	   # logs script
-	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
-	   echo " "                                                   >> /home/$USER/logs_flowise.sh
-	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
-	   #echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
-	   #echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
-	   #echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
-	   echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
-	   # Stop script
-	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
-	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
-	   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
-	   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
-	   echo "cd /home/$USER"                                     >> /home/$USER/stop_docker_flowise.sh
-	   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
-	   sleep 4
-	   cd ~/
-	   FDIR="/home/$USER/Flowise"
-	   if [ -d "$FDIR" ]; then
-	       rm -rf /home/$USER/Flowise
-	   fi	   
-	   git clone https://github.com/FlowiseAI/Flowise.git
-	   cd Flowise/
-	   sudo docker build --no-cache -t flowise .
+   echo "------------"   
+   cd /home/$USER/
+   #####################3
+	# flowise docker
+	# Ref: https://docs.flowiseai.com/getting-started#docker-compose
+	######################
+   cd /home/$USER/
+   # Install Flowise through docker"
+   # Ref: https://docs.flowiseai.com/getting-started
+   echo "Installing flowise docker. Takes time.."          
+   # Start script
+   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
+   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+   echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
+   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
+   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
+   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
+   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
+   echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
+   echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
+   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+   echo " "                                                   >> /home/$USER/start_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/start_flowise.sh
+   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
+   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
+   # Reset flowise password
+   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
+   echo " "                                                   >> /home/$USER/reset_flowise.sh
+   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+   echo "docker stop flowise"                                 >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
+   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
+   echo " "                                                   >> /home/$USER/reset_flowise.sh
+   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+   echo "docker start flowise"                                >> /home/$USER/reset_flowise.sh
+   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
+   echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
+   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
+   echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
+   echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
+   echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
+   echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
+   # logs script
+   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
+   echo " "                                                   >> /home/$USER/logs_flowise.sh
+   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
+   #echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
+   #echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
+   #echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
+   echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
+   # Stop script
+   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
+   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
+   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
+   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
+   echo "cd /home/$USER"                                     >> /home/$USER/stop_docker_flowise.sh
+   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
+   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
+   sleep 4
+   cd ~/
+   FDIR="/home/$USER/Flowise"
+   if [ -d "$FDIR" ]; then
+	   rm -rf /home/$USER/Flowise
+   fi	   
+   git clone https://github.com/FlowiseAI/Flowise.git
+   cd Flowise/
+   sudo docker build --no-cache -t flowise .
    
    # The '--network host' option removes network isolation between the container and
    #   the Docker host machine, meaning the container directly shares the host's networking stack
@@ -841,9 +788,6 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
    #   using the host's IP address and network interfaces.  
    sudo docker run -d --name flowise -p 3000:3000 --network host flowise
    #      docker run -d --name flowise -p 3000:3000 --network host flowise
-   #cd /home/$USER/Flowise/docker
-   #cp .env.example .env
-   #docker compose up -d
    cd /home/$USER/
    echo "In future to start/stop containers, proceed, as:"
    echo "            cd /home/$USER/Flowise"                  
@@ -851,7 +795,6 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
    echo "            docker stop docker-flowise-1"                     
    echo " Also, check all containers available, as:"
    echo "             docker ps -a "     
-   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
    ln -sT /home/$USER/stop_docker_flowise.sh /home/$USER/stop_flowise.sh
    mkdir -p /home/$USER/Documents/flowise
    cd /home/$USER/Documents/flowise
@@ -881,14 +824,8 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
    bash stop_n8n.sh
    bash stop_flowise.sh
    sleep 2
-   sudo systemctl reboot -i
-	   sleep 2
-	   wsl.exe --shutdown
-	 else
-	   echo "Flowise docker will not be installed"
-	 fi  
-	  echo "Flowise docker already installed"
- fi
+   wsl.exe --shutdown
+fi
 
 
 
@@ -904,11 +841,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"        
-	echo "Shall I install latest anaconda? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	    DIRECTORY=/home/$USER/anaconda3
+	DIRECTORY=/home/$USER/anaconda3
 	    if [ ! -d "$DIRECTORY" ]; then
 	        CONTREPO=https://repo.continuum.io/archive/
 			# In WSL Downloads folder does not exist
@@ -937,10 +870,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
 	     fi   
-	 else
-	    echo "Anaconda not installed"
-	 fi
-fi	 
+	fi	 
  
 ################
 # Install postgresql and sqlite3
@@ -951,11 +881,6 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 	echo "------------"   
-	echo "Shall I install postgres  db and pgvector? [Y,n]"    # 
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	
 	    # Install postgresql
 	    cd /home/$USER/
 	    echo "Installing postgresql and sqlite3"
@@ -1139,9 +1064,6 @@ if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
 		sleep 3
 		wsl.exe --shutdown
-	 else
-	   echo "Postgres not installed"
-	 fi  
  fi
 
 
@@ -1157,11 +1079,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"  
-	echo "Shall I install FAISS vector store? [Y,n]"    
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-		echo " "
+	    echo " "
 		echo "============"
 		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
 		echo "is of the folder where data files will be saved. Consider this as the "
@@ -1194,9 +1112,7 @@ if [ ! -f /home/$USER/faiss_installed.txt ]; then
 		cd /homne/$USER/
 		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 		wsl.exe --shutdown
-	else
-		echo "FAISS not installed"
-	fi	
+	
 fi
 
 
