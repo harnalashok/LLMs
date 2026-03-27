@@ -1679,6 +1679,40 @@ else
 	echo "  "
 fi	
 
+#############
+# Install n8nModels folder of examples
+# Installs the folder from github: LLM/n8nModels
+############
+
+#  Download github folder 'n8nModels' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/n8nExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing n8n Models"
+	sleep 3
+	rm -rf /home/$USER/Documents/n8nExamples
+	mkdir -p /home/$USER/Documents/n8nExamples
+	cd /home/$USER/Documents/n8nExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set n8nModels
+	git pull origin main
+	find . -maxdepth 1 ! -name "n8nModels" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mv llamaindexExamples/n8nModels/* .
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER
+	echo "n8nExamples_installed.txt" > /home/$USER/n8nExamples_installed.txt
+else
+	echo "  "
+fi	
+
+
+
 
 ##################
 ## Install agno
