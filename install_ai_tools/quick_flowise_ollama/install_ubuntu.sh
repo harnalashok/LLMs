@@ -1609,7 +1609,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		source /home/ashok/langchain/bin/activate
 	    rm -rf /home/$USER/ragsystem
 		mkdir /home/$USER/ragsystem
-		cd /home/ashok/ragsystem
+		cd /home/$USER/ragsystem
 		git init
 		git remote add origin https://github.com/harnalashok/LLMs.git
 		git sparse-checkout init --cone
