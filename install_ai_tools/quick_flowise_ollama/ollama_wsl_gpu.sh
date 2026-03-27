@@ -1233,6 +1233,38 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	fi		
 fi	
 
+#############
+# Install llamaindex folder of examples
+# Installs the folder from github: LLM/llamaindex
+############
+
+#  Download github folder 'llamaindex' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing llamaindexExamples"
+	sleep 3
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	mkdir -p /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER/Documents/llamaindexExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set llamaindex
+	git pull origin main
+	find . -maxdepth 1 ! -name "llamaindex" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mv llamaindexExamples/llamaindex/* .
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER
+	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
+else
+	echo "  "
+fi	
+
 ################
 # Install postgresql and sqlite3
 ################
