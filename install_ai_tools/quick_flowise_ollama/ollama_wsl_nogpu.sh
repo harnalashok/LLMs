@@ -10,6 +10,18 @@ if echo "$WSL" | grep -qi wsl ; then
     WSLSYSTEM="true"
 fi
 
+FILE="/home/$USER/install_progerss.txt"
+LINE="Record of installation progress"
+if ! grep -qF "$LINE" "$FILE"; then
+    echo "   "       >> "$FILE"
+	echo "=========" >> "$FILE"
+    echo "$LINE" >> "$FILE"
+	echo "=========" >> "$FILE"
+	echo "   "       >> "$FILE"
+fi
+cat /home/$USER/install_progerss.txt
+
+
 if [ "$WSLSYSTEM" = "true" ]; then
 	echo "  "
 	echo "=====***======"
@@ -1294,6 +1306,90 @@ else
     echo "  "
 fi	
 
+#############
+# Install RAG and RAG performance eval system
+# Created using Google Antigravity
+############
+
+#  Download github folder 'rag_eval_system-II' using command line
+#  Can copy and paste all at once:
+
+cd /home/$USER
+if [ ! -f /home/$USER/rageval_installed.txt ]; then
+		cd ~/   
+		echo "  "
+		echo "   "
+		echo "Installing RAG and RAG performance eval system"
+		sleep 3
+		source /home/ashok/langchain/bin/activate
+	    rm -rf /home/$USER/ragsystem
+		mkdir /home/$USER/ragsystem
+		cd /home/$USER/ragsystem
+		git init
+		git remote add origin https://github.com/harnalashok/LLMs.git
+		git sparse-checkout init --cone
+		git sparse-checkout set rag_eval_system-II
+		git pull origin main
+		find . -maxdepth 1 ! -name "rag_eval_system-II" ! -name "." ! -name ".." -delete
+	    ls -la
+        echo "echo 'Prepare as follows:'"                                            | tee    /home/$USER/start_ragEval.sh
+		echo "echo '  Put your .md files in rag_eval_system-II/dataFolder, AND'"       | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  place data.csv file in the rag_eval_system-II folder'"           | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  data.csv has three columns: text,question,idealAnswer'"          | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  A dummy data.csv and dummy .md files are placed'"              | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  source /home/ashok/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
+	    echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
+		# To ingest .md files in dataFolder
+		echo "echo '  python main.py --ingest'"                                        | tee   -a /home/$USER/start_ragEval.sh     
+	    echo "echo '  python main.py --query \"your question here\"'"                  | tee   -a /home/$USER/start_ragEval.sh
+		# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
+	    echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
+		
+		LINE="  21. RAG and RAG performance Eval system installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+			echo "$LINE" >> "$FILE"
+		fi
+		#
+	    echo "rageval_installed.txt"  > /home/$USER/rageval_installed.txt
+else
+	    echo "   "
+fi
+
+
+#############
+# Install llamaindex folder of examples
+# Installs the folder from github: LLM/llamaindex
+############
+
+#  Download github folder 'llamaindex' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing llamaindexExamples"
+	sleep 3
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	mkdir -p /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER/Documents/llamaindexExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set llamaindex
+	git pull origin main
+	find . -maxdepth 1 ! -name "llamaindex" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mv llamaindexExamples/llamaindex/* .
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER
+	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
+else
+	echo "  "
+fi	
 
 
 
