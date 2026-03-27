@@ -1704,7 +1704,7 @@ if [ ! -f /home/$USER/n8nExamples_installed.txt ]; then
 	find . -maxdepth 1 ! -name "n8nModels" ! -name "." ! -name ".." -delete
 	cd /home/$USER/Documents
 	mv llamaindexExamples/n8nModels/* .
-	rm -rf /home/$USER/Documents/llamaindexExamples
+	rm -rf /home/$USER/Documents/n8nExamples
 	cd /home/$USER
 	echo "n8nExamples_installed.txt" > /home/$USER/n8nExamples_installed.txt
 else
