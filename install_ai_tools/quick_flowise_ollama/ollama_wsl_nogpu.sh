@@ -302,9 +302,9 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
        reboot
     fi  
 else
-    echo "Docker installation process completed"
+    echo "  "
 	# Prevent any docker restarts on OS reboot
-    docker update --restart=no $(docker ps -a -q)
+    #docker update --restart=no $(docker ps -a -q)
 fi    
 
 
@@ -315,6 +315,7 @@ if ! command -v docker &> /dev/null; then
     exit 1
 else
     echo "Docker is installed."
+	echo "You may execute docker install instructions in docker-I and docker-II line-by-line"
 fi
 
 
@@ -934,7 +935,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  # Start ollama docker in future
 	  docker start ollama 
 	  sleep 4
-	  ollama list
+	  docker exec -it ollama ollama list
 	  sleep 2
 	  echo "Pulling bge-m3"
 	  docker exec -it ollama ollama pull bge-m3
