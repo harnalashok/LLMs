@@ -1368,6 +1368,40 @@ else
 	echo "  "
 fi	
 
+#############
+# Install flowise_models folder of examples
+# Installs the folder from github: LLM/flowise_models
+############
+
+#  Download github folder 'flowise_models' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing flowise Models"
+	sleep 3
+	rm -rf /home/$USER/Documents/flowiseExamples
+	mkdir -p /home/$USER/Documents/flowiseExamples
+	cd /home/$USER/Documents/flowiseExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set flowise_models
+	git pull origin main
+	find . -maxdepth 1 ! -name "flowise_models" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mkdir flowise_models
+	cd flowise_models
+	mv /home/$USER/Documents/flowiseExamples/flowise_models/* .
+	rm -rf /home/$USER/Documents/flowiseExamples
+	cd /home/$USER
+	echo "flowiseModels_installed.txt" > /home/$USER/flowiseModels_installed.txt
+else
+	echo "  "
+fi	
+
 
 
 
