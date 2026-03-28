@@ -189,7 +189,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
             sudo apt-key del 7fa2af80
             # Now follow the instructions as on this page:
             #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 27th Sep, 2025
+            # Added on 28th March, 2026
             wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
 			sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
 			#wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
