@@ -219,7 +219,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	# Now follow the instructions as on this page:
 	#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
 	# Added on 27th Sep, 2025
-	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+	wget -c https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 	sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
 	wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
 	sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
