@@ -630,6 +630,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
 	ln -sT /home/$USER/psql.sh                       psql.sh
 	ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/tableInfo.md
 	cd /home/$USER
 	
 	###########
