@@ -75,7 +75,7 @@ if [ ! -f /home/$USER/first_time.txt ]; then
 	sleep 5
 	echo "first_time.txt" > /home/$USER/first_time.txt
 else 
-    sleep 5
+    sleep 2
 fi	
 
 
@@ -311,6 +311,7 @@ fi
 
 if ! command -v docker &> /dev/null; then
     echo "Docker installation not found. Please install docker."
+	echo "You may try to execute the code in Docker-I and Docker-II line-by-line"
     exit 1
 else
     echo "Docker is installed."
