@@ -1,11 +1,11 @@
-psql commands:
-Get list of roles:                \du
-Get list of databases and owners:  \l
-Connect to database:              \c mydatabase
-Get list of tables:              \dt
-
-Database ravi:        Has CJ Date's spj tables
-Database chinook:     Is a Digital Media Store 
+psql commands:      
+>Get list of roles:                \du       
+>Get list of databases and owners:  \l     
+>Connect to database:              \c mydatabase      
+>Get list of tables:              \dt     
+    
+Database ravi:        Has CJ Date's spj tables     
+Database chinook:     Is a Digital Media Store      
 
      public | artist        | table | chinook | permanent   | heap          | 40 kB      |
      public | customer      | table | chinook | permanent   | heap          | 40 kB      |
