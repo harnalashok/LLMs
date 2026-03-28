@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 15th Feb, 2026
+# Last amended: 25th March, 2026
 
 clear
 # Are we having wsl systems
