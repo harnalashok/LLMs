@@ -1,0 +1,1218 @@
+{
+  "nodes": [
+    {
+      "id": "supervisor_0",
+      "position": {
+        "x": 300,
+        "y": -1075
+      },
+      "type": "customNode",
+      "data": {
+        "id": "supervisor_0",
+        "label": "Supervisor",
+        "version": 3,
+        "name": "supervisor",
+        "type": "Supervisor",
+        "baseClasses": [
+          "Supervisor"
+        ],
+        "category": "Multi Agents",
+        "inputParams": [
+          {
+            "label": "Supervisor Name",
+            "name": "supervisorName",
+            "type": "string",
+            "placeholder": "Supervisor",
+            "default": "Supervisor",
+            "id": "supervisor_0-input-supervisorName-string"
+          },
+          {
+            "label": "Supervisor Prompt",
+            "name": "supervisorPrompt",
+            "type": "string",
+            "description": "Prompt must contains {team_members}",
+            "rows": 4,
+            "default": "You are a supervisor tasked with managing a conversation between the following workers: {team_members}.\nGiven the following user request, respond with the worker to act next.\nEach worker will perform a task and respond with their results and status.\nWhen finished, respond with FINISH.\nSelect strategically to minimize the number of steps taken.",
+            "additionalParams": true,
+            "id": "supervisor_0-input-supervisorPrompt-string"
+          },
+          {
+            "label": "Summarization",
+            "name": "summarization",
+            "type": "boolean",
+            "description": "Return final output as a summarization of the conversation",
+            "optional": true,
+            "additionalParams": true,
+            "id": "supervisor_0-input-summarization-boolean"
+          },
+          {
+            "label": "Recursion Limit",
+            "name": "recursionLimit",
+            "type": "number",
+            "description": "Maximum number of times a call can recurse. If not provided, defaults to 100.",
+            "default": 100,
+            "additionalParams": true,
+            "id": "supervisor_0-input-recursionLimit-number"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Tool Calling Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "description": "Only compatible with models that are capable of function calling: ChatOpenAI, ChatMistral, ChatAnthropic, ChatGoogleGenerativeAI, GroqChat. Best result with GPT-4 model",
+            "id": "supervisor_0-input-model-BaseChatModel"
+          },
+          {
+            "label": "Agent Memory",
+            "name": "agentMemory",
+            "type": "BaseCheckpointSaver",
+            "description": "Save the state of the agent",
+            "optional": true,
+            "id": "supervisor_0-input-agentMemory-BaseCheckpointSaver"
+          },
+          {
+            "label": "Input Moderation",
+            "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+            "name": "inputModeration",
+            "type": "Moderation",
+            "optional": true,
+            "list": true,
+            "id": "supervisor_0-input-inputModeration-Moderation"
+          }
+        ],
+        "inputs": {
+          "supervisorName": "Supervisor",
+          "supervisorPrompt": "You are a supervisor tasked with managing a conversation between the following workers: {team_members}. Roles of {team_members} are:\n\nWorker X has a role of Product Designer\nWorker Y has a role of Software Developer\nWorker Z has a role of Technical Writer\n\nGiven the following user request, respond with the worker to act next.\nEach worker will perform a task and respond with their results and status. \n\nSelect strategically to minimize the number of steps taken.\n",
+          "model": "{{chatOllama_0.data.instance}}",
+          "agentMemory": "{{agentMemory_0.data.instance}}",
+          "summarization": "",
+          "recursionLimit": 100,
+          "inputModeration": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "supervisor_0-output-supervisor-Supervisor",
+            "name": "supervisor",
+            "label": "Supervisor",
+            "description": "",
+            "type": "Supervisor"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 489,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 300,
+        "y": -1075
+      }
+    },
+    {
+      "id": "worker_0",
+      "position": {
+        "x": 475,
+        "y": -500
+      },
+      "type": "customNode",
+      "data": {
+        "id": "worker_0",
+        "label": "Worker",
+        "version": 2,
+        "name": "worker",
+        "type": "Worker",
+        "baseClasses": [
+          "Worker"
+        ],
+        "category": "Multi Agents",
+        "inputParams": [
+          {
+            "label": "Worker Name",
+            "name": "workerName",
+            "type": "string",
+            "placeholder": "Worker",
+            "id": "worker_0-input-workerName-string"
+          },
+          {
+            "label": "Worker Prompt",
+            "name": "workerPrompt",
+            "type": "string",
+            "rows": 4,
+            "default": "You are a research assistant who can search for up-to-date info using search engine.",
+            "id": "worker_0-input-workerPrompt-string"
+          },
+          {
+            "label": "Format Prompt Values",
+            "name": "promptValues",
+            "type": "json",
+            "optional": true,
+            "acceptVariable": true,
+            "list": true,
+            "id": "worker_0-input-promptValues-json"
+          },
+          {
+            "label": "Max Iterations",
+            "name": "maxIterations",
+            "type": "number",
+            "optional": true,
+            "id": "worker_0-input-maxIterations-number"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Tools",
+            "name": "tools",
+            "type": "Tool",
+            "list": true,
+            "optional": true,
+            "id": "worker_0-input-tools-Tool"
+          },
+          {
+            "label": "Supervisor",
+            "name": "supervisor",
+            "type": "Supervisor",
+            "id": "worker_0-input-supervisor-Supervisor"
+          },
+          {
+            "label": "Tool Calling Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "optional": true,
+            "description": "Only compatible with models that are capable of function calling: ChatOpenAI, ChatMistral, ChatAnthropic, ChatGoogleGenerativeAI, ChatVertexAI, GroqChat. If not specified, supervisor's model will be used",
+            "id": "worker_0-input-model-BaseChatModel"
+          }
+        ],
+        "inputs": {
+          "workerName": "X",
+          "workerPrompt": "You work for a software development company.\nYour role as a product designer is to come up with features and product design based on the user requirements.",
+          "tools": "",
+          "supervisor": "{{supervisor_0.data.instance}}",
+          "model": "{{chatOllama_0.data.instance}}",
+          "promptValues": "",
+          "maxIterations": "2"
+        },
+        "outputAnchors": [],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 729,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 475,
+        "y": -500
+      },
+      "dragging": false
+    },
+    {
+      "id": "worker_1",
+      "position": {
+        "x": 875,
+        "y": -1100
+      },
+      "type": "customNode",
+      "data": {
+        "id": "worker_1",
+        "label": "Worker",
+        "version": 2,
+        "name": "worker",
+        "type": "Worker",
+        "baseClasses": [
+          "Worker"
+        ],
+        "category": "Multi Agents",
+        "inputParams": [
+          {
+            "label": "Worker Name",
+            "name": "workerName",
+            "type": "string",
+            "placeholder": "Worker",
+            "id": "worker_1-input-workerName-string"
+          },
+          {
+            "label": "Worker Prompt",
+            "name": "workerPrompt",
+            "type": "string",
+            "rows": 4,
+            "default": "You are a research assistant who can search for up-to-date info using search engine.",
+            "id": "worker_1-input-workerPrompt-string"
+          },
+          {
+            "label": "Format Prompt Values",
+            "name": "promptValues",
+            "type": "json",
+            "optional": true,
+            "acceptVariable": true,
+            "list": true,
+            "id": "worker_1-input-promptValues-json"
+          },
+          {
+            "label": "Max Iterations",
+            "name": "maxIterations",
+            "type": "number",
+            "optional": true,
+            "id": "worker_1-input-maxIterations-number"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Tools",
+            "name": "tools",
+            "type": "Tool",
+            "list": true,
+            "optional": true,
+            "id": "worker_1-input-tools-Tool"
+          },
+          {
+            "label": "Supervisor",
+            "name": "supervisor",
+            "type": "Supervisor",
+            "id": "worker_1-input-supervisor-Supervisor"
+          },
+          {
+            "label": "Tool Calling Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "optional": true,
+            "description": "Only compatible with models that are capable of function calling: ChatOpenAI, ChatMistral, ChatAnthropic, ChatGoogleGenerativeAI, ChatVertexAI, GroqChat. If not specified, supervisor's model will be used",
+            "id": "worker_1-input-model-BaseChatModel"
+          }
+        ],
+        "inputs": {
+          "workerName": "Y",
+          "workerPrompt": "You work for a software development company.\nAs an experienced software developer you build software solution using React, Nextjs, TailwindCSS, javascript and Node",
+          "tools": "",
+          "supervisor": "{{supervisor_0.data.instance}}",
+          "model": "{{chatOllama_1.data.instance}}",
+          "promptValues": "",
+          "maxIterations": "2"
+        },
+        "outputAnchors": [],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 729,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 875,
+        "y": -1100
+      }
+    },
+    {
+      "id": "worker_2",
+      "position": {
+        "x": 1325,
+        "y": -625
+      },
+      "type": "customNode",
+      "data": {
+        "id": "worker_2",
+        "label": "Worker",
+        "version": 2,
+        "name": "worker",
+        "type": "Worker",
+        "baseClasses": [
+          "Worker"
+        ],
+        "category": "Multi Agents",
+        "inputParams": [
+          {
+            "label": "Worker Name",
+            "name": "workerName",
+            "type": "string",
+            "placeholder": "Worker",
+            "id": "worker_2-input-workerName-string"
+          },
+          {
+            "label": "Worker Prompt",
+            "name": "workerPrompt",
+            "type": "string",
+            "rows": 4,
+            "default": "You are a research assistant who can search for up-to-date info using search engine.",
+            "id": "worker_2-input-workerPrompt-string"
+          },
+          {
+            "label": "Format Prompt Values",
+            "name": "promptValues",
+            "type": "json",
+            "optional": true,
+            "acceptVariable": true,
+            "list": true,
+            "id": "worker_2-input-promptValues-json"
+          },
+          {
+            "label": "Max Iterations",
+            "name": "maxIterations",
+            "type": "number",
+            "optional": true,
+            "id": "worker_2-input-maxIterations-number"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Tools",
+            "name": "tools",
+            "type": "Tool",
+            "list": true,
+            "optional": true,
+            "id": "worker_2-input-tools-Tool"
+          },
+          {
+            "label": "Supervisor",
+            "name": "supervisor",
+            "type": "Supervisor",
+            "id": "worker_2-input-supervisor-Supervisor"
+          },
+          {
+            "label": "Tool Calling Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "optional": true,
+            "description": "Only compatible with models that are capable of function calling: ChatOpenAI, ChatMistral, ChatAnthropic, ChatGoogleGenerativeAI, ChatVertexAI, GroqChat. If not specified, supervisor's model will be used",
+            "id": "worker_2-input-model-BaseChatModel"
+          }
+        ],
+        "inputs": {
+          "workerName": "Z",
+          "workerPrompt": "You work for a software developent Company. Write a detailed user manual based on the product design and code written by the team members. The manual should be in markdown format.",
+          "tools": "",
+          "supervisor": "{{supervisor_0.data.instance}}",
+          "model": "{{chatOllama_0.data.instance}}",
+          "promptValues": "",
+          "maxIterations": "2"
+        },
+        "outputAnchors": [],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 729,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 1325,
+        "y": -625
+      }
+    },
+    {
+      "id": "chatOllama_0",
+      "position": {
+        "x": -650,
+        "y": -500
+      },
+      "type": "customNode",
+      "data": {
+        "id": "chatOllama_0",
+        "label": "ChatOllama",
+        "version": 5,
+        "name": "chatOllama",
+        "type": "ChatOllama",
+        "baseClasses": [
+          "ChatOllama",
+          "ChatOllama",
+          "BaseChatModel",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "Chat Models",
+        "description": "Chat completion using open-source LLM on Ollama",
+        "inputParams": [
+          {
+            "label": "Base URL",
+            "name": "baseUrl",
+            "type": "string",
+            "default": "http://localhost:11434",
+            "id": "chatOllama_0-input-baseUrl-string",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "string",
+            "placeholder": "llama2",
+            "id": "chatOllama_0-input-modelName-string",
+            "display": true
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "description": "The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "chatOllama_0-input-temperature-number",
+            "display": true
+          },
+          {
+            "label": "Allow Image Uploads",
+            "name": "allowImageUploads",
+            "type": "boolean",
+            "description": "Allow image input. Refer to the <a href=\"https://docs.flowiseai.com/using-flowise/uploads#image\" target=\"_blank\">docs</a> for more details.",
+            "default": false,
+            "optional": true,
+            "id": "chatOllama_0-input-allowImageUploads-boolean",
+            "display": true
+          },
+          {
+            "label": "Streaming",
+            "name": "streaming",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-streaming-boolean",
+            "display": true
+          },
+          {
+            "label": "JSON Mode",
+            "name": "jsonMode",
+            "type": "boolean",
+            "description": "Coerces model outputs to only return JSON. Specify in the system prompt to return JSON. Ex: Format all responses as JSON object",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-jsonMode-boolean",
+            "display": true
+          },
+          {
+            "label": "Keep Alive",
+            "name": "keepAlive",
+            "type": "string",
+            "description": "How long to keep connection alive. A duration string (such as \"10m\" or \"24h\")",
+            "default": "5m",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-keepAlive-string",
+            "display": true
+          },
+          {
+            "label": "Top P",
+            "name": "topP",
+            "type": "number",
+            "description": "Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-topP-number",
+            "display": true
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "type": "number",
+            "description": "Reduces the probability of generating nonsense. A higher value (e.g. 100) will give more diverse answers, while a lower value (e.g. 10) will be more conservative. (Default: 40). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-topK-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat",
+            "name": "mirostat",
+            "type": "number",
+            "description": "Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostat-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat ETA",
+            "name": "mirostatEta",
+            "type": "number",
+            "description": "Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostatEta-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat TAU",
+            "name": "mirostatTau",
+            "type": "number",
+            "description": "Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostatTau-number",
+            "display": true
+          },
+          {
+            "label": "Context Window Size",
+            "name": "numCtx",
+            "type": "number",
+            "description": "Sets the size of the context window used to generate the next token. (Default: 2048) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numCtx-number",
+            "display": true
+          },
+          {
+            "label": "Number of GPU",
+            "name": "numGpu",
+            "type": "number",
+            "description": "The number of layers to send to the GPU(s). On macOS it defaults to 1 to enable metal support, 0 to disable. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numGpu-number",
+            "display": true
+          },
+          {
+            "label": "Number of Thread",
+            "name": "numThread",
+            "type": "number",
+            "description": "Sets the number of threads to use during computation. By default, Ollama will detect this for optimal performance. It is recommended to set this value to the number of physical CPU cores your system has (as opposed to the logical number of cores). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numThread-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Last N",
+            "name": "repeatLastN",
+            "type": "number",
+            "description": "Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-repeatLastN-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Penalty",
+            "name": "repeatPenalty",
+            "type": "number",
+            "description": "Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-repeatPenalty-number",
+            "display": true
+          },
+          {
+            "label": "Stop Sequence",
+            "name": "stop",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "AI assistant:",
+            "description": "Sets the stop sequences to use. Use comma to seperate different sequences. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-stop-string",
+            "display": true
+          },
+          {
+            "label": "Tail Free Sampling",
+            "name": "tfsZ",
+            "type": "number",
+            "description": "Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (Default: 1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-tfsZ-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "chatOllama_0-input-cache-BaseCache",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "baseUrl": "http://localhost:11434",
+          "modelName": "llama3.2:latest",
+          "temperature": 0.9,
+          "allowImageUploads": "",
+          "streaming": true,
+          "jsonMode": "",
+          "keepAlive": "5m",
+          "topP": "",
+          "topK": "",
+          "mirostat": "",
+          "mirostatEta": "",
+          "mirostatTau": "",
+          "numCtx": "",
+          "numGpu": "",
+          "numThread": "",
+          "repeatLastN": "",
+          "repeatPenalty": "",
+          "stop": "",
+          "tfsZ": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+            "name": "chatOllama",
+            "label": "ChatOllama",
+            "description": "Chat completion using open-source LLM on Ollama",
+            "type": "ChatOllama | ChatOllama | BaseChatModel | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 682,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -650,
+        "y": -500
+      },
+      "dragging": false
+    },
+    {
+      "id": "chatOllama_1",
+      "position": {
+        "x": -75,
+        "y": -500
+      },
+      "type": "customNode",
+      "data": {
+        "id": "chatOllama_1",
+        "label": "ChatOllama",
+        "version": 5,
+        "name": "chatOllama",
+        "type": "ChatOllama",
+        "baseClasses": [
+          "ChatOllama",
+          "ChatOllama",
+          "BaseChatModel",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "Chat Models",
+        "description": "Chat completion using open-source LLM on Ollama",
+        "inputParams": [
+          {
+            "label": "Base URL",
+            "name": "baseUrl",
+            "type": "string",
+            "default": "http://localhost:11434",
+            "id": "chatOllama_1-input-baseUrl-string",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "string",
+            "placeholder": "llama2",
+            "id": "chatOllama_1-input-modelName-string",
+            "display": true
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "description": "The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "chatOllama_1-input-temperature-number",
+            "display": true
+          },
+          {
+            "label": "Allow Image Uploads",
+            "name": "allowImageUploads",
+            "type": "boolean",
+            "description": "Allow image input. Refer to the <a href=\"https://docs.flowiseai.com/using-flowise/uploads#image\" target=\"_blank\">docs</a> for more details.",
+            "default": false,
+            "optional": true,
+            "id": "chatOllama_1-input-allowImageUploads-boolean",
+            "display": true
+          },
+          {
+            "label": "Streaming",
+            "name": "streaming",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-streaming-boolean",
+            "display": true
+          },
+          {
+            "label": "JSON Mode",
+            "name": "jsonMode",
+            "type": "boolean",
+            "description": "Coerces model outputs to only return JSON. Specify in the system prompt to return JSON. Ex: Format all responses as JSON object",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-jsonMode-boolean",
+            "display": true
+          },
+          {
+            "label": "Keep Alive",
+            "name": "keepAlive",
+            "type": "string",
+            "description": "How long to keep connection alive. A duration string (such as \"10m\" or \"24h\")",
+            "default": "5m",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-keepAlive-string",
+            "display": true
+          },
+          {
+            "label": "Top P",
+            "name": "topP",
+            "type": "number",
+            "description": "Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-topP-number",
+            "display": true
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "type": "number",
+            "description": "Reduces the probability of generating nonsense. A higher value (e.g. 100) will give more diverse answers, while a lower value (e.g. 10) will be more conservative. (Default: 40). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-topK-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat",
+            "name": "mirostat",
+            "type": "number",
+            "description": "Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-mirostat-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat ETA",
+            "name": "mirostatEta",
+            "type": "number",
+            "description": "Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-mirostatEta-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat TAU",
+            "name": "mirostatTau",
+            "type": "number",
+            "description": "Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-mirostatTau-number",
+            "display": true
+          },
+          {
+            "label": "Context Window Size",
+            "name": "numCtx",
+            "type": "number",
+            "description": "Sets the size of the context window used to generate the next token. (Default: 2048) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-numCtx-number",
+            "display": true
+          },
+          {
+            "label": "Number of GPU",
+            "name": "numGpu",
+            "type": "number",
+            "description": "The number of layers to send to the GPU(s). On macOS it defaults to 1 to enable metal support, 0 to disable. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-numGpu-number",
+            "display": true
+          },
+          {
+            "label": "Number of Thread",
+            "name": "numThread",
+            "type": "number",
+            "description": "Sets the number of threads to use during computation. By default, Ollama will detect this for optimal performance. It is recommended to set this value to the number of physical CPU cores your system has (as opposed to the logical number of cores). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-numThread-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Last N",
+            "name": "repeatLastN",
+            "type": "number",
+            "description": "Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-repeatLastN-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Penalty",
+            "name": "repeatPenalty",
+            "type": "number",
+            "description": "Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-repeatPenalty-number",
+            "display": true
+          },
+          {
+            "label": "Stop Sequence",
+            "name": "stop",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "AI assistant:",
+            "description": "Sets the stop sequences to use. Use comma to seperate different sequences. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-stop-string",
+            "display": true
+          },
+          {
+            "label": "Tail Free Sampling",
+            "name": "tfsZ",
+            "type": "number",
+            "description": "Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (Default: 1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_1-input-tfsZ-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "chatOllama_1-input-cache-BaseCache",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "baseUrl": "http://localhost:11434",
+          "modelName": "codestral:latest",
+          "temperature": 0.9,
+          "allowImageUploads": "",
+          "streaming": true,
+          "jsonMode": "",
+          "keepAlive": "5m",
+          "topP": "",
+          "topK": "",
+          "mirostat": "",
+          "mirostatEta": "",
+          "mirostatTau": "",
+          "numCtx": "",
+          "numGpu": "",
+          "numThread": "",
+          "repeatLastN": "",
+          "repeatPenalty": "",
+          "stop": "",
+          "tfsZ": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "chatOllama_1-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+            "name": "chatOllama",
+            "label": "ChatOllama",
+            "description": "Chat completion using open-source LLM on Ollama",
+            "type": "ChatOllama | ChatOllama | BaseChatModel | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 682,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -75,
+        "y": -500
+      },
+      "dragging": false
+    },
+    {
+      "id": "agentMemory_0",
+      "position": {
+        "x": -150,
+        "y": -1050
+      },
+      "type": "customNode",
+      "data": {
+        "id": "agentMemory_0",
+        "label": "Agent Memory",
+        "version": 2,
+        "name": "agentMemory",
+        "type": "AgentMemory",
+        "baseClasses": [
+          "AgentMemory",
+          "BaseCheckpointSaver"
+        ],
+        "category": "Memory",
+        "description": "Memory for agentflow to remember the state of the conversation",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "PostgresApi",
+              "MySQLApi"
+            ],
+            "optional": true,
+            "id": "agentMemory_0-input-credential-credential",
+            "display": true
+          },
+          {
+            "label": "Database",
+            "name": "databaseType",
+            "type": "options",
+            "options": [
+              {
+                "label": "SQLite",
+                "name": "sqlite"
+              },
+              {
+                "label": "PostgreSQL",
+                "name": "postgres"
+              },
+              {
+                "label": "MySQL",
+                "name": "mysql"
+              }
+            ],
+            "default": "sqlite",
+            "id": "agentMemory_0-input-databaseType-options",
+            "display": true
+          },
+          {
+            "label": "Database File Path",
+            "name": "databaseFilePath",
+            "type": "string",
+            "placeholder": "C:\\Users\\User\\.flowise\\database.sqlite",
+            "description": "If SQLite is selected, provide the path to the SQLite database file. Leave empty to use default application database",
+            "additionalParams": true,
+            "optional": true,
+            "id": "agentMemory_0-input-databaseFilePath-string",
+            "display": true
+          },
+          {
+            "label": "Host",
+            "name": "host",
+            "type": "string",
+            "description": "If PostgresQL/MySQL is selected, provide the host of the database",
+            "additionalParams": true,
+            "optional": true,
+            "id": "agentMemory_0-input-host-string",
+            "display": true
+          },
+          {
+            "label": "Database",
+            "name": "database",
+            "type": "string",
+            "description": "If PostgresQL/MySQL is selected, provide the name of the database",
+            "additionalParams": true,
+            "optional": true,
+            "id": "agentMemory_0-input-database-string",
+            "display": true
+          },
+          {
+            "label": "Port",
+            "name": "port",
+            "type": "number",
+            "description": "If PostgresQL/MySQL is selected, provide the port of the database",
+            "additionalParams": true,
+            "optional": true,
+            "id": "agentMemory_0-input-port-number",
+            "display": true
+          },
+          {
+            "label": "Additional Connection Configuration",
+            "name": "additionalConfig",
+            "type": "json",
+            "additionalParams": true,
+            "optional": true,
+            "id": "agentMemory_0-input-additionalConfig-json",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "databaseType": "sqlite",
+          "databaseFilePath": "",
+          "host": "",
+          "database": "",
+          "port": "",
+          "additionalConfig": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "agentMemory_0-output-agentMemory-AgentMemory|BaseCheckpointSaver",
+            "name": "agentMemory",
+            "label": "AgentMemory",
+            "description": "Memory for agentflow to remember the state of the conversation",
+            "type": "AgentMemory | BaseCheckpointSaver"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 430,
+      "positionAbsolute": {
+        "x": -150,
+        "y": -1050
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "stickyNote_0",
+      "position": {
+        "x": -100,
+        "y": -1225
+      },
+      "type": "stickyNote",
+      "data": {
+        "id": "stickyNote_0",
+        "label": "Sticky Note",
+        "version": 2,
+        "name": "stickyNote",
+        "type": "StickyNote",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "tags": [
+          "Utilities"
+        ],
+        "category": "Utilities",
+        "description": "Add a sticky note",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNote_0-input-note-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "Software Developer Team\nSupervisor prompt has been changed. Also worker names have been given as: X,Y,Z. Worker prompts have not been changed."
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNote_0-output-stickyNote-StickyNote",
+            "name": "stickyNote",
+            "label": "StickyNote",
+            "description": "Add a sticky note",
+            "type": "StickyNote"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 123,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -100,
+        "y": -1225
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "supervisor_0",
+      "sourceHandle": "supervisor_0-output-supervisor-Supervisor",
+      "target": "worker_0",
+      "targetHandle": "worker_0-input-supervisor-Supervisor",
+      "type": "buttonedge",
+      "id": "supervisor_0-supervisor_0-output-supervisor-Supervisor-worker_0-worker_0-input-supervisor-Supervisor"
+    },
+    {
+      "source": "supervisor_0",
+      "sourceHandle": "supervisor_0-output-supervisor-Supervisor",
+      "target": "worker_1",
+      "targetHandle": "worker_1-input-supervisor-Supervisor",
+      "type": "buttonedge",
+      "id": "supervisor_0-supervisor_0-output-supervisor-Supervisor-worker_1-worker_1-input-supervisor-Supervisor"
+    },
+    {
+      "source": "supervisor_0",
+      "sourceHandle": "supervisor_0-output-supervisor-Supervisor",
+      "target": "worker_2",
+      "targetHandle": "worker_2-input-supervisor-Supervisor",
+      "type": "buttonedge",
+      "id": "supervisor_0-supervisor_0-output-supervisor-Supervisor-worker_2-worker_2-input-supervisor-Supervisor"
+    },
+    {
+      "source": "chatOllama_0",
+      "sourceHandle": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "worker_0",
+      "targetHandle": "worker_0-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "chatOllama_0-chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable-worker_0-worker_0-input-model-BaseChatModel"
+    },
+    {
+      "source": "chatOllama_0",
+      "sourceHandle": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "worker_2",
+      "targetHandle": "worker_2-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "chatOllama_0-chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable-worker_2-worker_2-input-model-BaseChatModel"
+    },
+    {
+      "source": "chatOllama_0",
+      "sourceHandle": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "supervisor_0",
+      "targetHandle": "supervisor_0-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "chatOllama_0-chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable-supervisor_0-supervisor_0-input-model-BaseChatModel"
+    },
+    {
+      "source": "chatOllama_1",
+      "sourceHandle": "chatOllama_1-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "worker_1",
+      "targetHandle": "worker_1-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "chatOllama_1-chatOllama_1-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable-worker_1-worker_1-input-model-BaseChatModel"
+    },
+    {
+      "source": "agentMemory_0",
+      "sourceHandle": "agentMemory_0-output-agentMemory-AgentMemory|BaseCheckpointSaver",
+      "target": "supervisor_0",
+      "targetHandle": "supervisor_0-input-agentMemory-BaseCheckpointSaver",
+      "type": "buttonedge",
+      "id": "agentMemory_0-agentMemory_0-output-agentMemory-AgentMemory|BaseCheckpointSaver-supervisor_0-supervisor_0-input-agentMemory-BaseCheckpointSaver"
+    }
+  ]
+}
