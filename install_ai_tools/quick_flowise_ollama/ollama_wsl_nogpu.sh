@@ -325,8 +325,9 @@ fi
 if [ ! -f /home/$USER/venv_installed.txt ]; then
     cd /home/$USER
     echo " "
-    echo " "
+    echo "Creating python virtual environment"
     echo "------------"        
+	sleep 3
         # Clear earlier directory, if it exists
         python3 -m venv --clear /home/$USER/venv
         source /home/$USER/venv/bin/activate
@@ -399,7 +400,9 @@ cd /home/$USER/
 if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
-	echo "------------"        
+	echo "Installing vectordb"
+    echo "------------"        
+	sleep 3
 	    echo "====  "    
 		echo "Installing milvus vector database using docker"       
 		echo "You may be asked for the password. Supply it..."     
@@ -783,8 +786,9 @@ cd /home/$USER
 echo " "
 echo " "
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
-	echo "------------"   
-	echo "------------"   
+	echo "Installing n8n docker"
+    echo "------------"        
+	sleep 3
 	    cd ~/
 	    mkdir /home/$USER/n8n  # Redundant step
 	    #cd /home/$USER/n8n
