@@ -229,6 +229,8 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Installing docker.."
     sleep 2
     sudo apt-get update
+	sudo rm /etc/apt/sources.list.d/docker.list
+	sudo apt-get update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
