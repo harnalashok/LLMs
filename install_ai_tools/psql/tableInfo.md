@@ -2,7 +2,9 @@ psql commands:
 >Get list of roles:                \du       
 >Get list of databases and owners:  \l     
 >Connect to database:              \c mydatabase      
->Get list of tables:              \dt     
+>Get list of tables:              \dt      
+>Get table schema:                 \d tableName
+
     
 Database ravi:        Has CJ Date's spj tables     
 Database chinook:     Is a Digital Media Store      
