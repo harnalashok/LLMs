@@ -1114,6 +1114,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull qwen3.5:latest
 	docker exec -it ollama ollama pull qwen3:latest
 	docker exec -it ollama ollama pull mistral-nemo:latest
+	docker exec -it ollama ollama pull qwen3.5:0.8b
 	echo " "
 	echo " "
 	#ollama list
