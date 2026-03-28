@@ -64,7 +64,7 @@ Stop Symantic anti-virus first
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
    # Assuming sudo password is ashok
-   sed -i '/| sudo | sudo tee/! s/sudo/echo "ashok" | sudo -S /g' ollama_wsl_gpu.sh
+   sed -i '/(| sudo | sudo tee)/! s/sudo/echo "ashok" | sudo -S /g' ollama_wsl_gpu.sh
    bash ollama_wsl_gpu.sh
    cd ~/   
 ```
