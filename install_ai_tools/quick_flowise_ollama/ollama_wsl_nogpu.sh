@@ -1089,7 +1089,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
       else
         reboot
       fi  
-
+fi
 
 
 ###########################
