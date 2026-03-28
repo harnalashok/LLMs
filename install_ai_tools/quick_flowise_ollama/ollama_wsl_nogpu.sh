@@ -58,7 +58,7 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/first_time.txt ]; then
-    sleep 15
+    sleep 8
     echo "  "
     echo "------------"                            
 	echo "========script=============="
@@ -120,7 +120,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "Installing nodejs ver 22.x"
 	echo "===="
 	echo "  "
-	sleep 4
+	sleep 2
 	# First, update your package list
     sudo apt update
     # Install curl if you don't have it
@@ -200,7 +200,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         echo " "
         echo "=>   ./ollama_wsl_nogpu.sh"
         echo "=========="
-        sleep 15
+        sleep 8
         wsl.exe --shutdown
     else
         echo "====NOTE====="
@@ -208,7 +208,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         echo " "
         echo "=>   ./ollama_wsl_nogpu.sh"
         echo "=========="
-        sleep 15
+        sleep 8
         wsl.exe --shutdown
     fi
 fi
@@ -245,7 +245,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Docker is installed" > /home/$USER/docker_installed.txt   # To avoid repeat installation
     echo "WSL-Ubuntu will be closed"
     echo "Open the shell and execute:    ./ollama_wsl_nogpu.sh:"
-    sleep 9
+    sleep 4
     if [ "$WSLSYSTEM" = "true" ] ; then
         wsl.exe --shutdown
     else
