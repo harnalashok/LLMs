@@ -523,7 +523,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		ln -sT /home/$USER/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
 		#
 		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
-		wsl.exe --shutdown
+		#wsl.exe --shutdown
 		sleep 3
 		chmod +x /home/$USER/*.sh
         chmod +x /home/$USER/start/*.sh
