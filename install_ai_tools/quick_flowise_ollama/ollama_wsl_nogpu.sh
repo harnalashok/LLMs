@@ -307,6 +307,15 @@ else
 fi    
 
 
+
+if ! command -v docker &> /dev/null; then
+    echo "Docker installation not found. Please install docker."
+    exit 1
+else
+    echo "Docker is installed."
+fi
+
+
 ##############
 # Create python virtual env
 # source /home/$USER/venv/bin/activate
@@ -370,7 +379,11 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
       
         cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
         cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-		wsl.exe --shutdown
+		if [ "$WSLSYSTEM" = "true" ] ; then
+             wsl.exe --shutdown
+        else
+            reboot
+        fi  
 fi   
 
 
@@ -746,7 +759,11 @@ cd /home/$USER
 		echo "chromadb_installed.txt"  > /home/$USER/chromadb_installed.txt
 	    sleep 3
 		chmod +x /home/$USER/*.sh
-		wsl.exe --shutdown
+		if [ "$WSLSYSTEM" = "true" ] ; then
+           wsl.exe --shutdown
+        else
+           reboot
+        fi  
 	  
 fi
 
@@ -826,7 +843,11 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 		echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
 		sleep 3
 		chmod +x /home/$USER/*.sh
-		wsl.exe --shutdown
+		if [ "$WSLSYSTEM" = "true" ] ; then
+           wsl.exe --shutdown
+        else
+          reboot
+        fi  
 	
 fi	
 
@@ -886,7 +907,11 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
   echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
   sleep 2
   chmod +x /home/$USER/*.sh
-  wsl.exe --shutdown
+  if [ "$WSLSYSTEM" = "true" ] ; then
+        wsl.exe --shutdown
+   else
+        reboot
+    fi  
 fi	
 
 
@@ -918,7 +943,6 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  echo "models installed" > /home/$USER/models_installed.txt
 	  sleep 2
 	  chmod +x /home/$USER/*.sh
-	  wsl.exe --shutdown
 fi
 
 
@@ -1052,8 +1076,11 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
    bash stop_n8n.sh
    bash stop_flowise.sh
    sleep 2
-   wsl.exe --shutdown
-fi
+   if [ "$WSLSYSTEM" = "true" ] ; then
+        wsl.exe --shutdown
+      else
+        reboot
+      fi  
 
 
 
@@ -1094,8 +1121,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 			chmod +x /home/$USER/*.sh
 			chmod +x /home/$USER/start/*.sh
 			chmod +x /home/$USER/stop/*.sh
-			wsl.exe --shutdown
-	     else
+		else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
 	     fi   
 	fi	 
@@ -1204,7 +1230,11 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
-	wsl.exe --shutdown
+	if [ "$WSLSYSTEM" = "true" ] ; then
+        wsl.exe --shutdown
+      else
+        reboot
+      fi  
 else
     echo "  "
 fi	
