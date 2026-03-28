@@ -763,6 +763,7 @@ cd /home/$USER
 		echo "chromadb_installed.txt"  > /home/$USER/chromadb_installed.txt
 	    sleep 3
 		chmod +x /home/$USER/*.sh
+		echo "vectordb_installed.txt"  > /home/$USER/vectordb_installed.txt
 		if [ "$WSLSYSTEM" = "true" ] ; then
            wsl.exe --shutdown
         else
