@@ -1,0 +1,610 @@
+{
+  "nodes": [
+    {
+      "width": 300,
+      "height": 639,
+      "id": "promptRetriever_0",
+      "position": {
+        "x": -413.89312843524317,
+        "y": -403.3799092029521
+      },
+      "type": "customNode",
+      "data": {
+        "id": "promptRetriever_0",
+        "label": "Prompt Retriever",
+        "version": 1,
+        "name": "promptRetriever",
+        "type": "PromptRetriever",
+        "baseClasses": [
+          "PromptRetriever"
+        ],
+        "category": "Retrievers",
+        "description": "Store prompt template with name & description to be later queried by MultiPromptChain",
+        "inputParams": [
+          {
+            "label": "Prompt Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "physics-qa",
+            "id": "promptRetriever_0-input-name-string"
+          },
+          {
+            "label": "Prompt Description",
+            "name": "description",
+            "type": "string",
+            "rows": 3,
+            "description": "Description of what the prompt does and when it should be used",
+            "placeholder": "Good for answering questions about physics",
+            "id": "promptRetriever_0-input-description-string"
+          },
+          {
+            "label": "Prompt System Message",
+            "name": "systemMessage",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "You are a very smart physics professor. You are great at answering questions about physics in a concise and easy to understand manner. When you don't know the answer to a question you admit that you don't know.",
+            "id": "promptRetriever_0-input-systemMessage-string"
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "name": "physics",
+          "description": "Good for answering questions about physics",
+          "systemMessage": "You are a very smart physics professor. You are great at answering questions about physics in a concise and easy to understand manner.  Preface your answer as: Answered by Physics Wala: \nWhen you don't know the answer to a question you admit that you don't know."
+        },
+        "outputAnchors": [
+          {
+            "id": "promptRetriever_0-output-promptRetriever-PromptRetriever",
+            "name": "promptRetriever",
+            "label": "PromptRetriever",
+            "type": "PromptRetriever"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": -413.89312843524317,
+        "y": -403.3799092029521
+      },
+      "dragging": false
+    },
+    {
+      "width": 300,
+      "height": 338,
+      "id": "multiPromptChain_0",
+      "position": {
+        "x": 1413.0542976173751,
+        "y": 57.44114408008326
+      },
+      "type": "customNode",
+      "data": {
+        "id": "multiPromptChain_0",
+        "label": "Multi Prompt Chain",
+        "version": 2,
+        "name": "multiPromptChain",
+        "type": "MultiPromptChain",
+        "baseClasses": [
+          "MultiPromptChain",
+          "MultiRouteChain",
+          "BaseChain",
+          "BaseLangChain"
+        ],
+        "category": "Chains",
+        "description": "Chain automatically picks an appropriate prompt from multiple prompt templates",
+        "inputParams": [],
+        "inputAnchors": [
+          {
+            "label": "Language Model",
+            "name": "model",
+            "type": "BaseLanguageModel",
+            "id": "multiPromptChain_0-input-model-BaseLanguageModel"
+          },
+          {
+            "label": "Prompt Retriever",
+            "name": "promptRetriever",
+            "type": "PromptRetriever",
+            "list": true,
+            "id": "multiPromptChain_0-input-promptRetriever-PromptRetriever"
+          },
+          {
+            "label": "Input Moderation",
+            "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+            "name": "inputModeration",
+            "type": "Moderation",
+            "optional": true,
+            "list": true,
+            "id": "multiPromptChain_0-input-inputModeration-Moderation"
+          }
+        ],
+        "inputs": {
+          "inputModeration": "",
+          "model": "{{chatOllama_0.data.instance}}",
+          "promptRetriever": [
+            "{{promptRetriever_0.data.instance}}",
+            "{{promptRetriever_2.data.instance}}",
+            "{{promptRetriever_1.data.instance}}"
+          ]
+        },
+        "outputAnchors": [
+          {
+            "id": "multiPromptChain_0-output-multiPromptChain-MultiPromptChain|MultiRouteChain|BaseChain|BaseLangChain",
+            "name": "multiPromptChain",
+            "label": "MultiPromptChain",
+            "type": "MultiPromptChain | MultiRouteChain | BaseChain | BaseLangChain"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "positionAbsolute": {
+        "x": 1413.0542976173751,
+        "y": 57.44114408008326
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "width": 300,
+      "height": 639,
+      "id": "promptRetriever_1",
+      "position": {
+        "x": 37.680058398889855,
+        "y": -693.7936189056342
+      },
+      "type": "customNode",
+      "data": {
+        "id": "promptRetriever_1",
+        "label": "Prompt Retriever",
+        "version": 1,
+        "name": "promptRetriever",
+        "type": "PromptRetriever",
+        "baseClasses": [
+          "PromptRetriever"
+        ],
+        "category": "Retrievers",
+        "description": "Store prompt template with name & description to be later queried by MultiPromptChain",
+        "inputParams": [
+          {
+            "label": "Prompt Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "physics-qa",
+            "id": "promptRetriever_1-input-name-string"
+          },
+          {
+            "label": "Prompt Description",
+            "name": "description",
+            "type": "string",
+            "rows": 3,
+            "description": "Description of what the prompt does and when it should be used",
+            "placeholder": "Good for answering questions about physics",
+            "id": "promptRetriever_1-input-description-string"
+          },
+          {
+            "label": "Prompt System Message",
+            "name": "systemMessage",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "You are a very smart physics professor. You are great at answering questions about physics in a concise and easy to understand manner. When you don't know the answer to a question you admit that you don't know.",
+            "id": "promptRetriever_1-input-systemMessage-string"
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "name": "math",
+          "description": "Good for answering math questions",
+          "systemMessage": "You are a very good mathematician. You are great at answering math questions. You are so good because you are able to break down hard problems into their component parts, answer the component parts, and then put them together to answer the broader question. Preface your answer as: Answered by Math expert: "
+        },
+        "outputAnchors": [
+          {
+            "id": "promptRetriever_1-output-promptRetriever-PromptRetriever",
+            "name": "promptRetriever",
+            "label": "PromptRetriever",
+            "type": "PromptRetriever"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": 37.680058398889855,
+        "y": -693.7936189056342
+      },
+      "dragging": false
+    },
+    {
+      "width": 300,
+      "height": 639,
+      "id": "promptRetriever_2",
+      "position": {
+        "x": 482.7908717921006,
+        "y": -792.8352403157868
+      },
+      "type": "customNode",
+      "data": {
+        "id": "promptRetriever_2",
+        "label": "Prompt Retriever",
+        "version": 1,
+        "name": "promptRetriever",
+        "type": "PromptRetriever",
+        "baseClasses": [
+          "PromptRetriever"
+        ],
+        "category": "Retrievers",
+        "description": "Store prompt template with name & description to be later queried by MultiPromptChain",
+        "inputParams": [
+          {
+            "label": "Prompt Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "physics-qa",
+            "id": "promptRetriever_2-input-name-string"
+          },
+          {
+            "label": "Prompt Description",
+            "name": "description",
+            "type": "string",
+            "rows": 3,
+            "description": "Description of what the prompt does and when it should be used",
+            "placeholder": "Good for answering questions about physics",
+            "id": "promptRetriever_2-input-description-string"
+          },
+          {
+            "label": "Prompt System Message",
+            "name": "systemMessage",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "You are a very smart physics professor. You are great at answering questions about physics in a concise and easy to understand manner. When you don't know the answer to a question you admit that you don't know.",
+            "id": "promptRetriever_2-input-systemMessage-string"
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "name": "history",
+          "description": "Good for answering questions about history",
+          "systemMessage": "You are a very smart history professor. You are great at answering questions about history in a concise and easy to understand manner. Preface your answer as: Answered by History wizard:  \nWhen you don't know the answer to a question you admit that you don't know."
+        },
+        "outputAnchors": [
+          {
+            "id": "promptRetriever_2-output-promptRetriever-PromptRetriever",
+            "name": "promptRetriever",
+            "label": "PromptRetriever",
+            "type": "PromptRetriever"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": 482.7908717921006,
+        "y": -792.8352403157868
+      },
+      "dragging": false
+    },
+    {
+      "id": "chatOllama_0",
+      "position": {
+        "x": 1059.9391854641358,
+        "y": -878.9549126934681
+      },
+      "type": "customNode",
+      "data": {
+        "id": "chatOllama_0",
+        "label": "ChatOllama",
+        "version": 5,
+        "name": "chatOllama",
+        "type": "ChatOllama",
+        "baseClasses": [
+          "ChatOllama",
+          "ChatOllama",
+          "BaseChatModel",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "Chat Models",
+        "description": "Chat completion using open-source LLM on Ollama",
+        "inputParams": [
+          {
+            "label": "Base URL",
+            "name": "baseUrl",
+            "type": "string",
+            "default": "http://localhost:11434",
+            "id": "chatOllama_0-input-baseUrl-string",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "string",
+            "placeholder": "llama2",
+            "id": "chatOllama_0-input-modelName-string",
+            "display": true
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "description": "The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "chatOllama_0-input-temperature-number",
+            "display": true
+          },
+          {
+            "label": "Allow Image Uploads",
+            "name": "allowImageUploads",
+            "type": "boolean",
+            "description": "Allow image input. Refer to the <a href=\"https://docs.flowiseai.com/using-flowise/uploads#image\" target=\"_blank\">docs</a> for more details.",
+            "default": false,
+            "optional": true,
+            "id": "chatOllama_0-input-allowImageUploads-boolean",
+            "display": true
+          },
+          {
+            "label": "Streaming",
+            "name": "streaming",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-streaming-boolean",
+            "display": true
+          },
+          {
+            "label": "JSON Mode",
+            "name": "jsonMode",
+            "type": "boolean",
+            "description": "Coerces model outputs to only return JSON. Specify in the system prompt to return JSON. Ex: Format all responses as JSON object",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-jsonMode-boolean",
+            "display": true
+          },
+          {
+            "label": "Keep Alive",
+            "name": "keepAlive",
+            "type": "string",
+            "description": "How long to keep connection alive. A duration string (such as \"10m\" or \"24h\")",
+            "default": "5m",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-keepAlive-string",
+            "display": true
+          },
+          {
+            "label": "Top P",
+            "name": "topP",
+            "type": "number",
+            "description": "Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-topP-number",
+            "display": true
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "type": "number",
+            "description": "Reduces the probability of generating nonsense. A higher value (e.g. 100) will give more diverse answers, while a lower value (e.g. 10) will be more conservative. (Default: 40). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-topK-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat",
+            "name": "mirostat",
+            "type": "number",
+            "description": "Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostat-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat ETA",
+            "name": "mirostatEta",
+            "type": "number",
+            "description": "Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostatEta-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat TAU",
+            "name": "mirostatTau",
+            "type": "number",
+            "description": "Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostatTau-number",
+            "display": true
+          },
+          {
+            "label": "Context Window Size",
+            "name": "numCtx",
+            "type": "number",
+            "description": "Sets the size of the context window used to generate the next token. (Default: 2048) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numCtx-number",
+            "display": true
+          },
+          {
+            "label": "Number of GPU",
+            "name": "numGpu",
+            "type": "number",
+            "description": "The number of layers to send to the GPU(s). On macOS it defaults to 1 to enable metal support, 0 to disable. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numGpu-number",
+            "display": true
+          },
+          {
+            "label": "Number of Thread",
+            "name": "numThread",
+            "type": "number",
+            "description": "Sets the number of threads to use during computation. By default, Ollama will detect this for optimal performance. It is recommended to set this value to the number of physical CPU cores your system has (as opposed to the logical number of cores). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numThread-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Last N",
+            "name": "repeatLastN",
+            "type": "number",
+            "description": "Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-repeatLastN-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Penalty",
+            "name": "repeatPenalty",
+            "type": "number",
+            "description": "Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-repeatPenalty-number",
+            "display": true
+          },
+          {
+            "label": "Stop Sequence",
+            "name": "stop",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "AI assistant:",
+            "description": "Sets the stop sequences to use. Use comma to seperate different sequences. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-stop-string",
+            "display": true
+          },
+          {
+            "label": "Tail Free Sampling",
+            "name": "tfsZ",
+            "type": "number",
+            "description": "Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (Default: 1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-tfsZ-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "chatOllama_0-input-cache-BaseCache",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "baseUrl": "http://localhost:11434",
+          "modelName": "llama3.2:latest",
+          "temperature": 0.9,
+          "allowImageUploads": "",
+          "streaming": true,
+          "jsonMode": "",
+          "keepAlive": "5m",
+          "topP": "",
+          "topK": "",
+          "mirostat": "",
+          "mirostatEta": "",
+          "mirostatTau": "",
+          "numCtx": "",
+          "numGpu": "",
+          "numThread": "",
+          "repeatLastN": "",
+          "repeatPenalty": "",
+          "stop": "",
+          "tfsZ": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+            "name": "chatOllama",
+            "label": "ChatOllama",
+            "description": "Chat completion using open-source LLM on Ollama",
+            "type": "ChatOllama | ChatOllama | BaseChatModel | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 682,
+      "positionAbsolute": {
+        "x": 1059.9391854641358,
+        "y": -878.9549126934681
+      },
+      "selected": false,
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "promptRetriever_0",
+      "sourceHandle": "promptRetriever_0-output-promptRetriever-PromptRetriever",
+      "target": "multiPromptChain_0",
+      "targetHandle": "multiPromptChain_0-input-promptRetriever-PromptRetriever",
+      "type": "buttonedge",
+      "id": "promptRetriever_0-promptRetriever_0-output-promptRetriever-PromptRetriever-multiPromptChain_0-multiPromptChain_0-input-promptRetriever-PromptRetriever",
+      "data": {
+        "label": ""
+      }
+    },
+    {
+      "source": "promptRetriever_2",
+      "sourceHandle": "promptRetriever_2-output-promptRetriever-PromptRetriever",
+      "target": "multiPromptChain_0",
+      "targetHandle": "multiPromptChain_0-input-promptRetriever-PromptRetriever",
+      "type": "buttonedge",
+      "id": "promptRetriever_2-promptRetriever_2-output-promptRetriever-PromptRetriever-multiPromptChain_0-multiPromptChain_0-input-promptRetriever-PromptRetriever",
+      "data": {
+        "label": ""
+      }
+    },
+    {
+      "source": "promptRetriever_1",
+      "sourceHandle": "promptRetriever_1-output-promptRetriever-PromptRetriever",
+      "target": "multiPromptChain_0",
+      "targetHandle": "multiPromptChain_0-input-promptRetriever-PromptRetriever",
+      "type": "buttonedge",
+      "id": "promptRetriever_1-promptRetriever_1-output-promptRetriever-PromptRetriever-multiPromptChain_0-multiPromptChain_0-input-promptRetriever-PromptRetriever",
+      "data": {
+        "label": ""
+      }
+    },
+    {
+      "source": "chatOllama_0",
+      "sourceHandle": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "multiPromptChain_0",
+      "targetHandle": "multiPromptChain_0-input-model-BaseLanguageModel",
+      "type": "buttonedge",
+      "id": "chatOllama_0-chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable-multiPromptChain_0-multiPromptChain_0-input-model-BaseLanguageModel"
+    }
+  ]
+}

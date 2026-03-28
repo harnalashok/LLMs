@@ -1,0 +1,31 @@
+# Last amended: 12th June, 2025
+# Ref: https://www.youtube.com/watch?v=OXGznpKZ_sA
+
+To embed chatbot,
+	a. Start apache2, as:
+		sudo systemctl start apache2
+	b. Amend: /var/www/html/index.html, as:
+		sudo nano /var/www/html/index.html
+	c. Add code with style tag as below to amend index.html:
+	
+		CSS: Cascading Style Sheet language to describe the presentation of documents
+		html vs CSS
+			html: Foundation and structure of a building
+			CSS: How should each object: Walls, doors, Windows, Floor, Carpets look
+
+
+		Use the following PROMPT in 'codegemma' to generate code:
+
+		Write code for an index.html file. The code will contain:
+			a. Skelton html
+			b. A title: Demo Project
+			c. A top heading: Learning style sheets
+			d. An image, flower.jpg, will be displayed at top-right of the page. Image width will be 2-inches and image height is 3-inches
+			e. The page background will be light-green
+			f. If required, create a stylesheet also
+			OR
+			f. Use style tag within html code and do not use any css file
+	
+	d. Add chatbot	
+	
+	##############

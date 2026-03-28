@@ -1,0 +1,23 @@
+# Last amended: 11th August, 2024
+
+# 1.0 Start Ubuntu:
+$ npx flowise start
+
+# 1.1 Open in browser: 
+  http://localhost:3000
+
+# If required, open Inbound connection to port 3000 in firewall
+
+# 1.2 To import, click on 
+	Chatflows--Left panel
+	Click on Add New button
+	Click on Settings icon and click 'Load chatflow'
+
+
+# 2.0 When required, Update flowise as:
+
+$  npm update -g flowise
+
+
+
+#####################

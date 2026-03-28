@@ -1,0 +1,2080 @@
+{
+  "nodes": [
+    {
+      "width": 300,
+      "height": 513,
+      "id": "vectorStoreRetriever_0",
+      "position": {
+        "x": 187.04836682731604,
+        "y": 574.578802573154
+      },
+      "type": "customNode",
+      "data": {
+        "id": "vectorStoreRetriever_0",
+        "label": "Vector Store Retriever",
+        "version": 1,
+        "name": "vectorStoreRetriever",
+        "type": "VectorStoreRetriever",
+        "baseClasses": [
+          "VectorStoreRetriever"
+        ],
+        "category": "Retrievers",
+        "description": "Store vector store as retriever. Used with MultiRetrievalQAChain",
+        "inputParams": [
+          {
+            "label": "Retriever Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "netflix movies",
+            "id": "vectorStoreRetriever_0-input-name-string"
+          },
+          {
+            "label": "Retriever Description",
+            "name": "description",
+            "type": "string",
+            "rows": 3,
+            "description": "Description of when to use the vector store retriever",
+            "placeholder": "Good for answering questions about netflix movies",
+            "id": "vectorStoreRetriever_0-input-description-string"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Vector Store",
+            "name": "vectorStore",
+            "type": "VectorStore",
+            "id": "vectorStoreRetriever_0-input-vectorStore-VectorStore"
+          }
+        ],
+        "inputs": {
+          "vectorStore": "{{faiss_0.data.instance}}",
+          "name": "hockey",
+          "description": "Good for answering questions on hockey"
+        },
+        "outputAnchors": [
+          {
+            "id": "vectorStoreRetriever_0-output-vectorStoreRetriever-VectorStoreRetriever",
+            "name": "vectorStoreRetriever",
+            "label": "VectorStoreRetriever",
+            "type": "VectorStoreRetriever"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": 187.04836682731604,
+        "y": 574.578802573154
+      },
+      "dragging": false
+    },
+    {
+      "width": 300,
+      "height": 435,
+      "id": "multiRetrievalQAChain_0",
+      "position": {
+        "x": 812.3681071283584,
+        "y": 528.8043462845492
+      },
+      "type": "customNode",
+      "data": {
+        "id": "multiRetrievalQAChain_0",
+        "label": "Multi Retrieval QA Chain",
+        "version": 2,
+        "name": "multiRetrievalQAChain",
+        "type": "MultiRetrievalQAChain",
+        "baseClasses": [
+          "MultiRetrievalQAChain",
+          "MultiRouteChain",
+          "BaseChain",
+          "BaseLangChain"
+        ],
+        "category": "Chains",
+        "description": "QA Chain that automatically picks an appropriate vector store from multiple retrievers",
+        "inputParams": [
+          {
+            "label": "Return Source Documents",
+            "name": "returnSourceDocuments",
+            "type": "boolean",
+            "optional": true,
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Language Model",
+            "name": "model",
+            "type": "BaseLanguageModel",
+            "id": "multiRetrievalQAChain_0-input-model-BaseLanguageModel"
+          },
+          {
+            "label": "Vector Store Retriever",
+            "name": "vectorStoreRetriever",
+            "type": "VectorStoreRetriever",
+            "list": true,
+            "id": "multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever"
+          },
+          {
+            "label": "Input Moderation",
+            "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+            "name": "inputModeration",
+            "type": "Moderation",
+            "optional": true,
+            "list": true,
+            "id": "multiRetrievalQAChain_0-input-inputModeration-Moderation"
+          }
+        ],
+        "inputs": {
+          "inputModeration": "",
+          "model": "{{chatOllama_0.data.instance}}",
+          "vectorStoreRetriever": [
+            "{{vectorStoreRetriever_0.data.instance}}",
+            "{{vectorStoreRetriever_1.data.instance}}",
+            "{{vectorStoreRetriever_2.data.instance}}"
+          ],
+          "returnSourceDocuments": true
+        },
+        "outputAnchors": [
+          {
+            "id": "multiRetrievalQAChain_0-output-multiRetrievalQAChain-MultiRetrievalQAChain|MultiRouteChain|BaseChain|BaseLangChain",
+            "name": "multiRetrievalQAChain",
+            "label": "MultiRetrievalQAChain",
+            "type": "MultiRetrievalQAChain | MultiRouteChain | BaseChain | BaseLangChain"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": 812.3681071283584,
+        "y": 528.8043462845492
+      },
+      "dragging": false
+    },
+    {
+      "width": 300,
+      "height": 513,
+      "id": "vectorStoreRetriever_1",
+      "position": {
+        "x": 164.0770993997662,
+        "y": -281.44361169506647
+      },
+      "type": "customNode",
+      "data": {
+        "id": "vectorStoreRetriever_1",
+        "label": "Vector Store Retriever",
+        "version": 1,
+        "name": "vectorStoreRetriever",
+        "type": "VectorStoreRetriever",
+        "baseClasses": [
+          "VectorStoreRetriever"
+        ],
+        "category": "Retrievers",
+        "description": "Store vector store as retriever. Used with MultiRetrievalQAChain",
+        "inputParams": [
+          {
+            "label": "Retriever Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "netflix movies",
+            "id": "vectorStoreRetriever_1-input-name-string"
+          },
+          {
+            "label": "Retriever Description",
+            "name": "description",
+            "type": "string",
+            "rows": 3,
+            "description": "Description of when to use the vector store retriever",
+            "placeholder": "Good for answering questions about netflix movies",
+            "id": "vectorStoreRetriever_1-input-description-string"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Vector Store",
+            "name": "vectorStore",
+            "type": "VectorStore",
+            "id": "vectorStoreRetriever_1-input-vectorStore-VectorStore"
+          }
+        ],
+        "inputs": {
+          "vectorStore": "{{milvus_0.data.instance}}",
+          "name": "football",
+          "description": "Good for answering questions on football"
+        },
+        "outputAnchors": [
+          {
+            "id": "vectorStoreRetriever_1-output-vectorStoreRetriever-VectorStoreRetriever",
+            "name": "vectorStoreRetriever",
+            "label": "VectorStoreRetriever",
+            "type": "VectorStoreRetriever"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": 164.0770993997662,
+        "y": -281.44361169506647
+      },
+      "dragging": false
+    },
+    {
+      "width": 300,
+      "height": 513,
+      "id": "vectorStoreRetriever_2",
+      "position": {
+        "x": 140.25285233535834,
+        "y": -885.2303648271961
+      },
+      "type": "customNode",
+      "data": {
+        "id": "vectorStoreRetriever_2",
+        "label": "Vector Store Retriever",
+        "version": 1,
+        "name": "vectorStoreRetriever",
+        "type": "VectorStoreRetriever",
+        "baseClasses": [
+          "VectorStoreRetriever"
+        ],
+        "category": "Retrievers",
+        "description": "Store vector store as retriever. Used with MultiRetrievalQAChain",
+        "inputParams": [
+          {
+            "label": "Retriever Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "netflix movies",
+            "id": "vectorStoreRetriever_2-input-name-string"
+          },
+          {
+            "label": "Retriever Description",
+            "name": "description",
+            "type": "string",
+            "rows": 3,
+            "description": "Description of when to use the vector store retriever",
+            "placeholder": "Good for answering questions about netflix movies",
+            "id": "vectorStoreRetriever_2-input-description-string"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Vector Store",
+            "name": "vectorStore",
+            "type": "VectorStore",
+            "id": "vectorStoreRetriever_2-input-vectorStore-VectorStore"
+          }
+        ],
+        "inputs": {
+          "vectorStore": "{{memoryVectorStore_0.data.instance}}",
+          "name": "philosophy",
+          "description": "Good for answering questions about philosophy of life"
+        },
+        "outputAnchors": [
+          {
+            "id": "vectorStoreRetriever_2-output-vectorStoreRetriever-VectorStoreRetriever",
+            "name": "vectorStoreRetriever",
+            "label": "VectorStoreRetriever",
+            "type": "VectorStoreRetriever"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "selected": false,
+      "positionAbsolute": {
+        "x": 140.25285233535834,
+        "y": -885.2303648271961
+      },
+      "dragging": false
+    },
+    {
+      "id": "stickyNote_0",
+      "position": {
+        "x": 1207.4487853365156,
+        "y": 7.0720788829150365
+      },
+      "type": "stickyNote",
+      "data": {
+        "id": "stickyNote_0",
+        "label": "Sticky Note",
+        "version": 2,
+        "name": "stickyNote",
+        "type": "StickyNote",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "tags": [
+          "Utilities"
+        ],
+        "category": "Utilities",
+        "description": "Add a sticky note",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNote_0-input-note-string"
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "Multi Retrieval QA Chain is able to pick which Vector Store Retriever to use based on user question.\n\nHowever it comes with the restriction for not being able to resume follow up conversations because there isn't any memory.\n\nIt is suitable for LLM which doesn't have function calling support.\n\nOtherwise, it is recommended to use Multiple Documents QnA template which uses Tool Agent.\n\nQuestions asked:\na. Tell me history of hockey\nb. What is the history of football\nc. Explain philosophy of life\nd. How to admit a child to school\n\nThere will be confusing answer for the last question"
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNote_0-output-stickyNote-StickyNote",
+            "name": "stickyNote",
+            "label": "StickyNote",
+            "description": "Add a sticky note",
+            "type": "StickyNote"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 505,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 1207.4487853365156,
+        "y": 7.0720788829150365
+      },
+      "dragging": false
+    },
+    {
+      "id": "chatOllama_0",
+      "position": {
+        "x": 777.2120877364399,
+        "y": -365.62281356993094
+      },
+      "type": "customNode",
+      "data": {
+        "id": "chatOllama_0",
+        "label": "ChatOllama",
+        "version": 5,
+        "name": "chatOllama",
+        "type": "ChatOllama",
+        "baseClasses": [
+          "ChatOllama",
+          "ChatOllama",
+          "BaseChatModel",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "Chat Models",
+        "description": "Chat completion using open-source LLM on Ollama",
+        "inputParams": [
+          {
+            "label": "Base URL",
+            "name": "baseUrl",
+            "type": "string",
+            "default": "http://localhost:11434",
+            "id": "chatOllama_0-input-baseUrl-string",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "string",
+            "placeholder": "llama2",
+            "id": "chatOllama_0-input-modelName-string",
+            "display": true
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "description": "The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "chatOllama_0-input-temperature-number",
+            "display": true
+          },
+          {
+            "label": "Allow Image Uploads",
+            "name": "allowImageUploads",
+            "type": "boolean",
+            "description": "Allow image input. Refer to the <a href=\"https://docs.flowiseai.com/using-flowise/uploads#image\" target=\"_blank\">docs</a> for more details.",
+            "default": false,
+            "optional": true,
+            "id": "chatOllama_0-input-allowImageUploads-boolean",
+            "display": true
+          },
+          {
+            "label": "Streaming",
+            "name": "streaming",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-streaming-boolean",
+            "display": true
+          },
+          {
+            "label": "JSON Mode",
+            "name": "jsonMode",
+            "type": "boolean",
+            "description": "Coerces model outputs to only return JSON. Specify in the system prompt to return JSON. Ex: Format all responses as JSON object",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-jsonMode-boolean",
+            "display": true
+          },
+          {
+            "label": "Keep Alive",
+            "name": "keepAlive",
+            "type": "string",
+            "description": "How long to keep connection alive. A duration string (such as \"10m\" or \"24h\")",
+            "default": "5m",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-keepAlive-string",
+            "display": true
+          },
+          {
+            "label": "Top P",
+            "name": "topP",
+            "type": "number",
+            "description": "Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-topP-number",
+            "display": true
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "type": "number",
+            "description": "Reduces the probability of generating nonsense. A higher value (e.g. 100) will give more diverse answers, while a lower value (e.g. 10) will be more conservative. (Default: 40). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-topK-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat",
+            "name": "mirostat",
+            "type": "number",
+            "description": "Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostat-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat ETA",
+            "name": "mirostatEta",
+            "type": "number",
+            "description": "Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostatEta-number",
+            "display": true
+          },
+          {
+            "label": "Mirostat TAU",
+            "name": "mirostatTau",
+            "type": "number",
+            "description": "Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-mirostatTau-number",
+            "display": true
+          },
+          {
+            "label": "Context Window Size",
+            "name": "numCtx",
+            "type": "number",
+            "description": "Sets the size of the context window used to generate the next token. (Default: 2048) Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numCtx-number",
+            "display": true
+          },
+          {
+            "label": "Number of GPU",
+            "name": "numGpu",
+            "type": "number",
+            "description": "The number of layers to send to the GPU(s). On macOS it defaults to 1 to enable metal support, 0 to disable. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numGpu-number",
+            "display": true
+          },
+          {
+            "label": "Number of Thread",
+            "name": "numThread",
+            "type": "number",
+            "description": "Sets the number of threads to use during computation. By default, Ollama will detect this for optimal performance. It is recommended to set this value to the number of physical CPU cores your system has (as opposed to the logical number of cores). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-numThread-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Last N",
+            "name": "repeatLastN",
+            "type": "number",
+            "description": "Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-repeatLastN-number",
+            "display": true
+          },
+          {
+            "label": "Repeat Penalty",
+            "name": "repeatPenalty",
+            "type": "number",
+            "description": "Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-repeatPenalty-number",
+            "display": true
+          },
+          {
+            "label": "Stop Sequence",
+            "name": "stop",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "AI assistant:",
+            "description": "Sets the stop sequences to use. Use comma to seperate different sequences. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-stop-string",
+            "display": true
+          },
+          {
+            "label": "Tail Free Sampling",
+            "name": "tfsZ",
+            "type": "number",
+            "description": "Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (Default: 1). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "chatOllama_0-input-tfsZ-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "chatOllama_0-input-cache-BaseCache",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "baseUrl": "http://localhost:11434",
+          "modelName": "llama3.2:latest",
+          "temperature": 0.9,
+          "allowImageUploads": "",
+          "streaming": true,
+          "jsonMode": "",
+          "keepAlive": "5m",
+          "topP": "",
+          "topK": "",
+          "mirostat": "",
+          "mirostatEta": "",
+          "mirostatTau": "",
+          "numCtx": "",
+          "numGpu": "",
+          "numThread": "",
+          "repeatLastN": "",
+          "repeatPenalty": "",
+          "stop": "",
+          "tfsZ": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+            "name": "chatOllama",
+            "label": "ChatOllama",
+            "description": "Chat completion using open-source LLM on Ollama",
+            "type": "ChatOllama | ChatOllama | BaseChatModel | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 682,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 777.2120877364399,
+        "y": -365.62281356993094
+      },
+      "dragging": false
+    },
+    {
+      "id": "faiss_0",
+      "position": {
+        "x": -465.3397588520496,
+        "y": 583.3602836499132
+      },
+      "type": "customNode",
+      "data": {
+        "id": "faiss_0",
+        "label": "Faiss",
+        "version": 1,
+        "name": "faiss",
+        "type": "Faiss",
+        "baseClasses": [
+          "Faiss",
+          "VectorStoreRetriever",
+          "BaseRetriever"
+        ],
+        "category": "Vector Stores",
+        "description": "Upsert embedded data and perform similarity search upon query using Faiss library from Meta",
+        "inputParams": [
+          {
+            "label": "Base Path to load",
+            "name": "basePath",
+            "description": "Path to load faiss.index file",
+            "placeholder": "C:\\Users\\User\\Desktop",
+            "type": "string",
+            "id": "faiss_0-input-basePath-string",
+            "display": true
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "description": "Number of top results to fetch. Default to 4",
+            "placeholder": "4",
+            "type": "number",
+            "additionalParams": true,
+            "optional": true,
+            "id": "faiss_0-input-topK-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Document",
+            "name": "document",
+            "type": "Document",
+            "list": true,
+            "optional": true,
+            "id": "faiss_0-input-document-Document",
+            "display": true
+          },
+          {
+            "label": "Embeddings",
+            "name": "embeddings",
+            "type": "Embeddings",
+            "id": "faiss_0-input-embeddings-Embeddings",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "document": [
+            "{{pdfFile_1.data.instance}}"
+          ],
+          "embeddings": "{{ollamaEmbedding_0.data.instance}}",
+          "basePath": "/home/ashok/faiss",
+          "topK": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "",
+            "options": [
+              {
+                "id": "faiss_0-output-retriever-Faiss|VectorStoreRetriever|BaseRetriever",
+                "name": "retriever",
+                "label": "Faiss Retriever",
+                "description": "",
+                "type": "Faiss | VectorStoreRetriever | BaseRetriever"
+              },
+              {
+                "id": "faiss_0-output-vectorStore-Faiss|SaveableVectorStore|VectorStore",
+                "name": "vectorStore",
+                "label": "Faiss Vector Store",
+                "description": "",
+                "type": "Faiss | SaveableVectorStore | VectorStore"
+              }
+            ],
+            "default": "retriever"
+          }
+        ],
+        "outputs": {
+          "output": "vectorStore"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 465,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -465.3397588520496,
+        "y": 583.3602836499132
+      },
+      "dragging": false
+    },
+    {
+      "id": "memoryVectorStore_0",
+      "position": {
+        "x": -499.39265103954307,
+        "y": -842.4193829890756
+      },
+      "type": "customNode",
+      "data": {
+        "id": "memoryVectorStore_0",
+        "label": "In-Memory Vector Store",
+        "version": 1,
+        "name": "memoryVectorStore",
+        "type": "Memory",
+        "baseClasses": [
+          "Memory",
+          "VectorStoreRetriever",
+          "BaseRetriever"
+        ],
+        "category": "Vector Stores",
+        "description": "In-memory vectorstore that stores embeddings and does an exact, linear search for the most similar embeddings.",
+        "inputParams": [
+          {
+            "label": "Top K",
+            "name": "topK",
+            "description": "Number of top results to fetch. Default to 4",
+            "placeholder": "4",
+            "type": "number",
+            "optional": true,
+            "id": "memoryVectorStore_0-input-topK-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Document",
+            "name": "document",
+            "type": "Document",
+            "list": true,
+            "optional": true,
+            "id": "memoryVectorStore_0-input-document-Document",
+            "display": true
+          },
+          {
+            "label": "Embeddings",
+            "name": "embeddings",
+            "type": "Embeddings",
+            "id": "memoryVectorStore_0-input-embeddings-Embeddings",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "document": [
+            "{{docxFile_0.data.instance}}"
+          ],
+          "embeddings": "{{ollamaEmbedding_0.data.instance}}",
+          "topK": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "",
+            "options": [
+              {
+                "id": "memoryVectorStore_0-output-retriever-Memory|VectorStoreRetriever|BaseRetriever",
+                "name": "retriever",
+                "label": "Memory Retriever",
+                "description": "",
+                "type": "Memory | VectorStoreRetriever | BaseRetriever"
+              },
+              {
+                "id": "memoryVectorStore_0-output-vectorStore-Memory|VectorStore",
+                "name": "vectorStore",
+                "label": "Memory Vector Store",
+                "description": "",
+                "type": "Memory | VectorStore"
+              }
+            ],
+            "default": "retriever"
+          }
+        ],
+        "outputs": {
+          "output": "vectorStore"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 413,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -499.39265103954307,
+        "y": -842.4193829890756
+      },
+      "dragging": false
+    },
+    {
+      "id": "ollamaEmbedding_0",
+      "position": {
+        "x": -2447.016945720683,
+        "y": -138.72442155054833
+      },
+      "type": "customNode",
+      "data": {
+        "id": "ollamaEmbedding_0",
+        "label": "Ollama Embeddings",
+        "version": 1,
+        "name": "ollamaEmbedding",
+        "type": "OllamaEmbeddings",
+        "baseClasses": [
+          "OllamaEmbeddings",
+          "Embeddings"
+        ],
+        "category": "Embeddings",
+        "description": "Generate embeddings for a given text using open source model on Ollama",
+        "inputParams": [
+          {
+            "label": "Base URL",
+            "name": "baseUrl",
+            "type": "string",
+            "default": "http://localhost:11434",
+            "id": "ollamaEmbedding_0-input-baseUrl-string",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "string",
+            "placeholder": "llama2",
+            "id": "ollamaEmbedding_0-input-modelName-string",
+            "display": true
+          },
+          {
+            "label": "Number of GPU",
+            "name": "numGpu",
+            "type": "number",
+            "description": "The number of layers to send to the GPU(s). On macOS it defaults to 1 to enable metal support, 0 to disable. Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "ollamaEmbedding_0-input-numGpu-number",
+            "display": true
+          },
+          {
+            "label": "Number of Thread",
+            "name": "numThread",
+            "type": "number",
+            "description": "Sets the number of threads to use during computation. By default, Ollama will detect this for optimal performance. It is recommended to set this value to the number of physical CPU cores your system has (as opposed to the logical number of cores). Refer to <a target=\"_blank\" href=\"https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values\">docs</a> for more details",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "ollamaEmbedding_0-input-numThread-number",
+            "display": true
+          },
+          {
+            "label": "Use MMap",
+            "name": "useMMap",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "additionalParams": true,
+            "id": "ollamaEmbedding_0-input-useMMap-boolean",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "baseUrl": "http://localhost:11434",
+          "modelName": "nomic-embed-text",
+          "numGpu": "",
+          "numThread": "",
+          "useMMap": true
+        },
+        "outputAnchors": [
+          {
+            "id": "ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings",
+            "name": "ollamaEmbedding",
+            "label": "OllamaEmbeddings",
+            "description": "Generate embeddings for a given text using open source model on Ollama",
+            "type": "OllamaEmbeddings | Embeddings"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 436,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -2447.016945720683,
+        "y": -138.72442155054833
+      },
+      "dragging": false
+    },
+    {
+      "id": "docxFile_0",
+      "position": {
+        "x": -1193.5682869945845,
+        "y": -827.1803794302036
+      },
+      "type": "customNode",
+      "data": {
+        "id": "docxFile_0",
+        "label": "Docx File",
+        "version": 2,
+        "name": "docxFile",
+        "type": "Document",
+        "baseClasses": [
+          "Document"
+        ],
+        "category": "Document Loaders",
+        "description": "Load data from DOCX files",
+        "inputParams": [
+          {
+            "label": "Docx File",
+            "name": "docxFile",
+            "type": "file",
+            "fileType": ".docx",
+            "id": "docxFile_0-input-docxFile-file",
+            "display": true
+          },
+          {
+            "label": "Additional Metadata",
+            "name": "metadata",
+            "type": "json",
+            "description": "Additional metadata to be added to the extracted documents",
+            "optional": true,
+            "additionalParams": true,
+            "id": "docxFile_0-input-metadata-json",
+            "display": true
+          },
+          {
+            "label": "Omit Metadata Keys",
+            "name": "omitMetadataKeys",
+            "type": "string",
+            "rows": 4,
+            "description": "Each document loader comes with a default set of metadata keys that are extracted from the document. You can use this field to omit some of the default metadata keys. The value should be a list of keys, seperated by comma. Use * to omit all metadata keys execept the ones you specify in the Additional Metadata field",
+            "placeholder": "key1, key2, key3.nestedKey1",
+            "optional": true,
+            "additionalParams": true,
+            "id": "docxFile_0-input-omitMetadataKeys-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Text Splitter",
+            "name": "textSplitter",
+            "type": "TextSplitter",
+            "optional": true,
+            "id": "docxFile_0-input-textSplitter-TextSplitter",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "textSplitter": "{{recursiveCharacterTextSplitter_0.data.instance}}",
+          "metadata": "",
+          "omitMetadataKeys": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "Array of document objects containing metadata and pageContent",
+            "options": [
+              {
+                "id": "docxFile_0-output-document-Document|json",
+                "name": "document",
+                "label": "Document",
+                "description": "Array of document objects containing metadata and pageContent",
+                "type": "Document | json"
+              },
+              {
+                "id": "docxFile_0-output-text-string|json",
+                "name": "text",
+                "label": "Text",
+                "description": "Concatenated string from pageContent of documents",
+                "type": "string | json"
+              }
+            ],
+            "default": "document"
+          }
+        ],
+        "outputs": {
+          "output": "document"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 446,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -1193.5682869945845,
+        "y": -827.1803794302036
+      },
+      "dragging": false
+    },
+    {
+      "id": "recursiveCharacterTextSplitter_0",
+      "position": {
+        "x": -1865.645187868296,
+        "y": -781.4653758854996
+      },
+      "type": "customNode",
+      "data": {
+        "id": "recursiveCharacterTextSplitter_0",
+        "label": "Recursive Character Text Splitter",
+        "version": 2,
+        "name": "recursiveCharacterTextSplitter",
+        "type": "RecursiveCharacterTextSplitter",
+        "baseClasses": [
+          "RecursiveCharacterTextSplitter",
+          "TextSplitter",
+          "BaseDocumentTransformer",
+          "Runnable"
+        ],
+        "category": "Text Splitters",
+        "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+        "inputParams": [
+          {
+            "label": "Chunk Size",
+            "name": "chunkSize",
+            "type": "number",
+            "description": "Number of characters in each chunk. Default is 1000.",
+            "default": 1000,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_0-input-chunkSize-number",
+            "display": true
+          },
+          {
+            "label": "Chunk Overlap",
+            "name": "chunkOverlap",
+            "type": "number",
+            "description": "Number of characters to overlap between chunks. Default is 200.",
+            "default": 200,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_0-input-chunkOverlap-number",
+            "display": true
+          },
+          {
+            "label": "Custom Separators",
+            "name": "separators",
+            "type": "string",
+            "rows": 4,
+            "description": "Array of custom separators to determine when to split the text, will override the default separators",
+            "placeholder": "[\"|\", \"##\", \">\", \"-\"]",
+            "additionalParams": true,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_0-input-separators-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "chunkSize": 1000,
+          "chunkOverlap": 200,
+          "separators": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "recursiveCharacterTextSplitter_0-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+            "name": "recursiveCharacterTextSplitter",
+            "label": "RecursiveCharacterTextSplitter",
+            "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+            "type": "RecursiveCharacterTextSplitter | TextSplitter | BaseDocumentTransformer | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 436,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -1865.645187868296,
+        "y": -781.4653758854996
+      },
+      "dragging": false
+    },
+    {
+      "id": "recursiveCharacterTextSplitter_1",
+      "position": {
+        "x": -1868.0983849891031,
+        "y": -169.03670746406215
+      },
+      "type": "customNode",
+      "data": {
+        "id": "recursiveCharacterTextSplitter_1",
+        "label": "Recursive Character Text Splitter (1)",
+        "version": 2,
+        "name": "recursiveCharacterTextSplitter",
+        "type": "RecursiveCharacterTextSplitter",
+        "baseClasses": [
+          "RecursiveCharacterTextSplitter",
+          "TextSplitter",
+          "BaseDocumentTransformer",
+          "Runnable"
+        ],
+        "category": "Text Splitters",
+        "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+        "inputParams": [
+          {
+            "label": "Chunk Size",
+            "name": "chunkSize",
+            "type": "number",
+            "description": "Number of characters in each chunk. Default is 1000.",
+            "default": 1000,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_1-input-chunkSize-number",
+            "display": true
+          },
+          {
+            "label": "Chunk Overlap",
+            "name": "chunkOverlap",
+            "type": "number",
+            "description": "Number of characters to overlap between chunks. Default is 200.",
+            "default": 200,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_1-input-chunkOverlap-number",
+            "display": true
+          },
+          {
+            "label": "Custom Separators",
+            "name": "separators",
+            "type": "string",
+            "rows": 4,
+            "description": "Array of custom separators to determine when to split the text, will override the default separators",
+            "placeholder": "[\"|\", \"##\", \">\", \"-\"]",
+            "additionalParams": true,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_1-input-separators-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "chunkSize": 1000,
+          "chunkOverlap": 200,
+          "separators": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "recursiveCharacterTextSplitter_1-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+            "name": "recursiveCharacterTextSplitter",
+            "label": "RecursiveCharacterTextSplitter",
+            "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+            "type": "RecursiveCharacterTextSplitter | TextSplitter | BaseDocumentTransformer | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 436,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -1868.0983849891031,
+        "y": -169.03670746406215
+      },
+      "dragging": false
+    },
+    {
+      "id": "recursiveCharacterTextSplitter_2",
+      "position": {
+        "x": -1860.4395021276944,
+        "y": 409.0608917983327
+      },
+      "type": "customNode",
+      "data": {
+        "id": "recursiveCharacterTextSplitter_2",
+        "label": "Recursive Character Text Splitter (1) (2)",
+        "version": 2,
+        "name": "recursiveCharacterTextSplitter",
+        "type": "RecursiveCharacterTextSplitter",
+        "baseClasses": [
+          "RecursiveCharacterTextSplitter",
+          "TextSplitter",
+          "BaseDocumentTransformer",
+          "Runnable"
+        ],
+        "category": "Text Splitters",
+        "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+        "inputParams": [
+          {
+            "label": "Chunk Size",
+            "name": "chunkSize",
+            "type": "number",
+            "description": "Number of characters in each chunk. Default is 1000.",
+            "default": 1000,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_2-input-chunkSize-number",
+            "display": true
+          },
+          {
+            "label": "Chunk Overlap",
+            "name": "chunkOverlap",
+            "type": "number",
+            "description": "Number of characters to overlap between chunks. Default is 200.",
+            "default": 200,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_2-input-chunkOverlap-number",
+            "display": true
+          },
+          {
+            "label": "Custom Separators",
+            "name": "separators",
+            "type": "string",
+            "rows": 4,
+            "description": "Array of custom separators to determine when to split the text, will override the default separators",
+            "placeholder": "[\"|\", \"##\", \">\", \"-\"]",
+            "additionalParams": true,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_2-input-separators-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "chunkSize": 1000,
+          "chunkOverlap": 200,
+          "separators": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "recursiveCharacterTextSplitter_2-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+            "name": "recursiveCharacterTextSplitter",
+            "label": "RecursiveCharacterTextSplitter",
+            "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+            "type": "RecursiveCharacterTextSplitter | TextSplitter | BaseDocumentTransformer | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 436,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -1860.4395021276944,
+        "y": 409.0608917983327
+      },
+      "dragging": false
+    },
+    {
+      "id": "pdfFile_0",
+      "position": {
+        "x": -1161.8569484543605,
+        "y": -217.27916164706247
+      },
+      "type": "customNode",
+      "data": {
+        "id": "pdfFile_0",
+        "label": "Pdf File",
+        "version": 2,
+        "name": "pdfFile",
+        "type": "Document",
+        "baseClasses": [
+          "Document"
+        ],
+        "category": "Document Loaders",
+        "description": "Load data from PDF files",
+        "inputParams": [
+          {
+            "label": "Pdf File",
+            "name": "pdfFile",
+            "type": "file",
+            "fileType": ".pdf",
+            "id": "pdfFile_0-input-pdfFile-file",
+            "display": true
+          },
+          {
+            "label": "Usage",
+            "name": "usage",
+            "type": "options",
+            "options": [
+              {
+                "label": "One document per page",
+                "name": "perPage"
+              },
+              {
+                "label": "One document per file",
+                "name": "perFile"
+              }
+            ],
+            "default": "perPage",
+            "id": "pdfFile_0-input-usage-options",
+            "display": true
+          },
+          {
+            "label": "Use Legacy Build",
+            "name": "legacyBuild",
+            "type": "boolean",
+            "optional": true,
+            "additionalParams": true,
+            "id": "pdfFile_0-input-legacyBuild-boolean",
+            "display": true
+          },
+          {
+            "label": "Additional Metadata",
+            "name": "metadata",
+            "type": "json",
+            "description": "Additional metadata to be added to the extracted documents",
+            "optional": true,
+            "additionalParams": true,
+            "id": "pdfFile_0-input-metadata-json",
+            "display": true
+          },
+          {
+            "label": "Omit Metadata Keys",
+            "name": "omitMetadataKeys",
+            "type": "string",
+            "rows": 4,
+            "description": "Each document loader comes with a default set of metadata keys that are extracted from the document. You can use this field to omit some of the default metadata keys. The value should be a list of keys, seperated by comma. Use * to omit all metadata keys execept the ones you specify in the Additional Metadata field",
+            "placeholder": "key1, key2, key3.nestedKey1",
+            "optional": true,
+            "additionalParams": true,
+            "id": "pdfFile_0-input-omitMetadataKeys-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Text Splitter",
+            "name": "textSplitter",
+            "type": "TextSplitter",
+            "optional": true,
+            "id": "pdfFile_0-input-textSplitter-TextSplitter",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "textSplitter": "{{recursiveCharacterTextSplitter_1.data.instance}}",
+          "usage": "perPage",
+          "legacyBuild": "",
+          "metadata": "",
+          "omitMetadataKeys": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "Array of document objects containing metadata and pageContent",
+            "options": [
+              {
+                "id": "pdfFile_0-output-document-Document|json",
+                "name": "document",
+                "label": "Document",
+                "description": "Array of document objects containing metadata and pageContent",
+                "type": "Document | json"
+              },
+              {
+                "id": "pdfFile_0-output-text-string|json",
+                "name": "text",
+                "label": "Text",
+                "description": "Concatenated string from pageContent of documents",
+                "type": "string | json"
+              }
+            ],
+            "default": "document"
+          }
+        ],
+        "outputs": {
+          "output": "document"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 541,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -1161.8569484543605,
+        "y": -217.27916164706247
+      },
+      "dragging": false
+    },
+    {
+      "id": "milvus_0",
+      "position": {
+        "x": -482.33969527078915,
+        "y": -258.8861980534987
+      },
+      "type": "customNode",
+      "data": {
+        "id": "milvus_0",
+        "label": "Milvus",
+        "version": 2.1,
+        "name": "milvus",
+        "type": "Milvus",
+        "baseClasses": [
+          "Milvus",
+          "VectorStoreRetriever",
+          "BaseRetriever"
+        ],
+        "category": "Vector Stores",
+        "description": "Upsert embedded data and perform similarity search upon query using Milvus, world's most advanced open-source vector database",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "optional": true,
+            "credentialNames": [
+              "milvusAuth"
+            ],
+            "id": "milvus_0-input-credential-credential",
+            "display": true
+          },
+          {
+            "label": "Milvus Server URL",
+            "name": "milvusServerUrl",
+            "type": "string",
+            "placeholder": "http://localhost:19530",
+            "id": "milvus_0-input-milvusServerUrl-string",
+            "display": true
+          },
+          {
+            "label": "Milvus Collection Name",
+            "name": "milvusCollection",
+            "type": "string",
+            "id": "milvus_0-input-milvusCollection-string",
+            "display": true
+          },
+          {
+            "label": "Milvus Partition Name",
+            "name": "milvusPartition",
+            "default": "_default",
+            "type": "string",
+            "optional": true,
+            "id": "milvus_0-input-milvusPartition-string",
+            "display": true
+          },
+          {
+            "label": "File Upload",
+            "name": "fileUpload",
+            "description": "Allow file upload on the chat",
+            "hint": {
+              "label": "How to use",
+              "value": "\n**File Upload**\n\nThis allows file upload on the chat. Uploaded files will be upserted on the fly to the vector store.\n\n**Note:**\n- You can only turn on file upload for one vector store at a time.\n- At least one Document Loader node should be connected to the document input.\n- Document Loader should be file types like PDF, DOCX, TXT, etc.\n\n**How it works**\n- Uploaded files will have the metadata updated with the chatId.\n- This will allow the file to be associated with the chatId.\n- When querying, metadata will be filtered by chatId to retrieve files associated with the chatId.\n"
+            },
+            "type": "boolean",
+            "additionalParams": true,
+            "optional": true,
+            "id": "milvus_0-input-fileUpload-boolean",
+            "display": true
+          },
+          {
+            "label": "Milvus Text Field",
+            "name": "milvusTextField",
+            "type": "string",
+            "placeholder": "langchain_text",
+            "optional": true,
+            "additionalParams": true,
+            "id": "milvus_0-input-milvusTextField-string",
+            "display": true
+          },
+          {
+            "label": "Milvus Filter",
+            "name": "milvusFilter",
+            "type": "string",
+            "optional": true,
+            "description": "Filter data with a simple string query. Refer Milvus <a target=\"_blank\" href=\"https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md#Hybrid-search\">docs</a> for more details.",
+            "placeholder": "doc==\"a\"",
+            "additionalParams": true,
+            "id": "milvus_0-input-milvusFilter-string",
+            "display": true
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "description": "Number of top results to fetch. Default to 4",
+            "placeholder": "4",
+            "type": "number",
+            "additionalParams": true,
+            "optional": true,
+            "id": "milvus_0-input-topK-number",
+            "display": true
+          },
+          {
+            "label": "Secure",
+            "name": "secure",
+            "type": "boolean",
+            "optional": true,
+            "description": "Enable secure connection to Milvus server",
+            "additionalParams": true,
+            "id": "milvus_0-input-secure-boolean",
+            "display": true
+          },
+          {
+            "label": "Client PEM Path",
+            "name": "clientPemPath",
+            "type": "string",
+            "optional": true,
+            "description": "Path to the client PEM file",
+            "additionalParams": true,
+            "id": "milvus_0-input-clientPemPath-string",
+            "display": true
+          },
+          {
+            "label": "Client Key Path",
+            "name": "clientKeyPath",
+            "type": "string",
+            "optional": true,
+            "description": "Path to the client key file",
+            "additionalParams": true,
+            "id": "milvus_0-input-clientKeyPath-string",
+            "display": true
+          },
+          {
+            "label": "CA PEM Path",
+            "name": "caPemPath",
+            "type": "string",
+            "optional": true,
+            "description": "Path to the root PEM file",
+            "additionalParams": true,
+            "id": "milvus_0-input-caPemPath-string",
+            "display": true
+          },
+          {
+            "label": "Server Name",
+            "name": "serverName",
+            "type": "string",
+            "optional": true,
+            "description": "Server name for the secure connection",
+            "additionalParams": true,
+            "id": "milvus_0-input-serverName-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Document",
+            "name": "document",
+            "type": "Document",
+            "list": true,
+            "optional": true,
+            "id": "milvus_0-input-document-Document",
+            "display": true
+          },
+          {
+            "label": "Embeddings",
+            "name": "embeddings",
+            "type": "Embeddings",
+            "id": "milvus_0-input-embeddings-Embeddings",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "document": [
+            "{{pdfFile_0.data.instance}}"
+          ],
+          "embeddings": "{{ollamaEmbedding_0.data.instance}}",
+          "milvusServerUrl": "http://localhost:19530",
+          "milvusCollection": "football",
+          "milvusPartition": "_default",
+          "fileUpload": "",
+          "milvusTextField": "",
+          "milvusFilter": "",
+          "topK": "",
+          "secure": "",
+          "clientPemPath": "",
+          "clientKeyPath": "",
+          "caPemPath": "",
+          "serverName": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "",
+            "options": [
+              {
+                "id": "milvus_0-output-retriever-Milvus|VectorStoreRetriever|BaseRetriever",
+                "name": "retriever",
+                "label": "Milvus Retriever",
+                "description": "",
+                "type": "Milvus | VectorStoreRetriever | BaseRetriever"
+              },
+              {
+                "id": "milvus_0-output-vectorStore-Milvus|VectorStore",
+                "name": "vectorStore",
+                "label": "Milvus Vector Store",
+                "description": "",
+                "type": "Milvus | VectorStore"
+              }
+            ],
+            "default": "retriever"
+          }
+        ],
+        "outputs": {
+          "output": "vectorStore"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 759,
+      "positionAbsolute": {
+        "x": -482.33969527078915,
+        "y": -258.8861980534987
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "pdfFile_1",
+      "position": {
+        "x": -1159.2086608160316,
+        "y": 414.6572256186929
+      },
+      "type": "customNode",
+      "data": {
+        "id": "pdfFile_1",
+        "label": "Pdf File (1)",
+        "version": 2,
+        "name": "pdfFile",
+        "type": "Document",
+        "baseClasses": [
+          "Document"
+        ],
+        "category": "Document Loaders",
+        "description": "Load data from PDF files",
+        "inputParams": [
+          {
+            "label": "Pdf File",
+            "name": "pdfFile",
+            "type": "file",
+            "fileType": ".pdf",
+            "id": "pdfFile_1-input-pdfFile-file",
+            "display": true
+          },
+          {
+            "label": "Usage",
+            "name": "usage",
+            "type": "options",
+            "options": [
+              {
+                "label": "One document per page",
+                "name": "perPage"
+              },
+              {
+                "label": "One document per file",
+                "name": "perFile"
+              }
+            ],
+            "default": "perPage",
+            "id": "pdfFile_1-input-usage-options",
+            "display": true
+          },
+          {
+            "label": "Use Legacy Build",
+            "name": "legacyBuild",
+            "type": "boolean",
+            "optional": true,
+            "additionalParams": true,
+            "id": "pdfFile_1-input-legacyBuild-boolean",
+            "display": true
+          },
+          {
+            "label": "Additional Metadata",
+            "name": "metadata",
+            "type": "json",
+            "description": "Additional metadata to be added to the extracted documents",
+            "optional": true,
+            "additionalParams": true,
+            "id": "pdfFile_1-input-metadata-json",
+            "display": true
+          },
+          {
+            "label": "Omit Metadata Keys",
+            "name": "omitMetadataKeys",
+            "type": "string",
+            "rows": 4,
+            "description": "Each document loader comes with a default set of metadata keys that are extracted from the document. You can use this field to omit some of the default metadata keys. The value should be a list of keys, seperated by comma. Use * to omit all metadata keys execept the ones you specify in the Additional Metadata field",
+            "placeholder": "key1, key2, key3.nestedKey1",
+            "optional": true,
+            "additionalParams": true,
+            "id": "pdfFile_1-input-omitMetadataKeys-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Text Splitter",
+            "name": "textSplitter",
+            "type": "TextSplitter",
+            "optional": true,
+            "id": "pdfFile_1-input-textSplitter-TextSplitter",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "textSplitter": "",
+          "usage": "perPage",
+          "legacyBuild": "",
+          "metadata": "",
+          "omitMetadataKeys": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "Array of document objects containing metadata and pageContent",
+            "options": [
+              {
+                "id": "pdfFile_1-output-document-Document|json",
+                "name": "document",
+                "label": "Document",
+                "description": "Array of document objects containing metadata and pageContent",
+                "type": "Document | json"
+              },
+              {
+                "id": "pdfFile_1-output-text-string|json",
+                "name": "text",
+                "label": "Text",
+                "description": "Concatenated string from pageContent of documents",
+                "type": "string | json"
+              }
+            ],
+            "default": "document"
+          }
+        ],
+        "outputs": {
+          "output": "document"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 541,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -1159.2086608160316,
+        "y": 414.6572256186929
+      },
+      "dragging": false
+    },
+    {
+      "id": "stickyNote_2",
+      "position": {
+        "x": -844.5698205244674,
+        "y": -27.644349727840737
+      },
+      "type": "stickyNote",
+      "data": {
+        "id": "stickyNote_2",
+        "label": "Sticky Note",
+        "version": 2,
+        "name": "stickyNote",
+        "type": "StickyNote",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "tags": [
+          "Utilities"
+        ],
+        "category": "Utilities",
+        "description": "Add a sticky note",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNote_2-input-note-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "football.pdf"
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNote_2-output-stickyNote-StickyNote",
+            "name": "stickyNote",
+            "label": "StickyNote",
+            "description": "Add a sticky note",
+            "type": "StickyNote"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 42,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": -844.5698205244674,
+        "y": -27.644349727840737
+      }
+    },
+    {
+      "id": "stickyNote_3",
+      "position": {
+        "x": -826.1345704158075,
+        "y": 529.0194046768861
+      },
+      "type": "stickyNote",
+      "data": {
+        "id": "stickyNote_3",
+        "label": "Sticky Note (3)",
+        "version": 2,
+        "name": "stickyNote",
+        "type": "StickyNote",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "tags": [
+          "Utilities"
+        ],
+        "category": "Utilities",
+        "description": "Add a sticky note",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNote_3-input-note-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "hockey.pdf"
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNote_3-output-stickyNote-StickyNote",
+            "name": "stickyNote",
+            "label": "StickyNote",
+            "description": "Add a sticky note",
+            "type": "StickyNote"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 42,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": -826.1345704158075,
+        "y": 529.0194046768861
+      }
+    },
+    {
+      "id": "stickyNote_4",
+      "position": {
+        "x": -888.8160786903501,
+        "y": -658.3271461572399
+      },
+      "type": "stickyNote",
+      "data": {
+        "id": "stickyNote_4",
+        "label": "Sticky Note (3) (4)",
+        "version": 2,
+        "name": "stickyNote",
+        "type": "StickyNote",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "tags": [
+          "Utilities"
+        ],
+        "category": "Utilities",
+        "description": "Add a sticky note",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNote_4-input-note-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "Bertrand Russel on Philosophy.docx"
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNote_4-output-stickyNote-StickyNote",
+            "name": "stickyNote",
+            "label": "StickyNote",
+            "description": "Add a sticky note",
+            "type": "StickyNote"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 42,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": -888.8160786903501,
+        "y": -658.3271461572399
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "vectorStoreRetriever_0",
+      "sourceHandle": "vectorStoreRetriever_0-output-vectorStoreRetriever-VectorStoreRetriever",
+      "target": "multiRetrievalQAChain_0",
+      "targetHandle": "multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever",
+      "type": "buttonedge",
+      "id": "vectorStoreRetriever_0-vectorStoreRetriever_0-output-vectorStoreRetriever-VectorStoreRetriever-multiRetrievalQAChain_0-multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever",
+      "data": {
+        "label": ""
+      }
+    },
+    {
+      "source": "vectorStoreRetriever_1",
+      "sourceHandle": "vectorStoreRetriever_1-output-vectorStoreRetriever-VectorStoreRetriever",
+      "target": "multiRetrievalQAChain_0",
+      "targetHandle": "multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever",
+      "type": "buttonedge",
+      "id": "vectorStoreRetriever_1-vectorStoreRetriever_1-output-vectorStoreRetriever-VectorStoreRetriever-multiRetrievalQAChain_0-multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever",
+      "data": {
+        "label": ""
+      }
+    },
+    {
+      "source": "vectorStoreRetriever_2",
+      "sourceHandle": "vectorStoreRetriever_2-output-vectorStoreRetriever-VectorStoreRetriever",
+      "target": "multiRetrievalQAChain_0",
+      "targetHandle": "multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever",
+      "type": "buttonedge",
+      "id": "vectorStoreRetriever_2-vectorStoreRetriever_2-output-vectorStoreRetriever-VectorStoreRetriever-multiRetrievalQAChain_0-multiRetrievalQAChain_0-input-vectorStoreRetriever-VectorStoreRetriever",
+      "data": {
+        "label": ""
+      }
+    },
+    {
+      "source": "chatOllama_0",
+      "sourceHandle": "chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "multiRetrievalQAChain_0",
+      "targetHandle": "multiRetrievalQAChain_0-input-model-BaseLanguageModel",
+      "type": "buttonedge",
+      "id": "chatOllama_0-chatOllama_0-output-chatOllama-ChatOllama|ChatOllama|BaseChatModel|BaseLanguageModel|Runnable-multiRetrievalQAChain_0-multiRetrievalQAChain_0-input-model-BaseLanguageModel"
+    },
+    {
+      "source": "faiss_0",
+      "sourceHandle": "faiss_0-output-vectorStore-Faiss|SaveableVectorStore|VectorStore",
+      "target": "vectorStoreRetriever_0",
+      "targetHandle": "vectorStoreRetriever_0-input-vectorStore-VectorStore",
+      "type": "buttonedge",
+      "id": "faiss_0-faiss_0-output-vectorStore-Faiss|SaveableVectorStore|VectorStore-vectorStoreRetriever_0-vectorStoreRetriever_0-input-vectorStore-VectorStore"
+    },
+    {
+      "source": "memoryVectorStore_0",
+      "sourceHandle": "memoryVectorStore_0-output-vectorStore-Memory|VectorStore",
+      "target": "vectorStoreRetriever_2",
+      "targetHandle": "vectorStoreRetriever_2-input-vectorStore-VectorStore",
+      "type": "buttonedge",
+      "id": "memoryVectorStore_0-memoryVectorStore_0-output-vectorStore-Memory|VectorStore-vectorStoreRetriever_2-vectorStoreRetriever_2-input-vectorStore-VectorStore"
+    },
+    {
+      "source": "ollamaEmbedding_0",
+      "sourceHandle": "ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings",
+      "target": "faiss_0",
+      "targetHandle": "faiss_0-input-embeddings-Embeddings",
+      "type": "buttonedge",
+      "id": "ollamaEmbedding_0-ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings-faiss_0-faiss_0-input-embeddings-Embeddings"
+    },
+    {
+      "source": "ollamaEmbedding_0",
+      "sourceHandle": "ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings",
+      "target": "memoryVectorStore_0",
+      "targetHandle": "memoryVectorStore_0-input-embeddings-Embeddings",
+      "type": "buttonedge",
+      "id": "ollamaEmbedding_0-ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings-memoryVectorStore_0-memoryVectorStore_0-input-embeddings-Embeddings"
+    },
+    {
+      "source": "docxFile_0",
+      "sourceHandle": "docxFile_0-output-document-Document|json",
+      "target": "memoryVectorStore_0",
+      "targetHandle": "memoryVectorStore_0-input-document-Document",
+      "type": "buttonedge",
+      "id": "docxFile_0-docxFile_0-output-document-Document|json-memoryVectorStore_0-memoryVectorStore_0-input-document-Document"
+    },
+    {
+      "source": "recursiveCharacterTextSplitter_0",
+      "sourceHandle": "recursiveCharacterTextSplitter_0-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+      "target": "docxFile_0",
+      "targetHandle": "docxFile_0-input-textSplitter-TextSplitter",
+      "type": "buttonedge",
+      "id": "recursiveCharacterTextSplitter_0-recursiveCharacterTextSplitter_0-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable-docxFile_0-docxFile_0-input-textSplitter-TextSplitter"
+    },
+    {
+      "source": "recursiveCharacterTextSplitter_1",
+      "sourceHandle": "recursiveCharacterTextSplitter_1-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+      "target": "pdfFile_0",
+      "targetHandle": "pdfFile_0-input-textSplitter-TextSplitter",
+      "type": "buttonedge",
+      "id": "recursiveCharacterTextSplitter_1-recursiveCharacterTextSplitter_1-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable-pdfFile_0-pdfFile_0-input-textSplitter-TextSplitter"
+    },
+    {
+      "source": "pdfFile_0",
+      "sourceHandle": "pdfFile_0-output-document-Document|json",
+      "target": "milvus_0",
+      "targetHandle": "milvus_0-input-document-Document",
+      "type": "buttonedge",
+      "id": "pdfFile_0-pdfFile_0-output-document-Document|json-milvus_0-milvus_0-input-document-Document"
+    },
+    {
+      "source": "ollamaEmbedding_0",
+      "sourceHandle": "ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings",
+      "target": "milvus_0",
+      "targetHandle": "milvus_0-input-embeddings-Embeddings",
+      "type": "buttonedge",
+      "id": "ollamaEmbedding_0-ollamaEmbedding_0-output-ollamaEmbedding-OllamaEmbeddings|Embeddings-milvus_0-milvus_0-input-embeddings-Embeddings"
+    },
+    {
+      "source": "milvus_0",
+      "sourceHandle": "milvus_0-output-vectorStore-Milvus|VectorStore",
+      "target": "vectorStoreRetriever_1",
+      "targetHandle": "vectorStoreRetriever_1-input-vectorStore-VectorStore",
+      "type": "buttonedge",
+      "id": "milvus_0-milvus_0-output-vectorStore-Milvus|VectorStore-vectorStoreRetriever_1-vectorStoreRetriever_1-input-vectorStore-VectorStore"
+    },
+    {
+      "source": "pdfFile_1",
+      "sourceHandle": "pdfFile_1-output-document-Document|json",
+      "target": "faiss_0",
+      "targetHandle": "faiss_0-input-document-Document",
+      "type": "buttonedge",
+      "id": "pdfFile_1-pdfFile_1-output-document-Document|json-faiss_0-faiss_0-input-document-Document"
+    }
+  ]
+}
