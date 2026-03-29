@@ -4,7 +4,7 @@
 
 -- Get list of Schema and Tables
 -- =============
-{{ $fromAI("sql_query", "SQL Query") }}
+-- {{ $fromAI("sql_query", "SQL Query") }}
 
 -- Gets db schema	
 SELECT 
@@ -71,17 +71,18 @@ WHERE c.table_name = '{{ $fromAI("table_name") }}'
 ORDER BY c.ordinal_position;
 
 
---BB Following databas and tables are used in the experiment
+-- BB Following databas and tables are used in the experiment
 --		To create a role: kumar, database kumar with two samples table
-
+/*
 $sudo su kumar
 $psql kumar
 kumar=> \c kumar
-You are now connected to database "kumar" as user "kumar".
-kumar=> CREATE TABLE acars (  brand VARCHAR(255), model VARCHAR(255),year INT);
-kumar=> INSERT INTO acars (brand, model, year) VALUES ('Dzire','Maruti', 1994);
-kumar=> INSERT INTO acars (brand, model, year) VALUES ('Swift','Maruti', 1984);
-kumar=> select * from acars ;
+*/
+-- You are now connected to database "kumar" as user "kumar".
+CREATE TABLE acars (  brand VARCHAR(255), model VARCHAR(255),year INT);
+INSERT INTO acars (brand, model, year) VALUES ('Dzire','Maruti', 1994);
+INSERT INTO acars (brand, model, year) VALUES ('Swift','Maruti', 1984);
+select * from acars ;
 
 
 CREATE TABLE departments (
