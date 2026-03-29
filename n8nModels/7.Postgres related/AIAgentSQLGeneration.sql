@@ -104,9 +104,12 @@ INSERT INTO departments (department_id,department_name) values
 (30, 'Operations') ;
 
 INSERT INTO employees (employee_id,employee_name, age, departmentId) values
-(1,'Alice', 30.4, 10),
-(2,'Bob',50.8, 10),
-(3,'sudha', 39.0, 20),
-(4,'Charlie',34.0, 30);
+(1,'Alice', 30.4,10),
+(2,'Bob',50.8,10),
+(3,'sudha', 39.0,20),
+(4,'Charlie',34.0,30),
+(5,'Amrit',36.90,20),
+(6,'Kavita',23.0,1),
+(7,'tirth',45.5,1);
 
 
