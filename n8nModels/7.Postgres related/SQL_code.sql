@@ -1,4 +1,5 @@
 --SQL code
+--To create a role: kumar, database kumar with two samples table
 
 $sudo su kumar
 $psql kumar
@@ -75,5 +76,29 @@ where
   c.table_name = '{{ $fromAI("table_name") }}'
   AND c.table_schema = '{{ $fromAI("schema_name") }}'
 order by
-  c.ordinal_position
+  c.ordinal_position ;
+
+-- This code is correct AND not the above one
+
+SELECT 
+    c.column_name, 
+    c.data_type, 
+    c.is_nullable, 
+    c.column_default,
+    tc.constraint_type,
+    ccu.table_name AS referenced_table,
+    ccu.column_name AS referenced_column
+FROM information_schema.columns c
+LEFT JOIN information_schema.key_column_usage kcu 
+    ON c.table_name = kcu.table_name 
+    AND c.column_name = kcu.column_name
+LEFT JOIN information_schema.table_constraints tc 
+    ON kcu.constraint_name = tc.constraint_name 
+    AND tc.constraint_type = 'FOREIGN KEY' -- Filters for FKs specifically
+LEFT JOIN information_schema.constraint_column_usage ccu 
+    ON tc.constraint_name = ccu.constraint_name
+WHERE c.table_name = '{{ $fromAI("table_name") }}'
+  AND c.table_schema = '{{ $fromAI("schema_name") }}'
+ORDER BY c.ordinal_position;
+
 
