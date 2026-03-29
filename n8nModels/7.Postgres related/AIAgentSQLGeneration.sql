@@ -1,41 +1,3 @@
---SQL code
---To create a role: kumar, database kumar with two samples table
-
-$sudo su kumar
-$psql kumar
-kumar=> \c kumar
-You are now connected to database "kumar" as user "kumar".
-kumar=> CREATE TABLE acars (  brand VARCHAR(255), model VARCHAR(255),year INT);
-kumar=> INSERT INTO acars (brand, model, year) VALUES ('Dzire','Maruti', 1994);
-kumar=> INSERT INTO acars (brand, model, year) VALUES ('Swift','Maruti', 1984);
-kumar=> select * from acars ;
-
-
-CREATE TABLE departments (
-		    		department_id int PRIMARY KEY,
-		    		department_name VARCHAR(100) NOT NULL
-			);
-
-CREATE TABLE employees (
-			    employee_id int PRIMARY KEY,
-        	            employee_name VARCHAR(100) NOT NULL,
-                	    age float,
-			    departmentId INT REFERENCES departments (department_id)
-		    );
-	
-
-INSERT INTO departments (department_id,department_name) values
-(1, 'Human Resources'),
-(10,'Finance'),
-(20,'IT'),
-(30, 'Operations') ;
-
-INSERT INTO employees (employee_id,employee_name, age, departmentId) values
-(1,'Alice', 30.4, 10),
-(2,'Bob',50.8, 10),
-(3,'sudha', 39.0, 20),
-(4,'Charlie',34.0, 30);
-
 -- SQL code Generation by AI agent
 -- The following two pieces of code are used in two tool branches by the AI agent
 -- One gets which tables are present and the other gets information of columns for each table
@@ -107,5 +69,44 @@ LEFT JOIN information_schema.constraint_column_usage ccu
 WHERE c.table_name = '{{ $fromAI("table_name") }}'
   AND c.table_schema = '{{ $fromAI("schema_name") }}'
 ORDER BY c.ordinal_position;
+
+-- Extra Extra
+--SQL code
+--To create a role: kumar, database kumar with two samples table
+
+$sudo su kumar
+$psql kumar
+kumar=> \c kumar
+You are now connected to database "kumar" as user "kumar".
+kumar=> CREATE TABLE acars (  brand VARCHAR(255), model VARCHAR(255),year INT);
+kumar=> INSERT INTO acars (brand, model, year) VALUES ('Dzire','Maruti', 1994);
+kumar=> INSERT INTO acars (brand, model, year) VALUES ('Swift','Maruti', 1984);
+kumar=> select * from acars ;
+
+
+CREATE TABLE departments (
+		    		department_id int PRIMARY KEY,
+		    		department_name VARCHAR(100) NOT NULL
+			);
+
+CREATE TABLE employees (
+			    employee_id int PRIMARY KEY,
+        	            employee_name VARCHAR(100) NOT NULL,
+                	    age float,
+			    departmentId INT REFERENCES departments (department_id)
+		    );
+	
+
+INSERT INTO departments (department_id,department_name) values
+(1, 'Human Resources'),
+(10,'Finance'),
+(20,'IT'),
+(30, 'Operations') ;
+
+INSERT INTO employees (employee_id,employee_name, age, departmentId) values
+(1,'Alice', 30.4, 10),
+(2,'Bob',50.8, 10),
+(3,'sudha', 39.0, 20),
+(4,'Charlie',34.0, 30);
 
 
