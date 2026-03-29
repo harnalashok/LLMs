@@ -1,6 +1,6 @@
--- SQL code Generation by AI agent
--- The following two pieces of code are used in two tool branches by the AI agent
--- One gets which tables are present and the other gets information of columns for each table
+-- AA. SQL code Generation by AI agent
+-- 		The following two pieces of code are used in two tool branches by the AI agent
+-- 		One gets which tables are present and the other gets information of columns for each table
 
 -- Get list of Schema and Tables
 -- =============
@@ -70,9 +70,9 @@ WHERE c.table_name = '{{ $fromAI("table_name") }}'
   AND c.table_schema = '{{ $fromAI("schema_name") }}'
 ORDER BY c.ordinal_position;
 
--- Extra Extra
---SQL code
---To create a role: kumar, database kumar with two samples table
+
+--BB Following databas and tables are used in the experiment
+--		To create a role: kumar, database kumar with two samples table
 
 $sudo su kumar
 $psql kumar
