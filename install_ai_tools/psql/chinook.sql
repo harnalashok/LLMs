@@ -1,7 +1,7 @@
 -- Modified fiie. Double inverte commas removvvvvvvvvvvvvvvvvved
 -- Original file: https://github.com/neondatabase/postgres-sample-dbs/tree/main
 -- PostgreSQL database dump
---
+-- Digital Media Database
 
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2 (Ubuntu 15.2-1.pgdg22.04+1)
