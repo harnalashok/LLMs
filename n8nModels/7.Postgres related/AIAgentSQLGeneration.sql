@@ -36,10 +36,15 @@ INSERT INTO employees (employee_id,employee_name, age, departmentId) values
 (3,'sudha', 39.0, 20),
 (4,'Charlie',34.0, 30);
 
-Get DB Schema
-=============
+-- SQL code Generation by AI agent
+-- The following two pieces of code are used in two tool branches by the AI agent
+-- One gets which tables are present and the other gets information of columns for each table
+
+-- Get list of Schema and Tables
+-- =============
 {{ $fromAI("sql_query", "SQL Query") }}
 
+-- Gets db schema	
 SELECT 
     table_schema,
     table_name
@@ -48,8 +53,10 @@ WHERE table_type = 'BASE TABLE'
     AND table_schema NOT IN ('pg_catalog', 'information_schema')
 ORDER BY table_schema, table_name;
 
-Get Table Definition
-==================
+-- Get Table Definition
+-- ==================
+-- WRONG code
+-- See correct code below
 
 select
   c.column_name,
@@ -78,7 +85,7 @@ where
 order by
   c.ordinal_position ;
 
--- This code is correct AND not the above one
+-- Correct code: This code is correct AND not the above one
 
 SELECT 
     c.column_name, 
