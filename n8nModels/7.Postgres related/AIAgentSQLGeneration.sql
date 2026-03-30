@@ -1,8 +1,10 @@
--- AA. SQL code Generation by AI agent
--- 		The following two pieces of code are used in two tool branches by the AI agent
--- 		One gets which tables are present and the other gets information of columns for each table
+-- SQL code Generation by AI agent
+-- 		Here is the description of AI Agent and Tools used.
+--      The PostgreSQL connection used automatically decides the database.
+--      For example, if the role is chinook then the database would be chinook
+--	    If the role is ravi, database would be ravi (with s,p,j and spj tables)
 
--- System message for AI Agent:
+-- AA. AI Agent: System message
 /*
 You are a helpful assistant expert in designing and writing postgresql SQL queries. 
 You take help from three tools: 'getDBSchema', 'getTableStructure' and 'executeSQLquery'. 
@@ -12,12 +14,17 @@ user input you frame an SQL query to extract data from the tables. This SQL quer
 is executed using tool 'executeSQLquery' and then results returned as response to the user.
 
 */
--- Tool: executeSQLquery
--- Get list of Schema and Tables
--- =============
--- {{ $fromAI("sql_query", "SQL Query") }}
+-- ==================
+--  Tool-1: executeSQLquery
+--  Tool Description: Get all the data from PostgreSQL, make sure you append the tables with correct schema. 
+--  Every table is associated with some schema in the database.
+--  Query: {{ $fromAI("sql_query", "SQL Query") }}
+--==================
 
--- Gets db schema	
+--==================
+-- Tool-2: getDBSchema
+-- Tool Description: Get list of all tables with their schema in the database
+-- Query:
 SELECT 
     table_schema,
     table_name
@@ -25,41 +32,12 @@ FROM information_schema.tables
 WHERE table_type = 'BASE TABLE'
     AND table_schema NOT IN ('pg_catalog', 'information_schema')
 ORDER BY table_schema, table_name;
+--==================
 
--- Get Table Definition
--- ==================
--- WRONG code
--- See correct code below
-
-select
-  c.column_name,
-  c.data_type,
-  c.is_nullable,
-  c.column_default,
-  tc.constraint_type,
-  ccu.table_name AS referenced_table,
-  ccu.column_name AS referenced_column
-from
-  information_schema.columns c
-LEFT join
-  information_schema.key_column_usage kcu
-  ON c.table_name = kcu.table_name
-  AND c.column_name = kcu.column_name
-LEFT join
-  information_schema.table_constraints tc
-  ON kcu.constraint_name = tc.constraint_name
-  AND tc.constraint_type = 'FOREIGN KEY'
-LEFT join
-  information_schema.constraint_column_usage ccu
-  ON tc.constraint_name = ccu.constraint_name
-where
-  c.table_name = '{{ $fromAI("table_name") }}'
-  AND c.table_schema = '{{ $fromAI("schema_name") }}'
-order by
-  c.ordinal_position ;
-
--- Correct code: This code is correct AND not the above one
-
+--==================
+-- Tool-3: getTableStructure
+-- Tool Description: Get table definition to find all columns and types
+-- Query:
 SELECT 
     c.column_name, 
     c.data_type, 
@@ -80,7 +58,7 @@ LEFT JOIN information_schema.constraint_column_usage ccu
 WHERE c.table_name = '{{ $fromAI("table_name") }}'
   AND c.table_schema = '{{ $fromAI("schema_name") }}'
 ORDER BY c.ordinal_position;
-
+--==================
 
 -- BB Following databas and tables are used in the experiment
 --		To create a role: kumar, database kumar with two samples table
@@ -124,4 +102,36 @@ INSERT INTO employees (employee_id,employee_name, age, departmentId) values
 (6,'Kavita',23.0,1),
 (7,'tirth',45.5,1);
 
+
+-- Get Table Definition
+-- ==================
+-- WRONG code
+-- See correct code above
+
+select
+  c.column_name,
+  c.data_type,
+  c.is_nullable,
+  c.column_default,
+  tc.constraint_type,
+  ccu.table_name AS referenced_table,
+  ccu.column_name AS referenced_column
+from
+  information_schema.columns c
+LEFT join
+  information_schema.key_column_usage kcu
+  ON c.table_name = kcu.table_name
+  AND c.column_name = kcu.column_name
+LEFT join
+  information_schema.table_constraints tc
+  ON kcu.constraint_name = tc.constraint_name
+  AND tc.constraint_type = 'FOREIGN KEY'
+LEFT join
+  information_schema.constraint_column_usage ccu
+  ON tc.constraint_name = ccu.constraint_name
+where
+  c.table_name = '{{ $fromAI("table_name") }}'
+  AND c.table_schema = '{{ $fromAI("schema_name") }}'
+order by
+  c.ordinal_position ;
 
