@@ -10,10 +10,10 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.4,
       "position": [
-        -288,
-        -48
+        -544,
+        112
       ],
-      "id": "48a8542e-7d73-41c9-9555-5c81d9173175",
+      "id": "a5f14df0-b6b0-4b6c-9ee3-3785b4c23455",
       "name": "When chat message received",
       "webhookId": "3226a454-ed53-495a-b57c-ef1e2737fba9"
     },
@@ -25,51 +25,34 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
       "position": [
-        -224,
-        160
+        -480,
+        320
       ],
-      "id": "706af525-b6af-494b-b3a0-ad00ef137f3a",
+      "id": "8e949526-b428-405c-92f2-a6ce5efe958b",
       "name": "Ollama Chat Model",
       "credentials": {
         "ollamaApi": {
-          "id": "82LM4CnYKsbmhe8B",
+          "id": "mudPJ1oZ72EnJlyv",
           "name": "Ollama account"
         }
       }
     },
     {
-      "parameters": {},
+      "parameters": {
+        "tableName": "n8n_mychat_histories"
+      },
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1.3,
       "position": [
-        -80,
-        160
+        -336,
+        320
       ],
-      "id": "cd269ec7-0fac-4095-85fe-ff0e274262ed",
+      "id": "adfee86f-dcdb-4621-bb8d-3b177957bcb7",
       "name": "Postgres Chat Memory",
       "credentials": {
         "postgres": {
-          "id": "gY82dsmgR8y4PG3y",
+          "id": "cbdKOc4SJNlErsV7",
           "name": "Postgres account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
-      "typeVersion": 1,
-      "position": [
-        80,
-        160
-      ],
-      "id": "e191ddec-944e-4838-8af6-b27a9b1cca87",
-      "name": "InternetSearch",
-      "credentials": {
-        "serpApi": {
-          "id": "xuwnsMGdeZEoXyEl",
-          "name": "SerpAPI account"
         }
       }
     },
@@ -80,14 +63,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
       "position": [
-        272,
-        144
+        16,
+        304
       ],
-      "id": "9b6c16f8-0cd3-474b-b14b-5e518606639e",
+      "id": "7feef12b-a76d-4e59-8491-613dfc86e55b",
       "name": "Ollama Chat Model1",
       "credentials": {
         "ollamaApi": {
-          "id": "82LM4CnYKsbmhe8B",
+          "id": "mudPJ1oZ72EnJlyv",
           "name": "Ollama account"
         }
       }
@@ -103,25 +86,25 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        272,
-        -48
+        16,
+        112
       ],
-      "id": "ef88ac53-3885-4036-95e0-b0634a425b36",
+      "id": "d53b4f4d-0deb-4d53-a580-08fe0e0a4d4d",
       "name": "Blog writer agent"
     },
     {
       "parameters": {
         "options": {
-          "systemMessage": "You are a helpful assistant. Your task is to search Internet through InternetSearch tool."
+          "systemMessage": "You are a helpful assistant. You receive a prompt from user. Your task is to first search Internet using  internetSearch tool as per the prompt and then pass on the results. You will not reply from your own pre-trained knowledge."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        -80,
-        -48
+        -336,
+        112
       ],
-      "id": "8eb42dfe-e136-4cbb-904e-a1feb49a85b2",
+      "id": "89a1c4b2-4a0b-49c8-ac46-0cb4028843c8",
       "name": "Search agent"
     },
     {
@@ -132,11 +115,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -128,
-        288
+        -400,
+        448
       ],
       "typeVersion": 1,
-      "id": "98377907-fb19-4aeb-bef8-fd29b6fc18f1",
+      "id": "9ca06f2b-1387-46eb-bc35-aab85ac80472",
       "name": "Sticky Note"
     },
     {
@@ -147,11 +130,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        96,
-        288
+        -160,
+        464
       ],
       "typeVersion": 1,
-      "id": "64a28fe2-011e-4199-9d26-2fb188eadb31",
+      "id": "dd3e73c5-be5b-4524-b15f-4ee8223621d7",
       "name": "Sticky Note1"
     },
     {
@@ -162,11 +145,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        256,
-        288
+        0,
+        448
       ],
       "typeVersion": 1,
-      "id": "9ff96824-79b4-4cd8-9387-4a4c0d28fea7",
+      "id": "f158acc7-763d-4578-975a-dc19695c1273",
       "name": "Sticky Note2"
     },
     {
@@ -177,11 +160,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        256,
-        -160
+        0,
+        0
       ],
       "typeVersion": 1,
-      "id": "23654155-579d-4595-83fb-7def56aa120a",
+      "id": "0020eadf-b018-4cc9-b335-823f489981b1",
       "name": "Sticky Note3"
     },
     {
@@ -192,12 +175,46 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -80,
-        -144
+        -336,
+        16
       ],
       "typeVersion": 1,
-      "id": "3d8651ea-c9c4-4f8a-b0c6-32694c33777c",
+      "id": "e90628fe-01de-4b02-944b-d239637539d0",
       "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "q": "=Task: {{ $json.chatInput }}",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        336
+      ],
+      "id": "c60fc321-07ee-4856-a67f-7d029a61610b",
+      "name": "internetSearch",
+      "credentials": {
+        "serpApi": {
+          "id": "LBHoExWNK2Dr5h0w",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Be careful\n You must use SerpAPI Official tool. Otherwise there may not be search."
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -864,
+        112
+      ],
+      "typeVersion": 1,
+      "id": "68ecc704-82e9-4b5e-b82e-78a66546bacb",
+      "name": "Sticky Note5"
     }
   ],
   "pinData": {},
@@ -235,17 +252,6 @@
         ]
       ]
     },
-    "InternetSearch": {
-      "ai_tool": [
-        [
-          {
-            "node": "Search agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Ollama Chat Model1": {
       "ai_languageModel": [
         [
@@ -267,19 +273,29 @@
           }
         ]
       ]
+    },
+    "internetSearch": {
+      "ai_tool": [
+        [
+          {
+            "node": "Search agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
+    "binaryMode": "separate"
   },
-  "versionId": "d7c36fb4-4f48-4083-9ec6-1cbf002cf3fa",
+  "versionId": "1257e40a-5a8d-4182-a74b-97b2c9217ffa",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "af45f44e149076c1b6fbc300329d021fdbc08c2cd82d691f742000de0a998802"
+    "instanceId": "902e785c32021c0bcc14053d93633c43f340fc597c1f8feeced84ef40971442a"
   },
-  "id": "5CoPZSdSSiB0Y6uT",
+  "id": "WIYjepJ0g1m4HqkL",
   "tags": []
 }
