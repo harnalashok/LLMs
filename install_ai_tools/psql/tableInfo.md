@@ -1,4 +1,5 @@
-psql commands:      
+psql commands:  
+> *'d'* stands for *describe*
 >Get list of roles:                \du       
 >Get list of databases and owners:  \l     
 >Connect to database:              \c mydatabase      
