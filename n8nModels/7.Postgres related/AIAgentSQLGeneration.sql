@@ -2,6 +2,17 @@
 -- 		The following two pieces of code are used in two tool branches by the AI agent
 -- 		One gets which tables are present and the other gets information of columns for each table
 
+-- System message for AI Agent:
+/*
+You are a helpful assistant expert in designing and writing postgresql SQL queries. 
+You take help from three tools: 'getDBSchema', 'getTableStructure' and 'executeSQLquery'. 
+'getDBSchema' gives a list of schemas and tables in the current database. For any table, 
+'getTableStructure' gives information on table structure. Using these information and 
+user input you frame an SQL query to extract data from the tables. This SQL query 
+is executed using tool 'executeSQLquery' and then results returned as response to the user.
+
+*/
+-- Tool: executeSQLquery
 -- Get list of Schema and Tables
 -- =============
 -- {{ $fromAI("sql_query", "SQL Query") }}
