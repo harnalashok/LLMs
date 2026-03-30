@@ -3,6 +3,8 @@
 --      The PostgreSQL connection used automatically decides the database.
 --      For example, if the role is chinook then the database would be chinook
 --	    If the role is ravi, database would be ravi (with s,p,j and spj tables)
+--      IT WILL BE MUCH BETTER IF TABLES ALSO HAVE COMMENTS
+
 
 -- AA. AI Agent: System message
 /*
