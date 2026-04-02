@@ -162,7 +162,18 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "echo 'Web server is at /var/www/html/'"              | tee -a /home/$USER/start_apache2.sh
 	echo "sudo systemctl restart apache2"                      | tee -a /home/$USER/start_apache2.sh
 	echo "cd /home/$USER"                                      | tee -a /home/$USER/start_apache2.sh 
+	echo "echo '    '"                                         | tee -a /home/$USER/start_apache2.sh 
+	echo "echo '=========='"                                   | tee -a /home/$USER/start_apache2.sh 
+	echo "echo 'Two related files are: '"					   | tee -a /home/$USER/start_apache2.sh 
+	echo "echo '   1. indexDownload.sh'"					   | tee -a /home/$USER/start_apache2.sh 		
+	echo "echo '   2. mvIndex.sh'"				               | tee -a /home/$USER/start_apache2.sh 
+	echo "echo '=========='"                                   | tee -a /home/$USER/start_apache2.sh 
+	echo "echo '    '"                                         | tee -a /home/$USER/start_apache2.sh 
 	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
+    mkdir -p /home/$USER/Documents/apache2
+	cd /home/$USER
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_apache2.sh
 	echo " "                                                   | tee -a /home/$USER/stop_apache2.sh
 	echo "cd ~/"                                               | tee -a /home/$USER/stop_apache2.sh
