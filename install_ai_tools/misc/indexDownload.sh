@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Downloading 'index.html' file"
 echo "Folder: Documents/apache2/"
 sleep 5
