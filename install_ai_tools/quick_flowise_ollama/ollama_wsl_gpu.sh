@@ -104,6 +104,11 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	cd /home/$USER
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
 	sudo mv /home/$USER/index.html  /var/www/html/index.html
+	mkdir -p /home/$USER/Documents/apache2
+	cd /home/$USER
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
+	chmod +x *.sh
 	echo '#!/bin/bash'                                         | tee    /home/$USER/start_apache2.sh
 	echo " "                                                   | tee -a /home/$USER/start_apache2.sh
 	echo "cd ~/"                                               | tee -a /home/$USER/start_apache2.sh
