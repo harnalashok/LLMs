@@ -1142,7 +1142,18 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/RAGandToolAgent.pdf?raw=true
 	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/huggingfaceAcessToken.pdf?raw=true
 	   cd /home/$USER
-	   echo "flowise installed" > /home/$USER/flowise_installed.txt
+	   mkdir -p /home/$USER/Documents/flowise/data/text_files
+	   cd       /home/$USER/Documents/flowise/data/text_files
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l1_quantum.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l2_religion.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l3_law.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l4_psychology.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l5_law.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l6_quantum.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l7_law.txt
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l8_religion.txt
+	  cd /home/$USER
+      echo "flowise installed" > /home/$USER/flowise_installed.txt
 	   chmod +x /home/$USER/*.sh
 	   chmod +x /home/$USER/start/*.sh
 	   chmod +x /home/$USER/stop/*.sh
