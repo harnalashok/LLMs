@@ -19,7 +19,7 @@ ollama gguf model can be used both in flowise and anythingllm.</h6>
 
 
 ## **B. Steps for using gguf models in ollama:** <br>
-<h6>Directly run a gguf model available in huggingface repo, as:</h6><br><br>
+<h6>Directly run a gguf model available in huggingface repo. See [this](https://medium.com/@udemirezen/converting-hugging-face-models-for-use-with-ollama-a-detailed-tutorial-4e64b66eea27) full article.</h6><br><br>
 
 > *ollama run hf.co/\<completeModelName\>*   <br>   
 > For example, to download and run [this](https://huggingface.co/gpustack/stable-diffusion-v1-4-GGUF) gguf model from huggingface, issue command:     
