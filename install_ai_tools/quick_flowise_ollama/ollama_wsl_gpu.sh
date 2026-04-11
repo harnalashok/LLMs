@@ -1228,6 +1228,9 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		pip install langgraph
 		pip install "langserve[all]"
 		pip install langchain-cli
+		# Install smolagents
+		pip install "smolagents[gradio]"
+		pip install ddgs
 		#################
 		# llamaindex
 		# To be installed ONLY in langchain virtual env
