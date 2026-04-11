@@ -1,4 +1,4 @@
-<h6>Last amended: 22nd August, 2024<br>
+<h6>Last amended: 11th April, 2026<br>
 Install any gguf model from huggingface in either anythingLLM <br>or in ollama.<br> 
 ollama gguf model can be used both in flowise and anythingllm.</h6>
 
@@ -19,20 +19,11 @@ ollama gguf model can be used both in flowise and anythingllm.</h6>
 
 
 ## **B. Steps for using gguf models in ollama:** <br>
-<h6>(After processing as below, these models can be used both in anythingllm and in ollama)</h6><br><br>
->>i)  Download a relevant *gguf* model from [huggingface.](https://huggingface.co/models)<br>
->>ii) To search for a relevant model, you can use its *Full text search* facility<br>
-     at this [link](https://huggingface.co/search/full-text?type=model). For example, to search for a bio or medical model of gguf format, you can write search text as:<br><br> 
-          *gguf model for medical applications* <br>   
->>iii) From the list of models that appears, select an appropiate *gguf* model. Have a look at the Model card of the selected model to know more about the model capabilities.<br>
->>iv) Download this *gguf* model and place it in the following folder in wsl ubuntu, say:<br>
-/home/ashok/gguf/ <br><br>
->>v) Open up *tilde* in Ubuntu, and create a *modelfile*, at the minimum, with FROM clause, as:<br>
-     FROM /home/ashok/gguf/biomistral-7b.IQ2_XXS.gguf<br>
->>vi) Save the file, say, as: gguf_modelfile<br>
->>vii) Create a model using ollama command, as:<br>
- ollama create biomistral -f gguf_modelfile<br>
->>vii) Start using biomistarl created above in either *anythingLLM* or in *flowise*<br>
+<h6>Directly run a gguf model available in huggingface repo, as:</h6><br><br>
+
+> *ollama run hf.co/\<completeModelName\>*   <br>   
+> For example, to download and run [this](https://huggingface.co/gpustack/stable-diffusion-v1-4-GGUF) gguf model from huggingface, issue command:     
+>> *ollama run hf.co/gpustack/stable-diffusion-v1-4-GGUF*
 
 **************************************************************************<br>
 Below is a response from a gguf medical model: *biomistral-7b.IQ2_XXS.gguf* <br>
