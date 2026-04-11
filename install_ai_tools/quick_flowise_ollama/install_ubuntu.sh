@@ -1422,6 +1422,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U langchain-cli
 	pip install -U unstructured
 	pip install -U unstructured[md]
+	# Install smolagents
+	pip install "smolagents[gradio]"
 	#################
 	# llamaindex
 	# To be installed ONLY in langchain virtual env
