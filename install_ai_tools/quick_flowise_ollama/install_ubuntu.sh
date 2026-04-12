@@ -1425,6 +1425,7 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	sleep 5
 	chmod +x /home/$USER/*.sh
 	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
+	pip list > /home/$USER/packagesInSmollagents_env.txt
 	LINE="  17a. smollagents virtual env, 'smollagents', created."
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
