@@ -1372,6 +1372,69 @@ fi
 
 
 #################
+# smollagents
+#################
+
+cd /home/$USER
+if [ ! -f /home/$USER/smoll_installed.txt ]; then
+    deactivate
+	cd /home/$USER
+	sleep 10
+    echo " "
+    echo " "
+	echo "Installing smollagents.."
+    sleep 3
+	# Activate python environment at 'smollagents'
+	#  for installing smollagents
+	##############
+	# Create python virtual env
+	##############
+	python3 -m venv /home/$USER/smollagents
+	source /home/$USER/smollagents/bin/activate
+	# 1.6 Essentials software
+    # Install smolagents
+	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
+	pip install "smolagents[gradio]"
+	pip install "smolagents[toolkit]"
+	pip install "smolagents[mcp]"
+	pip install "smolagents[litellm]"		
+	pip install -U "huggingface_hub[cli]"
+	pip install -U huggingface_hub
+	pip install ddgs
+	# Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	# Create script to activate 'smollagents' env
+	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	echo "  "
+	echo "====="
+	echo "Putting HF token in .bashrc"
+	echo "====="
+	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	sleep 5
+	chmod +x /home/$USER/*.sh
+	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
+	LINE="  17a. smollagents virtual env, 'smollagents', created."
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	sudo systemctl reboot -i
+else
+    echo "  "
+fi	
+
+#################
 # langchain & langraph
 #################
 
@@ -1422,13 +1485,6 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U langchain-cli
 	pip install -U unstructured
 	pip install -U unstructured[md]
-	# Install smolagents
-	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
-	pip install "smolagents[gradio]"
-	pip install "smolagents[toolkit]"
-	pip install "smolagents[mcp]"
-	pip install "smolagents[litellm]"		
-	pip install ddgs
 	#################
 	# llamaindex
 	# To be installed ONLY in langchain virtual env
@@ -1472,12 +1528,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
 	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
-	echo "  "
-	echo "====="
-	echo "Putting HF token in .bashrc"
-	echo "====="
-	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
-	sleep 5
+	sleep 3
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
@@ -1495,7 +1546,6 @@ fi
 #   Anaconda installation is a must
 # https://antigravity.google/download/linux
 ###########################
-
 
 cd /home/$USER
 # Install only if anaconda is installed:
