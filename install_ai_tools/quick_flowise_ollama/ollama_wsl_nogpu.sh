@@ -1164,7 +1164,67 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	     fi   
 	fi	 
  
+#################
+# smollagents
+#################
 
+cd /home/$USER
+if [ ! -f /home/$USER/smoll_installed.txt ]; then
+    deactivate
+	cd /home/$USER
+	sleep 10
+    echo " "
+    echo " "
+	echo "Installing smollagents.."
+    sleep 3
+	# Activate python environment at 'smollagents'
+	#  for installing smollagents
+	##############
+	# Create python virtual env
+	##############
+	python3 -m venv /home/$USER/smollagents
+	source /home/$USER/smollagents/bin/activate
+	# 1.6 Essentials software
+    # Install smolagents
+	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
+	pip install "smolagents[gradio]"
+	pip install "smolagents[toolkit]"
+	pip install "smolagents[mcp]"
+	pip install "smolagents[litellm]"		
+	pip install -U "huggingface_hub[cli]"
+	pip install -U huggingface_hub
+	pip install ddgs
+	# Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	# Create script to activate 'smollagents' env
+	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	echo "  "
+	echo "====="
+	echo "Putting HF token in .bashrc"
+	echo "====="
+	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	sleep 5
+	chmod +x /home/$USER/*.sh
+	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
+	pip list > /home/$USER/packagesInSmollagents_env.txt
+	if [ "$WSLSYSTEM" = "true" ] ; then
+        wsl.exe --shutdown
+      else
+        reboot
+      fi  
+fi	
 
 
 #################
@@ -1217,13 +1277,6 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install langchain-cli
 	pip install unstructured
 	pip install unstructured[md]
-	# Install smolagents
-	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
-	pip install "smolagents[gradio]"
-	pip install "smolagents[toolkit]"
-	pip install "smolagents[mcp]"
-	pip install "smolagents[litellm]"		
-	pip install ddgs
 	#################
 	# llamaindex
 	# To be installed ONLY in langchain virtual env
@@ -1276,10 +1329,6 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  16. langchain and langgraph virtual env, 'langchain', created."
-	if ! grep -qF "$LINE" "$FILE"; then
-		echo "$LINE" >> "$FILE"
-	fi
 	if [ "$WSLSYSTEM" = "true" ] ; then
         wsl.exe --shutdown
       else
