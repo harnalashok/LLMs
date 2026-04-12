@@ -1165,7 +1165,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	fi	 
  
 #################
-# smollagents
+# smolagents
 #################
 
 cd /home/$USER
@@ -1200,6 +1200,7 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	pip install ipython
 	pip install notebook
 	pip install -U streamlit
+	pip install plotly
 	# Create script to activate 'smollagents' env
 	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
 	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
