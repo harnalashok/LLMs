@@ -1228,8 +1228,13 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		pip install langgraph
 		pip install "langserve[all]"
 		pip install langchain-cli
+		
 		# Install smolagents
+		# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
 		pip install "smolagents[gradio]"
+		pip install "smolagents[toolkit]"
+		pip install "smolagents[mcp]"
+		pip install "smolagents[litellm]"		
 		pip install ddgs
 		#################
 		# llamaindex
@@ -1273,6 +1278,12 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
+		echo "  "
+		echo "====="
+		echo "Putting HF token in .bashrc"
+		echo "====="
+		sleep 3
+		echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
 		wsl.exe --shutdown
 fi	
 
@@ -1343,7 +1354,6 @@ if [ ! -f /home/$USER/n8nExamples_installed.txt ]; then
 else
 	echo "  "
 fi	
-
 
 
 #############
