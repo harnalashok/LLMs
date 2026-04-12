@@ -1191,6 +1191,7 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	pip install "smolagents[toolkit]"
 	pip install "smolagents[mcp]"
 	pip install "smolagents[litellm]"		
+	pip install 'smolagents[transformers]'
 	pip install -U "huggingface_hub[cli]"
 	pip install -U huggingface_hub
 	pip install ddgs
