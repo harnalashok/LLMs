@@ -1408,11 +1408,11 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	pip install notebook
 	pip install -U streamlit
 	# Create script to activate 'smollagents' env
-	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_smollagents_venv.sh
-	echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
 	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
-	echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
 	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
 	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
 	chmod +x /home/$USER/*.sh
