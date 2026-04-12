@@ -1218,7 +1218,11 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install unstructured
 	pip install unstructured[md]
 	# Install smolagents
+	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
 	pip install "smolagents[gradio]"
+	pip install "smolagents[toolkit]"
+	pip install "smolagents[mcp]"
+	pip install "smolagents[litellm]"		
 	pip install ddgs
 	#################
 	# llamaindex
@@ -1263,7 +1267,12 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
 	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
-	sleep 3
+	echo "  "
+	echo "====="
+	echo "Putting HF token in .bashrc"
+	echo "====="
+	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	sleep 5
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
