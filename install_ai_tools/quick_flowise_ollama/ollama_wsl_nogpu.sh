@@ -1308,6 +1308,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install llama-index-llms-together
 	pip install llama-index-llms-mistralai
 	pip install llama-index-llms-openrouter
+	pip install  llama-index-experimental
+	pip install polars
 	# Install deepeval evaluation system
 	pip install -U deepeval
 	# Download llamaindex tutorials
