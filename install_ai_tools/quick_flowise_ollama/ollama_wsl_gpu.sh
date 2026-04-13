@@ -1315,6 +1315,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 		pip install llama-index-llms-groq
 		pip install llama-index-llms-together
 		pip install llama-index-llms-mistralai
+		pip install  llama-index-experimental
+	    pip install polars
 		# Download llamaindex tutorials
 		mkdir -p /home/$USER/Documents/llamaindex
 		cd /home/$USER/Documents/llamaindex
