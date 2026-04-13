@@ -1519,6 +1519,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install llama-index-llms-openrouter
 	# Install deepeval evaluation system
 	pip install -U deepeval
+	pip install  llama-index-experimental
+	pip install polars
 	# Download llamaindex tutorials
 	mkdir -p /home/$USER/Documents/llamaindex
 	cd /home/$USER/Documents/llamaindex
