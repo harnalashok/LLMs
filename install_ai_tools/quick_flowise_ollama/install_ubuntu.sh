@@ -2035,9 +2035,10 @@ if [ ! -f /home/$USER/localai_installed.txt ]; then
 	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/$USER/localai
 	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/$USER/
 	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/$USER/localai
-	
-	# MAke symbolic links
+	wget -c https://github.com/harnalashok/LLMs/edit/main/install_ai_tools/localai/modelList.sh                                        -P /home/$USER/localai
+	# Make symbolic links
 	cd /home/$USER
+	ln -sT /home/$USER/start/modelList.sh  modelList.sh 
 	ln -sT /home/$USER/start/start_localai.sh start_localai.sh
 	ln -sT /home/$USER/stop/stop_localai.sh stop_localai.sh
 	
