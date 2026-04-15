@@ -154,7 +154,15 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	sudo apt-get install apache2 -y
 	cd /home/$USER
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
+	wget -c 
 	sudo mv /home/$USER/index.html  /var/www/html/index.html
+    mkdir -p /home/$USER/apache2
+	cd /home/$USER/apache2
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	chmod +x *.sh
+	cd /home/$USER
 	echo '#!/bin/bash'                                         | tee    /home/$USER/start_apache2.sh
 	echo " "                                                   | tee -a /home/$USER/start_apache2.sh
 	echo "cd ~/"                                               | tee -a /home/$USER/start_apache2.sh
