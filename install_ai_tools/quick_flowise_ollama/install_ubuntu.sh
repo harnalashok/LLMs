@@ -1984,6 +1984,81 @@ else
 fi
 
 
+
+#####################
+## LocalAI install
+####################
+
+cd /home/$USER
+if [ ! -f /home/$USER/localai_installed.txt ]; then
+	mkdir /home/$USER/localai
+	cd /home/$USER/localai
+		
+	# Should run in detached mode
+	#  docker run -ti -d --name local-ai -p 8080:8080 localai/localai:latest-cpu
+	
+	# Install localai using Nvidia GPU:
+	# https://github.com/mudler/LocalAI
+	#docker run -ti --name local-ai -p 8080:8080 --gpus all localai/localai:latest-gpu-nvidia-cuda-12
+	docker run -ti --name local-ai -p 8080:8080 --gpus all localai/localai:latest-gpu-nvidia-cuda-13
+	
+	#echo "Download localai model"
+	#echo "Process will run in background"
+	sleep 5
+	
+	# Start local-ai in future
+	echo '#!/bin/bash'                                                                         > /home/$USER/start/start_localai.sh
+	echo " "                                                                                  >> /home/$USER/start/start_localai.sh
+	echo "cd /home/$USER/localai"                                                             >> /home/$USER/start/start_localai.sh
+	echo "echo 'Localai will be available at port 8080'"                                      >> /home/$USER/start/start_localai.sh
+	echo "docker start local-ai"                                                              >> /home/$USER/start/start_localai.sh
+	echo "netstat -aunt | grep 8080"                                                          >> /home/$USER/start/start_localai.sh
+	chmod +x /home/$USER/start/*.sh
+	
+	# Stop local-ai in future
+	echo '#!/bin/bash'                                                                         > /home/$USER/stop/stop_localai.sh
+	echo " "                                                                                  >> /home/$USER/stop/stop_localai.sh
+	echo "cd /home/$USER/localai"                                                                >> /home/$USER/stop/stop_localai.sh
+	echo "docker stop local-ai"                                                              >> /home/$USER/stop/stop_localai.sh
+	chmod +x /home/$USER/stop/*.sh
+	
+	# Download sh files to download models
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_bert_embeddings.sh   -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma3_4b_it.sh      -P /home/$USER/localai
+	#wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_localaiModel3.sh    -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_mistral_7b_instruct.sh    -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_stablediffusion.sh   -P /home/$USER/localai
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/download_gemma_3_27b_it.sh     -P /home/$USER/localai
+	
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/get_download_status.sh        -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/find_file.sh                  -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/$USER/
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/search_docker_data.sh         -P /home/$USER/localai
+	
+	# MAke symbolic links
+	cd /home/$USER
+	ln -sT /home/$USER/start/start_localai.sh start_localai.sh
+	ln -sT /home/$USER/stop/stop_localai.sh stop_localai.sh
+	
+	# Download to files to create create images
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/generate_image.sh   -P /home/$USER/localai
+	wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/localai/generate_image2.sh  -P /home/$USER/localai
+	
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/localai/*.sh
+	echo "localai_installed.txt" > /home/$USER/localai_installed.txt 
+	LINE="  25. LocalAI installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+			echo "$LINE" >> "$FILE"
+		fi
+		cd
+else
+    echo "   "
+fi
+
+
+
 ##################
 ## Install Qlib
 # Open-source AI quantitative investment platform
