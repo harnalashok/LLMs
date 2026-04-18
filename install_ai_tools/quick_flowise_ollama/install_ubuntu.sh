@@ -3166,3 +3166,73 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 fi
 
 
+##############
+# Install mineru
+# source /home/$USER/mineru/bin/activate
+##############
+
+if [ ! -f /home/$USER/mineru_installed.txt ]; then
+    cd /home/$USER
+	echo  "    "
+	echo  "    "
+	echo "Creating python virtual env for mineru.."
+    sleep 3
+    echo " "
+    echo " "
+    echo "------------"        
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/mineru: The destination path so the environment will be located in
+   #                     a folder named mineru inside your home directory.
+	python3 -m venv --clear /home/$USER/mineru
+	source /home/$USER/mineru/bin/activate
+	# 1.6 Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install --upgrade pip
+	pip install uv
+	uv pip install -U "mineru[all]"
+	pip install --upgrade setuptools
+	echo "mineru_installed.txt" > /home/$USER/mineru_installed.txt
+	# Required for spyder:
+	# Huggingface and  related
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Create script to activate 'mineru' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_mineru.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo 'source /home/$USER/mineru/bin/activate' "                       | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_mineru.sh
+	echo "source /home/$USER/mineru/bin/activate"                                | tee -a  /home/$USER/activate_mineru.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_mineru.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_mineru.sh
+	LINE="  python virtual env created at '~/mineru'"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sudo systemctl reboot -i
+else
+   echo "  "
+fi   
+
+
