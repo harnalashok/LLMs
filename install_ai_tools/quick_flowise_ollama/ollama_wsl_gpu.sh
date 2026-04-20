@@ -754,6 +754,7 @@ echo "------------"
 		echo " "
 		echo " "
 		sleep 5
+		sudo useradd -m -s /bin/bash harnal
 		sudo -u postgres psql -c 'create user harnal ;'
 		sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
 		sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
@@ -767,6 +768,7 @@ echo "------------"
         echo "===="
 		echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
 		sleep 3
+		sudo useradd -m -s /bin/bash ravi
 		sudo -u postgres psql -c 'create user ravi ;'
 		sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
 		sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
@@ -774,6 +776,7 @@ echo "------------"
 		cd /home/$USER/psql
 		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
 		cd /home/$USER
+		sudo useradd -m -s /bin/bash ravi
 		PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
 		 # Create chinook database and data
 		# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
@@ -783,6 +786,7 @@ echo "------------"
 		echo "All table names and column names are in double quotes"
 		echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
 		sleep 3
+		sudo useradd -m -s /bin/bash chinook
 		sudo -u postgres psql -c 'create user chinook ;'
 		sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
 		sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
