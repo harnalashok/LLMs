@@ -638,6 +638,7 @@ cd /home/$USER
 		echo " "
 		echo " "
 		sleep 5
+		sudo useradd -m -s /bin/bash harnal
 		sudo -u postgres psql -c 'create user harnal ;'
 		sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
 		sudo -u postgres psql -c 'grant all privileges on database harnal to harnal;'
@@ -650,12 +651,14 @@ cd /home/$USER
 		sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
 		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 		echo "===="
+		sudo useradd -m -s /bin/bash gautam
 		sudo -u postgres psql -c 'create user gautam ;'
 		sudo -u postgres psql -c 'CREATE DATABASE gautam WITH OWNER = gautam;  '
 		sudo -u postgres psql -c 'grant all privileges on database gautam to gautam;'
 		sudo -u postgres psql -c "alter user gautam with encrypted password 'gautam';"
 		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d gautam
 		echo "===="
+		sudo useradd -m -s /bin/bash ganesh
 		sudo -u postgres psql -c 'create user ganesh ;'
 		sudo -u postgres psql -c 'CREATE DATABASE ganesh WITH OWNER = ganesh;  '
 		sudo -u postgres psql -c 'grant all privileges on database ganesh to ganesh;'
@@ -663,6 +666,7 @@ cd /home/$USER
 		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ganesh
 		echo "===="
 		echo "===="
+		sudo useradd -m -s /bin/bash ravi
 		echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
 		sleep 3
 		sudo -u postgres psql -c 'create user ravi ;'
@@ -681,6 +685,7 @@ cd /home/$USER
 		echo "All table names and column names are in double quotes"
 		echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
 		sleep 3
+		sudo useradd -m -s /bin/bash chinook
 		sudo -u postgres psql -c 'create user chinook ;'
 		sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
 		sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
