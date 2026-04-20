@@ -65,8 +65,9 @@ ORDER BY c.ordinal_position;
 -- BB Following databas and tables are used in the experiment
 --		To create a role: kumar, database kumar with two samples table
 /*
-sudo adduser kumar
+sudo useradd -m -s /bin/bash kumar
 sudo su kumar
+cd
 psql kumar
 kumar=> \c kumar
 */
