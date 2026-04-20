@@ -557,6 +557,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	# Create venv for FAISS
 	python3 -m venv /home/$USER/faiss
 	source /home/$USER/faiss/bin/activate
+	pip install --upgrade pip
 	pip3 install faiss-cpu
 	deactivate
 	## Script to activate FAISS library
@@ -1273,6 +1274,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	python3 -m venv --clear /home/$USER/venv
 	source /home/$USER/venv/bin/activate
 	# 1.6 Essentials software
+	pip install --upgrade pip
 	pip install spyder numpy scipy pandas matplotlib sympy cython
 	pip install jupyterlab
 	pip install -U wheel
@@ -1406,6 +1408,7 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	# 1.6 Essentials software
     # Install smolagents
 	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
+	pip install --upgrade pip
 	pip install "smolagents[gradio]"
 	pip install "smolagents[toolkit]"
 	pip install "smolagents[mcp]"
@@ -1467,6 +1470,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	python3 -m venv /home/$USER/langchain
 	source /home/$USER/langchain/bin/activate
 	# 1.6 Essentials software
+	pip install --upgrade pip
 	pip install spyder numpy scipy pandas matplotlib sympy cython
 	pip install jupyterlab
 	pip install ipython
@@ -1630,6 +1634,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  # Installing llama.cpp
 	  source /home/$USER/venv/bin/activate
 	   # Huggingface and llama.cpp related
+	  pip install --upgrade pip
 	  pip install huggingface_hub
 	  pip install transformers
 	  pip install accelerate
