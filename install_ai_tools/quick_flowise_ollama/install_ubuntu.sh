@@ -698,6 +698,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	sleep 5
+	# Create first ubuntu user
+	sudo useradd -m -s /bin/bash harnal
 	sudo -u postgres psql -c 'create user harnal ;'
 	sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
 	sudo -u postgres psql -c 'grant all privileges on database harnal to harnal;'
@@ -710,12 +712,14 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
 	echo "===="
+	sudo useradd -m -s /bin/bash gautam
 	sudo -u postgres psql -c 'create user gautam ;'
 	sudo -u postgres psql -c 'CREATE DATABASE gautam WITH OWNER = gautam;  '
 	sudo -u postgres psql -c 'grant all privileges on database gautam to gautam;'
 	sudo -u postgres psql -c "alter user gautam with encrypted password 'gautam';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d gautam
 	echo "===="
+	sudo useradd -m -s /bin/bash ganesh
 	sudo -u postgres psql -c 'create user ganesh ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ganesh WITH OWNER = ganesh;  '
 	sudo -u postgres psql -c 'grant all privileges on database ganesh to ganesh;'
@@ -727,6 +731,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "In the same database, creating linked tables: s,p,j,spj with data"
 	echo "See as: ./psql.sh ; \c ravi ; select * from spj ; ' "
 	sleep 3
+	sudo useradd -m -s /bin/bash ravi
 	sudo -u postgres psql -c 'create user ravi ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
 	sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
@@ -745,6 +750,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "All table names and column names are in double quotes"
 	echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
 	sleep 3
+	sudo useradd -m -s /bin/bash chinook
 	sudo -u postgres psql -c 'create user chinook ;'
 	sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
 	sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
