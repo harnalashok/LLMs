@@ -98,7 +98,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt install curl -y
 	# I(nstall filezilla for ssh access to bridged network 
 	sudo apt install filezilla -y
+	# Install pandoc to convert .md files to .txt files
 	sudo apt install pandoc  -y
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
     # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
     # Replace '22.x' with the desired major version if needed
     #curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
