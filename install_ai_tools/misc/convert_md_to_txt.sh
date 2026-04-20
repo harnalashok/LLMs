@@ -2,8 +2,9 @@
 
 echo "   "
 echo "============"
-echo "First cd to folder that contains md files"
-echo "If not, ctrl+c first, and then run this script"
+echo "Convert markdown files (.md) to text files"
+echo "But first cd to folder that contains .md files"
+echo "Else, ctrl+c first, and then run this script"
 echo "You have 10secs"
 echo "=============="
 echo "    "
