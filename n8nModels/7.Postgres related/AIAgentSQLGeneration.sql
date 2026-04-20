@@ -65,8 +65,9 @@ ORDER BY c.ordinal_position;
 -- BB Following databas and tables are used in the experiment
 --		To create a role: kumar, database kumar with two samples table
 /*
-$sudo su kumar
-$psql kumar
+sudo adduser kumar
+sudo su kumar
+psql kumar
 kumar=> \c kumar
 */
 -- You are now connected to database "kumar" as user "kumar".
