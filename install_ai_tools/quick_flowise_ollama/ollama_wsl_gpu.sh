@@ -102,6 +102,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "Install httpd server"
 	sudo apt-get install apache2 -y
 	cd /home/$USER
+	# Install pandoc to convert .md files to .txt files
+	sudo apt install pandoc  -y
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
 	sudo mv /home/$USER/index.html  /var/www/html/index.html
 	mkdir -p /home/$USER/Documents/apache2
