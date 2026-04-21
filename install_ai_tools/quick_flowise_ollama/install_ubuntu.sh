@@ -694,6 +694,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "Database 'ashok' can also be used as vector database"
 	echo "Database 'harnal' can also be used as vector database"
 	echo "Similarly we have users gautam and ganesh:"
+	echo "Each one of them has db creation powers"
 	echo "========="
 	echo " "
 	echo " "
@@ -705,12 +706,14 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'grant all privileges on database harnal to harnal;'
 	sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
+	sudo -u postgres psql -c "ALTER USER harnal WITH CREATEDB;"
 	echo "===="
 	sudo -u postgres psql -c 'create user ashok ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
 	sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
 	sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
+	sudo -u postgres psql -c "ALTER USER ashok WITH CREATEDB;"
 	echo "===="
 	sudo useradd -m -s /bin/bash gautam
 	sudo -u postgres psql -c 'create user gautam ;'
@@ -718,6 +721,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'grant all privileges on database gautam to gautam;'
 	sudo -u postgres psql -c "alter user gautam with encrypted password 'gautam';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d gautam
+	sudo -u postgres psql -c "ALTER USER gautam WITH CREATEDB;"
 	echo "===="
 	sudo useradd -m -s /bin/bash ganesh
 	sudo -u postgres psql -c 'create user ganesh ;'
@@ -725,6 +729,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'grant all privileges on database ganesh to ganesh;'
 	sudo -u postgres psql -c "alter user ganesh with encrypted password 'ganesh';"
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ganesh
+	sudo -u postgres psql -c "ALTER USER ganesh WITH CREATEDB;"
 	echo "===="
 	echo "===="
 	echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
@@ -735,6 +740,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'create user ravi ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
 	sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
+	sudo -u postgres psql -c "ALTER USER ravi WITH CREATEDB;"
 	#
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/simpleTable.sql
@@ -754,6 +760,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c 'create user chinook ;'
 	sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
 	sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
+	sudo -u postgres psql -c "ALTER USER chinook WITH CREATEDB;"
 	#
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/chinook.sql
