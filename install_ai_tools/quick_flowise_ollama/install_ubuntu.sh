@@ -249,9 +249,9 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
 	sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
 	echo $password | sudo -S apt-get update
-	echo $password | sudo -S apt-get -y install cuda-toolkit-13-0
+	echo $password | sudo -S apt-get install cuda-toolkit-13-0 -y
 	# NVIDIA Driver Instructions
-	echo $password | sudo -S apt-get install -y nvidia-open
+	echo $password | sudo -S apt-get install nvidia-open -y
 	echo $password | sudo -S apt autoremove -y
 	#nvidia-settings
 	sleep 8
