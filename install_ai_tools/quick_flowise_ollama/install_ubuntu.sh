@@ -85,7 +85,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt install zip p7zip-full unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
-    sudo apt-get install libssl-dev libcurl4-openssl-dev -y
+    echo $password | sudo -S apt-get install libssl-dev libcurl4-openssl-dev -y
 	echo "  "
 	echo "  "
 	echo "===="
@@ -114,7 +114,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
-	sudo apt install npm
+	echo $password | sudo -S apt install npm
 	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
     wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
@@ -155,7 +155,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "  "
 	echo "------"
 	echo "Install httpd server"
-	sudo apt-get install apache2 -y
+	echo $password | sudo -S apt-get install apache2 -y
 	cd /home/$USER
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
 	wget -c 
@@ -211,7 +211,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-    sudo systemctl reboot -i
+    echo $password | sudo -S systemctl reboot -i
 else 
     LINE="  1. Ubuntu updated"
 	if ! grep -qF "$LINE" "$FILE"; then
@@ -248,8 +248,8 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
 	sudo dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
 	sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-	sudo apt-get update
-	sudo apt-get -y install cuda-toolkit-13-0
+	echo $password | sudo -S apt-get update
+	echo $password | sudo -S apt-get -y install cuda-toolkit-13-0
 	# NVIDIA Driver Instructions
 	sudo apt-get install -y nvidia-open
 	sudo apt autoremove -y
@@ -260,7 +260,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
    	LINE="  2. CUDA installed"
 	if ! grep -qF "$LINE" "$FILE"; then
@@ -376,7 +376,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
 	    echo "$LINE" >> "$FILE"
 	fi
     echo "Machine will be rebooted "
-    sudo systemctl reboot -i
+    echo $password | sudo -S systemctl reboot -i
 else
     LINE="  4. Docker configured to use normal user"
 	if ! grep -qF "$LINE" "$FILE"; then
@@ -701,7 +701,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	sleep 5
 	# Create first ubuntu user
-	sudo useradd -m -s /bin/bash harnal
+	echo $password | sudo -S useradd -m -s /bin/bash harnal
 	sudo -u postgres psql -c 'create user harnal ;'
 	sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
 	sudo -u postgres psql -c 'grant all privileges on database harnal to harnal;'
@@ -832,7 +832,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
     echo "  "
 fi	
