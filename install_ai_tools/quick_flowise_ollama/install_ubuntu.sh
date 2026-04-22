@@ -412,6 +412,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "You may be asked for the password. Supply it..."     
 	echo "====  "                                                   
 	sleep 3
+	echo $password | sudo -S  apt-get update
 	curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 	bash standalone_embed.sh start
 	echo " "
@@ -869,7 +870,8 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	# Access at localhost:5678
 	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
 	# Access at localhost:5678
-	echo $password | sudo -S  docker run -it -d --rm \
+	echo $password | sudo -S  apt-get update
+	sudo  docker run -it -d --rm \
 				--name n8n \
 				 -p 5678:5678 \
 				 -e NODE_OPTIONS="--max-old-space-size=4096" \
