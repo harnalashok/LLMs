@@ -70,7 +70,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "----------"                              
     echo " "
     sleep 2
-    echo $password | sudo apt update
+    echo $password | sudo -S apt update
     sudo apt upgrade -y
     # To get multiple python versions, install repo
     # See: https://askubuntu.com/a/1538589
