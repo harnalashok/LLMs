@@ -1063,7 +1063,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-   sudo systemctl reboot -i
+   echo $password | sudo -S systemctl reboot -i
 else
    echo " "
 fi	 
@@ -1262,7 +1262,7 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
     echo "   "
 fi
@@ -1342,7 +1342,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
    echo "  "
 fi   
@@ -1394,7 +1394,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		if ! grep -qF "$LINE" "$FILE"; then
 	    	echo "$LINE" >> "$FILE"
 		fi
-		sudo systemctl reboot -i
+		echo $password | sudo -S  systemctl reboot -i
 	fi
 else
    echo "  "
@@ -1628,7 +1628,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
-			sudo systemctl reboot -i
+			echo $password | sudo -S systemctl reboot -i
 	else
 	       echo " "
 	fi
@@ -1713,7 +1713,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
    echo "    "
 fi
@@ -2118,6 +2118,7 @@ if [ ! -f /home/$USER/localai_installed.txt ]; then
 	# Install localai using Nvidia GPU:
 	# https://github.com/mudler/LocalAI
 	#docker run -ti --name local-ai -p 8080:8080 --gpus all localai/localai:latest-gpu-nvidia-cuda-12
+	echo $password | sudo -S apt update
 	docker run -ti --name local-ai -p 8080:8080 --gpus all localai/localai:latest-gpu-nvidia-cuda-13
 	
 	#echo "Download localai model"
@@ -2167,6 +2168,7 @@ if [ ! -f /home/$USER/localai_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/localai/*.sh
 	echo "localai_installed.txt" > /home/$USER/localai_installed.txt 
+	echo $password | sudo -S systemctl reboot -i
 	LINE="  30. LocalAI installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
