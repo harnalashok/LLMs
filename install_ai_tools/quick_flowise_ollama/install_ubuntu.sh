@@ -35,6 +35,7 @@ echo "Install  to tunnel access of local website"
 echo "Will install ragflow docker"
 echo "Will upgrade ragflow"
 echo "==========================="
+password="ashok"
 sleep 2
 
 FILE="/home/$USER/install_progerss.txt"
@@ -69,7 +70,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "----------"                              
     echo " "
     sleep 2
-    sudo apt update
+    echo $password | sudo apt update
     sudo apt upgrade -y
     # To get multiple python versions, install repo
     # See: https://askubuntu.com/a/1538589
@@ -238,7 +239,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo "cuda-toolkit does not change GPU drivers."
 	echo "But higher versions of cuda-toolkit may have installation problems"
 	# Remove old gpg key
-	sudo apt-key del 7fa2af80
+	echo $password | sudo -S apt-key del 7fa2af80
 	# Now follow the instructions as on this page:
 	#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
 	# Added on 27th Sep, 2025
@@ -280,7 +281,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
 	echo "   "
     echo "Installing docker.."
     sleep 2
-    sudo apt-get update
+    echo $password | sudo -S  apt-get update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -330,7 +331,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     echo "AND running docker without root privilegs.."
     sleep 3
     # Check if docker installed
-    sudo docker run hello-world
+    echo $password | sudo -S  docker run hello-world
     # Run docker witout root privileges
     sudo groupadd docker
     sudo usermod -aG docker $USER
@@ -593,7 +594,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	cd /home/$USER/
 	echo "Installing postgresql and sqlite3"
 	sleep 3
-	sudo apt install postgresql postgresql-contrib sqlite3   -y
+	echo $password | sudo -S  apt install postgresql postgresql-contrib sqlite3   -y
     
 	# Postgresql start/stop script
 
@@ -678,7 +679,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
 	cd pgvector
 	make
-	sudo make install 
+	echo $password | sudo -S  make install 
 
 	# Create user ashok and database ashok
 	cd /home/$USER/
@@ -868,7 +869,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	# Access at localhost:5678
 	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
 	# Access at localhost:5678
-	sudo docker run -it -d --rm \
+	echo $password | sudo -S  docker run -it -d --rm \
 				--name n8n \
 				 -p 5678:5678 \
 				 -e NODE_OPTIONS="--max-old-space-size=4096" \
@@ -997,7 +998,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    fi	   
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
-   sudo docker build --no-cache -t flowise .
+   echo $password | sudo -S docker build --no-cache -t flowise .
    
    # The '--network host' option removes network isolation between the container and
    #   the Docker host machine, meaning the container directly shares the host's networking stack
@@ -1132,7 +1133,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  if ! grep -qF "$LINE" "$FILE"; then
 	     echo "$LINE" >> "$FILE"
 	  fi
-	  sudo systemctl reboot -i
+	  echo $password | sudo -S systemctl reboot -i
 else
       echo " "
 fi
@@ -1208,7 +1209,7 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
 	pip install --upgrade setuptools
 	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
 	# Required for spyder:
-	sudo apt install pyqt5-dev-tools -y
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
 	sudo apt install tesseract-ocr-all -y
 	echo "Install pdfminer to extract text from pdf"
 	# Ref: https://github.com/pdfminer/pdfminer.six
@@ -1303,7 +1304,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 	#pip install huggingface_hub
 	echo "####"
-	sudo apt install pyqt5-dev-tools -y
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
 	sudo apt install tesseract-ocr-all -y
 	echo "Install pdfminer to extract text from pdf"
 	# Ref: https://github.com/pdfminer/pdfminer.six
@@ -1456,11 +1457,11 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
 	pip list > /home/$USER/packagesInSmollagents_env.txt
-	LINE="  17a. smollagents virtual env, 'smollagents', created."
+	LINE="  17. smollagents virtual env, 'smollagents', created."
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
     echo "  "
 fi	
@@ -1490,7 +1491,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install notebook
 	pip install -U streamlit
 	# Required for spyder:
-	sudo apt install pyqt5-dev-tools -y
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
 	# Huggingface and llama.cpp related
 	pip install -U huggingface_hub
 	# To connect to postgresql
@@ -1508,7 +1509,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	source /home/$USER/langchain/bin/activate
 	pip install -U langchain
 	pip install -U langchain-openai
-	 pip install -U langchain-ollama
+	pip install -U langchain-ollama
 	pip install -U langchain-community
 	pip install -U langchain-classic
 	pip install -U langchain-experimental
@@ -1536,7 +1537,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U faiss-cpu
 	pip install -U qdrant-client llama-index-vector-stores-chroma 
 	pip install =U llama-index-vector-stores-qdrant fastembed
-	 pip install -U llama-index-vector-stores-postgres
+	pip install -U llama-index-vector-stores-postgres
 	# 1.3 Web access site
 	pip install tavily-python
 	# 1.4 Yahoo finance data
@@ -1566,11 +1567,11 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  17. langchain and langgraph virtual env, 'langchain', created."
+	LINE="  18. langchain and langgraph virtual env, 'langchain', created."
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
     echo "  "
 fi	
@@ -1591,7 +1592,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
     		sleep 3
            conda init
 		   #  create a directory for keyrings
-			sudo mkdir -p /etc/apt/keyrings
+			echo $password | sudo -S mkdir -p /etc/apt/keyrings
 			# Download and add Google's signing key
 			sudo mkdir -p /etc/apt/keyrings
 			curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | \
@@ -1604,7 +1605,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "Installing marktext markdown reader"
 			sudo snap install marktext
 			# Install Google Antigravity
-			sudo apt install antigravity
+			sudo apt install antigravity -y
 			sudo apt autoremove -y
 			echo "antigravity_installed.txt" > /home/$USER/antigravity_installed.txt
 			echo " "
@@ -1621,7 +1622,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
 			chmod +x *.sh
 			sleep 5
-			LINE="  18. Google antigravity installed."
+			LINE="  19. Google antigravity installed."
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
@@ -1656,11 +1657,11 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
-	  LINE="  19. llamacpp installed"
+	  LINE="  20. llamacpp installed"
 	  if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	  fi
-	  sudo systemctl reboot -i
+	  echo $password | sudo -S systemctl reboot -i
 else
       echo "   "
 fi	
@@ -1689,7 +1690,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 	# Fill in filename from above
 	mv * code.deb
-	sudo apt install /home/$USER/1234/code.deb  -y
+	echo $password | sudo -S apt install /home/$USER/1234/code.deb  -y
 	cd /home/$USER
 	rm -rf /home/$USER/1234/
 	mkdir /home/$USER/Documents/vscode
@@ -1706,7 +1707,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     chmod +x /home/$USER/start/*.sh
     chmod +x /home/$USER/stop/*.sh
 	sleep 5
-	LINE="  20. VSCode installed"
+	LINE="  21. VSCode installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1759,7 +1760,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 	    echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
 		
-		LINE="  21. RAG and RAG performance Eval system installed"
+		LINE="  22. RAG and RAG performance Eval system installed"
 		if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		fi
@@ -1799,6 +1800,11 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	mv /home/$USER/Documents/llamaindexExamples/llamaindex/* .
 	rm -rf /home/$USER/Documents/llamaindexExamples
 	cd /home/$USER
+    LINE="  23. llamaindex examples installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	#
 	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
 else
 	echo "  "
@@ -1833,6 +1839,11 @@ if [ ! -f /home/$USER/n8nExamples_installed.txt ]; then
 	mv /home/$USER/Documents/n8nExamples/n8nModels/* .
 	rm -rf /home/$USER/Documents/n8nExamples
 	cd /home/$USER
+	LINE="  24. n8n models installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	#
 	echo "n8nExamples_installed.txt" > /home/$USER/n8nExamples_installed.txt
 else
 	echo "  "
@@ -1867,11 +1878,86 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 	mv /home/$USER/Documents/flowiseExamples/flowise_models/* .
 	rm -rf /home/$USER/Documents/flowiseExamples
 	cd /home/$USER
+	LINE="  25. flowise models installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	#
 	echo "flowiseModels_installed.txt" > /home/$USER/flowiseModels_installed.txt
 else
 	echo "  "
 fi	
 
+
+
+##############
+# Install mineru
+# source /home/$USER/mineru/bin/activate
+##############
+
+if [ ! -f /home/$USER/mineru_installed.txt ]; then
+    cd /home/$USER
+	echo  "    "
+	echo  "    "
+	echo "Creating python virtual env for mineru.."
+    sleep 3
+    echo " "
+    echo " "
+    echo "------------"        
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/mineru: The destination path so the environment will be located in
+   #                     a folder named mineru inside your home directory.
+	python3 -m venv --clear /home/$USER/mineru
+	source /home/$USER/mineru/bin/activate
+	# 1.6 Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install --upgrade pip
+	pip install uv
+	uv pip install -U "mineru[all]"
+	pip install --upgrade setuptools
+	echo "mineru_installed.txt" > /home/$USER/mineru_installed.txt
+	# Required for spyder:
+	# Huggingface and  related
+	echo "####"
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Create script to activate 'mineru' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_mineru.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo 'source /home/$USER/mineru/bin/activate' "                       | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_mineru.sh
+	echo "source /home/$USER/mineru/bin/activate"                                | tee -a  /home/$USER/activate_mineru.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_mineru.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_mineru.sh
+	LINE="  26.python virtual env created at '~/mineru'"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sudo systemctl reboot -i
+else
+   echo "  "
+fi   
 
 
 
@@ -1935,7 +2021,7 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "sleep 5"																		|   tee  -a  /home/$USER/start_agno.sh
 	echo "python /home/$USER/agno/cookbook/00_quickstart/run.py"						 |   tee  -a  /home/$USER/start_agno.sh
 	chmod +x /home/$USER/*.sh
-	LINE="  22. Agent Builder agno installed"
+	LINE="  27. Agent Builder agno installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1963,7 +2049,7 @@ if [ ! -f /home/$USER/openbb_installed.txt ]; then
 	openbb-api
 	echo "openbb_installed.txt"  >  /home/$USER/openbb_installed.txt
 	conda deactivate
-	LINE="  23. OpenBB installed"
+	LINE="  28. OpenBB installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -2003,7 +2089,7 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cd /home/$USER
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
-	LINE="  24. Trading Agent installed"
+	LINE="  29. Trading Agent installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -2079,11 +2165,11 @@ if [ ! -f /home/$USER/localai_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/localai/*.sh
 	echo "localai_installed.txt" > /home/$USER/localai_installed.txt 
-	LINE="  25. LocalAI installed"
-		if ! grep -qF "$LINE" "$FILE"; then
-			echo "$LINE" >> "$FILE"
-		fi
-		cd
+	LINE="  30. LocalAI installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	cd
 else
     echo "   "
 fi
@@ -2159,7 +2245,7 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 		    docker compose -f docker-compose.yml up -d
 			docker logs -f docker-ragflow-gpu-1
 			echo "ragflowUpgraded_installed.txt" > /home/$USER/ragflowUpgraded_installed.txt
-			LINE="  25. RagFlow"
+			LINE="  31. RagFlow"
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
@@ -2432,7 +2518,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		chmod +x /home/$USER/stop/*.sh
 		echo "langflow_installed.txt" > /home/$USER/langflow_installed.txt
 		sleep 2
-		LINE="  26. Langflow installed"
+		LINE="  32. Langflow installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -2481,7 +2567,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		echo "opennotebook_installed.txt" > /home/$USER/opennotebook_installed.txt
 		cd /home/$USER
 		sleep 3
-		LINE="  27. OpenNotebook installed"
+		LINE="  33. OpenNotebook installed"
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
@@ -2538,7 +2624,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
 	   
-	   LINE="  28. Portainer installed"
+	   LINE="  34. Portainer installed"
 	   if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	   fi
@@ -2601,7 +2687,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# https://connivently-unhusked-carri.ngrok-free.dev
 		echo "ngrok_installed.txt" > /home/$USER/ngrok_installed.txt 
 		sleep 2
-		LINE="  29. ngrok installed"
+		LINE="  35. ngrok installed"
 	    if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	    fi
@@ -3187,73 +3273,6 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 fi
 
 
-##############
-# Install mineru
-# source /home/$USER/mineru/bin/activate
-##############
 
-if [ ! -f /home/$USER/mineru_installed.txt ]; then
-    cd /home/$USER
-	echo  "    "
-	echo  "    "
-	echo "Creating python virtual env for mineru.."
-    sleep 3
-    echo " "
-    echo " "
-    echo "------------"        
-   # Clear earlier directory, if it exists
-   # -m venv: Run the built-in venv module to create isolated environments.
-   # --clear: Delete the contents of the target directory if it already exists
-   # /home/$USER/mineru: The destination path so the environment will be located in
-   #                     a folder named mineru inside your home directory.
-	python3 -m venv --clear /home/$USER/mineru
-	source /home/$USER/mineru/bin/activate
-	# 1.6 Essentials software
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install -U wheel
-	pip install ipython
-	pip install notebook
-	pip install --upgrade pip
-	pip install uv
-	uv pip install -U "mineru[all]"
-	pip install --upgrade setuptools
-	echo "mineru_installed.txt" > /home/$USER/mineru_installed.txt
-	# Required for spyder:
-	# Huggingface and  related
-	echo "####"
-	sudo apt install pyqt5-dev-tools -y
-	sudo apt install tesseract-ocr-all -y
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	echo "####"
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	mkdir -p /home/$USER/Documents/samples/in
-	mkdir -p /home/$USER/Documents/samples/out
-	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-	cd /home/$USER
-	echo "####"
-	# Create script to activate 'mineru' env
-	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_mineru.sh
-	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_mineru.sh
-	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_mineru.sh
-	echo "echo 'source /home/$USER/mineru/bin/activate' "                       | tee -a  /home/$USER/activate_mineru.sh
-	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_mineru.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_mineru.sh
-	echo "source /home/$USER/mineru/bin/activate"                                | tee -a  /home/$USER/activate_mineru.sh
-	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_mineru.sh
-	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_mineru.sh
-	LINE="  python virtual env created at '~/mineru'"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
-	sudo systemctl reboot -i
-else
-   echo "  "
-fi   
 
 
