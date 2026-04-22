@@ -83,7 +83,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	#sudo apt install retext  -y
     # pipx to install poetry
     sudo apt install zip p7zip-full unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
-    sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
+    sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq -y
     sudo apt-get install python3-tk -y
     echo $password | sudo -S apt-get install libssl-dev libcurl4-openssl-dev -y
 	echo "  "
@@ -110,7 +110,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 
     # Now install Node.js and npm
     #sudo apt install nodejs -y
-	nvm install 22
+	nvm install 22  --silent
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
@@ -139,7 +139,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "   "
 	echo "Will install homebrew"
 	sudo apt update
-    sudo apt install build-essential procps curl file git
+    sudo apt install build-essential procps curl file git -y
 	#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/$USER/.bashrc
