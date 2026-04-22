@@ -1954,7 +1954,7 @@ if [ ! -f /home/$USER/mineru_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	sudo systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
    echo "  "
 fi   
@@ -2215,7 +2215,7 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 			bash /home/$USER/stop_ragflow.sh
 			sleep 2
 			echo "1.0 Moving earlier ragflow folder"
-			sudo rm -rf /home/$USER/ragflow.old
+			echo $password | sudo -S rm -rf /home/$USER/ragflow.old
 			mv /home/$USER/ragflow  /home/$USER/ragflow.old
 			echo "2.0 Cloning git repo"
 			git clone https://github.com/infiniflow/ragflow.git
@@ -2415,7 +2415,7 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
 	    chmod +x /home/$USER/*.sh
 	    chmod +x /home/$USER/*.sh
 	    # Installation script
-	    sudo sysctl -w vm.max_map_count=262144
+	    echo $password | sudo -S sysctl -w vm.max_map_count=262144
 	    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 	    git clone https://github.com/infiniflow/ragflow.git
 	    cd ragflow/docker
@@ -2522,7 +2522,7 @@ if [ ! -f /home/$USER/langflow_installed.txt ]; then
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
-		sudo systemctl reboot -i
+		echo $password | sudo -S systemctl reboot -i
 	else
 		echo "langflow NOT installed"
 	fi
@@ -2571,7 +2571,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 		  if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		  fi
-		sudo systemctl reboot -i
+		echo $password | sudo -S systemctl reboot -i
 	else
 	    echo "OpenNotebook not installed"
 	fi
@@ -2628,7 +2628,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	   fi
-	   sudo systemctl reboot -i
+	   echo $password | sudo -S systemctl reboot -i
 	else
 	   echo "Portainer not installed"
 	fi 
@@ -2659,6 +2659,7 @@ if [ ! -f /home/$USER/ngrok_installed.txt ]; then
 		# Install ngrok
 		# https://dashboard.ngrok.com/get-started/setup/linux
 		echo "Installing ngrok..."
+		echo $password | sudo -S apt update
 		sleep 3
 		curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 		  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
@@ -2747,7 +2748,7 @@ fi
         echo "cd /home/$USER/dify/docker"                         >> /home/$USER/stop_dify.sh
         echo "docker compose stop"                                >> /home/$USER/stop_dify.sh
         sleep 4
-		sudo systemctl reboot -i
+		echo $password | sudo -S systemctl reboot -i
     else
         echo "dify not installed"
     fi
@@ -2773,7 +2774,7 @@ read input
 #input=${input:-Y}
 if [[ $input == "Y" || $input == "y" ]]; then
     cd /home/$USER/
-    sudo apt-get install gnupg curl
+    echo $password | sudo -S apt-get install gnupg curl
     curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
             sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
             --dearmor
