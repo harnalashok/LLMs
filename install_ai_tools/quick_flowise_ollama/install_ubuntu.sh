@@ -251,8 +251,8 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo $password | sudo -S apt-get update
 	echo $password | sudo -S apt-get -y install cuda-toolkit-13-0
 	# NVIDIA Driver Instructions
-	sudo apt-get install -y nvidia-open
-	sudo apt autoremove -y
+	echo $password | sudo -S apt-get install -y nvidia-open
+	echo $password | sudo -S apt autoremove -y
 	#nvidia-settings
 	sleep 8
 	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
