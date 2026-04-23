@@ -114,6 +114,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
+	password="ashok"
 	echo $password | sudo -S apt install npm
 	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
@@ -155,6 +156,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "  "
 	echo "------"
 	echo "Install httpd server"
+	password="ashok"
 	echo $password | sudo -S apt-get install apache2 -y
 	cd /home/$USER
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
@@ -211,6 +213,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+	password="ashok"
     echo $password | sudo -S systemctl reboot -i
 else 
     LINE="  1. Ubuntu updated"
@@ -239,6 +242,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo "cuda-toolkit does not change GPU drivers."
 	echo "But higher versions of cuda-toolkit may have installation problems"
 	# Remove old gpg key
+	password="ashok"
 	echo $password | sudo -S apt-key del 7fa2af80
 	# Now follow the instructions as on this page:
 	#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
@@ -307,7 +311,8 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-    sudo systemctl reboot -i
+	password="ashok"
+    echo $password | sudo -S systemctl reboot -i
 else
    LINE="  3. Docker installed"
 	if ! grep -qF "$LINE" "$FILE"; then
@@ -323,6 +328,7 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
+	password="ashok"
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
 	echo "  "
@@ -352,15 +358,15 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     # 2.0 Install the NVIDIA Container Toolkit packages:
     #
-    sudo apt-get install -y nvidia-container-toolkit
+    echo $password | sudo -S   apt-get install -y nvidia-container-toolkit
     #
     # 3.0  Configure the container runtime by using the nvidia-ctk command:
     #
-    sudo nvidia-ctk runtime configure --runtime=docker
+    echo $password | sudo -S   nvidia-ctk runtime configure --runtime=docker
     #
     # 4.0 Restart the Docker daemon:
     #
-    sudo systemctl restart docker
+    echo $password | sudo -S   systemctl restart docker
     #
     # Store docker help files
     mkdir /home/$USER/Documents/dockers
@@ -790,7 +796,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	# Create the repository configuration file:
 	sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 	# Install for both desktop and web modes:
-	sudo apt install pgadmin4 -y
+	password="ashok"
+	echo $password | sudo -S  apt install pgadmin4 -y
     #
 	# Download RAG data files
 	mkdir -p /home/$USER/Documents/data
@@ -870,6 +877,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	# Access at localhost:5678
 	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
 	# Access at localhost:5678
+	password="ashok"
 	echo $password | sudo -S  apt-get update
 	sudo  docker run -it -d --rm \
 				--name n8n \
@@ -1000,13 +1008,15 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    fi	   
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
+   password="ashok"
    echo $password | sudo -S docker build --no-cache -t flowise .
    
    # The '--network host' option removes network isolation between the container and
    #   the Docker host machine, meaning the container directly shares the host's networking stack
    # The container operates as if it were a process running directly on the host machine,
    #   using the host's IP address and network interfaces.  
-   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+   password="ashok"
+   echo $password | sudo -S  docker run -d --name flowise -p 3000:3000 --network host flowise
    #      docker run -d --name flowise -p 3000:3000 --network host flowise
    #cd /home/$USER/Flowise/docker
    #cp .env.example .env
@@ -1135,6 +1145,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  if ! grep -qF "$LINE" "$FILE"; then
 	     echo "$LINE" >> "$FILE"
 	  fi
+	  password="ashok"
 	  echo $password | sudo -S systemctl reboot -i
 else
       echo " "
@@ -1185,167 +1196,6 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 else
     echo "  "
 fi
-
-##################3
-# crawl4AI
-# https://github.com/unclecode/crawl4ai
-###################
-
-
-if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
-   # Clear earlier directory, if it exists
-   # -m venv: Run the built-in venv module to create isolated environments.
-   # --clear: Delete the contents of the target directory if it already exists
-   # /home/$USER/crawl4ai: The destination path so the environment will be located in
-   #                     a folder named venv inside your home directory.
-	python3 -m venv --clear /home/$USER/crawl4ai
-	source /home/$USER/crawl4ai/bin/activate
-	# 1.6 Essentials software
-	pip install --upgrade pip
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install -U wheel
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install --upgrade setuptools
-	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
-	# Required for spyder:
-	echo $password | sudo -S apt install pyqt5-dev-tools -y
-	sudo apt install tesseract-ocr-all -y
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	# To connect to postgresql
-	pip install psycopg2
-	echo "####"
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	sleep 2
-	# Install the crew4AI
-    pip install -U crawl4ai
-	sleep 2
-	playwright install
-	sleep 2
-	python -m playwright install --with-deps chromium
-	sleep 3
-	crawl4ai-setup
-	crawl4ai-doctor
-	# Create script to activate 'crawl4ai' env
-	echo '#!/bin/bash'                                                            | tee   /home/$USER/activate_crawl4ai.sh
-	echo "echo 'Execute this file as: source activate_crawl4ai.sh' "              | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo 'To use or install any python package, first activate python crawl4ai as:' "        | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo 'source /home/$USER/crawl4ai/bin/activate' "                       | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo '(Note the change in prompt after activating)' "                   | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "            | tee -a  /home/$USER/activate_crawl4ai.sh
-	echo "source /home/$USER/crawl4ai/bin/activate"                               | tee -a  /home/$USER/activate_crawl4ai.sh
-	#
-	# Pull and run the latest release
-    docker pull unclecode/crawl4ai:latest
-    docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
-	docker update --restart=no $(docker ps -a -q)
-	echo '#!/bin/bash'                                         >  /home/$USER/start_crawl4ai.sh
-    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
-    echo "cd ~/"                                               >> /home/$USER/start_crawl4ai.sh
-    echo "echo 'crawl4ai port 11235 onstarting'"                 >> /home/$USER/start_crawl4ai.sh
-    echo "echo 'Access crawl4ai as: http://localhost:11235'"     >> /home/$USER/start_crawl4ai.sh
-    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
-    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
-    echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
-    echo "docker start crawl4ai"                               >> /home/$USER/start_crawl4ai.sh
-    echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
-    echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
-    chmod +x *.sh
-	sleep 2
-	LINE="  14. crawl4ai installed"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
-	echo $password | sudo -S systemctl reboot -i
-else
-    echo "   "
-fi
-
-
-##############
-# Create python virtual env
-# source /home/$USER/venv/bin/activate
-##############
-
-if [ ! -f /home/$USER/venv_installed.txt ]; then
-    cd /home/$USER
-	echo  "    "
-	echo  "    "
-	echo "Creating python virtual env.."
-    sleep 3
-    echo " "
-    echo " "
-    echo "------------"        
-   # Clear earlier directory, if it exists
-   # -m venv: Run the built-in venv module to create isolated environments.
-   # --clear: Delete the contents of the target directory if it already exists
-   # /home/$USER/venv: The destination path so the environment will be located in
-   #                   a folder named venv inside your home directory.
-	python3 -m venv --clear /home/$USER/venv
-	source /home/$USER/venv/bin/activate
-	# 1.6 Essentials software
-	pip install --upgrade pip
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install -U wheel
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install --upgrade setuptools
-	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-	# Required for spyder:
-	# Huggingface and  related
-	#pip install huggingface_hub
-	# cu124: is as per cuda version. Get cuda version from nvidia-smi
-	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-	#pip install huggingface_hub
-	echo "####"
-	echo $password | sudo -S apt install pyqt5-dev-tools -y
-	sudo apt install tesseract-ocr-all -y
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	# To connect to postgresql
-	pip install psycopg2
-	echo "####"
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	mkdir -p /home/$USER/Documents/samples/in
-	mkdir -p /home/$USER/Documents/samples/out
-	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-	cd /home/$USER
-	echo "####"
-	# Create script to activate 'venv' env
-	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-	# Download script to create python venv
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	chmod +x /home/$USER/*.sh
-	sleep 2
-  
-	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-	LINE="  15. python virtual env created at '~/venv'"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
-	echo $password | sudo -S systemctl reboot -i
-else
-   echo "  "
-fi   
 
 
 ###########################
@@ -1633,6 +1483,89 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 	       echo " "
 	fi
 fi
+
+
+
+##############
+# Create python virtual env
+# source /home/$USER/venv/bin/activate
+##############
+
+if [ ! -f /home/$USER/venv_installed.txt ]; then
+    cd /home/$USER
+	echo  "    "
+	echo  "    "
+	echo "Creating python virtual env.."
+    sleep 3
+    echo " "
+    echo " "
+    echo "------------"        
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/venv: The destination path so the environment will be located in
+   #                   a folder named venv inside your home directory.
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install --upgrade setuptools
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	echo "####"
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	# Download script to create python venv
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x /home/$USER/*.sh
+	sleep 2
+  
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	LINE="  15. python virtual env created at '~/venv'"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	echo $password | sudo -S systemctl reboot -i
+else
+   echo "  "
+fi   
+
+
 
 ###################
 # llama.cpp install--I
@@ -1960,6 +1893,64 @@ if [ ! -f /home/$USER/mineru_installed.txt ]; then
 else
    echo "  "
 fi   
+
+
+
+
+#####################3
+# portrainer docker
+######################
+
+cd /home/$USER
+if [ ! -f /home/$USER/portainer_installed.txt ]; then
+	echo "------------"        
+	echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
+	echo "Press ENTER to skip"
+	read input
+	#input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+	   # Installing portrainer
+	   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
+	   # Script to start portainer container
+	   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
+	   echo " "                                                       >> /home/$USER/start/start_portainer.sh
+	   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
+	   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
+	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
+	   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
+	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
+	   #
+	   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
+	   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
+	   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
+	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
+	   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
+	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
+	   #
+	   cd /home/$USER
+	   docker volume create portainer_data
+	   # This is one long line command
+	   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
+	   # Install portainer community edition (ce)
+	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
+	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
+	   
+	   LINE="  34. Portainer installed"
+	   if ! grep -qF "$LINE" "$FILE"; then
+		 echo "$LINE" >> "$FILE"
+	   fi
+	   echo $password | sudo -S systemctl reboot -i
+	else
+	   echo "Portainer not installed"
+	fi 
+fi
+   
+
 
 
 
@@ -2585,59 +2576,6 @@ fi
 
 
 
-#####################3
-# portrainer docker
-######################
-
-cd /home/$USER
-if [ ! -f /home/$USER/portainer_installed.txt ]; then
-	echo "------------"        
-	echo "Shall I install portainer docker? [Y,n]"    # Else docker chromadb may be installed
-	echo "Press ENTER to skip"
-	read input
-	#input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-	   # Installing portrainer
-	   echo "Installing portainer docker "                             | tee -a /home/$USER/info.log
-	   # Script to start portainer container
-	   echo '#!/bin/bash'                                              > /home/$USER/start/start_portainer.sh
-	   echo " "                                                       >> /home/$USER/start/start_portainer.sh
-	   echo "cd /home/$USER"                                          >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#========'"                                        >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#Access portainer at:'"                            >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#https://127.0.0.1:9443'"                          >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#User: admin; password: foreschoolmgt'"            >> /home/$USER/start/start_portainer.sh
-	   echo "echo '#=========='"                                      >> /home/$USER/start/start_portainer.sh
-	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/start/start_portainer.sh
-	   echo "docker start portainer"                                  >> /home/$USER/start/start_portainer.sh
-	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/start/start_portainer.sh
-	   #
-	   echo '#!/bin/bash'                                              > /home/$USER/stop/stop_portainer.sh
-	   echo " "                                                       >> /home/$USER/stop/stop_portainer.sh
-	   echo "cd /home/$USER"                                          >> /home/$USER/stop/stop_portainer.sh
-	   #echo "cd /home/$USER/portainer/"                               >> /home/$USER/stop/stop_portainer.sh
-	   echo "docker stop portainer"                                   >> /home/$USER/stop/stop_portainer.sh
-	   echo "netstat -aunt | grep 9443"                               >> /home/$USER/stop/stop_portainer.sh
-	   #
-	   cd /home/$USER
-	   docker volume create portainer_data
-	   # This is one long line command
-	   # To change port 8000 to a different value, see: https://github.com/portainer/portainer-docs/issues/91#issuecomment-1184225862
-	   # Install portainer community edition (ce)
-	   #docker run -d -p 8888:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:2.21.5
-	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
-	   
-	   LINE="  34. Portainer installed"
-	   if ! grep -qF "$LINE" "$FILE"; then
-		 echo "$LINE" >> "$FILE"
-	   fi
-	   echo $password | sudo -S systemctl reboot -i
-	else
-	   echo "Portainer not installed"
-	fi 
-fi
-   
 
 
 ##########################
@@ -3277,6 +3215,87 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	fi   
 fi
 
+
+##################3
+# crawl4AI
+# https://github.com/unclecode/crawl4ai
+###################
+
+
+if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
+   # Clear earlier directory, if it exists
+   # -m venv: Run the built-in venv module to create isolated environments.
+   # --clear: Delete the contents of the target directory if it already exists
+   # /home/$USER/crawl4ai: The destination path so the environment will be located in
+   #                     a folder named venv inside your home directory.
+	python3 -m venv --clear /home/$USER/crawl4ai
+	source /home/$USER/crawl4ai/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install -U wheel
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install --upgrade setuptools
+	echo "webscrapper_installed.txt" > /home/$USER/webscrapper_installed.txt
+	# Required for spyder:
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
+	sudo apt install tesseract-ocr-all -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	sleep 2
+	# Install the crew4AI
+    pip install -U crawl4ai
+	sleep 2
+	playwright install
+	sleep 2
+	python -m playwright install --with-deps chromium
+	sleep 3
+	crawl4ai-setup
+	crawl4ai-doctor
+	# Create script to activate 'crawl4ai' env
+	echo '#!/bin/bash'                                                            | tee   /home/$USER/activate_crawl4ai.sh
+	echo "echo 'Execute this file as: source activate_crawl4ai.sh' "              | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'To use or install any python package, first activate python crawl4ai as:' "        | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo 'source /home/$USER/crawl4ai/bin/activate' "                       | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(Note the change in prompt after activating)' "                   | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "            | tee -a  /home/$USER/activate_crawl4ai.sh
+	echo "source /home/$USER/crawl4ai/bin/activate"                               | tee -a  /home/$USER/activate_crawl4ai.sh
+	#
+	# Pull and run the latest release
+    docker pull unclecode/crawl4ai:latest
+    docker run -d -p 11235:11235 --name crawl4ai --shm-size=1g unclecode/crawl4ai:latest
+	docker update --restart=no $(docker ps -a -q)
+	echo '#!/bin/bash'                                         >  /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd ~/"                                               >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'crawl4ai port 11235 onstarting'"                 >> /home/$USER/start_crawl4ai.sh
+    echo "echo 'Access crawl4ai as: http://localhost:11235'"     >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo " "                                                   >> /home/$USER/start_crawl4ai.sh
+    echo "cd /home/$USER"                                      >> /home/$USER/start_crawl4ai.sh
+    echo "docker start crawl4ai"                               >> /home/$USER/start_crawl4ai.sh
+    echo "sleep 3"                                             >> /home/$USER/start_crawl4ai.sh
+    echo "netstat -aunt | grep 11235"                           >> /home/$USER/start_crawl4ai.sh
+    chmod +x *.sh
+	sleep 2
+	LINE="  14. crawl4ai installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	echo $password | sudo -S systemctl reboot -i
+else
+    echo "   "
+fi
 
 
 
