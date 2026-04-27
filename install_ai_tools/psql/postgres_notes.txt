@@ -9,6 +9,19 @@ Concepts
        for regular users or # for superusers (e.g., mydatabase=> or postgres=#). 
        List all databases with \l command.
 
+		2. Peer authentication in PostgreSQL on Ubuntu is a security method that relies on your
+		   Linux system's username to log you into the database. Instead of asking for a database-specific
+           password, the PostgreSQL server asks the operating system's kernel for the name of the user currently
+           running the client program (like psql). If that Linux username matches a PostgreSQL role name, 
+           you are granted access automatically without asking for password. 
+		   Key Characteristics
+    	   Local Only: It only works for "local" connections made via Unix domain sockets (the default when 
+                        you run psql on the same machine as the server).
+           Username Match: By default, it requires your Ubuntu username to be exactly the same as your
+                           PostgreSQL username.
+            Password-Free: Since the kernel verifies your identity, you don't need to enter a separate password to connect.
+
+
        2. System users and postgres users:
        The root user is an account on the system independent from Postgres. There is 
        only ONE root user. A superuser is an account in Postgres with access to 
