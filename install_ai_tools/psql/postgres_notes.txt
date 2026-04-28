@@ -3,6 +3,10 @@
 
 Concepts
 =========
+      0. Quickly create ubuntu user:
+	       sudo adduser username       -- This will also create a home folder
+		   sudo adduser -m usernam     -- No questions asked
+
        1. psql Prompt:
        A standard prompt is displayed when psql is ready to accept a new SQL command
        or meta-command. By default, it often shows the database name followed by => 
@@ -22,7 +26,7 @@ Concepts
             Password-Free: Since the kernel verifies your identity, you don't need to enter a separate password to connect.
 
 
-       2. System users and postgres users:
+       3. System users and postgres users:
        The root user is an account on the system independent from Postgres. There is 
        only ONE root user. A superuser is an account in Postgres with access to 
        everything. There may be MANY superusers. System accounts and Postgres 
@@ -44,27 +48,35 @@ Concepts
 
         To list all 'superusers', issue command: \du
 
-        3. Postgres has, by default, a database 'postgres' and a superuser 'postgres'.
-	A superuser in PostgreSQL is a user who bypasses all permission checks. 
-	This user can do anything. The prompt:
+        4. Postgres has, by default, a database 'postgres' and a superuser 'postgres'.
+	      A superuser in PostgreSQL is a user who bypasses all permission checks. 
+	      This user can do anything. The prompt:
 	
 	               postgres=# 
 	
 	indicates that the database is postgres and the '#' symbol indicates that the logged
 	in role is the superuser, 'postgres'.
-	You can change the logged in role with the command: 'Set Role muyser ;' and, the prompt
+
+	4a. Even if System user does NOT exist:
+	    You can change the logged in role with the command: 'Set Role muyser ;' and, the prompt
         will change. 'Set Role' DOES NOT change connected database:
 	
 		postgres=# set role myuser ;
 		postgres=> create database xyz ;              -- Role changed; prompt changes. Database still 'postgres'
 		ERROR:  permission denied to create database  --'myuser' be first given privilegs by superuser
+	To know who is the current user, check, as:
+	    postgres=> select current_user ;              -- Current role
+	    postgres=> select session_user ;		      -- The suer with which you logged in
+	Difference between roles:
+        Session User: The role that authenticated the connection.
+        Current User: The role whose permissions are currently being applied, which can be modified by SET ROL	
                                                               	
 	Set the role back to superuser, and as superuser, create a database and grant ownership to
 	myuser:
 	
 		postgres=> set role postgres ;
 
-	4. To create a database and a user, first loginto 'postgres' system user (and NOT postgres user) postgres :
+	5. To create a database and a user, first loginto 'postgres' system user (and NOT postgres user) postgres :
 
 		ashok@ashok:~$ sudo su postgres
            
@@ -77,25 +89,26 @@ Concepts
 
 		postgres=# 
 	
-	5. Create a linux system user with HOME folder, as:
+	6. Create a linux system user with HOME folder, as:
 
               sudo useradd -m joker
-	      sudo passwd joker
+	          sudo passwd joker
 
-       6. Then one can switch user, as follows. Then issue two commands
-          cd followd by pwd:
+    7. Then one can switch user, as follows. Then issue two commands
+        cd followd by pwd:
 
             sudo su joker
             $cd
             $pwd
 
-        5. Once a Linux system user is created, loginto postgres system account 
-           and create a user and create a database, as:
+    5. Once a Linux system user is created, loginto postgres system account 
+       and create a user and create a database, as:
 
               Create system user and password==>As postgres, create postgresql user and password
                  ==>create a database==>grant all privilegs over database
                      ==>Connect to database==>Grant usage over public schema==:Grant create over public schema
                       ==>Allow vector database extension to be created
+		
 		postgres=# create user joker with password 'joker' ;
 		postgres=# CREATE DATABASE joker ;
                 # Hiterto, database, joker and user joker are unrelated.
@@ -111,6 +124,12 @@ Concepts
                 joker=# GRANT CREATE ON SCHEMA public TO joker;
                 joker=# GRANT all ON SCHEMA public TO joker;         /*This is better than the above two grant statments*/
                 joker=# CREATE EXTENSION vector;
+
+        In PostgreSQL, granting "all privileges" on a database does not automatically grant permissions on the schemas or tables within it because Postgres uses a strict, non-cascading security hierarchy. 
+        Think of it like a secured building:
+              Database Privileges are your key card to the front door (the building itself). You can enter, but you can't walk into any individual office.
+              Schema Privileges are your key to the office suites inside. Without these, you might be in the building, but you're stuck in the hallway.
+              Table/Object Privileges are the keys to specific filing cabinets inside the office. 				
         
 	6. A postgres user, say, 'joker' cannot log into postgres with psql unless, joker, is also a system user.
 	   Thus, this command fails:
