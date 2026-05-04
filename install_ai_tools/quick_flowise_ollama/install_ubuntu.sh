@@ -1631,6 +1631,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	mkdir /home/$USER/Documents/vscode
 	cd /home/$USER/Documents/vscode
 	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
+	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/vscode_ollamaCoder.pdf?raw=true
 	echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	#    
 	sleep 5
