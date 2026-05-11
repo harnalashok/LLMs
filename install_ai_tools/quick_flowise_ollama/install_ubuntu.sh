@@ -2211,6 +2211,7 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 			bash /home/$USER/stop_ragflow.sh
 			sleep 2
 			echo "1.0 Moving earlier ragflow folder"
+			password="ashok"
 			echo $password | sudo -S rm -rf /home/$USER/ragflow.old
 			mv /home/$USER/ragflow  /home/$USER/ragflow.old
 			echo "2.0 Cloning git repo"
