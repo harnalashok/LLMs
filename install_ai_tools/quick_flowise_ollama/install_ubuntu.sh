@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 24th March, 2026
+# Last amended: 11th May, 2026
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -61,6 +61,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "Updating Ubuntu.."
     sleep 3
 	# Download test file
+	# Tests different software installation
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test.sh
 	
 	nvidia_driver_version=`modinfo nvidia | grep ^version`
@@ -80,12 +81,16 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo 'export HISTTIMEFORMAT="%F %T "'  >> /home/$USER/.bashrc
 	# For reading markdown documents
 	# Instead use marktext (see antigravity installation below)
-	#sudo apt install retext  -y
-    # pipx to install poetry
+	# pipx to install poetry
     sudo apt install zip p7zip-full unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
-    sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq -y
+    sudo apt install python3-pip python3-dev python3-venv gcc g++ make jq -y
     sudo apt-get install python3-tk -y
-    echo $password | sudo -S apt-get install libssl-dev libcurl4-openssl-dev -y
+    # I(nstall filezilla for ssh access to bridged network 
+	sudo apt install filezilla -y
+	# Install pandoc to convert .md files to .txt files
+	sudo apt install pandoc  -y
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
+	echo $password | sudo -S apt-get install libssl-dev libcurl4-openssl-dev -y
 	echo "  "
 	echo "  "
 	echo "===="
@@ -97,25 +102,21 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt update
     # Install curl if you don't have it
     sudo apt install curl -y
-	# I(nstall filezilla for ssh access to bridged network 
-	sudo apt install filezilla -y
-	# Install pandoc to convert .md files to .txt files
-	sudo apt install pandoc  -y
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
-    # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
+	# Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
     # Replace '22.x' with the desired major version if needed
     #curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 	# Install nvm
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-
+	# Refer: https://github.com/nvm-sh/nvm#installing-and-updating
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+	# Activate nvm
+	source /home/$USER/.bashrc
     # Now install Node.js and npm
-    #sudo apt install nodejs -y
-	nvm install 22  --silent
+    nvm install --lts
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
-	password="ashok"
-	echo $password | sudo -S apt install npm
+	#password="ashok"
+	#echo $password | sudo -S apt install npm -y
 	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
     wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
@@ -358,7 +359,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     #
     # 2.0 Install the NVIDIA Container Toolkit packages:
     #
-    echo $password | sudo -S   apt-get install -y nvidia-container-toolkit
+    echo $password | sudo -S   apt-get install nvidia-container-toolkit -y
     #
     # 3.0  Configure the container runtime by using the nvidia-ctk command:
     #
