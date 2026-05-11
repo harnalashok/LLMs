@@ -119,10 +119,10 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	#echo $password | sudo -S apt install npm -y
 	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
-    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
-    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
+    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
+    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
+    #perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
+    #perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
     chmod +x /home/$USER/*.sh
     echo " "
     echo "Ubuntu upgraded ......"               

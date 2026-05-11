@@ -107,10 +107,10 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
     echo "Ubuntu is updated" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
-    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
-    perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
+    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
+    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
+    #perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
+    #perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
     chmod +x /home/$USER/*.sh
     echo " "
     echo "Ubuntu upgraded ......"  
@@ -127,14 +127,17 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt install curl -y
     # Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
     # Replace '22.x' with the desired major version if needed
-    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+   	# Install nvm
+	# Refer: https://github.com/nvm-sh/nvm#installing-and-updating
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+	# Activate nvm
+	source /home/$USER/.bashrc
     # Now install Node.js and npm
-    sudo apt install nodejs -y
+    nvm install --lts
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
 	echo 'export HISTTIMEFORMAT="%F %T "'  >> /home/$USER/.bashrc
-	sudo apt install npm
 	echo "Install httpd server"
 	sudo apt-get install apache2 -y
 	cd /home/$USER
