@@ -101,9 +101,9 @@ CREATE TABLE ravi.public.spj (
   INSERT INTO spj VALUES('S5', 'P5', 'J4', 400) ;
   INSERT INTO spj VALUES('S5', 'P6', 'J4', 500) ;
 
-
-#select * from s ;
-#select * from p ;
-#select * from j ;
-#select * from spj ;
-
+/*
+select * from s ;
+select * from p ;
+select * from j ;
+select * from spj ;
+*/
