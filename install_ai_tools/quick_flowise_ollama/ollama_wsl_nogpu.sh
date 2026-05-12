@@ -354,65 +354,65 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
     echo "Creating python virtual environment"
     echo "------------"        
 	sleep 3
-        # Clear earlier directory, if it exists
-        python3 -m venv --clear /home/$USER/venv
-        source /home/$USER/venv/bin/activate
-        # 1.6 Essentials software
-		pip install --upgrade pip
-        pip install spyder numpy scipy pandas matplotlib sympy cython
-        pip install jupyterlab
-        pip install ipython
-        pip install notebook
-        pip install streamlit
-		# To connect to postgresql
-		pip install psycopg2
-        echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-        # Required for spyder:
-		echo " "
-		echo " "
-		echo -en "\007"
-        sudo apt install pyqt5-dev-tools -y
-		echo "####"
-		echo "Install pdfminer to extract text from pdf"
-		# Ref: https://github.com/pdfminer/pdfminer.six
-		pip install pdfminer.six
-		echo "####"
-		sudo apt install pyqt5-dev-tools -y
-		echo "Install pymupdf4llm to extract text/json"
-		# Ref: https://github.com/pymupdf/pymupdf4llm
-		pip install pymupdf4llm pymupdf4llm[layout]
-		mkdir -p /home/$USER/Documents/samples/in
-		mkdir -p /home/$USER/Documents/samples/out
-		cd /home/$USER/Documents/samples
-        wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-		cd /home/$USER
-		echo "####"
-        # Download file that creates a fresh python enviroemnet
-        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-		chmod +x *.sh   
-        # Huggingface and  related
-        #pip install huggingface_hub
-        # cu124: is as per cuda version. Get cuda version from nvidia-smi
-        #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-        #pip install huggingface_hub
-        # Create script to activate 'venv' env
-        echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-        echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-        echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-        echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-        echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-        echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-        echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-        chmod +x /home/$USER/*.sh
-        sleep 2
-      
-        cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-        cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-		if [ "$WSLSYSTEM" = "true" ] ; then
-             wsl.exe --shutdown
-        else
-            reboot
-        fi  
+	# Clear earlier directory, if it exists
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install streamlit
+	# To connect to postgresql
+	pip install psycopg2
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	echo " "
+	echo " "
+	echo -en "\007"
+	sudo apt install pyqt5-dev-tools -y
+	echo "####"
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Download file that creates a fresh python enviroemnet
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x *.sh   
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	if [ "$WSLSYSTEM" = "true" ] ; then
+			wsl.exe --shutdown
+	else
+		reboot
+	fi  
 fi   
 
 
