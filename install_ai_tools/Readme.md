@@ -6,7 +6,7 @@ To begin installing all packages, execute the following five commands in *Ubuntu
 Press <b>F2</b> at boot time to change bios settings if you have a problem with UEFI (secure boot).  Also use <b>Audit mode</b>             
 We assume Ubuntu/WSL username as 'ashok'. Copy and paste. A list of what is installed from which script is [here](https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/whatiswhere.sh).      
         
-In CR1, press keys: Windows+R and enter *smc -stop* to stop antivirus system.
+In CR1, press keys: *Windows+R* to open command prompt and enter *smc -stop* to stop antivirus system.
 
 
 ```
