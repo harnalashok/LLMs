@@ -1182,6 +1182,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull qwen3.5:0.8b
 	docker exec -it ollama ollama pull openhermes
 	docker exec -it ollama ollama pull openchat:latest
+	docker exec -it ollama ollama pull NeuralNet/openchat-3.6
 	echo " "
 	echo " "
 	#ollama list
