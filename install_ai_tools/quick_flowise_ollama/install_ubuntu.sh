@@ -2032,8 +2032,9 @@ fi
 
 
 cd /home/$USER
-echo "You can stop here"
+echo "You can stop here. Click ctrl+c to terminate"
 read response
+sleep 20
 
 
 
