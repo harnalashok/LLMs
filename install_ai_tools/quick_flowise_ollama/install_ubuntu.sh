@@ -1175,6 +1175,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull llama3.2:1b
 	docker exec -it ollama ollama pull deepseek-r1:1.5b
 	docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
+	docker exec -it ollama ollama pull qwen3-embedding:0.6b
 	docker exec -it ollama ollama pull gemma3:270m
 	docker exec -it ollama ollama pull qwen3.5:latest
 	docker exec -it ollama ollama pull qwen3:latest
