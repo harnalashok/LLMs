@@ -2031,9 +2031,13 @@ else
 fi
 
 
+echo "    "
+echo "     "
+echo "=========="
 cd /home/$USER
 echo "You can stop here. Click ctrl+c to terminate"
 read response
+echo "==========="
 sleep 20
 
 
