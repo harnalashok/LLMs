@@ -2031,6 +2031,14 @@ else
 fi
 
 
+cd /home/$USER
+echo "You can stop here"
+read response
+
+
+
+
+
 
 #####################
 ## LocalAI install
