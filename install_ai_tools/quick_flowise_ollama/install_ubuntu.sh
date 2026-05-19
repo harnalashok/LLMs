@@ -60,6 +60,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "------------"   
 	echo "Updating Ubuntu.."
     sleep 3
+	# Folders for start/stop scripts
+    mkdir /home/$USER/start
+    mkdir /home/$USER/stop
 	# Download test file
 	# Tests different software installation
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test.sh
@@ -134,9 +137,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "docker stop \$(docker ps -q)"                         | tee -a /home/$USER/stop_alldockers.sh
     echo "docker ps"                                           | tee -a /home/$USER/stop_alldockers.sh
 	now_nvidia_driver_version=`modinfo nvidia | grep ^version`
-	# Folders for start/stop scripts
-    mkdir /home/$USER/start
-    mkdir /home/$USER/stop
 	echo "  "
 	echo "   "
 	echo "Will install homebrew"
@@ -770,11 +770,6 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sleep 3
 	echo $password | sudo -S  apt-get update
 	curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-	cat << EOF > user.yaml
-	# Extra config to override default milvus.yaml
-	proxy:
-  		healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
-	EOF
 	bash standalone_embed.sh start
 	echo " "
 	echo "Milvus vector database installed"                      
@@ -1253,7 +1248,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
-		LINE="  16. anaconda installed"
+		LINE="  14. anaconda installed"
 		if ! grep -qF "$LINE" "$FILE"; then
 	    	echo "$LINE" >> "$FILE"
 		fi
@@ -1365,7 +1360,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  18. langchain and langgraph virtual env, 'langchain', created."
+	LINE="  15. langchain and langgraph virtual env, 'langchain', created."
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1420,7 +1415,7 @@ if [  -f /home/$USER/anaconda_installed.txt ]; then
 			echo "antigravity"                      				   | tee -a /home/$USER/start_antigravity.sh
 			chmod +x *.sh
 			sleep 5
-			LINE="  19. Google antigravity installed."
+			LINE="  16. Google antigravity installed."
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
@@ -1502,7 +1497,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
   
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-	LINE="  15. python virtual env created at '~/venv'"
+	LINE="  17. python virtual env created at '~/venv'"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -1538,7 +1533,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
 	  sleep 3
-	  LINE="  20. llamacpp installed"
+	  LINE="  18. llamacpp installed"
 	  if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	  fi
@@ -1589,7 +1584,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
     chmod +x /home/$USER/start/*.sh
     chmod +x /home/$USER/stop/*.sh
 	sleep 5
-	LINE="  21. VSCode installed"
+	LINE="  19. VSCode installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1642,7 +1637,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
 	    echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
 		
-		LINE="  22. RAG and RAG performance Eval system installed"
+		LINE="  20. RAG and RAG performance Eval system installed"
 		if ! grep -qF "$LINE" "$FILE"; then
 			echo "$LINE" >> "$FILE"
 		fi
@@ -1682,7 +1677,7 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	mv /home/$USER/Documents/llamaindexExamples/llamaindex/* .
 	rm -rf /home/$USER/Documents/llamaindexExamples
 	cd /home/$USER
-    LINE="  23. llamaindex examples installed"
+    LINE="  21. llamaindex examples installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1721,7 +1716,7 @@ if [ ! -f /home/$USER/n8nExamples_installed.txt ]; then
 	mv /home/$USER/Documents/n8nExamples/n8nModels/* .
 	rm -rf /home/$USER/Documents/n8nExamples
 	cd /home/$USER
-	LINE="  24. n8n models installed"
+	LINE="  22. n8n models installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1760,7 +1755,7 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 	mv /home/$USER/Documents/flowiseExamples/flowise_models/* .
 	rm -rf /home/$USER/Documents/flowiseExamples
 	cd /home/$USER
-	LINE="  25. flowise models installed"
+	LINE="  23. flowise models installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1832,7 +1827,7 @@ if [ ! -f /home/$USER/mineru_installed.txt ]; then
 	echo "source /home/$USER/mineru/bin/activate"                                | tee -a  /home/$USER/activate_mineru.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_mineru.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_mineru.sh
-	LINE="  26.python virtual env created at '~/mineru'"
+	LINE="  24.python virtual env created at '~/mineru'"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -1887,7 +1882,7 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 	   echo "portainer_installed.txt" > /home/$USER/portainer_installed.txt
 	   
-	   LINE="  34. Portainer installed"
+	   LINE="  25. Portainer installed"
 	   if ! grep -qF "$LINE" "$FILE"; then
 		 echo "$LINE" >> "$FILE"
 	   fi
@@ -1961,7 +1956,7 @@ if [ ! -f /home/$USER/agno_installed.txt ]; then
 	echo "sleep 5"																		|   tee  -a  /home/$USER/start_agno.sh
 	echo "python /home/$USER/agno/cookbook/00_quickstart/run.py"						 |   tee  -a  /home/$USER/start_agno.sh
 	chmod +x /home/$USER/*.sh
-	LINE="  27. Agent Builder agno installed"
+	LINE="  26. Agent Builder agno installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1989,7 +1984,7 @@ if [ ! -f /home/$USER/openbb_installed.txt ]; then
 	openbb-api
 	echo "openbb_installed.txt"  >  /home/$USER/openbb_installed.txt
 	conda deactivate
-	LINE="  28. OpenBB installed"
+	LINE="  27. OpenBB installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -2029,7 +2024,7 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 	cd /home/$USER
 	#python -m cli.main
 	echo "tradingAgent_installed.txt"  > /home/$USER/tradingAgent_installed.txt
-	LINE="  29. Trading Agent installed"
+	LINE="  28. Trading Agent installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -2120,7 +2115,7 @@ if [ ! -f /home/$USER/localai_installed.txt ]; then
 	chmod +x /home/$USER/localai/*.sh
 	echo "localai_installed.txt" > /home/$USER/localai_installed.txt 
 	echo $password | sudo -S systemctl reboot -i
-	LINE="  30. LocalAI installed"
+	LINE="  29. LocalAI installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
