@@ -873,6 +873,19 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
 	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
 	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	# Reset n8n password
+    echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
+    echo " "                                                   >> /home/$USER/reset_n8n.sh
+    echo "docker exec -it n8n n8n user-management:reset"       >> /home/$USER/reset_n8n.sh
+    echo "sleep 3"                                             >> /home/$USER/reset_n8n.sh
+    echo "netstat -aunt | grep 5678"                           >> /home/$USER/reset_n8n.sh
+    echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
+    echo "echo 'For uniformity, keep details as follows:'"     >> /home/$USER/reset_n8n.sh
+    echo "echo '   email:       ashok@fsm.ac.in'"              >> /home/$USER/reset_n8n.sh
+    echo "echo '   First Name:  ashok'"                        >> /home/$USER/reset_n8n.sh
+    echo "echo '   Last Name:   harnal'"                       >> /home/$USER/reset_n8n.sh
+    echo "echo '   password:   Ashok@12345'"                   >> /home/$USER/reset_n8n.sh
+    echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
 	# n8n community nodes
 	echo '#!/bin/bash'                                                                                                        > /home/$USER/comm_node_n8n.sh
 	echo " "                                                                                                                  >> /home/$USER/comm_node_n8n.sh
