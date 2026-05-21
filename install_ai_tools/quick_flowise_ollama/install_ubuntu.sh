@@ -1908,6 +1908,16 @@ fi
 
 
 
+echo "    "
+echo "     "
+echo "=========="
+cd /home/$USER
+echo "You can stop here. Click ctrl+c to terminate"
+read response
+echo "==========="
+sleep 20
+
+
 
 ##################
 ## Install agno
@@ -2046,18 +2056,6 @@ if [ ! -f /home/$USER/tradingAgent_installed.txt ]; then
 else
     echo "   "
 fi
-
-
-echo "    "
-echo "     "
-echo "=========="
-cd /home/$USER
-echo "You can stop here. Click ctrl+c to terminate"
-read response
-echo "==========="
-sleep 20
-
-
 
 
 
