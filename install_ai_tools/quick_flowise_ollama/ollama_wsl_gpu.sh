@@ -481,372 +481,460 @@ echo "    "
 echo "===File ./start_antigravity.sh======"		
 echo  "     "
 sleep 5
-####################
 
 
- 
+#########3
+# VectorDB install
+##########
 
-###############
-# Milvus install
-# Webui avaiable at: http://localhost:9091/webui
-# Ref: https://milvus.io/docs/install_standalone-docker.md
-################
-echo "  "
-echo "   "
 cd /home/$USER/
 if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
-	echo "------------"        
-	    echo "====  "    
-		echo "Installing milvus vector database using docker"       
-		echo "You may be asked for the password. Supply it..."     
-		echo "====  "                                                   
-		sleep 3
-		curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-		bash standalone_embed.sh start
-		echo " "
-		echo "Milvus vector database installed"                      
-		echo "Ports used are: 9091 and 19530."                       
-		echo "To restart/stop docker use the following commands:"            
-		echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
-		mkdir /home/$USER/milvus
-		mv standalone_embed.sh /home/$USER/milvus/
-		echo 'export PATH="/home/$USER/milvus/:$PATH"' >> /home/$USER/.bashrc
-		# Our milvus start script		
-		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
-		echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
-		echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
-		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
-		echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
-		echo "cd /home/$USER"                                       | tee -a /home/$USER/stop/start_milvus.sh 
-		echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
-		# Stop script		
-		echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
-		echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
-		echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
-		#
-		# Delete milvus database as also the container
-		echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
-		echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
-		echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
-		echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
-		echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
-        #
-        ln -sT /home/$USER/start_milvus.sh       /home/$USER/start_milvus.sh  
-		ln -sT /home/$USER/stop_milvus.sh        /home/$USER/stop_milvus.sh  
-		ln -sT /home/$USER/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
-		#
-		echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
-		#wsl.exe --shutdown
-		sleep 3
-		chmod +x /home/$USER/*.sh
-        chmod +x /home/$USER/start/*.sh
-        chmod +x /home/$USER/stop/*.sh
-		echo "Milvus db is installed"
-
-###############
-# Meilisearch install
-# Ref: https://www.meilisearch.com/docs/guides/docker
-################
-
-echo "  "
-echo "   "
-cd /home/$USER/
-	echo " "
-	echo " "
-	echo "------------"        
-	    echo "====  "    
-		echo "Installing meilisearch vector database using docker"       
-		echo "You may be asked for the password. Supply it..."     
-		echo "====  "                                                   
-		sleep 3
-		echo "Installing mellisearch vector database using docker"       
-		docker pull getmeili/meilisearch:latest
-		docker run -d --rm \
-		           -p 7700:7700 \
-		           -v $(pwd)/meili_data:/meili_data \
-		             getmeili/meilisearch:latest
-		echo "Mellisearch installed"
-		echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
-		echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
-		echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
-		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
-		ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
-		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
- 		
-
-
-##########################
-### Install FAISS library
-##########################
-
-echo " "
-echo " "
-echo "-----"
-cd /home/$USER
-    echo " "
-    echo " "
-	echo "------------"  
-		echo " "
-		echo "============"
-		echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
-		echo "is of the folder where data files will be saved. Consider this as the "
-		echo "location of FAISS database for that application."
-		echo "=============="
-		echo " "
-		sleep 8
-		# Create venv for FAISS
-		python3 -m venv /home/$USER/faiss
-		source /home/$USER/faiss/bin/activate
-		pip3 install faiss-cpu
-		deactivate
-		## Script to activate FAISS library
-		echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
-		echo " "                                                                >> /home/$USER/start/activate_faiss.sh
-		echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
-		echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
-		echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
-		echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
-		echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
-		deactivate
-		echo "FAISS library installed at /home/$USER/faiss/"
-		echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
-		# FAISS download data-cleaning script
-		cd /home/$USER/
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
-		chmod +x *.sh
-		chmod +x /home/$USER/start/*.sh
-		sleep 4
-		cd /homne/$USER/
-		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
+	echo "------------" 
+    echo "Vector DBs would be installed"
+	sleep 3
+	echo "  "
+	echo  "  "
+					
+	###############
+	# Meilisearch install
+	# Ref: https://www.meilisearch.com/docs/guides/docker
+	################
 		
-################
-# Install postgresql and sqlite3
-################
-
-echo " "
-echo " "
-cd /home/$USER
-echo "------------"   
-		# Install postgresql
-	    cd /home/$USER/
-	    echo "Installing postgresql and sqlite3"
-	    sudo apt install postgresql postgresql-contrib sqlite3   -y
-		
-	    # Postgresql start/stop script
-
-		# Start script
-		echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
-	    echo " "                                                               >> /home/$USER/start_postgresql.sh  
-	    echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
-	    echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
-	    echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
-	    echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
-	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
-	    
-		# Stop script
-	    echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
-	    echo " "                                                               >> /home/$USER/stop_postgresql.sh  
-	    echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
-	    echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
-	    echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
-	    echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
-		
-		mkdir /home/$USER/psql
-	    cd /home/$USER/psql
-		
-	    # Script to create sqlite database
-		# A small help script
-	    echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-	    echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
-	    echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
-	    echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
-	    chmod +x *.sh
-		
-	    #############
-	    # psql related
-	    # Download help scripts that will inturn, help create user and password
-	    # in postgresql
-	    ##############
-	    cd /home/$USER/
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
-	    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createdatabase.sh
-	    chmod +x /home/$USER/*.sh
-	    
-		# Create symlinks
-	    cd /home/$USER/psql
-	    ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
-	    ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
-	    ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
-	    ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
-	    ln -sT /home/$USER/psql.sh                       psql.sh
-		ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/tableInfo.md
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/n8nModels/7.Postgres%20related/AIAgentSQLGeneration.sql
-	    cd /home/$USER
-	    
-		###########
-	    ## Add postgres vector storage capability
-	    ############
-	    # Add vector storage capability to postgres
-	    # My version of postgres db is 14.
-	    # (Check as: pg_config --version)
-	    # Install a needed package (depending upon your version of postgres)
-	    # Check version as: pg_config --version
-	    # Assuming version 16
-	    pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
-	    psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
-	    version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-	    sudo apt install postgresql-server-dev-$version  -y
-	    #sudo apt install postgresql-server-dev-16  -y
-	    # Ref: https://github.com/pgvector/pgvector
-	    cd /tmp
-	    git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
-	    cd pgvector
-	    make
-	    sudo make install 
-
-		# Create user ashok and database ashok
-		cd /home/$USER/
-		# Creating user 'ashok', owning database 'ashok'. 
-		# Creating user 'harnal', owning database 'harnal'. 
-		echo " "
-		echo " "
-		echo "========="
-		echo "Creating user 'ashok' owning database 'askok'"
-		echo "Creating user 'harnal' and database 'harnal'"
-		echo "User 'ashok' has password: ashok"
-		echo "User 'harnal' has password: harnal"
-		echo "Database 'ashok' can also be used as vector database"
-		echo "Database 'harnal' can also be used as vector database"
-		echo "========="
-		echo " "
-		echo " "
-		sleep 5
-		sudo useradd -m -s /bin/bash harnal
-		sudo -u postgres psql -c 'create user harnal ;'
-		sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
-		sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
-		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
-		echo "===="
-		sudo -u postgres psql -c 'create user ashok ;'
-		sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
-		sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
-		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
-		echo "   "
-        echo "===="
-		echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
-		sleep 3
-		sudo useradd -m -s /bin/bash ravi
-		sudo -u postgres psql -c 'create user ravi ;'
-		sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
-		sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
-		#sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ravi
-		cd /home/$USER/psql
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
-		cd /home/$USER
-		sudo useradd -m -s /bin/bash ravi
-		PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
-		 # Create chinook database and data
-		# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
-		echo "===="
-		echo "Create user chinook, password chinook, database chinook with many rows"
-		echo "In the same database, creating multiple linked tables. Use pgAdmin4 to view data"
-		echo "All table names and column names are in double quotes"
-		echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
-		sleep 3
-		sudo useradd -m -s /bin/bash chinook
-		sudo -u postgres psql -c 'create user chinook ;'
-		sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
-		sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
-		#
-		cd /home/$USER/psql
-		rm  /home/$USER/psql/chinook.sql
-		# Original is here: 
-		# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
-		# With double quotes removed
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
-		cd /home/$USER
-		PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
-		#sudo -u postgres psql -c "\du" 
-		#sudo -u postgres psql -c "\l"
-
-		# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
-		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-        cd /etc/postgresql/$version/main
-        echo "listen_addresses = '*'" | sudo tee -a /etc/postgresql/$version/main/postgresql.conf
-        echo "host    all             all             0.0.0.0/0               scram-sha-256" | sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
-        sudo systemctl restart postgresql
-        cd /home/$USER
-		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
-		
-	
-##########################
-### Install chromadb docker
-# Ref: https://docs.trychroma.com/production/containers/docker
-#      https://cookbook.chromadb.dev/strategies/cors/
-##########################
-
-cd /home/$USER
-echo " "
-echo " "
-echo "------------"        
-    # Write chroma start script
-    echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
-    echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
-    echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
-    echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
-    echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
-    echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
-    echo " docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20"   | tee -a /home/$USER/start_chroma.sh 
-
-    # Pulling chromadb docker image  
-    cd /home/$USER/
-    echo " "                                       | tee -a /home/$USER/error.log
-    echo " Pulling chromadb docker image"          | tee -a /home/$USER/error.log
-    # Refer: https://cookbook.chromadb.dev/strategies/cors/
-     docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
-    echo "------------"                            | tee -a /home/$USER/error.log
-    echo " "                                       | tee -a /home/$USER/error.log
-    sleep 3
+	echo "====  "    
+	echo "Installing meilisearch vector database using docker"       
+	echo "You may be asked for the password. Supply it..."     
+	echo "====  "                                                   
+	sleep 3
+	echo "Installing mellisearch vector database using docker"       
+	docker pull getmeili/meilisearch:latest
+	docker run -d --rm \
+			   -p 7700:7700 \
+			   -v $(pwd)/meili_data:/meili_data \
+				 getmeili/meilisearch:latest
+	echo "Mellisearch installed"
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_meilisearch.sh
+	echo " "                                                   | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo ' '"                                            | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "echo '=====Useful info========'"                     | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "echo 'Port is: 7700'"                                | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo 'Data folder is: /home/$USER/meili_data'"       | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo 'Access in flowise as: http://<hostIP>:7700'"   | tee -a /home/$USER/start/start_meilisearch.sh
+	echo "echo 'Press ctrl+c to terminate'"                    | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "echo '================='"                            | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "sleep 4"                                             | tee -a /home/$USER/start/start_meilisearch.sh  
+	echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
+	ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
+	echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
-	wsl.exe --shutdown
-fi   
+	sleep 2
+	LINE="  5. Meilisearch installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+				
+	##########################
+	### Install chromadb docker
+	# Ref: https://docs.trychroma.com/production/containers/docker
+	#      https://cookbook.chromadb.dev/strategies/cors/
+	##########################
+	
+	cd /home/$USER
+	echo "Installing chromadb.."
+    sleep 2
+	# Write chroma start script
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
+	echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
+	echo "cd ~/"                                               | tee -a /home/$USER/start_chroma.sh  
+	echo "echo 'Chromadb will be available at port 8000'"      | tee -a /home/$USER/start_chroma.sh 
+	echo "echo 'Data dir is ~/chroma_data/'"                   | tee -a /home/$USER/start_chroma.sh 
+	echo "echo 'In flowise, access it as: http://hostip:8000'"                   | tee -a /home/$USER/start_chroma.sh 
+	echo " docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 "   | tee -a /home/$USER/start_chroma.sh 
 
+	# Pulling chromadb docker image  
+	cd /home/$USER/
+	echo " "                                       
+	echo " Pulling chromadb docker image"          
+	# Refer: https://cookbook.chromadb.dev/strategies/cors/
+	docker run -d --rm --network host -e CHROMA_SERVER_CORS_ALLOW_ORIGINS='["http://localhost:3000"]' -v /home/$USER/chroma_data:/chroma/chroma -p 8000:8000 --name chroma  chromadb/chroma:1.0.20 
+	echo "------------"                            
+	echo " "                                       
+	echo "chromadb_installed" > /home/$USER/chromadb_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	sleep 2
+	LINE="  6. chromadb installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+		
+	##########################
+	### Install FAISS library
+	##########################
+	
+	echo "  "
+	echo  "   "
+	echo "Installing FAISS.."
+    sleep 3
+	echo " "
+	echo "While using flowise, the 'Base Path to Load' which needs to be spcified"
+	echo "is of the folder where data files will be saved. Consider this as the "
+	echo "location of FAISS database for that application."
+	echo "=============="
+	echo " "
+	sleep 8
+	# Create venv for FAISS
+	python3 -m venv /home/$USER/faiss
+	source /home/$USER/faiss/bin/activate
+	pip install --upgrade pip
+	pip3 install faiss-cpu
+	deactivate
+	## Script to activate FAISS library
+	echo '#!/bin/bash'                                                      > /home/$USER/start/activate_faiss.sh
+	echo " "                                                                >> /home/$USER/start/activate_faiss.sh
+	echo "cd ~/"                                                            >> /home/$USER/start/activate_faiss.sh
+	echo "echo 'Activate FAISS library, as:'"                                >> /home/$USER/start/activate_faiss.sh                           
+	echo "echo 'source /home/$USER/start/activate_faiss.sh'"                 >> /home/$USER/start/activate_faiss.sh
+	echo "echo 'To deactivate issue just the command: deactivate'"           >> /home/$USER/start/activate_faiss.sh
+	echo "source /home/$USER/faiss/bin/activate"                             >> /home/$USER/start/activate_faiss.sh
+	deactivate
+	echo "FAISS library installed at /home/$USER/faiss/"
+	echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
+	# FAISS download data-cleaning script
+	cd /home/$USER/
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
+	chmod +x *.sh
+	chmod +x /home/$USER/start/*.sh
+	echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
+	sleep 2
+	LINE="  7. FAISS installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	
+	################
+	# Install postgresql and sqlite3
+	# https://stackoverflow.com/questions/18223665/postgresql-query-from-bash-script-as-database-user-postgres
+	################
+	
+	echo " "
+	echo " "
+	cd /home/$USER/
+	echo "Installing postgresql and sqlite3"
+	sleep 3
+	echo $password | sudo -S  apt install postgresql postgresql-contrib sqlite3   -y
+    
+	# Postgresql start/stop script
+
+	# Start script
+	echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
+	echo " "                                                               >> /home/$USER/start_postgresql.sh  
+	echo "cd ~/"                                                           >> /home/$USER/start_postgresql.sh  
+	echo "echo 'postgresql will be available on port 5432'"                >> /home/$USER/start_postgresql.sh  
+	echo "sudo systemctl start postgresql.service"                         >> /home/$USER/start_postgresql.sh  
+	echo "sleep 2"                                                         >> /home/$USER/start_postgresql.sh  
+	echo "netstat -aunt | grep 5432"                                       >> /home/$USER/start_postgresql.sh  
+	
+	# Stop script
+	echo '#!/bin/bash'                                                      > /home/$USER/stop_postgresql.sh  
+	echo " "                                                               >> /home/$USER/stop_postgresql.sh  
+	echo "cd ~/"                                                           >> /home/$USER/stop_postgresql.sh  
+	echo "sudo systemctl stop postgresql.service"                          >> /home/$USER/stop_postgresql.sh  
+	echo "sleep 2"                                                         >> /home/$USER/stop_postgresql.sh  
+	echo "netstat -aunt | grep 5432"                                       >> /home/$USER/stop_postgresql.sh  
+	
+	mkdir /home/$USER/psql
+	cd /home/$USER/psql
+	
+	# Script to create sqlite database
+	# A small help script
+	echo '#!/bin/bash'                                                     > /home/$USER/create_sqlite_db.sh 
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	echo "# Create sqlite3 database"                                       >> /home/$USER/create_sqlite_db.sh 
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh  
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	echo "echo 'How to create sqlite3 database?'"                          >> /home/$USER/create_sqlite_db.sh 
+	echo "echo 'To create database: mydatabase.db'"                        >> /home/$USER/create_sqlite_db.sh 
+	echo "echo 'issue command:'"                                           >> /home/$USER/create_sqlite_db.sh 
+	echo "echo '         sqlite3 mydatabase.db'"                           >> /home/$USER/create_sqlite_db.sh 
+	echo " "                                                               >> /home/$USER/create_sqlite_db.sh 
+	chmod +x *.sh
+	
+	#############
+	# psql related
+	# Download help scripts that will inturn, help create user and password
+	# in postgresql
+	##############
+	cd /home/$USER/
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createdatabase.sh
+	chmod +x /home/$USER/*.sh
+	
+	# Create symlinks
+	cd /home/$USER/psql
+	ln -sT /home/$USER/createpostgresuser.sh         createpostgresuser.sh
+	ln -sT /home/$USER/show_postgres_databases.sh    show_postgres_databases.sh
+	ln -sT /home/$USER/createvectordb.sh             createvectordb.sh
+	ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
+	ln -sT /home/$USER/psql.sh                       psql.sh
+	ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/tableInfo.md
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/n8nModels/7.Postgres%20related/AIAgentSQLGeneration.sql
+	cd /home/$USER
+	
+	###########
+	## Add postgres vector storage capability
+	############
+	# Add vector storage capability to postgres
+	# My version of postgres db is 14.
+	# (Check as: pg_config --version)
+	# Install a needed package (depending upon your version of postgres)
+	# Check version as: pg_config --version
+	# Assuming version 16
+	pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
+	psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
+	version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+	sudo apt install postgresql-server-dev-$version  -y
+	#sudo apt install postgresql-server-dev-16  -y
+	# Ref: https://github.com/pgvector/pgvector
+	cd /tmp
+	git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
+	cd pgvector
+	make
+	echo $password | sudo -S  make install 
+
+	# Create user ashok and database ashok
+	cd /home/$USER/
+	# Creating user 'ashok', owning database 'ashok'. 
+	# Creating user 'harnal', owning database 'harnal'. 
+	echo " "
+	echo " "
+	echo "========="
+	echo "Creating user 'ashok' owning database 'askok'"
+	echo "Creating user 'harnal' and database 'harnal'"
+	echo "User 'ashok' has password: ashok"
+	echo "User 'harnal' has password: harnal"
+	echo "Database 'ashok' can also be used as vector database"
+	echo "Database 'harnal' can also be used as vector database"
+	echo "Similarly we have users gautam and ganesh:"
+	echo "Each one of them has db creation powers"
+	echo "========="
+	echo " "
+	echo " "
+	sleep 5
+	# Create first ubuntu user
+	echo $password | sudo -S useradd -m -s /bin/bash harnal
+	sudo -u postgres psql -c 'create user harnal ;'
+	sudo -u postgres psql -c 'CREATE DATABASE harnal WITH OWNER = harnal;  '
+	sudo -u postgres psql -c 'grant all privileges on database harnal to harnal;'
+	sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
+	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
+	sudo -u postgres psql -c "ALTER USER harnal WITH CREATEDB;"
+	echo "===="
+	sudo -u postgres psql -c 'create user ashok ;'
+	sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
+	sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
+	sudo -u postgres psql -c "alter user ashok with encrypted password 'ashok';"
+	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ashok
+	sudo -u postgres psql -c "ALTER USER ashok WITH CREATEDB;"
+	echo "===="
+	sudo useradd -m -s /bin/bash gautam
+	sudo -u postgres psql -c 'create user gautam ;'
+	sudo -u postgres psql -c 'CREATE DATABASE gautam WITH OWNER = gautam;  '
+	sudo -u postgres psql -c 'grant all privileges on database gautam to gautam;'
+	sudo -u postgres psql -c "alter user gautam with encrypted password 'gautam';"
+	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d gautam
+	sudo -u postgres psql -c "ALTER USER gautam WITH CREATEDB;"
+	echo "===="
+	sudo useradd -m -s /bin/bash ganesh
+	sudo -u postgres psql -c 'create user ganesh ;'
+	sudo -u postgres psql -c 'CREATE DATABASE ganesh WITH OWNER = ganesh;  '
+	sudo -u postgres psql -c 'grant all privileges on database ganesh to ganesh;'
+	sudo -u postgres psql -c "alter user ganesh with encrypted password 'ganesh';"
+	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d ganesh
+	sudo -u postgres psql -c "ALTER USER ganesh WITH CREATEDB;"
+	echo "===="
+	echo "===="
+	echo "Create user ravi, password ravi, database ravi and a table, distributors, with few rows"
+	echo "In the same database, creating linked tables: s,p,j,spj with data"
+	echo "See as: ./psql.sh ; \c ravi ; select * from spj ; ' "
+	sleep 3
+	sudo useradd -m -s /bin/bash ravi
+	sudo -u postgres psql -c 'create user ravi ;'
+	sudo -u postgres psql -c 'CREATE DATABASE ravi WITH OWNER = ravi;  '
+	sudo -u postgres psql -c "alter user ravi with encrypted password 'ravi';"
+	sudo -u postgres psql -c "ALTER USER ravi WITH CREATEDB;"
+	#
+	cd /home/$USER/psql
+	rm  /home/$USER/psql/simpleTable.sql
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
+	cd /home/$USER
+	PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
+	#
+    # Create chinook database and data
+	# Ref: https://github.com/neondatabase/postgres-sample-dbs/tree/main?tab=readme-ov-file#chinook-database
+	echo "===="
+	echo "Create user chinook, password chinook, database chinook with many rows"
+	echo "In the same database, creating multiple linked tables. Use pgAdmin4 to view data"
+	echo "All table names and column names are in double quotes"
+	echo 'Check as: ./psql.sh ; \c chinook ; select * from "Album" ; OR select * from "Artist" ; '
+	sleep 3
+	sudo useradd -m -s /bin/bash chinook
+	sudo -u postgres psql -c 'create user chinook ;'
+	sudo -u postgres psql -c 'CREATE DATABASE chinook WITH OWNER = chinook;  '
+	sudo -u postgres psql -c "alter user chinook with encrypted password 'chinook';"
+	sudo -u postgres psql -c "ALTER USER chinook WITH CREATEDB;"
+	#
+	cd /home/$USER/psql
+	rm  /home/$USER/psql/chinook.sql
+	# Original is here: 
+	# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
+	# With double quotes removed
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
+	cd /home/$USER
+	PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
+			
+	#sudo -u postgres psql -c "\du" 
+	#sudo -u postgres psql -c "\l"
+
+	# Finally change postgresql.conf and pg_hba.conf and make them highly permissive
+	version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
+	cd /etc/postgresql/$version/main
+	echo "listen_addresses = '*'" | sudo tee -a /etc/postgresql/$version/main/postgresql.conf
+	echo "host    all             all             0.0.0.0/0               scram-sha-256" | sudo tee -a /etc/postgresql/$version/main/pg_hba.conf
+	sudo systemctl restart postgresql
+	#
+	# Install pgadmin4 only in Ubuntu
+	echo "Installing pgadmin4.."
+	sleep 3
+	curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+	# Create the repository configuration file:
+	sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+	# Install for both desktop and web modes:
+	password="ashok"
+	echo $password | sudo -S  apt install pgadmin4 -y
+    #
+	# Download RAG data files
+	mkdir -p /home/$USER/Documents/data
+	cd /home/$USER/Documents/data
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/bertrandRusselEssays.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/goodWriting.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/iWorkedOnEssay.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/sherlockHolmes.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/slyFox.txt
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
+	cd /home/$USER
+	echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+	LINE="  8. PostgreSQL installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	sleep 2
+	
+	###############
+	# Milvus install
+	# Webui avaiable at: http://localhost:9091/webui
+	# Ref: https://milvus.io/docs/install_standalone-docker.md
+	################
+	echo "  "
+	echo "   "
+	cd /home/$USER/
+	echo "====  "    
+	echo "Installing milvus vector database using docker"       
+	echo "You may be asked for the password. Supply it..."     
+	echo "====  "                                                   
+	sleep 3
+	echo $password | sudo -S  apt-get update
+	curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+	bash standalone_embed.sh start
+	echo " "
+	echo "Milvus vector database installed"                      
+	echo "Ports used are: 9091 and 19530."                       
+	echo "To restart/stop docker use the following commands:"            
+	echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
+	mkdir /home/$USER/milvus
+	mv standalone_embed.sh /home/$USER/milvus/
+	echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
+	# Our milvus start script		
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
+	echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
+	echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
+	echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
+	echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
+	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
+	echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
+	echo "cd /home/$USER"                                       | tee -a /home/$USER/start/start_milvus.sh 
+	echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
+	# Stop script		
+	echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
+	echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
+	echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
+	#
+	# Delete milvus database as also the container
+	echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
+	echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
+	echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
+	echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
+	echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
+	#
+	ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
+	ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
+	ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
+	#
+	echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	sleep 3
+	
+	LINE="  9. Milvus installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+		
+	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
+
+	# Start all vector databases to check
+	bash stop_milvus.sh
+    bash start_postgresql.sh
+	bash start_chroma.sh  
+	bash start_meilisearch.sh
+	bash start_milvus.sh
+	echo "  "
+    echo "  "
+	echo "Postgresql started?"
+	netstat -aunt | grep 5432
+	echo "Chromadb started?"
+	netstat -aunt | grep 8000
+	echo "meilisearch started"
+	netstat -aunt | grep 7700
+	echo "milvus started"
+	netstat -aunt | grep 19530
+	sleep 8
+	
+	wsl.exe --shutdown
+else
+    echo "  "
+fi	
 
 
 ##########################
@@ -1470,9 +1558,6 @@ fi
 
 
 
-
-
-
 ##################3
 # crawl4AI
 # https://github.com/unclecode/crawl4ai
@@ -1827,7 +1912,7 @@ docker update --restart=no $(docker ps -a -q)
 
 
 ###################
-# llama.cpp install
+# llama.cpp install-I
 # python env remains activated
 # source /home/$USER/venv/bin/activate
 ###################
