@@ -3,12 +3,22 @@
 # Download PsycoLLM.Q4_K_M.gguf or any other gguf folder
 #  and place it in /home/$USER/gguf_models/ :
 
-# No space before and after '='
-modelFolder=/home/$USER/gguf_models/
-modelName="PsycoLLM.Q4_K_M.gguf"
 
+# No space before and after '='
+cd ~/
+modelName="PsycoLLM.Q4_K_M.gguf"       
+modelFolder=/home/$USER/gguf_models/
 
 ######## Do NOT AMEND CODE BELOW ###########
+# Check if llama.cpp is installed:
+
+FILE="/home/$USER/llamacpp_installed.txt"
+if [[ -f "$FILE" ]]; then
+    echo "llama.cpp is installed."
+else
+    echo "llama.cpp is NOT installed"
+    exit
+fi
 
 echo "  "
 echo "  "
