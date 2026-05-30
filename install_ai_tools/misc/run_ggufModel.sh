@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Execute as: 
+@       bash run_ggufModel.sh
+# 
 # Download PsycoLLM.Q4_K_M.gguf or any other gguf folder
 #  and place it in /home/$USER/gguf_models/ :
+
 
 
 # No space before and after '='
