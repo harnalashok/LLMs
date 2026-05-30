@@ -1911,8 +1911,42 @@ fi
 docker update --restart=no $(docker ps -a -q)
 
 
+
 ###################
-# llama.cpp install-I
+# llama.cpp install--I
+# python env remains activated
+# source /home/$USER/venv/bin/activate
+# https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md
+###################
+echo "  "
+echo " "
+cd /home/$USER
+if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
+	echo "Shall I now install llama.cpp using homebrew ? [Y,n]"   
+	read input
+	input=${input:-Y}
+	if [[ $input == "Y" || $input == "y" ]]; then
+		  # Installing llama.cpp
+		  source /home/$USER/venv/bin/activate
+		   # Huggingface and llama.cpp related
+		  pip install huggingface_hub
+		  pip install transformers
+		  pip install accelerate
+		  brew install llama.cpp
+		  wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/run_ggufModel.sh
+		  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
+		  echo "llama.cpp installed"
+		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
+		  wsl.exe --shutdown
+	else
+		   echo "llama-cpp not installed"
+	fi
+fi	
+
+
+
+###################
+# llama.cpp install-II
 # python env remains activated
 # source /home/$USER/venv/bin/activate
 ###################
@@ -1991,36 +2025,6 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	fi
 fi	
   
-
-###################
-# llama.cpp install--II
-# python env remains activated
-# source /home/$USER/venv/bin/activate
-# https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md
-###################
-echo "  "
-echo " "
-cd /home/$USER
-if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
-	echo "Shall I now install llama.cpp using homebrew ? [Y,n]"   
-	read input
-	input=${input:-Y}
-	if [[ $input == "Y" || $input == "y" ]]; then
-		  # Installing llama.cpp
-		  source /home/$USER/venv/bin/activate
-		   # Huggingface and llama.cpp related
-		  pip install huggingface_hub
-		  pip install transformers
-		  pip install accelerate
-		  brew install llama.cpp
-		  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
-		  echo "llama.cpp installed"
-		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
-		  wsl.exe --shutdown
-	else
-		   echo "llama-cpp not installed"
-	fi
-fi	
 
 ##########################
 ### Install xinference
