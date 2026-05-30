@@ -8,7 +8,18 @@
 
 
 # No space before and after '='
-prompt="Generate a psychometric test for an introvert person. To test this trait, generate ten questions."
+prompt="Generate a psychometric test for an introvert person. Test should contain ten questions. 
+        Each question should have multiple options. Aso suggest a scoring methodology. Here is 
+        an example question:
+        
+        Example question
+        =========
+        
+        How do you feel when you're around a large group of people?
+	   - A) Energized and excited
+	   - B) Nervous and overwhelmed
+	   - C) Indifferent
+        "
 cd ~/
 modelName="PsycoLLM.Q4_K_M.gguf"       
 modelFolder=/home/$USER/gguf_models/
@@ -39,7 +50,7 @@ sleep 3
 
 llama-cli \
   -m $modelFolder$modelName \
-  -p $prompt \
+  -p "$prompt" \
   -sys "You are an expert psychometric test generator" \
   -ngl 0 \
   -c 4096 \
