@@ -1,0 +1,138 @@
+#######
+# A. Single python file
+#######
+
+cd ~/
+uv venv my_env				
+source my_env/bin/activate		
+
+uv pip install crewai crewai[tools] langchain  langchain-openai langchain-ollama langchain-community langchain-classic langchain-experimental langchain-cli yfinance 
+
+uv pip install 'crewai-tools[mcp]'
+
+uv pip install llama-index llama-index-llms-groq llama-index-core  llama-index-readers-file llama-index-embeddings-huggingface  newsapi-python  
+
+#######
+# B. Standard crewai install
+#######
+
+cd ~/
+uv tool install crewai  
+			   
+crewai create crew my_project
+cd my_project
+crewai install
+uv add crewai crewai[tools] langchain  langchain-openai langchain-ollama langchain-community langchain-classic langchain-experimental langchain-cli yfinance 
+
+uv add llama-index llama-index-llms-groq llama-index-core  llama-index-readers-file llama-index-embeddings-huggingface  'crewai[tools]'  newsapi-python  
+
+# Execute to see what all is installed:
+cat pyproject.toml
+
+
+#######
+# C. Install crewai within a virtual env
+#    GitHub:
+#    https://github.com/crewaiinc/crewai#1-installation
+#######
+	# a) Create a python virtual env 'crewai'
+	python -m venv crewai
+	# b) Activate the env
+	source /home/ashok/crewai/bin/activate
+	# c) Now install crewai and other packages using uv
+	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
+	uv pip install langchain-openai langchain-ollama langchain-community  
+	uv pip install langchain-experimental langchain-classic yfinance 
+	uv pip install llama-index llama-index-llms-groq llama-index-core
+	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
+	uv pip install 'crewai[tools]'  newsapi-python
+	# d)
+	deactivate  
+
+
+###########
+# D. Project workflow:
+#    (Complete C. above)
+###########
+
+The Recommended Workflow
+	0. Activate virtual env 'crewai'
+	a. Run 'crewai create crew <project_name>' to generate the project folder.
+	b. Run 'cd <project_name>' to enter the directory.
+	c. Run 'crewai install' to set up the environment and dependencies.
+	d. Next, open your code editor and configure your .env, YAML, and .py files.
+	e. Finally, run 'crewai run' to execute your project.
+	f. If you add new third-party Python packages to your pyproject.toml file later,
+	   simply run crewai install again to update your environment.
+
+
+	source /home/ashok/venv/bin/activate
+	crewai create crew my_project
+	cd my_project/
+	crewai install
+	OR
+	crewai install --prerelease=allow
+	
+	Always use 'uv pip install' within the python venv to install
+	any additional packages. These packages are available within my_project
+	folder.
+
+
+
+
+#######
+# E. For additional packages
+#######
+If you have pyproject.toml, use 'uv add' else 'uv pip install'.
+Activate the environment and use: 'uv pip install' to only install in the environment.
+Note that 'pip install', installs globally rather than in the environment only.
+'uv add' uses 'uv pip install' behind the scenes but ALSO writes to pyproject.toml.
+
+########
+# F Sample prompt in crewai's AI Assistant
+########
+I have two agents: Researcher and ReportWriter. Each have a task. I have two tools: one a function that uses yfinance library and the other uses the search tool serpapidevt. Both tools are used by Researcher. ReportWriter uses only serpapidevt tool. Can you assist me in writing yaml file for the agents and how should crew.py file be written especially coupling tools to agents.
+
+#########
+# G. Strategy
+########
+
+What strategy should I adopt and when?  Should I have an Agent with two tasks OR have two Agents with one task each. Can you give examples of which route to take when?
+
+Great, I have solid grounding. Here's the answer:
+
+## Strategy: Specialists Over Generalists
+
+CrewAI's guidance is clear: **prefer multiple specialized agents, each with a focused task, rather than one agent juggling many tasks**. Specialized agents produce more consistent, higher-quality outputs because their role, goal, and backstory align tightly with one objective.
+
+### Use **Two Agents, One Task Each** when:
+- The tasks require **different skills / personas** (e.g., gathering data vs. writing prose).
+- The tasks need **different tool sets** — exactly your case: Researcher uses `yfinance` + `serpapidevt`; ReportWriter only uses `serpapidevt`.
+- You want **clear handoff points** between stages of work.
+- You may reuse one of the agents in other crews.
+
+**Example (your scenario):**
+- `Researcher` → `research_task` (collect stock data + web context)
+- `ReportWriter` → `report_task` (turn research into polished report)
+
+This matches the doc's example crew of Research Specialist → Technical Writer → Editor.
+
+### Use **One Agent, Two Tasks** when:
+- Both tasks fall within the **same domain of expertise** and need the **same tools**.
+- The second task is a natural continuation/refinement of the first (e.g., "draft outline" then "expand outline" — same writer).
+- Splitting would create artificial handoffs with no skill change.
+
+**Example:** A `Technical Blog Writer` agent doing `draft_post_task` then `polish_post_task` — same persona, same tools, sequential refinement.
+
+### Key principles from the docs:
+1. **80/20 rule** — spend 80% on task design, 20% on agent design.
+2. **Single Purpose, Single Output** — avoid "god tasks" that combine research + analysis + writing.
+3. **Complementary skills** — design agents whose specializations complement each other.
+4. **Start sequential, not hierarchical** — don't over-engineer.
+
+### Verdict for your setup
+Stick with **two agents, one task each**. The tool sets differ (yfinance is Researcher-only), and the work involves two distinct skills (data gathering vs. report writing). That's a textbook case for separation.
+
+
+
+
