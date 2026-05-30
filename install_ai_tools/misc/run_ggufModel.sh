@@ -7,8 +7,8 @@
 #  and place it in /home/$USER/gguf_models/ :
 
 
-
 # No space before and after '='
+prompt="Generate a psychometric test for an introvert person. To test this trait, generate ten questions."
 cd ~/
 modelName="PsycoLLM.Q4_K_M.gguf"       
 modelFolder=/home/$USER/gguf_models/
@@ -39,7 +39,7 @@ sleep 3
 
 llama-cli \
   -m $modelFolder$modelName \
-  -p "Generate a psychometric test for an introvert person. To test this trait, generate ten questions." \
+  -p $prompt \
   -sys "You are an expert psychometric test generator" \
   -ngl 0 \
   -c 4096 \
