@@ -108,13 +108,19 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
     # Replace '22.x' with the desired major version if needed
     #curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-	# Install nvm
+	# First Install nvm
 	# Refer: https://github.com/nvm-sh/nvm#installing-and-updating
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+	# Run this command to inject the correct paths and auto-completion scripts
+	#   into your configuration file:
+    echo 'export NVM_DIR="$HOME/.nvm"' >> "/home/$USER/.bashrc"
+	echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> "/home/$USER/.bashrc"
+	echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> "/home/$USER/.bashrc"
 	# Activate nvm
 	source /home/$USER/.bashrc
     # Now install Node.js and npm
     nvm install --lts
+	nvm use --lts
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
