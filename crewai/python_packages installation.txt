@@ -1,6 +1,8 @@
 #######
 # A. Single python file
 #######
+#    In CR1 or at Gurugram, press Windows + R
+#      execute: smc -stop
 
 cd ~/
 uv venv my_env				
@@ -15,6 +17,8 @@ uv pip install llama-index llama-index-llms-groq llama-index-core  llama-index-r
 #######
 # B. Standard crewai install
 #######
+#    In CR1 or at Gurugram, press Windows + R
+#      execute: smc -stop
 
 cd ~/
 uv tool install crewai  
@@ -34,11 +38,13 @@ cat pyproject.toml
 # C. Install crewai within a virtual env
 #    GitHub:
 #    https://github.com/crewaiinc/crewai#1-installation
+#    In CR1 or at Gurugram, press Windows + R
+#      execute: smc -stop
 #######
 	# a) Create a python virtual env 'crewai'
-	python -m venv crewai
+	python -m venv crewai_env
 	# b) Activate the env
-	source /home/ashok/crewai/bin/activate
+	source /home/ashok/crewai_env/bin/activate
 	# c) Now install crewai and other packages using uv
 	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
 	uv pip install langchain-openai langchain-ollama langchain-community  
@@ -46,6 +52,7 @@ cat pyproject.toml
 	uv pip install llama-index llama-index-llms-groq llama-index-core
 	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
 	uv pip install 'crewai[tools]'  newsapi-python
+    uv pip install 'crewai-tools[mcp]'
 	# d)
 	deactivate  
 
