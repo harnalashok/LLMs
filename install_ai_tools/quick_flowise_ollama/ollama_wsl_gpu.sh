@@ -212,8 +212,7 @@ cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo "  "
     echo "------------"                            
-    echo " Will update Ubuntu"                     
-    echo " You will be asked for password...supply it..."
+    echo " Will install crewai"                     
     echo "----------"                              
     echo " "
     sleep 2
@@ -236,7 +235,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "crewai_installed.txt"  /home/$USER/crewai_installed.txt
+	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
 	wsl.exe --shutdown
 else 
     LINE="  1a. crewai updated"
