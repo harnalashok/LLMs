@@ -338,8 +338,6 @@ else
    echo "Docker is installed"
 fi  
 
-
-
 ##################
 # Docker installation-II
 #################
@@ -462,7 +460,6 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
 	wsl.exe --shutdown
-       
 fi   
 
 ###########################
