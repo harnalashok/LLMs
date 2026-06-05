@@ -23,6 +23,7 @@ echo "Install latest anaconda"
 echo "Install Visual Studio Coder"
 echo "Will install Ragflow docker"
 echo "==========================="
+password="ashok"
 sleep 2
 
 # Are we having wsl system
@@ -57,7 +58,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo "----------"                              
     echo " "
     sleep 2
-    sudo apt update
+    echo $password | sudo -S apt update
     sudo apt upgrade -y
     # To get multiple python versions, install repo
     # See: https://askubuntu.com/a/1538589
@@ -109,7 +110,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	sleep 3
 	# Record date/time in history
 	echo 'export HISTTIMEFORMAT="%F %T "'  >> /home/$USER/.bashrc
-	sudo apt install npm
+	echo $password | sudo -S  apt install npm
 	echo "Install httpd server"
 	sudo apt-get install apache2 -y
 	cd /home/$USER
@@ -184,7 +185,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 	echo "------"
 	echo "Install httpd server"
-	sudo apt-get install apache2 -y
+	echo $password | sudo -S apt-get install apache2 -y
 	cd /home/$USER
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
 	sudo mv /home/$USER/index.html  /var/www/html/index.html
@@ -200,8 +201,23 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
     wsl.exe --shutdown
- fi
-
+ else 
+    LINE="  1. Ubuntu updated"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+fi
+python -m venv crewai_env
+	# b) Activate the env
+	source /home/ashok/crewai_env/bin/activate
+	# c) Now install crewai and other packages using uv
+	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
+	uv pip install langchain-openai langchain-ollama langchain-community  
+	uv pip install langchain-experimental langchain-classic yfinance 
+	uv pip install llama-index llama-index-llms-groq llama-index-core
+	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
+	uv pip install 'crewai[tools]'  newsapi-python
+    uv pip install 'crewai-tools[mcp]'
 ##################
 # Install CUDA toolkit
 #################
@@ -215,38 +231,44 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
     echo " "
     echo "  "
     echo "==>For WSL-Ubuntu ONLY<=="
-            # Update wsl
-            wsl.exe --update
-            # Remove old gpg key
-            sudo apt-key del 7fa2af80
-            # Now follow the instructions as on this page:
-            #  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
-            # Added on 28th March, 2026
-            wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-			sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-			#wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-			#sudo dpkg -i cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
-			#sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-			#sudo apt-get -y install cuda-toolkit-13-0
-			wget -c https://developer.download.nvidia.com/compute/cuda/13.3.0/local_installers/cuda-repo-wsl-ubuntu-13-3-local_13.3.0-1_amd64.deb
-			sudo dpkg -i cuda-repo-wsl-ubuntu-13-3-local_13.3.0-1_amd64.deb
-			sudo cp /var/cuda-repo-wsl-ubuntu-13-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
-            sudo apt-get update
-            sudo apt-get -y install cuda-toolkit-13-3
-            sudo apt autoremove -y
-            echo "Which NVIDIA driver I have:"
-            echo "============================"
-            echo "Step-by-step guide for Windows 11:"
-            echo "  1.Right-click: on an empty area of your Windows 11 desktop." 
-            echo "  2.From the context menu, select NVIDIA Control Panel. "
-            echo "  3.In the NVIDIA Control Panel, click on the Help menu in the top-left corner. "
-            echo "  4.Select System Information from the dropdown menu. "
-            echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
-            sleep 8
-            echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-            wsl.exe --shutdown
-       
-    fi
+	# Remove old gpg key
+	echo $password | sudo -S  apt-key del 7fa2af80
+	# Now follow the instructions as on this page:
+	#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local
+	# Added on 28th March, 2026
+	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+	echo $password | sudo -S mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+	#wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
+	#sudo dpkg -i cuda-repo-wsl-ubuntu-13-0-local_13.0.1-1_amd64.deb
+	#sudo cp /var/cuda-repo-wsl-ubuntu-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+	#sudo apt-get -y install cuda-toolkit-13-0
+	wget -c https://developer.download.nvidia.com/compute/cuda/13.3.0/local_installers/cuda-repo-wsl-ubuntu-13-3-local_13.3.0-1_amd64.deb
+	sudo dpkg -i cuda-repo-wsl-ubuntu-13-3-local_13.3.0-1_amd64.deb
+	sudo cp /var/cuda-repo-wsl-ubuntu-13-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+	sudo apt-get update
+	sudo apt-get -y install cuda-toolkit-13-3
+	sudo apt autoremove -y
+	echo "Which NVIDIA driver I have:"
+	echo "============================"
+	echo "Step-by-step guide for Windows 11:"
+	echo "  1.Right-click: on an empty area of your Windows 11 desktop." 
+	echo "  2.From the context menu, select NVIDIA Control Panel. "
+	echo "  3.In the NVIDIA Control Panel, click on the Help menu in the top-left corner. "
+	echo "  4.Select System Information from the dropdown menu. "
+	echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
+	sleep 8
+	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
+	LINE="  2. CUDA installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	wsl.exe --shutdown
+else
+   	LINE="  2. CUDA installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+fi
 
    
 ##################
@@ -260,7 +282,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     # Add Docker's official GPG key:
     echo "Installing docker.."
     sleep 2
-    sudo apt-get update
+    echo $password | sudo -S apt-get update
 	sudo rm /etc/apt/sources.list.d/docker.list
 	sudo apt-get update
     sudo apt-get install ca-certificates curl
@@ -302,7 +324,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     echo "AND running docker without root privilegs.."
     sleep 2
     # Check if docker installed
-    sudo docker run hello-world
+    echo $password | sudo -S docker run hello-world
     # Run docker witout root privileges
     sudo groupadd docker
     sudo usermod -aG docker $USER
@@ -361,57 +383,57 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
     echo " "
     echo " "
     echo "------------"        
-        # Clear earlier directory, if it exists
-        python3 -m venv --clear /home/$USER/venv
-        source /home/$USER/venv/bin/activate
-        # 1.6 Essentials software
-		pip install --upgrade pip
-        pip install spyder numpy scipy pandas matplotlib sympy cython
-        pip install jupyterlab
-        pip install ipython
-        pip install notebook
-        pip install streamlit
-        echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-        # Required for spyder:
-        sudo apt install pyqt5-dev-tools -y
-		echo "####"
-		sudo apt install pyqt5-dev-tools -y
-		echo "Install pdfminer to extract text from pdf"
-		# Ref: https://github.com/pdfminer/pdfminer.six
-		pip install pdfminer.six
-		# To connect to postgresql
-	    pip install psycopg2
-		echo "####"
-		echo "Install pymupdf4llm to extract text/json"
-		# Ref: https://github.com/pymupdf/pymupdf4llm
-		pip install pymupdf4llm pymupdf4llm[layout]
-		mkdir -p /home/$USER/Documents/samples/in
-		mkdir -p /home/$USER/Documents/samples/out
-		cd /home/$USER/Documents/samples
-        wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-		cd /home/$USER
-		echo "####"
-        # Download file that creates a fresh python enviroemnet
-        wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-		chmod +x *.sh   
-        # Huggingface and  related
-        #pip install huggingface_hub
-        # cu124: is as per cuda version. Get cuda version from nvidia-smi
-        #pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-        #pip install huggingface_hub
-        # Create script to activate 'venv' env
-        echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-        echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-        echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-        echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-        echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-        echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-        echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-        chmod +x /home/$USER/*.sh
-        sleep 2
-        cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-        cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-		wsl.exe --shutdown
+	# Clear earlier directory, if it exists
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install streamlit
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	sudo apt install pyqt5-dev-tools -y
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Download file that creates a fresh python enviroemnet
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x *.sh   
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	wsl.exe --shutdown
        
 fi   
 
@@ -456,42 +478,6 @@ if [ ! -d "$DIRECTORY" ]; then
 	     fi   
 	
 fi	 
-
-
-###############
-# Google Antigravity install for WSL
-# Ref: https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3
-# 1. Install first in Windows from:
-#     https://antigravity.google/download
-# 2. PRess ctrl+shift+p and select WSL: Connect to WSL
-# 3. Select a folder in WSL, say, /home/ashok/Documents 
-# 
-################
-echo "    "
-echo "     "
-echo "#######3 AntiGravity on WSL ###########" 					> /home/$USER/start_antigravity.sh
-echo "To install antigravity on WSL, follow these steps"        >> /home/$USER/start_antigravity.sh
-echo "1. Install antigravity first in Windows"					>> /home/$USER/start_antigravity.sh
-echo "2. Press ctrl+shift+p and select WSL: Connect to WSL"		>> /home/$USER/start_antigravity.sh
-echo "3. Select a folder in WSL, say, /home/$USER/Documents"	>> /home/$USER/start_antigravity.sh
-echo "DONE"														>> /home/$USER/start_antigravity.sh
-echo "Refer: Medium article:"									>> /home/$USER/start_antigravity.sh
-echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		>> /home/$USER/start_antigravity.sh
-echo "========="												>> /home/$USER/start_antigravity.sh
-echo "    "
-echo "     "
-echo "#######3 AntiGravity on WSL ###########" 					
-echo "To install antigravity on WSL, follow these steps"        
-echo "1. Install antigravity first in Windows"					
-echo "2. Press ctrl+shift+p and select WSL: Connect to WSL"		
-echo "3. Select a folder in WSL, say, /home/$USER/Documents"	
-echo "DONE"														
-echo "Refer: Medium article:"									
-echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		
-echo "    "
-echo "===File ./start_antigravity.sh======"		
-echo  "     "
-sleep 5
 
 
 #########3
@@ -962,94 +948,94 @@ cd /home/$USER/
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo " "
 	echo " "
-	    cd ~/
-	    mkdir /home/$USER/n8n  # Redundant step
-	    #cd /home/$USER/n8n
-	    # Volumes are automatically created below: /var/lib/docker/volumes/
-		#                                         /var/lib/docker/volumes/n8n_data/_data
-	    docker volume create n8n_data
-	    #   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
-	    #   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
-	    # Access at localhost:5678
-	    # --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
-	    # docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
-	    # Access at localhost:5678
-	    docker run -it -d --rm \
-	                --name n8n \
-	                 -p 5678:5678 \
-	                 -e NODE_OPTIONS="--max-old-space-size=4096" \
-	                --network host   \
-	                 -v n8n_data:/home/$USER/node/.n8n \
-	                    docker.n8n.io/n8nio/n8n
-	    # n8n start script for Ubuntu
-	    echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
-	    echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
-	    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
-		echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
-		echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
-	    echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
-	    echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
-		echo "echo 'Next time start as: docker start n8n'"																		   >>  /home/$USER/start_n8n.sh
-	    echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
-	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
-	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/$USER/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-	    # Reset n8n password
-    	echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
-    	echo " "                                                   >> /home/$USER/reset_n8n.sh
-    	echo "docker exec -it n8n n8n user-management:reset"       >> /home/$USER/reset_n8n.sh
-    	echo "sleep 3"                                             >> /home/$USER/reset_n8n.sh
-    	echo "netstat -aunt | grep 5678"                           >> /home/$USER/reset_n8n.sh
-   	 	echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
-    	echo "echo 'For uniformity, keep details as follows:'"     >> /home/$USER/reset_n8n.sh
-    	echo "echo '   email:       ashok@fsm.ac.in'"              >> /home/$USER/reset_n8n.sh
-    	echo "echo '   First Name:  ashok'"                        >> /home/$USER/reset_n8n.sh
-    	echo "echo '   Last Name:   harnal'"                       >> /home/$USER/reset_n8n.sh
-    	echo "echo '   password:   Ashok@12345'"                   >> /home/$USER/reset_n8n.sh
-    	echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
-		# n8n community nodes
-		echo '#!/bin/bash'                                                                                                        > /home/$USER/comm_node_n8n.sh
-		echo " "                                                                                                                  >> /home/$USER/comm_node_n8n.sh
-		echo "echo 'List of community nodes to install:'"                                                                         >> /home/$USER/comm_node_n8n.sh
-		echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/comm_node_n8n.sh
-		echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/comm_node_n8n.sh
-		echo "echo '  1. n8n-nodes-crawl4ai-enhanced'"                                                                             >> /home/$USER/comm_node_n8n.sh
-		echo "sleep 9"                                                                                                             >> /home/$USER/comm_node_n8n.sh
-		# n8n start script for WSL
-	    echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
-	    echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
-	    echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
-	    #echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
-	    echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
-	    #echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
-	    # REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
-	    #echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
-	    echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
-	    cd ~/
-	    #ln -sT /home/$USER/start_n8n.sh start_n8n.sh
-	    #ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
-		mkdir -p /home/$USER/Documents/n8n
-		cd /home/$USER/Documents/n8n
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_with_smtp_III.json?raw=true
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_II.json?raw=true
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/2.twilio/quickstart-twilio.pdf?raw=true
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/2.twilio/checking%20website%20status%20using%20twilio.pdf?raw=true
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/2.twilio/check_website_status.json
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/4.forms_and_SMTP/form_to_smtp_node.json
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/6.looping/Simple%20RAG%20flow.json
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/6.looping/Rag%20Flow-I.json
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/7.postgresql_related/Postgres%20nodes.json
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/7.postgresql_related/Postgres%20with%20ai%20agent.json
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/Build%20Your%20Very%20First%20Workflow%20in%20n8n.pdf?raw=true
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/3.webScrapping/web_scrapping_and_summarization-I.json
-		wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/3.webScrapping/web_scrapping.pdf?raw=true
-		echo "n8n_installed" > /home/$USER/n8n_installed.txt
-		cd /home/$USER
-		sleep 3
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
- 		echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
-		wsl.exe --shutdown
+	cd ~/
+	mkdir /home/$USER/n8n  # Redundant step
+	#cd /home/$USER/n8n
+	# Volumes are automatically created below: /var/lib/docker/volumes/
+	#                                         /var/lib/docker/volumes/n8n_data/_data
+	docker volume create n8n_data
+	#   https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+	#   https://docs.n8n.io/hosting/scaling/memory-errors/#increase-old-memory
+	# Access at localhost:5678
+	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
+	# docker run -it -d --rm  --network host   --name n8n -p 5678:5678 -e NODE_OPTIONS="--max-old-space-size=4096" --network host  -v n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n
+	# Access at localhost:5678
+	docker run -it -d --rm \
+				--name n8n \
+					-p 5678:5678 \
+					-e NODE_OPTIONS="--max-old-space-size=4096" \
+				--network host   \
+					-v n8n_data:/home/$USER/node/.n8n \
+					docker.n8n.io/n8nio/n8n
+	# n8n start script for Ubuntu
+	echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
+	echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
+	echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo 'To stop it, issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
+	echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
+	echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
+	echo "echo 'Next time start as: docker start n8n'"																		   >>  /home/$USER/start_n8n.sh
+	echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
+	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/$USER/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	# Reset n8n password
+	echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
+	echo " "                                                   >> /home/$USER/reset_n8n.sh
+	echo "docker exec -it n8n n8n user-management:reset"       >> /home/$USER/reset_n8n.sh
+	echo "sleep 3"                                             >> /home/$USER/reset_n8n.sh
+	echo "netstat -aunt | grep 5678"                           >> /home/$USER/reset_n8n.sh
+	echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
+	echo "echo 'For uniformity, keep details as follows:'"     >> /home/$USER/reset_n8n.sh
+	echo "echo '   email:       ashok@fsm.ac.in'"              >> /home/$USER/reset_n8n.sh
+	echo "echo '   First Name:  ashok'"                        >> /home/$USER/reset_n8n.sh
+	echo "echo '   Last Name:   harnal'"                       >> /home/$USER/reset_n8n.sh
+	echo "echo '   password:   Ashok@12345'"                   >> /home/$USER/reset_n8n.sh
+	echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
+	# n8n community nodes
+	echo '#!/bin/bash'                                                                                                        > /home/$USER/comm_node_n8n.sh
+	echo " "                                                                                                                  >> /home/$USER/comm_node_n8n.sh
+	echo "echo 'List of community nodes to install:'"                                                                         >> /home/$USER/comm_node_n8n.sh
+	echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/comm_node_n8n.sh
+	echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/comm_node_n8n.sh
+	echo "echo '  1. n8n-nodes-crawl4ai-enhanced'"                                                                             >> /home/$USER/comm_node_n8n.sh
+	echo "sleep 9"                                                                                                             >> /home/$USER/comm_node_n8n.sh
+	# n8n start script for WSL
+	echo '#!/bin/bash'                                                                                                         > /home/$USER/start_wsl_n8n.sh
+	echo " "                                                                                                                   >> /home/$USER/start_wsl_n8n.sh
+	echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_wsl_n8n.sh
+	#echo "echo 'To stop it, issue command: cd /home/$USER/n8n/ ; docker stop n8n'"                                             >> /home/$USER/start_wsl_n8n.sh
+	echo "sleep 9"                                                                                                             >> /home/$USER/start_wsl_n8n.sh
+	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_wsl_n8n.sh
+	# REf: https://community.n8n.io/t/communication-issue-between-n8n-and-ollama-on-ubuntu-installed-on-windows/48285/6
+	#echo "docker run -d -it --rm --network host --name n8n -p 5678:5678  -e NODE_OPTIONS=\"--max-old-space-size=4096\" -v /home/$USER/n8n_data:/home/$USER/n8n/node/.n8n docker.n8n.io/n8nio/n8n"  >> /home/$USER/start_wsl_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_wsl_n8n.sh
+	cd ~/
+	#ln -sT /home/$USER/start_n8n.sh start_n8n.sh
+	#ln -sT /home/$USER/start_wsl_n8n.sh    start_wsl_n8n.sh
+	mkdir -p /home/$USER/Documents/n8n
+	cd /home/$USER/Documents/n8n
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_with_smtp_III.json?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/1.simpleCalculator/Calculator_AI_Agent_II.json?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/2.twilio/quickstart-twilio.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/2.twilio/checking%20website%20status%20using%20twilio.pdf?raw=true
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/2.twilio/check_website_status.json
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/4.forms_and_SMTP/form_to_smtp_node.json
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/6.looping/Simple%20RAG%20flow.json
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/6.looping/Rag%20Flow-I.json
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/7.postgresql_related/Postgres%20nodes.json
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/7.postgresql_related/Postgres%20with%20ai%20agent.json
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/Build%20Your%20Very%20First%20Workflow%20in%20n8n.pdf?raw=true
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/n8n/3.webScrapping/web_scrapping_and_summarization-I.json
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/n8n/3.webScrapping/web_scrapping.pdf?raw=true
+	echo "n8n_installed" > /home/$USER/n8n_installed.txt
+	cd /home/$USER
+	sleep 3
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
+	wsl.exe --shutdown
 fi
 
 
@@ -1066,58 +1052,57 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"   
-	      cd /home/$USER/
-	      # Start ollama docker in future
-	      echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
-		  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
-		  echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
-		  echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
-		  echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
-		  echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
-		  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '========'"                                                                                     >> /home/$USER/start_ollama.sh
-		  echo "echo '6. Access ollama, as:'"                                                                       >> /home/$USER/start_ollama.sh
-		  echo "echo '       http://host.docker.internal:11434'"                                                    >> /home/$USER/start_ollama.sh
-		  echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
-		  echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
-		  echo "echo '    Get your IP (in either WSL or in ubuntu) as the Ist address of:'"                         >> /home/$USER/start_ollama.sh
-		  echo "echo '         hostnae -I'"                                                                         >> /home/$USER/start_ollama.sh
-		  echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
-		  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
-		  echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "echo 'IP:  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo " hostname -I | awk '{ print \$1 }'"                                                                  >> /home/$USER/start_ollama.sh
-		  echo "sleep 3"                                                                                            >> /home/$USER/start_ollama.sh
-		  echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
-		  echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh    
-	      # Script to stop ollama
-	      echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
-	      echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
-	      echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
-	      chmod +x /home/$USER/*.sh
-	      # For model storage local folder ollama is mounted.
-	      echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
-	      echo "Will install ollama for GPU..."
-	      sleep 4
-	      # Creating alias for command: docker exec -it ollama
-		  hostip=`hostname -I | awk '{print $1}'`
-		  echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
-		  echo "docker start ollama"                          >> /home/$USER/.bashrc
-		  echo "echo 'Ollama docker started at port 11434'"   >> /home/$USER/.bashrc
-		  echo "echo 'Access as: http://$hostip:11434'"       >> /home/$USER/.bashrc
-	      #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
-	      # network host would be local mashine
-	      docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
-		  sleep 2
-		  echo "ollama_installed.txt" > ollama_installed.txt
-		  chmod +x /home/$USER/*.sh
-		  wsl.exe --shutdown
-	
+	cd /home/$USER/
+	# Start ollama docker in future
+	echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
+	echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
+	echo "echo '1. Stop ollama docker, as: docker stop ollama'"                                               >> /home/$USER/start_ollama.sh
+	echo "echo '2. Ollama is at port 11434'"                                                                  >> /home/$USER/start_ollama.sh
+	echo "echo '3. Pull model from ollama library: ollama pull <modelName'"                                   >> /home/$USER/start_ollama.sh
+	echo "echo '4. Run ollama model as: ollama run <modelName'"                                               >> /home/$USER/start_ollama.sh
+	echo "echo '5. Alias for command=> docker exec -it ollama => has a name: ollama'"                         >> /home/$USER/start_ollama.sh
+	echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	echo "echo '========'"                                                                                     >> /home/$USER/start_ollama.sh
+	echo "echo '6. Access ollama, as:'"                                                                       >> /home/$USER/start_ollama.sh
+	echo "echo '       http://host.docker.internal:11434'"                                                    >> /home/$USER/start_ollama.sh
+	echo "echo '   Or as:'"                                                                                   >> /home/$USER/start_ollama.sh
+	echo "echo '       http://hostip:11434 '"                                                                 >> /home/$USER/start_ollama.sh
+	echo "echo '    Get your IP (in either WSL or in ubuntu) as the Ist address of:'"                         >> /home/$USER/start_ollama.sh
+	echo "echo '         hostnae -I'"                                                                         >> /home/$USER/start_ollama.sh
+	echo "echo '========'"                                                                                    >> /home/$USER/start_ollama.sh
+	echo " "                                                                                                  >> /home/$USER/start_ollama.sh
+	echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
+	echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
+	echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
+	echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
+	echo "echo 'IP:  '"                                                                                                  >> /home/$USER/start_ollama.sh
+	echo " hostname -I | awk '{ print \$1 }'"                                                                  >> /home/$USER/start_ollama.sh
+	echo "sleep 3"                                                                                            >> /home/$USER/start_ollama.sh
+	echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
+	echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh    
+	# Script to stop ollama
+	echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
+	echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
+	echo "docker stop ollama "                                                                                >> /home/$USER/stop_ollama.sh      
+	chmod +x /home/$USER/*.sh
+	# For model storage local folder ollama is mounted.
+	echo "Local folder ollama for models is: /var/lib/docker/volumes/ollama/"
+	echo "Will install ollama for GPU..."
+	sleep 4
+	# Creating alias for command: docker exec -it ollama
+	hostip=`hostname -I | awk '{print $1}'`
+	echo "alias ollama='docker exec -it ollama ollama'" >> /home/$USER/.bashrc
+	echo "docker start ollama"                          >> /home/$USER/.bashrc
+	echo "echo 'Ollama docker started at port 11434'"   >> /home/$USER/.bashrc
+	echo "echo 'Access as: http://$hostip:11434'"       >> /home/$USER/.bashrc
+	#docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+	# network host would be local mashine
+	docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+	sleep 2
+	echo "ollama_installed.txt" > ollama_installed.txt
+	chmod +x /home/$USER/*.sh
+	wsl.exe --shutdown
 fi	
 
 
@@ -1129,26 +1114,25 @@ echo " "
 echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
 	echo "------------"   
-	      cd /home/$USER/
-	      # Start ollama docker in future
-	      docker start ollama 
-		  echo "Pulling bge-m3"
-	      docker exec -it ollama ollama pull bge-m3
-		  echo "Pulling llama3.2"
-		  docker exec -it ollama ollama pull llama3.2:latest
-		  docker exec -it ollama ollama pull mistral-nemo:latest
-		  docker exec -it ollama ollama pull qwen3.5:0.8b
-		  docker exec -it ollama ollama pull nomic-embed-text
-		  docker exec -it ollama ollama pull llama3.2:1b
-		  docker exec -it ollama ollama pull deepseek-r1:1.5b
-		  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
-		  echo " "
-		  echo " "
-		  #ollama list
-		  echo "models installed" > /home/$USER/models_installed.txt
-		  sleep 2
-		  wsl.exe --shutdown
-	
+	cd /home/$USER/
+	# Start ollama docker in future
+	docker start ollama 
+	echo "Pulling bge-m3"
+	docker exec -it ollama ollama pull bge-m3
+	echo "Pulling llama3.2"
+	docker exec -it ollama ollama pull llama3.2:latest
+	docker exec -it ollama ollama pull mistral-nemo:latest
+	docker exec -it ollama ollama pull qwen3.5:0.8b
+	docker exec -it ollama ollama pull nomic-embed-text
+	docker exec -it ollama ollama pull llama3.2:1b
+	docker exec -it ollama ollama pull deepseek-r1:1.5b
+	docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
+	echo " "
+	echo " "
+	#ollama list
+	echo "models installed" > /home/$USER/models_installed.txt
+	sleep 2
+	wsl.exe --shutdown
 fi
 
 
@@ -1163,210 +1147,147 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	echo "------------"   
-	   cd /home/$USER/
-	   #####################3
-		# flowise docker
-		# Ref: https://docs.flowiseai.com/getting-started#docker-compose
-		######################
-	   cd /home/$USER/
-	   # Install Flowise through docker"
-	   # Ref: https://docs.flowiseai.com/getting-started
-	   echo "Installing flowise docker. Takes time.."          
-	   # Start script
-	   echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
-	   echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
-	   echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
-	   echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
-	   echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
-	   echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
-	   echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
-	   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
-	   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
-	   echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
-	   echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
-	   echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
-	   echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
-	   echo " "                                                   >> /home/$USER/start_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/start_flowise.sh
-	   echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
-	   echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
-	   # Reset flowise password
-	   echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
-	   echo " "                                                   >> /home/$USER/reset_flowise.sh
-	   echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-	   echo "docker stop flowise"                                 >> /home/$USER/reset_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-	   echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
-	   echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
-	   echo " "                                                   >> /home/$USER/reset_flowise.sh
-	   echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
-	   echo "docker start flowise"                                >> /home/$USER/reset_flowise.sh
-	   echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
-	   echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
-	   echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
-	   echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
-	   echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
-	   echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
-	   echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
-	   # logs script
-	   echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
-	   echo " "                                                   >> /home/$USER/logs_flowise.sh
-	   echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
-	   #echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
-	   #echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
-	   #echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
-	   echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
-	   # Stop script
-	   echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
-	   echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
-	   echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
-	   echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
-	   echo "cd /home/$USER"                                     >> /home/$USER/stop_docker_flowise.sh
-	   echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
-	   echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
-	   sleep 4
-	   cd ~/
-	   FDIR="/home/$USER/Flowise"
-	   if [ -d "$FDIR" ]; then
-	       rm -rf /home/$USER/Flowise
-	   fi	   
-	   git clone https://github.com/FlowiseAI/Flowise.git
-	   cd Flowise/
-	   sudo docker build --no-cache -t flowise .
-	   
-	   # The '--network host' option removes network isolation between the container and
-	   #   the Docker host machine, meaning the container directly shares the host's networking stack
-	   # The container operates as if it were a process running directly on the host machine,
-	   #   using the host's IP address and network interfaces.  
-	   sudo docker run -d --name flowise -p 3000:3000 --network host flowise
-	   #      docker run -d --name flowise -p 3000:3000 --network host flowise
-	   #cd /home/$USER/Flowise/docker
-	   #cp .env.example .env
-	   #docker compose up -d
-	   cd /home/$USER/
-	   echo "In future to start/stop containers, proceed, as:"
-	   echo "            cd /home/$USER/Flowise"                  
-	   echo "            docker start docker-flowise-1"                    
-	   echo "            docker stop docker-flowise-1"                     
-	   echo " Also, check all containers available, as:"
-	   echo "             docker ps -a "     
-	   #ln -sT /home/$USER/start_flowise.sh start_flowise.sh
-	   ln -sT /home/$USER/stop_docker_flowise.sh /home/$USER/stop_flowise.sh
-	   mkdir -p /home/$USER/Documents/flowise
-	   cd /home/$USER/Documents/flowise
-	   # For .pdf file, add '?raw=true' to URL
-	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf?raw=true
-	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf?raw=true
-	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingface_datasets.pdf?raw-true
-	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/ExportDocumentStoreVectorStoreAndChatflow.pdf?raw=true
-	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/RAGandToolAgent.pdf?raw=true
-	   wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/huggingfaceAcessToken.pdf?raw=true
-	   cd /home/$USER
-	   mkdir -p /home/$USER/Documents/flowise/data/text_files
-	   cd       /home/$USER/Documents/flowise/data/text_files
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l1_quantum.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l2_religion.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l3_law.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l4_psychology.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l5_law.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l6_quantum.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l7_law.txt
-	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l8_religion.txt
-	  cd /home/$USER
-      echo "flowise installed" > /home/$USER/flowise_installed.txt
-	   chmod +x /home/$USER/*.sh
-	   chmod +x /home/$USER/start/*.sh
-	   chmod +x /home/$USER/stop/*.sh
-	   echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
-	   bash reset_flowise.sh
-	   bash start_n8n.sh
-	   echo "  "
-	   echo "  "
-	   echo "n8n started?"
-	   netstat -aunt | grep 5678
-	   echo "flowise started?"
-	   netstat -aunt | grep 3000
-	   echo "===="
-	   sleep 8
-	   bash stop_flowise.sh
-	   sleep 2
-	   chmod +x /home/$USER/*.sh
-	   chmod +x /home/$USER/start/*.sh
-	   chmod +x /home/$USER/stop/*.sh
-	   wsl.exe --shutdown
-	   echo "Flowise docker already installed"
+	cd /home/$USER/
+	#####################3
+	# flowise docker
+	# Ref: https://docs.flowiseai.com/getting-started#docker-compose
+	######################
+	cd /home/$USER/
+	# Install Flowise through docker"
+	# Ref: https://docs.flowiseai.com/getting-started
+	echo "Installing flowise docker. Takes time.."          
+	# Start script
+	echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
+	echo " "                                                   >> /home/$USER/start_flowise.sh
+	echo "cd ~/"                                               >> /home/$USER/start_flowise.sh
+	echo "echo 'Flowise port 3000 onstarting'"                 >> /home/$USER/start_flowise.sh
+	echo "echo 'Access flowise as: http://localhost:3000'"     >> /home/$USER/start_flowise.sh
+	echo " "                                                   >> /home/$USER/start_flowise.sh
+	echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+	echo "echo 'To reset flowise password, STOP flowise and then issue the command:'"   >> /home/$USER/start_flowise.sh
+	echo "echo '              sudo rm -rf .flowise/'"          >> /home/$USER/start_flowise.sh
+	echo "echo '  OR:            ./reset_flowise.sh'"          >> /home/$USER/start_flowise.sh
+	echo "echo '======='"                                      >> /home/$USER/start_flowise.sh
+	echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+	echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/start_flowise.sh
+	echo "echo '   Adm name:   ashok'"             >> /home/$USER/start_flowise.sh
+	echo "echo '   userid:     ashok@fsm.ac.in'"   >> /home/$USER/start_flowise.sh
+	echo "echo '   password:   Ashok@12345'"       >> /home/$USER/start_flowise.sh
+	echo "echo '==**====**====='"                                      >> /home/$USER/start_flowise.sh
+	echo " "                                                   >> /home/$USER/start_flowise.sh
+	echo "cd /home/$USER"                                      >> /home/$USER/start_flowise.sh
+	echo "docker start flowise"                                >> /home/$USER/start_flowise.sh
+	echo "sleep 3"                                             >> /home/$USER/start_flowise.sh
+	echo "netstat -aunt | grep 3000"                           >> /home/$USER/start_flowise.sh
+	# Reset flowise password
+	echo '#!/bin/bash'                                         >  /home/$USER/reset_flowise.sh
+	echo " "                                                   >> /home/$USER/reset_flowise.sh
+	echo "echo '===Stopping flowise===='"                      >> /home/$USER/reset_flowise.sh
+	echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+	echo "docker stop flowise"                                 >> /home/$USER/reset_flowise.sh
+	echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+	echo "sudo rm -rf .flowise/"                               >> /home/$USER/reset_flowise.sh
+	echo "echo '===Restarting flowise===='"                    >> /home/$USER/reset_flowise.sh
+	echo " "                                                   >> /home/$USER/reset_flowise.sh
+	echo "cd /home/$USER"                                      >> /home/$USER/reset_flowise.sh
+	echo "docker start flowise"                                >> /home/$USER/reset_flowise.sh
+	echo "sleep 3"                                             >> /home/$USER/reset_flowise.sh
+	echo "netstat -aunt | grep 3000"                           >> /home/$USER/reset_flowise.sh
+	echo "echo '==**====**====='"                              >> /home/$USER/reset_flowise.sh
+	echo "echo 'For uniformity, keep userid and passwd as follows:'"   >> /home/$USER/reset_flowise.sh
+	echo "echo '   Adm name:   ashok'"                          >> /home/$USER/reset_flowise.sh
+	echo "echo '   userid:     ashok@fsm.ac.in'"                >> /home/$USER/reset_flowise.sh
+	echo "echo '   password:   Ashok@12345'"                    >> /home/$USER/reset_flowise.sh
+	echo "echo '==**====**====='"                               >> /home/$USER/reset_flowise.sh
+	# logs script
+	echo '#!/bin/bash'                                         >  /home/$USER/logs_flowise.sh
+	echo " "                                                   >> /home/$USER/logs_flowise.sh
+	echo "cd /home/$USER/"                                     >> /home/$USER/logs_flowise.sh
+	#echo "echo 'Flowise version is:'"                          >> /home/$USER/logs_flowise.sh
+	#echo "docker logs flowise | grep start:default | head -1 | awk '{print \$2}'"  >> /home/$USER/logs_flowise.sh
+	#echo "sleep 4"                                             >> /home/$USER/logs_flowise.sh
+	echo "docker logs docker-flowise-1"                         >> /home/$USER/logs_flowise.sh
+	# Stop script
+	echo '#!/bin/bash'                                        >  /home/$USER/stop_docker_flowise.sh
+	echo " "                                                  >> /home/$USER/stop_docker_flowise.sh
+	echo "cd /home/$USER/"                                    >> /home/$USER/stop_docker_flowise.sh
+	echo "echo 'Flowise Stopping'"                            >> /home/$USER/stop_docker_flowise.sh
+	echo "cd /home/$USER"                                     >> /home/$USER/stop_docker_flowise.sh
+	echo "docker stop flowise"                                >> /home/$USER/stop_docker_flowise.sh
+	echo "netstat -aunt | grep 3000"                           >> /home/$USER/stop_docker_flowise.sh
+	sleep 4
+	cd ~/
+	FDIR="/home/$USER/Flowise"
+	if [ -d "$FDIR" ]; then
+		rm -rf /home/$USER/Flowise
+	fi	   
+	git clone https://github.com/FlowiseAI/Flowise.git
+	cd Flowise/
+	echo $password | sudo -S  docker build --no-cache -t flowise .
+	
+	# The '--network host' option removes network isolation between the container and
+	#   the Docker host machine, meaning the container directly shares the host's networking stack
+	# The container operates as if it were a process running directly on the host machine,
+	#   using the host's IP address and network interfaces.  
+	echo $password | sudo -S  docker run -d --name flowise -p 3000:3000 --network host flowise
+	#      docker run -d --name flowise -p 3000:3000 --network host flowise
+	#cd /home/$USER/Flowise/docker
+	#cp .env.example .env
+	#docker compose up -d
+	cd /home/$USER/
+	echo "In future to start/stop containers, proceed, as:"
+	echo "            cd /home/$USER/Flowise"                  
+	echo "            docker start docker-flowise-1"                    
+	echo "            docker stop docker-flowise-1"                     
+	echo " Also, check all containers available, as:"
+	echo "             docker ps -a "     
+	#ln -sT /home/$USER/start_flowise.sh start_flowise.sh
+	ln -sT /home/$USER/stop_docker_flowise.sh /home/$USER/stop_flowise.sh
+	mkdir -p /home/$USER/Documents/flowise
+	cd /home/$USER/Documents/flowise
+	# For .pdf file, add '?raw=true' to URL
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/DesignChatflowsWithFlowise.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingfaceAcessToken.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/huggingface/huggingface_datasets.pdf?raw-true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/ExportDocumentStoreVectorStoreAndChatflow.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/RAGandToolAgent.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/flowise/huggingfaceAcessToken.pdf?raw=true
+	cd /home/$USER
+	mkdir -p /home/$USER/Documents/flowise/data/text_files
+	cd       /home/$USER/Documents/flowise/data/text_files
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l1_quantum.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l2_religion.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l3_law.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l4_psychology.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l5_law.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l6_quantum.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l7_law.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/flowise_models/chatflows/data/txt_Files/l8_religion.txt
+	cd /home/$USER
+	echo "flowise installed" > /home/$USER/flowise_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
+	bash reset_flowise.sh
+	bash start_n8n.sh
+	echo "  "
+	echo "  "
+	echo "n8n started?"
+	netstat -aunt | grep 5678
+	echo "flowise started?"
+	netstat -aunt | grep 3000
+	echo "===="
+	sleep 8
+	bash stop_flowise.sh
+	sleep 2
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	wsl.exe --shutdown
+	echo "Flowise docker already installed"
  fi
 
-
-#################
-# smolagents
-#################
-
-cd /home/$USER
-if [ ! -f /home/$USER/smoll_installed.txt ]; then
-    deactivate
-	cd /home/$USER
-	sleep 10
-    echo " "
-    echo " "
-	echo "Installing smollagents.."
-    sleep 3
-	# Activate python environment at 'smollagents'
-	#  for installing smollagents
-	##############
-	# Create python virtual env
-	##############
-	python3 -m venv /home/$USER/smollagents
-	source /home/$USER/smollagents/bin/activate
-	# 1.6 Essentials software
-    # Install smolagents
-	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
-	pip install --upgrade pip
-	pip install "smolagents[gradio]"
-	pip install "smolagents[toolkit]"
-	pip install "smolagents[mcp]"
-	pip install "smolagents[litellm]"		
-	pip install 'smolagents[transformers]'
-	pip install -U "huggingface_hub[cli]"
-	pip install -U huggingface_hub
-	pip install ddgs
-	# Essentials software
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install plotly
-	# Create script to activate 'smollagents' env
-	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
-	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
-	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
-	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
-	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
-	chmod +x /home/$USER/*.sh
-	sleep 2
-	echo "  "
-	echo "====="
-	echo "Putting HF token in .bashrc"
-	echo "====="
-	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
-	sleep 5
-	chmod +x /home/$USER/*.sh
-	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
-	pip list > /home/$USER/packagesInSmollagents_env.txt
-	wsl.exe --shutdown
-else
-    echo "  "
-fi	
 
 #################
 # langchain & langraph
@@ -1379,89 +1300,89 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"  
-		# Activate python environment at 'langchain'
-		#  for installing langchain and llama-index
-		##############
-		# Create python virtual env
-		##############
-		python3 -m venv /home/$USER/langchain
-		source /home/$USER/langchain/bin/activate
-		# 1.6 Essentials software
-		pip install --upgrade pip
-		pip install spyder numpy scipy pandas matplotlib sympy cython
-		pip install jupyterlab
-		pip install ipython
-		pip install notebook
-		pip install streamlit
-		# To connect to postgresql
-	    pip install psycopg2
-		# Required for spyder:
-		sudo apt install pyqt5-dev-tools -y
-		# Huggingface and llama.cpp related
-		pip install huggingface_hub
-		# Create script to activate 'langchain' env
-		echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-		echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
-		echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
-		echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
-		echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
-		chmod +x /home/$USER/*.sh
-		sleep 2
-		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
-		cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
-		source /home/$USER/langchain/bin/activate
-		pip install langchain
-		pip install langchain-openai
-		pip install langchain-community
-		pip install langchain-experimental
-		pip install langgraph
-		pip install "langserve[all]"
-		pip install langchain-cli
-		#################
-		# llamaindex
-		# To be installed ONLY in langchain virtual env
-		#################
-		# 1.0 LLamaindex install
-		# Mostly openai related
-		echo "Installing llama-index"
-		echo "  "
-		pip install llama-index
-		# 1,1 Ollama, huggingface and localai (openailike) oriented
-		pip install --upgrade transformers
-		pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
-		pip install llama-index-readers-file llama-index-embeddings-fastembed
-		# Needed inspite of code repeated above
-		pip install --upgrade transformers
-		# 1.2 Vector stores
-		pip install faiss-cpu
-		pip install qdrant-client llama-index-vector-stores-chroma 
-		pip install llama-index-vector-stores-qdrant fastembed
-		# 1.3 Web access site
-		pip install tavily-python
-		# 1.4 Yahoo finance data
-		pip install yfinance
-		# 1.5 For groq, together, mistralAI access
-		pip install llama-index-llms-groq
-		pip install llama-index-llms-together
-		pip install llama-index-llms-mistralai
-		pip install  llama-index-experimental
-	    pip install polars
-		# Download llamaindex tutorials
-		mkdir -p /home/$USER/Documents/llamaindex
-		cd /home/$USER/Documents/llamaindex
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
-		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
-		wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
-		echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
-		chmod +x /home/$USER/*.sh
-		chmod +x /home/$USER/start/*.sh
-		chmod +x /home/$USER/stop/*.sh
-		wsl.exe --shutdown
+	# Activate python environment at 'langchain'
+	#  for installing langchain and llama-index
+	##############
+	# Create python virtual env
+	##############
+	python3 -m venv /home/$USER/langchain
+	source /home/$USER/langchain/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install streamlit
+	# To connect to postgresql
+	pip install psycopg2
+	# Required for spyder:
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
+	# Huggingface and llama.cpp related
+	pip install huggingface_hub
+	# Create script to activate 'langchain' env
+	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
+	echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
+	echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
+	cp /home/$USER/activate_langchain_venv.sh  /home/$USER/stop/activate_langchain_venv.sh
+	source /home/$USER/langchain/bin/activate
+	pip install langchain
+	pip install langchain-openai
+	pip install langchain-community
+	pip install langchain-experimental
+	pip install langgraph
+	pip install "langserve[all]"
+	pip install langchain-cli
+	#################
+	# llamaindex
+	# To be installed ONLY in langchain virtual env
+	#################
+	# 1.0 LLamaindex install
+	# Mostly openai related
+	echo "Installing llama-index"
+	echo "  "
+	pip install llama-index
+	# 1,1 Ollama, huggingface and localai (openailike) oriented
+	pip install --upgrade transformers
+	pip install llama-index-core llama-index-readers-file llama-index-llms-ollama llama-index-embeddings-ollama llama-index-embeddings-huggingface llama-index-llms-openai-like llama-index-vector-stores-faiss 
+	pip install llama-index-readers-file llama-index-embeddings-fastembed
+	# Needed inspite of code repeated above
+	pip install --upgrade transformers
+	# 1.2 Vector stores
+	pip install faiss-cpu
+	pip install qdrant-client llama-index-vector-stores-chroma 
+	pip install llama-index-vector-stores-qdrant fastembed
+	# 1.3 Web access site
+	pip install tavily-python
+	# 1.4 Yahoo finance data
+	pip install yfinance
+	# 1.5 For groq, together, mistralAI access
+	pip install llama-index-llms-groq
+	pip install llama-index-llms-together
+	pip install llama-index-llms-mistralai
+	pip install  llama-index-experimental
+	pip install polars
+	# Download llamaindex tutorials
+	mkdir -p /home/$USER/Documents/llamaindex
+	cd /home/$USER/Documents/llamaindex
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
+	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
+	chmod +x /home/$USER/*.sh
+	chmod +x /home/$USER/start/*.sh
+	chmod +x /home/$USER/stop/*.sh
+	wsl.exe --shutdown
 fi	
 
 #############
@@ -1567,7 +1488,40 @@ else
 	echo "  "
 fi	
 
-
+###############
+# Google Antigravity install for WSL
+# Ref: https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3
+# 1. Install first in Windows from:
+#     https://antigravity.google/download
+# 2. PRess ctrl+shift+p and select WSL: Connect to WSL
+# 3. Select a folder in WSL, say, /home/ashok/Documents 
+# 
+################
+echo "    "
+echo "     "
+echo "#######3 AntiGravity on WSL ###########" 					> /home/$USER/start_antigravity.sh
+echo "To install antigravity on WSL, follow these steps"        >> /home/$USER/start_antigravity.sh
+echo "1. Install antigravity first in Windows"					>> /home/$USER/start_antigravity.sh
+echo "2. Press ctrl+shift+p and select WSL: Connect to WSL"		>> /home/$USER/start_antigravity.sh
+echo "3. Select a folder in WSL, say, /home/$USER/Documents"	>> /home/$USER/start_antigravity.sh
+echo "DONE"														>> /home/$USER/start_antigravity.sh
+echo "Refer: Medium article:"									>> /home/$USER/start_antigravity.sh
+echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		>> /home/$USER/start_antigravity.sh
+echo "========="												>> /home/$USER/start_antigravity.sh
+echo "    "
+echo "     "
+echo "#######3 AntiGravity on WSL ###########" 					
+echo "To install antigravity on WSL, follow these steps"        
+echo "1. Install antigravity first in Windows"					
+echo "2. Press ctrl+shift+p and select WSL: Connect to WSL"		
+echo "3. Select a folder in WSL, say, /home/$USER/Documents"	
+echo "DONE"														
+echo "Refer: Medium article:"									
+echo "https://medium.com/google-cloud/working-with-google-antigravity-in-wsl-944c96c949f3"		
+echo "    "
+echo "===File ./start_antigravity.sh======"		
+echo  "     "
+sleep 5
 
 ##################3
 # crawl4AI
@@ -2204,6 +2158,71 @@ if [ ! -f /home/$USER/portainer_installed.txt ]; then
 	else
 	   echo "Portainer not installed"
 	fi  
+fi	
+
+
+
+#################
+# smolagents
+#################
+
+cd /home/$USER
+if [ ! -f /home/$USER/smoll_installed.txt ]; then
+    deactivate
+	cd /home/$USER
+	sleep 10
+    echo " "
+    echo " "
+	echo "Installing smollagents.."
+    sleep 3
+	# Activate python environment at 'smollagents'
+	#  for installing smollagents
+	##############
+	# Create python virtual env
+	##############
+	python3 -m venv /home/$USER/smollagents
+	source /home/$USER/smollagents/bin/activate
+	# 1.6 Essentials software
+    # Install smolagents
+	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
+	pip install --upgrade pip
+	pip install "smolagents[gradio]"
+	pip install "smolagents[toolkit]"
+	pip install "smolagents[mcp]"
+	pip install "smolagents[litellm]"		
+	pip install 'smolagents[transformers]'
+	pip install -U "huggingface_hub[cli]"
+	pip install -U huggingface_hub
+	pip install ddgs
+	# Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install plotly
+	# Create script to activate 'smollagents' env
+	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	echo "  "
+	echo "====="
+	echo "Putting HF token in .bashrc"
+	echo "====="
+	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	sleep 5
+	chmod +x /home/$USER/*.sh
+	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
+	pip list > /home/$USER/packagesInSmollagents_env.txt
+	wsl.exe --shutdown
+else
+    echo "  "
 fi	
 
 
