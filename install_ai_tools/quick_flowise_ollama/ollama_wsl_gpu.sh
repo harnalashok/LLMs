@@ -218,7 +218,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo " "
     sleep 2
 	mkdir /home/$USER/crewai_pjt
-	python -m venv crewai_env
+	python3 -m venv crewai_env
 	# b) Activate the env
 	source /home/ashok/crewai_env/bin/activate
 	# c) Now install crewai and other packages using uv
