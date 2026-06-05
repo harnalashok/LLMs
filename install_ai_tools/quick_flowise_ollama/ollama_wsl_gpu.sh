@@ -207,7 +207,18 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	    echo "$LINE" >> "$FILE"
 	fi
 fi
-python -m venv crewai_env
+
+cd /home/$USER
+if [ ! -f /home/$USER/crewai_installed.txt ]; then
+    echo "  "
+    echo "------------"                            
+    echo " Will update Ubuntu"                     
+    echo " You will be asked for password...supply it..."
+    echo "----------"                              
+    echo " "
+    sleep 2
+	mkdir /home/$USER/crewai_pjt
+	python -m venv crewai_env
 	# b) Activate the env
 	source /home/ashok/crewai_env/bin/activate
 	# c) Now install crewai and other packages using uv
@@ -218,7 +229,24 @@ python -m venv crewai_env
 	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
 	uv pip install 'crewai[tools]'  newsapi-python
     uv pip install 'crewai-tools[mcp]'
-##################
+	# Create script to activate 'crewai_env' env
+	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
+	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "crewai_installed.txt"  /home/$USER/crewai_installed.txt
+	wsl.exe --shutdown
+else 
+    LINE="  1a. crewai updated"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+fi	
+
+
+fi##################
 # Install CUDA toolkit
 #################
 
