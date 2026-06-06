@@ -1108,7 +1108,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
-	LINE="  12. n8n Installed"
+	LINE="  11. n8n Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1180,7 +1180,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	sleep 2
 	echo "ollama_installed.txt" > ollama_installed.txt
 	chmod +x /home/$USER/*.sh
-	LINE="  13. Ollama Installed"
+	LINE="  12. Ollama Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1215,7 +1215,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	#ollama list
 	echo "ollama models installed" > /home/$USER/models_installed.txt
 	sleep 2
-	LINE="  14. Ollama models Downloaded"
+	LINE="  13. Ollama models Downloaded"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1372,7 +1372,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  15. Flowise Installed"
+	LINE="  14. Flowise Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1475,7 +1475,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  16. langchain and langgraph Installed"
+	LINE="  15. langchain and langgraph Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1585,6 +1585,43 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 else
 	echo "  "
 fi	
+
+
+#############
+# Install crewai folder of examples
+# Installs the folder from github: LLM/crewai
+############
+
+#  Download github folder 'crewai' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing crewai Models"
+	sleep 3
+	rm -rf /home/$USER/Documents/crewaiExamples
+	mkdir -p /home/$USER/Documents/crewaiExamples
+	cd /home/$USER/Documents/crewaiExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set crewaiModels
+	git pull origin main
+	find . -maxdepth 1 ! -name "crewai" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mkdir crewai
+	cd crewai
+	mv /home/$USER/Documents/crewaiExamples/crewai/* .
+	rm -rf /home/$USER/Documents/crewaiExamples
+	cd /home/$USER
+	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
+else
+	echo "  "
+fi	
+
+
 
 
 echo "You can terminate here"
