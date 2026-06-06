@@ -1,0 +1,23 @@
+# Last amended: 1st June, 2026
+# Test if MCP server is running
+# My folder: C:\Users\ashok\OneDrive\Documents\crewai\crewai_with mcp_servers
+
+Verify MCP server is running:
+============================
+	# 0. Start your mcp server, say, maths_mcp_server.py
+    # 1. Activate the crewai python environment
+    # 2. Use uv and execute:
+
+        uv run mcp dev maths_mcp_server.py
+    
+    # 3. The above may ask to install '@modelcontextprotocol/inspector'
+    # 4. Go ahead and install it.
+    # 5. A web-site opens to launch the inspector via the built-in CLI (http://localhost:6274/?MCP_PROXY_AUTH_TOKEN=ae6f2261545f53a7d1310979347cee7c3b6fc4ce1b404d878e2943b9ee90cc82#tools)
+
+    Verification Steps:
+        1. Open the UI link displayed in your terminal (typically http://localhost:5173).
+        2. Click Connect to initialize the handshake and check baseline capability registration.
+        3. Navigate to the Tools or Resources tab to view your parsed JSON schemas.
+        4. Fill in the arguments form and click Run Tool to inspect error handling and outputs
+
+#############
