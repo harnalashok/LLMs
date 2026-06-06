@@ -9,9 +9,8 @@ uv venv my_env
 source my_env/bin/activate		
 
 uv pip install crewai crewai[tools] langchain  langchain-openai langchain-ollama langchain-community langchain-classic langchain-experimental langchain-cli yfinance 
-
 uv pip install 'crewai-tools[mcp]'
-
+uv pip install fastmcp
 uv pip install llama-index llama-index-llms-groq llama-index-core  llama-index-readers-file llama-index-embeddings-huggingface  newsapi-python  
 
 #######
@@ -22,12 +21,11 @@ uv pip install llama-index llama-index-llms-groq llama-index-core  llama-index-r
 
 cd ~/
 uv tool install crewai  
-			   
 crewai create crew my_project
 cd my_project
 crewai install
 uv add crewai crewai[tools] langchain  langchain-openai langchain-ollama langchain-community langchain-classic langchain-experimental langchain-cli yfinance 
-
+uv pip install fastmcp
 uv add llama-index llama-index-llms-groq llama-index-core  llama-index-readers-file llama-index-embeddings-huggingface  'crewai[tools]'  newsapi-python  
 
 # Execute to see what all is installed:
@@ -53,6 +51,7 @@ cat pyproject.toml
 	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
 	uv pip install 'crewai[tools]'  newsapi-python
     uv pip install 'crewai-tools[mcp]'
+    uv pip install fastmcp
 	# d)
 	deactivate  
 
