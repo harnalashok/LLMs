@@ -46,6 +46,7 @@ cat /home/$USER/install_progerss.txt
 
 # Run following script only once
 # Needed as .bashrc is not executing when terminal opens
+# Amend .profile
 if [ ! -f /home/$USER/firsttime.txt ]; then
 	echo '# if running bash'   >> /home/$USER/.profile
 	echo 'if [ -n "$BASH_VERSION" ]; then' >> /home/$USER/.profile
