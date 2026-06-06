@@ -1592,7 +1592,12 @@ fi
 # Installs the folder from github: LLM/crewai
 ############
 
-#  Download github folder 'crewai' using command line
+#############
+# Install crewaiModels folder of examples
+# Installs the folder from github: LLM/crewaiModels
+############
+
+#  Download github folder 'crewaiModels' using command line
 #  Can copy and paste all at once:
 cd /home/$USER
 if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
@@ -1609,17 +1614,18 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	git sparse-checkout init --cone
 	git sparse-checkout set crewaiModels
 	git pull origin main
-	find . -maxdepth 1 ! -name "crewai" ! -name "." ! -name ".." -delete
+	find . -maxdepth 1 ! -name "crewaiModels" ! -name "." ! -name ".." -delete
 	cd /home/$USER/Documents
-	mkdir crewai
-	cd crewai
-	mv /home/$USER/Documents/crewaiExamples/crewai/* .
+	mkdir crewaiModels
+	cd crewaiModels
+	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
 	rm -rf /home/$USER/Documents/crewaiExamples
 	cd /home/$USER
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
 else
 	echo "  "
 fi	
+
 
 
 
