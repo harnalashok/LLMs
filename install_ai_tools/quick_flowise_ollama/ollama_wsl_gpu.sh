@@ -43,6 +43,7 @@ if ! grep -qF "$LINE" "$FILE"; then
 	echo "   "       >> "$FILE"
 fi
 cat /home/$USER/install_progerss.txt
+sleep 2
 
 ################
 # Update Ubuntu
@@ -201,7 +202,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
     wsl.exe --shutdown
- else 
+else 
     LINE="  1. Ubuntu updated"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
@@ -228,6 +229,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
 	uv pip install 'crewai[tools]'  newsapi-python
     uv pip install 'crewai-tools[mcp]'
+	deactivate
 	# Create script to activate 'crewai_env' env
 	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
 	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
@@ -236,9 +238,13 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
+	LINE="  2. crewai Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
 else 
-    LINE="  1a. crewai updated"
+    LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -253,10 +259,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/cuda_installed.txt ]; then
     cd /home/$USER
     echo " "
-    echo " "
     echo "------------"        
     echo " "
-    echo "  "
     echo "==>For WSL-Ubuntu ONLY<=="
 	# Remove old gpg key
 	echo $password | sudo -S  apt-key del 7fa2af80
@@ -285,13 +289,14 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	echo "  5.A 'Details' window will open. The driver version will be listed under the Driver Version field. "
 	sleep 8
 	echo "cuda is installed" > /home/$USER/cuda_installed.txt   # To avoid repeat cuda installation
-	LINE="  2. CUDA installed"
+	LINE="  3. CUDA installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+
 	wsl.exe --shutdown
 else
-   	LINE="  2. CUDA installed"
+   	LINE="  3. CUDA installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -392,11 +397,18 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     echo "Machine will be rebooted "
 	# Prevent any docker restarts on OS reboot
     docker update --restart=no $(docker ps -a -q)
-    wsl.exe --shutdown
+    
+    LINE="  4. Docker Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	wsl.exe --shutdown
 else
-    echo "Docker installation process completed"
-fi    
-
+   	LINE="  4. Docker installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+fi
 
 ##############
 # Create python virtual env
@@ -458,7 +470,16 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	sleep 2
 	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
 	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	LINE="  5. Python virtual env created"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
+else
+    LINE="  5. Python virtual env created"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi	
 fi   
 
 ###########################
@@ -496,6 +517,10 @@ if [ ! -d "$DIRECTORY" ]; then
 		   	chmod +x /home/$USER/*.sh
 			chmod +x /home/$USER/start/*.sh
 			chmod +x /home/$USER/stop/*.sh
+			LINE="  6. Anaconda Installed"
+			if ! grep -qF "$LINE" "$FILE"; then
+				echo "$LINE" >> "$FILE"
+			fi
 			wsl.exe --shutdown
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
@@ -553,7 +578,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
-	LINE="  5. Meilisearch installed"
+	LINE="  7. Meilisearch installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -589,7 +614,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
-	LINE="  6. chromadb installed"
+	LINE="  8. chromadb installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -633,7 +658,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 	sleep 2
-	LINE="  7. FAISS installed"
+	LINE="  9. FAISS installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -857,7 +882,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
 	cd /home/$USER
 	echo "postgresql installed" > /home/$USER/postgresql_installed.txt
-	LINE="  8. PostgreSQL installed"
+	LINE="  10. PostgreSQL installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -927,7 +952,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/stop/*.sh
 	sleep 3
 	
-	LINE="  9. Milvus installed"
+	LINE="  11. Milvus installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -1059,6 +1084,10 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
+	LINE="  12. n8n Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
 fi
 
@@ -1126,6 +1155,10 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	sleep 2
 	echo "ollama_installed.txt" > ollama_installed.txt
 	chmod +x /home/$USER/*.sh
+	LINE="  13. Ollama Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
 fi	
 
@@ -1154,8 +1187,12 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	echo " "
 	echo " "
 	#ollama list
-	echo "models installed" > /home/$USER/models_installed.txt
+	echo "ollama models installed" > /home/$USER/models_installed.txt
 	sleep 2
+	LINE="  14. Ollama models Downloaded"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
 fi
 
@@ -1308,6 +1345,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
+	LINE="  15. Flowise Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
 	echo "Flowise docker already installed"
  fi
@@ -1406,6 +1447,10 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
+	LINE="  16. langchain and langgraph Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	wsl.exe --shutdown
 fi	
 
@@ -1511,6 +1556,14 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 else
 	echo "  "
 fi	
+
+
+echo "You can terminate here"
+read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
+sleep 5
+
+
+
 
 ###############
 # Google Antigravity install for WSL
