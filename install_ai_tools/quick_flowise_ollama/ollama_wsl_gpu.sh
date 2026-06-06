@@ -43,6 +43,20 @@ if ! grep -qF "$LINE" "$FILE"; then
 	echo "   "       >> "$FILE"
 fi
 cat /home/$USER/install_progerss.txt
+
+# Run following script only once
+# Needed as .bashrc is not executing when terminal opens
+if [ ! -f /home/$USER/firsttime.txt ]; then
+	echo '# if running bash'   >> /home/$USER/.profile
+	echo 'if [ -n "$BASH_VERSION" ]; then' >> /home/$USER/.profile
+	echo '# include .bashrc if it exists'   >> /home/$USER/.profile
+	echo ' if [ -f "$HOME/.bashrc" ]; then'  >> /home/$USER/.profile
+	echo '      . "$HOME/.bashrc"'  >> /home/$USER/.profile
+	echo '    fi'  >> /home/$USER/.profile
+	echo 'fi'  >> /home/$USER/.profile
+	echo firsttime.txt > firsttime.txt
+fi
+
 sleep 2
 
 ################
