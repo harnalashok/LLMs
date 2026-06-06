@@ -1588,11 +1588,6 @@ fi
 
 
 #############
-# Install crewai folder of examples
-# Installs the folder from github: LLM/crewai
-############
-
-#############
 # Install crewaiModels folder of examples
 # Installs the folder from github: LLM/crewaiModels
 ############
