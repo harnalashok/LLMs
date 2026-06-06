@@ -201,6 +201,11 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
+	LINE="  1. Ubuntu updated"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sleep 2
     wsl.exe --shutdown
 else 
     LINE="  1. Ubuntu updated"
@@ -242,16 +247,17 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 else 
     LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-fi	
+fi
 
 
-fi##################
+##################
 # Install CUDA toolkit
 #################
 
@@ -293,7 +299,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-
+    sleep 2
 	wsl.exe --shutdown
 else
    	LINE="  3. CUDA installed"
@@ -337,6 +343,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     echo "Download script to print names of docker containers"
     wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
     chmod +x *.sh
+	sleep 2
     wsl.exe --shutdown
 else
    echo "Docker is installed"
@@ -402,6 +409,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 else
    	LINE="  4. Docker installed"
@@ -474,6 +482,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 else
     LINE="  5. Python virtual env created"
@@ -521,6 +530,7 @@ if [ ! -d "$DIRECTORY" ]; then
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
+			sleep 2
 			wsl.exe --shutdown
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
@@ -1088,6 +1098,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 fi
 
@@ -1159,6 +1170,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 fi	
 
@@ -1193,6 +1205,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 fi
 
@@ -1349,6 +1362,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 	echo "Flowise docker already installed"
  fi
@@ -1451,6 +1465,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 fi	
 
@@ -1676,6 +1691,7 @@ if [ ! -f /home/$USER/webscrapper_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+	sleep 2
 	wsl.exe --shutdown
 else
     echo "   "
@@ -1979,6 +1995,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 		  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
 		  echo "llama.cpp installed"
 		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
+		  sleep 2
 		  wsl.exe --shutdown
 	else
 		   echo "llama-cpp not installed"
@@ -2061,6 +2078,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 		  echo "llamacpp_installed.txt" > /home/$USER/llamacpp_installed.txt
 		  chmod +x /home/$USER/start/*.sh
 		  chmod +x /home/$USER/*.sh
+		  sleep 2
 		  wsl.exe --shutdown
 	else
 		  echo "Skipping install of llama.cpp"
