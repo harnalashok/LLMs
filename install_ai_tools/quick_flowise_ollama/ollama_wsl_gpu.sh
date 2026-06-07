@@ -1640,7 +1640,9 @@ fi
 
 
 
-
+echo "   "
+echo "    "
+echo "============"
 echo "You can terminate here"
 read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
 sleep 5
