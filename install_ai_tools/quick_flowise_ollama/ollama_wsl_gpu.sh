@@ -1259,7 +1259,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	cd /home/$USER/
 	# Install Flowise through docker"
 	# Ref: https://docs.flowiseai.com/getting-started
-	echo "Installing flowise docker. Takes time.."          
+	echo "Installing flowise docker. Takes a lot of time..especially at 6/6 point..."          
 	# Start script
 	echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
 	echo " "                                                   >> /home/$USER/start_flowise.sh
