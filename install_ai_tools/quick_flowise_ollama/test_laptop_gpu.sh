@@ -48,7 +48,8 @@ echo "======="         >> /home/$USER/test_report.txt
 echo "    "            >> /home/$USER/test_report.txt
 
 
-
+echo "    "
+echo "     "
 abc=
 abc=`sudo ss -tulpn | grep ':5678'`
 
@@ -60,6 +61,9 @@ fi
 
 #######3
 # Test ollama
+
+echo "    "
+echo "     "
 abc=
 abc=`sudo ss -tulpn | grep ':11434'`
 
@@ -72,6 +76,9 @@ fi
 #######3
 # Test postgres
 
+echo "    "
+echo "    "
+
 abc=
 abc=`sudo ss -tulpn | grep ':5432'`
 
@@ -82,6 +89,8 @@ else
 fi
 
 #######3
+echo "    "
+echo "    "
 abc=
 abc=`sudo ss -tulpn | grep ':8000'`
 
@@ -93,6 +102,8 @@ fi
 
 #######3
 
+echo "    "
+echo "     "
 abc=
 abc=`sudo ss -tulpn | grep ':7700'`
 
@@ -104,18 +115,25 @@ fi
 
 ###########
 
-abc=
-abc=`sudo ss -tulpn | grep ':3000'`
+sleep 3
 
-if [[ -n $abc ]]; then
+echo "    "
+echo "    "
+acc=
+acc=`sudo ss -tulpn | grep ':3000'`
+
+if [[ -n $acc ]]; then
   echo "6. flowise is started."     >> /home/$USER/test_report.txt
 else
    echo "6. flowise NOT installed"    >> /home/$USER/test_report.txt
 fi
 
+echo $acc
+
 ###########
 
-
+echo "   "
+echo "   "
 abc=
 abc=`nvidia-smi | grep 'Memory-Usage'`
 if [[ -n $abc ]]; then
@@ -126,6 +144,8 @@ fi
 
 ###############3
 
+echo "   "
+echo "   "
 abc=
 abc=`node --version | grep '22'`
 if [[ -n $abc ]]; then
@@ -134,6 +154,8 @@ else
    echo "8. nodejs ver 22.x not installed"   >> /home/$USER/test_report.txt
 fi
 
+echo "    "
+echo "    "
 abc=
 abc=`npm --version | grep '10'`
 if [[ -n $abc ]]; then
@@ -141,6 +163,7 @@ if [[ -n $abc ]]; then
 else
    echo "8. npm ver 10.x not installed"    >> /home/$USER/test_report.txt
 fi
+
 
 echo "   "        >> /home/$USER/test_report.txt
 echo "======"     >> /home/$USER/test_report.txt
