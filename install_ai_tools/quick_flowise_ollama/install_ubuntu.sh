@@ -1206,6 +1206,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull openhermes
 	docker exec -it ollama ollama pull granite4.1:8b
 	docker exec -it ollama ollama pull NeuralNet/openchat-3.6
+	docker exec -it ollama ollama pull phi4-mini:3.8b
+	docker exec -it ollama ollama pull qwen2.5:1.5b
 	echo " "
 	echo " "
 	#ollama list
