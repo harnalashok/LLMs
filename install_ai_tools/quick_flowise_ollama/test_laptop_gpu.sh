@@ -8,12 +8,14 @@ rm /home/$USER/test_report.txt
 
 # Stop software, if started
 echo "Stopping services, if started..."
+echo "========="
 docker stop chroma
 docker stop ollama
 docker stop flowise
 docker stop n8n
 docker stop meilisearch
-
+echo "   "
+echo "DONE....."
 echo "   "
 echo "    "
 echo "Starting services"
