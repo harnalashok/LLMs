@@ -31,6 +31,8 @@ if [ ! -f /home/$USER/firsttime.txt ]; then
 	echo "Install Visual Studio Coder"
 	echo "Will install Ragflow docker"
 	echo "==========================="
+	# Tests different software installation
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test_laptop_gpu.sh
 
 	# Needed as .bashrc is not executing when terminal opens
 	# Amend .profile
@@ -1637,8 +1639,10 @@ else
 	echo "  "
 fi	
 
-
-
+echo "   "
+echo "Testing what all is installed"
+echo "   "
+bash test_laptop_gpu.sh
 echo "    "
 echo "   "
 echo "    "

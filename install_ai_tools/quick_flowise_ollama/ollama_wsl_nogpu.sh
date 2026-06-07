@@ -63,6 +63,7 @@ if [ ! -f /home/$USER/first_time.txt ]; then
     echo "------------"                            
 	echo "========script=============="
 	echo "Will update Ubuntu and install nodejs and uv"
+	echo "Will install crewai"
 	echo "Will install docker"
 	echo "Will install flowise docker"
 	echo "Will install ollama docker without gpu"
@@ -77,6 +78,8 @@ if [ ! -f /home/$USER/first_time.txt ]; then
 	echo "Install latest anaconda"
 	echo "Will install Ragflow docker"
 	echo "==========================="
+	# Download Test script
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test_laptop_gpu.sh
 	sleep 5
 	echo "first_time.txt" > /home/$USER/first_time.txt
 else 
@@ -248,6 +251,54 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
         wsl.exe --shutdown
     fi
 fi
+
+
+################
+# Install crewai
+################
+
+cd /home/$USER
+if [ ! -f /home/$USER/crewai_installed.txt ]; then
+    echo "  "
+    echo "------------"                            
+    echo " Will install crewai"                     
+    echo "----------"                              
+    echo " "
+    sleep 2
+	mkdir /home/$USER/crewai_pjt
+	python3 -m venv crewai_env
+	# b) Activate the env
+	source /home/ashok/crewai_env/bin/activate
+	# c) Now install crewai and other packages using uv
+	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
+	uv pip install langchain-openai langchain-ollama langchain-community  
+	uv pip install langchain-experimental langchain-classic yfinance 
+	uv pip install llama-index llama-index-llms-groq llama-index-core
+	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
+	uv pip install 'crewai[tools]'  newsapi-python
+    uv pip install 'crewai-tools[mcp]'
+	deactivate
+	# Create script to activate 'crewai_env' env
+	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
+	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
+	LINE="  2. crewai Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sleep 2
+	wsl.exe --shutdown
+else 
+    LINE="  2. crewai Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+fi
+
 
 ##################
 # Docker installation-I
@@ -1406,6 +1457,9 @@ else
     echo "  "
 fi	
 
+
+
+
 #############
 # Install RAG and RAG performance eval system
 # Created using Google Antigravity
@@ -1560,6 +1614,21 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 else
 	echo "  "
 fi	
+
+
+echo "   "
+echo "Testing what all is installed"
+echo "   "
+bash test_laptop_gpu.sh
+echo "    "
+echo "   "
+echo "    "
+echo "============"
+echo "You can terminate here"
+read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
+sleep 5
+
+
 
 
 
