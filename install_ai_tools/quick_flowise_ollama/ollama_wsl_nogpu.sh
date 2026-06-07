@@ -726,7 +726,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		cd /homne/$USER/
 		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 	fi		
-		
+
 	##########################
 	### Install chromadb docker
 	# Ref: https://docs.trychroma.com/production/containers/docker
@@ -1022,6 +1022,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull deepseek-r1:1.5b
 	  docker exec -it ollama ollama pull qwen3.5:0.8b
 	  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
+	  docker exec -it ollama ollama pull phi4-mini:3.8b
+	  docker exec -it ollama ollama pull qwen2.5:1.5b
 	  echo " "
 	  echo " "
 	  #ollama list
