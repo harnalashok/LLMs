@@ -1,53 +1,40 @@
 #!/bin/bash
 
-# Last amended: 15th Feb, 2026
+# Last amended: 07th June, 2026
 
-echo "========script=============="
-echo "Will update Ubuntu and install nodejs"
-echo "Will install cuda toolkit"
-echo "Will install docker"
-echo "Will install python venv"
-echo "Install portainer"
-echo "Will install flowise docker"
-echo "Will install ollama docker for gpu"
-echo "Will install milvus vector store"
-echo "Will install meilisearch vector store"
-echo "Will install chromadb docker"
-echo "Will install n8n docker"
-echo "Will install dify docker"
-echo "Will install mongodb and mongosh:"
-echo "Installs postgres db and pgvector"
-echo "Installs xinference"
-echo "Installs AutoGen Studio"
-echo "Install latest anaconda"
-echo "Install Visual Studio Coder"
-echo "Will install Ragflow docker"
-echo "==========================="
+
+# CHANGE IT, IF DIFFERENT
 password="ashok"
-sleep 2
 
-# Are we having wsl system
-WSL=$(cat /proc/version)
-WSLSYSTEM=
-if echo "$WSL" | grep -qi wsl ; then
-    WSLSYSTEM="yes"
-fi
-
-FILE="/home/$USER/install_progerss.txt"
-LINE="Record of installation progress"
-if ! grep -qF "$LINE" "$FILE"; then
-    echo "   "       >> "$FILE"
-	echo "=========" >> "$FILE"
-    echo "$LINE" >> "$FILE"
-	echo "=========" >> "$FILE"
-	echo "   "       >> "$FILE"
-fi
-cat /home/$USER/install_progerss.txt
 
 # Run following script only once
-# Needed as .bashrc is not executing when terminal opens
-# Amend .profile
 if [ ! -f /home/$USER/firsttime.txt ]; then
+	echo "========script=============="
+	echo "Will update Ubuntu and install nodejs"
+	echo "Will install cuda toolkit"
+	echo "Will install docker"
+	echo "Will install python venv"
+	echo "Install portainer"
+	echo "Will install flowise docker"
+	echo "Will install ollama docker for gpu"
+	echo "Will install milvus vector store"
+	echo "Will install meilisearch vector store"
+	echo "Will install chromadb docker"
+	echo "Wil install crewai"
+	echo "Will install n8n docker"
+	echo "Will install dify docker"
+	echo "Will install mongodb and mongosh:"
+	echo "Installs postgres db and pgvector"
+	echo "Installs xinference"
+	echo "Installs AutoGen Studio"
+	echo "Install latest anaconda"
+	echo "Install Visual Studio Coder"
+	echo "Will install Ragflow docker"
+	echo "==========================="
+
+	# Needed as .bashrc is not executing when terminal opens
+	# Amend .profile
+
 	echo '# if running bash'   >> /home/$USER/.profile
 	echo 'if [ -n "$BASH_VERSION" ]; then' >> /home/$USER/.profile
 	echo '# include .bashrc if it exists'   >> /home/$USER/.profile
@@ -58,6 +45,28 @@ if [ ! -f /home/$USER/firsttime.txt ]; then
 	echo firsttime.txt > firsttime.txt
 fi
 
+sleep 2
+
+# Are we having wsl system
+WSL=$(cat /proc/version)
+WSLSYSTEM=
+if echo "$WSL" | grep -qi wsl ; then
+    WSLSYSTEM="yes"
+fi
+
+
+FILE="/home/$USER/install_progerss.txt"
+LINE="Record of installation progress"
+if ! grep -qF "$LINE" "$FILE"; then
+    echo "   "       >> "$FILE"
+	echo "=========" >> "$FILE"
+    echo "$LINE" >> "$FILE"
+	echo "=========" >> "$FILE"
+	echo "   "       >> "$FILE"
+fi
+
+# What all is installed
+cat /home/$USER/install_progerss.txt
 sleep 2
 
 ################
@@ -229,6 +238,10 @@ else
 	fi
 fi
 
+################
+# Install crewai
+################
+
 cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo "  "
@@ -360,9 +373,8 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     chmod +x *.sh
 	sleep 2
     wsl.exe --shutdown
-else
-   echo "Docker is installed"
-fi  
+fi
+  
 
 ##################
 # Docker installation-II
@@ -550,7 +562,6 @@ if [ ! -d "$DIRECTORY" ]; then
 	     else
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
 	     fi   
-	
 fi	 
 
 

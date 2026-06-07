@@ -725,7 +725,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		sleep 4
 		cd /homne/$USER/
 		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
-	fi			
+	fi		
+		
 	##########################
 	### Install chromadb docker
 	# Ref: https://docs.trychroma.com/production/containers/docker
