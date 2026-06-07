@@ -6,13 +6,6 @@
 rm /home/$USER/test_report.txt
 
 
-echo "   "
-echo "    "
-echo "Starting services"
-echo "==========="
-echo "   "
-echo "    "
-
 # Stop software, if started
 echo "Stopping services, if started..."
 docker stop chroma
@@ -21,7 +14,12 @@ docker stop flowise
 docker stop n8n
 docker stop meilisearch
 
-echo "  "
+echo "   "
+echo "    "
+echo "Starting services"
+echo "==========="
+echo "   "
+echo "    "
 
 # Start apps
 bash start_ollama.sh
