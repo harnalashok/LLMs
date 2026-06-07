@@ -29,17 +29,27 @@ echo "   "
 echo "    "
 
 # Start apps
+echo "  "
+echo "   "
 bash start_ollama.sh
+echo "  "
+echo "   "
 bash start_postgresql.sh
+echo "  "
+echo "   "
 bash start_n8n.sh
+echo "  "
+echo "   "
 bash start_flowise.sh
+echo "  "
+echo "   "
 bash start_chroma.sh
+echo "  "
+echo "   "
 bash start_meilisearch.sh 
 echo "=============="
 echo "  "
 echo "   "
-# Test n8n
-
 #######3
 
 echo "======="         > /home/$USER/test_report.txt
@@ -48,8 +58,6 @@ echo "======="         >> /home/$USER/test_report.txt
 echo "    "            >> /home/$USER/test_report.txt
 
 
-echo "    "
-echo "     "
 abc=
 abc=`sudo ss -tulpn | grep ':5678'`
 
@@ -62,8 +70,6 @@ fi
 #######3
 # Test ollama
 
-echo "    "
-echo "     "
 abc=
 abc=`sudo ss -tulpn | grep ':11434'`
 
@@ -76,8 +82,6 @@ fi
 #######3
 # Test postgres
 
-echo "    "
-echo "    "
 
 abc=
 abc=`sudo ss -tulpn | grep ':5432'`
@@ -89,8 +93,6 @@ else
 fi
 
 #######3
-echo "    "
-echo "    "
 abc=
 abc=`sudo ss -tulpn | grep ':8000'`
 
@@ -102,8 +104,6 @@ fi
 
 #######3
 
-echo "    "
-echo "     "
 abc=
 abc=`sudo ss -tulpn | grep ':7700'`
 
@@ -117,8 +117,6 @@ fi
 
 sleep 3
 
-echo "    "
-echo "    "
 acc=
 acc=`sudo ss -tulpn | grep ':3000'`
 
@@ -128,12 +126,8 @@ else
    echo "6. flowise NOT installed"    >> /home/$USER/test_report.txt
 fi
 
-echo $acc
-
 ###########
 
-echo "   "
-echo "   "
 abc=
 abc=`nvidia-smi | grep 'Memory-Usage'`
 if [[ -n $abc ]]; then
@@ -144,8 +138,6 @@ fi
 
 ###############3
 
-echo "   "
-echo "   "
 abc=
 abc=`node --version | grep '22'`
 if [[ -n $abc ]]; then
@@ -154,8 +146,6 @@ else
    echo "8. nodejs ver 22.x not installed"   >> /home/$USER/test_report.txt
 fi
 
-echo "    "
-echo "    "
 abc=
 abc=`npm --version | grep '10'`
 if [[ -n $abc ]]; then
