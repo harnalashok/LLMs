@@ -10,10 +10,15 @@ rm /home/$USER/test_report.txt
 echo "Stopping services, if started..."
 echo "========="
 docker stop chroma
+sleep 2
 docker stop ollama
+sleep 2
 docker stop flowise
+sleep 2
 docker stop n8n
+sleep 2
 docker stop meilisearch
+sleep 2
 echo "   "
 echo "DONE....."
 echo "   "
