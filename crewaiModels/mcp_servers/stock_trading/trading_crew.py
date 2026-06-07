@@ -1,4 +1,4 @@
-# trading_crew.py
+# MCP Server: technical_indicators_mcp.py
 # Folder: /home/ashok/finance_pjt/
 # CrewAI Trading Agent — RSI & MACD Analysis
 #

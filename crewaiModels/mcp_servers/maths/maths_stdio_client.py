@@ -4,10 +4,11 @@
 # Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 MCP Maths client
 =====
+    MCP Server: math_stdio_server.py
     It connects to tools advertised locally
     by math_stdio_server.py. This file is in
     'servers' folder, below the current folder. 
-
+    
 """
 
 # 1.0

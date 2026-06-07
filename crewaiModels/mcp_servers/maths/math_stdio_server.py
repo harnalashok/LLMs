@@ -3,6 +3,7 @@
 # https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 MCP Maths server
 =====
+    MCP Client: math_stdio_client.py    
     A simple Math MCP server that implements 
     the Model Context Protocol. This server provides 
     mathematical operations as tools that can be 

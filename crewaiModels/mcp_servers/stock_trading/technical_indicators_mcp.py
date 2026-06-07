@@ -1,8 +1,10 @@
 """
 # Last amended: 31st May, 2026
+# MCP Client: trading_crew.py
+#
 # Keep this file: 
 #       /home/ashok/finance_pjt/servers/technical_indicators_mcp.py
-# 
+
 # Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 """
 
