@@ -154,15 +154,10 @@ else
    echo "8. npm ver 10.x not installed"    >> /home/$USER/test_report.txt
 fi
 
-
-echo "   "        >> /home/$USER/test_report.txt
 echo "======"     >> /home/$USER/test_report.txt
-abc=`ollama list`
-echo $abc          >> /home/$USER/test_report.txt
+ollama list       >> /home/$USER/test_report.txt
 echo "======"     >> /home/$USER/test_report.txt
 
-echo "    "
-echo "   "
 echo "======"
 cat /home/$USER/test_report.txt
 
