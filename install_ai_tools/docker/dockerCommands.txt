@@ -1,7 +1,8 @@
-# Last amended: 9th Feb, 2026
+# Last amended: 8th June, 2026
 # My folder: D:\OneDrive\Documents\docker
 # Ref: https://docs.docker.com/engine/reference/commandline/builder/
 # kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
+# YouTube video: https://www.youtube.com/watch?v=pg19Z8LL06w
 
 
 ## 1. Quick Summary:
