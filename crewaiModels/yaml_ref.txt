@@ -1,0 +1,10 @@
+YAML:
+
+Ist Ref:
+https://dev.to/aadarsh_verma_a3415c0de85/yaml-tutorial-a-beginners-guide-to-writing-yaml-files-3438
+
+IInd Ref:
+https://xmlaficionado.com/XML+Aficionado/YAML+Tutorial
+
+Video:
+https://www.youtube.com/watch?v=BEki_rsWu4E
