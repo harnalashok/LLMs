@@ -11,7 +11,7 @@ echo "Stopping services, if started..."
 echo "========="
 docker stop chroma
 sleep 2
-docker stop ollama
+#docker stop ollama
 sleep 2
 docker stop flowise
 sleep 2
@@ -154,11 +154,12 @@ else
    echo "8. npm ver 10.x not installed"    >> /home/$USER/test_report.txt
 fi
 
+sleep 2
+
 echo "======"     >> /home/$USER/test_report.txt
-ollama list       >> /home/$USER/test_report.txt
+ollama list       | tee -a  /home/$USER/test_report.txt
 echo "======"     >> /home/$USER/test_report.txt
 
-echo "======"
 cat /home/$USER/test_report.txt
 
 
