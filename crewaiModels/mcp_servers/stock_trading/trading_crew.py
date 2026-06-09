@@ -1,3 +1,4 @@
+# This is MCP client
 # MCP Server: technical_indicators_mcp.py
 # Folder: /home/ashok/finance_pjt/
 # CrewAI Trading Agent — RSI & MACD Analysis
@@ -73,6 +74,11 @@ mcp_params = StdioServerParameters(
 # 2.1
 # MCPServerAdapter wraps the MCP server and converts its tools
 # into CrewAI-compatible tool objects.
+#     Given 'server parameters', MCPServerAdapter 
+#       connects to MCP server(s) and makes available
+#        tools
+# Ref: https://docs.crewai.com/en/mcp/multiple-servers 
+
 mcp_adapter = MCPServerAdapter(mcp_params)
 mcp_tools   = mcp_adapter.tools   # list: [fetch_ohlcv, calculate_rsi, calculate_macd]
 

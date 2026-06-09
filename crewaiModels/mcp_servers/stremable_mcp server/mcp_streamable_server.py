@@ -1,79 +1,60 @@
 """
-# Last amended: 31st May, 2026
-# https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
+# Last amended: 8th June, 2026
+Keep this server in 'servers' folder.
+Start this server in a terminal, as:
 
-MCP Maths server
-Keep it under servers folder
-Start it in a seperate terminal, as:
-    python3 math_stdio_server.py
-=====
-    MCP Client: math_stdio_client.py
-    
-    This is a simple Math MCP server that implements 
-    the Model Context Protocol. This server provides 
-    mathematical operations as tools that can be 
-    discovered and used by MCP clients.
+    python3 mcp_streamable_server.py'
 
-    As to how to test it, see below.
+Client is: 
+    'stremable_mcp_client.py'
 
+Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/blob/main/script_approach_examples/streamable_http_client_demo.py
 """
 
-# 1.0
-# Use fastmcp 
-from mcp.server.fastmcp import FastMCP
 
-# 1.1 Our MCP server name is: "Math" 
-mcp = FastMCP("Math")
+# In crewai_env, issue:
+# uv pip install fastmcp
+from fastmcp import FastMCP
 
-# 2.0 Tools. We have six tools.
+mcp = FastMCP("Hello")
 
-# 2.1
 @mcp.tool()
-def add(a: float, b: float) -> float:
-    """Add two numbers (ints or floats)"""
-    return a + b
+def hello(name: str) -> str:
+    """Say hello to the user"""
+    return f"Hello, {name}!"
 
-# 2.2
-@mcp.tool()
-def subtract(a: float, b: float) -> float:
-    """Subtract b from a (ints or floats)"""
-    return a - b
-
-# 2.3
-@mcp.tool()
-def multiply(a: float, b: float) -> float:
-    """Multiply two numbers (ints or floats)"""
-    return a * b
-
-# 2.4
-@mcp.tool()
-def divide(numerator: float, denominator: float) -> float:
-    """Divide numerator by denominator (floats ok)"""
-    if denominator == 0:
-        raise ValueError("Cannot divide by zero")
-    return numerator / denominator
-
-# 2.5
-@mcp.tool()
-def power(base: float, exponent: float) -> float:
-    """Raise base to the power of exponent (floats ok)"""
-    return base ** exponent
-
-# 2.6
-@mcp.tool()
-def sqrt(number: float) -> float:
-    """Calculate the square root of a number"""
-    if number < 0:
-        raise ValueError("Cannot calculate square root of a negative number")
-    return number ** 0.5
-
-# 3.0
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(
+            transport="streamable-http", 
+            host="localhost", 
+            port=8001
+           )
+
 
 """
-Verify MCP server is running:
-============================
+
+Question 1: Does a streamable http mcp server creates a web-server?
+
+    Yes, absolutely. A Model Context Protocol (MCP) server configured
+    to use the Streamable HTTP transport creates and acts as a standard 
+    web server. Unlike the local stdio transport (where the server runs 
+    as a hidden local background process communicating via standard input/output),
+    the Streamable HTTP transport exposes the MCP server to the network via a URL.
+    Here is a breakdown of how it behaves as a web server, the underlying mechanics, 
+    and how it differs based on your tech stack.
+
+    How It Functions as a Web Server:
+    ========================
+    Network Availability: The server listens on a specific network port 
+    (e.g., http://localhost:3000 or a public domain).
+    Unified API Endpoint: It exposes a web endpoint (frequently hosted at /mcp)
+    to handle incoming requests.
+    Standard HTTP Methods: It handles standard web traffic, processing inbound 
+    tool or context queries via HTTP POST and GET requests.
+    Reverse Proxies & Firewalls: Because it uses native web protocols, you can 
+    put it behind standard web infrastructure like Nginx, AWS ALBs, or Cloudflare.
+
+Question 2: How to verify MCP server is running?
 
     # Use uv for package management, launch the inspector via the built-in CLI:
     # Activate the crewai python environment
@@ -90,8 +71,9 @@ Verify MCP server is running:
         2. Click Connect to initialize the handshake and check baseline capability registration.
         3. Navigate to the Tools or Resources tab to view your parsed JSON schemas.
         4. Fill in the arguments form and click Run Tool to inspect error handling and outputs
-        
-Question : HTTP Transport, how does it work?
+
+
+Question 3: HTTP Transport, how does it work?
 Ref:      https://gofastmcp.com/deployment/running-server
 
     HTTP transport turns your MCP server into a web service accessible via a URL. This 
@@ -118,6 +100,9 @@ Ref:      https://gofastmcp.com/deployment/running-server
             a. Local development and testing
             b. Claude Desktop integration
             c. Command-line tools
-            d. Single-user applications        
+            d. Single-user applications
+​
 
-"""
+
+"""    
+    

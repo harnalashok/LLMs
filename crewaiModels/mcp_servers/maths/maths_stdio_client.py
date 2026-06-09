@@ -5,6 +5,8 @@
 MCP Maths client
 =====
     MCP Server: math_stdio_server.py
+    Start the server in a separate terminal
+    
     It connects to tools advertised locally
     by math_stdio_server.py. This file is in
     'servers' folder, below the current folder. 
@@ -36,6 +38,11 @@ server_params=StdioServerParameters(
 )
 
 # 5.0 Use the StdioServerParameters object to create a MCPServerAdapter
+#     Given 'server parameters', MCPServerAdapter 
+#       connects to MCP server(s) and makes available
+#        tools
+# Ref: https://docs.crewai.com/en/mcp/multiple-servers 
+
 with MCPServerAdapter(server_params) as tools:
     print(f"Available tools from Stdio MCP server: {[tool.name for tool in tools]}")
 

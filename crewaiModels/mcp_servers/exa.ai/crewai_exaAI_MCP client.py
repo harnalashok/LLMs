@@ -34,6 +34,11 @@ server_params = {"url": "https://mcp.exa.ai/mcp?api_key=ec0029cc-e2c1-4664-b5a8-
                  "transport": "streamable-http" \
                 }
 
+#     Given 'server parameters', MCPServerAdapter 
+#       connects to MCP server(s) and makes available
+#        tools
+# Ref: https://docs.crewai.com/en/mcp/multiple-servers 
+
 with MCPServerAdapter(server_params) as mcp_tools:
     fetch_tool = [t for t in mcp_tools if t.name == "web_fetch_exa"][0]
     fetch_tool.result_as_answer = False
