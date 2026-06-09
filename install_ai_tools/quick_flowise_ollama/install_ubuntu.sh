@@ -2485,6 +2485,7 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	echo "   "
 	echo "Installing crewai Models"
 	sleep 3
+	rm -rf /home/$USER/Documents/crewaiModels
 	rm -rf /home/$USER/Documents/crewaiExamples
 	mkdir -p /home/$USER/Documents/crewaiExamples
 	cd /home/$USER/Documents/crewaiExamples
