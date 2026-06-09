@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Last amended: 11th May, 2026
+# Last amended: 9th June, 2026
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
 echo "Will install cuda toolkit"
+echo "Will install crewai"
 echo "Will install docker"
 echo "Will install python venv"
 echo "Install portainer"
@@ -229,6 +230,7 @@ else
 	fi
 fi
 
+
 ##################
 # Install CUDA toolkit
 #################
@@ -278,6 +280,55 @@ else
 	    echo "$LINE" >> "$FILE"
 	fi
 fi
+
+################
+# Install crewai
+################
+
+cd /home/$USER
+if [ ! -f /home/$USER/crewai_installed.txt ]; then
+    echo "  "
+    echo "------------"                            
+    echo " Will install crewai"                     
+    echo "----------"                              
+    echo " "
+    sleep 2
+	mkdir /home/$USER/crewai_pjt
+	python3 -m venv crewai_env
+	# b) Activate the env
+	source /home/ashok/crewai_env/bin/activate
+	# c) Now install crewai and other packages using uv
+	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
+	uv pip install langchain-openai langchain-ollama langchain-community  
+	uv pip install langchain-experimental langchain-classic yfinance 
+	uv pip install llama-index llama-index-llms-groq llama-index-core
+	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
+	uv pip install 'crewai[tools]'  newsapi-python
+    uv pip install 'crewai-tools[mcp]'
+	deactivate
+	# Create script to activate 'crewai_env' env
+	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
+	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
+	LINE="  2. crewai Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sleep 2
+	wsl.exe --shutdown
+else 
+    LINE="  2. crewai Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+fi
+
+
+
 
 ##################
 # Docker installation-I
@@ -1208,6 +1259,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull NeuralNet/openchat-3.6
 	docker exec -it ollama ollama pull phi4-mini:3.8b
 	docker exec -it ollama ollama pull qwen2.5:1.5b
+	docker exec -it ollama ollama pull qwen2.5:latest
 	echo " "
 	echo " "
 	#ollama list
@@ -2418,6 +2470,42 @@ if [ ! -f /home/$USER/ragflow_installed.txt ]; then
         docker update --restart=no $(docker ps -a -q)
 	fi
 fi	
+
+#############
+# Install crewaiModels folder of examples
+# Installs the folder from github: LLM/crewaiModels
+############
+
+#  Download github folder 'crewaiModels' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing crewai Models"
+	sleep 3
+	rm -rf /home/$USER/Documents/crewaiExamples
+	mkdir -p /home/$USER/Documents/crewaiExamples
+	cd /home/$USER/Documents/crewaiExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set crewaiModels
+	git pull origin main
+	find . -maxdepth 1 ! -name "crewaiModels" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mkdir crewaiModels
+	cd crewaiModels
+	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
+	rm -rf /home/$USER/Documents/crewaiExamples
+	cd /home/$USER
+	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
+else
+	echo "  "
+fi	
+
+
 
 docker update --restart=no $(docker ps -a -q)
 clear

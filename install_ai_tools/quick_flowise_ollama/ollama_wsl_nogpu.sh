@@ -1075,6 +1075,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
 	  docker exec -it ollama ollama pull phi4-mini:3.8b
 	  docker exec -it ollama ollama pull qwen2.5:1.5b
+	  docker exec -it ollama ollama pull qwen2.5:latest
 	  docker exec -it ollama ollama pull qwen3-embedding:0.6b
 	  docker exec -it ollama ollama pull gemma3:270m
 	  echo " "
@@ -1614,6 +1615,44 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 else
 	echo "  "
 fi	
+
+
+#############
+# Install crewaiModels folder of examples
+# Installs the folder from github: LLM/crewaiModels
+############
+
+#  Download github folder 'crewaiModels' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing crewai Models"
+	sleep 3
+	rm -rf /home/$USER/Documents/crewaiExamples
+	mkdir -p /home/$USER/Documents/crewaiExamples
+	cd /home/$USER/Documents/crewaiExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set crewaiModels
+	git pull origin main
+	find . -maxdepth 1 ! -name "crewaiModels" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	mkdir crewaiModels
+	cd crewaiModels
+	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
+	rm -rf /home/$USER/Documents/crewaiExamples
+	cd /home/$USER
+	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
+else
+	echo "  "
+fi	
+
+
+
 
 
 echo "   "
