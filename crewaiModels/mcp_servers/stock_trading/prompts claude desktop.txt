@@ -1,0 +1,148 @@
+# Last amended: 1st June, 2026
+# Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/blob/main/servers/math_stdio_server.py
+# Claude Desktop with Sonnet 4.6
+
+Prompt1:
+========
+Here is a sample mcp server that has certain maths tools.
+I want to create a similar sample mcp server that has two tools: one to calculate Relative Strength Index and the other to create Moving Average Convergence Trend. The program gets required OHLCV data from 'Alpaca paper trading' using requisite APIs. 
+
+Sample MCP server:
+===============
+# 1.0
+# Use fastmcp 
+from mcp.server.fastmcp import FastMCP
+# 1.1 Our MCP server name is: "Math" 
+mcp = FastMCP("Math")
+# 2.0 Tools. We have six tools.
+# 2.1
+@mcp.tool()
+def add(a: float, b: float) -> float:
+    """Add two numbers (ints or floats)"""
+    return a + b
+# 2.2
+@mcp.tool()
+def subtract(a: float, b: float) -> float:
+    """Subtract b from a (ints or floats)"""
+    return a - b
+# 2.3
+@mcp.tool()
+def multiply(a: float, b: float) -> float:
+    """Multiply two numbers (ints or floats)"""
+    return a * b
+# 2.4
+@mcp.tool()
+def divide(numerator: float, denominator: float) -> float:
+    """Divide numerator by denominator (floats ok)"""
+    if denominator == 0:
+        raise ValueError("Cannot divide by zero")
+    return numerator / denominator
+# 2.5
+@mcp.tool()
+def power(base: float, exponent: float) -> float:
+    """Raise base to the power of exponent (floats ok)"""
+    return base ** exponent
+# 2.6
+@mcp.tool()
+def sqrt(number: float) -> float:
+    """Calculate the square root of a number"""
+    if number < 0:
+        raise ValueError("Cannot calculate square root of a negative number")
+    return number ** 0.5
+# 3.0
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
+
+
+
+Prompt2:
+========
+Can you transform this code into three tools:
+One tool fetches data from alpaca for a specified period and for a given script and the other two tools calculate rsi and macd
+
+#### Result #######
+
+The key architectural change is the introduction of `_cache` — a simple in-memory dict (section `3.0`) that acts as the handoff point between the three tools:
+
+**Tool 1 — `fetch_ohlcv`** takes `symbol`, `lookback_days`, and `timeframe` as inputs, hits Alpaca, builds the DataFrame, and stores it in `_cache`. It returns a preview so you can confirm the data looks right before calculating anything.
+
+**Tool 2 — `calculate_rsi`** reads from `_cache["df"]` directly. Its only input is `period` — no symbol, no date range. The data fetch is completely decoupled.
+
+**Tool 3 — `calculate_macd`** same pattern — reads from cache, only takes `fast_period`, `slow_period`, and `signal_period`.
+
+**The intended call sequence is:**
+```
+fetch_ohlcv("AAPL", lookback_days=180)
+    → calculate_rsi(period=14)
+    → calculate_macd(fast_period=12, slow_period=26, signal_period=9)
+```
+
+Both indicator tools will raise a clear `RuntimeError` with a helpful message if called before `fetch_ohlcv`, rather than failing silently.
+
+
+
+#####################
+
+
+
+Prompt3:
+=========
+This mcp server with the three tools: fetch_ohlcv(), calculate_rsi() and calculate_macd() works fine. Can you next help me write python code for the four crewai agent-task pairs, as: One agent-task pair fetches ohlcv data for a stock symbol from Alpaca paper data; the second agent-task pair calculates RSI from this fetched data, the third agent-task pair calculates MACD of the stock symbol from this fetched data and the last and the fourth agent-task pair analyses the output of the IInd and IIIrd agents and then writes a report either recommending the stock purchase or not.
+
+#### Result #######
+
+Here's how the four agent-task pairs are wired together:
+
+---
+
+### Architecture overview
+
+```
+Task 1 (fetch_ohlcv)
+        ↓ context
+Task 2 (RSI)    Task 3 (MACD)
+        ↘             ↙ context
+         Task 4 (Report)
+```
+
+The `context=` parameter on each task is the key mechanism — it tells CrewAI what prior task outputs to inject as context before running that task. Tasks 2 and 3 both depend on Task 1; Task 4 depends on both Task 2 and Task 3.
+
+---
+
+### Key design decisions
+
+**Agent 4 has no MCP tools.** The strategy agent reasons purely over the text outputs from agents 2 and 3 — no API calls needed. Giving it tools it doesn't need would just create noise.
+
+**Tasks 2 and 3 run after Task 1 but are otherwise independent.** With `Process.sequential` they run one after the other, but the `context=[task_fetch_ohlcv]` on both ensures neither fires before the data is loaded into the MCP cache.
+
+**The MCP server is launched once** via `MCPServerAdapter` and its tools shared across all agents. This means the in-memory `_cache` in the MCP server persists across all three tool calls in the same session.
+
+---
+
+### To run it
+
+```bash
+pip install crewai crewai-tools mcp
+
+export ALPACA_API_KEY="your_key"
+export ALPACA_SECRET_KEY="your_secret"
+export OPENAI_API_KEY="your_openai_key"
+
+python trading_crew.py          # defaults to AAPL
+python trading_crew.py NVDA     # any ticker
+```
+
+#####################
+
+Prompt4
+
+Q: How should the paper trade be triggered?
+A: Automatically
+
+Q: What order type should be placed at Alpaca?
+A: Market order
+
+Q: How should the trade size be determined?
+A: Yes $1000 per trade
+
+
