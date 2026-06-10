@@ -28,7 +28,7 @@ local_llm = LLM(
                 )
 
 # MCP server exa.ai key
-api_key = "ec0029cc-e2c1-4664-b5a8-13c0f525fbf2"
+api_key = "ec0029cc-e2c1-6678-b5a8-13c0f525fbf2"
 
 server_params = {"url": "https://mcp.exa.ai/mcp?api_key=ec0029cc-e2c1-4664-b5a8-13c0f525fbf2", \
                  "transport": "streamable-http" \
