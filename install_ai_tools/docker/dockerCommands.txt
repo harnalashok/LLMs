@@ -4,6 +4,11 @@
 # kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
 # YouTube video: https://www.youtube.com/watch?v=pg19Z8LL06w
 
+Self Study:
+	1. About Dockers: kdnuggets: https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html 
+	2. Docker commands: https://medium.com/@psnavya90/docker-commands-24b35161f775
+	3. Docker commands: https://medium.com/devops-dudes/docker-cli-commands-101-d5082eb33bab
+
 
 ## 1. Quick Summary:
 
