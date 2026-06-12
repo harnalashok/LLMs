@@ -57,6 +57,9 @@ cat /home/$USER/install_progerss.txt
 
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
+    cd /home/$USER/Documents
+    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
+	cd /home/$USER
     echo "  "
     echo "------------"   
 	echo "Updating Ubuntu.."
