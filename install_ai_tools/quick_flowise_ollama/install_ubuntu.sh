@@ -238,36 +238,65 @@ fi
 # Install CUDA toolkit
 #################
 
+abc=
+abc=`cat /etc/os-release | grep 26.04`
 cd /home/$USER
 if [ ! -f /home/$USER/cuda_installed.txt ]; then
-	cd /home/$USER
-	echo " "
-	echo " "
-	echo "------------"        
-	echo " "
-	echo "  "
-	echo "==>CUDA install for Ubuntu 22.04 ONLY<=="
-	echo "  "
-	#nvidia-settings
-	#echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
-	#echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
-	echo "cuda-toolkit does not change GPU drivers."
-	echo "But higher versions of cuda-toolkit may have installation problems"
-	# Remove old gpg key
-	password="ashok"
-	echo $password | sudo -S apt-key del 7fa2af80
-	# Now follow the instructions as on this page:
-	#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
-	# Added on 27th Sep, 2025
-	wget -c https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-	sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-	wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
-	echo $password | sudo -S  dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
-	sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-	echo $password | sudo -S apt-get update
-	echo $password | sudo -S apt-get install cuda-toolkit-13-0 -y
-	# NVIDIA Driver Instructions
-	echo $password | sudo -S apt-get install nvidia-open -y
+	if [ -n "$abc" ]; then
+		cd /home/$USER
+		echo " We have ubuntu 26.04."
+		echo " "
+		echo " "
+		echo "------------"        
+		echo " "
+		echo "  "
+		echo "==>CUDA install for Ubuntu 26.04 ONLY<=="
+		echo "  "
+		password="ashok"
+		echo $password | sudo -S apt install cuda-toolkit -y
+
+		# Now follow the instructions as on this page:
+		#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
+		# Added on 27th Sep, 2025
+		wget -c https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+		sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+		wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+		echo $password | sudo -S  dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+		sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+		echo $password | sudo -S apt-get update
+		echo $password | sudo -S apt-get install cuda-toolkit-13-0 -y
+		# NVIDIA Driver Instructions
+		echo $password | sudo -S apt-get install nvidia-open -y
+	else
+		cd /home/$USER
+		echo " "
+		echo " "
+		echo "------------"        
+		echo " "
+		echo "  "
+		echo "==>CUDA install for Ubuntu 22.04 ONLY<=="
+		echo "  "
+		#nvidia-settings
+		#echo "https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local"
+		#echo "Archive: https://developer.nvidia.com/cuda-toolkit-archive"
+		echo "cuda-toolkit does not change GPU drivers."
+		echo "But higher versions of cuda-toolkit may have installation problems"
+		# Remove old gpg key
+		password="ashok"
+		echo $password | sudo -S apt-key del 7fa2af80
+		# Now follow the instructions as on this page:
+		#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
+		# Added on 27th Sep, 2025
+		wget -c https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+		sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+		wget https://developer.download.nvidia.com/compute/cuda/13.0.1/local_installers/cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+		echo $password | sudo -S  dpkg -i cuda-repo-ubuntu2204-13-0-local_13.0.1-580.82.07-1_amd64.deb
+		sudo cp /var/cuda-repo-ubuntu2204-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+		echo $password | sudo -S apt-get update
+		echo $password | sudo -S apt-get install cuda-toolkit-13-0 -y
+		# NVIDIA Driver Instructions
+		echo $password | sudo -S apt-get install nvidia-open -y
+	fi	
 	echo $password | sudo -S apt autoremove -y
 	#nvidia-settings
 	sleep 8
