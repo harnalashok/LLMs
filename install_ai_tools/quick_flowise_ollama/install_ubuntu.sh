@@ -351,7 +351,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	    echo "$LINE" >> "$FILE"
 	fi
 	sleep 2
-	wsl.exe --shutdown
+	echo $password | sudo -S systemctl reboot -i
 else 
     LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
