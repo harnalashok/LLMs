@@ -259,7 +259,7 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 		#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=26.04&target_type=deb_local
 		# Added on 13th June, 2026
 		wget -c https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2604/x86_64/cuda-ubuntu2604.pin
-		sudo mv cuda-ubuntu2604.pin /etc/apt/preferences.d/cuda-repository-pin-600
+		echo $password | sudo -S mv cuda-ubuntu2604.pin /etc/apt/preferences.d/cuda-repository-pin-600
 		wget -c https://developer.download.nvidia.com/compute/cuda/13.3.0/local_installers/cuda-repo-ubuntu2604-13-3-local_13.3.0-610.43.02-1_amd64.deb
 		echo $password | sudo -S dpkg -i cuda-repo-ubuntu2604-13-3-local_13.3.0-610.43.02-1_amd64.deb
 		sudo cp /var/cuda-repo-ubuntu2604-13-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
