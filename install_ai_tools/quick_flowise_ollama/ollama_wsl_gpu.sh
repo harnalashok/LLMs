@@ -251,7 +251,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo "  "
     echo "------------"                            
-    echo " Will install crewai"                     
+    echo " Will install crewai"        
+	echo " Takes time...Be patient..."             
     echo "----------"                              
     echo " "
     sleep 2

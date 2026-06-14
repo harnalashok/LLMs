@@ -264,7 +264,8 @@ cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo "  "
     echo "------------"                            
-    echo " Will install crewai"                     
+    echo " Will install crewai"       
+	echo " Takes time...Be patient..."                  
     echo "----------"                              
     echo " "
     sleep 2
@@ -312,6 +313,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
     # Add Docker's official GPG key:
+	echo "   "
     echo "Installing docker.."
     sleep 2
 	echo -en "\007"
