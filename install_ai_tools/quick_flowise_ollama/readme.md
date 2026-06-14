@@ -8,6 +8,7 @@ See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20u
 Stop Symantic anti-virus first       
 (copy and paste in WSL-Ubuntu terminal)
 ```
+  cd /home/$USER
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
@@ -36,6 +37,7 @@ Stop Symantic anti-virus first
 (copy and paste in WSL-Ubuntu terminal)
 
 ```
+  cd /home/$USER
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
@@ -64,6 +66,7 @@ Stop Symantic anti-virus first
 (copy and paste in Ubuntu terminal)
 
 ```
+  cd /home/$USER
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
