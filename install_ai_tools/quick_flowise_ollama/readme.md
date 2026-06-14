@@ -8,6 +8,9 @@ See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20u
 Stop Symantic anti-virus first       
 (copy and paste in WSL-Ubuntu terminal)
 ```
+  echo "Installation script to install several applications"
+  echo "frameworks on WSL Ubuntu laptop WITHOUT GPU."
+  sleep 3
   cd /home/$USER
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
@@ -37,20 +40,25 @@ Stop Symantic anti-virus first
 (copy and paste in WSL-Ubuntu terminal)
 
 ```
+  echo "Installation script to install several applications"
+  echo "frameworks on WSL Ubuntu laptop with GPU."
+  sleep 3
+
   cd /home/$USER
+
   DIRECTORY=/home/$USER/Documents
   if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
   fi
-   DIRECTORY=/home/$USER/Downloads
-   if [ ! -d "$DIRECTORY" ]; then
+  DIRECTORY=/home/$USER/Downloads
+  if [ ! -d "$DIRECTORY" ]; then
       mkdir $DIRECTORY
-   fi
+  fi
 
-   DIRECTORY=/home/$USER/Documents/docker
-   if [ ! -d "$DIRECTORY" ]; then
-      mkdir -p $DIRECTORY
-   fi
+  DIRECTORY=/home/$USER/Documents/docker
+  if [ ! -d "$DIRECTORY" ]; then
+     mkdir -p $DIRECTORY
+  fi
 
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
