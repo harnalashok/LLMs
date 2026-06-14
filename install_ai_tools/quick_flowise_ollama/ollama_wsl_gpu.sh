@@ -446,78 +446,7 @@ else
 	fi
 fi
 
-##############
-# Create python virtual env
-# source /home/$USER/venv/bin/activate
-##############
 
-if [ ! -f /home/$USER/venv_installed.txt ]; then
-    cd /home/$USER
-    echo " "
-    echo " "
-    echo "------------"        
-	# Clear earlier directory, if it exists
-	python3 -m venv --clear /home/$USER/venv
-	source /home/$USER/venv/bin/activate
-	# 1.6 Essentials software
-	pip install --upgrade pip
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install ipython
-	pip install notebook
-	pip install streamlit
-	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-	# Required for spyder:
-	sudo apt install pyqt5-dev-tools -y
-	echo "####"
-	sudo apt install pyqt5-dev-tools -y
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	# To connect to postgresql
-	pip install psycopg2
-	echo "####"
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	mkdir -p /home/$USER/Documents/samples/in
-	mkdir -p /home/$USER/Documents/samples/out
-	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-	cd /home/$USER
-	echo "####"
-	# Download file that creates a fresh python enviroemnet
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	chmod +x *.sh   
-	# Huggingface and  related
-	#pip install huggingface_hub
-	# cu124: is as per cuda version. Get cuda version from nvidia-smi
-	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-	#pip install huggingface_hub
-	# Create script to activate 'venv' env
-	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-	chmod +x /home/$USER/*.sh
-	sleep 2
-	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-	LINE="  5. Python virtual env created"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
-	sleep 2
-	wsl.exe --shutdown
-else
-    LINE="  5. Python virtual env created"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi	
-fi   
 
 ###########################
 # Install latest anaconda
@@ -928,92 +857,28 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
 	
-	###############
-	# Milvus install
-	# Webui avaiable at: http://localhost:9091/webui
-	# Ref: https://milvus.io/docs/install_standalone-docker.md
-	################
-	echo "  "
-	echo "   "
-	cd /home/$USER/
-	echo "====  "    
-	echo "Installing milvus vector database using docker"       
-	echo "You may be asked for the password. Supply it..."     
-	echo "====  "                                                   
-	sleep 3
-	echo $password | sudo -S  apt-get update
-	curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-	bash standalone_embed.sh start
-	echo " "
-	echo "Milvus vector database installed"                      
-	echo "Ports used are: 9091 and 19530."                       
-	echo "To restart/stop docker use the following commands:"            
-	echo "     sudo bash standalone_embed.sh restart|start|stop|upgrade|delete"                      
-	mkdir /home/$USER/milvus
-	mv standalone_embed.sh /home/$USER/milvus/
-	echo 'export PATH="$PATH:/home/$USER/milvus/"' >> /home/$USER/.bashrc
-	# Our milvus start script		
-	echo '#!/bin/bash'                                         | tee    /home/$USER/start/start_milvus.sh
-	echo " "                                                   | tee -a /home/$USER/start/start_milvus.sh
-	echo "cd ~/"                                               | tee -a /home/$USER/start/start_milvus.sh
-	echo "echo 'Ports are: 9091 and 19530.'"                   | tee -a /home/$USER/start/start_milvus.sh
-	echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_milvus.sh
-	echo "echo 'Access in flowise as: http://<hostIP>:19530.'"           | tee -a /home/$USER/start/start_milvus.sh
-	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/start/start_milvus.sh
-	echo "bash standalone_embed.sh start"                      | tee -a /home/$USER/start/start_milvus.sh
-	echo "cd /home/$USER"                                       | tee -a /home/$USER/start/start_milvus.sh 
-	echo "netstat -aunt | grep 19530"                          | tee -a /home/$USER/start/start_milvus.sh
-	# Stop script		
-	echo '#!/bin/bash'                                         | tee    /home/$USER/stop/stop_milvus.sh 
-	echo " "                                                   | tee -a /home/$USER/stop/stop_milvus.sh 
-	echo "cd ~/"                                               | tee -a /home/$USER/stop/stop_milvus.sh 
-	echo "cd /home/$USER/milvus"                               | tee -a /home/$USER/stop/stop_milvus.sh 
-	echo "sudo bash standalone_embed.sh stop"                  | tee -a /home/$USER/stop/stop_milvus.sh 
-	echo "cd /home/$USER"                                      | tee -a /home/$USER/stop/stop_milvus.sh 
-	echo "netstat -aunt | grep 19530"                           | tee -a /home/$USER/stop/stop_milvus.sh 
-	#
-	# Delete milvus database as also the container
-	echo "cd /home/$USER/milvus"                            > /home/$USER/start/delete_milvus_db.sh
-	echo "echo 'Will delete milvus database'"              >> /home/$USER/start/delete_milvus_db.sh 
-	echo "echo 'Data is in /home/$USER/volumes/milvus/'"   >> /home/$USER/start/delete_milvus_db.sh
-	echo "sleep 5"                                         >> /home/$USER/start/delete_milvus_db.sh
-	echo "sudo bash standalone_embed.sh delete"             >> /home/$USER/start/delete_milvus_db.sh
-	#
-	ln -sT /home/$USER/start/start_milvus.sh       /home/$USER/start_milvus.sh  
-	ln -sT /home/$USER/stop/stop_milvus.sh        /home/$USER/stop_milvus.sh  
-	ln -sT /home/$USER/start/delete_milvus_db.sh   /home/$USER/delete_milvus_db.sh  
-	#
-	echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+	
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 3
 	
-	LINE="  11. Milvus installed"
-	if ! grep -qF "$LINE" "$FILE"; then
-	    echo "$LINE" >> "$FILE"
-	fi
 		
 	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
 
 	# Start all vector databases to check
-	bash stop_milvus.sh
-    bash start_postgresql.sh
+	bash start_postgresql.sh
 	bash start_chroma.sh  
 	bash start_meilisearch.sh
-	bash start_milvus.sh
 	echo "  "
     echo "  "
-	echo "Postgresql started?"
+	echo "1. Postgresql started?"
 	netstat -aunt | grep 5432
-	echo "Chromadb started?"
+	echo "2. Chromadb started?"
 	netstat -aunt | grep 8000
-	echo "meilisearch started"
+	echo "3. meilisearch started"
 	netstat -aunt | grep 7700
-	echo "milvus started"
-	netstat -aunt | grep 19530
 	sleep 8
-	
 	wsl.exe --shutdown
 else
     echo "  "
@@ -1689,6 +1554,82 @@ echo "    "
 echo "===File ./start_antigravity.sh======"		
 echo  "     "
 sleep 5
+
+
+
+##############
+# Create python virtual env
+# source /home/$USER/venv/bin/activate
+##############
+
+if [ ! -f /home/$USER/venv_installed.txt ]; then
+    cd /home/$USER
+    echo " "
+    echo " "
+    echo "------------"        
+	# Clear earlier directory, if it exists
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install streamlit
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	sudo apt install pyqt5-dev-tools -y
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	# To connect to postgresql
+	pip install psycopg2
+	echo "####"
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Download file that creates a fresh python enviroemnet
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x *.sh   
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	LINE="  5. Python virtual env created"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+	sleep 2
+	wsl.exe --shutdown
+else
+    LINE="  5. Python virtual env created"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi	
+fi   
+
 
 ##################3
 # crawl4AI
