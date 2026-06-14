@@ -483,7 +483,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		   	chmod +x /home/$USER/*.sh
 			chmod +x /home/$USER/start/*.sh
 			chmod +x /home/$USER/stop/*.sh
-			LINE="  6. Anaconda Installed"
+			LINE="  5. Anaconda Installed"
 			if ! grep -qF "$LINE" "$FILE"; then
 				echo "$LINE" >> "$FILE"
 			fi
@@ -544,7 +544,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
-	LINE="  7. Meilisearch installed"
+	LINE="  6. Meilisearch installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -580,7 +580,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
-	LINE="  8. chromadb installed"
+	LINE="  7. chromadb installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -624,7 +624,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 	sleep 2
-	LINE="  9. FAISS installed"
+	LINE="  8. FAISS installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
@@ -848,37 +848,22 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
 	cd /home/$USER
 	echo "postgresql installed" > /home/$USER/postgresql_installed.txt
-	LINE="  10. PostgreSQL installed"
+
+	LINE="  9. PostgreSQL installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
+
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 2
-	
-	
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	sleep 3
-	
-		
+			
 	echo "vectordb_installed.txt" > /home/$USER/vectordb_installed.txt
-
-	# Start all vector databases to check
-	bash start_postgresql.sh
-	bash start_chroma.sh  
-	bash start_meilisearch.sh
-	echo "  "
-    echo "  "
-	echo "1. Postgresql started?"
-	netstat -aunt | grep 5432
-	echo "2. Chromadb started?"
-	netstat -aunt | grep 8000
-	echo "3. meilisearch started"
-	netstat -aunt | grep 7700
-	sleep 8
 	wsl.exe --shutdown
 else
     echo "  "
@@ -986,7 +971,8 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
-	LINE="  11. n8n Installed"
+
+	LINE="  10. n8n Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1058,7 +1044,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	sleep 2
 	echo "ollama_installed.txt" > ollama_installed.txt
 	chmod +x /home/$USER/*.sh
-	LINE="  12. Ollama Installed"
+
+	LINE="  11. Ollama Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1098,7 +1085,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	#ollama list
 	echo "ollama models installed" > /home/$USER/models_installed.txt
 	sleep 2
-	LINE="  13. Ollama models Downloaded"
+
+	LINE="  12. Ollama models Downloaded"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1126,7 +1114,8 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	cd /home/$USER/
 	# Install Flowise through docker"
 	# Ref: https://docs.flowiseai.com/getting-started
-	echo "Installing flowise docker. Takes a lot of time..especially at 6/6 point..."          
+	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."          
+	sleep 4
 	# Start script
 	echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
 	echo " "                                                   >> /home/$USER/start_flowise.sh
@@ -1255,7 +1244,8 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  14. Flowise Installed"
+
+	LINE="  13. Flowise Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1358,7 +1348,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	LINE="  15. langchain and langgraph Installed"
+
+	LINE="  14. langchain and langgraph Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
@@ -1517,7 +1508,9 @@ echo "You can terminate here"
 read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
 sleep 5
 
-
+###############33
+##### END ###########
+################
 
 
 ###############
@@ -1629,6 +1622,18 @@ else
 	    echo "$LINE" >> "$FILE"
 	fi	
 fi   
+
+
+
+echo "    "
+echo "     "
+echo "=========="
+cd /home/$USER
+echo "You can stop here. Click ctrl+c to terminate"
+read response
+echo "==========="
+sleep 20
+
 
 
 ##################3
