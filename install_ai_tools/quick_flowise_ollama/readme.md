@@ -29,7 +29,7 @@ Stop Symantic anti-virus first
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
    bash ollama_wsl_nogpu.sh
-   cd ~/   
+   cd /home/$USER 
 ```
 
 ## $${\color{red}Script \space for \space \color{green} wsl \space GPU \space }$$
@@ -58,7 +58,7 @@ Stop Symantic anti-virus first
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    chmod +x  ~/*.sh
    bash ollama_wsl_gpu.sh
-   cd ~/   
+   cd /home/$USER 
 ```
 
 ## Script for ubuntu machine (gpu)
@@ -92,5 +92,5 @@ Stop Symantic anti-virus first
    chmod +x  ~/*.sh
    
    bash install_ubuntu.sh
-   cd ~/   
+   cd /home/$USER 
 ```
