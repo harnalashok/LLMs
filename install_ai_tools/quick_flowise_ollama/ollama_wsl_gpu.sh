@@ -348,6 +348,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
     # Add Docker's official GPG key:
+	echo "   "
     echo "Installing docker.."
     sleep 2
     echo $password | sudo -S apt-get update
@@ -386,7 +387,10 @@ cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
-    echo "Testing if docker is properly installed"
+    
+	echo "   "
+	echo "   "
+	echo "Testing if docker is properly installed"
     echo "AND running docker without root privilegs.."
     sleep 2
     # Check if docker installed
@@ -462,6 +466,9 @@ if [ ! -d "$DIRECTORY" ]; then
 	echo "------------"        
 	    DIRECTORY=/home/$USER/anaconda3       # Redundant
 	    if [ ! -d "$DIRECTORY" ]; then
+			echo "   "
+    		echo "Installing Anaconda.."
+    		sleep 3
 	        CONTREPO=https://repo.continuum.io/archive/
 			# In WSL Downloads folder does not exist
 			mkdir /home/$USER/Downloads
@@ -505,7 +512,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------" 
-    echo "Vector DBs would be installed"
+    echo " Several Vector DBs would be installed"
 	sleep 3
 	echo "  "
 	echo  "  "
@@ -557,6 +564,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	##########################
 	
 	cd /home/$USER
+	echo "   "
+	echo "------------"   
 	echo "Installing chromadb.."
     sleep 2
 	# Write chroma start script
@@ -592,6 +601,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	
 	echo "  "
 	echo  "   "
+	echo "------------"   
 	echo "Installing FAISS.."
     sleep 3
 	echo " "
@@ -638,6 +648,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	cd /home/$USER/
+	echo "------------"   
 	echo "Installing postgresql and sqlite3"
 	sleep 3
 	echo $password | sudo -S  apt install postgresql postgresql-contrib sqlite3   -y
@@ -885,6 +896,9 @@ cd /home/$USER/
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo " "
 	echo " "
+	echo "------------"   
+	echo "Installing n8n docker"
+	echo "------------"   
 	cd ~/
 	mkdir /home/$USER/n8n  # Redundant step
 	#cd /home/$USER/n8n
@@ -995,6 +1009,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "------------"   
+	echo " Installing Ollama docker"
+	sleep 2
 	cd /home/$USER/
 	# Start ollama docker in future
 	echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
@@ -1063,23 +1079,37 @@ echo " "
 echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
 	echo "------------"   
+	echo " Downloading ollama models"
+	echo " Takes time.. Relax..."
+	echo "------------"
 	cd /home/$USER/
 	# Start ollama docker in future
 	docker start ollama 
-	echo "Pulling bge-m3"
+	echo "1. Pulling bge-m3"
 	docker exec -it ollama ollama pull bge-m3
-	echo "Pulling llama3.2"
+	echo "2. Pulling llama3.2"
 	docker exec -it ollama ollama pull llama3.2:latest
+	echo "3. Pulling mistral-nemo:latest"
 	docker exec -it ollama ollama pull mistral-nemo:latest
+	echo "4. Pulling qwen3.5:0.8b"
 	docker exec -it ollama ollama pull qwen3.5:0.8b
+	echo "5. Pulling nomic-embed-text"
 	docker exec -it ollama ollama pull nomic-embed-text
+	echo "6. Pulling llama3.2:1b"
 	docker exec -it ollama ollama pull llama3.2:1b
+	echo "7. Pulling deepseek-r1:1.5b"
 	docker exec -it ollama ollama pull deepseek-r1:1.5b
+	echo "8. Pulling qllama/bge-small-en-v1.5"
 	docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
+	echo "9. Pulling pull phi4-mini:3.8b"
 	docker exec -it ollama ollama pull phi4-mini:3.8b
+	echo "10. Pulling qwen2.5:1.5b"
 	docker exec -it ollama ollama pull qwen2.5:1.5b
+	echo "11. Pulling qwen2.5:latest"
 	docker exec -it ollama ollama pull qwen2.5:latest
+	echo "12. Pulling qwen-embedding:0.6b"
 	docker exec -it ollama ollama pull qwen3-embedding:0.6b
+	echo "13. Pulling gemma3:270m"
 	docker exec -it ollama ollama pull gemma3:270m
 	echo " "
 	echo " "
@@ -1115,7 +1145,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	cd /home/$USER/
 	# Install Flowise through docker"
 	# Ref: https://docs.flowiseai.com/getting-started
-	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."          
+	echo "   "
+	echo "-------"      
+	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."    
+	echo "-------"      
 	sleep 4
 	# Start script
 	echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh

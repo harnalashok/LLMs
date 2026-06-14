@@ -1064,24 +1064,38 @@ echo " "
 if [ ! -f /home/$USER/models_installed.txt ]; then
 	 echo "------------"   
 	  cd /home/$USER/
+	  echo "------------"   
+	  echo " Downloading ollama models"
+	  echo " Takes time.. Relax..."
+	  echo "------------"
 	  # Start ollama docker in future
 	  docker start ollama 
 	  sleep 4
 	  docker exec -it ollama ollama list
 	  sleep 2
-	  echo "Pulling bge-m3"
+	  echo "1. Pulling bge-m3"
 	  docker exec -it ollama ollama pull bge-m3
+	  echo "2. Pulling nomic-embed-text"
 	  docker exec -it ollama ollama pull nomic-embed-text
-	  echo "Pulling llama3.2 and small models"
+	  echo "3. Pulling llama3.2"latest"
 	  docker exec -it ollama ollama pull llama3.2:latest
+	  echo "4. Pulling llama3.2:1b"
 	  docker exec -it ollama ollama pull llama3.2:1b
+	  echo "5. Pulling deepseek-r1:1.5b"
 	  docker exec -it ollama ollama pull deepseek-r1:1.5b
+	  echo "6. Pulling qwen3.5:0.8b"
 	  docker exec -it ollama ollama pull qwen3.5:0.8b
+	  echo "7. Pulling qllama/bge-small-en-v1.5"
 	  docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
+	  echo "8. Pulling phi4-mini:3.8b"
 	  docker exec -it ollama ollama pull phi4-mini:3.8b
+	  echo "9. Pulling qwen2.5:1.5b"
 	  docker exec -it ollama ollama pull qwen2.5:1.5b
+	  echo "10. Pulling qwen2.5:latest"
 	  docker exec -it ollama ollama pull qwen2.5:latest
+	  echo "11. Pulling qwen3-embedding:0.6b"
 	  docker exec -it ollama ollama pull qwen3-embedding:0.6b
+	  echo "12. Pulling gemma3:270m"
 	  docker exec -it ollama ollama pull gemma3:270m
 	  echo " "
 	  echo " "
