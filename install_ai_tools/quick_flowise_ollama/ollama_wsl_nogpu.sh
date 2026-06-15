@@ -1246,12 +1246,7 @@ fi
 ###########################
 
 cd /home/$USER
-echo " "
-echo " "
 if [ ! -f /home/$USER/anaconda_installed.txt ]; then
-	echo " "
-	echo " "
-	echo "------------"        
 	DIRECTORY=/home/$USER/anaconda3
 	    if [ ! -d "$DIRECTORY" ]; then
 	        CONTREPO=https://repo.continuum.io/archive/
@@ -1261,12 +1256,13 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 			echo "--------"
 			echo "Installing Anaconda"
 			echo "--------"
+			echo "   "
 			mkdir /home/$USER/Downloads
 	        # Stepwise filtering of the html at $CONTREPO
 	        # Get the topmost line that matches our requirements, extract the file name.
 	        ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
 	        wget -O /home/$USER/Downloads/anaconda.sh $CONTREPO$ANACONDAURL
-	        bash /home/$USER//Downloads/anaconda.sh -b -p $HOME/anaconda3
+	        bash /home/$USER/Downloads/anaconda.sh -b -p $HOME/anaconda3
 	        rm /home/$USER/Downloads/anaconda.sh
 	        echo 'export PATH="/home/$USER/anaconda3/bin:$PATH"' >> /home/$USER/.bashrc 
 	        # Reload default profile
@@ -1304,6 +1300,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	echo "--------"
 	echo "Installing langchain and langraph.."
 	echo "--------"
+	echo "   "
     sleep 3
 	# Activate python environment at 'langchain'
 	#  for installing langchain and llama-index
