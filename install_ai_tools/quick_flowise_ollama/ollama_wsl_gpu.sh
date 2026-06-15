@@ -1554,6 +1554,7 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	rm -rf /home/$USER/Documents/crewaiExamples
 	cd /home/$USER
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
+	wsl.exe --shutdown
 else
 	echo "  "
 fi	

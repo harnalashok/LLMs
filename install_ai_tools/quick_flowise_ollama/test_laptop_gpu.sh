@@ -64,7 +64,7 @@ abc=`sudo ss -tulpn | grep ':5678'`
 if [[ -n $abc ]]; then
   echo "1. n8n is started."  >> /home/$USER/test_report.txt
 else
-   echo "1. n8n NOT installed"  >> /home/$USER/test_report.txt
+   echo "1. n8n NOT started"  >> /home/$USER/test_report.txt
 fi
 
 #######3
@@ -76,7 +76,7 @@ abc=`sudo ss -tulpn | grep ':11434'`
 if [[ -n $abc ]]; then
   echo "2. ollama is started."    >> /home/$USER/test_report.txt
 else
-   echo "2. ollama NOT installed"  >> /home/$USER/test_report.txt
+   echo "2. ollama NOT started"  >> /home/$USER/test_report.txt
 fi
 
 #######3
@@ -89,7 +89,7 @@ abc=`sudo ss -tulpn | grep ':5432'`
 if [[ -n $abc ]]; then
   echo "3. postgres is started."    >> /home/$USER/test_report.txt
 else
-   echo "3. postgres NOT installed"    >> /home/$USER/test_report.txt
+   echo "3. postgres NOT started"    >> /home/$USER/test_report.txt
 fi
 
 #######3
@@ -99,7 +99,7 @@ abc=`sudo ss -tulpn | grep ':8000'`
 if [[ -n $abc ]]; then
   echo "4. chromadb is started."     >> /home/$USER/test_report.txt
 else
-   echo "4. chromadb NOT installed"    >> /home/$USER/test_report.txt
+   echo "4. chromadb NOT started"    >> /home/$USER/test_report.txt
 fi
 
 #######3
@@ -110,7 +110,7 @@ abc=`sudo ss -tulpn | grep ':7700'`
 if [[ -n $abc ]]; then
   echo "5. meilisearch is started."     >> /home/$USER/test_report.txt
 else
-   echo "5. meilisearch NOT installed"   >> /home/$USER/test_report.txt
+   echo "5. meilisearch NOT started"   >> /home/$USER/test_report.txt
 fi
 
 ###########
@@ -123,7 +123,7 @@ acc=`sudo ss -tulpn | grep ':3000'`
 if [[ -n $acc ]]; then
   echo "6. flowise is started."     >> /home/$USER/test_report.txt
 else
-   echo "6. flowise NOT installed"    >> /home/$USER/test_report.txt
+   echo "6. flowise is NOT started"    >> /home/$USER/test_report.txt
 fi
 
 ###########
@@ -143,7 +143,7 @@ abc=`node --version | grep '22'`
 if [[ -n $abc ]]; then
   echo "8. nodejs ver 22.x is installed"     >> /home/$USER/test_report.txt
 else
-   echo "8. nodejs ver 22.x not installed"   >> /home/$USER/test_report.txt
+   echo "8. nodejs ver 22.x appears to be not installed"   >> /home/$USER/test_report.txt
 fi
 
 abc=
