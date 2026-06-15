@@ -43,6 +43,7 @@ echo "   "
 bash start_flowise.sh
 echo "  "
 echo "   "
+bash start_flowise.sh
 bash start_chroma.sh
 echo "  "
 echo "   "
