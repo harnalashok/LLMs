@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 07th June, 2026
+# Last amended: 15th June, 2026
 
 # Delete earlier report
 rm /home/$USER/test_report.txt
@@ -9,16 +9,43 @@ rm /home/$USER/test_report.txt
 # Stop software, if started
 echo "Stopping services, if started..."
 echo "========="
-docker stop chroma
-sleep 2
-#docker stop ollama
-sleep 2
-docker stop flowise
-sleep 2
+
+
+nn=
+nn=`sudo ss -tulpn | grep ':5678'`
+
+if [[ -n $nn ]]; then
+echo "Stopping n8n"
 docker stop n8n
-sleep 2
-docker stop meilisearch
-sleep 2
+fi
+
+
+ol=
+ol=`sudo ss -tulpn | grep ':11434'`
+
+if [[ -n $ol ]]; then
+echo "Stopping ollama docker"
+docker stop ollama
+fi
+
+
+chr=
+chr=`sudo ss -tulpn | grep ':8000'`
+
+if [[ -n $chr ]]; then
+echo "Stopping chromadb"
+docker stop chroma
+fi
+
+
+flo=
+flo=`sudo ss -tulpn | grep ':3000'`
+
+if [[ -n $flo ]]; then
+echo "Stopping flowise"
+docker stop flowise
+fi
+
 echo "   "
 echo "DONE....."
 echo "   "
@@ -73,7 +100,6 @@ else
    echo "1. n8n NOT started"  >> /home/$USER/test_report.txt
 fi
 
-#######3
 # Test ollama
 
 abc=
@@ -125,9 +151,6 @@ sleep 3
 
 acc=
 acc=`sudo ss -tulpn | grep ':3000'`
-#echo $acc
-#echo "Press ctrl+c "
-#sleep 4
 
 if [[ -n $acc ]]; then
   echo "6. flowise is started."     >> /home/$USER/test_report.txt
@@ -165,7 +188,7 @@ fi
 
 sleep 2
 
-echo "======"     >> /home/$USER/test_report.txt
+#echo "======"     >> /home/$USER/test_report.txt
 ollama list       | tee -a  /home/$USER/test_report.txt
 echo "======"     >> /home/$USER/test_report.txt
 
