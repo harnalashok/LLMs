@@ -1313,12 +1313,14 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 #################
 echo " "
 echo " "
-echo "-----"
 cd /home/$USER
 if [ ! -f /home/$USER/langchain_installed.txt ]; then
     echo " "
     echo " "
 	echo "------------"  
+	echo "Installing langchain & langgraph"
+	echo "-------------"
+
 	# Activate python environment at 'langchain'
 	#  for installing langchain and llama-index
 	##############
@@ -1421,8 +1423,9 @@ cd /home/$USER
 if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	cd ~/   
 	echo "  "
-	echo "   "
+	echo "---------   "
 	echo "Installing llamaindexExamples"
+	echo "---------   "
 	sleep 3
 	rm -rf /home/$USER/Documents/llamaindexExamples
 	mkdir -p /home/$USER/Documents/llamaindexExamples
@@ -1456,7 +1459,9 @@ if [ ! -f /home/$USER/n8nExamples_installed.txt ]; then
 	cd ~/   
 	echo "  "
 	echo "   "
+	echo "---------   "
 	echo "Installing n8n Models"
+	echo "---------   "
 	sleep 3
 	rm -rf /home/$USER/Documents/n8nExamples
 	mkdir -p /home/$USER/Documents/n8nExamples
@@ -1491,7 +1496,9 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 	cd ~/   
 	echo "  "
 	echo "   "
+	echo "---------   "
 	echo "Installing flowise Models"
+	echo "---------   "
 	sleep 3
 	rm -rf /home/$USER/Documents/flowiseExamples
 	mkdir -p /home/$USER/Documents/flowiseExamples
@@ -1526,7 +1533,9 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	cd ~/   
 	echo "  "
 	echo "   "
+	echo "---------   "
 	echo "Installing crewai Models"
+	echo "---------   "
 	sleep 3
 	rm -rf /home/$USER/Documents/crewaiModels
 	rm -rf /home/$USER/Documents/crewaiExamples
@@ -1550,7 +1559,9 @@ else
 fi	
 
 echo "   "
+echo "---------   "
 echo "Testing what all is installed"
+echo "---------   "
 echo "   "
 bash test_laptop_gpu.sh
 echo "    "
