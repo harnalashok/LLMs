@@ -1572,7 +1572,9 @@ echo "=========="
 cd /home/$USER
 echo "You can stop here. Click ctrl+c to terminate"
 read response
+echo "   "
 echo "==========="
+echo "Are you sure you want to proceed and install EXTRA software. Else click ctrl+c to terminate now" 
 sleep 20
 
 ###############33
