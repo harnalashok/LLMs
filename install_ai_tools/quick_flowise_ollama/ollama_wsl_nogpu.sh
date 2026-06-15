@@ -2,6 +2,9 @@
 
 # Last amended: 12th May, 2026
 
+# Change it, if needed
+password="ashok"
+
 clear
 # Are we having wsl systems
 WSL=$(cat /proc/version)
@@ -232,6 +235,10 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
+	LINE="  1. Ubuntu updated"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
 	sleep 3
     if [ "$WSLSYSTEM" = "true" ] ; then
         # WSL installed
@@ -387,6 +394,11 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     cd /home/$USER/
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
+	LINE="  3. Docker installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+	    echo "$LINE" >> "$FILE"
+	fi
+
     echo "Machine will be rebooted "
    if [ "$WSLSYSTEM" = "true" ] ; then
         wsl.exe --shutdown
@@ -457,6 +469,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		echo "docker run -d --rm -p 7700:7700 -v $(pwd)/meili_data:/meili_data   getmeili/meilisearch:latest"  | tee  -a  /home/$USER/start/start_meilisearch.sh
 		ln -sT /home/$USER/start/start_meilisearch.sh    /home/$USER/start_meilisearch.sh 
 		echo "meilisearch_installed.txt"   >   meilisearch_installed.txt
+		LINE="  4. meilisearch Installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+	    	echo "$LINE" >> "$FILE"
+		fi
 		chmod +x /home/$USER/*.sh
 		chmod +x /home/$USER/start/*.sh
 		chmod +x /home/$USER/stop/*.sh
@@ -662,6 +678,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		
 		cd /home/$USER
 		echo "postgresql installed" > /home/$USER/postgresql_installed.txt
+		LINE="  5. Postgresql Installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+	    	echo "$LINE" >> "$FILE"
+		fi
 		sleep 3
 	fi	
 	
@@ -709,6 +729,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		sleep 4
 		cd /homne/$USER/
 		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
+		LINE="  6. FAISS Installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+	    	echo "$LINE" >> "$FILE"
+		fi
 	fi		
 
 	##########################
@@ -739,6 +763,10 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		echo "------------"                            | tee -a /home/$USER/error.log
 		echo " "                                       | tee -a /home/$USER/error.log
 		echo "chromadb_installed.txt"  > /home/$USER/chromadb_installed.txt
+		LINE="  7. ChromaDB Installed"
+		if ! grep -qF "$LINE" "$FILE"; then
+	    	echo "$LINE" >> "$FILE"
+		fi
 		sleep 3
 		chmod +x /home/$USER/*.sh
 	fi	
@@ -905,6 +933,10 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "n8n_installed" > /home/$USER/n8n_installed.txt
 	cd /home/$USER
 	echo "n8n_installed.txt "  > /home/$USER/n8n_installed.txt
+	LINE="  8. n8n Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	sleep 3
 	chmod +x /home/$USER/*.sh
 	if [ "$WSLSYSTEM" = "true" ] ; then
@@ -971,6 +1003,10 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo -en "\007"
 	docker run -d  -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
 	echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
+	LINE="  9. Ollama docker Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	sleep 2
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
@@ -1029,6 +1065,10 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  echo " "
 	  #ollama list
 	  echo "models installed" > /home/$USER/models_installed.txt
+	  LINE="  10. Ollama models downloaded"
+		if ! grep -qF "$LINE" "$FILE"; then
+	    	echo "$LINE" >> "$FILE"
+		fi
 	  sleep 2
 	  chmod +x /home/$USER/*.sh
 fi
@@ -1166,6 +1206,10 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
 	echo "n8n and flowise installed" > /home/$USER/n8mandflowise_installed.txt
+	LINE="  11. Flowise Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	bash reset_flowise.sh
 	bash start_n8n.sh
 	echo "  "
@@ -1221,6 +1265,10 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 			# Download script to create conda venv
 			wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
 			echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
+			LINE="  12. Anaconda Installed"
+			if ! grep -qF "$LINE" "$FILE"; then
+				echo "$LINE" >> "$FILE"
+			fi
 			chmod +x /home/$USER/*.sh
 			chmod +x /home/$USER/start/*.sh
 			chmod +x /home/$USER/stop/*.sh
@@ -1332,6 +1380,10 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	echo "Putting HF token in .bashrc"
 	echo "====="
 	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	LINE="  13. langchain Installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
 	sleep 5
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
