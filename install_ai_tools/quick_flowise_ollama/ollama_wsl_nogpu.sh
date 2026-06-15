@@ -81,6 +81,8 @@ if [ ! -f /home/$USER/first_time.txt ]; then
 	echo "Install latest anaconda"
 	echo "Will install Ragflow docker"
 	echo "==========================="
+	echo "  "
+	echo "  "
 	# Download Test script
     wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test_laptop_gpu.sh
 	sleep 5
@@ -97,6 +99,7 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
+    clear
     cd /home/$USER/Documents
     wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
 	cd /home/$USER
@@ -377,7 +380,7 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     sleep 2
     # Check if docker installed
 	echo -en "\007"
-    echo $password | -sudo -S docker run hello-world
+    echo $password | sudo -S docker run hello-world
     # Run docker witout root privileges
     sudo groupadd docker
     sudo usermod -aG docker $USER
