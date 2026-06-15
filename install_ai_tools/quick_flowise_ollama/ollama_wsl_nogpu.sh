@@ -108,12 +108,12 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo " "
     sleep 2
 	echo -en "\007"
-    sudo apt update
+    echo $password | sudo -S apt update
     sudo apt upgrade -y
     # To get multiple python versions, install repo
     # See: https://askubuntu.com/a/1538589
     sudo add-apt-repository ppa:deadsnakes/ppa -y
-    sudo apt update 
+    echo $password | sudo -S apt update
     # pipx to install poetry
     sudo apt install zip unzip net-tools cmake  build-essential python3-pip tilde curl git  python3-dev python3-venv gcc g++ make jq  openssh-server libfuse2 pipx -y  
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
@@ -136,7 +136,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "  "
 	sleep 4
 	# First, update your package list
-    sudo apt update
+    echo $password | sudo -S apt update
     # Install curl if you don't have it
     sudo apt install curl -y
 	# Download and run the setup script for the desired Node.js version (e.g., Node.js 22.x LTS)
@@ -321,16 +321,18 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
     #      https://docs.docker.com/engine/install/linux-postinstall/
     # Add Docker's official GPG key:
 	echo "   "
+	echo "------------"     
     echo "Installing docker.."
+	echo "------------"     
     sleep 2
 	echo -en "\007"
-    sudo apt-get update
+    echo $password | sudo -S apt-get update
 	sudo rm /etc/apt/sources.list.d/docker.list
 	sudo apt-get update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    echo $password | sudo -S chmod a+r /etc/apt/keyrings/docker.asc
     # Add the repository to Apt sources:
     echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
@@ -367,12 +369,15 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
 	chmod +x *.sh
 	cd /home/$USER
+	echo "  "
+	echo "------------"     
 	echo "Testing if docker is properly installed"
     echo "AND running docker without root privilegs.."
+	echo "------------"     
     sleep 2
     # Check if docker installed
 	echo -en "\007"
-    sudo docker run hello-world
+    echo $password | -sudo -S docker run hello-world
     # Run docker witout root privileges
     sudo groupadd docker
     sudo usermod -aG docker $USER
@@ -485,15 +490,15 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	################
 
     if [ ! -f /home/$USER/postgresql_installed.txt ]; then
-		echo " "
-		echo " "
-		cd /home/$USER
-		echo "------------"   
 		# Install postgresql
 		cd /home/$USER/
+		echo "   "
+		echo "------------"     
 		echo "Installing postgresql and sqlite3"
+		echo "------------"     
+		sleep 2
 		echo -en "\007"
-		sudo apt install postgresql postgresql-contrib sqlite3   -y
+		echo $password | sudo -S apt install postgresql postgresql-contrib sqlite3   -y
 		
 		# Postgresql start/stop script
 		# Start script
@@ -570,7 +575,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		pg_config --version    # Version is 16.9 so install: postgresql-server-dev-16 
 		psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n'
 		version=$(psql -V | awk '{print $3}' |  cut -d '.' -f 1 | tr -d '\n')
-		sudo apt install postgresql-server-dev-$version  -y
+		echo $password | sudo -S apt install postgresql-server-dev-$version  -y
 		#sudo apt install postgresql-server-dev-16  -y
 		# Ref: https://github.com/pgvector/pgvector
 		cd /tmp
@@ -690,12 +695,11 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	##########################
 	
 	if [ ! -f /home/$USER/faiss_installed.txt ]; then
-		echo " "
-		echo " "
-		echo "-----"
 		cd /home/$USER
 		echo " "
 		echo " "
+		echo "-----"
+		echo "Installing FAISS"
 		echo "------------"  
 		echo " "
 		echo "============"
@@ -745,6 +749,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		echo " "
 		echo " "
 		echo "------------"  
+		echo "Installing chromadb"
+		echo "------------"
 		# Write chroma start script
 		echo '#!/bin/bash'                                         | tee    /home/$USER/start_chroma.sh  
 		echo " "                                                   | tee -a /home/$USER/start_chroma.sh  
@@ -779,6 +785,9 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "  "
 	echo "   "
 	cd /home/$USER/
+	# Jump it
+	echo "milvus_installed.txt" > /home/$USER/milvus_installed.txt
+	echo "vectordb_installed.txt"  > /home/$USER/vectordb_installed.txt
 	if [ ! -f /home/$USER/milvus_installed.txt ]; then
 		echo " "
 		echo " "
@@ -860,6 +869,7 @@ cd /home/$USER
 echo " "
 echo " "
 if [ ! -f /home/$USER/n8n_installed.txt ]; then
+	echo "------------"
 	echo "Installing n8n docker"
     echo "------------"        
 	sleep 3
@@ -957,6 +967,7 @@ echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/ollama_installed.txt ]; then
   	echo "------------"   
+	echo "Installing ollama docker"
   	echo "------------"   
   	cd /home/$USER/
   	# Start ollama docker in future
@@ -1083,7 +1094,6 @@ echo " "
 echo " "
 cd /home/$USER
 if [ ! -f /home/$USER/flowise_installed.txt ]; then
-	echo "------------"   
 	cd /home/$USER/
 	#####################3
 		# flowise docker
@@ -1164,13 +1174,13 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	fi	   
 	git clone https://github.com/FlowiseAI/Flowise.git
 	cd Flowise/
-	sudo docker build --no-cache -t flowise .
+	echo $password | sudo -S docker build --no-cache -t flowise .
 	
 	# The '--network host' option removes network isolation between the container and
 	#   the Docker host machine, meaning the container directly shares the host's networking stack
 	# The container operates as if it were a process running directly on the host machine,
 	#   using the host's IP address and network interfaces.  
-	sudo docker run -d --name flowise -p 3000:3000 --network host flowise
+	echo $password | sudo -S docker run -d --name flowise -p 3000:3000 --network host flowise
 	#      docker run -d --name flowise -p 3000:3000 --network host flowise
 	cd /home/$USER/
 	echo "In future to start/stop containers, proceed, as:"
@@ -1247,6 +1257,11 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	    if [ ! -d "$DIRECTORY" ]; then
 	        CONTREPO=https://repo.continuum.io/archive/
 			# In WSL Downloads folder does not exist
+			echo "   "
+			echo "    "
+			echo "--------"
+			echo "Installing Anaconda"
+			echo "--------"
 			mkdir /home/$USER/Downloads
 	        # Stepwise filtering of the html at $CONTREPO
 	        # Get the topmost line that matches our requirements, extract the file name.
@@ -1287,7 +1302,9 @@ cd /home/$USER
 if [ ! -f /home/$USER/langchain_installed.txt ]; then
     echo " "
     echo " "
+	echo "--------"
 	echo "Installing langchain and langraph.."
+	echo "--------"
     sleep 3
 	# Activate python environment at 'langchain'
 	#  for installing langchain and llama-index
@@ -1304,7 +1321,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install notebook
 	pip install streamlit
 	# Required for spyder:
-	sudo apt install pyqt5-dev-tools -y
+	echo $password | sudo -S apt install pyqt5-dev-tools -y
 	# Huggingface and llama.cpp related
 	pip install huggingface_hub
 	# To connect to postgresql
