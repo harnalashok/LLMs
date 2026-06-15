@@ -425,11 +425,7 @@ if ! command -v docker &> /dev/null; then
     echo "Docker installation not found. Please install docker."
 	echo "You may try to execute the code in Docker-I and Docker-II line-by-line"
     exit 1
-else
-    echo "Docker is installed."
-	echo "You may execute docker install instructions in docker-I and docker-II line-by-line"
 fi
-
 
 
 #########
@@ -734,7 +730,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		chmod +x *.sh
 		chmod +x /home/$USER/start/*.sh
 		sleep 4
-		cd /homne/$USER/
+		cd /home/$USER/
 		echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
 		LINE="  6. FAISS Installed"
 		if ! grep -qF "$LINE" "$FILE"; then
@@ -1055,7 +1051,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull bge-m3
 	  echo "2. Pulling nomic-embed-text"
 	  docker exec -it ollama ollama pull nomic-embed-text
-	  echo "3. Pulling llama3.2"latest"
+	  echo "3. Pulling llama3.2 latest"
 	  docker exec -it ollama ollama pull llama3.2:latest
 	  echo "4. Pulling llama3.2:1b"
 	  docker exec -it ollama ollama pull llama3.2:1b
