@@ -45,6 +45,21 @@ if [ ! -f /home/$USER/firsttime.txt ]; then
 	echo '    fi'  >> /home/$USER/.profile
 	echo 'fi'  >> /home/$USER/.profile
 	echo firsttime.txt > firsttime.txt
+else
+	echo "  "
+	echo "=====***======"
+	echo "WSL ubuntu WINDOW will close many times during installation"
+	echo "Each time, double click to open it, and each time "
+	echo "issue the command:"
+	echo "            ./ollama_wsl_gpu.sh"
+	echo "   Answer Y to most questions, if asked"
+	echo "      till, all software is installed."
+	echo "   You may have to supply your ubuntu pasword"
+	echo "================"
+	echo "   "
+	echo "   "
+	echo "    "
+	echo -en "\007"
 fi
 
 sleep 2
@@ -1148,6 +1163,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	echo "   "
 	echo "-------"      
 	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."    
+	echo "So go and have a cum of coffee.."
 	echo "-------"      
 	sleep 4
 	# Start script
@@ -1536,11 +1552,13 @@ echo "   "
 bash test_laptop_gpu.sh
 echo "    "
 echo "   "
-echo "    "
-echo "============"
-echo "You can terminate here"
-read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
-sleep 5
+echo "     "
+echo "=========="
+cd /home/$USER
+echo "You can stop here. Click ctrl+c to terminate"
+read response
+echo "==========="
+sleep 20
 
 ###############33
 ##### END ###########

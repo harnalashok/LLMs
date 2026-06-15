@@ -29,7 +29,7 @@ if [ "$WSLSYSTEM" = "true" ]; then
 	echo "Each time, double click to open it, and each time "
 	echo "issue the command:"
 	echo "            ./ollama_wsl_nogpu.sh"
-	echo "   Answer Y to most questions"
+	echo "   Answer Y to most questions, if asked"
 	echo "      till, all software is installed."
 	echo "   You may have to supply your ubuntu pasword"
 	echo "================"
@@ -44,7 +44,7 @@ else
 	echo "Each time, double click to open it, and each time "
 	echo "issue the command:"
 	echo "            ./ollama_wsl_nogpu.sh"
-	echo "   Answer Y to most questions"
+	echo "   Answer 'Y' to most questions, if asked"
 	echo "      till, all software is installed."
 	echo "   You may have to supply your ubuntu pasword"
 	echo "================"
@@ -410,78 +410,6 @@ else
 	echo "You may execute docker install instructions in docker-I and docker-II line-by-line"
 fi
 
-
-##############
-# Create python virtual env
-# source /home/$USER/venv/bin/activate
-##############
-
-if [ ! -f /home/$USER/venv_installed.txt ]; then
-    cd /home/$USER
-    echo " "
-    echo "Creating python virtual environment"
-    echo "------------"        
-	sleep 3
-	# Clear earlier directory, if it exists
-	python3 -m venv --clear /home/$USER/venv
-	source /home/$USER/venv/bin/activate
-	# 1.6 Essentials software
-	pip install --upgrade pip
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install ipython
-	pip install notebook
-	pip install streamlit
-	# To connect to postgresql
-	pip install psycopg2
-	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
-	# Required for spyder:
-	echo " "
-	echo " "
-	echo -en "\007"
-	sudo apt install pyqt5-dev-tools -y
-	echo "####"
-	echo "Install pdfminer to extract text from pdf"
-	# Ref: https://github.com/pdfminer/pdfminer.six
-	pip install pdfminer.six
-	echo "####"
-	sudo apt install pyqt5-dev-tools -y
-	echo "Install pymupdf4llm to extract text/json"
-	# Ref: https://github.com/pymupdf/pymupdf4llm
-	pip install pymupdf4llm pymupdf4llm[layout]
-	mkdir -p /home/$USER/Documents/samples/in
-	mkdir -p /home/$USER/Documents/samples/out
-	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
-	cd /home/$USER
-	echo "####"
-	# Download file that creates a fresh python enviroemnet
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
-	chmod +x *.sh   
-	# Huggingface and  related
-	#pip install huggingface_hub
-	# cu124: is as per cuda version. Get cuda version from nvidia-smi
-	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-	#pip install huggingface_hub
-	# Create script to activate 'venv' env
-	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
-	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
-	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
-	chmod +x /home/$USER/*.sh
-	sleep 2
-	
-	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
-	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
-	if [ "$WSLSYSTEM" = "true" ] ; then
-			wsl.exe --shutdown
-	else
-		reboot
-	fi  
-fi   
 
 
 #########
@@ -1124,7 +1052,11 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	cd /home/$USER/
 	# Install Flowise through docker"
 	# Ref: https://docs.flowiseai.com/getting-started
-	echo "Installing flowise docker. Takes time.."          
+	echo "   "
+	echo "-------"      
+	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."    
+	echo "So go and have a cum of coffee.."
+	echo "-------"   
 	# Start script
 	echo '#!/bin/bash'                                         >  /home/$USER/start_flowise.sh
 	echo " "                                                   >> /home/$USER/start_flowise.sh
@@ -1296,71 +1228,7 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 	        echo "Anaconda is already installed in /home/$USER/anaconda3"
 	     fi   
 	fi	 
- 
-#################
-# smolagents
-#################
 
-cd /home/$USER
-if [ ! -f /home/$USER/smoll_installed.txt ]; then
-    deactivate
-	cd /home/$USER
-	sleep 10
-    echo " "
-    echo " "
-	echo "Installing smollagents.."
-    sleep 3
-	# Activate python environment at 'smollagents'
-	#  for installing smollagents
-	##############
-	# Create python virtual env
-	##############
-	python3 -m venv /home/$USER/smollagents
-	source /home/$USER/smollagents/bin/activate
-	# 1.6 Essentials software
-    # Install smolagents
-	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
-	pip install --upgrade pip
-	pip install "smolagents[gradio]"
-	pip install "smolagents[toolkit]"
-	pip install "smolagents[mcp]"
-	pip install "smolagents[litellm]"		
-	pip install 'smolagents[transformers]'
-	pip install -U "huggingface_hub[cli]"
-	pip install -U huggingface_hub
-	pip install ddgs
-	# Essentials software
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install plotly
-	# Create script to activate 'smollagents' env
-	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
-	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
-	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
-	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
-	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
-	chmod +x /home/$USER/*.sh
-	sleep 2
-	echo "  "
-	echo "====="
-	echo "Putting HF token in .bashrc"
-	echo "====="
-	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
-	sleep 5
-	chmod +x /home/$USER/*.sh
-	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
-	pip list > /home/$USER/packagesInSmollagents_env.txt
-	if [ "$WSLSYSTEM" = "true" ] ; then
-        wsl.exe --shutdown
-      else
-        reboot
-      fi  
-fi	
 
 
 #################
@@ -1475,6 +1343,91 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
       fi  
 else
     echo "  "
+fi	
+
+
+
+
+echo "   "
+echo "Testing what all is installed"
+echo "   "
+bash test_laptop_gpu.sh
+echo "    "
+echo "   "
+echo "     "
+echo "=========="
+cd /home/$USER
+echo "You can stop here. Click ctrl+c to terminate"
+read response
+echo "==========="
+sleep 20
+
+
+
+
+#################
+# smolagents
+#################
+
+cd /home/$USER
+if [ ! -f /home/$USER/smoll_installed.txt ]; then
+    deactivate
+	cd /home/$USER
+	sleep 10
+    echo " "
+    echo " "
+	echo "Installing smollagents.."
+    sleep 3
+	# Activate python environment at 'smollagents'
+	#  for installing smollagents
+	##############
+	# Create python virtual env
+	##############
+	python3 -m venv /home/$USER/smollagents
+	source /home/$USER/smollagents/bin/activate
+	# 1.6 Essentials software
+    # Install smolagents
+	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
+	pip install --upgrade pip
+	pip install "smolagents[gradio]"
+	pip install "smolagents[toolkit]"
+	pip install "smolagents[mcp]"
+	pip install "smolagents[litellm]"		
+	pip install 'smolagents[transformers]'
+	pip install -U "huggingface_hub[cli]"
+	pip install -U huggingface_hub
+	pip install ddgs
+	# Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install plotly
+	# Create script to activate 'smollagents' env
+	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	echo "  "
+	echo "====="
+	echo "Putting HF token in .bashrc"
+	echo "====="
+	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	sleep 5
+	chmod +x /home/$USER/*.sh
+	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
+	pip list > /home/$USER/packagesInSmollagents_env.txt
+	if [ "$WSLSYSTEM" = "true" ] ; then
+        wsl.exe --shutdown
+      else
+        reboot
+      fi  
 fi	
 
 
@@ -1688,6 +1641,78 @@ read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
 sleep 5
 
 
+
+##############
+# Create python virtual env
+# source /home/$USER/venv/bin/activate
+##############
+
+if [ ! -f /home/$USER/venv_installed.txt ]; then
+    cd /home/$USER
+    echo " "
+    echo "Creating python virtual environment"
+    echo "------------"        
+	sleep 3
+	# Clear earlier directory, if it exists
+	python3 -m venv --clear /home/$USER/venv
+	source /home/$USER/venv/bin/activate
+	# 1.6 Essentials software
+	pip install --upgrade pip
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install streamlit
+	# To connect to postgresql
+	pip install psycopg2
+	echo "venv_installed.txt" > /home/$USER/venv_installed.txt
+	# Required for spyder:
+	echo " "
+	echo " "
+	echo -en "\007"
+	sudo apt install pyqt5-dev-tools -y
+	echo "####"
+	echo "Install pdfminer to extract text from pdf"
+	# Ref: https://github.com/pdfminer/pdfminer.six
+	pip install pdfminer.six
+	echo "####"
+	sudo apt install pyqt5-dev-tools -y
+	echo "Install pymupdf4llm to extract text/json"
+	# Ref: https://github.com/pymupdf/pymupdf4llm
+	pip install pymupdf4llm pymupdf4llm[layout]
+	mkdir -p /home/$USER/Documents/samples/in
+	mkdir -p /home/$USER/Documents/samples/out
+	cd /home/$USER/Documents/samples
+	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	cd /home/$USER
+	echo "####"
+	# Download file that creates a fresh python enviroemnet
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	chmod +x *.sh   
+	# Huggingface and  related
+	#pip install huggingface_hub
+	# cu124: is as per cuda version. Get cuda version from nvidia-smi
+	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+	#pip install huggingface_hub
+	# Create script to activate 'venv' env
+	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
+	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
+	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	
+	cp /home/$USER/activate_venv.sh  /home/$USER/start/activate_venv.sh
+	cp /home/$USER/activate_venv.sh  /home/$USER/stop/activate_venv.sh
+	if [ "$WSLSYSTEM" = "true" ] ; then
+			wsl.exe --shutdown
+	else
+		reboot
+	fi  
+fi   
 
 
 
