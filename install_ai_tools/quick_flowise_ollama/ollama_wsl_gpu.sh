@@ -482,7 +482,9 @@ if [ ! -d "$DIRECTORY" ]; then
 	    DIRECTORY=/home/$USER/anaconda3       # Redundant
 	    if [ ! -d "$DIRECTORY" ]; then
 			echo "   "
+			echo "------"
     		echo "Installing Anaconda.."
+			echo "-------"
     		sleep 3
 	        CONTREPO=https://repo.continuum.io/archive/
 			# In WSL Downloads folder does not exist
@@ -528,6 +530,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo "------------" 
     echo " Several Vector DBs would be installed"
+	echo "------------"
 	sleep 3
 	echo "  "
 	echo  "  "
@@ -1162,7 +1165,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	# Ref: https://docs.flowiseai.com/getting-started
 	echo "   "
 	echo "-------"      
-	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."    
+	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at [6/6] point..."    
 	echo "So go and have a cum of coffee.."
 	echo "-------"      
 	sleep 4

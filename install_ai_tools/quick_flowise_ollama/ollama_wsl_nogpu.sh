@@ -1054,7 +1054,7 @@ if [ ! -f /home/$USER/flowise_installed.txt ]; then
 	# Ref: https://docs.flowiseai.com/getting-started
 	echo "   "
 	echo "-------"      
-	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at 6/6 point..."    
+	echo "Installing flowise docker. Takes a LOTS OF TIME..especially at [6/6] point..."    
 	echo "So go and have a cum of coffee.."
 	echo "-------"   
 	# Start script
