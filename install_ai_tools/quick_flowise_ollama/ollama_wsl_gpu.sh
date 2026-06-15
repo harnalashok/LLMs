@@ -1119,7 +1119,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull deepseek-r1:1.5b
 	echo "8. Pulling qllama/bge-small-en-v1.5"
 	docker exec -it ollama ollama pull qllama/bge-small-en-v1.5
-	echo "9. Pulling pull phi4-mini:3.8b"
+	echo "9. Pulling phi4-mini:3.8b"
 	docker exec -it ollama ollama pull phi4-mini:3.8b
 	echo "10. Pulling qwen2.5:1.5b"
 	docker exec -it ollama ollama pull qwen2.5:1.5b
