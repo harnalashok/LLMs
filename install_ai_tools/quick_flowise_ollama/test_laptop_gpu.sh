@@ -30,24 +30,29 @@ echo "    "
 
 # Start apps
 echo "  "
-echo "   "
+echo "Starting flowise   "
+bash start_flowise.sh
+sleep 3
+echo "  "
+echo "Starting Ollama   "
 bash start_ollama.sh
+sleep 3
 echo "  "
-echo "   "
-bash start_postgresql.sh
-echo "  "
-echo "   "
+echo "Starting n8n   "
 bash start_n8n.sh
+sleep 3
 echo "  "
-echo "   "
-bash start_flowise.sh
-echo "  "
-echo "   "
-bash start_flowise.sh
+echo "Starting Chroma   "
 bash start_chroma.sh
 echo "  "
-echo "   "
+echo "Starting meilisearch   "
 bash start_meilisearch.sh 
+sleep 3
+echo "  "
+echo "Starting Postgres   "
+bash start_postgresql.sh
+sleep 3
+
 echo "=============="
 echo "  "
 echo "   "
@@ -120,6 +125,9 @@ sleep 3
 
 acc=
 acc=`sudo ss -tulpn | grep ':3000'`
+#echo $acc
+#echo "Press ctrl+c "
+#sleep 4
 
 if [[ -n $acc ]]; then
   echo "6. flowise is started."     >> /home/$USER/test_report.txt
