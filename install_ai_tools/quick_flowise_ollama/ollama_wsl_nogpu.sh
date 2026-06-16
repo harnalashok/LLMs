@@ -616,6 +616,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		sudo -u postgres psql -c "alter user harnal with encrypted password 'harnal';"
 		sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
 		echo "===="
+		echo $password | sudo -S useradd -m -s /bin/bash ashok
 		sudo -u postgres psql -c 'create user ashok ;'
 		sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
 		sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'

@@ -796,6 +796,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	sudo -u postgres psql -c "CREATE EXTENSION vector;" -d harnal
 	sudo -u postgres psql -c "ALTER USER harnal WITH CREATEDB;"
 	echo "===="
+	echo $password | sudo -S useradd -m -s /bin/bash ashok
 	sudo -u postgres psql -c 'create user ashok ;'
 	sudo -u postgres psql -c 'CREATE DATABASE ashok WITH OWNER = ashok;  '
 	sudo -u postgres psql -c 'grant all privileges on database ashok to ashok;'
