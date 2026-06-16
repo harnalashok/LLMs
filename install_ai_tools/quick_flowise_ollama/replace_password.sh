@@ -11,7 +11,8 @@ if [ ! -f "$TARGET_FILE" ]; then
 fi
 
 # Prompt the user for the new password
-read -p "Enter your password to replace 'ashok': " var
+echo "Enter your password to replace existing password: 'ashok'. "
+read -p "Do NOT PUT ANY SPACES OR INVERTED COMMA before or after your password: " var
 
 if [[ -z "$var" ]]; then
     var="ashok"
@@ -23,4 +24,4 @@ var="${var%"${var##*[![:space:]]}"}"
 # Perform the in-place replacement using sed
 sed -i "s/ashok/$var/g" "$TARGET_FILE"
 
-echo "Password replaced!"
+echo "Your password is: $var"
