@@ -2,7 +2,11 @@
 
 # Last amended: 12th May, 2026
 
-# Change it, if needed
+# This is the password of your WSL ubuntu account
+#  Change it, if different 
+#    DO NOT PUT ANY SPACES ANYWHERE
+#      NEITHER AROUND '=' NOR BEFORE 'password'
+#       NOR AT EHE END
 password="ashok"
 
 clear
@@ -1760,11 +1764,6 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	# Download file that creates a fresh python enviroemnet
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
 	chmod +x *.sh   
-	# Huggingface and  related
-	#pip install huggingface_hub
-	# cu124: is as per cuda version. Get cuda version from nvidia-smi
-	#pip install transformers torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-	#pip install huggingface_hub
 	# Create script to activate 'venv' env
 	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
 	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh

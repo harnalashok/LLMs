@@ -2,8 +2,11 @@
 
 # Last amended: 07th June, 2026
 
-
-# CHANGE IT, IF DIFFERENT
+# This is the password of your WSL ubuntu account
+#  Change it, if different 
+#    DO NOT PUT ANY SPACES ANYWHERE
+#      NEITHER AROUND '=' NOR BEFORE 'password'
+#       NOR AT EHE END
 password="ashok"
 
 
