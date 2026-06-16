@@ -8,6 +8,10 @@ See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20u
 Stop Symantic anti-virus first       
 (copy and paste in WSL-Ubuntu terminal)
 ```
+  # Last amended: 16th June, 2026
+  # My folder: C:\Users\ashok\OneDrive\Documents\FORE_data_analytics_course\2026\agentic AI
+  # Open WSL Ubuntu terminal and then copy (ctrl+A, ctrl+C) and paste all (ctrl+V) the following 
+  #  at one go in Ubuntu terminal
   echo "Installation script to install several applications"
   echo "frameworks on WSL Ubuntu laptop WITHOUT GPU."
   sleep 3
@@ -42,6 +46,10 @@ Stop Symantic anti-virus first
 (copy and paste in WSL-Ubuntu terminal)
 
 ```
+  # Last amended: 16th June, 2026
+  # My folder: C:\Users\ashok\OneDrive\Documents\FORE_data_analytics_course\2026\agentic AI
+  # Open WSL Ubuntu terminal and then copy (ctrl+A, ctrl+C) and paste all (ctrl+V) the following 
+  #  at one go in Ubuntu terminal
   echo "Installation script to install several applications"
   echo "frameworks on WSL Ubuntu laptop with GPU."
   sleep 3
