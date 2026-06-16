@@ -50,9 +50,6 @@ echo "DONE....."
 echo "   "
 echo "    "
 echo "Starting services"
-echo "==========="
-echo "   "
-echo "    "
 
 # Start apps
 echo "   "
@@ -88,7 +85,7 @@ sleep 3
 echo "  "
 echo "   "
 echo "======="                 > /home/$USER/test_report.txt
-echo "Writing Test Report"     >> /home/$USER/test_report.txt
+echo "Test Report"            >> /home/$USER/test_report.txt
 echo "======="                 >> /home/$USER/test_report.txt
 echo "    "                    >> /home/$USER/test_report.txt
 
@@ -171,8 +168,8 @@ else
 fi
 
 sleep 2
-echo "    "
-echo "    "
+echo "    "                              >> /home/$USER/test_report.txt
+echo "    "                              >> /home/$USER/test_report.txt
 echo "==Ollama models downloaded===="     >> /home/$USER/test_report.txt
 docker exec -it ollama ollama list         | tee -a  /home/$USER/test_report.txt
 echo "======"                             >> /home/$USER/test_report.txt
