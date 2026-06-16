@@ -160,6 +160,10 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Activate nvm
 	source /home/$USER/.bashrc
     # Now install Node.js and npm
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    nvm install --lts
     nvm install --lts
 	nvm use --lts
 	echo "NodeJS installed"
@@ -276,7 +280,11 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
-   # Will try to install Node.js again
+   # Posted by Leonardo Pimentel
+    # Retrieved 2026-06-16, License - CC BY-SA 4.0
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     nvm install --lts
 	nvm use --lts
 	sleep 3

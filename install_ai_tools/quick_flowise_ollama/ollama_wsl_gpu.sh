@@ -151,6 +151,10 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	# Activate nvm
 	source /home/$USER/.bashrc
     # Now install Node.js and npm
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    nvm install --lts
     nvm install --lts
 	nvm use --lts
 	echo "NodeJS installed"
