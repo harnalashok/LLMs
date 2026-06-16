@@ -264,6 +264,9 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
+    # Will try to install Node.js again
+    nvm install --lts
+	nvm use --lts
     echo "  "
     echo "------------"                            
     echo " Will install crewai"        
