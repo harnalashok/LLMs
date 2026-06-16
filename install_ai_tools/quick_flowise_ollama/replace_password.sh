@@ -14,6 +14,7 @@ fi
 echo "Enter your password to replace existing password: 'ashok'. "
 read -p "Do NOT PUT ANY SPACES OR INVERTED COMMA before or after your password: " var
 
+# If password is empty
 if [[ -z "$var" ]]; then
     var="ashok"
 fi
