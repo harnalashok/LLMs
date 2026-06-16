@@ -13,7 +13,9 @@ fi
 # Prompt the user for the new password
 read -p "Enter your password to replace 'ashok': " var
 
-
+if [[ -z "$var" ]]; then
+    var="ashok"
+fi
 # Trim leading and trailing spaces
 var="${var#"${var%%[![:space:]]*}"}"
 var="${var%"${var##*[![:space:]]}"}"
