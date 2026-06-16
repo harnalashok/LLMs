@@ -64,11 +64,11 @@ Stop Symantic anti-virus first
 
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/ollama_wsl_gpu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/replace_password.sh
-
+   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/replace_password1.sh
+            
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    chmod +x  ~/*.sh
-   bash replace_password.sh
+   bash replace_password1.sh
    bash ollama_wsl_gpu.sh
    cd /home/$USER 
 ```
@@ -95,12 +95,12 @@ Stop Symantic anti-virus first
 
    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/install_ubuntu.sh
    wget  -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/dockerCommands.txt -P /home/$USER/Documents/docker/
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/replace_password.sh
+   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/replace_password2.sh
 
    perl -pi -e 's/\r\n/\n/g' ~/install_ubuntu.sh
    chmod +x  ~/*.sh
 
-   bash replace_password.sh
+   bash replace_password2.sh
    bash install_ubuntu.sh
    cd /home/$USER 
 ```
