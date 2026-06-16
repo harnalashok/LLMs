@@ -36,6 +36,9 @@ Stop Symantic anti-virus first
 
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_nogpu.sh
    chmod +x  ~/*.sh
+   clear
+   echo "   "
+   echo "    "
    bash replace_password.sh
    echo "   "
    echo "    "
@@ -79,6 +82,9 @@ Stop Symantic anti-virus first
             
    perl -pi -e 's/\r\n/\n/g' ~/ollama_wsl_gpu.sh
    chmod +x  ~/*.sh
+   clear
+   echo "   "
+   echo "    "
    bash replace_password1.sh
    echo "   "
    echo "    "
@@ -113,7 +119,9 @@ Stop Symantic anti-virus first
 
    perl -pi -e 's/\r\n/\n/g' ~/install_ubuntu.sh
    chmod +x  ~/*.sh
-
+   clear
+   echo "   "
+   echo "    "
    bash replace_password2.sh
    echo "   "
    echo "    "
