@@ -4,7 +4,7 @@
 
 # This is the password of your WSL ubuntu account
 #  Change it, if different 
-#    DO NOT PUT ANY SPACES ANYWHERE
+#    DO NOT PUT ANY SPACES ANYWHERE ON THIS LINE
 #      NEITHER AROUND '=' NOR BEFORE 'password'
 #       NOR AT EHE END
 password="ashok"
