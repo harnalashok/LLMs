@@ -171,10 +171,11 @@ else
 fi
 
 sleep 2
-
-#echo "======"     >> /home/$USER/test_report.txt
-docker exec -it ollama ollama list       | tee -a  /home/$USER/test_report.txt
-echo "======"     >> /home/$USER/test_report.txt
+echo "    "
+echo "    "
+echo "==Ollama models downloaded===="     >> /home/$USER/test_report.txt
+docker exec -it ollama ollama list         | tee -a  /home/$USER/test_report.txt
+echo "======"                             >> /home/$USER/test_report.txt
 
 cat /home/$USER/test_report.txt
 
