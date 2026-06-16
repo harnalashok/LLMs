@@ -268,6 +268,12 @@ fi
 cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
     # Will try to install Node.js again
+	# Source - https://stackoverflow.com/a/60214427
+# Posted by Leonardo Pimentel
+# Retrieved 2026-06-16, License - CC BY-SA 4.0
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     nvm install --lts
 	nvm use --lts
     echo "  "
@@ -280,7 +286,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	mkdir /home/$USER/crewai_pjt
 	python3 -m venv crewai_env
 	# b) Activate the env
-	source /home/ashok/crewai_env/bin/activate
+	source /home/$USER/crewai_env/bin/activate
 	# c) Now install crewai and other packages using uv
 	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
 	uv pip install langchain-openai langchain-ollama langchain-community  
@@ -769,7 +775,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	echo "========="
-	echo "Creating user 'ashok' owning database 'askok'"
+	echo "Creating user 'ashok' owning database 'ashok'"
 	echo "Creating user 'harnal' and database 'harnal'"
 	echo "User 'ashok' has password: ashok"
 	echo "User 'harnal' has password: harnal"
@@ -870,7 +876,6 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	# Create the repository configuration file:
 	sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 	# Install for both desktop and web modes:
-	password="ashok"
 	echo $password | sudo -S  apt install pgadmin4 -y
     #
 	# Download RAG data files
@@ -1594,7 +1599,7 @@ sleep 20
 # 1. Install first in Windows from:
 #     https://antigravity.google/download
 # 2. PRess ctrl+shift+p and select WSL: Connect to WSL
-# 3. Select a folder in WSL, say, /home/ashok/Documents 
+# 3. Select a folder in WSL, say, /home/$USER/Documents 
 # 
 ################
 echo "    "

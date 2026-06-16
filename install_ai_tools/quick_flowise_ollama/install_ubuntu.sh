@@ -2,6 +2,14 @@
 
 # Last amended: 9th June, 2026
 
+# This is the password of your WSL ubuntu account
+#  Change it, if different 
+#    DO NOT PUT ANY SPACES ANYWHERE ON THIS LINE
+#      NEITHER AROUND '=' NOR BEFORE 'password'
+#       NOR AT EHE END
+password="ashok"
+
+
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
 echo "Will install cuda toolkit"
@@ -36,7 +44,6 @@ echo "Install  to tunnel access of local website"
 echo "Will install ragflow docker"
 echo "Will upgrade ragflow"
 echo "==========================="
-password="ashok"
 sleep 2
 
 FILE="/home/$USER/install_progerss.txt"
@@ -128,7 +135,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "NodeJS installed"
 	echo " "
 	sleep 3
-	#password="ashok"
 	#echo $password | sudo -S apt install npm -y
 	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
@@ -167,7 +173,6 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "  "
 	echo "------"
 	echo "Install httpd server"
-	password="ashok"
 	echo $password | sudo -S apt-get install apache2 -y
 	cd /home/$USER
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/index.html
@@ -224,8 +229,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	password="ashok"
-    echo $password | sudo -S systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else 
     LINE="  1. Ubuntu updated"
 	if ! grep -qF "$LINE" "$FILE"; then
@@ -253,7 +257,6 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 		echo "  "
 		echo "==>CUDA install for Ubuntu 26.04 ONLY<=="
 		echo "  "
-		password="ashok"
 		#echo $password | sudo -S apt install cuda-toolkit -y
 		# Now follow the instructions as on this page:
 		#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=26.04&target_type=deb_local
@@ -282,7 +285,6 @@ if [ ! -f /home/$USER/cuda_installed.txt ]; then
 		echo "cuda-toolkit does not change GPU drivers."
 		echo "But higher versions of cuda-toolkit may have installation problems"
 		# Remove old gpg key
-		password="ashok"
 		echo $password | sudo -S apt-key del 7fa2af80
 		# Now follow the instructions as on this page:
 		#  https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local
@@ -331,7 +333,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	mkdir /home/$USER/crewai_pjt
 	python3 -m venv crewai_env
 	# b) Activate the env
-	source /home/ashok/crewai_env/bin/activate
+	source /home/$USER/crewai_env/bin/activate
 	# c) Now install crewai and other packages using uv
 	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
 	uv pip install langchain-openai langchain-ollama langchain-community  
@@ -404,8 +406,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
 	fi
-	password="ashok"
-    echo $password | sudo -S systemctl reboot -i
+	echo $password | sudo -S systemctl reboot -i
 else
    LINE="  3. Docker installed"
 	if ! grep -qF "$LINE" "$FILE"; then
@@ -421,8 +422,7 @@ fi
 
 cd /home/$USER
 if [ ! -f /home/$USER/docker_installed_1.txt ]; then
-	password="ashok"
-    # Ref: https://docs.docker.com/engine/install/ubuntu/
+	# Ref: https://docs.docker.com/engine/install/ubuntu/
     #      https://docs.docker.com/engine/install/linux-postinstall/
 	echo "  "
 	echo "  "
@@ -824,7 +824,6 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	# Create the repository configuration file:
 	sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 	# Install for both desktop and web modes:
-	password="ashok"
 	echo $password | sudo -S  apt install pgadmin4 -y
     #
 	# Download RAG data files
@@ -973,7 +972,6 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	# Access at localhost:5678
 	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
 	# Access at localhost:5678
-	password="ashok"
 	echo $password | sudo -S  apt-get update
 	sudo  docker run -it -d --rm \
 				--name n8n \
@@ -1117,14 +1115,12 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
    fi	   
    git clone https://github.com/FlowiseAI/Flowise.git
    cd Flowise/
-   password="ashok"
    echo $password | sudo -S docker build --no-cache -t flowise .
    
    # The '--network host' option removes network isolation between the container and
    #   the Docker host machine, meaning the container directly shares the host's networking stack
    # The container operates as if it were a process running directly on the host machine,
    #   using the host's IP address and network interfaces.  
-   password="ashok"
    echo $password | sudo -S  docker run -d --name flowise -p 3000:3000 --network host flowise
    #      docker run -d --name flowise -p 3000:3000 --network host flowise
    #cd /home/$USER/Flowise/docker
@@ -1254,7 +1250,6 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  if ! grep -qF "$LINE" "$FILE"; then
 	     echo "$LINE" >> "$FILE"
 	  fi
-	  password="ashok"
 	  echo $password | sudo -S systemctl reboot -i
 else
       echo " "
@@ -1719,7 +1714,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		echo "   "
 		echo "Installing RAG and RAG performance eval system"
 		sleep 3
-		source /home/ashok/langchain/bin/activate
+		source /home/$USER/langchain/bin/activate
 	    rm -rf /home/$USER/ragsystem
 		mkdir /home/$USER/ragsystem
 		cd /home/$USER/ragsystem
@@ -1738,7 +1733,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 		echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
 		echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
-		echo "echo '  source /home/ashok/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
+		echo "echo '  source /home/$USER/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
 	    echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
 		# To ingest .md files in dataFolder
 		echo "echo '  python main.py --ingest'"                                        | tee   -a /home/$USER/start_ragEval.sh     
@@ -2272,7 +2267,6 @@ if [  -f /home/$USER/ragflow_installed.txt ]; then
 			bash /home/$USER/stop_ragflow.sh
 			sleep 2
 			echo "1.0 Moving earlier ragflow folder"
-			password="ashok"
 			echo $password | sudo -S rm -rf /home/$USER/ragflow.old
 			mv /home/$USER/ragflow  /home/$USER/ragflow.old
 			echo "2.0 Cloning git repo"

@@ -24,6 +24,9 @@ var="${var#"${var%%[![:space:]]*}"}"
 var="${var%"${var##*[![:space:]]}"}"
 
 # Perform the in-place replacement using sed
-sed -i "s/ashok/$var/g" "$TARGET_FILE"
+#sed -i "s/ashok/$var/g" "$TARGET_FILE"
+# Line no is 10
+sed -i "10s/ashok/$var/" "$TARGET_FILE"
+
 
 echo "Your password is: $var"

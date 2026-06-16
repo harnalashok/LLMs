@@ -290,7 +290,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	mkdir /home/$USER/crewai_pjt
 	python3 -m venv crewai_env
 	# b) Activate the env
-	source /home/ashok/crewai_env/bin/activate
+	source /home/$USER/crewai_env/bin/activate
 	# c) Now install crewai and other packages using uv
 	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
 	uv pip install langchain-openai langchain-ollama langchain-community  
@@ -1523,7 +1523,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 	echo "   "
 	echo "Installing RAG and RAG performance eval system"
 	sleep 3
-	source /home/ashok/langchain/bin/activate
+	source /home/$USER/langchain/bin/activate
 	rm -rf /home/$USER/ragsystem
 	mkdir /home/$USER/ragsystem
 	cd /home/$USER/ragsystem
@@ -1542,7 +1542,7 @@ if [ ! -f /home/$USER/rageval_installed.txt ]; then
 	echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
 	echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
 	echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '  source /home/ashok/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '  source /home/$USER/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
 	echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
 	# To ingest .md files in dataFolder
 	echo "echo '  python main.py --ingest'"                                        | tee   -a /home/$USER/start_ragEval.sh     
