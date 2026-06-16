@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Last amended: 15th June, 2026
+# Last amended: 16th June, 2026
 
 # Delete earlier report
 rm /home/$USER/test_report.txt
 
-
-# Stop software, if started
+# Stop services, if started
 echo "Stopping services, if started..."
 echo "========="
 sleep 2
@@ -49,36 +48,36 @@ echo "   "
 echo "DONE....."
 echo "   "
 echo "    "
-echo "Starting services"
+echo "**Starting services**"
 
 # Start apps
 echo "   "
 echo "======  "
-echo "Starting flowise   "
+echo "**Starting flowise**"
 bash start_flowise.sh
 sleep 3
 echo "  "
 echo "======  "
-echo "Starting Ollama   "
+echo "**Starting Ollama**"
 bash start_ollama.sh
 sleep 3
 echo "  "
 echo "======  "
-echo "Starting n8n   "
+echo "**Starting n8n**"
 bash start_n8n.sh
 sleep 3
 echo "  "
 echo "======  "
-echo "Starting Chroma   "
+echo "**Starting Chromadb**"
 bash start_chroma.sh
 echo "  "
 echo "======  "
-echo "Starting meilisearch   "
+echo "**Starting meilisearch**"
 bash start_meilisearch.sh 
 sleep 3
 echo "  "
 echo "======  "
-echo "Starting Postgres   "
+echo "**Starting Postgresql**"
 bash start_postgresql.sh
 sleep 3
 
@@ -152,17 +151,17 @@ else
 fi
 
 abc=
-abc=`node --version | grep '22'`
+abc=`node --version | egrep '^v2'`
 if [[ -n $abc ]]; then
-  echo "8. nodejs ver 22.x is installed"     >> /home/$USER/test_report.txt
+  echo "8. nodejs ver $abc installed"                   >> /home/$USER/test_report.txt
 else
-   echo "8. nodejs ver 22.x appears to be not installed"   >> /home/$USER/test_report.txt
+   echo "8. nodejs appears to be not installed"   >> /home/$USER/test_report.txt
 fi
 
 abc=
-abc=`npm --version | grep '10'`
+abc=` npm --version | egrep '[.1]'`
 if [[ -n $abc ]]; then
-  echo "9. npm ver 10.x is installed"     >> /home/$USER/test_report.txt
+  echo "9. npm ver $abc is installed"     >> /home/$USER/test_report.txt
 else
    echo "8. npm ver 10.x not installed"    >> /home/$USER/test_report.txt
 fi
