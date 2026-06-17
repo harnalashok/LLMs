@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# Last amended: 17th June, 2026
 
+cd /home/$USER
 # Define the target file name
 TARGET_FILE="ollama_wsl_nogpu.sh"
 
@@ -22,6 +24,7 @@ if [[ -z "$var" ]]; then
     echo "Your password remains as: $var"
     exit 1
 fi
+
 # Trim leading and trailing spaces
 var="${var#"${var%%[![:space:]]*}"}"
 var="${var%"${var##*[![:space:]]}"}"

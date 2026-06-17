@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 12th May, 2026
+# Last amended: 17th June, 2026
 
 # This is the password of your WSL ubuntu account
 #  Change it, if different 
@@ -1428,8 +1428,6 @@ else
 fi	
 
 
-
-
 echo "   "
 echo "Testing what all is installed"
 echo "   "
@@ -1441,6 +1439,7 @@ echo "=========="
 cd /home/$USER
 echo "You can stop here. Click ctrl+c to terminate"
 read response
+exit 1
 echo "   "
 echo "==========="
 echo "Are you sure you want to proceed and install EXTRA software. Else click ctrl+c to terminate now" 

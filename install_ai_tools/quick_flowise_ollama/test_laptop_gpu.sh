@@ -1,9 +1,15 @@
 #!/bin/bash
 
-# Last amended: 16th June, 2026
+# Last amended: 17th June, 2026
 
 # Delete earlier report
-rm /home/$USER/test_report.txt
+FILE="test_report.txt"
+cd /home/$USER
+
+if [ -f "$FILE" ]; thens
+    rm /home/$USER/test_report.txt
+fi
+
 
 # Stop services, if started
 echo "Stopping services, if started..."
