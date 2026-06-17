@@ -6,7 +6,7 @@
 FILE="test_report.txt"
 cd /home/$USER
 
-if [ -f "$FILE" ]; thens
+if [ -f "$FILE" ]; then
     rm /home/$USER/test_report.txt
 fi
 
