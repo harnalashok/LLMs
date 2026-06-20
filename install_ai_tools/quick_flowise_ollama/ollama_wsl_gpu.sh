@@ -1095,6 +1095,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	sleep 2
 	echo "ollama_installed.txt" > ollama_installed.txt
 	chmod +x /home/$USER/*.sh
+	cd /home/$USER/Documents
+	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Types_of_LLMs.pdf
 
 	LINE="  11. Ollama Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
