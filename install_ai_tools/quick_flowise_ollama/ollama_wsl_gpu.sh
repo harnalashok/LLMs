@@ -97,7 +97,7 @@ sleep 2
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     cd /home/$USER/Documents
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
+    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Types_of_LLMs_and_Agents.pdf
 	cd /home/$USER
     echo "  "
     echo "------------"                            
