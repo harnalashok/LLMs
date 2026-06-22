@@ -1038,8 +1038,11 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
 	chmod +x /home/$USER/stop/*.sh
-	cd /home/$USER/Documents
+	mkdir /home/$USER/Documents/llms
+	cd /home/$USER/Documents/llms
 	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Types_of_LLMs_and_Agents.pdf
+	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Technical%20concepts.pdf
+	cd /home/$USER
 	if [ "$WSLSYSTEM" = "true" ] ; then
 			wsl.exe --shutdown
 	else
