@@ -1547,7 +1547,8 @@ fi
 ############
 
 #  Download github folder 'crewaiModels' using command line
-#  Can copy and paste all at once:
+#  Can copy and paste all at once.
+#  Creates folder Documents/crewaiModels/
 cd /home/$USER
 if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	cd ~/   
