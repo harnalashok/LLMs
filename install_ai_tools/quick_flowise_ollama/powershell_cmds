@@ -1,9 +1,9 @@
 # Last amended: 26th June, 2026
 
-# This file contains powershell scripts to be executed
+# This file contains powershell scripts (for Windows 11) to be executed
 
 ##**$$$$$$$$$ IMPT $$$$$$##
-# in Windows 11. We assume useraccount is 'ashok'.
+# We assume WSL Ubuntu useraccount is 'ashok'.
 # If your useraccount in ubuntu is different from 'ashok', first simply
 #   replace 'ashok' with that name below. DO NOT PUT ANY SPACES
 #    while replacing
