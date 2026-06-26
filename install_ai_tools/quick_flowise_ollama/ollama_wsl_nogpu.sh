@@ -104,9 +104,7 @@ fi
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     clear
-    cd /home/$USER/Documents
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
-	cd /home/$USER
+    cd /home/$USER
     echo "  "
     echo "------------"                            
     echo " Will update Ubuntu. Takes time..."                     
@@ -1432,148 +1430,6 @@ else
     echo "  "
 fi	
 
-
-echo "   "
-echo "Testing what all is installed"
-echo "   "
-bash test_laptop_gpu.sh
-echo "    "
-echo "   "
-echo "     "
-echo "=========="
-cd /home/$USER
-echo "You can stop here. Click ctrl+c to terminate"
-read response
-exit 1
-echo "   "
-echo "==========="
-echo "Are you sure you want to proceed and install EXTRA software. Else click ctrl+c to terminate now" 
-sleep 20
-
-
-
-
-#################
-# smolagents
-#################
-
-cd /home/$USER
-if [ ! -f /home/$USER/smoll_installed.txt ]; then
-    deactivate
-	cd /home/$USER
-	sleep 10
-    echo " "
-    echo " "
-	echo "Installing smollagents.."
-    sleep 3
-	# Activate python environment at 'smollagents'
-	#  for installing smollagents
-	##############
-	# Create python virtual env
-	##############
-	python3 -m venv /home/$USER/smollagents
-	source /home/$USER/smollagents/bin/activate
-	# 1.6 Essentials software
-    # Install smolagents
-	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
-	pip install --upgrade pip
-	pip install "smolagents[gradio]"
-	pip install "smolagents[toolkit]"
-	pip install "smolagents[mcp]"
-	pip install "smolagents[litellm]"		
-	pip install 'smolagents[transformers]'
-	pip install -U "huggingface_hub[cli]"
-	pip install -U huggingface_hub
-	pip install ddgs
-	# Essentials software
-	pip install spyder numpy scipy pandas matplotlib sympy cython
-	pip install jupyterlab
-	pip install ipython
-	pip install notebook
-	pip install -U streamlit
-	pip install plotly
-	# Create script to activate 'smollagents' env
-	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
-	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
-	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
-	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
-	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
-	chmod +x /home/$USER/*.sh
-	sleep 2
-	echo "  "
-	echo "====="
-	echo "Putting HF token in .bashrc"
-	echo "====="
-	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
-	sleep 5
-	chmod +x /home/$USER/*.sh
-	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
-	pip list > /home/$USER/packagesInSmollagents_env.txt
-	if [ "$WSLSYSTEM" = "true" ] ; then
-        wsl.exe --shutdown
-      else
-        reboot
-      fi  
-fi	
-
-
-
-
-#############
-# Install RAG and RAG performance eval system
-# Created using Google Antigravity
-############
-
-#  Download github folder 'rag_eval_system-II' using command line
-#  Can copy and paste all at once:
-
-cd /home/$USER
-if [ ! -f /home/$USER/rageval_installed.txt ]; then
-	cd ~/   
-	echo "  "
-	echo "   "
-	echo "Installing RAG and RAG performance eval system"
-	sleep 3
-	source /home/$USER/langchain/bin/activate
-	rm -rf /home/$USER/ragsystem
-	mkdir /home/$USER/ragsystem
-	cd /home/$USER/ragsystem
-	git init
-	git remote add origin https://github.com/harnalashok/LLMs.git
-	git sparse-checkout init --cone
-	git sparse-checkout set rag_eval_system-II
-	git pull origin main
-	find . -maxdepth 1 ! -name "rag_eval_system-II" ! -name "." ! -name ".." -delete
-	ls -la
-	echo "echo 'Prepare as follows:'"                                            | tee    /home/$USER/start_ragEval.sh
-	echo "echo '  Put your .md files in rag_eval_system-II/dataFolder, AND'"       | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '  place data.csv file in the rag_eval_system-II folder'"           | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '  data.csv has three columns: text,question,idealAnswer'"          | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '  A dummy data.csv and dummy .md files are placed'"              | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '  source /home/$USER/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
-	echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
-	# To ingest .md files in dataFolder
-	echo "echo '  python main.py --ingest'"                                        | tee   -a /home/$USER/start_ragEval.sh     
-	echo "echo '  python main.py --query \"your question here\"'"                  | tee   -a /home/$USER/start_ragEval.sh
-	# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
-	echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
-	
-	LINE="  21. RAG and RAG performance Eval system installed"
-	if ! grep -qF "$LINE" "$FILE"; then
-		echo "$LINE" >> "$FILE"
-	fi
-	#
-	echo "rageval_installed.txt"  > /home/$USER/rageval_installed.txt
-else
-	echo "   "
-fi
-
-
 #############
 # Install llamaindex folder of examples
 # Installs the folder from github: LLM/llamaindex
@@ -1716,18 +1572,145 @@ fi
 
 
 
-
 echo "   "
 echo "Testing what all is installed"
 echo "   "
 bash test_laptop_gpu.sh
 echo "    "
 echo "   "
-echo "    "
-echo "============"
-echo "You can terminate here"
-read -p "Press ctrl+c to terminate. OR ENTER to continue " fullname
-sleep 5
+echo "     "
+echo "=========="
+cd /home/$USER
+echo "You can stop here. Click ctrl+c to terminate"
+read response
+exit 1
+echo "   "
+echo "==========="
+echo "Are you sure you want to proceed and install EXTRA software. Else click ctrl+c to terminate now" 
+sleep 20
+
+
+
+
+#################
+# smolagents
+#################
+
+cd /home/$USER
+if [ ! -f /home/$USER/smoll_installed.txt ]; then
+    deactivate
+	cd /home/$USER
+	sleep 10
+    echo " "
+    echo " "
+	echo "Installing smollagents.."
+    sleep 3
+	# Activate python environment at 'smollagents'
+	#  for installing smollagents
+	##############
+	# Create python virtual env
+	##############
+	python3 -m venv /home/$USER/smollagents
+	source /home/$USER/smollagents/bin/activate
+	# 1.6 Essentials software
+    # Install smolagents
+	# Refer: https://huggingface.co/docs/smolagents/installation#installation-options
+	pip install --upgrade pip
+	pip install "smolagents[gradio]"
+	pip install "smolagents[toolkit]"
+	pip install "smolagents[mcp]"
+	pip install "smolagents[litellm]"		
+	pip install 'smolagents[transformers]'
+	pip install -U "huggingface_hub[cli]"
+	pip install -U huggingface_hub
+	pip install ddgs
+	# Essentials software
+	pip install spyder numpy scipy pandas matplotlib sympy cython
+	pip install jupyterlab
+	pip install ipython
+	pip install notebook
+	pip install -U streamlit
+	pip install plotly
+	# Create script to activate 'smollagents' env
+	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
+	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
+	chmod +x /home/$USER/*.sh
+	sleep 2
+	echo "  "
+	echo "====="
+	echo "Putting HF token in .bashrc"
+	echo "====="
+	echo 'export HF_TOKEN="hf_CjBhzZFXvJNHLjuZQZBHTzGLDEJoxmWguFFORE"' >> /home/$USER/.bashrc
+	sleep 5
+	chmod +x /home/$USER/*.sh
+	echo "smoll_installed.txt" > /home/$USER/smoll_installed.txt
+	pip list > /home/$USER/packagesInSmollagents_env.txt
+	if [ "$WSLSYSTEM" = "true" ] ; then
+        wsl.exe --shutdown
+      else
+        reboot
+      fi  
+fi	
+
+
+
+
+#############
+# Install RAG and RAG performance eval system
+# Created using Google Antigravity
+############
+
+#  Download github folder 'rag_eval_system-II' using command line
+#  Can copy and paste all at once:
+
+cd /home/$USER
+if [ ! -f /home/$USER/rageval_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing RAG and RAG performance eval system"
+	sleep 3
+	source /home/$USER/langchain/bin/activate
+	rm -rf /home/$USER/ragsystem
+	mkdir /home/$USER/ragsystem
+	cd /home/$USER/ragsystem
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set rag_eval_system-II
+	git pull origin main
+	find . -maxdepth 1 ! -name "rag_eval_system-II" ! -name "." ! -name ".." -delete
+	ls -la
+	echo "echo 'Prepare as follows:'"                                            | tee    /home/$USER/start_ragEval.sh
+	echo "echo '  Put your .md files in rag_eval_system-II/dataFolder, AND'"       | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '  place data.csv file in the rag_eval_system-II folder'"           | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '  data.csv has three columns: text,question,idealAnswer'"          | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '  A dummy data.csv and dummy .md files are placed'"              | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '==========='"                                                    | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '   '"                                                            | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo 'Execute commands, as follows:   '"                               | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '  source /home/$USER/langchain/bin/activate'"                      | tee  -a  /home/$USER/start_ragEval.sh
+	echo "echo '  cd /home/$USER/ragsystem/rag_eval_system-II'"                    | tee  -a  /home/$USER/start_ragEval.sh
+	# To ingest .md files in dataFolder
+	echo "echo '  python main.py --ingest'"                                        | tee   -a /home/$USER/start_ragEval.sh     
+	echo "echo '  python main.py --query \"your question here\"'"                  | tee   -a /home/$USER/start_ragEval.sh
+	# runs all 9 QA pairs through Judge LLM → evaluation_results.csv
+	echo "echo '  python main.py --evaluate'"                                      | tee   -a /home/$USER/start_ragEval.sh
+	
+	LINE="  21. RAG and RAG performance Eval system installed"
+	if ! grep -qF "$LINE" "$FILE"; then
+		echo "$LINE" >> "$FILE"
+	fi
+	#
+	echo "rageval_installed.txt"  > /home/$USER/rageval_installed.txt
+else
+	echo "   "
+fi
 
 
 

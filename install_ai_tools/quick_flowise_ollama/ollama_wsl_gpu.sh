@@ -1432,6 +1432,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	wsl.exe --shutdown
 fi	
 
+
 #############
 # Install llamaindex folder of examples
 # Installs the folder from github: LLM/llamaindex
@@ -1582,45 +1583,6 @@ fi
 
 
 
-#############
-# Install crewaiModels folder of examples
-# Installs the folder from github: LLM/crewaiModels
-############
-
-#  Download github folder 'crewaiModels' using command line
-#  Can copy and paste all at once.
-#  Creates folder Documents/crewaiModels/
-
-
-cd c:\
-Remove-Item -Path "C:\aiExamples" -Recurse -Force
-	
-mkdir "c:\aiExamples"
-cd "C:\aiExamples"
-
-
-git init
-git remote add origin https://github.com/harnalashok/LLMs.git
-git sparse-checkout init --cone
-git sparse-checkout set crewaiModels
-git pull origin main
-Get-ChildItem -Path . -Depth 0 | Where-Object { $_.Name -ne 'crewaimodels' } | Remove-Item  -Recurse  -Force
-Remove-Item -Path "C:\aiExamples\.git" -Recurse -Force
-
-cd "c:\"
-
-# Copy this crewaiModels folder to Ubuntu-22.04--Documents/crewaiModels
-# Existing folder is first deleted
-$wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\crewaiModels"
-if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
-Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
-
-
-
-
-
-
-
 
 echo "   "
 echo "---------   "
@@ -1633,13 +1595,13 @@ echo "   "
 echo "     "
 echo "=========="
 cd /home/$USER
-echo "You can stop here. c"
+echo "You can stop here. Press ctrl+c to terminate"
 read response
 exit 1
 echo "   "
 echo "==========="
 echo "Are you sure you want to proceed and install EXTRA software. Else click ctrl+c to terminate now" 
-sleep 20
+sleep 50
 
 ###############33
 ##### END ###########
