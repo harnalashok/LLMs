@@ -1,8 +1,14 @@
-
+# This file contains powershell script to be executed
+# in Windows 11. 
 
 #############
-# Install crewaiModels folder of examples
-# Installs the folder from github: LLM/crewaiModels
+# The folowing script creates a folder 'c:\aiExamples\crewaiModels'
+#  This folder contains all folders/files from here
+#   https://github.com/harnalashok/LLMs/tree/main/crewaiModels
+# 
+# Open powershell, copy and paste all the following
+#  at one go in the powershell terminal. 
+#   UBUNTU TERMINAL MUST ALSO BE OPEN.
 ############
 
 #  Download github folder 'crewaiModels' using command line
@@ -29,6 +35,7 @@ cd "c:\"
 
 # Copy this crewaiModels folder to Ubuntu-22.04--Documents/crewaiModels
 # Existing folder is first deleted
+
 $wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\crewaiModels"
 if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
 Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
