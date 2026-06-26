@@ -1,6 +1,9 @@
-# This file contains powershell script to be executed
-# in Windows 11. 
+# Last amended: 25th June, 2026
 
+# This file contains powershell script to be executed
+# in Windows 11. We assume useraccount is 'ashok'.
+
+# AA
 #############
 # The folowing script does two things:
 #   1. Creates a folder 'c:\aiExamples\crewaiModels'
