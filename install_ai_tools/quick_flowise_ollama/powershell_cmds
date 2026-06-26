@@ -2,10 +2,17 @@
 # in Windows 11. 
 
 #############
-# The folowing script creates a folder 'c:\aiExamples\crewaiModels'
-#  This folder contains all folders/files from here
-#   https://github.com/harnalashok/LLMs/tree/main/crewaiModels
-# 
+# The folowing script does two things:
+#   1. Creates a folder 'c:\aiExamples\crewaiModels'
+#      and then downloads all files and folders from here
+#      https://github.com/harnalashok/LLMs/tree/main/crewaiModels
+#  2. Copies all files from 'c:\aiExamples\crewaiModels' to
+#     /home/ashok/Documents/crewaiModels 
+#  3. If your useraccount in ubuntu is different from 'ashok', replace
+#     that name below.
+#  4. Ubuntu terminal must be open for the complete script to work.
+#
+#
 # Open powershell, copy and paste all the following
 #  at one go in the powershell terminal. 
 #   UBUNTU TERMINAL MUST ALSO BE OPEN.
