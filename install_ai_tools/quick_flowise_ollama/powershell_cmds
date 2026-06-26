@@ -103,3 +103,5 @@ Copy-Item -Path "C:\aiExamples\n8nModels" -Destination "\\wsl.localhost\Ubuntu-2
 cd c:\
 
 
+
+
