@@ -1,12 +1,13 @@
 # Last amended: 26th June, 2026
 
 # This file contains powershell scripts (for Windows 11) to be executed
+# But keep Ubuntu terminal ALSO open, when executing powershell script
 
 ##**$$$$$$$$$ IMPT $$$$$$##
 # We assume WSL Ubuntu useraccount is 'ashok'.
-# If your useraccount in ubuntu is different from 'ashok', first simply
-#   replace 'ashok' with that name below. DO NOT PUT ANY SPACES
-#    while replacing
+# If your useraccount in wsl ubuntu is different from 'ashok', first, simply
+#   replace 'ashok' with that name below wherever it occurs. 
+#    DO NOT PUT ANY SPACES while replacing
 ##**$$$$$$$$$ IMPT $$$$$$##
 
 
@@ -19,9 +20,7 @@
 #      https://github.com/harnalashok/LLMs/tree/main/crewaiModels
 #  2. Copies all files from 'c:\aiExamples\crewaiModels' to
 #     WSL ubuntu: /home/ashok/Documents/crewaiModels 
-#  3. If your useraccount in ubuntu is different from 'ashok', replace
-#     'ashok' with that below.
-#  4. Ubuntu terminal must be open for the complete script to work.
+#  3. Ubuntu terminal must be open for the complete script to work.
 #
 #
 # Open powershell, copy and paste all the following
@@ -65,15 +64,14 @@ Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubunt
 #      and then downloads all files and folders from here
 #      https://github.com/harnalashok/LLMs/tree/main/n8nModels
 #  2. Copies all files from 'c:\aiExamples\n8nModels' to
-#     wsl Ubuntu: /home/ashok/Documents/n8nModels 
-#  3. If your useraccount in ubuntu is different from 'ashok', replace
-#     that name below.
-#  4. Ubuntu terminal must be open for the complete script to work.
+#     WSL ubuntu: /home/ashok/Documents/n8nModels 
+#  3. Ubuntu terminal must be open for the complete script to work.
 #
 #
 # Open powershell, copy and paste all the following
-#  of 'script BB'at one go in the powershell terminal. 
+#  of 'script BB' at one go in the powershell terminal. 
 #   UBUNTU TERMINAL MUST ALSO BE OPEN.
+############
 ############
 
 #  Downloads github folder 'n8nModels' using command line
