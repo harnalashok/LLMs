@@ -27,7 +27,7 @@
 
 
 cd c:\
-# Remove-Item -Path "C:\aiExamples\crewaiModels" -Recurse -Force
+Remove-Item -Path "C:\aiExamples\crewaiModels" -Recurse -Force
 	
 mkdir "c:\aiExamples"
 cd "C:\aiExamples"
@@ -68,9 +68,9 @@ Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubunt
 #   UBUNTU TERMINAL MUST ALSO BE OPEN.
 ############
 
-#  Download github folder 'crewaiModels' using command line
+#  Download github folder 'n8nModels' using command line
 #  Can copy and paste all at once.
-#  Creates folder Documents/crewaiModels/
+#  Creates folder Documents/n8nModels/
 
 
 cd c:\
@@ -83,18 +83,18 @@ cd "C:\aiExamples"
 git init
 git remote add origin https://github.com/harnalashok/LLMs.git
 git sparse-checkout init --cone
-git sparse-checkout set crewaiModels
+git sparse-checkout set n8nModels
 git pull origin main
-Get-ChildItem -Path . -Depth 0 | Where-Object { $_.Name -ne 'crewaimodels' } | Remove-Item  -Recurse  -Force
+Get-ChildItem -Path . -Depth 0 | Where-Object { $_.Name -ne 'n8nmodels' } | Remove-Item  -Recurse  -Force
 Remove-Item -Path "C:\aiExamples\.git" -Recurse -Force
 
 cd "c:\"
 
-# Copy this crewaiModels folder to Ubuntu-22.04--Documents/crewaiModels
+# Copy this n8nModels folder to Ubuntu-22.04--Documents/n8nModels
 # Existing folder is first deleted
 
-$wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\crewaiModels"
+$wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\n8nModels"
 if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
-Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
+Copy-Item -Path "C:\aiExamples\n8nModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
 
 
