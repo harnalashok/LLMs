@@ -56,6 +56,7 @@ cd "c:\"
 $wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\crewaiModels"
 if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
 Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
+cd c:\
 
 #############
 # Script: BB
@@ -99,5 +100,6 @@ cd "c:\"
 $wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\n8nModels"
 if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
 Copy-Item -Path "C:\aiExamples\n8nModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
+cd c:\
 
 
