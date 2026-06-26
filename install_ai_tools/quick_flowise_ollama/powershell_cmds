@@ -1,29 +1,36 @@
-# Last amended: 25th June, 2026
+# Last amended: 26th June, 2026
 
-# This file contains powershell script to be executed
+# This file contains powershell scripts to be executed
+
+##**$$$$$$$$$ IMPT $$$$$$##
 # in Windows 11. We assume useraccount is 'ashok'.
+# If your useraccount in ubuntu is different from 'ashok', first simply
+#   replace 'ashok' with that name below. DO NOT PUT ANY SPACES
+#    while replacing
+##**$$$$$$$$$ IMPT $$$$$$##
 
-# AA
+
+#############
+# Script: AA
 #############
 # The folowing script does two things:
 #   1. Creates a folder 'c:\aiExamples\crewaiModels'
 #      and then downloads all files and folders from here
 #      https://github.com/harnalashok/LLMs/tree/main/crewaiModels
 #  2. Copies all files from 'c:\aiExamples\crewaiModels' to
-#     /home/ashok/Documents/crewaiModels 
+#     WSL ubuntu: /home/ashok/Documents/crewaiModels 
 #  3. If your useraccount in ubuntu is different from 'ashok', replace
-#     that name below.
+#     'ashok' with that below.
 #  4. Ubuntu terminal must be open for the complete script to work.
 #
 #
 # Open powershell, copy and paste all the following
-#  at one go in the powershell terminal. 
+#  of 'script AA' at one go in the powershell terminal. 
 #   UBUNTU TERMINAL MUST ALSO BE OPEN.
 ############
 
-#  Download github folder 'crewaiModels' using command line
-#  Can copy and paste all at once.
-#  Creates folder Documents/crewaiModels/
+#  Downloads github folder 'crewaiModels' using command line
+
 
 
 cd c:\
@@ -50,27 +57,27 @@ $wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\crewaiModels"
 if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
 Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
 
-# BB
+#############
+# Script: BB
 #############
 # The folowing script does two things:
 #   1. Creates a folder 'c:\aiExamples\n8nModels'
 #      and then downloads all files and folders from here
 #      https://github.com/harnalashok/LLMs/tree/main/n8nModels
 #  2. Copies all files from 'c:\aiExamples\n8nModels' to
-#     /home/ashok/Documents/n8nModels 
+#     wsl Ubuntu: /home/ashok/Documents/n8nModels 
 #  3. If your useraccount in ubuntu is different from 'ashok', replace
 #     that name below.
 #  4. Ubuntu terminal must be open for the complete script to work.
 #
 #
 # Open powershell, copy and paste all the following
-#  at one go in the powershell terminal. 
+#  of 'script BB'at one go in the powershell terminal. 
 #   UBUNTU TERMINAL MUST ALSO BE OPEN.
 ############
 
-#  Download github folder 'n8nModels' using command line
-#  Can copy and paste all at once.
-#  Creates folder Documents/n8nModels/
+#  Downloads github folder 'n8nModels' using command line
+
 
 
 cd c:\
