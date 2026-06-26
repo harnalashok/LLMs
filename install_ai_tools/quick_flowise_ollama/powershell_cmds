@@ -2,6 +2,7 @@
 
 # This file contains powershell scripts (for Windows 11) to be executed
 # But keep Ubuntu terminal ALSO open, when executing powershell script
+# WSL Ubuntu is: Ubuntu-22.04
 
 ##**$$$$$$$$$ IMPT $$$$$$##
 # We assume WSL Ubuntu useraccount is 'ashok'.
@@ -33,9 +34,9 @@
 
 
 cd c:\
-Remove-Item -Path "C:\aiExamples\crewaiModels" -Recurse -Force
-	
-mkdir "c:\aiExamples"
+$null = New-Item -Path "C:\aiExamples" -ItemType Directory -Force
+Remove-Item -Path "C:\aiExamples\crewaiModels" -Recurse -Force -ErrorAction Ignore
+
 cd "C:\aiExamples"
 
 
@@ -76,12 +77,9 @@ Copy-Item -Path "C:\aiExamples\crewaiModels" -Destination "\\wsl.localhost\Ubunt
 
 #  Downloads github folder 'n8nModels' using command line
 
-
-
 cd c:\
-Remove-Item -Path "C:\aiExamples\n8nModels" -Recurse -Force
-	
-mkdir "c:\aiExamples"
+$null = New-Item -Path "C:\aiExamples" -ItemType Directory -Force
+Remove-Item -Path "C:\aiExamples\n8nModels" -Recurse -Force -ErrorAction Ignore
 cd "C:\aiExamples"
 
 
