@@ -1,20 +1,27 @@
 # Last amended: 26th June, 2026
 
 # This file contains powershell scripts (for Windows 11) to be executed
-# But keep Ubuntu terminal ALSO open, when executing powershell script
+# But keep Ubuntu terminal ALSO open, when executing powershell scripts
 # WSL Ubuntu is: Ubuntu-22.04
 
 ##**$$$$$$$$$ IMPT $$$$$$##
-# We assume WSL Ubuntu useraccount is 'ashok'.
+# We assume WSL Ubuntu user account is 'ashok'.
 # If your useraccount in wsl ubuntu is different from 'ashok', first, simply
 #   replace 'ashok' with that name below wherever it occurs. 
 #    DO NOT PUT ANY SPACES while replacing
 ##**$$$$$$$$$ IMPT $$$$$$##
 
 
-# Install git
-winget install --id Git.Git -e --source winget
+#############
+# Script: OO
+#############
 
+# Open powershell, install git.
+# Terminal window will close. Open it again
+# Open terminal again for Script AA and Script BB
+
+winget install --id Git.Git -e --source winget
+exit
 
 
 
