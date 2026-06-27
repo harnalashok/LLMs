@@ -45,6 +45,8 @@ exit
 #  Downloads github folder 'crewaiModels' using command line
 
 
+# Open Ubuntu terminal and minimize it
+Start-Process wsl -WindowStyle Minimized
 
 cd d:\
 $null = New-Item -Path "d:\aiExamples" -ItemType Directory -Force
@@ -101,7 +103,9 @@ cd "d:\"
 
 #  Downloads github folder 'n8nModels' using command line
 
-start-process wsl
+# Open Ubuntu terminal and minimize it
+Start-Process wsl -WindowStyle Minimized
+
 cd d:\
 $null = New-Item -Path "d:\aiExamples" -ItemType Directory -Force
 Remove-Item -Path "d:\aiExamples\n8nModels" -Recurse -Force -ErrorAction Ignore
@@ -154,6 +158,10 @@ cd "d:\"
 ############
 
 #  Downloads github folder 'flowise_models' using command line
+
+
+# Open Ubuntu terminal and minimize it
+Start-Process wsl -WindowStyle Minimized
 
 cd d:\
 $null = New-Item -Path "d:\aiExamples" -ItemType Directory -Force
