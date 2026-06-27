@@ -134,6 +134,58 @@ if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
 Copy-Item -Path "d:\n8nModels" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
 cd "d:\"
 
+#############
+# Script: CC
+#############
+# The folowing script does two things:
+#   1. Creates a folder 'd:\aiExamples\flowise_models'
+#      and then downloads all files and folders from here
+#      https://github.com/harnalashok/LLMs/tree/main/flowise_models
+#  2. Copies all files from 'd:\aiExamples\flowise_models' to
+#     WSL ubuntu: /home/ashok/Documents/flowise_models 
+#  3. Ubuntu terminal must remain open for the complete script to work.
+#
+#
+# Open powershell, copy and paste all the following
+#  of 'script CC' at one go in the powershell terminal. 
+#   UBUNTU TERMINAL MUST ALSO BE OPEN.
+############
+############
+
+#  Downloads github folder 'flowise_models' using command line
+
+cd d:\
+$null = New-Item -Path "d:\aiExamples" -ItemType Directory -Force
+Remove-Item -Path "d:\aiExamples\flowise_models" -Recurse -Force -ErrorAction Ignore
+cd "d:\aiExamples"
+
+
+git init
+git remote add origin https://github.com/harnalashok/LLMs.git
+git sparse-checkout init --cone
+git sparse-checkout set flowise_models
+git pull origin main
+Get-ChildItem -Path . -Depth 0 | Where-Object { $_.Name -ne 'flowise_models' } | Remove-Item  -Recurse  -Force
+Remove-Item -Path "d:\aiExamples\.git" -Recurse -Force
+
+# 1. Define where you want to move the files (Change this path if needed)
+$Destination = "d:\"
+
+# 2. Move all files and subfolders out of aiExamples
+Get-ChildItem -Path "d:\aiExamples\*" | Move-Item -Destination $Destination -Force
+
+# 3. Remove the empty aiExamples folder
+Remove-Item -Path "d:\aiExamples" -Force
+
+cd "d:\"
+
+# Copy this flowise_models folder to Ubuntu-22.04--Documents/flowise_models
+# Existing folder is first deleted
+
+$wslPath = "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\flowise_models"
+if (Test-Path $wslPath) { Remove-Item -Path $wslPath -Recurse -Force }
+Copy-Item -Path "d:\flowise_models" -Destination "\\wsl.localhost\Ubuntu-22.04\home\ashok\Documents\" -Recurse -Force
+cd "d:\"
 
 
 
