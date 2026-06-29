@@ -4,10 +4,10 @@
 # Every Python file has a built-in variable called __name__. 
 #  Its value changes depending on how the file is run.
 
-def add(a, b):
+def add(a: float, b: float)-> float:
     return a + b
 
-def subtract(a, b):
+def subtract(a: int, b: int) -> int:
     return a - b
 
 if __name__ == "__main__":
