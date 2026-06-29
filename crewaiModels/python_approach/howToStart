@@ -1,0 +1,8 @@
+To work on python files procedd as follows:
+Open WSL Ubuntu. Enter the following commands
+one-by-one:
+
+  
+source /home/$USER/crewai_env/bin/activate
+cd /home/$USER/crewai_pjt
+code .  
