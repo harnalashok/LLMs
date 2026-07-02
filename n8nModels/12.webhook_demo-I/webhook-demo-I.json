@@ -1,0 +1,153 @@
+{
+  "name": "webhook-demo-I",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "feedback",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -416,
+        -16
+      ],
+      "id": "d028f042-3491-4be4-9bc7-8600e4c2529b",
+      "name": "Webhook",
+      "webhookId": "5633b3f5-6aa2-4c32-b848-bf7f14a7211c"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -48,
+        -16
+      ],
+      "id": "0924777a-dfce-41fc-be23-1cee0014127d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        208
+      ],
+      "id": "b7e362cc-2676-4274-8211-4d51e31268b8",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "8zHdIHnwqD0kF2Jh",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## A simple workflow demonstrating webhook",
+        "height": 80,
+        "width": 528
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -160
+      ],
+      "id": "5f39bb68-c28b-4899-9b1d-9af00f0f82f9",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "HTTP method: POST\nAuthentication: None\nPath: feedback\nRespond: Immediately\n",
+        "height": 112
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        128
+      ],
+      "id": "8e8e6e47-551c-4ce2-8efb-8a3a9b566f63",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "<!-- simple.html ; Copy it to folder: /var/www/html. - - >\n<!-- Access as: http://localhost/simple.html -- >\n\n<html>\n<title> Sentiment analysis </title>\n<header>\n<h1> Simple form</h1>\n</header>\n<body>\n<form action=\"http://localhost:5678/webhook-test/feedback\" method=\"POST\">\n  <input type=\"text\" name=\"message\" placeholder=\"Type your text here...\">\n  <input type=\"submit\" value=\"Submit\">\n</form>\n</body>\n</html>",
+        "height": 400,
+        "width": 608
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1216,
+        -112
+      ],
+      "id": "678db748-c6ed-42c0-94ac-aa6f7a2bf5bd",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Source for prompt (User message): Define below\nPrompt:  {{ $json.body.message }}",
+        "height": 80,
+        "width": 464
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        80,
+        192
+      ],
+      "id": "796d527b-ee11-4a6d-944c-9b13f4277013",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d363ce1a-b97d-4213-b3e2-778716cd7c45",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8ea49ea3e986a1b77d9eeb5666046d135d8724f828ba8f095665082f9510d480"
+  },
+  "nodeGroups": [],
+  "id": "6xM1ISDRTCAuMwHD",
+  "tags": []
+}

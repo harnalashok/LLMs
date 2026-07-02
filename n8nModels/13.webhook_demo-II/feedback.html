@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Leave feedback</h3>
+  <textarea id="text" rows="4" cols="40"></textarea><br>
+  <button onclick="submitFeedback()">Submit</button>
+  <p id="result"></p>
+
+  <script>
+    async function submitFeedback() {
+      const text = document.getElementById('text').value;
+      const res = await fetch('http://localhost:5678/webhook-test/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      const data = await res.json();
+      document.getElementById('result').innerText = data.analysis;
+    }
+  </script>
+</body>
+</html>

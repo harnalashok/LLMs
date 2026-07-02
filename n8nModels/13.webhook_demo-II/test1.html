@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form Submission Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 500px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #444;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Submitting Text to a URL</h1>
+
+    <div class="form-container">
+        <h2>Example 2: Account/Data Form (POST Method)</h2>
+        <p>This sends the text invisibly inside the background request payload.</p>
+        
+        <form action="http://localhost:5678/webhook-test/feedback" method="post">
+            <label for="message">Type your private message:</label>
+            <input type="text" id="message" name="message" placeholder="e.g., Hello World" required>
+            <input type="submit" value="Submit via POST">
+        </form>
+    </div>
+
+</body>
+</html>
