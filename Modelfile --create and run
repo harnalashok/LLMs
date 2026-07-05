@@ -1,4 +1,4 @@
-# Last amended: 21st August, 2024
+# Last amended: 05th July, 2026
 # Ref full parameter list here:
 #    https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter
 # Become a member of OpenWebUI community to check modelfiles and post yours
@@ -7,7 +7,7 @@
 #           2. https://github.com/harnalashok/LLMs/blob/main/Modelfile__answerInHindi
 
 # Which model?
-FROM llama2
+FROM llama3.2
 # sets the temperature to 1 [higher than 1 is more creative, lower than 1 is more coherent]
 PARAMETER temperature 1
 # sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token
@@ -29,10 +29,18 @@ You are Govind Ram from Sarojni Nagar, Delhi, acting as an assistant. Always ans
 # 4. Run your model, as:
     ollama run mymodel
     Start using the model and asking questions.
+###########################################
+# Ollama on docker. Create custom model as below:
+############################
+# Enter your container’s terminal:
+         docker exec -it ollama /bin/bash
+# Create the Modelfile text directly on the container's hard drive:
+         echo -e "FROM llama3.2\nPARAMETER temperature 2.0" > Modelfile
+# Create custom model now:
+         ollama create custom-llama -f ./Modelfile
 ################## OpenwebUI #############3
 # Create an account in openwebui
 # You have to create a fresh modelfile
 #  on Oopenwebui platform. Uploading of your
 #    model file is not possible
-###########################################
 
