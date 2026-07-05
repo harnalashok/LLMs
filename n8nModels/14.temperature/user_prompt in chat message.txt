@@ -1,0 +1,20 @@
+# Last amended: 5th July, 2026
+
+# Experiment changing ollama parameters: temperature and top_p
+
+1.0
+'Ollama chat model' in n8n does not permit changing temperature > 1.0. Use custom-model through Modelfile. Modelfile is:
+
+FROM llama3.2
+PARAMETER temperature 2.0
+
+
+2.0
+user_prompt:
+Complete the sentence and also write two more sentences in continuation: 'The clock struck midnight and suddenly the shadows began to ...'
+
+###########
+
+
+
+

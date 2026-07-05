@@ -1,0 +1,137 @@
+{
+  "name": "ollama_parameters_expt",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -272,
+        -64
+      ],
+      "id": "56612cc1-8db5-4143-8a7e-bad160642cb3",
+      "name": "When chat message received",
+      "webhookId": "3bd872df-2e3e-4575-8795-0790a340b05e"
+    },
+    {
+      "parameters": {
+        "model": "custom-llama:latest",
+        "options": {
+          "topP": 1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        112
+      ],
+      "id": "60293357-bdf3-415b-b877-4e2973f6e397",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "cRbnmNa4kwieYCha",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -32,
+        -64
+      ],
+      "id": "8a83bcd9-9883-4bd9-b719-c0f637f8ee59",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "content": "Experimenting with temperature and top_p",
+        "height": 80,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        -160
+      ],
+      "id": "9bfc182b-d966-43c7-99bf-e9cbd7a3c956",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Use this prompt in chat message: \nComplete the sentence and also write two more sentences in continuation: 'The clock struck midnight and suddenly the shadows began to ...'\n",
+        "height": 128,
+        "width": 576
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        80
+      ],
+      "id": "741ce5d2-05f9-4e73-9a35-41dd152006bd",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "For temperature >1.0, use custom model through Modelfile. \nUse \n> llama3.2: t: 0.1, top_p:0.1\n> customModel: top_p:1.0\n(See experiment and [Modelfile here](https://github.com/harnalashok/LLMs/blob/main/n8nModels/Build%20Your%20Very%20First%20Workflow%20in%20n8n.pdf) )",
+        "height": 224,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        128,
+        64
+      ],
+      "id": "807fc4ad-d427-4ed3-a8e6-cadaa9436fb2",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0593b0c9-9b84-4045-a4fb-c912c5f0b781",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3fe17e7d64f9c48d19ad5abc52904663dbfd8fe682936b6355204e72bb1e602b"
+  },
+  "nodeGroups": [],
+  "id": "VZVsg4sqyn9JONAN",
+  "tags": []
+}
