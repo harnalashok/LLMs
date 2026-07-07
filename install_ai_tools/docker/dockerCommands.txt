@@ -232,43 +232,43 @@ Global Options:
 ###############
 
 # AA. Image download from docker hub
-# Downloads the image, creates container and runs it. 
-# Deletes container (--rm) when stopped. Not visible with docker ps -a
-# https://github.com/erseco/alpine-php-webserver
-
- docker run --rm -p 8080:8080 erseco/alpine-php-webserver
-
-# Following will download image, start container but will NOT delete it.
-  docker run -p 8080:8080 erseco/alpine-php-webserver
-  (Can re-start it as: docker start <name OR id>)
+	# Downloads the image, creates container and runs it. 
+	# Deletes container (--rm) when stopped. Not visible with docker ps -a
+	# https://github.com/erseco/alpine-php-webserver
+	
+	 docker run --rm -p 8080:8080 erseco/alpine-php-webserver
+	
+	# Following will download image, start container but will NOT delete it.
+	  docker run -p 8080:8080 erseco/alpine-php-webserver
+	  (Can re-start it as: docker start <name OR id>)
 
 # BB. Use images in 'docker_compose.yaml'
- git clone https://github.com/dockersamples/todo-list-app
- cd todo-list-app
- docker compose up -d 
+	 git clone https://github.com/dockersamples/todo-list-app
+	 cd todo-list-app
+	 docker compose up -d 
 
 # CC. Build image from Dockerfile
-# Ref: https://github.com/mmumshad/simple-webapp-flask
-
-git clone https://github.com/mmumshad/simple-webapp-flask.git
-cd simple-webapp-flask
-# Build image. Dockerfile in current folder (.)
-docker build -t simple-webapp-flask .
-# Run image
-docker run -p 5000:5000 simple-webapp-flask
-(Next time use docker start IF container exists but is topped.
- Else, use 'docker run' again.)
+	# Ref: https://github.com/mmumshad/simple-webapp-flask
+	
+	git clone https://github.com/mmumshad/simple-webapp-flask.git
+	cd simple-webapp-flask
+	# Build image. Dockerfile in current folder (.)
+	docker build -t simple-webapp-flask .
+	# Run image
+	docker run -p 5000:5000 simple-webapp-flask
+	(Next time use docker start IF container exists but is topped.
+	 Else, use 'docker run' again.)
 
 # DD. Build from very simple Dockerfile
-# Ref: https://github.com/shekhargulati/python-flask-docker-hello-world
-
-git clone https://github.com/shekhargulati/python-flask-docker-hello-world
-cd python-flask-docker-hello-world
-# Create image. Dockerfile in current folder (.)
-docker build -t simple-flask-app:latest .
-# Run image
-docker run -d -p 5000:5000 simple-flask-app
-(Access it as: http://localhost:5000)
+	# Ref: https://github.com/shekhargulati/python-flask-docker-hello-world
+	
+	git clone https://github.com/shekhargulati/python-flask-docker-hello-world
+	cd python-flask-docker-hello-world
+	# Create image. Dockerfile in current folder (.)
+	docker build -t simple-flask-app:latest .
+	# Run image
+	docker run -d -p 5000:5000 simple-flask-app
+	(Access it as: http://localhost:5000)
  
  
 
