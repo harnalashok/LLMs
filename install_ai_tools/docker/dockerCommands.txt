@@ -248,7 +248,8 @@ Global Options:
  docker compose up -d 
 
 # CC. Build image from Dockerfile
-Build dockerfile
+# Ref: https://github.com/mmumshad/simple-webapp-flask
+
 git clone https://github.com/mmumshad/simple-webapp-flask.git
 cd simple-webapp-flask
 
