@@ -288,6 +288,16 @@ Global Options:
     # c. Start services
     docker compose up -d
    (Access at : http://localhost:8502 )
+
+    # d. Step 4: Configure AI Provider
+	    Go to Models and choose your provider (OpenAI, Anthropic, Google, etc.)
+	    Click + Add Configuration
+	    Paste your API key and other info as needed and click Add Configuration
+	    Click Test to test connection
+	    Click Sync Models and check models to include
+	    Under Default Model Assignments, click Auto-Assign Defaults or manually specify which models to use for what
+
+        Done! You're ready to create your first notebook.
  
  #########################################################
 
