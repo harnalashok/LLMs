@@ -252,7 +252,6 @@ Global Options:
 
 git clone https://github.com/mmumshad/simple-webapp-flask.git
 cd simple-webapp-flask
-
 # Build image. Dockerfile in current folder (.)
 docker build -t simple-webapp-flask .
 # Run image
@@ -260,8 +259,9 @@ docker run -p 5000:5000 simple-webapp-flask
 (Next time use docker start IF container exists but is topped.
  Else, use 'docker run' again.)
 
-# EE. Build from very simple Dockerfile
+# DD. Build from very simple Dockerfile
 # Ref: https://github.com/shekhargulati/python-flask-docker-hello-world
+
 git clone https://github.com/shekhargulati/python-flask-docker-hello-world
 cd python-flask-docker-hello-world
 # Create image. Dockerfile in current folder (.)
