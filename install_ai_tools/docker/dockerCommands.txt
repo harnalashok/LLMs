@@ -258,6 +258,9 @@ Global Options:
 	docker run -p 5000:5000 simple-webapp-flask
 	(Next time use docker start IF container exists but is topped.
 	 Else, use 'docker run' again.)
+    Access: http://localhost:5000/how-are-you
+    OR
+	        http://localhost:5000
 
 # DD. Build from very simple Dockerfile
 	# Ref: https://github.com/shekhargulati/python-flask-docker-hello-world
