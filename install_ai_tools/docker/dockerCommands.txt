@@ -198,7 +198,7 @@ Common Commands:
   exec        Execute a command in a running container (say, ls -la)
 	 docker exec -it   92985f90db92  ls -la /
 
-  ps          List containers
+  ps          List containers (Process Status)
   images      List images
   version     Show the Docker version information
   info        Display system-wide information
@@ -247,10 +247,23 @@ B.
 C. Build dockerfile
 git clone https://github.com/mmumshad/simple-webapp-flask.git
 cd simple-webapp-flask
+
+# Build image. Dockerfile in current folder (.)
 docker build -t simple-webapp-flask .
+# Run image
 docker run -p 5000:5000 simple-webapp-flask
 (Next time use docker start IF container exists but is topped.
- Else use docker run again.)
+ Else, use 'docker run' again.)
+
+d. Build very simple Dockerfile
+git clone https://github.com/shekhargulati/python-flask-docker-hello-world
+cd python-flask-docker-hello-world
+
+# Create image. Dockerfile in current folder (.)
+docker build -t simple-flask-app:latest .
+# Run image
+docker run -d -p 5000:5000 simple-flask-app
+Access it as: http://localhost:5000
  
  
 
