@@ -15,19 +15,23 @@ Self Study:
 	==A Docker image is a standalone, blueprint used to create a container== 
 	==A container is an embodiment of what all is soecifed in image==
 	
-	docker build	    ==> Builds image from Dockerfile ie from a collection of 
-						    instructions as what all the image should contain
-	docker run	        ==> Downlods an image from specified docker registry
-			                and then runs an image to create container.
+	docker build .	    ==> Builds image from Dockerfile ie from a collection of 
+						    instructions as what all the image should contain.
+                           dot (.) means Dockerfile exists in the current folder.
+	docker run	        ==> Downlods an image from specified docker registry, if specified,
+							else, looks for image locally. And then runs the image to 
+                            create container.
                             Stop the container with 'docker stop'.
     docker run --rm     ==> Same as above, but will delete the container as soon
                             as it is stopped to save space on hard-disk.
                             Use 'docker run' AND NOT 'docker start' again to 
                             bring container to life but this time, image 
                             is NOT downloaded as it already exists.
-	docker compose	   ==> Downloads multiple images and manages multiple containers
 
-	docker start	   ==> Starts a container, only if it exists but was stopped
+	docker compose	   ==> Downloads multiple pre-built multiple images and starts 
+                           multiple containers.
+
+	docker start	   ==> Starts a container, only if it exists, but was stopped
                             (not deleted)
 	docker stop	       ==>  Stop a running container
  	docker volume	   ==> Docker volumes are meant to provide a persistent storage mechanism.
