@@ -232,16 +232,20 @@ Global Options:
 ###############
 
 # AA. Image download from docker hub
-	# a. Downloads the image, creates container and runs it. 
-	#    Deletes container (--rm) when stopped. Not visible with docker ps -a
 	#    https://github.com/erseco/alpine-php-webserver
+	#    Downloads the image, creates container and runs it. 
+	#    Deletes container (--rm) when stopped. Not visible with docker ps -a
+	
 	docker run --rm -p 8080:8080 erseco/alpine-php-webserver
 	
 	# b. Following will download image, start container but will NOT delete it.
+	
 	  docker run -p 8080:8080 erseco/alpine-php-webserver
 	  (Can re-start it as: docker start <name OR id>)
 
 # BB. Use images in 'docker_compose.yaml'
+#	  https://github.com/dockersamples/todo-list-app
+
      # a. Clone repo and change dir
 	 git clone https://github.com/dockersamples/todo-list-app
 	 cd todo-list-app
@@ -255,8 +259,10 @@ Global Options:
 	git clone https://github.com/mmumshad/simple-webapp-flask.git
 	cd simple-webapp-flask
 	# b. Build image. Dockerfile in current folder (.)
+	
 	docker build -t simple-webapp-flask .
 	# c. Run image
+	
 	docker run -p 5000:5000 simple-webapp-flask
 	(Next time use docker start IF container exists but is topped.
 	 Else, use 'docker run' again.)
