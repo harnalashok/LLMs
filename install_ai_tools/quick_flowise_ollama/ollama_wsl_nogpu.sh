@@ -1091,6 +1091,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull qwen3-embedding:0.6b
 	  echo "12. Pulling gemma3:270m"
 	  docker exec -it ollama ollama pull gemma3:270m
+	  echo "13. Pulling granite4:350m"
+	  docker exec -it ollama ollama pull granite4:350m
 	  echo " "
 	  echo " "
 	  #ollama list
