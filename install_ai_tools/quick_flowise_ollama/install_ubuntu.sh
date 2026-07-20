@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 9th June, 2026
+# Last amended: 20th July, 2026
 
 # This is the password of your WSL ubuntu account
 #  Change it, if different 
@@ -1005,6 +1005,21 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
     echo "echo '   Last Name:   harnal'"                       >> /home/$USER/reset_n8n.sh
     echo "echo '   password:   Ashok@12345'"                   >> /home/$USER/reset_n8n.sh
     echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
+
+    # update n8n
+    echo '#!/bin/bash'                                          >  /home/$USER/update_n8n.sh
+    echo " "                                                   >> /home/$USER/update_n8n.sh
+    echo "docker stop n8n"                                     >> /home/$USER/update_n8n.sh
+	echo "echo ' Updating n8n'"                               >> /home/$USER/update_n8n.sh
+    echo "sleep 3"                                             >> /home/$USER/update_n8n.sh
+    echo "netstat -aunt | grep 5678"                           >> /home/$USER/update_n8n.sh
+    echo "echo '==**====**====='"                              >> /home/$USER/update_n8n.sh
+    echo "docker pull docker.n8n.io/n8nio/n8n "                >> /home/$USER/update_n8n.sh
+    echo "echo '   n8n updated'"                               >> /home/$USER/update_n8n.sh
+   
+
+
+
   	# n8n community nodes
 	echo '#!/bin/bash'                                                                                                        > /home/$USER/comm_node_n8n.sh
 	echo " "                                                                                                                  >> /home/$USER/comm_node_n8n.sh
