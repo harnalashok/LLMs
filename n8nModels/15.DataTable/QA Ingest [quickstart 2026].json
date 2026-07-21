@@ -1,0 +1,460 @@
+{
+  "name": "QA Ingest [quickstart 2026]",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "QA Submission",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name"
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "Question"
+            },
+            {
+              "fieldLabel": "Answer",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "660d0e30-4b1d-4b3f-855b-5b22277121c3",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        -304,
+        368
+      ],
+      "webhookId": "13d9d247-ef79-427a-8006-de9ffb57cd34",
+      "typeVersion": 2.5
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "38f6f1bc-e298-484c-b763-fd43b670b293",
+              "name": "isTrusted",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "99661713-f85d-4222-b17e-56b035ef7d92",
+      "name": "isTrusted:true",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        288,
+        256
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "38f6f1bc-e298-484c-b763-fd43b670b293",
+              "name": "isTrusted",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "64d15262-cc41-497e-b3d3-513a75b3f83c",
+      "name": "isTrusted:false",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        288,
+        544
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {},
+      "id": "a461eeca-2ccd-4c5b-bc62-142f6d74db93",
+      "name": "ref",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        624,
+        400
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze the following question and answer and output relevant tags\n\nQuestion: {{ $json.Question }}\nAnswer: {{ $json.Answer }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a content tagging expert. Your task is to analyze Question and Answer submissions and generate relevant, descriptive tags that categorize the content based on topic, key concepts, and technical terms. Always provide 4-8 tags as a comma separated list. Keep tags short and focused in individual length.\n\nExample Output:\npartner, partnerships, agency, external contractors, lead referral "
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "id": "ba1bf69e-2843-4a41-8538-d51a4075356c",
+      "name": "Add tags",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        896,
+        384
+      ],
+      "typeVersion": 1.9
+    },
+    {
+      "parameters": {
+        "content": "## QA DataTable usage\n### Flow 1/2\nThis workflow lets users submit Question and Answer pairs, automatically enriches them by flagging trusted submissions based on email validation and using an LLM to generate relevant tags, then stores everything in an n8n Data Table.\n\nBy [Max Tkacz | The Original Flowgrammer](https://www.linkedin.com/in/maxtkacz/)\n",
+        "height": 304,
+        "width": 432,
+        "color": 7
+      },
+      "id": "b49b39bf-b9b2-4ef6-9be9-7dacb5684841",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -288,
+        48
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n@[youtube](GuaKeDS6UKU)",
+        "height": 256,
+        "width": 384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        592,
+        80
+      ],
+      "id": "63025555-1314-454b-a55d-cc6706a733e0",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        880,
+        608
+      ],
+      "id": "28128aab-02a7-4f66-8f95-8935bdc30e2b",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "kU4FRTMWDZcVbGOb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Add a field: 'isTrusted' depending upon the branch of If node\n",
+        "height": 96
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        272,
+        400
+      ],
+      "id": "4d32987e-2e5b-4d9c-be26-b4696d726f7d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Column names of DataTable need not match those of form. Just drag a particular received value below appropriate column name"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        544
+      ],
+      "id": "4328e2c9-4766-4fbd-b747-2df92ae975a7",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "Basic LLM Chain",
+        "height": 80,
+        "width": 176
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        928,
+        496
+      ],
+      "id": "03f4a0a3-79b6-48d3-bb29-27ede53a4abc",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "jA3cfYeoBEOQf10c",
+          "mode": "list",
+          "cachedResultName": "data",
+          "cachedResultUrl": "/projects/o2LcZDRmvyLjiPy9/datatables/jA3cfYeoBEOQf10c"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tags": "={{ $json.text }}",
+            "Quest": "={{ $('ref').item.json.Question }}",
+            "answer": "={{ $('ref').item.json.Answer }}",
+            "email": "={{ $('ref').item.json.Email }}",
+            "Name": "={{ $('ref').item.json.Name }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "tags",
+              "displayName": "tags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Quest",
+              "displayName": "Quest",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "answer",
+              "displayName": "answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1264,
+        384
+      ],
+      "id": "dc4db1ef-992d-4611-aca8-aa15af2cedf4",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "content": "**No OP**eration node",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        592,
+        512
+      ],
+      "id": "70dc07e7-1f9c-43bd-8d90-da3f55acbdc7",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2c77555f-438e-4756-8c5a-51b4cec4bd80",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "fsm.ac.in"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a9bf3610-b89b-4f0f-b382-ee6181cdb92a",
+      "name": "is_fsm.ac.in",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -80,
+        368
+      ],
+      "typeVersion": 2.3
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Name": "ashok",
+          "Email": "ashok@fsm.ac.in",
+          "Question": "What is AI Engineering?",
+          "Answer": "AI engineering is the discipline of building production-ready AI applications. Rather than building models from scratch, it focuses on integrating pre-trained foundation models (like GPT-4, Claude, or Gemini) into real-world software. ",
+          "submittedAt": "2026-07-21T14:28:27.373-04:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "ref": {
+      "main": [
+        [
+          {
+            "node": "Add tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add tags": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "isTrusted:true": {
+      "main": [
+        [
+          {
+            "node": "ref",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "isTrusted:false": {
+      "main": [
+        [
+          {
+            "node": "ref",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "is_fsm.ac.in",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Add tags",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "is_fsm.ac.in": {
+      "main": [
+        [
+          {
+            "node": "isTrusted:true",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "isTrusted:false",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "aaa91d5a-16d6-43bc-b60f-466885eeb954",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9fc045c78924b48d567a6b95e079609dad604272c059c09aff8d972834855c46"
+  },
+  "nodeGroups": [],
+  "id": "c5emltlKuPFUG4RD",
+  "tags": []
+}
