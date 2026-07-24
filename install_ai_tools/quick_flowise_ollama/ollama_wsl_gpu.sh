@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 20th July, 2026
+# Last amended: 24th July, 2026
 
 # This is the password of your WSL ubuntu account
 #  Change it, if different 
@@ -290,6 +290,8 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo " "
     sleep 2
 	mkdir /home/$USER/crewai_pjt
+	# Make it writable by any program
+	chmod -R 777 /home/$USER/crewai_pjt
 	python3 -m venv crewai_env
 	# b) Activate the env
 	source /home/$USER/crewai_env/bin/activate
