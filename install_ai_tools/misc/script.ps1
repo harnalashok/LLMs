@@ -4,6 +4,10 @@
 ##  folder rather than in some other folder. It configures
 ##   VSCode's Settings through powershell script.
 
+# cd /home/$USER
+# wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/script.ps1
+#  powershell.exe -ExecutionPolicy Bypass -File '/home/ashok/script.ps1'
+
 #------------------------
 ## ONLY for WSL Ubuntu
 #------------------------
