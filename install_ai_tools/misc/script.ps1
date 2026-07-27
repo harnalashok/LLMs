@@ -38,3 +38,29 @@ $settings | Add-Member -NotePropertyName "terminal.integrated.cwd" -NoteProperty
 $settings | ConvertTo-Json -Depth 100 | Set-Content $settingsPath
 
 ################3
+# Last amended: 27th July, 2026
+# Powershell script
+## Script to set VSCode to always open in the same folder
+##  It configures VSCode's Settings through powershell script.
+
+# 1. Define the VS Code settings file path
+$dirPath = "$env:C:\Users\ashok\AppData\Roaming\Code\User"
+$settingsPath = "$dirPath\settings.json"
+
+# 2. Check if the file exists; if not, create an empty JSON object
+if (-not (Test-Path $settingsPath)) {
+    New-Item -ItemType File -Path $settingsPath -Force | Out-Null
+    Set-Content -Path $settingsPath -Value "{}"
+}
+
+# 3. Read and parse the existing JSON data
+$settings = Get-Content -Path $settingsPath -Raw | ConvertFrom-Json
+
+# 4. Add or update the window.restoreWindows setting
+$settings | Add-Member -NotePropertyName "window.restoreWindows" -NotePropertyValue 'preserve' -Force
+
+# 5. Save the updated configuration back to the file
+$settings | ConvertTo-Json -Depth 10 | Set-Content -Path $settingsPath
+
+Write-Host "VS Code setting updated successfully!" -ForegroundColor Green
+
