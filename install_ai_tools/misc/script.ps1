@@ -57,8 +57,8 @@ if (-not (Test-Path $settingsPath)) {
 $settings = Get-Content -Path $settingsPath -Raw | ConvertFrom-Json
 
 # 4. Add or update the window.restoreWindows setting
-#$settings | Add-Member -NotePropertyName "window.restoreWindows" -NotePropertyValue 'preserve' -Force
-$settings | Add-Member -NotePropertyName "window.restoreWindows" -NotePropertyValue 'folders' -Force
+$settings | Add-Member -NotePropertyName "window.restoreWindows" -NotePropertyValue 'preserve' -Force
+#$settings | Add-Member -NotePropertyName "window.restoreWindows" -NotePropertyValue 'folders' -Force
 
 # 5. Save the updated configuration back to the file
 $settings | ConvertTo-Json -Depth 10 | Set-Content -Path $settingsPath
