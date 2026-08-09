@@ -1,0 +1,211 @@
+{
+  "name": "AI-Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -512,
+        -192
+      ],
+      "id": "5fd69995-3b3f-488d-8bd1-ec021fb88d6e",
+      "name": "When chat message received",
+      "webhookId": "130c1764-9a33-4ba9-b9b9-f3f018d72174"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant. For any query regarding mathematical calculations please get results from 'calculator' tool. For any other query please get answers from 'searchInternet' tool."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -272,
+        -208
+      ],
+      "id": "bfde6da1-0ccc-4e0b-a969-b1ffebc89d78",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "qwen3.5:0.8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        32
+      ],
+      "id": "62f3d8a8-3d70-4075-8e49-c6c30daa8923",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "87bUsKSG9wNeFh7i",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -208,
+        16
+      ],
+      "id": "6a0cc932-2c31-4d11-85da-ec8536289bb6",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "q": "={{ $json.chatInput }}",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        32,
+        0
+      ],
+      "id": "993e3bad-1554-4f96-9465-78a049c80a31",
+      "name": "searchInternet",
+      "credentials": {
+        "serpApi": {
+          "id": "87pjy9gisx7n2Cfo",
+          "name": "SerpApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        16
+      ],
+      "id": "97bac849-e1af-4e45-9fcf-485029a38414",
+      "name": "calculator"
+    },
+    {
+      "parameters": {
+        "content": "Try llama3.2 and then qwen3.5:0.8b.",
+        "height": 80,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        144
+      ],
+      "id": "9cefba9b-39ab-404f-bc50-057c9b8d14c1",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Query1:  45 * 89\nQuery2: Calculate 45 * 89\nQuery3: Give me latest on US Iran war ",
+        "height": 80,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        16
+      ],
+      "id": "0b8002a0-44e4-4522-84e1-96cd44c3f89c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "AI Agent System message:\nYou are a helpful assistant. For any query regarding mathematical calculations please get results from 'calculator' tool. For any other query please get answers from 'searchInternet' tool.",
+        "width": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        48,
+        -208
+      ],
+      "id": "6d148e2a-c440-4128-8eef-328a1bde1f34",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "searchInternet": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "8d8c0ccd-7705-42a9-9170-928ee41bf7cb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2a35db63a1b8ad11a89579c529a870af9bb13daf6c4c995b5f366b37ffaaa196"
+  },
+  "id": "pwAR4wHYZRSoluwK",
+  "tags": []
+}
