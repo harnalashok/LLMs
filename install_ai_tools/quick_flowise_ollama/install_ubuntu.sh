@@ -976,10 +976,20 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	# --rm implies remove docker when stopped. So docker will not show up in 'docker ps -a' call
 	# Access at localhost:5678
 	echo $password | sudo -S  apt-get update
+	
+	IP_ADDRESS=$(hostname -I | awk '{print $1}')
+	# Fallback mechanism if hostname -I returns empty (common on macOS or minimal Linux)
+	if [ -z "$IP_ADDRESS" ]; then
+		IP_ADDRESS=$(ip route get 1 // | awk '{print $7}')
+	fi
+	# Print the detected IP for visibility
+	echo "Detected Local IP Address: $IP_ADDRESS"
+
 	sudo  docker run -it -d --rm \
 				--name n8n \
 				 -p 5678:5678 \
 				 -e NODE_OPTIONS="--max-old-space-size=4096" \
+				 -e WEBHOOK_URL="http://${IP_ADDRESS}:5678/" \
 				--network host   \
 				 -v n8n_data:/home/node/.n8n \
 					docker.n8n.io/n8nio/n8n
@@ -994,7 +1004,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
 	echo "echo 'Next time start as: docker start n8n'"																		   >>  /home/$USER/start_n8n.sh
 	echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
-	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e WEBHOOK_URL=\"http://${IP_ADDRESS}:5678/\" -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
 	echo "echo 'n8n version is'"    																						   >> /home/$USER/start_n8n.sh
 	echo "docker exec -it n8n n8n --version"  																				   >> /home/$USER/start_n8n.sh
 	# Reset n8n password
