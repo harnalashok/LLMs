@@ -962,6 +962,7 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
 	echo "echo 'To update it, issue command: ./update_n8n.sh'"                                                                >> /home/$USER/start_n8n.sh
 	echo "echo 'To stop it,   issue command:  docker stop n8n'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo 'In case n8n download fails, press Windows+R and execute smc -stop '"                                         >> /home/$USER/start_n8n.sh
 	echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
 	echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
 	echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
