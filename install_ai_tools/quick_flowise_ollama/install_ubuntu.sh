@@ -1331,7 +1331,7 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull qwen2.5:1.5b
 	docker exec -it ollama ollama pull qwen2.5:latest
 	docker exec -it ollama ollama pull llama2:text
-	
+	docker exec -it ollama ollama pull alibayram/smollm3
 	echo " "
 	echo " "
 	#ollama list

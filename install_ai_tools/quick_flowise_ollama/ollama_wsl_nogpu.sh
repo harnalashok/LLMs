@@ -1124,6 +1124,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull granite4:350m
 	  echo "14. Pulling llama2:text"
 	  docker exec -it ollama ollama pull llama2:text
+	  echo "15. Pulling alibayram/smollm3"
+	  docker exec -it ollama ollama pull alibayram/smollm3
 	  echo " "
 	  echo " "
 	  #ollama list
