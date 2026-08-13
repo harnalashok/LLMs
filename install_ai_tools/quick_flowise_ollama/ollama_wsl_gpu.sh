@@ -301,6 +301,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	uv pip install langchain-experimental langchain-classic yfinance 
 	uv pip install llama-index llama-index-llms-groq llama-index-core
 	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
+	uv pip install llama-index llama-index-experimental pandas
 	uv pip install 'crewai[tools]'  newsapi-python
     uv pip install 'crewai-tools[mcp]'
 	deactivate
@@ -1410,6 +1411,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install langgraph
 	pip install "langserve[all]"
 	pip install langchain-cli
+	pip install llama-index llama-index-experimental pandas
 	#################
 	# llamaindex
 	# To be installed ONLY in langchain virtual env
