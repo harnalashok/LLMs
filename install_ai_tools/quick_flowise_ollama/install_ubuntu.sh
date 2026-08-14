@@ -1877,6 +1877,49 @@ else
 fi	
 
 #############
+# Install llamaindex folder of examples
+# Installs the folder from github: LLM/llamaindex
+############
+#  Download github folder 'llamaindex' using command line
+#  Can copy and paste all at once:
+cd /home/$USER
+if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
+	cd ~/  
+	echo "  "
+	echo "   "
+	echo "Installing llamaindex examples"
+	sleep 3
+	rm -rf /home/$USER/Documents/llamaindexExamples
+	mkdir -p /home/$USER/Documents/llamaindexExamples
+	cd /home/$USER/Documents/llamaindexExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set llamaindex
+	git pull origin main
+	find . -maxdepth 1 ! -name "llamaindex" ! -name "." ! -name ".." -delete
+	cd /home/$USER/Documents
+	rm -rf /home/$USER/Documents/llamaindex
+	mkdir  /home/$USER/Documents/llamaindex
+	cd /home/$USER/Documents/llamaindex
+	mv /home/$USER/Documents/llamaindexExamples/llamaindex/* .
+	rm -rf /home/$USER/Documents/llamaindexExamples
+
+	echo "Populating lprojects"
+	cd /home/$USER
+	rm -rf /home/$USER/lprojects
+	mkdir /home/$USER/lprojects
+	cp /home/ashok/Documents/llamaindex/revised14042026/*  /home/$USER/lprojects/
+	cp /home/ashok/Documents/llamaindex/data/metagpt.pdf   /home/$USER/lprojects/
+	cp /home/ashok/Documents/llamaindex/data/sports.pdf   /home/$USER/lprojects/
+    cp /home/ashok/Documents/llamaindex/data/customers-100.csv	 /home/$USER/lprojects/
+	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
+	else
+	echo "  "
+fi 
+
+
+#############
 # Install flowise_models folder of examples
 # Installs the folder from github: LLM/flowise_models
 ############
