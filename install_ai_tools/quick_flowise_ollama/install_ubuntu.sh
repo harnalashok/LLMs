@@ -1812,6 +1812,7 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	echo "   "
 	echo "Installing llamaindexExamples"
 	sleep 3
+	rm -rf /home/$USER/Documents/llamaindex
 	rm -rf /home/$USER/Documents/llamaindexExamples
 	mkdir -p /home/$USER/Documents/llamaindexExamples
 	cd /home/$USER/Documents/llamaindexExamples
