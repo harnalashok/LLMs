@@ -1581,12 +1581,17 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	cd /home/$USER
 	rm -rf /home/$USER/lprojects
 	mkdir /home/$USER/lprojects
-	cp /home/ashok/Documents/llamaindex/revised14042026/*  /home/$USER/lprojects/
-	cp /home/ashok/Documents/llamaindex/data/metagpt.pdf   /home/$USER/lprojects/
-	cp /home/ashok/Documents/llamaindex/data/sports.pdf   /home/$USER/lprojects/
-    cp /home/ashok/Documents/llamaindex/data/customers-100.csv	 /home/$USER/lprojects/
+	mkdir /home/$USER/lprojects/md_files
+	cp /home/$USER/Documents/llamaindex/data/*.pdf         /home/$USER/lprojects/
+	cp /home/$USER/Documents/llamaindex/data/*.csv         /home/$USER/lprojects/
+	cp /home/$USER/Documents/llamaindex/revised14042026/txt_files/* /home/$USER/lprojects/
+	cp /home/$USER/Documents/llamaindex/revised14042026/*  /home/$USER/lprojects/
+	cp /home/$USER/Documents/llamaindex/data/metagpt.pdf   /home/$USER/lprojects/
+	cp /home/$USER/Documents/llamaindex/data/sports.pdf    /home/$USER/lprojects/
+    cp /home/$USER/Documents/llamaindex/data/customers-100.csv	 /home/$USER/lprojects/
+	cp /home/ashok/Documents/llamaindex/data/md_files/*.md       /home/$USER/lprojects/md_files/
 	echo "llamaindexExamples_installed.txt" > /home/$USER/llamaindexExamples_installed.txt
-	else
+else
 	echo "  "
 fi 
 
