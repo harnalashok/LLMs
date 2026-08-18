@@ -1829,10 +1829,12 @@ if [ ! -f /home/$USER/llamaindexExamples_installed.txt ]; then
 	rm -rf /home/$USER/Documents/llamaindexExamples
 	cd /home/$USER
 	rm -rf /home/$USER/lprojects
-	mkdir /home/$USER/lprojects
+	mkdir -p /home/$USER/lprojects/md_files
 	cp /home/$USER/Documents/llamaindex/revised14042026/*.pdf    /home/$USER/lprojects
+	cp /home/$USER/Documents/llamaindex/revised14042026/*.csv    /home/$USER/lprojects
 	cp /home/$USER/Documents/llamaindex/revised14042026/*.ipynb  /home/$USER/lprojects
-    LINE="  21. llamaindex examples installed"
+	cp /home/$USER/Documents/llamaindex/data/md_files/*.md       /home/$USER/lprojects/md_files
+	LINE="  21. llamaindex examples installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 		echo "$LINE" >> "$FILE"
 	fi
