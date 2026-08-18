@@ -7,6 +7,23 @@ Concepts
 	       sudo adduser username       -- This will also create a home folder
 		   sudo useradd -m usernam     -- No questions asked
 
+=====QUICK=======
+		./psql.sh
+		create user kavita with password 'kavita' ;
+		create database kavita with owner kavita ;
+		\l
+		\q
+		sudo useradd -m kavita
+		sudo su Kavita
+		psql
+		\c Kavita
+		create table goat (id int primary key, name varchar(3000)) ;
+		\q
+		In n8n now do this:
+			./reset_n8n.sh
+			FORM trigger (with two fields: id and name)==>Postgresql (Insert)
+============
+
        1. psql Prompt:
        A standard prompt is displayed when psql is ready to accept a new SQL command
        or meta-command. By default, it often shows the database name followed by => 
