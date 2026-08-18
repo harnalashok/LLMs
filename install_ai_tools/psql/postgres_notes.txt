@@ -5,7 +5,7 @@ Concepts
 =========
       0. Quickly create ubuntu user:
 	       sudo adduser username       -- This will also create a home folder
-		   sudo adduser -m usernam     -- No questions asked
+		   sudo useradd -m usernam     -- No questions asked
 
        1. psql Prompt:
        A standard prompt is displayed when psql is ready to accept a new SQL command
