@@ -930,9 +930,8 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "echo '2. Update n8n as:            ./update_n8n.sh'"                                                                >> /home/$USER/start_n8n.sh
 	echo "echo '3. Stop n8n as:              docker stop n8n'"                                                                >> /home/$USER/start_n8n.sh
 	echo "echo '4. Delete all workflows as:  sudo rm -rf .n8n/ '"                                                             >> /home/$USER/start_n8n.sh
-	echo "echo '5. n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
-	echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
-	echo "echo '6. Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
+	echo "echo '5. Reset n8n login:          ./reset_n8n.sh'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo '6. Memory usage: Use \"top -u $USER\" OR \"free -g \" '"                                                      >>  /home/$USER/start_n8n.sh
 	echo "sleep 4"                                                                                                             >> /home/$USER/start_n8n.sh
 	#echo "docker run -it -d --rm --name n8n -p 5678:5678 -e WEBHOOK_URL=\"http://${IP_ADDRESS}:5678/\" -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
 	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e WEBHOOK_URL="http://192.240.4.114:5678/" -e NODE_OPTIONS="--max-old-space-size=4096" --network host -v /home/ashok/.n8n:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
