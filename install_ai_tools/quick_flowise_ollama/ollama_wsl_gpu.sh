@@ -973,10 +973,10 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
 	echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
 	echo "IP_ADDRESS=\$(hostname -I | awk '{print \$1}')"                                                                     >> /home/$USER/start_n8n.sh        
-	echo "echo '1. Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
-	echo "echo '2. To update it, issue command: ./update_n8n.sh'"                                                                 >> /home/$USER/start_n8n.sh
-	echo "echo '3. To stop it,   issue command:  docker stop n8n'"                                                                >> /home/$USER/start_n8n.sh
-	echo "echo '4. To delete all workflows, issue command: sudo rm -rf .n8n/ '"                                                   >> /home/$USER/start_n8n.sh
+	echo "echo '1. Access n8n at port 5678. Wait...starting...'"                                                              >> /home/$USER/start_n8n.sh
+	echo "echo '2. Update n8n as:            ./update_n8n.sh'"                                                                >> /home/$USER/start_n8n.sh
+	echo "echo '3. Stop n8n as:              docker stop n8n'"                                                                >> /home/$USER/start_n8n.sh
+	echo "echo '4. Delete all workflows as:  sudo rm -rf .n8n/ '"                                                             >> /home/$USER/start_n8n.sh
 	echo "echo '5. n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
 	echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
 	echo "echo '6. Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
