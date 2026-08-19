@@ -916,26 +916,37 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 					-p 5678:5678 \
 					-e NODE_OPTIONS="--max-old-space-size=4096" \
 					-e WEBHOOK_URL="http://${IP_ADDRESS}:5678/" \
-				--network host   \
-					-v n8n_data:/home/node/.n8n \
+				   --network host   \
+					-v /home/$USER/.n8n:/home/node/.n8n \
 					docker.n8n.io/n8nio/n8n
+
+    echo $password | sudo chown -R 1000:1000 /home/$USER/.n8n
+		
 	# n8n start script for Ubuntu
 	echo '#!/bin/bash'                                                                                                        > /home/$USER/start_n8n.sh
-	echo " "                                                                                                                >> /home/$USER/start_n8n.sh   
-	echo "IP_ADDRESS=\$(hostname -I | awk '{print \$1}')"                                                                   >> /home/$USER/start_n8n.sh                                                                                                    >> /home/$USER/start_n8n.sh
-	echo "echo 'Access n8n at port 5678. Wait...starting...'"                                                               >> /home/$USER/start_n8n.sh
-	echo "echo 'To update it, issue command: ./update_n8n.sh'"                                                              >> /home/$USER/start_n8n.sh
-	echo "echo 'To stop it,   issue command:  docker stop n8n'"                                                              >> /home/$USER/start_n8n.sh
-	echo "echo 'In case n8n download fails, press Windows+R and execute smc -stop '"                                         >> /home/$USER/start_n8n.sh
-	echo "echo 'n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
+	echo " "                                                                                                                  >> /home/$USER/start_n8n.sh
+	echo "IP_ADDRESS=\$(hostname -I | awk '{print \$1}')"                                                                     >> /home/$USER/start_n8n.sh        
+	echo "echo '1. Access n8n at port 5678. Wait...starting...'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo '2. To update it, issue command: ./update_n8n.sh'"                                                                 >> /home/$USER/start_n8n.sh
+	echo "echo '3. To stop it,   issue command:  docker stop n8n'"                                                                >> /home/$USER/start_n8n.sh
+	echo "echo '4. To delete all workflows, issue command: sudo rm -rf .n8n/ '"                                                   >> /home/$USER/start_n8n.sh
+	echo "echo '5. n8n community nodes available at:'"                                                                           >> /home/$USER/start_n8n.sh
 	echo "echo '==>    https://ncnodes.com/packages'"                                                                          >> /home/$USER/start_n8n.sh
-	echo "echo 'Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
-	echo "sleep 9"                                                                                                             >> /home/$USER/start_n8n.sh
-	#echo "cd /home/$USER/n8n"                                                                                                  >> /home/$USER/start_n8n.sh
-	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e WEBHOOK_URL=\"http://${IP_ADDRESS}:5678/\" -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
-	echo "echo 'n8n version is'"    																						   >> /home/$USER/start_n8n.sh
-	echo  "docker exec -it n8n n8n --version"  																				   >> /home/$USER/start_n8n.sh
-	echo "echo \"\"\${IP_ADDRESS}\"\""                                                                                         >> /home/$USER/start_n8n.sh
+	echo "echo '6. Use \"top -u $USER\" OR \"free -g \" command to see memory usage'"                                             >>  /home/$USER/start_n8n.sh
+	echo "sleep 4"                                                                                                             >> /home/$USER/start_n8n.sh
+	#echo "docker run -it -d --rm --name n8n -p 5678:5678 -e WEBHOOK_URL=\"http://${IP_ADDRESS}:5678/\" -e NODE_OPTIONS=\"--max-old-space-size=4096\" --network host -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	echo "docker run -it -d --rm --name n8n -p 5678:5678 -e WEBHOOK_URL="http://192.240.4.114:5678/" -e NODE_OPTIONS="--max-old-space-size=4096" --network host -v /home/ashok/.n8n:/home/node/.n8n docker.n8n.io/n8nio/n8n"   >> /home/$USER/start_n8n.sh
+	echo "echo '  '"                                              >> /home/$USER/start_n8n.sh
+	echo "echo '======NOTE==='"                                   >> /home/$USER/start_n8n.sh
+	echo "echo 'if n8n does not get started, issue command:'"     >> /home/$USER/start_n8n.sh
+	echo "echo '     sudo chown -R 1000:1000 /home/$USER/.n8n'"   >> /home/$USER/start_n8n.sh
+	echo "echo ' And restart n8n using this very command'"        >> /home/$USER/start_n8n.sh
+	echo "echo '======NOTE==='"                                   >> /home/$USER/start_n8n.sh
+	echo "echo 'n8n version is'"                                  >> /home/$USER/start_n8n.sh
+	echo "docker exec -it n8n n8n --version"  					  >> /home/$USER/start_n8n.sh
+	echo "echo \"\"\${IP_ADDRESS}\"\""                            >> /home/$USER/start_n8n.sh
+	
+	
 	# Reset n8n password
     echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
     echo " "                                                   >> /home/$USER/reset_n8n.sh
