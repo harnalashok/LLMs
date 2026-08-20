@@ -992,6 +992,8 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "echo 'n8n version is'"                                  >> /home/$USER/start_n8n.sh
 	echo "docker exec -it n8n n8n --version"  					  >> /home/$USER/start_n8n.sh
 	echo "echo \"\"\${IP_ADDRESS}\"\""                            >> /home/$USER/start_n8n.sh
+	echo "sleep 3"                                                >> /home/$USER/start_n8n.sh
+	echo "netstat -aunt | grep 5678"                              >> /home/$USER/start_n8n.sh
 		
 	# Reset n8n password
 	echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
