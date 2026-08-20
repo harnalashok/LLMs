@@ -996,19 +996,25 @@ if [ ! -f /home/$USER/n8n_installed.txt ]; then
 	echo "netstat -aunt | grep 5678"                              >> /home/$USER/start_n8n.sh
 		
 	# Reset n8n password
-	echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
-	echo " "                                                   >> /home/$USER/reset_n8n.sh
-	echo "docker exec -it n8n n8n user-management:reset"       >> /home/$USER/reset_n8n.sh
-	echo "sleep 3"                                             >> /home/$USER/reset_n8n.sh
-	echo "netstat -aunt | grep 5678"                           >> /home/$USER/reset_n8n.sh
-	echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
-	echo "echo 'For uniformity, keep details as follows:'"     >> /home/$USER/reset_n8n.sh
-	echo "echo '   email:       ashok@fsm.ac.in'"              >> /home/$USER/reset_n8n.sh
-	echo "echo '   First Name:  ashok'"                        >> /home/$USER/reset_n8n.sh
-	echo "echo '   Last Name:   harnal'"                       >> /home/$USER/reset_n8n.sh
-	echo "echo '   password:   Ashok@12345'"                   >> /home/$USER/reset_n8n.sh
-	echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
-	
+    echo '#!/bin/bash'                                          >  /home/$USER/reset_n8n.sh
+    echo " "                                                   >> /home/$USER/reset_n8n.sh
+	echo "if (echo > /dev/tcp/127.0.0.1/5678) >/dev/null 2>&1; then"   >> /home/$USER/reset_n8n.sh
+    echo "echo 'Port 5678 is listening'  "                             >> /home/$USER/reset_n8n.sh
+    echo "else"                                                        >> /home/$USER/reset_n8n.sh
+    echo "echo 'Port 5678 is closed or not responding. First start n8n.'"    >> /home/$USER/reset_n8n.sh
+	echo "echo 'Exiting....'"                                          >> /home/$USER/reset_n8n.sh
+    echo "exit 1 "                                                     >> /home/$USER/reset_n8n.sh
+    echo "fi"                                                          >> /home/$USER/reset_n8n.sh
+    echo "docker exec -it n8n n8n user-management:reset"       >> /home/$USER/reset_n8n.sh
+    echo "sleep 3"                                             >> /home/$USER/reset_n8n.sh
+    echo "netstat -aunt | grep 5678"                           >> /home/$USER/reset_n8n.sh
+    echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
+    echo "echo 'For uniformity, keep details as follows:'"     >> /home/$USER/reset_n8n.sh
+    echo "echo '   email:       ashok@fsm.ac.in'"              >> /home/$USER/reset_n8n.sh
+    echo "echo '   First Name:  ashok'"                        >> /home/$USER/reset_n8n.sh
+    echo "echo '   Last Name:   harnal'"                       >> /home/$USER/reset_n8n.sh
+    echo "echo '   password:   Ashok@12345'"                   >> /home/$USER/reset_n8n.sh
+    echo "echo '==**====**====='"                              >> /home/$USER/reset_n8n.sh
 	
 	# Hard Reset n8n password
     echo '#!/bin/bash'                                          > /home/$USER/hard_reset_n8n.sh
