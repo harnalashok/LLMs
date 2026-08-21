@@ -74,7 +74,7 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.4,
       "position": [
-        592,
+        608,
         224
       ],
       "id": "dcc6fe29-bc5d-4b65-aedb-f0cd408817e7",
@@ -127,7 +127,7 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.4,
       "position": [
-        160,
+        192,
         224
       ],
       "id": "33aa6fbc-8485-49fd-b480-735655aba9e4",
@@ -209,7 +209,7 @@
     },
     {
       "parameters": {
-        "content": "aiagent:\n**System Message:** You are a helpful assistant. You have two tools with you. These are: 'searchAssistant' and 'dataAnalyzer'. For any user message received, you first direct 'searchAssistant' tool to get information about it from the Internet. And once the information is received, you pass it on to 'dataAnalyzer' tool to analyze it and write a structured report on it. Only when 'dataAnalyzer' tool gives you an output you pass it on to the user.",
+        "content": "Orchestrator: aiagent:\n**System Message:** You are a helpful assistant. You have two tools with you. These are: 'searchAssistant' and 'dataAnalyzer'. For any user message received, you first direct 'searchAssistant' tool to get information about it from the Internet. And once the information is received, you pass it on to 'dataAnalyzer' tool to analyze it and write a structured report on it. Only when 'dataAnalyzer' tool gives you an output you pass it on to the user.",
         "height": 144,
         "width": 960
       },
@@ -306,8 +306,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        752,
-        -208
+        768,
+        -80
       ],
       "id": "5a6e4da9-8066-465f-9b26-7585832847e8",
       "name": "Sticky Note7"
@@ -432,7 +432,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "a928d378-4cd1-4bad-939e-e47f435bbd1a",
+  "versionId": "2be24bbc-99e5-4bfb-bef6-e3b006cf7b9f",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "2f177ccd1a0c60dda46eebd3235152eff668321f5830a41be44aa7e57fa613b9"
