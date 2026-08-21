@@ -1,0 +1,443 @@
+{
+  "name": "Agentic System with subsystems",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -560,
+        -224
+      ],
+      "id": "0ed9559d-9979-46f3-98a7-d290281a1722",
+      "name": "When chat message received",
+      "webhookId": "3c442c33-3b58-4d38-a70d-207ae9b77354"
+    },
+    {
+      "parameters": {
+        "model": "qwen3.5:0.8b",
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -16
+      ],
+      "id": "fe551065-a877-4104-b5d9-3e9af8c52e6f",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "hf7mWZeKI2idAlRr",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.4,
+      "position": [
+        -192,
+        -16
+      ],
+      "id": "9ac81dd9-166d-4fcf-bc5c-27c0720c3723",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "5zGlNOoUpk4aUYHc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant. You have two tools with you. These are: 'searchAssistant' and 'dataAnalyzer'. For any user message received, you first direct 'searchAssistant' tool to get information about it from the Internet. And once the information is received, you pass it on to 'dataAnalyzer' tool to analyze it and write a structured report on it. Only when 'dataAnalyzer' tool gives you an output you pass it on to the user."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        80,
+        -224
+      ],
+      "id": "33b5cfd7-34fb-4709-a5c1-194ddd431548",
+      "name": "aiagent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        592,
+        224
+      ],
+      "id": "dcc6fe29-bc5d-4b65-aedb-f0cd408817e7",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": "granite4.1:3b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        464,
+        224
+      ],
+      "id": "83b8d8e1-5d7c-40bb-bc31-00be23e32016",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "hf7mWZeKI2idAlRr",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "granite4.1:3b",
+        "options": {
+          "temperature": 0.5
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        32,
+        224
+      ],
+      "id": "ea06a927-6c55-4c8b-8cf6-2dc7556268d3",
+      "name": "Ollama Chat Model2",
+      "credentials": {
+        "ollamaApi": {
+          "id": "hf7mWZeKI2idAlRr",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        160,
+        224
+      ],
+      "id": "33aa6fbc-8485-49fd-b480-735655aba9e4",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "q": "={{ $json.chatInput }}",
+        "locationSettings": {},
+        "languageSettings": {},
+        "searchOptions": {},
+        "timeFilters": {},
+        "pagination": {},
+        "advancedOptions": {},
+        "requestOptions": {}
+      },
+      "type": "@searchapi/n8n-nodes-searchapi.searchApiTool",
+      "typeVersion": 1,
+      "position": [
+        752,
+        224
+      ],
+      "id": "dc3c03d0-a52a-4ba7-8de9-dc913bdc8349",
+      "name": "searchTool",
+      "credentials": {
+        "searchApi": {
+          "id": "adydR7DAqfWLElxt",
+          "name": "SearchApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "You perform your search using 'searchTool' at your disposal on topics given to you by 'aiagent'.",
+        "options": {
+          "systemMessage": "You are a helpful assistant. You are an expert in performing research on any topic given to you. You use 'searchTool' for the purpose."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        512,
+        -48
+      ],
+      "id": "294db0fa-c354-4655-a44b-a9541013ad31",
+      "name": "searchAssistant"
+    },
+    {
+      "parameters": {
+        "toolDescription": "An expert in analyzing information about cricket bats and writing structured reports.",
+        "text": "=You are a helpful assistant. You are expert in  analyzing information about cricket bats and write structured reports.",
+        "options": {
+          "systemMessage": "You are a helpful assistant. You are expert in  analyzing information about cricket bats and write structured reports."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        48,
+        -32
+      ],
+      "id": "17a47de6-a748-4dee-a645-3ff03be42814",
+      "name": "dataAnalyzer"
+    },
+    {
+      "parameters": {
+        "content": "qwen3.5:0.8b works",
+        "height": 80,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        112
+      ],
+      "id": "dc10b741-888c-48bf-91c1-08284fcf88e8",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "aiagent:\n**System Message:** You are a helpful assistant. You have two tools with you. These are: 'searchAssistant' and 'dataAnalyzer'. For any user message received, you first direct 'searchAssistant' tool to get information about it from the Internet. And once the information is received, you pass it on to 'dataAnalyzer' tool to analyze it and write a structured report on it. Only when 'dataAnalyzer' tool gives you an output you pass it on to the user.",
+        "height": 144,
+        "width": 960
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -400
+      ],
+      "id": "a5afd66a-9c0a-47d9-8057-dcde0d817770",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "AI Agent Tool: dataAnalyser; \n**Description:**\nAn expert in analyzing information about cricket bats and writing structured reports.\n**System Message and Prompt**\nYou are a helpful assistant. You are expert in  analyzing information about cricket bats and write structured reports.",
+        "width": 752
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        208
+      ],
+      "id": "51770d20-f9f3-4eba-a81f-31d4121be35a",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "granite4.1:3b\ntemperature: 0.5",
+        "height": 80,
+        "width": 176
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        32,
+        336
+      ],
+      "id": "b2a8098a-8e06-458b-a583-a66a95343454",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "granite4.1:3b",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        384,
+        336
+      ],
+      "id": "b104745a-bac2-43e7-ac22-cd6b5dd2d7c6",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "searchAPI",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        736,
+        336
+      ],
+      "id": "ead7fce8-63e5-4305-8cb2-ba84892774c5",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 496,
+        "width": 944,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        -48
+      ],
+      "id": "264397e7-b427-411a-bbc2-713fa28da564",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "AI Agent Tool: searchAssistant\n**Description:**\nAI Agent that can call other tools\n**System Message**\nYou are a helpful assistant. You are an expert in performing research on any topic given to you. You use 'searchTool' for the purpose.\n**Prompt:(User Message)**\nYou perform your search using 'searchTool' at your disposal on topics given to you by 'aiagent'.",
+        "height": 240,
+        "width": 752
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        752,
+        -208
+      ],
+      "id": "5a6e4da9-8066-465f-9b26-7585832847e8",
+      "name": "Sticky Note7"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "aiagent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "aiagent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "aiagent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "searchAssistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "searchAssistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "dataAnalyzer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "dataAnalyzer",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "searchTool": {
+      "ai_tool": [
+        [
+          {
+            "node": "searchAssistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "searchAssistant": {
+      "ai_tool": [
+        [
+          {
+            "node": "aiagent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dataAnalyzer": {
+      "ai_tool": [
+        [
+          {
+            "node": "aiagent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a928d378-4cd1-4bad-939e-e47f435bbd1a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2f177ccd1a0c60dda46eebd3235152eff668321f5830a41be44aa7e57fa613b9"
+  },
+  "nodeGroups": [],
+  "id": "zsU29QDnzLt9hLXg",
+  "tags": []
+}
