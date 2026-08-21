@@ -1,4 +1,28 @@
+# =============
+# Quick steps
+# ==============
+	./psql.sh
+	create user kavi with password 'kavi'  CREATEDB ;
+	create database kavi with owner kavi   ;
+	\l
+	\q
+	
+	sudo useradd -m kavi 
+	sudo su kavi
+	psql
+	create database mkavi    ;
+	\l
+	\c mkavi
+	create table goat (id int primary key, name varchar(3000)) ;
+	\q
+	
+	./hard_reset_n8n.sh
+	FORM (with two fields: id and name)==>Postgresql (Insert)
+Credential: user kavi ; Database: mkavi ; Password: kavi
+
+#########
 # Generating database, tables and data directly from command line
+#########
 sudo useradd -m kumar
 sudo passwd kumar
 sudo -u postgres psql -c 'drop database if exists kumar;'
