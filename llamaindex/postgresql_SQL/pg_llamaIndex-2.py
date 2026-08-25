@@ -10,6 +10,7 @@ tables for each specific question before generating the SQL
 
 %reset -f
 
+
 # 0.0
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.ollama import OllamaEmbedding
@@ -34,6 +35,7 @@ llm = Ollama(model=  "granite4.1:3b", #             "mistral:latest",
             base_url="http://localhost:11434",
              request_timeout=240.0)
 
+
 # 2. Configure the Embedding Model (for schema/metadata mapping)
 # Ensure you have run 'ollama pull mxbai-embed-large' (or your preferred model)
 embed_model = OllamaEmbedding(
@@ -45,30 +47,37 @@ embed_model = OllamaEmbedding(
 Settings.llm = llm
 Settings.embed_model = embed_model
 
+
 # 4. Connect to PostgreSQL
 # Format: postgresql+psycopg2://user:password@host:port/dbname
 engine = create_engine("postgresql+psycopg2://ravi:ravi@localhost:5432/ravi")
 sql_database = SQLDatabase(engine)
 
 
-# 1. Map your database tables to searchable "Nodes"
+# 5. Map your database tables to searchable "Nodes"
+#    "nodes" are objects that represent chunks of 
+#     information—in this case, each node corresponds to
+#     a table schema from your SQL database. What’s special
+#     is that LlamaIndex treats nodes as first-class, embeddable, 
+#     and retrievable units, enabling semantic search and flexible 
+#      retrieval strategies
 table_node_mapping = SQLTableNodeMapping(sql_database)
 
-# 2. Create schema objects for all tables (or a subset)
+# 6. Create schema objects for all tables (or a subset)
 table_schema_objs = [
     SQLTableSchema(table_name=t) 
     for t in ["s", "p", "j", "spj"]
 ]
 
-# SQLTableSchema only stores the table name (and optional context),
-#  NOT the actual schema details (like columns or types)
+# 6.1 SQLTableSchema only stores the table name (and optional context),
+#      NOT the actual schema details (like columns or types)
 for schema in table_schema_objs:
     print(schema)
 
-# Get full schema details of a table:
+# 6.2 Get full schema details of a table:
 sql_database.get_single_table_info('spj')
 
-# 3. Create a searchable index of these tables using your Ollama embed_model
+# 7. Create a searchable index of these tables using your Ollama embed_model
 #    This command creates a list of SQLTableSchema objects, one for each table name
 #     in ["s", "p", "j", "spj"]. Each SQLTableSchema represents the structure of a 
 #      specific SQL table, which can then be used for indexing, retrieval, or 
@@ -90,7 +99,7 @@ obj_index = ObjectIndex.from_objects(
                                     )
                                    
 
-# 4. Use the Retriever Query Engine
+# 8. Use the Retriever Query Engine
 # This will automatically pick the top 'k' relevant tables for every query
 
 """
@@ -111,11 +120,13 @@ query_engine = SQLTableRetrieverQueryEngine(
                                             obj_index.as_retriever(similarity_top_k=2), # Limits to 2 most relevant tables
                                             )
 
+# 8.1
 response = query_engine.query("What is the total number of rows in spj table?")
 
-
+# 8.2
 print(f"Response: {response}")
 print(f"SQL Used: {response.metadata['sql_query']}")
+
 
 ##################
 """
