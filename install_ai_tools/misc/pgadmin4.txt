@@ -1,8 +1,14 @@
 # Last amended: 26th August, 2026
 
 Using PGAdmin4
+==============
+Tasks:
 
-### For superuser ############33
+	a. Create adminServer
+	b. Create goatServer
+	c. Transform database to vector database
+
+### Task a. For superuser ############33
 
 #1. Set password for postgres user:
 
@@ -29,38 +35,38 @@ Tab: Connection
 	
 Click Save
 
-# 4.
+# 5.
 Right-click on Login/Group Roles.
 Click Create Login/Group Roles:
 Tab: General
 	Name: Your username (goat)
 Tab: Definition
 	Password: Give password (goat)
-Tab: Privilges:
+Tab: Privileges:
 	Select Privileges
 	At the leats: Can Login
 		      Create Databases
 		      
 
-# 5. 
+# 6. 
 Right-click on Create Databases 
 Click Create Database:
 Tab: General
 	Give database name, (goat) 
 	Owner: Write user name created above (goat)
 
-# 6.
+# 7.
 Right-click on adminServer
 And click Disconnect from Server.
 
-### For normal user ############33
+### Task c. For normal user ############33
 
-# 3. 
+# 8. 
 Right click on Servers in the right-panel and click 
 	Register-->Server
 
 
-# 4.
+# 9.
 Now fill up as follows:
 
 Tab: General	
@@ -74,14 +80,36 @@ Tab: Connection
 	
 Click Save
 
-NOW YOU SHOULD BE ABLE TO CREATE A DATABASE AND TABLE
-ALWAYS HAVE A PRIMARY KEY IN THE TABLE.
-Data types for table:
-	i)   integer
-	ii)  character
-	iii) character varying 
- 	     (Not character varying[])
-==============================
+# 10.
+	NOW YOU SHOULD BE ABLE TO CREATE A DATABASE AND TABLE
+	ALWAYS HAVE A PRIMARY KEY IN THE TABLE.
+	Data types for table:
+		i)   integer
+		ii)  character
+		iii) character varying 
+	 	     (Not character varying[])
+
+#### Task c. Vector Database ##########
+
+# 11
+# Transform 'goat' to vector database
+
+# 12.
+Disconnect connection as 'goatServer'
+AND Connect as adminServer
+
+# 13.
+Look for Database: 'goat'
+
+# 14.
+Right click on it and click 'Query Tool'
+
+# 15. Execute:
+CREATE EXTENSION IF NOT EXISTS vector;
+
+# DONE. The database is transformed to vector database
+
+
 
 
 	
