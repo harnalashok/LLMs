@@ -1,3 +1,5 @@
+# Last amended: 26th August, 2026
+
 Using PGAdmin4
 
 #1. Set password for postgres user:
