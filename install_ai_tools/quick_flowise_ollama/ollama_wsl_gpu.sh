@@ -796,6 +796,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	sleep 5
+    echo "Set password for postgres user"
+	echo $password | sudo -S -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 	# Create first ubuntu user
 	echo $password | sudo -S useradd -m -s /bin/bash harnal
 	sudo -u postgres psql -c 'create user harnal ;'
