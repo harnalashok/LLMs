@@ -2,6 +2,8 @@
 
 Using PGAdmin4
 
+### For superuser ############33
+
 #1. Set password for postgres user:
 
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
@@ -51,7 +53,7 @@ Tab: General
 Right-click on adminServer
 And click Disconnect from Server.
 
-##########
+### For normal user ############33
 
 # 3. 
 Right click on Servers in the right-panel and click 
