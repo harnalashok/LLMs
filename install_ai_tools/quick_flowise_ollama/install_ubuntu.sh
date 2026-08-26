@@ -786,6 +786,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	#
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/simpleTable.sql
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/pgadmin4.txt
 	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
 	cd /home/$USER
 	PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql

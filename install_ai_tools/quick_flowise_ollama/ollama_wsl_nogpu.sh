@@ -678,6 +678,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		# Original is here: 
 		# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
 		# With double quotes removed
+		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/pgadmin4.txt
 		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
 		cd /home/$USER
 		PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
