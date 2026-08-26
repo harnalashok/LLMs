@@ -4,9 +4,9 @@ Using PGAdmin4
 ==============
 Tasks:
 
-	a. Create adminServer
-	b. Create goatServer
-	c. Transform database to vector database
+	a. Create adminServer: user postgres
+	b. Create goatServer : user goat
+	c. Transform database to vector database: user postgres
 
 ### Task a. For superuser ############33
 
