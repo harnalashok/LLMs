@@ -1,0 +1,87 @@
+Using PGAdmin4
+
+#1. Set password for postgres user:
+
+sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+
+#2.
+Start PGAdmin4. It has its own browser like Window.
+
+# 3. 
+Right click on Servers in the right-panel and click 
+	Register-->Server
+
+# 4.
+Now fill up as follows:
+
+Tab: General	
+	Name: adminServer
+Tab: Connection
+	Host Name/Address: localhost
+	Port: 5432
+	Mainetenace Database: postgres
+	Username: postgres
+	password: postgres
+	
+Click Save
+
+# 4.
+Right-click on Login/Group Roles.
+Click Create Login/Group Roles:
+Tab: General
+	Name: Your username (goat)
+Tab: Definition
+	Password: Give password (goat)
+Tab: Privilges:
+	Select Privileges
+	At the leats: Can Login
+		      Create Databases
+		      
+
+# 5. 
+Right-click on Create Databases 
+Click Create Database:
+Tab: General
+	Give database name, (goat) 
+	Owner: Write user name created above (goat)
+
+# 6.
+Right-click on adminServer
+And click Disconnect from Server.
+
+##########
+
+# 3. 
+Right click on Servers in the right-panel and click 
+	Register-->Server
+
+
+# 4.
+Now fill up as follows:
+
+Tab: General	
+	Name: Say goatServer
+Tab: Connection
+	Host Name/Address: localhost
+	Port: 5432
+	Mainetenace Database: goat
+	Username: goat
+	password: goat
+	
+Click Save
+
+NOW YOU SHOULD BE ABLE TO CREATE A DATABASE AND TABLE
+ALWAYS HAVE A PRIMARY KEY IN THE TABLE.
+
+==============================
+
+
+	
+	
+	
+ 
+				
+
+	
+	
+
