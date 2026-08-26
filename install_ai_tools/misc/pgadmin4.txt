@@ -74,7 +74,11 @@ Click Save
 
 NOW YOU SHOULD BE ABLE TO CREATE A DATABASE AND TABLE
 ALWAYS HAVE A PRIMARY KEY IN THE TABLE.
-
+Data types for table:
+	i)   integer
+	ii)  character
+	iii) character varying 
+ 	     (Not character varying[])
 ==============================
 
 
