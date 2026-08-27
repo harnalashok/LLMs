@@ -65,7 +65,7 @@ cat /home/$USER/install_progerss.txt
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     cd /home/$USER/Documents
-    wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
+    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
 	cd /home/$USER
     echo "  "
     echo "------------"   
@@ -103,7 +103,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	sudo apt install filezilla -y
 	# Install pandoc to convert .md files to .txt files
 	sudo apt install pandoc  -y
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
 	echo $password | sudo -S apt-get install libssl-dev libcurl4-openssl-dev -y
 	echo "  "
 	echo "  "
@@ -138,8 +138,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	#echo $password | sudo -S apt install npm -y
 	echo "Ubuntu is updated and NodeJS installed" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
-    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
-    #wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
+    #wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
+    #wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker2.sh -P /home/$USER
     #perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker1.sh
     #perl -pi -e 's/\r\n/\n/g' /home/$USER/ubuntu_docker2.sh
     chmod +x /home/$USER/*.sh
@@ -202,8 +202,8 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
     mkdir -p /home/$USER/Documents/apache2
 	cd /home/$USER
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
 	chmod +x *.sh
     echo '#!/bin/bash'                                         | tee    /home/$USER/stop_apache2.sh
 	echo " "                                                   | tee -a /home/$USER/stop_apache2.sh
@@ -402,7 +402,7 @@ if [ ! -f /home/$USER/docker_installed.txt ]; then
 	mkdir /home/$USER/docker
 	cd /home/$USER/docker
 	echo "Download script to print names of docker containers"
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/docker/names_dockers.sh
 	chmod +x *.sh
 	cd /home/$USER
 	LINE="  3. Docker installed"
@@ -467,9 +467,9 @@ if [ ! -f /home/$USER/docker_installed_1.txt ]; then
     # Store docker help files
     mkdir /home/$USER/Documents/dockers
     cd /home/$USER/Documents/dockers
-    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/Understanding%20docker%20technology.pdf?raw=true
-    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/docker%20commands.txt?raw=true
-    wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
+    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/Understanding%20docker%20technology.pdf?raw=true
+    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/docker%20commands.txt?raw=true
+    wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/docker/dockers%20in%20brief.pdf?raw=true
     cd /home/$USER/
     #
     echo "Docker installation completed" > /home/$USER/docker_installed_1.txt   # To avoid repeat installation
@@ -612,7 +612,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "FAISS stores its data files 'docstore.json' and 'faiss.index' here."
 	# FAISS download data-cleaning script
 	cd /home/$USER/
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/faiss/empty_faiss_database.sh
 	chmod +x *.sh
 	chmod +x /home/$USER/start/*.sh
 	echo "faiss_installed.txt" > /home/$USER/faiss_installed.txt
@@ -676,14 +676,14 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	# in postgresql
 	##############
 	cd /home/$USER/
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createdatabase.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createpostgresuser.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/show_postgres_databases.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createvectordb.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/delete_postgres_db.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/psql.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/postgres_notes.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/permit_remote_con.sh
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/createdatabase.sh
 	chmod +x /home/$USER/*.sh
 	
 	# Create symlinks
@@ -694,8 +694,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	ln -sT /home/$USER/delete_postgres_db.sh         delete_postgres_db.sh
 	ln -sT /home/$USER/psql.sh                       psql.sh
 	ln -sT /home/$USER/permit_remote_con.sh          permit_remote_con.sh
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/tableInfo.md
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/n8nModels/7.Postgres%20related/AIAgentSQLGeneration.sql
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/tableInfo.md
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/n8nModels/7.Postgres%20related/AIAgentSQLGeneration.sql
 	cd /home/$USER
 	
 	###########
@@ -786,8 +786,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	#
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/simpleTable.sql
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/pgadmin4.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/pgadmin4.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/simpleTable.sql
 	cd /home/$USER
 	PGPASSWORD="ravi"  psql -U ravi -d ravi -h localhost -f /home/$USER/psql/simpleTable.sql
 	#
@@ -808,9 +808,9 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	cd /home/$USER/psql
 	rm  /home/$USER/psql/chinook.sql
 	# Original is here: 
-	# wget -Nc https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
+	# wget -c https://raw.githubusercontent.com/neondatabase/postgres-sample-dbs/main/chinook.sql
 	# With double quotes removed
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/psql/chinook.sql
 	cd /home/$USER
 	PGPASSWORD="chinook"  psql -U chinook -d chinook -h localhost -f /home/$USER/psql/chinook.sql
 			
@@ -836,12 +836,12 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	# Download RAG data files
 	mkdir -p /home/$USER/Documents/data
 	cd /home/$USER/Documents/data
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/bertrandRusselEssays.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/goodWriting.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/iWorkedOnEssay.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/sherlockHolmes.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/slyFox.txt
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/bertrandRusselEssays.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/goodWriting.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/iWorkedOnEssay.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/sherlockHolmes.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/slyFox.txt
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/essays/threewishes.txt
 	cd /home/$USER
 	echo "postgresql installed" > /home/$USER/postgresql_installed.txt
 	LINE="  8. PostgreSQL installed"
@@ -1326,8 +1326,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  chmod +x /home/$USER/stop/*.sh
 	  mkdir /home/$USER/Documents/llms
 	  cd /home/$USER/Documents/llms
-	  wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Types_of_LLMs_and_Agents.pdf
-	  wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Technical%20concepts.pdf
+	  wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Types_of_LLMs_and_Agents.pdf
+	  wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/Technical%20concepts.pdf
 	  cd /home/$USER
 	  sleep 3
 	  LINE="  12. Ollama installed"
@@ -1435,7 +1435,7 @@ if [ ! -d "$DIRECTORY" ]; then
 		# Install postgresql client
  		conda install -c conda-forge psycopg2  -y
 		# Download script to create conda venv
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_conda_venv.sh -P /home/$USER
 		chmod +x *.sh  
 		echo "anaconda_installed.txt" > /home/$USER/anaconda_installed.txt
 		chmod +x /home/$USER/*.sh
@@ -1541,14 +1541,14 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	# Download llamaindex tutorials
 	mkdir -p /home/$USER/Documents/llamaindex
 	cd /home/$USER/Documents/llamaindex
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	sleep 3
 	chmod +x /home/$USER/*.sh
@@ -1673,7 +1673,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	mkdir -p /home/$USER/Documents/samples/in
 	mkdir -p /home/$USER/Documents/samples/out
 	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
 	cd /home/$USER
 	echo "####"
 	# Create script to activate 'venv' env
@@ -1685,7 +1685,7 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
 	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
 	# Download script to create python venv
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
 	chmod +x /home/$USER/*.sh
 	sleep 2
   
@@ -1723,7 +1723,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  pip install transformers
 	  pip install accelerate
 	  brew install llama.cpp
-	  wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/run_ggufModel.sh
+	  wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/run_ggufModel.sh
 	  echo 'export PATH="/home/linuxbrew/.linuxbrew/Cellar/llama.cpp/8030/bin:$PATH"'  >> /home/$USER/.bashrc
 	  echo "llama.cpp installed"  
 	  echo "llamacpp_installed.txt"  > /home/$USER/llamacpp_installed.txt
@@ -1758,7 +1758,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	mkdir /home/$USER/1234
 	cd /home/$USER/1234
 	# Direct download link
-	wget -Nc 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+	wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 	# Fill in filename from above
 	mv * code.deb
 	echo $password | sudo -S apt install /home/$USER/1234/code.deb  -y
@@ -1766,8 +1766,8 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	rm -rf /home/$USER/1234/
 	mkdir /home/$USER/Documents/vscode
 	cd /home/$USER/Documents/vscode
-	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
-	wget -Nc https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/vscode_ollamaCoder.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/vscode_ollamaCoder.pdf?raw=true
 	echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	#    
 	sleep 5
@@ -2091,7 +2091,7 @@ if [ ! -f /home/$USER/mineru_installed.txt ]; then
 	mkdir -p /home/$USER/Documents/samples/in
 	mkdir -p /home/$USER/Documents/samples/out
 	cd /home/$USER/Documents/samples
-	wget -nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
 	cd /home/$USER
 	echo "####"
 	# Create script to activate 'mineru' env
@@ -2813,7 +2813,7 @@ if [ ! -f /home/$USER/opennotebook_installed.txt ]; then
 	    echo " "
 		mkdir /home/$USER/opennotebook
 		cd /home/$USER/opennotebook
-		wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
+		wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/opennotebook/docker-compose.yml
 		docker compose up -d
 		sleep 4
 		echo "  "
@@ -3024,20 +3024,20 @@ if [[ $input == "Y" || $input == "y" ]]; then
    # Dowload some files
    mkdir -p /home/$USER/Documents/mongodb/datasets
    cd /home/$USER/Documents/mongodb/datasets
-   wget -Nc  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
+   wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
    cd /home/$USER/Documents/mongodb
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
 else
     echo "Mongodb for Ubuntu 22.04 not installed"
 fi    
@@ -3096,20 +3096,20 @@ if [[ $input == "Y" || $input == "y" ]]; then
    # Dowload some files
    mkdir -p /home/$USER/Documents/mongodb/datasets
    cd /home/$USER/Documents/mongodb/datasets
-   wget -Nc  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
+   wget -c  https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/catalog.books.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/credit_card_customers.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/howToImport.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/primer-dataset.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/restaurant.json
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/datasets/students.json
    cd /home/$USER/Documents/mongodb
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
-   wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/0.about%20json-0.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/1.mongo_CRUD.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/3.mongo_qyeryTextSearch.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/4.fullTextSearch.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/5.mongo_aggregationPipe.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/7.mongo_backupRestore.txt
+   wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/mongodb/12.accessControl_class_mongo.txt
    sleep 2
    sudo systemctl reboot -i
 else
@@ -3189,7 +3189,7 @@ if [ ! -f /home/$USER/llamacpp_installed.txt ]; then
 	  cd /home/$USER/gguf
 	  echo "Downloading llama-thinker-3b-preview.q8_0.gguf. Takes time..."
 	  sleep 4
-	  wget -Nc https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
+	  wget -c https://huggingface.co/mradermacher/Llama-Thinker-3B-Preview-GGUF/resolve/main/Llama-Thinker-3B-Preview.Q8_0.gguf?download=true
 	  mv 'Llama-Thinker-3B-Preview.Q8_0.gguf?download=true'  llama-thinker-3b-preview.q8_0.gguf
 	  echo "Done...."
 	  cd /home/$USER
@@ -3455,7 +3455,7 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 	    conda env create -f environment.yml
 		#
 		sudo apt-get install graphviz
-	    wget -Nc https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
+	    wget -c https://github.com/TorchStudio/torchstudio/releases/download/0.9.19/TorchStudio_0.9.19-Linux_Installer.deb
 		sudo dpkg -i  TorchStudio_0.9.19-Linux_Installer.deb
 		rm TorchStudio_0.9.19-Linux_Installer.deb
 		echo " "
@@ -3465,7 +3465,7 @@ if [ ! -f /home/$USER/torchstudio_installed.txt ]; then
 		echo "  "
 		sleep 5
 		cd /home/$USER/Documents
-		wget -Nc https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv
+		wget -c https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv
 		cd /home/$USER
 		echo "To run torchstudio:"
 		echo "    Select python interpretur at directory: /anaconda3/envs/TorchStudio/bin/python"
