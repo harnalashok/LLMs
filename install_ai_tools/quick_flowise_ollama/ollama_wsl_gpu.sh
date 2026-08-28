@@ -9,7 +9,9 @@
 #       NOR AT EHE END
 password="ashok"
 
-echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+#echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+echo $password | sudo -S sh -c 'echo "185.199.111.133 raw.githubusercontent.com" >> /etc/hosts'
+
 cat /etc/hosts
 
 # Run following script only once
