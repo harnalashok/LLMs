@@ -1065,7 +1065,8 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo "Installing ollama docker"
   	echo "------------"   
   	cd /home/$USER/
-  	# Start ollama docker in future
+  	
+	# Start ollama docker in future
   	echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
 	echo " "                                                                                                  >> /home/$USER/start_ollama.sh
 	echo "echo '==========Help: HowTo=============='"                                                         >> /home/$USER/start_ollama.sh
@@ -1089,6 +1090,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
 	echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
 	echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
+	
 	# Script to stop ollama
 	echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
 	echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
@@ -1107,7 +1109,20 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	#docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 	# network host would be local mashine
 	echo -en "\007"
+
+	# Update ollama docker in future
+	echo '#!/bin/bash'                                  > /home/$USER/update_ollama.sh
+	echo " "                                           >> /home/$USER/update_ollama.sh
+	echo "docker pull ollama/ollama:latest"            >> /home/$USER/update_ollama.sh
+	echo "docker stop ollama"                          >> /home/$USER/update_ollama.sh
+	echo "docker rm ollama"                            >> /home/$USER/update_ollama.sh
+    echo "docker run -d -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama"      >> /home/$USER/update_ollama.sh
+    echo "echo '  '   "                                >> /home/$USER/update_ollama.sh                                     
+	echo "echo 'Done...'"                              >> /home/$USER/update_ollama.sh  
+	
+	# Install ollama
 	docker run -d  -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+
 	echo "ollama_installed.txt " > /home/$USER/ollama_installed.txt
 	LINE="  9. Ollama docker Installed"
 	if ! grep -qF "$LINE" "$FILE"; then

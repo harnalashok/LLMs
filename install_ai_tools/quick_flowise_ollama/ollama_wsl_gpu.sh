@@ -1129,6 +1129,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo " Installing Ollama docker"
 	sleep 2
 	cd /home/$USER/
+	
 	# Start ollama docker in future
 	echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
 	echo " "                                                                                                  >> /home/$USER/start_ollama.sh
@@ -1157,6 +1158,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo "sleep 3"                                                                                            >> /home/$USER/start_ollama.sh
 	echo "echo '  '"                                                                                                  >> /home/$USER/start_ollama.sh
 	echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh    
+	
 	# Script to stop ollama
 	echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
 	echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
@@ -1174,6 +1176,18 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	echo "echo 'Access as: http://$hostip:11434'"       >> /home/$USER/.bashrc
 	#docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 	# network host would be local mashine
+	
+    # Update ollama docker in future
+	echo '#!/bin/bash'                                  > /home/$USER/update_ollama.sh
+	echo " "                                           >> /home/$USER/update_ollama.sh
+	echo "docker pull ollama/ollama:latest"            >> /home/$USER/update_ollama.sh
+	echo "docker stop ollama"                          >> /home/$USER/update_ollama.sh
+	echo "docker rm ollama"                            >> /home/$USER/update_ollama.sh
+    echo "docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama"      >> /home/$USER/update_ollama.sh
+    echo "echo '  '   "                                >> /home/$USER/update_ollama.sh                                     
+	echo "echo 'Done...'"                              >> /home/$USER/update_ollama.sh  
+
+	# Install ollama7
 	docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
 	sleep 2
 	echo "ollama_installed.txt" > ollama_installed.txt

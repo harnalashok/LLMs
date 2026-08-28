@@ -1278,6 +1278,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  echo "Installing ollama docker.."
       sleep 3
 	  cd /home/$USER/
+	 
 	  # Start ollama docker in future
 	  echo '#!/bin/bash'                                                                                        > /home/$USER/start_ollama.sh
 	  echo " "                                                                                                  >> /home/$USER/start_ollama.sh
@@ -1302,6 +1303,7 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  echo "echo '7. Pulled models are available at /var/lib/docker/volumes/ollama/ '"                          >> /home/$USER/start_ollama.sh
 	  echo "echo '8. Remember ollama is now an alias NOT the actual command '"                                  >> /home/$USER/start_ollama.sh
 	  echo "docker start ollama "                                                                               >> /home/$USER/start_ollama.sh     
+	  
 	  # Script to stop ollama
 	  echo '#!/bin/bash'                                                                                        > /home/$USER/stop_ollama.sh
 	  echo " "                                                                                                  >> /home/$USER/stop_ollama.sh
@@ -1319,9 +1321,23 @@ if [ ! -f /home/$USER/ollama_installed.txt ]; then
 	  echo "docker start ollama"                          >> /home/$USER/.bashrc
 	  echo "echo 'Ollama docker started at port 11434'"   >> /home/$USER/.bashrc
 	  echo "echo 'Access as: http://$hostip:11434'"       >> /home/$USER/.bashrc
+
+	  # Install ollama
 	  #docker run -d --gpus=all -v /home/$USER/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 	  # network host would be local mashine
 	  docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama
+
+	  # Update ollama
+	  # Update ollama docker in future
+	  echo '#!/bin/bash'                                  > /home/$USER/update_ollama.sh
+	  echo " "                                           >> /home/$USER/update_ollama.sh
+	  echo "docker pull ollama/ollama:latest"            >> /home/$USER/update_ollama.sh
+	  echo "docker stop ollama"                          >> /home/$USER/update_ollama.sh
+	  echo "docker rm ollama"                            >> /home/$USER/update_ollama.sh
+      echo "docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --network host --name ollama ollama/ollama"      >> /home/$USER/update_ollama.sh
+      echo "echo '  '   "                                        >> /home/$USER/update_ollama.sh                                     
+	  echo "echo 'Done...'"                                    >> /home/$USER/update_ollama.sh  
+
 	  echo "ollama_installed" > /home/$USER/ollama_installed.txt
 	  sleep 4
 	  chmod +x /home/$USER/*.sh
