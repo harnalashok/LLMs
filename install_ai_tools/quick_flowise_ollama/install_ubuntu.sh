@@ -9,6 +9,7 @@
 #       NOR AT EHE END
 password="ashok"
 
+# echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
 
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
@@ -61,6 +62,7 @@ cat /home/$USER/install_progerss.txt
 # Update Ubuntu
 # Also install postgresql
 ################
+
 
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then

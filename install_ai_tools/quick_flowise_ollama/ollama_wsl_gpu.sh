@@ -9,6 +9,8 @@
 #       NOR AT EHE END
 password="ashok"
 
+echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+cat /etc/hosts
 
 # Run following script only once
 if [ ! -f /home/$USER/firsttime.txt ]; then

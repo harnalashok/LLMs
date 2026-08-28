@@ -9,6 +9,9 @@
 #       NOR AT EHE END
 password="ashok"
 
+echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+cat /etc/hosts
+
 clear
 # Are we having wsl systems
 WSL=$(cat /proc/version)
