@@ -1454,7 +1454,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	# Create python virtual env
 	##############
 	rm -rf /home/$USER/langchain
-	python3.11 -m venv /home/$USER/langchain
+	rm activate_langchain_venv.sh
+	python3 -m venv /home/$USER/langchain
 	source /home/$USER/langchain/bin/activate
 	# 1.6 Essentials software
 	pip install --upgrade pip
@@ -1517,17 +1518,6 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install llama-index-llms-mistralai
 	pip install  llama-index-experimental
 	pip install polars
-	# Download llamaindex tutorials
-	mkdir -p /home/$USER/Documents/llamaindex
-	cd /home/$USER/Documents/llamaindex
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/llamaindex_fundamentals.ipynb
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/1_basic_agent.py
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_csv_moodle-expt.ipynb
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L0_simple_skill_gap.ipynb
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L1_Router_Engine.ipynb
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L2_Tool_Calling.ipynb
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L3_Building_an_Agent_Reasoning_Loop.ipynb
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/llamaindex/L4_Building_a_Multi-Document_Agent.ipynb
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	chmod +x /home/$USER/*.sh
 	chmod +x /home/$USER/start/*.sh
