@@ -1421,8 +1421,6 @@ if [ ! -f /home/$USER/anaconda_installed.txt ]; then
 #################
 
 cd /home/$USER
-rm -rf /home/$USER/langchain
-rm activate_langchain_venv.sh
 if [ ! -f /home/$USER/langchain_installed.txt ]; then
     echo " "
     echo " "
