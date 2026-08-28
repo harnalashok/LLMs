@@ -1197,7 +1197,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull smollm2
 	  echo "17. Pulling granite4.1:3b"
 	  docker exec -it ollama ollama pull granite4.1:3b
-	  echo " "
+	  echo "18. Pulling mistral:latest"
+	  docker exec -it ollama ollama pull mistral:latest
 	  echo " "
 	  #ollama list
 	  echo "models installed" > /home/$USER/models_installed.txt
