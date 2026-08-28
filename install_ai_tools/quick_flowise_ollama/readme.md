@@ -4,9 +4,9 @@ To quickly install dockers for flowise+ollama+chromadb+n8n follow these scripts.
 See [here](https://github.com/harnalashok/LLMs/blob/main/wsl%20install%20and%20uninstall%20and%20misc.txt) for installing/uninstalling ubuntu from wsl        
 
 **Problem in downloading from githubusercontent.**     
-Proceed as follows:      
+== Proceed as follows:      
 sudo /nano /etc/hosts        
-Add last line:        
+Add last line (other IPs are 109,110):        
 185.199.111.133 raw.githubusercontent.com      
 Do this each time WSL restarts      
 
