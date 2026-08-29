@@ -1777,6 +1777,16 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	cd /home/$USER/Documents/vscode
 	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
 	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/vscode_ollamaCoder.pdf?raw=true
+	
+    # Copy VScode keybindings file
+	# ctrl+shift+q: Restart kernel; ctrl+shift+0 : Clear all outputs
+	cd  /home/$USER/.config/Code/User/
+	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/keybindings
+	mv 	keybindings.json keybindings.txt
+	mv keybindings  keybindings.json
+    cd /home/$USER
+
+
 	echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	#    
 	sleep 5
