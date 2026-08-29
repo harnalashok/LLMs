@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Last amended: 24th July, 2026
+# Last amended: 29th August, 2026
 
 # This is the password of your WSL ubuntu account
 #  Change it, if different 
@@ -2588,7 +2588,7 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	pip install notebook
 	pip install -U streamlit
 	pip install plotly
-	
+
 	# Create script to activate 'smollagents' env
 	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
 	echo "echo '         source /home/$USER/smollagents/bin/activate' "      >>  /home/$USER/activate_smollagents_venv.sh
