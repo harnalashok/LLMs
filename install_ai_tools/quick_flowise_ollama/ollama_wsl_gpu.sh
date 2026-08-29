@@ -1469,6 +1469,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
 	echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+	echo "cd /home/$USER/lprojects"                                            >>  /home/$USER/activate_langchain_venv.sh
 	
 	chmod +x /home/$USER/*.sh
 	sleep 2
