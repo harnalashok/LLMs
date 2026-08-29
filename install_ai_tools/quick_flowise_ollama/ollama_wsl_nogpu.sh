@@ -313,14 +313,17 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	uv pip install 'crewai[tools]'  newsapi-python
     uv pip install 'crewai-tools[mcp]'
 	deactivate
+
 	# Create script to activate 'crewai_env' env
 	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
 	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
+
 	LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
@@ -1451,12 +1454,15 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install huggingface_hub
 	# To connect to postgresql
 	pip install psycopg2
+
 	# Create script to activate 'langchain' env
 	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-	echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+	echo "echo '         source /home/$USER/langchain/bin/activate' "          >>  /home/$USER/activate_langchain_venv.sh
+	echo "echo 'Or, as:  . activate_langchain_env.sh' "                        >>  /home/$USER/activate_langchain_venv.sh
 	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
 	echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+
 	chmod +x /home/$USER/*.sh
 	sleep 2
 	cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
@@ -1813,9 +1819,11 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	pip install notebook
 	pip install -U streamlit
 	pip install plotly
+	
 	# Create script to activate 'smollagents' env
 	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
-	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '         source /home/$USER/smollagents/bin/activate' "      >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'OR as:   . /home/$USER/smollagents/bin/activate' "           >>  /home/$USER/activate_smollagents_venv.sh
 	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
 	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
@@ -1943,11 +1951,13 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	# Download file that creates a fresh python enviroemnet
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/venv/create_python_venv.sh -P /home/$USER
 	chmod +x *.sh   
+
 	# Create script to activate 'venv' env
 	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
 	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
 	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '         source /home/$USER/venv/bin/activate' "               | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'OR, as:  .  /home/$USER/venv/bin/activate' "                   | tee -a  /home/$USER/activate_venv.sh
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
 	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh

@@ -353,6 +353,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
 	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
@@ -1495,12 +1496,15 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U huggingface_hub
 	# To connect to postgresql
 	pip install psycopg2
+
 	# Create script to activate 'langchain' env
-	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  > /home/$USER/activate_langchain_venv.sh
-	echo "echo 'source /home/$USER/langchain/bin/activate' "                   >>  /home/$USER/activate_langchain_venv.sh
+	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  >  /home/$USER/activate_langchain_venv.sh
+	echo "echo '         source /home/$USER/langchain/bin/activate' "          >>  /home/$USER/activate_langchain_venv.sh
+	echo "echo 'Or, as:  . activate_langchain_env.sh' "                        >>  /home/$USER/activate_langchain_venv.sh
 	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_langchain_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_langchain_venv.sh
 	echo "source /home/$USER/langchain/bin/activate"                           >>  /home/$USER/activate_langchain_venv.sh
+	
 	chmod +x /home/$USER/*.sh
 	sleep 2
 	cp /home/$USER/activate_langchain_venv.sh  /home/$USER/start/activate_langchain_venv.sh
@@ -1678,11 +1682,13 @@ if [ ! -f /home/$USER/venv_installed.txt ]; then
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
 	cd /home/$USER
 	echo "####"
+
 	# Create script to activate 'venv' env
 	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_venv.sh
 	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_venv.sh
 	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_venv.sh
-	echo "echo 'source /home/$USER/venv/bin/activate' "                       | tee -a  /home/$USER/activate_venv.sh
+	echo "echo '         source /home/$USER/venv/bin/activate' "               | tee -a  /home/$USER/activate_venv.sh
+	echo "echo 'OR, as:  .  /home/$USER/venv/bin/activate' "                   | tee -a  /home/$USER/activate_venv.sh
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_venv.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_venv.sh
 	echo "source /home/$USER/venv/bin/activate"                                | tee -a  /home/$USER/activate_venv.sh
@@ -2099,8 +2105,9 @@ if [ ! -f /home/$USER/mineru_installed.txt ]; then
 	# Create script to activate 'mineru' env
 	echo '#!/bin/bash'                                                        | tee   /home/$USER/activate_mineru.sh
 	echo "echo 'Execute this file as: source activate_venv.sh' "              | tee -a  /home/$USER/activate_mineru.sh
-	echo "echo 'To use or install any python package, first activate python venv as:' "        | tee -a  /home/$USER/activate_mineru.sh
-	echo "echo 'source /home/$USER/mineru/bin/activate' "                       | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo 'To use or install any python package, first activate python venv as:' "   | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo '         source /home/$USER/mineru/bin/activate' "             | tee -a  /home/$USER/activate_mineru.sh
+	echo "echo 'OR, as:      .   /home/$USER/mineru/bin/activate' "            | tee -a  /home/$USER/activate_mineru.sh
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_mineru.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_mineru.sh
 	echo "source /home/$USER/mineru/bin/activate"                                | tee -a  /home/$USER/activate_mineru.sh
@@ -3607,12 +3614,14 @@ if [ ! -f /home/$USER/smoll_installed.txt ]; then
 	pip install notebook
 	pip install -U streamlit
 	pip install plotly
+	
 	# Create script to activate 'smollagents' env
 	echo "echo 'To activate smollagents virtual envs, activate as:' "         > /home/$USER/activate_smollagents_venv.sh
-	echo "echo 'source /home/$USER/smollagents/bin/activate' "                   >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(Note the change in prompt after activating)' "                >>  /home/$USER/activate_smollagents_venv.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         >>  /home/$USER/activate_smollagents_venv.sh
-	echo "source /home/$USER/smollagents/bin/activate"                           >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '         source /home/$USER/smollagents/bin/activate' "      >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo 'OR as:   . /home/$USER/smollagents/bin/activate' "           >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(Note the change in prompt after activating)' "              >>  /home/$USER/activate_smollagents_venv.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "       >>  /home/$USER/activate_smollagents_venv.sh
+	echo "source /home/$USER/smollagents/bin/activate"                       >>  /home/$USER/activate_smollagents_venv.sh
 	cp /home/$USER/activate_smollagents_venv.sh  /home/$USER/start/activate_smollagents_venv.sh
 	cp /home/$USER/activate_smollagents_venv.sh /home/$USER/stop/activate_smollagents_venv.sh
 	chmod +x /home/$USER/*.sh
