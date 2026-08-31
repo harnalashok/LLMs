@@ -640,6 +640,7 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo $password | sudo -S  apt install postgresql postgresql-contrib sqlite3   -y
     
     # Install pgsql-http extension
+	# Needed to trigger webhooks
 	# https://github.com/pramsey/pgsql-http
 	# Wouldn't it be nice to be able to write a trigger
 	#  that called a web service? Either to get back a 
