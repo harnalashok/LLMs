@@ -691,13 +691,27 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo " "
 	echo " "
 	cd /home/$USER/
+	
+	# Install postgresql server 
 	echo "------------"   
 	echo "Installing postgresql and sqlite3"
 	sleep 3
 	echo $password | sudo -S  apt install postgresql postgresql-contrib sqlite3   -y
     
-	# Postgresql start/stop script
+    # Install pgsql-http extension
+	# https://github.com/pramsey/pgsql-http
+	# Wouldn't it be nice to be able to write a trigger
+	#  that called a web service? Either to get back a 
+	#   result, or to poke that service into refreshing 
+	#    itself against the new state of the database?
+    # Clone the official repository
+    git clone https://github.com/pramsey/pgsql-http.git
+    cd pgsql-http
+    # Compile and install
+    make
+    sudo make install
 
+	# Postgresql start/stop script
 	# Start script
 	echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
 	echo " "                                                               >> /home/$USER/start_postgresql.sh  

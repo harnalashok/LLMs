@@ -102,7 +102,6 @@ fi
 
 ################
 # Update Ubuntu
-# Also install postgresql
 ################
 
 cd /home/$USER
@@ -515,6 +514,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
     if [ ! -f /home/$USER/postgresql_installed.txt ]; then
 		# Install postgresql
 		cd /home/$USER/
+
+		# Install postgresql server and sqlite3
 		echo "   "
 		echo "------------"     
 		echo "Installing postgresql and sqlite3"
@@ -523,6 +524,20 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		echo -en "\007"
 		echo $password | sudo -S apt install postgresql postgresql-contrib sqlite3   -y
 		
+		# Install pgsql-http extension
+		# https://github.com/pramsey/pgsql-http
+		# Wouldn't it be nice to be able to write a trigger
+		#  that called a web service? Either to get back a 
+		#   result, or to poke that service into refreshing 
+		#    itself against the new state of the database?
+		# Clone the official repository
+		git clone https://github.com/pramsey/pgsql-http.git
+		cd pgsql-http
+		# Compile and install
+		make
+		sudo make install
+
+
 		# Postgresql start/stop script
 		# Start script
 		echo '#!/bin/bash'                                                      > /home/$USER/start_postgresql.sh  
