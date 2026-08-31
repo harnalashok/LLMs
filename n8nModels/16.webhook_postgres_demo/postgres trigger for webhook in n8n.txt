@@ -1,0 +1,133 @@
+# Last amended: 31st August, 2026
+Objective: Trigger an n8n webhook when a row is inserted
+	   into a postgresql table
+=========================================================================
+
+Steps 1:
+	In postgres server install pgsql-http extension from here:
+	https://github.com/pramsey/pgsql-http#postgresql-http-client
+	This extension oding is already available on github.com in
+	our files ollama-wsl-gpu.sh, install_ubuntu.sh and the other one.
+
+Step 2: In Ubuntu terminal, using ./psql.sh, change the password of user
+	postgres, as: ALTER USER postgres WITH PASSWORD 'postgres';
+	
+Step 3: Start PgAdmin4. Register a Server, say, name: AdminServer as:
+	user: postgres, database: postgres, host: localhost
+
+Step 4: Create a user 'akh', database 'akh' with owner 'akh'.
+	In database 'akh' enable http extension as:
+	
+	CREATE EXTENSION http;
+	
+	ALTER DATABASE akh SET http.timeout_msec = 5000;
+	
+Step 5: In PgAdmin4, register another server, name it as: akhServer,
+	user: akh, database: akh, password: akh
+	
+Step 6: Create a table in database, akh by name of 'tourist' having
+	three fields: id (int, primary key), name: varchar(35),
+	location: varchar(50).
+	
+Step 7: Restart postgresql 	
+
+Step 8: Start n8n. Add a webhook node. Note down its test URL. It is:
+	http://192.240.4.114:5678/webhook-test/postgresWebhook
+	
+Step 9: In PgAdmin4, while logged in as 'akh' ie 'akhServer',
+	Right click on Database, akh, and open Query Tool. Paste the 
+	following code and execute:
+	
+=========================================================================
+	 			
+-- 1. Create the function using the 'http' extension syntax
+CREATE OR REPLACE FUNCTION notify_n8n_webhook() 
+RETURNS TRIGGER AS $$
+DECLARE
+    payload TEXT;
+    response http_response;
+BEGIN
+    -- Convert the newly inserted row to text
+    payload := row_to_json(NEW)::text;
+    
+    -- Send the HTTP POST request via the http extension
+    -- Note HERE PUT YUR WEBHOOK URL
+    SELECT * INTO response FROM http_post(
+        'http://192.240.4.102:5678/webhook-test/postgresWebhook',
+        payload,
+        'application/json'
+    );
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- 2. Bind it to your table
+CREATE OR REPLACE TRIGGER tr_after_insert_n8n
+AFTER INSERT ON public.tourist
+FOR EACH ROW
+EXECUTE FUNCTION notify_n8n_webhook();
+----------------
+
+=========================================================================
+
+Step 10: You will find both the function and the trigger
+	in their appropraite places in PgAdmin4 in the 
+	left panel.
+	
+Step 11: Start Webhook in n8n. It will start listening.
+
+Step 12: Right click on the 'tourist' table in PgAdmin4
+	 and open Query Tool. Execute the following
+	 INSERT statment:
+	 
+	 INSERT INTO public.tourist (id, name, location) VALUES (3, 'ashok', 'Delhi');
+	 
+	 You should find Webhook containg information about this insertion.
+	 
+=========================================================================
+			
+
+
+		
+	
+	
+
+	
+
+
+
+
+
+-- 1. Create the function using the 'http' extension syntax
+CREATE OR REPLACE FUNCTION notify_n8n_webhook() 
+RETURNS TRIGGER AS $$
+DECLARE
+    payload TEXT;
+    response http_response;
+BEGIN
+    -- Convert the newly inserted row to text
+    payload := row_to_json(NEW)::text;
+    
+    -- Send the HTTP POST request via the http extension
+    SELECT * INTO response FROM http_post(
+        'http://192.240.4.102:5678/webhook-test/postgresWebhook',
+        payload,
+        'application/json'
+    );
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- 2. Bind it to your table
+CREATE TRIGGER tr_after_insert_n8n
+AFTER INSERT ON public.tourist
+FOR EACH ROW
+EXECUTE FUNCTION notify_n8n_webhook();
+
+
+INSERT INTO public.tourist (id, name, location) 
+VALUES (2, 'gautam', 'Delhi');
+
