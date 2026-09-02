@@ -1756,9 +1756,10 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	sleep 3
 	rm -rf /home/$USER/Documents/crewaiModels
 	rm -rf /home/$USER/Documents/crewaiExamples
+	rm -rf /home/$USER/crewai_pjt
 	
 	mkdir -p /home/$USER/Documents/crewaiExamples
-	mkdir -p /home/$USER/Documents/crewai_pjt
+	mkdir -p /home/$USER/crewai_pjt
 	
 	cd /home/$USER/Documents/crewaiExamples
 	git init
