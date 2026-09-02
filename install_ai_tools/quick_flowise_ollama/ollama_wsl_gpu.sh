@@ -316,6 +316,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
 	LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
