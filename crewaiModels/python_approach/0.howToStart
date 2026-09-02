@@ -11,3 +11,8 @@ code .
 cd ~/        
 . activate_crewai_env.sh        
 code .
+
+After VSStudio is opened and env for a file is selected
+keep cursor at the beginning of a function def and press
+shift+ENTER to execute the whole function-definition code.
+In the terminal below, start python, if not started.
