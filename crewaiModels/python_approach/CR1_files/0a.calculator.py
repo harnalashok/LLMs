@@ -1,8 +1,11 @@
-# Last amended: 25th June, 2026
+# Last amended: 2nd Sep, 2026
 # calculator.py
 # Obj: Demonstrate the use of __name__ = __main__ variable
 # Every Python file has a built-in variable called __name__. 
 #  Its value changes depending on how the file is run.
+
+# python 0a.calculator.py
+
 
 def add(a: float, b: float)-> float:
     return a + b

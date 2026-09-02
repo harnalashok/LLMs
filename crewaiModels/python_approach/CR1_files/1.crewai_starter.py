@@ -1,6 +1,16 @@
 # Ref: https://www.youtube.com/watch?v=tnejrr-0a94
+
+# Last amended: 2nd Sep. 2026
+
+# Keep cursor at the beginning of a function def and press
+#  shift+ENTER to execute the whole function-definition code.
+#   Also In the terminal below, start python, if not started.
+
+# python 1.crewai_starter.py
+
+
 from crewai import Agent, Task,Crew, Process,LLM
-#rom langchain_community.llms import Ollama
+#from langchain_community.llms import Ollama
 
 # Define your Ollama model
 ollama_llm = LLM(
@@ -50,3 +60,4 @@ my_crew = Crew(
 result = my_crew.kickoff(inputs={'topic': 'AI trends'})
 
 print(result)
+
