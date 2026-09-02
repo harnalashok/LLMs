@@ -997,6 +997,7 @@ if [ ! -f /home/$USER/n8mandflowise_installed.txt ]; then
 	if [ -z "$IP_ADDRESS" ]; then
 		IP_ADDRESS=$(ip route get 1 // | awk '{print $7}')
 	fi
+
 	# Print the detected IP for visibility
 	echo "Detected Local IP Address: $IP_ADDRESS"
 
@@ -2725,7 +2726,10 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	sleep 3
 	rm -rf /home/$USER/Documents/crewaiModels
 	rm -rf /home/$USER/Documents/crewaiExamples
+	
 	mkdir -p /home/$USER/Documents/crewaiExamples
+	mkdir -p /home/$USER/Documents/crewai_pjt
+	
 	cd /home/$USER/Documents/crewaiExamples
 	git init
 	git remote add origin https://github.com/harnalashok/LLMs.git
@@ -2739,6 +2743,7 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
 	rm -rf /home/$USER/Documents/crewaiExamples
 	cd /home/$USER
+	cp -r /home/$USER/Documents/crewaiModels/*  /home/$USER/crewai_pjt
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
 else
 	echo "  "

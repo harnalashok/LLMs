@@ -1745,13 +1745,14 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	cd ~/   
 	echo "  "
 	echo "   "
-	echo "---------   "
 	echo "Installing crewai Models"
-	echo "---------   "
 	sleep 3
 	rm -rf /home/$USER/Documents/crewaiModels
 	rm -rf /home/$USER/Documents/crewaiExamples
+	
 	mkdir -p /home/$USER/Documents/crewaiExamples
+	mkdir -p /home/$USER/Documents/crewai_pjt
+	
 	cd /home/$USER/Documents/crewaiExamples
 	git init
 	git remote add origin https://github.com/harnalashok/LLMs.git
@@ -1765,7 +1766,7 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
 	rm -rf /home/$USER/Documents/crewaiExamples
 	cd /home/$USER
-	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
+	cp -r /home/$USER/Documents/crewaiModels/*  /home/$USER/crewai_pjt
 	wsl.exe --shutdown
 else
 	echo "  "
