@@ -6,3 +6,8 @@ one-by-one:
 source /home/$USER/crewai_env/bin/activate
 cd /home/$USER/crewai_pjt
 code .  
+
+**OR**       
+cd ~/        
+. activate_crewai_env.sh        
+code .
