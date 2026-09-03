@@ -1,4 +1,5 @@
 """
+# LAst amended: 4th Sep, 2026
 research_task modified.
 But reply has hallucination
 llama3.2 Model NOT good
@@ -7,7 +8,7 @@ My folder: D:\Documents\OneDrive\Documents\crewai\python_based
 
 """
 
-
+import os
 from crewai import Agent, Crew, Process, Task, LLM
 # 1. Import the Serper/SerpAPI search tool
 from crewai_tools import SerperDevTool
@@ -15,6 +16,7 @@ from crewai_tools import SerperDevTool
 # 2. Initialize the search tool (Requires SERPER_API_KEY in your environment variables)
 #    export SERPER_API_KEY="your_api_key_here"
 #    export SERPER_API_KEY="c374574bf69fc2eeaa6a021831fe29e52ec3cd7a" 
+os.environ["OPENAI_API_KEY"] = "your-actual-api-key-here"
 search_tool = SerperDevTool()
 
 # 3. Define your local Ollama LLM configuration
