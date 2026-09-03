@@ -278,26 +278,33 @@ cd /home/$USER
 if [ ! -f /home/$USER/crewai_installed.txt ]; then
     # Will try to install Node.js again
 	# Source - https://stackoverflow.com/a/60214427
-# Posted by Leonardo Pimentel
-# Retrieved 2026-06-16, License - CC BY-SA 4.0
+    # Posted by Leonardo Pimentel
+    # Retrieved 2026-06-16, License - CC BY-SA 4.0
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    # Will try to install Node.js again
     nvm install --lts
 	nvm use --lts
     echo "  "
     echo "------------"                            
-    echo " Will install crewai"        
-	echo " Takes time...Be patient..."             
+    echo " Will install crewai"                     
     echo "----------"                              
     echo " "
+	cd /home/$USER
     sleep 2
+	
+	# Our project folder
 	mkdir /home/$USER/crewai_pjt
 	# Make it writable by any program
 	chmod -R 777 /home/$USER/crewai_pjt
+
+    # Delete existing env
+    rm -rf /home/$USER/crewai_env
 	python3 -m venv crewai_env
 	# b) Activate the env
 	source /home/$USER/crewai_env/bin/activate
+	
 	# c) Now install crewai and other packages using uv
 	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
 	uv pip install langchain-openai langchain-ollama langchain-community  
@@ -308,11 +315,12 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 	uv pip install 'crewai[tools]'  newsapi-python
     uv pip install 'crewai-tools[mcp]'
 	deactivate
+	
 	# Create script to activate 'crewai_env' env
 	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
 	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
