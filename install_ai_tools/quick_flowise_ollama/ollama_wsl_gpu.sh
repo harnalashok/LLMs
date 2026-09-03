@@ -254,6 +254,13 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	echo "sudo systemctl restart apache2"                      | tee -a /home/$USER/start_apache2.sh
 	echo "cd /home/$USER"                                      | tee -a /home/$USER/start_apache2.sh 
 	echo "netstat -aunt | grep 80"                             | tee -a /home/$USER/start_apache2.sh
+    
+	# Install python 3.13
+	echo $password | sudo -S add-apt-repository ppa:deadsnakes/ppa
+    echo $password | sudo -S apt update
+    # You need both the base package and the venv tool for 3.13
+    echo $password | sudo -S apt install python3.13 python3.13-venv
+
 	# Print IP of machine while opening terminal
 	echo "hostname -I | awk '{print \$1}'  " >> /home/$USER/.bashrc
 	sleep 3
@@ -301,7 +308,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
 
     # Delete existing env
     rm -rf /home/$USER/crewai_env
-	python3 -m venv crewai_env
+	python3.13 -m venv crewai_env
 	# b) Activate the env
 	source /home/$USER/crewai_env/bin/activate
 	
