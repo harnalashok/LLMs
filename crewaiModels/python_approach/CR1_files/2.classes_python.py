@@ -60,6 +60,7 @@ the actions or behaviors that the object can perform
 # objects as you want from it
 
 # Creating two separate dog objects (instantiation)
+
 dog1 = Dog("Buddy", "Golden Retriever")
 dog2 = Dog("Luna", "Husky")
 
@@ -79,6 +80,8 @@ Instead of writing manual validation code to check if an email
 is valid, if an age is a positive integer, or if a required 
 field is missing, Pydantic handles it all automatically using 
 standard Python type hints.
+
+uv pip install 'pydantic[email]'
 
 """
 
