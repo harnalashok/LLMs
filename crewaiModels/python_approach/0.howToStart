@@ -23,5 +23,9 @@ In the terminal below, start python, if not started.
 
        python  python crewai_starter.py
 
+# 4.0 Create crew from Command line:
+
+       crewai create crew research_crew --classic
+
 ######### DONE ##########
 
