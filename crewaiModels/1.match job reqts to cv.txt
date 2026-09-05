@@ -1,7 +1,9 @@
 # https://github.com/crewAIInc/crewAI-examples/tree/main/crews/match_profile_to_positions
 
 # 1.0
-crewai create crew job-profile-matching --classic
+rm -rf job-profile-matching          
+crewai create crew job-profile-matching      
+crewai create crew job-profile-matching --classic    
 
 # 2.0
 
