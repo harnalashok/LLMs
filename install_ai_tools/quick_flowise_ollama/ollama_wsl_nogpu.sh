@@ -297,7 +297,7 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
     nvm install --lts
 	nvm use --lts
     echo "  "
-    echo "------------"                            
+       echo "------------"                            
     echo " Will install crewai"                     
     echo "----------"                              
     echo " "
@@ -338,26 +338,23 @@ EOF
 uv tool install crewai
 
 	# Our project folder
+	rm -rf /home/$USER/crewai_pjt 
 	mkdir /home/$USER/crewai_pjt
 	# Make it writable by any program
 	chmod -R 777 /home/$USER/crewai_pjt
-
-    # # Delete existing env
-    # rm -rf /home/$USER/crewai_env
-	# python3.13 -m venv crewai_env
-	# # b) Activate the env
-	# source /home/$USER/crewai_env/bin/activate
-	
+    cd crewai_pjt
+    uv init
+    uv add crewai crewai-tools
 	# # c) Now install crewai and other packages using uv
-	# uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
-	# uv pip install langchain-openai langchain-ollama langchain-community  
-	# uv pip install langchain-experimental langchain-classic yfinance 
-	# uv pip install llama-index llama-index-llms-groq llama-index-core
-	# uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
-	# uv pip install llama-index llama-index-experimental pandas
-	# uv pip install 'crewai[tools]'  newsapi-python
-    # uv pip install 'crewai-tools[mcp]'
-	# deactivate
+	uv add crewai crewai-tools crewai-cli langchain langchain-cli
+	uv add langchain-openai langchain-ollama langchain-community  
+	uv add langchain-experimental langchain-classic yfinance 
+	uv add llama-index llama-index-llms-groq llama-index-core
+	uv add llama-index-readers-file llama-index-embeddings-huggingface  
+	uv add llama-index llama-index-experimental pandas
+	uv add 'crewai[tools]'  newsapi-python
+    uv add 'crewai-tools[mcp]'
+	cd /home/$USER
 	
 	# # Create script to activate 'crewai_env' env
 	# echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
