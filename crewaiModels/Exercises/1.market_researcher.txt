@@ -1,0 +1,74 @@
+# Ref: https://www.youtube.com/watch?v=tnejrr-0a94
+# Last amended: 5th Sep. 2026
+
+# Build market research agent that performs 
+# market research using LLM only.
+
+
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+cd ~/
+source /home/$USER/crewai_env/bin/activate
+    (OR . activate_crewai_env.sh )
+
+# 1.0.2
+
+cd /home/$USER/crewai_pjt
+rm -rf market_research         
+crewai create crew market_research
+# crewai create crew market_research --classic    
+
+
+
+
+#==========
+# BB. Agents
+#==========
+
+# 2.0.1 
+
+name:		researcher
+role:		Researcher
+goal:		Perform thorough research on AI
+backstory:	You are a diligent researcher with a passion for uncovering hidden insights and providing comprehensive analysis on AI.
+
+
+# 2.0.2
+
+name:		blogWriter
+role:		Blog Writer
+goal:		Write a comprehensive blog post on the research findings about AI
+backstory:	A skilled writer with a knack for translating complex research findings into engaging and accessible blog posts.",
+                   llm = ollama_llm,
+                   verbose = True,
+                   allow_delegation = False)
+
+#==========
+# CC. Tasks
+#==========
+
+# 3.0.1
+
+description:		Analyze the latest trends in AI.",
+expected_output:	A summary report.",
+agent:			researcher
+
+# 3.0.2
+
+description:		Blog Writer Task
+expected_output: 	A Blog
+agent:			blogWriter
+    
+#============
+# DD. Run
+#==========
+
+# 4.0.1
+
+crewai run
+
