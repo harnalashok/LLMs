@@ -13,7 +13,7 @@ source /home/$USER/crewai_env/bin/activate
 
 # 1.0.2
 
-cd crewai_pjt
+cd /home/$USER/crewai_pjt
 rm -rf job_profile_matching          
 crewai create crew job_profile_matching      
 # crewai create crew job_profile_matching --classic    
