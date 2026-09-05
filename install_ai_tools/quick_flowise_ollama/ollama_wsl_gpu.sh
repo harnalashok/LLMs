@@ -351,6 +351,7 @@ uv tool install crewai
 	uv add llama-index llama-index-experimental pandas
 	uv add 'crewai[tools]'  newsapi-python
     uv add 'crewai-tools[mcp]'
+	uv add ddgs
 	cd /home/$USER
 	
 	# # Create script to activate 'crewai_env' env
