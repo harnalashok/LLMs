@@ -77,5 +77,6 @@ crewai create crew job_profile_matching
    
     
     
-    
+  #4.0
+crewai run
 
