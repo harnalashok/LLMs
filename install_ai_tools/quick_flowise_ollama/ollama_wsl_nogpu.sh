@@ -1805,10 +1805,10 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	sleep 3
 	rm -rf /home/$USER/Documents/crewaiModels
 	rm -rf /home/$USER/Documents/crewaiExamples
-	rm -rf /home/$USER/crewai_pjt
+	#rm -rf /home/$USER/crewai_pjt
 	
 	mkdir -p /home/$USER/Documents/crewaiExamples
-	mkdir -p /home/$USER/crewai_pjt
+	#mkdir -p /home/$USER/crewai_pjt
 	
 	cd /home/$USER/Documents/crewaiExamples
 	git init
@@ -1823,7 +1823,7 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
 	rm -rf /home/$USER/Documents/crewaiExamples
 	cd /home/$USER
-	cp -r /home/$USER/Documents/crewaiModels/*  /home/$USER/crewai_pjt
+	\cp -r /home/$USER/Documents/crewaiModels/. /home/$USER/crewai_pjt
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
 else
 	echo "  "
