@@ -1,0 +1,81 @@
+# LAst amended: 5th Sep, 2026
+# Ref: https://github.com/crewAIInc/crewAI-examples/tree/main/crews/match_profile_to_positions
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+cd ~/
+source /home/$USER/crewai_env/bin/activate
+    (OR . activate_crewai_env.sh )
+
+# 1.0.2
+
+cd crewai_pjt
+rm -rf job_profile_matching          
+crewai create crew job_profile_matching      
+# crewai create crew job_profile_matching --classic    
+
+
+
+# ============
+# BB. AGENTS
+# ============
+
+# 2.0.1 Agent-I
+  name:		cv_reader
+  role: 	CV Reader
+  goal: 	Extract relevant information from the CV, such as skills, experience, and education.
+  backstory: 	With years of experience in HR, you excel at quickly identifying key qualifications in resumes.
+
+# 2.0.2 Agent-II
+  name: 	job_opportunities_parser
+  role:		Job Opportunities Parser
+  goal:		Extract job descriptions from the CSV file, including job title, required skills, and responsibilities.
+  backstory:    A data analyst who has transitioned into HR, you have a knack for organizing and interpreting job data.
+
+
+# 2.0.3 Agent-III
+  name: 	matcher
+  role:		Matcher
+  goal:		Match the CV to the job opportunities based on skills and experience.
+  backstory:    A seasoned recruiter, you specialize in finding the perfect fit between candidates and job roles.
+
+
+
+# ============
+# CC. TASKS
+# ============
+
+# 3.0.1 Task-I
+
+  name:			read_cv_task:
+  description:		Extract relevant information from the given CV. Focus on skills, experience, education, and key achievements. Ensure to capture the candidate's professional summary, technical skills, work history, and educational background. CV file: {path_to_cv}.
+  expected_output:	A structured summary of the CV, including:\n - Professional Summary\n - Technical Skills\n - Work History\n - Education\n - Key Achievements
+  agent:		CV Reader
+
+
+
+# 3.0.2 Task-II
+
+  name:			parse_job_opportunities_task:
+  description:		Extract job opportunities from the given CSV file. Focus on job title, required skills, responsibilities, and any qualifications listed for each position. Jobs CSV file: {path_to_jobs_csv}
+  expected_output:	A structured list of job opportunities, including for each job:\n - Job Title\n - Required Skills\n - Responsibilities\n - Qualifications
+  agent: 		job_opportunities_parser 
+
+
+
+# 3.0.3 Task-III
+
+  name:			match_cv_task:
+  description:		Match the CV to the job opportunities based on skills, experience, and key achievements. Evaluate how well the candidate's profile fits each job description,  focusing on the alignment of skills, work history, and key achievements  with the job requirements. Jobs CSV file: {path_to_jobs_csv} . CV file: {path_to_cv}.
+  expected_output:	A ranked list of job opportunities that best match the CV, including:\n - Job Title\n - Match Score (based on skills and experience)\n - Key Matching Points
+  agent:		matcher  
+
+   
+    
+    
+    
+
