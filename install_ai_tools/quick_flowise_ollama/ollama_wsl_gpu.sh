@@ -300,38 +300,71 @@ if [ ! -f /home/$USER/crewai_installed.txt ]; then
     echo " "
 	cd /home/$USER
     sleep 2
-	
+	# 1. Switch to your home directory
+    cd ~/
+    curl -LsSf https://astral.sh/uv/install.sh | sh 
+# 2. Compile to a local temp file (which uv deletes instantly anyway)
+uv pip compile --system -o ~/temp_reqs.txt -q <(cat <<EOF
+crewai
+crewai-tools
+crewai-cli
+langchain
+langchain-cli
+langchain-openai
+langchain-ollama
+langchain-community
+langchain-experimental
+langchain-classic
+yfinance
+llama-index
+llama-index-llms-groq
+llama-index-core
+llama-index-readers-file
+llama-index-embeddings-huggingface
+llama-index-experimental
+pandas
+newsapi-python
+crewai[tools]
+crewai-tools[mcp]
+EOF
+)
+
+# 3. Clean up the placeholder file
+#rm -f ~/temp_reqs.txt
+
+uv tool install crewai
+
 	# Our project folder
 	mkdir /home/$USER/crewai_pjt
 	# Make it writable by any program
 	chmod -R 777 /home/$USER/crewai_pjt
 
-    # Delete existing env
-    rm -rf /home/$USER/crewai_env
-	python3.13 -m venv crewai_env
-	# b) Activate the env
-	source /home/$USER/crewai_env/bin/activate
+    # # Delete existing env
+    # rm -rf /home/$USER/crewai_env
+	# python3.13 -m venv crewai_env
+	# # b) Activate the env
+	# source /home/$USER/crewai_env/bin/activate
 	
-	# c) Now install crewai and other packages using uv
-	uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
-	uv pip install langchain-openai langchain-ollama langchain-community  
-	uv pip install langchain-experimental langchain-classic yfinance 
-	uv pip install llama-index llama-index-llms-groq llama-index-core
-	uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
-	uv pip install llama-index llama-index-experimental pandas
-	uv pip install 'crewai[tools]'  newsapi-python
-    uv pip install 'crewai-tools[mcp]'
-	deactivate
+	# # c) Now install crewai and other packages using uv
+	# uv pip install crewai crewai-tools crewai-cli langchain langchain-cli
+	# uv pip install langchain-openai langchain-ollama langchain-community  
+	# uv pip install langchain-experimental langchain-classic yfinance 
+	# uv pip install llama-index llama-index-llms-groq llama-index-core
+	# uv pip install llama-index-readers-file llama-index-embeddings-huggingface  
+	# uv pip install llama-index llama-index-experimental pandas
+	# uv pip install 'crewai[tools]'  newsapi-python
+    # uv pip install 'crewai-tools[mcp]'
+	# deactivate
 	
-	# Create script to activate 'crewai_env' env
-	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
-	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
-	echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
+	# # Create script to activate 'crewai_env' env
+	# echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
+	# echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	# echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
+	# echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
+	# echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
+	# echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	# echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
+	# echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
 	LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
