@@ -1,0 +1,172 @@
+# Ref: https://www.youtube.com/watch?v=tnejrr-0a94
+# Last amended: 6th Sep. 2026
+
+# Build market research agent that performs 
+#   market research using Serper API
+
+
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+	-- If using VScode
+
+		source /home/$USER/crewai_pjt/.venv/bin/activate 
+        	cd /home/$USER/crewai_pjt
+        	code . 
+       
+              # OR
+                     . activate_crewai_pjt.sh
+                     code .  
+       
+               When VScode is open: 
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
+
+# 1.0.2 START HERE 
+
+	-- If on console
+	
+		cd /home/$USER/crewai_pjt
+		rm -rf market_research-serper         
+		crewai create crew market_research-serper
+		# crewai create crew market_research-serper --classic    
+
+
+
+
+#==========
+# BB. Agents
+#==========
+
+# 2.0.1 
+
+name:		researcher
+role:		Market Research Specialist
+goal:		Find comprehensive market data on emerging technologies
+backstory:	You are an expert at discovering market trends and gathering data.
+tools:		search_tool
+llm:		qwen2.5:1.5b
+
+
+# 2.0.2
+
+name:		analyst
+role:		Market Analyst
+goal:		Analyze market data and identify key opportunities
+backstory:	You excel at interpreting market data and spotting valuable insights
+
+
+#==========
+# CC. Tasks
+#==========
+
+# 3.0.1
+
+name:			research_task 
+description=		CRITICAL REQUIREMENT: You MUST execute your 'Google Serper Search' tool to look up current market data.\n Do NOT rely on your internal training knowledge or generate assumptions.\n Your final response must be based strictly on fresh external research fetched during this run.\n Specifically search for current 2026 data regarding the market landscape for AI-powered healthcare solutions, \n including key players, market size, and growth trends.
+expected_output:	Comprehensive market data including key players, market size, and growth trends, citing live web data.
+agent:			researcher
+
+
+# 3.0.2
+name:			analysis_task
+description:		Analyze the market data and identify the top 3 investment opportunities
+expected_output:	Analysis report with 3 recommended investment opportunities and rationale
+agent:			analyst
+context:		research_task 		(Is it required? Read below)
+
+
+
+# 3.0.3 
+
+    Start editing .jsonc files
+
+	    cd market_research
+	    code .
+
+# 3.0.4
+
+	Context Required?:
+	-----------------
+	    Do I need to specify 'context' for 'Blog Writer Task'
+	    When is a context needed to be specified for a task. 
+	    For example, there are two tasks, task1 and task2, 
+	    each with the respective agents: researcher and 'blogWriter'.
+	    Blog writer is to write the blog using task2 after researcher
+	    has done his work. We create two agents, attach tasks to each 
+	    but no context is specified to 'task2' task. The 'bogWriter' 
+	    does work and gives output.
+
+	Answer:
+	------
+	    In sequential execution, if you don't specify context on task2,
+	    CrewAI defaults to giving it the output of all previously 
+	    executed tasks anyway — so task2 (blogWriter) still receives
+	    task1's (researcher's) output automatically, since sequential
+	    tasks by default use prior tasks' outputs as context. That's 
+	    why it worked without explicit context.
+	    Explicit context is needed when you want to:
+		a.    Control which specific prior task(s) output are passed (not all previous ones)
+		b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
+		c.    Explicitly exclude a task's output from context (using context=[])
+
+
+
+
+#====== Command Execution Completed ==========
+
+#==========
+# DD. Modify senior_research_snalyst.jsonc
+#==========#
+#
+# After the command 'crewai create crew market_research-serper' is 
+# fully executed, we have .jsonc files--one for every Agent and Task.
+# We may have to amend the Agent configuration file for tools. 
+#
+
+
+#==========
+# DD. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+    
+
+#============
+# EE. Modify .env
+#==========
+
+# Any API keys such as serper_api_key need to be set.
+# Set them in the same shell where you are 
+# going to execute 'crewai run'
+
+export SERPER_API_KEY="xyz"
+
+# OR, modify .env file in VSCode, as:
+
+MODEL=ollama/mistral:latest
+API_BASE=http://localhost:11434
+SERPER_API_KEY=xyz
+
+    
+#============
+# FF. Run
+#==========
+
+# 4.0.1
+
+cd  crew market_research-serper
+crewai run
+
+
+
+
