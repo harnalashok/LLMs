@@ -1,97 +1,100 @@
 # Last amended: 6th Sep, 2026
 
 To work on crewai proceed as follows:
-Open Ubuntu OR WSL-Ubuntu. Take following steps:
+Open Ubuntu OR WSL-Ubuntu. Take following broad steps:
 
-Broad Steps:
-       --> In Console
-         i)   Create Agents/Tasks and complete these
-       --> In code .
-        ii)   Set any creai-tools in respective Agent's jsonc file
-       iii)   Set any custom-tools in respective Agent's jsonc file
-        iv)   Write python file for the custom-tool under 'tools' folder
-         v)   In 'crew.jsonc' file also add an embedder, as:
-               "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
-       --> In Console
-        vi)   cd langchain_tools
-              crewai run
-              
-              Memory Error:
-              You may still get following memory_recall error.
-              Error: model "ollama/mistral:latest" not found, try pulling it first
-              (even though mistral:latest exists). Solution is not clear. Ignore
-              the error.
+--- Broad Steps:
+              --> In Console
+                i)   Create Agents/Tasks and complete these
+              --> In code .
+               ii)   Set any creai-tools in respective Agent's jsonc file
+              iii)   Set any custom-tools in respective Agent's jsonc file
+               iv)   Write python file for the custom-tool under 'tools' folder
+                v)   In 'crew.jsonc' file also add an embedder, as:
+                      "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+              --> In Console
+               vi)   cd langchain_tools
+                     crewai run
+                     
+                     Memory Error:
+                     You may still get following memory_recall error.
+                     Error: model "ollama/mistral:latest" not found, try pulling it first
+                     (even though mistral:latest exists). Solution is not clear. Ignore
+                     the error.
               
 --- python files
-# 1.
-If working on python files:
-       source /home/$USER/crewai_pjt/.venv/bin/activate 
-       cd /home/$USER/crewai_pjt
-       code . 
-
-       # OR
-              . activate_crewai_pjt.sh
-              code .  
-
-        When VScode is open: 
-              i)   click ctrl+shift+p to select Python interpreter
-              ii)  Python: Select Interpreter
-              iii) Look for crewai-pjt python environment.
-
-# 2.0
-       After VSStudio is opened and python env for a file is selected
-       keep cursor at the beginning of a function def and press
-       'shift+ENTER' to execute the whole function-definition code.
-       In the terminal below, start python, if not started.
-
-# 3.0 Execute python files from console in ubuntu shell, as:
-
-       source /home/ashok/crewai_pjt/.venv/bin/activate 
-       python  1.crewai_starter.py
+       # 1.
+       If working on python files:
+              source /home/$USER/crewai_pjt/.venv/bin/activate 
+              cd /home/$USER/crewai_pjt
+              code . 
+       
+              # OR
+                     . activate_crewai_pjt.sh
+                     code .  
+       
+               When VScode is open: 
+                     i)   click ctrl+shift+p to select Python interpreter
+                     ii)  Python: Select Interpreter
+                     iii) Look for crewai-pjt python environment.
+       
+       # 2.0
+              After VSStudio is opened and python env for a file is selected
+              keep cursor at the beginning of a function def and press
+              'shift+ENTER' to execute the whole function-definition code.
+              In the terminal below, start python, if not started.
+       
+       # 3.0 Execute python files from console in ubuntu shell, as:
+       
+              source /home/ashok/crewai_pjt/.venv/bin/activate 
+              python  1.crewai_starter.py
 
 -- Directly from Console
 
-# 4.0 Crew Creation (Console): 
-       To create crew from Command line, there are two approaches:
+       # 4.0 Crew Creation (Console): 
+              To create crew from Command line, there are two approaches:
+       
+              # Approach:1
+              crewai create crew research_crew --classic
+       
+              This creates agents.yaml and tasks,yam files. Also creates 
+              crew.py and main.py files. And also a sample file for custom-tools
+              under 'tools' folder.
+              Modify these files and run, as:
+       
+              cd research_crew
+              crewai run
+       
+              # Approach:2
+              crewai create crew research_crew
+       
+              This approach guides you to crew creation 
+              step-by-step. Only, .jsonc files are created.
+       
+              No .py file (such as crew.py or main.py)
+              is created. One .jsonc file is created for
+              each Agent and for each Task. Agent .jsonc
+              file, for example contains the ollama model
+              specified and any crewai tool selected.
+       
+              And one file, crew.jsonc, is created that 
+              describes our crew.
+       
+              We have now to read these files and amend as
+              needed. For example, we may add custom-tools
+              etc. No sample custom-tool.py is created. After
+              everything is done, execute:
+       
+              cd research_crew
+              crewai run
 
-       # Approach:1
-       crewai create crew research_crew --classic
+-- Missing packages
 
-       This creates agents.yaml and tasks,yam files. Also creates 
-       crew.py and main.py files. And also a sample file for custom-tools
-       under 'tools' folder.
-       Modify these files and run, as:
+              If there are missing packages, install them
+              WITHIN 'crewai_pjt/research_crew' folder 
+              using 'uv add', as:
 
-       cd research_crew
-       crewai run
-
-       # Approach:2
-       crewai create crew research_crew
-
-       This approach guides you to crew creation 
-       step-by-step. Only, .jsonc files are created.
-
-       No .py file (such as crew.py or main.py)
-       is created. One .jsonc file is created for
-       each Agent and for each Task. Agent .jsonc
-       file, for example contains the ollama model
-       specified and any crewai tool selected.
-
-       And one file, crew.jsonc, is created that 
-       describes our crew.
-
-       We have now to read these files and amend as
-       needed. For example, we may add custom-tools
-       etc. No sample custom-tool.py is created. After
-       everything is done, execute:
-
-       cd research_crew
-       crewai run
-
-       If there are missing packages, install them
-       WITHIN 'crewai_pjt/research_crew' folder as:
-
-       uv add <package1>  <package2>
+                     uv add <package1>  <package2>
 
 ######### DONE ##########
 
