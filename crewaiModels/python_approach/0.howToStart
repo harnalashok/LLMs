@@ -1,8 +1,30 @@
-To work on python files proceed as follows:
-Open Ubuntu OR WSL-Ubuntu. Enter the following commands
-one-by-one:
+# Last amended: 6th Sep, 2026
 
-# 1.  
+To work on crewai proceed as follows:
+Open Ubuntu OR WSL-Ubuntu. Take following steps:
+
+Broad Steps:
+       --> In Console
+         i)   Create Agents/Tasks and complete these
+       --> In code .
+        ii)   Set any creai-tools in respective Agent's jsonc file
+       iii)   Set any custom-tools in respective Agent's jsonc file
+        iv)   Write python file for the custom-tool under 'tools' folder
+         v)   In 'crew.jsonc' file also add an embedder, as:
+               "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+       --> In Console
+        vi)   cd langchain_tools
+              crewai run
+              
+              Memory Error:
+              You may still get following memory_recall error.
+              Error: model "ollama/mistral:latest" not found, try pulling it first
+              (even though mistral:latest exists). Solution is not clear. Ignore
+              the error.
+              
+--- python files
+# 1.
+If working on python files:
        source /home/$USER/crewai_pjt/.venv/bin/activate 
        cd /home/$USER/crewai_pjt
        code . 
@@ -22,12 +44,15 @@ one-by-one:
        'shift+ENTER' to execute the whole function-definition code.
        In the terminal below, start python, if not started.
 
-# 3.0 In ubuntu shell, execute:
+# 3.0 Execute python files from console in ubuntu shell, as:
 
        source /home/ashok/crewai_pjt/.venv/bin/activate 
        python  1.crewai_starter.py
 
-# 4.0 To create crew from Command line, there are two approaches:
+-- Directly from Console
+
+# 4.0 Crew Creation (Console): 
+       To create crew from Command line, there are two approaches:
 
        # Approach:1
        crewai create crew research_crew --classic
@@ -48,8 +73,12 @@ one-by-one:
 
        No .py file (such as crew.py or main.py)
        is created. One .jsonc file is created for
-       each Agent and for each Task. And one file
-       crew.jsonc is created that describes our crew.
+       each Agent and for each Task. Agent .jsonc
+       file, for example contains the ollama model
+       specified and any crewai tool selected.
+
+       And one file, crew.jsonc, is created that 
+       describes our crew.
 
        We have now to read these files and amend as
        needed. For example, we may add custom-tools
