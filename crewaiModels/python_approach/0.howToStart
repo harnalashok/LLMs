@@ -44,21 +44,20 @@ In the terminal below, start python, if not started.
        # Approach:2
        crewai create crew research_crew
 
-       This approach guides you to crew creation.
-       Only, .jsonc fiels are created--No .py file
+       This approach guides you to crew creation 
+       step-by-step. Only, .jsonc files are created.
+
+       No .py file (such as crew.py or main.py)
        is created. One .jsonc file is created for
        each Agent and for each Task. And one file
        crew.jsonc is created that describes our crew.
+
        We have now to read these files and amend as
        needed. For example, we may add custom-tools
        etc. No sample custom-tool.py is created. After
        everything is done, execute:
 
        crewai run
-
-
-       every Agent
-
 
 ######### DONE ##########
 
