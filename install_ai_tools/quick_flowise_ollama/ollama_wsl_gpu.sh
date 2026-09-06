@@ -354,15 +354,16 @@ uv tool install crewai
 	uv add ddgs duckduckgo-search
 	cd /home/$USER
 	
-	# # Create script to activate 'crewai_env' env
-	# echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
-	# echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
-	# echo "echo 'source /home/$USER/crewai_env/bin/activate' "                  | tee -a  /home/$USER/activate_crewai_env.sh
-	# echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
-	# echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
-	# echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
-	# echo "source /home/$USER/crewai_env/bin/activate"                          | tee -a  /home/$USER/activate_crewai_env.sh
-	# echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
+	# Create script to activate 'crewai_pjt' env
+	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
+	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'source /home/$USER/crewai_pjt/.venv/bin/activate' "            | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "source /home/$USER/crewai_pjt/.venv/bin/activate"                    | tee -a  /home/$USER/activate_crewai_env.sh
+	echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
+
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
 	
 	LINE="  2. crewai Installed"
