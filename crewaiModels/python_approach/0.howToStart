@@ -1,28 +1,26 @@
-To work on python files procedd as follows:
-Open WSL Ubuntu. Enter the following commands
+To work on python files proceed as follows:
+Open Ubuntu OR WSL-Ubuntu. Enter the following commands
 one-by-one:
 
 # 1.  
        source /home/$USER/crewai_pjt/.venv/bin/activate 
        cd /home/$USER/crewai_pjt
-       code .  
+       code . 
 
- When VScode is open, 
-       click ctrl+shift+p 
-       Python: Select Interpreter
-       Search for crewai-pjt python environment.
+       # OR
+              . activate_crewai_pjt.sh
+              code .  
 
-# OR
-       . activate_crewai_pjt.sh
-       code .  
-
-
+        When VScode is open: 
+              i)   click ctrl+shift+p to select Python interpreter
+              ii)  Python: Select Interpreter
+              iii) Look for crewai-pjt python environment.
 
 # 2.0
-After VSStudio is opened and env for a file is selected
-keep cursor at the beginning of a function def and press
-shift+ENTER to execute the whole function-definition code.
-In the terminal below, start python, if not started.
+       After VSStudio is opened and python env for a file is selected
+       keep cursor at the beginning of a function def and press
+       'shift+ENTER' to execute the whole function-definition code.
+       In the terminal below, start python, if not started.
 
 # 3.0 In ubuntu shell, execute:
 
@@ -39,6 +37,7 @@ In the terminal below, start python, if not started.
        under 'tools' folder.
        Modify these files and run, as:
 
+       cd research_crew
        crewai run
 
        # Approach:2
@@ -57,7 +56,13 @@ In the terminal below, start python, if not started.
        etc. No sample custom-tool.py is created. After
        everything is done, execute:
 
+       cd research_crew
        crewai run
+
+       If there are missing packages, install them
+       WITHIN 'crewai_pjt/research_crew' folder as:
+
+       uv add <package1>  <package2>
 
 ######### DONE ##########
 
