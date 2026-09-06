@@ -72,6 +72,12 @@ expected_output: 	A Blog
 agent:			    blogWriter
 
 # 3.0.3 
+    Start editing .jsonc files
+
+        cd market_research
+        code .
+
+# 3.0.4
 
 Context Required?:
 -----------------
