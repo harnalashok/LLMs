@@ -1,0 +1,175 @@
+# Ref: https://github.com/langchain-ai/langchain-community/tree/7c10a5fa327f6aaaf7c932822a9e5d144891406e/libs/community/langchain_community/tools/polygon
+# Last amended:  6th Sep, 2026
+# Using PolygonFinancials tool from langchain
+#    This tool is useful for fetching fundamental financials from
+#    balance sheets, income statements, and cash flow statements
+#    for a stock ticker. The input should be the ticker that you 
+#    want to get the latest fundamental financial data for
+
+os.environ["POLYGON_API_KEY"] = "j0ZrkimZ53C1ZNx3cdtMXk0tE1pYL3Kx"
+os.environ["POLYGON_API_KEY"] = "FYnW3PHAEuJmys61rQnwDiQX8eO2eemz"
+
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+	-- If using VScode
+
+		source /home/$USER/crewai_pjt/.venv/bin/activate 
+        	cd /home/$USER/crewai_pjt
+        	code . 
+       
+              # OR
+                     . activate_crewai_pjt.sh
+                     code .  
+       
+               When VScode is open: 
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
+
+# 1.0.2 START HERE 
+
+	-- If on console
+	
+		cd /home/$USER/crewai_pjt
+		rm -rf financial_research_polygon
+		crewai create crew financial_research_polygon
+		# crewai create crew financial_research_polygon --classic    
+
+
+
+
+#==========
+# BB. Agents
+#==========
+
+# 2.0.1 
+
+role=Financial Analyst
+goal=Retrieve and analyze company financial statements
+backstory=Expert financial analyst skilled in extracting data from market APIs.
+tools=[PolygonFinancialsTool()],
+
+
+# 2.0.2
+
+role=Market Analyst
+goal=Analyze market data and identify key opportunities
+backstory=You excel at interpreting market data and spotting valuable insights
+
+
+
+#==========
+# CC. Tasks
+#==========
+
+# 3.0.1
+
+description=Research the current market landscape for {scriptName}
+expected_output=Comprehensive financial metrics
+agent=researcher
+
+
+# 3.0.2
+
+description=Analyze the financial data for {scriptName}
+expected_output=Bulleted Analysis report
+agent=analyst
+context=[research_task] 
+
+
+# 3.0.3 
+
+    Start editing .jsonc files
+
+	    cd financial_research_polygon
+	    code .
+
+# 3.0.4
+
+	Context Required?:
+	-----------------
+	    Do I need to specify 'context' for the second task.
+	    When is a context needed to be specified for a task? 
+	    For example, there are two tasks, task1 and task2, 
+	    each with the respective agents: 'Financial Analyst' and 'Market Analyst'.
+	    Market Analyst' is to write the analysis after researcher
+	    has done his work. We create two agents, attach tasks to each 
+	    but no context is specified to 'task2' task. The 'Market Analyst' 
+	    does work and gives output.
+
+	Answer:
+	------
+	    In sequential execution, if you don't specify context on task2,
+	    CrewAI defaults to giving it the output of all previously 
+	    executed tasks anyway.
+	    So task2 (Market Analyst') still receives
+	    task1's (researcher's) output automatically, since sequential
+	    tasks by default use prior tasks' outputs as context. That's 
+	    why it worked without explicit context.
+	    Explicit context is needed when you want to:
+		a.    Control which specific prior task(s) output are passed (not all previous ones)
+		b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
+		c.    Explicitly exclude a task's output from context (using context=[])
+
+
+
+
+#====== Command Execution Completed ==========
+
+#==========
+# DD. Modify financial_analyst.jsonc
+#==========#
+#
+# After the command 'crewai create crew financial_research_polygon' is 
+# fully executed, we have .jsonc files--one for every Agent and Task.
+# We may have to amend the Agent configuration file for tools. 
+#
+
+
+#==========
+# DD. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+    
+
+#============
+# EE. Modify .env
+#==========
+
+# Any API keys such as serper_api_key need to be set.
+# Set them in the same shell where you are 
+# going to execute 'crewai run'
+
+export POLYGON_API_KEY="xyz"
+
+# OR, modify .env file in VSCode, as:
+
+MODEL=ollama/mistral:latest
+API_BASE=http://localhost:11434
+POLYGON_API_KEY=xyz
+
+    
+#============
+# FF. Run
+#==========
+
+# 4.0.1
+
+cd  financial_research_polygon
+crewai run
+
+    
+
+
+
+
