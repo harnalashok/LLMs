@@ -12,18 +12,26 @@
 
 # 1.0.1
 
-cd ~/
-source /home/$USER/crewai_env/bin/activate
-    (OR . activate_crewai_env.sh )
+-- If using VSCode
+
+    cd ~/
+    source /home/$USER/crewai_env/bin/activate
+        (OR . activate_crewai_env.sh )
+
+    When VScode is open: 
+                     i)   click ctrl+shift+p to select Python interpreter
+                     ii)  Python: Select Interpreter
+                     iii) Look for crewai-pjt python environment.
+
 
 # 1.0.2
 
-cd /home/$USER/crewai_pjt
-rm -rf market_research         
-crewai create crew market_research
-# crewai create crew market_research --classic    
+-- If using console
 
-
+        cd /home/$USER/crewai_pjt
+        rm -rf market_research         
+        crewai create crew market_research
+        # crewai create crew market_research --classic    
 
 
 #==========
