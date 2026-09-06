@@ -1,0 +1,309 @@
+# Last amended:  6th Sep, 2026
+
+# Using
+#	a) yahoo finance tool BUT NOT from langchain, and
+#	b) Two run-time inputs
+#	c) No API needed for yfinance
+#	d) Two tools used: one Serper Tool and another yfinance
+
+
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+	-- If using VScode
+
+		source /home/$USER/crewai_pjt/.venv/bin/activate 
+        	cd /home/$USER/crewai_pjt
+        	code . 
+       
+              # OR
+                     . activate_crewai_pjt.sh
+                     code .  
+       
+               When VScode is open: 
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
+
+# 1.0.2 START HERE 
+
+	-- If on console
+	
+		cd /home/$USER/crewai_pjt
+		rm -rf financial_research_yahoo
+		crewai create crew financial_research_yahoo
+		# crewai create crew financial_research_yahoo --classic    
+
+
+
+
+#==========
+# BB. Agents
+#==========
+
+# 2.0.1 
+
+role=Senior Research Analyst
+goal=Gather hard financial metrics and the latest news for a specific {company}
+backstory=You are an expert financial researcher. You use specialized tools to extract live market metrics and search the web for recent news regarding a target {company}.
+tools=[yfinance_tool, search_tool]
+
+
+# 2.0.2
+
+role=Financial Analyst
+goal=Analyze the research and raw financial numbers to write a comprehensive report
+backstory=You are a seasoned financial analyst. You excel at taking raw metrics (like P/E ratios and prices) and matching them with market news to build clear investment insights.
+tools=[search_tool],
+
+
+
+#==========
+# CC. Tasks
+#==========
+
+# 3.0.1
+
+description=Extract live financial metrics using the Yahoo Finance tool for {company_ticker}. Then, search for recent news events or earnings context.
+expected_output=A structured summary containing the live stock numbers and a bulleted list of recent news.
+agent=research_analyst
+
+
+# 3.0.2
+
+description=Using the live metrics and news gathered by the researcher, analyze the financial health and valuation of {company_ticker}.
+expected_output=A professional financial analysis report with a summary of valuation metrics, pros/cons, and future outlook.
+agent=financial_analyst
+output_file=financial_report.md
+
+
+
+# 3.0.3 
+
+    Start editing .jsonc files
+
+	    cd financial_research_yahoo
+	    code .
+
+# 3.0.4
+
+	Context Required?:
+	-----------------
+	    Do I need to specify 'context' for the second task.
+	    When is a context needed to be specified for a task? 
+
+	Answer:
+	------
+	    In sequential execution, if you don't specify context on task2,
+	    CrewAI defaults to giving it the output of all previously 
+	    executed tasks anyway.
+	    So task2 still receives task1's output automatically, since sequential
+	    tasks by default use prior tasks' outputs as context. 
+	    Explicit context is needed when you want to:
+		a.    Control which specific prior task(s) output are passed (not all previous ones)
+		b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
+		c.    Explicitly exclude a task's output from context (using context=[])
+
+
+#==========
+# DD. Modify financial_analyst.jsonc
+#==========#
+#
+# After the command 'crewai create crew financial_research_finance' is 
+# fully executed, we have .jsonc files--one for every Agent and Task.
+# We may have to amend the Agent configuration file for tools. 
+# In file 'financial_analyst.jsonc', write:
+
+"tools": ["custom:yfinance_tool"],
+
+
+#==========
+# EE. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+   
+
+#============
+# EE. Modify .env
+#==========
+
+# Any API keys such as serper_api_key need to be set.
+# Set them in the same shell where you are 
+# going to execute 'crewai run'
+
+
+# OR, modify .env file in VSCode, as:
+
+MODEL=ollama/mistral:latest
+API_BASE=http://localhost:11434
+POLYGON_API_KEY=xyz
+
+ 
+#========
+# FF. Tools folder
+#=========
+
+# As we need custom search tool 'PolygonFinancialsTool()'
+# that invokes Polygon financials, we will need a custom
+# python file in the 'financial_research_polygon/tools' folder 
+# when we execute 'crewai run'.
+# So, create file 'PolygonFinancialsTool.py' under just created 
+# 'tools' folder, as, below:
+
+#-------
+
+from crewai.tools import BaseTool
+from pydantic import Field
+from langchain_community.tools.polygon.financials import PolygonFinancials
+from langchain_community.utilities.polygon import PolygonAPIWrapper
+
+
+# 3. Initialize the wrapper and the specific tool
+
+class PolygonFinancialsTool(BaseTool):
+    name: str = "Polygon Financials"
+    description: str = "Fetch financial data from Polygon."
+    polygon: PolygonFinancials = Field(default_factory=lambda: PolygonFinancials(api_wrapper=PolygonAPIWrapper()))
+            
+    def _run(self, query: str) -> str:
+        return self.polygon.run(query)
+
+#------------ 
+ 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 1. Define the Custom Yahoo Finance Tool
+@tool(Yahoo Finance Stock Scraper)
+def yfinance_tool(ticker: str) -> str:
+    
+    Fetches real-time financial metrics for a specific stock ticker.
+    Input should be a stock ticker symbol (e.g., 'AAPL', 'NVDA').
+    
+    try:
+        stock = yf.Ticker(ticker)
+        info = stock.info
+        
+        # Extract key metrics safely
+        current_price = info.get('currentPrice', 'N/A')
+        fifty_two_week_high = info.get('fiftyTwoWeekHigh', 'N/A')
+        fifty_two_week_low = info.get('fiftyTwoWeekLow', 'N/A')
+        pe_ratio = info.get('trailingPE', 'N/A')
+        market_cap = info.get('marketCap', 'N/A')
+        forward_pe = info.get('forwardPE', 'N/A')
+        
+        # Format the output data for the agent
+        data_summary = (
+            fFinancial Data for {ticker.upper()}:\n
+            f- Current Price: ${current_price}\n
+            f- 52-Week High: ${fifty_two_week_high}\n
+            f- 52-Week Low: ${fifty_two_week_low}\n
+            f- Trailing P/E Ratio: {pe_ratio}\n
+            f- Forward P/E Ratio: {forward_pe}\n
+            #f- Market Capitalization: ${market_cap:, if isinstance(market_cap, (int, float)) else market_cap}\n
+        )
+        return data_summary
+    except Exception as e:
+        return fError fetching data for {ticker}: {str(e)}
+
+
+
+# 2. Initialize Web Search Tool
+#    # 2. Initialize the search tool (Requires SERPER_API_KEY in your environment variables)
+#    export SERPER_API_KEY=your_api_key_here
+#    export SERPER_API_KEY=c374574bf69fc2eeaa6a021831fe29e52ec3cd7a 
+search_tool = SerperDevTool()
+
+# 4. Define the Tasks
+research_task = Task(
+    description=Extract live financial metrics using the Yahoo Finance tool for {company_ticker}. Then, search for recent news events or earnings context.,
+    expected_output=A structured summary containing the live stock numbers and a bulleted list of recent news.,
+    agent=research_analyst,
+)
+
+if __name__ == __main__:
+    inputs = {'company_ticker': 'NVDA'}
+    
+    print(## Starting Financial Analysis with Live Data...)
+    result = financial_crew.kickoff(inputs=inputs)
+    print(\n\n######################)
+    print(## Analysis Complete)
+    print(######################\n)
+    print(result)
+
+
+AA. How to test your tool:
+    1. Create a blank python file.
+    2. Import the yfinance library
+    3. Copy the yfinance_tool(sticker) function.  
+    4. Execute yfinance(NVDA). It should work.
+BB. How to add tools:
+    1. Define tool function, at the top of crew.py file
+    2. In crew.py, under respective agent write:
+        tools=[yfinance_tool, search_tool],
+       as for example,
+
+       @agent
+        def researcher(self) -> Agent:
+            return Agent(
+                config=self.agents_config['researcher'], # type: ignore[index]
+                verbose=True,
+                tools=[yfinance_tool, search_tool],   # both tools
+            )
+    3. No need to write tools in YAML files   
+    4. If required, specify inputs right in the kickoff() (in main.py file), as:
+
+            FinanceAnalyst().crew().kickoff(inputs={company_ticker : NVDA})      
+    5. Done...
+ CC. .env file:
+    A .env file is used to store environment variables for your application. 
+    These files are typically read by libraries like dotenv in Node.js, Python
+    (python-dotenv), or other frameworks. When writing values such as API keys,
+    understanding whether to use quotes is important for correct parsing.
+        Syntax Rules
+            No quotes needed:
+            The simplest approach is to write the value directly without quotes:
+            SERPER_API_KEY=123456abcdef   
+
+
