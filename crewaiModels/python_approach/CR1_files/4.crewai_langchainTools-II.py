@@ -1,5 +1,5 @@
 """
-# Last amended:  25th May, 2026
+# Last amended:  6th Sep, 2026
 # My folder:
 # Using PolygonFinancials tool from langchain
 # About Polygon tools:
@@ -24,7 +24,7 @@ from langchain_community.utilities.polygon import PolygonAPIWrapper
 
 # 2. Define your local Ollama LLM configuration
 local_llm = LLM(
-                model="ollama/phi4-mini:3.8b",        # Prefix with 'ollama/' followed by your model name
+                model= "ollama/mistral:latest", #    Smaller models may get you memory errors    "ollama/phi4-mini:3.8b",        # Prefix with 'ollama/' followed by your model name
                 base_url="http://localhost:11434" # Default Ollama local server URL
                 )
 
@@ -35,6 +35,7 @@ local_llm = LLM(
 #     the key into your script:
 
 os.environ["POLYGON_API_KEY"] = "j0ZrkimZ53C1ZNx3cdtMXk0tE1pYL3Kx"
+os.environ["POLYGON_API_KEY"] = "FYnW3PHAEuJmys61rQnwDiQX8eO2eemz"
 
 # 3. Initialize the wrapper and the specific tool
 #    See Questions below for understanding this class
@@ -84,6 +85,37 @@ analysis_task = Task(
                                              #  a task may access context from other or previous 
                                              #     tasks also.
                     )
+
+
+
+"""
+# You can make task definitions more flexible. Write tasks, as:
+
+# 6.1 Task1
+research_task = Task(
+                    description="Research the current market landscape for {scripName}",
+                    expected_output="Comprehensive financial metrics",
+                    agent=researcher
+                    )
+
+# 6.2 Task2
+analysis_task = Task(
+                    description="Analyze the financial data for {scripName}",
+                    expected_output="Bulleted Analysis report",
+                    agent=analyst,
+                    context=[research_task]  
+                    )
+
+
+# And write the kickoff, as:
+
+market_analysis_crew.kickoff(inputs={"scripName": "NVDA"})
+market_analysis_crew.kickoff(inputs={"scripName": "AAPL"})
+
+"""
+
+
+
 
 # 7.0 Create the crew
 market_analysis_crew = Crew(
