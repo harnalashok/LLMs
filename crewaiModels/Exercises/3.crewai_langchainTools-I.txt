@@ -158,7 +158,7 @@ SERPER_API_KEY=xyz
 
 # Execute:  
 		cd lanchain_tools 
-  	 	crew run 
+  	 	crewai run 
 
 # Missing packages ('crewai run'):
 # 	When we execute 'crewai run', It is possible 
