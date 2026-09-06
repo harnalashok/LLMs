@@ -1,6 +1,8 @@
 # Ref: https://github.com/langchain-ai/langchain-community/tree/7c10a5fa327f6aaaf7c932822a9e5d144891406e/libs/community/langchain_community/tools/polygon
 # Last amended:  6th Sep, 2026
-# Using PolygonFinancials tool from langchain
+# Using a) PolygonFinancials tool from langchain, and
+        b) run-time Input
+
 #    This tool is useful for fetching fundamental financials from
 #    balance sheets, income statements, and cash flow statements
 #    for a stock ticker. The input should be the ticker that you 
