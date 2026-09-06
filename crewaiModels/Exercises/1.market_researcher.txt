@@ -44,9 +44,7 @@ name:		blogWriter
 role:		Blog Writer
 goal:		Write a comprehensive blog post on the research findings about AI
 backstory:	A skilled writer with a knack for translating complex research findings into engaging and accessible blog posts.",
-                   llm = ollama_llm,
-                   verbose = True,
-                   allow_delegation = False)
+
 
 #==========
 # CC. Tasks
@@ -98,4 +96,6 @@ Answer:
 # 4.0.1
 
 crewai run
+
+####################3
 
