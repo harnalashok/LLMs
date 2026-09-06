@@ -135,8 +135,25 @@ class SearchTool(BaseTool):
 
 #------------
 
+#============
+# FF. Modify .env
+#==========
+
+# Any API keys such as serper_api_key need to be set.
+# Set them in the same shell where you are 
+# going to execute 'crewai run'
+
+export SERPER_API_KEY="xyz"
+
+# OR, modify .env file in VSCode, as:
+
+MODEL=ollama/mistral:latest
+API_BASE=http://localhost:11434
+SERPER_API_KEY=xyz
+
+
 #========
-# FF. crew run
+# GG. crew run
 #========
 
 # Execute:  
