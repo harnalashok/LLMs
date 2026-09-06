@@ -95,7 +95,12 @@ Answer:
 
 # 4.0.1
 
-crewai run
+    cd market_research
+    crewai run
+
+
 
 ####################3
+
+
 
