@@ -61,18 +61,63 @@ agent:              researcher
 
 
 
+#====== Command Execution Comleted ==========
+
 #==========
+# DD. Modify senior_research_snalyst.jsonc
+#==========#
 #
+# After the command 'crewai create crew langchain_tools' is 
+# fully executed, we have .jsonc files--one for every Agent and Task.
+# We have to amend the Agent configuration file: 
+# 'senior_research_analyst.jsonc' to add Duck Duck Go search tool.
+# Open this file in VSCode. Add a tool in this file, as:
+#	"tools": ["custom:SearchTool"],
+# this is around line 29. Save the file.
 #
-
-
+# Proceed, next to write python file for the tool, as below 
 
 
 #========
-# DD. Tools folder
+# EE. Tools folder
 #=========
 
-# Create
+# As we need custom search tool 'SearchTool()'
+# that invokes duckduckgo-search, we will need a custom
+# python file in the 'langchain_tools/tools' folder 
+# when we execute 'crewai run'.
+# So, create file 'SearchTool.py' under just created 
+# 'tools' folder, as, below:
+
+#-------
+from crewai.tools import BaseTool
+from pydantic import Field
+from langchain_community.tools import DuckDuckGoSearchRun
+
+
+class SearchTool(BaseTool):
+    name: str = "DuckDuckGo Search"
+    description: str = "Search the web with DuckDuckGo."
+    search: DuckDuckGoSearchRun = Field(default_factory=DuckDuckGoSearchRun)
+
+    def _run(self, query: str) -> str:
+        """Execute the search query and return results"""
+        try:
+            return self.search.run(query)
+        except Exception as e:
+            return f"Error performing search: {str(e)}"
+
+#------------
+
+#========
+# FF. crew run
+#========
+# Missing packages ('crewai run'):
+# 	When we execute 'crewai run', It is possible 
+# 	that certain packages are found missing.
+#       Those packages need to be installed in
+#       'langchain_tools' folder, as: 
+#		uv add <package1> <package2> ...
 
 
 #########################
