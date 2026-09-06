@@ -78,6 +78,14 @@ agent:              researcher
 # Proceed, next to write python file for the tool, as below 
 
 
+#==========
+# DD. Modify crew.jsonc
+#==========#
+
+# Add the following line (around line 87) to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
 #========
 # EE. Tools folder
 #=========
@@ -112,11 +120,16 @@ class SearchTool(BaseTool):
 #========
 # FF. crew run
 #========
+
+# Execute:  
+		cd lanchain_tools 
+  	 	crew run 
+
 # Missing packages ('crewai run'):
 # 	When we execute 'crewai run', It is possible 
 # 	that certain packages are found missing.
 #       Those packages need to be installed in
-#       'langchain_tools' folder, as: 
+#       'langchain_tools' folder only, as: 
 #		uv add <package1> <package2> ...
 
 
