@@ -164,7 +164,7 @@ SERPER_API_KEY=xyz
 
 # 4.0.1
 
-cd  crew market_research-serper
+cd  market_research-serper
 crewai run
 
 
