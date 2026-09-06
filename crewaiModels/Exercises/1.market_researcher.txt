@@ -119,7 +119,7 @@ Answer:
 # DD. Modify crew.jsonc
 #==========#
 
-# Add the following line (around line 87) to avoid memory recall error:
+# Add the following line (look for embedder) to avoid memory recall error:
 
 "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
 
