@@ -103,7 +103,28 @@ Answer:
         b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
         c.    Explicitly exclude a task's output from context (using context=[])
 
-    
+
+#====== Command Execution Completed ==========
+
+#==========
+# DD. Modify researcher.jsonc
+#==========#
+#
+# After the command 'crewai create crew market_research' is 
+# fully executed, we have .jsonc files--one for every Agent and Task.
+# We may have to amend the Agent configuration file: 
+
+
+#==========
+# DD. Modify crew.jsonc
+#==========#
+
+# Add the following line (around line 87) to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+
+
 #============
 # DD. Run
 #==========
