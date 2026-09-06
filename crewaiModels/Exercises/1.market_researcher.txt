@@ -19,9 +19,10 @@
         (OR . activate_crewai_env.sh )
 
     When VScode is open: 
-                     i)   click ctrl+shift+p to select Python interpreter
-                     ii)  Python: Select Interpreter
-                     iii) Look for crewai-pjt python environment.
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to select Python interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
 
 
 # 1.0.2
