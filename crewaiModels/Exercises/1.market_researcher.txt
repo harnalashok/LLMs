@@ -54,7 +54,7 @@ backstory:	A skilled writer with a knack for translating complex research findin
 
 description:		Analyze the latest trends in AI.",
 expected_output:	A summary report.",
-agent:			researcher
+agent:			    researcher
 
 # 3.0.2
 
