@@ -73,7 +73,7 @@ agent:              researcher
 # 3.0.2 
     Start editing .jsonc files
 
-        cd angchain_tools
+        cd langchain_tools
         code .
 
 
@@ -100,7 +100,7 @@ agent:              researcher
 # DD. Modify crew.jsonc
 #==========#
 
-# Add the following line (around line 87) to avoid memory recall error:
+# Add the following line (look for embedder) to avoid memory recall error:
 
 "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
 
