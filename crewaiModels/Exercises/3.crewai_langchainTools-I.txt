@@ -1,0 +1,79 @@
+"""
+# Last amended: 6th Sep, 2026
+# Using langchain toos: DuckDuckGoSearchRun    
+
+"""
+
+
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+cd ~/
+source /home/$USER/crewai_env/bin/activate
+    (OR . activate_crewai_env.sh )
+
+# 1.0.2
+
+cd /home/$USER/crewai_pjt
+rm -rf langchain_tools       
+crewai create crew langchain_tools
+
+
+# 1.0.3
+# Missing packages ('crewai run'):
+# 	As we need custom search tool SearchTool()
+# 	using duckduckgo-search, we will need a custom
+# 	python file in the 'langchain_tools/tools' folder 
+# 	when we execute 'crewai run'. It is also possible 
+# 	when executing 'crewai run', certain packages are 
+# 	found missing. Those packages need to be installed 
+#       in 'langchain_tools' folder, as: 
+#		uv add <package1> <package2> ...
+
+
+
+
+#========
+# BB. Agent
+#========
+
+# 2.0.1
+
+name:       researcher
+role:       Senior Research Analyst
+goal:       Uncover groundbreaking technologies and companies
+backstory:  You are a master at digging up facts and details from the web and encyclopedias
+tools:      SearchTool()
+
+#=======
+# CC. Task
+#========
+
+# 3.0.1
+
+description:        Research Quantum Computing using Wikipedia and gather the latest news using DuckDuckGo.
+expected_output:    A 3-paragraph summary of the latest trends in Quantum Computing
+agent:              researcher
+
+
+
+#==========
+#
+#
+
+
+
+
+#========
+# DD. Tools folder
+#=========
+
+# Create
+
+
+#########################
+
