@@ -65,8 +65,9 @@ expected_output: 	A Blog
 agent:			    blogWriter
 
 # 3.0.3 
-Question:
 
+Context Required?:
+-----------------
     Do I need to specify 'context' for 'Blog Writer Task'
     When is a context needed to be specified for a task. 
     For example, there are two tasks, task1 and task2, 
@@ -77,13 +78,17 @@ Question:
     does work and gives output.
 
 Answer:
-    In sequential execution, if you don't specify context on task2, CrewAI defaults to giving it the output of all previously executed tasks anyway — so task2 (blogWriter) still receives task1's (researcher's) output automatically, since sequential tasks by default use prior tasks' outputs as context. That's why it worked without explicit context.
-
-Explicit context is needed when you want to:
-
-    Control which specific prior task(s) output are passed (not all previous ones)
-    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
-    Explicitly exclude a task's output from context (using context=[])
+------
+    In sequential execution, if you don't specify context on task2,
+    CrewAI defaults to giving it the output of all previously 
+    executed tasks anyway — so task2 (blogWriter) still receives
+    task1's (researcher's) output automatically, since sequential
+    tasks by default use prior tasks' outputs as context. That's 
+    why it worked without explicit context.
+    Explicit context is needed when you want to:
+        a.    Control which specific prior task(s) output are passed (not all previous ones)
+        b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
+        c.    Explicitly exclude a task's output from context (using context=[])
 
     
 #============
