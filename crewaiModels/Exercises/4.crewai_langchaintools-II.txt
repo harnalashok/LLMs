@@ -129,18 +129,20 @@ context=[research_task]
 # After the command 'crewai create crew financial_research_polygon' is 
 # fully executed, we have .jsonc files--one for every Agent and Task.
 # We may have to amend the Agent configuration file for tools. 
-#
+# In file financial_analyst.jsonc, write:
+
+"tools": ["custom:PolygonFinancialsTool"],
 
 
 #==========
-# DD. Modify crew.jsonc
+# EE. Modify crew.jsonc
 #==========#
 
 # Add the following line (look for 'embedder') to avoid memory recall error:
 
 "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
 
-    
+   
 
 #============
 # EE. Modify .env
@@ -158,9 +160,41 @@ MODEL=ollama/mistral:latest
 API_BASE=http://localhost:11434
 POLYGON_API_KEY=xyz
 
+ 
+#========
+# FF. Tools folder
+#=========
+
+# As we need custom search tool 'PolygonFinancialsTool()'
+# that invokes Polygon financials, we will need a custom
+# python file in the 'financial_research_polygon/tools' folder 
+# when we execute 'crewai run'.
+# So, create file 'PolygonFinancialsTool.py' under just created 
+# 'tools' folder, as, below:
+
+#-------
+
+from crewai.tools import BaseTool
+from pydantic import Field
+from langchain_community.tools.polygon.financials import PolygonFinancials
+from langchain_community.utilities.polygon import PolygonAPIWrapper
+
+
+# 3. Initialize the wrapper and the specific tool
+
+class PolygonFinancialsTool(BaseTool):
+    name: str = "Polygon Financials"
+    description: str = "Fetch financial data from Polygon."
+    polygon: PolygonFinancials = Field(default_factory=lambda: PolygonFinancials(api_wrapper=PolygonAPIWrapper()))
+            
+    def _run(self, query: str) -> str:
+        return self.polygon.run(query)
+
+#------------ 
+ 
     
 #============
-# FF. Run
+# GG. Run
 #==========
 
 # 4.0.1
@@ -169,7 +203,7 @@ cd  financial_research_polygon
 crewai run
 
     
-
+################################
 
 
 
