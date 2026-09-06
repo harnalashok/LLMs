@@ -20,7 +20,7 @@
 
     When VScode is open: 
                      i)   Open your .py file
-                     ii)  click ctrl+shift+p to select Python interpreter
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
                      iii)  Python: Select Interpreter
                      iv)   Look for crewai-pjt python environment.
 
