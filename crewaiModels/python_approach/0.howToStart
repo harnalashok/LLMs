@@ -3,15 +3,20 @@ Open WSL Ubuntu. Enter the following commands
 one-by-one:
 
 # 1.  
-source /home/$USER/crewai_env/bin/activate
-cd /home/$USER/crewai_pjt
-code .  
+       source /home/$USER/crewai_pjt/.venv/bin/activate 
+       cd /home/$USER/crewai_pjt
+       code .  
 
-# 1.1
-**OR**       
-cd ~/        
-. activate_crewai_env.sh        
-code .
+ When VScode is open, 
+       click ctrl+shift+p 
+       Python: Select Interpreter
+       Search for crewai-pjt python environment.
+
+# OR
+       . activate_crewai_pjt.sh
+       code .  
+
+
 
 # 2.0
 After VSStudio is opened and env for a file is selected
@@ -19,13 +24,41 @@ keep cursor at the beginning of a function def and press
 shift+ENTER to execute the whole function-definition code.
 In the terminal below, start python, if not started.
 
-# 3.0 From within crewai environment, execute:
+# 3.0 In ubuntu shell, execute:
 
-       python  python crewai_starter.py
+       source /home/ashok/crewai_pjt/.venv/bin/activate 
+       python  1.crewai_starter.py
 
-# 4.0 Create crew from Command line:
+# 4.0 To create crew from Command line, there are two approaches:
 
+       # Approach:1
        crewai create crew research_crew --classic
+
+       This creates agents.yaml and tasks,yam files. Also creates 
+       crew.py and main.py files. And also a sample file for custom-tools
+       under 'tools' folder.
+       Modify these files and run, as:
+
+       crewai run
+
+       # Approach:2
+       crewai create crew research_crew
+
+       This approach guides you to crew creation.
+       Only, .jsonc fiels are created--No .py file
+       is created. One .jsonc file is created for
+       each Agent and for each Task. And one file
+       crew.jsonc is created that describes our crew.
+       We have now to read these files and amend as
+       needed. For example, we may add custom-tools
+       etc. No sample custom-tool.py is created. After
+       everything is done, execute:
+
+       crewai run
+
+
+       every Agent
+
 
 ######### DONE ##########
 
