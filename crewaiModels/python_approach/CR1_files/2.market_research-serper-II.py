@@ -1,5 +1,5 @@
 """
-# LAst amended: 4th Sep, 2026
+# LAst amended: 6th Sep, 2026
 research_task modified.
 But reply has hallucination
 llama3.2 Model NOT good
@@ -18,6 +18,33 @@ from crewai_tools import SerperDevTool
 #    export SERPER_API_KEY="c374574bf69fc2eeaa6a021831fe29e52ec3cd7a" 
 os.environ["OPENAI_API_KEY"] = "your-actual-api-key-here"
 search_tool = SerperDevTool()
+
+"""
+Ref: https://docs.crewai.com/v1.15.18/en/tools/search-research/serperdevtool
+The SerperDevTool comes with several parameters that will be passed to the API :
+
+    1. search_url: The URL endpoint for the search API. (Default is https://google.serper.dev/search)
+    2. country: Optional. Specify the country for the search results.
+    3. location: Optional. Specify the location for the search results.
+    4. locale: Optional. Specify the locale for the search results.
+    5. n_results: Number of search results to return. Default is 10
+
+Examples:
+
+    tool = SerperDevTool(
+        search_url="https://google.serper.dev/scholar",
+        n_results=2,
+        )
+
+    tool = SerperDevTool(
+        country="fr",
+        locale="fr",
+        location="Paris, Paris, Ile-de-France, France",
+        n_results=2,
+        )
+
+
+"""
 
 # 3. Define your local Ollama LLM configuration
 # Change 'llama3' to any model you have downloaded locally (e.g., 'mistral', 'phi3', etc.)
