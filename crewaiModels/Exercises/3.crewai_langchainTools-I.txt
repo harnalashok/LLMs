@@ -12,15 +12,25 @@
 
 # 1.0.1
 
-cd ~/
-source /home/$USER/crewai_env/bin/activate
-    (OR . activate_crewai_env.sh )
+-- If using VSCode
 
-# 1.0.2
+    cd ~/
+    source /home/$USER/crewai_env/bin/activate
+        (OR . activate_crewai_env.sh )
 
-cd /home/$USER/crewai_pjt
-rm -rf langchain_tools       
-crewai create crew langchain_tools
+    When VScode is open: 
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
+
+# 1.0.2  START HERE
+
+-- If using console
+
+	cd /home/$USER/crewai_pjt
+	rm -rf langchain_tools       
+	crewai create crew langchain_tools
 
 
 # 1.0.3
@@ -60,8 +70,16 @@ expected_output:    A 3-paragraph summary of the latest trends in Quantum Comput
 agent:              researcher
 
 
+# 3.0.2 
+    Start editing .jsonc files
 
-#====== Command Execution Comleted ==========
+        cd angchain_tools
+        code .
+
+
+
+
+#====== Command Execution Completed ==========
 
 #==========
 # DD. Modify senior_research_snalyst.jsonc
