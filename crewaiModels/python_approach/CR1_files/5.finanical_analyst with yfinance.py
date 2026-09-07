@@ -1,3 +1,5 @@
+# LAst amended: 7th Sep. 2026
+
 # My folder: D:\Documents\OneDrive\Documents\crewai\python_based
 
 import os
@@ -17,7 +19,7 @@ load_dotenv()
 # 2. Define your local Ollama LLM configuration
 # Change 'llama3' to any model you have downloaded locally (e.g., 'mistral', 'phi3', etc.)
 local_llm = LLM(
-    model="ollama/qwen2.5:1.5b",        # Prefix with 'ollama/' followed by your model name
+    model="ollama/mistral:latest", # "qwen2.5:1.5b",        # Prefix with 'ollama/' followed by your model name
     base_url="http://localhost:11434" # Default Ollama local server URL
 )
 
@@ -61,6 +63,7 @@ def yfinance_tool(ticker: str) -> str:
 #    # 2. Initialize the search tool (Requires SERPER_API_KEY in your environment variables)
 #    export SERPER_API_KEY="your_api_key_here"
 #    export SERPER_API_KEY="c374574bf69fc2eeaa6a021831fe29e52ec3cd7a" 
+os.environ["SERPER_API_KEY"] = "c374574bf69fc2eeaa6a021831fe29e52ec3cd7a"
 search_tool = SerperDevTool()
 
 # 3. Define the Agents (Equipped with the new tool)
@@ -106,7 +109,7 @@ financial_crew = Crew(
 )
 
 if __name__ == "__main__":
-    inputs = {'company_ticker': 'NVDA'}
+    inputs = {'company_ticker': 'AAPL'}
     
     print("## Starting Financial Analysis with Live Data...")
     result = financial_crew.kickoff(inputs=inputs)
