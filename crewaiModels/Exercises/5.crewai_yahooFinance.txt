@@ -145,7 +145,7 @@ output_file=financial_report.md
 
 MODEL=ollama/mistral:latest
 API_BASE=http://localhost:11434
-POLYGON_API_KEY=xyz
+SERPER_API_KEY="xyz"
 
  
 #========
@@ -163,64 +163,21 @@ POLYGON_API_KEY=xyz
 
 from crewai.tools import BaseTool
 from pydantic import Field
-from langchain_community.tools.polygon.financials import PolygonFinancials
-from langchain_community.utilities.polygon import PolygonAPIWrapper
+
 
 
 # 3. Initialize the wrapper and the specific tool
 
-class PolygonFinancialsTool(BaseTool):
-    name: str = "Polygon Financials"
-    description: str = "Fetch financial data from Polygon."
-    polygon: PolygonFinancials = Field(default_factory=lambda: PolygonFinancials(api_wrapper=PolygonAPIWrapper()))
-            
-    def _run(self, query: str) -> str:
-        return self.polygon.run(query)
-
-#------------ 
- 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # 1. Define the Custom Yahoo Finance Tool
+
+import yfinance as yf
 @tool(Yahoo Finance Stock Scraper)
 def yfinance_tool(ticker: str) -> str:
-    
+    """    
     Fetches real-time financial metrics for a specific stock ticker.
     Input should be a stock ticker symbol (e.g., 'AAPL', 'NVDA').
-    
+    """
     try:
         stock = yf.Ticker(ticker)
         info = stock.info
@@ -246,6 +203,101 @@ def yfinance_tool(ticker: str) -> str:
         return data_summary
     except Exception as e:
         return fError fetching data for {ticker}: {str(e)}
+
+#----------
+
+from crewai.tools import BaseTool
+import yfinance as yf
+
+
+class YFinanceTool(BaseTool):
+    name: str = "Yahoo Finance Stock Scraper"
+    description: str = (
+        "Fetches real-time financial metrics for a specific stock ticker. "
+        "Input should be a stock ticker symbol (e.g., 'AAPL', 'NVDA')."
+    )
+
+    def _run(self, ticker: str) -> str:
+        try:
+            stock = yf.Ticker(ticker)
+            info = stock.info
+
+            current_price = info.get('currentPrice', 'N/A')
+            fifty_two_week_high = info.get('fiftyTwoWeekHigh', 'N/A')
+            fifty_two_week_low = info.get('fiftyTwoWeekLow', 'N/A')
+            pe_ratio = info.get('trailingPE', 'N/A')
+            market_cap = info.get('marketCap', 'N/A')
+            forward_pe = info.get('forwardPE', 'N/A')
+
+            data_summary = (
+                f"Financial Data for {ticker.upper()}:\n"
+                f"- Current Price: ${current_price}\n"
+                f"- 52-Week High: ${fifty_two_week_high}\n"
+                f"- 52-Week Low: ${fifty_two_week_low}\n"
+                f"- Trailing P/E Ratio: {pe_ratio}\n"
+                f"- Forward P/E Ratio: {forward_pe}\n"
+                f"- Market Capitalization: {market_cap}\n"
+            )
+            return data_summary
+        except Exception as e:
+            return f"Error fetching data for {ticker}: {str(e)}"
+
+
+
+#------------ 
+ 
+    
+
+
+    
+#============
+# GG. Run
+#==========
+
+# 4.0.1
+
+
+cd  financial_research_yahoo
+crewai run
+
+You may have to add:
+
+uv add yfinance
+uv add ollama
+
+Company Apple Inc.
+Scrip: AAPL
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
