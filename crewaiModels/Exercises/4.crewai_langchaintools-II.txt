@@ -200,6 +200,12 @@ class PolygonFinancialsTool(BaseTool):
 cd  financial_research_polygon
 crewai run
 
+# Add any missing packages to project-root
+# as:
+
+	cd  financial_research_polygon
+	uv add <packageName1>
+
     
 ################################
 
