@@ -1,9 +1,10 @@
-# Last amended:  6th Sep, 2026
+# Last amended:  7th Sep, 2026
 
 # Using
-#	a) yahoo finance tool BUT NOT from langchain, and
-#	b) Two run-time inputs
-#	c) No API needed for yfinance
+#	a) yahoo finance tool BUT NOT from langchain 
+#	b) Two inputs, company and scripName (say, Apple Inc. and AAPL) 
+# 	   required at run-time.
+#	c) No API needed for yfinance. Only web-scarapping.
 #	d) Two tools used: one Serper Tool and another yfinance
 
 
@@ -40,17 +41,20 @@
 		# crewai create crew financial_research_yahoo --classic    
 
 
-
-
 #==========
 # BB. Agents
 #==========
 
 # 2.0.1 
 
+++++++
+Note: Your backstory or goal must specify use of BOTH the tools. Else, Agent
+      may skip using one of the tools.
+++++++
+      
 role=Senior Research Analyst
 goal=Gather hard financial metrics and the latest news for a specific {company}
-backstory=You are an expert financial researcher. You use specialized tools to extract live market metrics and search the web for recent news regarding a target {company}.
+backstory=You are an expert financial researcher. You use specialized tools (such as yahoo finance) to extract live market metrics and search the web for recent news regarding a target {company}.
 tools=[yfinance_tool, search_tool]
 
 
@@ -59,7 +63,7 @@ tools=[yfinance_tool, search_tool]
 role=Financial Analyst
 goal=Analyze the research and raw financial numbers to write a comprehensive report
 backstory=You are a seasoned financial analyst. You excel at taking raw metrics (like P/E ratios and prices) and matching them with market news to build clear investment insights.
-tools=[search_tool],
+tools=[search_tool]
 
 
 
@@ -68,6 +72,11 @@ tools=[search_tool],
 #==========
 
 # 3.0.1
+
+++++++
+Note: Your description must specify use of BOTH the tools. Else, the task
+      may skip using one of the tools.
+++++++
 
 description=Extract live financial metrics using the Yahoo Finance tool for {company_ticker}. Then, search for recent news events or earnings context.
 expected_output=A structured summary containing the live stock numbers and a bulleted list of recent news.
@@ -85,7 +94,7 @@ output_file=financial_report.md
 
 # 3.0.3 
 
-    Start editing .jsonc files
+    Start editing .jsonc files in VScode
 
 	    cd financial_research_yahoo
 	    code .
@@ -116,10 +125,10 @@ output_file=financial_report.md
 #
 # After the command 'crewai create crew financial_research_finance' is 
 # fully executed, we have .jsonc files--one for every Agent and Task.
-# We may have to amend the Agent configuration file for tools. 
+# We may have to amend the first Agent's configuration file for tools. 
 # In file 'financial_analyst.jsonc', write:
 
-"tools": ["custom:yfinance_tool"],
+"tools": ["custom:YFinanceTool","SerperDevTool"],
 
 
 #==========
@@ -130,7 +139,7 @@ output_file=financial_report.md
 
 "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
 
-   
+
 
 #============
 # EE. Modify .env
@@ -152,59 +161,14 @@ SERPER_API_KEY="xyz"
 # FF. Tools folder
 #=========
 
-# As we need custom search tool 'PolygonFinancialsTool()'
-# that invokes Polygon financials, we will need a custom
-# python file in the 'financial_research_polygon/tools' folder 
-# when we execute 'crewai run'.
-# So, create file 'PolygonFinancialsTool.py' under just created 
-# 'tools' folder, as, below:
+# As we need custom yahoo finance tool 'YFinanceTool'
 
 #-------
 
-from crewai.tools import BaseTool
-from pydantic import Field
-
-
-
-# 3. Initialize the wrapper and the specific tool
-
-
-# 1. Define the Custom Yahoo Finance Tool
-
-import yfinance as yf
-@tool(Yahoo Finance Stock Scraper)
-def yfinance_tool(ticker: str) -> str:
-    """    
-    Fetches real-time financial metrics for a specific stock ticker.
-    Input should be a stock ticker symbol (e.g., 'AAPL', 'NVDA').
-    """
-    try:
-        stock = yf.Ticker(ticker)
-        info = stock.info
-        
-        # Extract key metrics safely
-        current_price = info.get('currentPrice', 'N/A')
-        fifty_two_week_high = info.get('fiftyTwoWeekHigh', 'N/A')
-        fifty_two_week_low = info.get('fiftyTwoWeekLow', 'N/A')
-        pe_ratio = info.get('trailingPE', 'N/A')
-        market_cap = info.get('marketCap', 'N/A')
-        forward_pe = info.get('forwardPE', 'N/A')
-        
-        # Format the output data for the agent
-        data_summary = (
-            fFinancial Data for {ticker.upper()}:\n
-            f- Current Price: ${current_price}\n
-            f- 52-Week High: ${fifty_two_week_high}\n
-            f- 52-Week Low: ${fifty_two_week_low}\n
-            f- Trailing P/E Ratio: {pe_ratio}\n
-            f- Forward P/E Ratio: {forward_pe}\n
-            #f- Market Capitalization: ${market_cap:, if isinstance(market_cap, (int, float)) else market_cap}\n
-        )
-        return data_summary
-    except Exception as e:
-        return fError fetching data for {ticker}: {str(e)}
-
+# 1. Define the Custom Yahoo Finance Tool under 'tools' folder
+s
 #----------
+# File name is: YFinanceTool.py
 
 from crewai.tools import BaseTool
 import yfinance as yf
@@ -245,13 +209,23 @@ class YFinanceTool(BaseTool):
 
 
 #------------ 
- 
+# Test it as follows:
+# Create a file, say test.py, under project root:
+# Write the following lines and execute the file. 
+#  It should print result.
+
+
+import yfinance
+from tools.YFinanceTool import YFinanceTool
+tool = YFinanceTool()
+result = tool._run("NVDA")
+print(result) 
     
 
 
     
 #============
-# GG. Run
+# GG. Run your agents
 #==========
 
 # 4.0.1
@@ -260,7 +234,9 @@ class YFinanceTool(BaseTool):
 cd  financial_research_yahoo
 crewai run
 
-You may have to add:
+# You may have to add:
+# Following two packages right 
+# in the project root folder:
 
 uv add yfinance
 uv add ollama
@@ -269,7 +245,7 @@ Company Apple Inc.
 Scrip: AAPL
     
 
-
+########################
 
 
 
