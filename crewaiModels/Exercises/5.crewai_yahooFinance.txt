@@ -238,8 +238,9 @@ crewai run
 # Following two packages right 
 # in the project root folder:
 
-uv add yfinance
-uv add ollama
+	cd  financial_research_yahoo
+	uv add yfinance
+	uv add ollama
 
 Company Apple Inc.
 Scrip: AAPL
