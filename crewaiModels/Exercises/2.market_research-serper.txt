@@ -167,6 +167,13 @@ SERPER_API_KEY=xyz
 cd  market_research-serper
 crewai run
 
+# You may have to add:
+# Following package right 
+# in the project root folder:
 
+cd  market_research-serper
+uv add ollama
+
+###################3333
 
 
