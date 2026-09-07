@@ -160,11 +160,12 @@ SERPER_API_KEY=xyz
 		cd lanchain_tools 
   	 	crewai run 
 
-# Missing packages ('crewai run'):
+
+#  Missing packages 
 # 	When we execute 'crewai run', It is possible 
 # 	that certain packages are found missing.
-#       Those packages need to be installed in
-#       'langchain_tools' folder only, as: 
+#       Those packages need to be installed in project-root
+#       folder ie 'langchain_tools' folder only, as: 
 #		uv add <package1> <package2> ...
 
 
