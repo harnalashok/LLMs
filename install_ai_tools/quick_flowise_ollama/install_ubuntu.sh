@@ -2799,6 +2799,9 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	rm -rf /home/$USER/Documents/crewaiExamples
 	cd /home/$USER
 	\cp -r /home/$USER/Documents/crewaiModels/. /home/$USER/crewai_pjt
+	mkdir /home/ashok/crewai_pjt/servers
+    cp /home/ashok/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_server.py /home/ashok/crewai_pjt/servers/
+    cp /home/ashok/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_client.py /home/ashok/crewai_pjt/
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
 else
 	echo "  "
