@@ -146,17 +146,25 @@ context=[research_task]
 # EE. Modify .env
 #==========
 
-# Any API keys such as serper_api_key need to be set.
-# Set them in the same shell where you are 
-# going to execute 'crewai run'
+AA1
+====
+	# Any API keys such as serper_api_key need to be set.
+	# Set them in the same shell where you are 
+	# going to execute 'crewai run'
+	
+	export POLYGON_API_KEY="xyz"
+	
+	# OR, modify .env file in VSCode, as:
+	
+	MODEL=ollama/mistral:latest
+	API_BASE=http://localhost:11434
+	POLYGON_API_KEY=xyz
 
-export POLYGON_API_KEY="xyz"
+AA2
+===
+     # Write:
+     CREWAI_TRACING_ENABLED=true
 
-# OR, modify .env file in VSCode, as:
-
-MODEL=ollama/mistral:latest
-API_BASE=http://localhost:11434
-POLYGON_API_KEY=xyz
 
  
 #========
