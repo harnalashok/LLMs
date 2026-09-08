@@ -1,23 +1,41 @@
 # LAst amended: 5th Sep, 2026
 # Ref: https://github.com/crewAIInc/crewAI-examples/tree/main/crews/match_profile_to_positions
 
+	Note 1: CSVSearchTool works only with OpenAI API key and not with others
+	Note 2: Use ollama cloud models. Local models do not work. I have used nemotron-3-nano:30b-cloud
+		Its very fast.
+	Note 3: Try to use ollama cloud in offpeak hours. Offpeak hours are : BEfore 5:30pm or after 11:30pm	 
+
 # ============
 # AA. Activate crewai_env
 # ============
 
 # 1.0.1
 
-cd ~/
-source /home/$USER/crewai_env/bin/activate
-    (OR . activate_crewai_env.sh )
+	-- If using VScode
 
-# 1.0.2
+		source /home/$USER/crewai_pjt/.venv/bin/activate 
+        	cd /home/$USER/crewai_pjt
+        	code . 
+       
+              # OR
+                     . activate_crewai_pjt.sh
+                     code .  
+       
+               When VScode is open: 
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
 
-cd /home/$USER/crewai_pjt
-rm -rf job_profile_matching          
-crewai create crew job_profile_matching      
-# crewai create crew job_profile_matching --classic    
+# 1.0.2 START HERE 
 
+	-- If on console
+	
+		cd /home/$USER/crewai_pjt
+		rm -rf  job_profile_matching      
+		crewai create crew  job_profile_matching      
+		# crewai create crew  job_profile_matching   --classic    
 
 
 # ============
@@ -25,20 +43,21 @@ crewai create crew job_profile_matching
 # ============
 
 # 2.0.1 Agent-I
-  name:		cv_reader
+  
   role: 	CV Reader
   goal: 	Extract relevant information from the CV, such as skills, experience, and education.
   backstory: 	With years of experience in HR, you excel at quickly identifying key qualifications in resumes.
-
+  tools:	File reader
+  
 # 2.0.2 Agent-II
-  name: 	job_opportunities_parser
+  
   role:		Job Opportunities Parser
   goal:		Extract job descriptions from the CSV file, including job title, required skills, and responsibilities.
   backstory:    A data analyst who has transitioned into HR, you have a knack for organizing and interpreting job data.
-
+  tools:	CSVSearchTool
 
 # 2.0.3 Agent-III
-  name: 	matcher
+  
   role:		Matcher
   goal:		Match the CV to the job opportunities based on skills and experience.
   backstory:    A seasoned recruiter, you specialize in finding the perfect fit between candidates and job roles.
@@ -51,37 +70,133 @@ crewai create crew job_profile_matching
 
 # 3.0.1 Task-I
 
-  name:			read_cv_task:
   description:		Extract relevant information from the given CV. Focus on skills, experience, education, and key achievements. Ensure to capture the candidate's professional summary, technical skills, work history, and educational background. CV file: {path_to_cv}.
   expected_output:	A structured summary of the CV, including:\n - Professional Summary\n - Technical Skills\n - Work History\n - Education\n - Key Achievements
   agent:		CV Reader
-
+  tools: 		File reader
 
 
 # 3.0.2 Task-II
 
-  name:			parse_job_opportunities_task:
   description:		Extract job opportunities from the given CSV file. Focus on job title, required skills, responsibilities, and any qualifications listed for each position. Jobs CSV file: {path_to_jobs_csv}
   expected_output:	A structured list of job opportunities, including for each job:\n - Job Title\n - Required Skills\n - Responsibilities\n - Qualifications
   agent: 		job_opportunities_parser 
+  tools:		CSVSearchTool
 
 
 
 # 3.0.3 Task-III
 
-  name:			match_cv_task:
   description:		Match the CV to the job opportunities based on skills, experience, and key achievements. Evaluate how well the candidate's profile fits each job description,  focusing on the alignment of skills, work history, and key achievements  with the job requirements. Jobs CSV file: {path_to_jobs_csv} . CV file: {path_to_cv}.
   expected_output:	A ranked list of job opportunities that best match the CV, including:\n - Job Title\n - Match Score (based on skills and experience)\n - Key Matching Points
-  agent:		matcher  
+  agent:		matcher
+  context:		Flow from task-I and task-II
+  tools:		File Reader, CSVSearchTool
+
+  
+
+# 3.0.4 
+
+    Start editing .jsonc files
+
+	    cd job_profile_matching
+	    code .
+
+# 3.0.5
+
+	Context Required?:
+	-----------------
+	    Do I need to specify 'context' for the second task.
+	    When is a context needed to be specified for a task? 
+	    For example, there are two tasks, task1 and task2, 
+	    each with the respective agents.
+	    
+	Answer:
+	------
+	    In sequential execution, if you don't specify context on task2,
+	    CrewAI defaults to giving it the output of all previously 
+	    executed tasks anyway.
+	    So task2 (Market Analyst') still receives
+	    task1's (researcher's) output automatically, since sequential
+	    tasks by default use prior tasks' outputs as context. That's 
+	    why it worked without explicit context.
+	    Explicit context is needed when you want to:
+		a.    Control which specific prior task(s) output are passed (not all previous ones)
+		b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
+		c.    Explicitly exclude a task's output from context (using context=[])
+
+
+#====== Command Execution Completed ==========
+
+#==========
+# DD. Modify *.jsonc files
+#==========#
+#
+# In cv_reader.jsonc, 
+	# After the command 'crewai create crew job_profile_matching' is 
+	# fully executed, we have .jsonc files--one for every Agent and Task.
+	# We may have to amend the Agent configuration file for tools. 
+	# In file 'cv_reader.jsonc', check:
+
+	"tools": ["FileReadTool"],
+
+# In job_opportunities_parser, check:
+	"tools": ["CSVSearchTool"],
+
+# In matcher.jsonc, check:
+	"tools": ["FileReadTool", "CSVSearchTool"],	
+
+
+#==========
+# EE. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
 
    
+
+#============
+# EE. Modify .env
+#==========
+
+AA1
+====
+	# No API keys are to be written to
+
+AA2
+===
+     # Write:
+     CREWAI_TRACING_ENABLED=true
+
     
     
 #============
-# DD. Run
+# FF. Run
 #==========
 
 # 4.0.1
 
-crewai run
+	cd job_profile_matching 
+	crewai run
+
+# Add any missing packages to project-root
+# as:
+
+	cd  job_profile_matching 
+	uv add <packageName1>
+
+
+
+Data:
+
+	mkdir /home/$USER/crewai_pjt/job_profile_matching/data
+	cp    /home/$USER/crewai_pjt/Exercises/*  /home/$USER/crewai_pjt/job_profile_matching/data
+
+path_to_cv:	/home/ashok/crewai_pjt/job_profile_matching/data/cv.md
+path_to_csv:	/home/ashok/crewai_pjt/job_profile_matching/data/jobs.csv
+
+	
+################	
 
