@@ -1,8 +1,8 @@
-# LAst amended: 5th Sep, 2026
+# LAst amended: 9th Sep, 2026
 # Ref: https://github.com/crewAIInc/crewAI-examples/tree/main/crews/match_profile_to_positions
 
-	Note 1: CSVSearchTool works only with OpenAI API key and not with others
-	Note 2: Use ollama cloud models. Local models do not work. I have used nemotron-3-nano:30b-cloud
+	Note 1: CSVSearchTool works only with OpenAI API key and not with AI models
+	Note 2: Use ollama cloud models. Local models do not work. I have used 'nemotron-3-nano:30b-cloud'
 		Its very fast.
 	Note 3: Try to use ollama cloud in offpeak hours. Offpeak hours are : BEfore 5:30pm or after 11:30pm	 
 
@@ -130,21 +130,38 @@
 
 #==========
 # DD. Modify *.jsonc files
+#     Tools and cloud models
 #==========#
 #
-# In cv_reader.jsonc, 
+# In 'cv_reader.jsonc', 
 	# After the command 'crewai create crew job_profile_matching' is 
 	# fully executed, we have .jsonc files--one for every Agent and Task.
 	# We may have to amend the Agent configuration file for tools. 
 	# In file 'cv_reader.jsonc', check:
 
 	"tools": ["FileReadTool"],
+	
+	USe cloud model:
 
-# In job_opportunities_parser, check:
+	"llm": "ollama/nemotron-3-nano:30b-cloud",
+
+	
+
+# In 'job_opportunities_parser', check:
+# (this tool requires OpenAI API key.)
+# (so, instead use FileReaderTool).
+
 	"tools": ["CSVSearchTool"],
 
-# In matcher.jsonc, check:
-	"tools": ["FileReadTool", "CSVSearchTool"],	
+# In 'matcher.jsonc', check:
+	"tools": ["FileReadTool", "CSVSearchTool"],
+
+# Also in all three files: 
+#	'cv_reader, job_opportunities_parser and matcher'
+# Use ollama cloud models:
+
+	"llm": "ollama/nemotron-3-nano:30b-cloud",
+	
 
 
 #==========
@@ -155,7 +172,6 @@
 
 "embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
 
-   
 
 #============
 # EE. Modify .env
@@ -189,13 +205,21 @@ AA2
 
 
 
-Data:
+#============
+# GG. Input data paths
+#==========
 
+	# Create data folder and copy files to 'job_profile_matching/data'
 	mkdir /home/$USER/crewai_pjt/job_profile_matching/data
-	cp    /home/$USER/crewai_pjt/Exercises/*  /home/$USER/crewai_pjt/job_profile_matching/data
-
-path_to_cv:	/home/ashok/crewai_pjt/job_profile_matching/data/cv.md
-path_to_csv:	/home/ashok/crewai_pjt/job_profile_matching/data/jobs.csv
+	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_profile_matching/data
+	cp    /home/$USER/crewai_pjt/Exercises/cv.md  /home/$USER/crewai_pjt/job_profile_matching/data
+	
+	Else, try before copying paths also:
+	
+			path-after-copying						path-before-copying
+			------------------						--------------------
+path_to_cv:	/home/ashok/crewai_pjt/job_profile_matching/data/cv.md		/home/$USER/crewai_pjt/Exercises/cv.md 
+path_to_csv:	/home/ashok/crewai_pjt/job_profile_matching/data/jobs.csv	/home/$USER/crewai_pjt/Exercises/jobs.csv
 
 	
 ################	
