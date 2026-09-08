@@ -15,7 +15,7 @@
 -- If using VSCode
 
     cd ~/
-    source /home/$USER/crewai_env/bin/activate
+    source /home/ashok/crewai_pjt/.venv/bin/activate
         (OR . activate_crewai_env.sh )
 
     When VScode is open: 
