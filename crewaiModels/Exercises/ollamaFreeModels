@@ -1,0 +1,20 @@
+# LAst amended: 9th Sep, 2026
+# Ollama free models and Offpeak times
+
+Free models
+=============
+
+i)    gemma4-31b              ollama run gemma4:31b-cloud
+ii)   gpt-oss20b		          ollama pull gpt-oss:20b-cloud
+iii)  nemotron-3-nano:30b	    ollama pull nemotron-3-nano:30b-cloud
+iv)   gpt-oss120b		          ollama pull gpt-oss:120b-cloud          (120b model)
+v)    nemotron-3-super	      ollama pull nemotron-3-super:cloud	    (120b model)
+vi)   nemotrol-3-ultra	      ollama pull nemotron-3-ultra:cloud	    (550b model) 	
+
+
+Ollama offpeak times:
+==================
+
+	12:00 UTC equals 17:30 IST (5:30 PM).
+	After 18:00 hours UTC" means any time after 11:30 PM IST
+	On Sunday: All day
