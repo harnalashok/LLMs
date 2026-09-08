@@ -1,13 +1,13 @@
 """
-# Last amended: 31st May, 2026
+# Last amended: 8th Sep, 2026
 # https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 
 MCP Maths server
 Keep it under servers folder
 Start it in a seperate terminal, as:
-    python3 math_stdio_server.py
+    python3 maths_stdio_server.py
 =====
-    MCP Client: math_stdio_client.py
+    MCP Client: maths_stdio_client.py
     
     This is a simple Math MCP server that implements 
     the Model Context Protocol. This server provides 

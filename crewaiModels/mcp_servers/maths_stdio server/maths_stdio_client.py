@@ -1,10 +1,10 @@
 
 """
-# Last amended: 31st May, 2026
+# Last amended: 8th Sep, 2026
 # Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 MCP Maths client
 =====
-    MCP Server: math_stdio_server.py
+    MCP Server: maths_stdio_server.py
     Start the server in a separate terminal
     
     It connects to tools advertised locally
@@ -32,10 +32,10 @@ local_llm = LLM(
 #    Note that mcp server DOES NOT have a port or a url:
 
 server_params=StdioServerParameters(
-    command="python3", 
-    args=["servers/math_stdio_server.py"],
-    env={"UV_PYTHON": "3.13", **os.environ},
-)
+                                    command="python3", 
+                                    args=["servers/maths_stdio_server.py"],
+                                    env={"UV_PYTHON": "3.13", **os.environ},
+                                    )
 
 # 5.0 Use the StdioServerParameters object to create a MCPServerAdapter
 #     Given 'server parameters', MCPServerAdapter 
