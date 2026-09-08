@@ -1,0 +1,148 @@
+# Ref: https://www.youtube.com/watch?v=tnejrr-0a94
+# Last amended: 8th Sep. 2026
+
+# Build ai research agent that performs 
+# ai research using tools hosted on 
+# external MCP server
+
+
+Question 4: What tools are available with exa.ai mcp    
+
+    Refer GitHub: https://github.com/exa-labs/exa-mcp-server
+    The Exa MCP Server connects AI assistants (like Claude, Cursor, and Windsurf) 
+    to Exa's search, code, and company research capabilities. Depending on your 
+    configuration, it supports the following tools:
+
+    web_search_exa: Performs real-time web searches and extracts clean, token-efficient 
+                    content optimized for AI.
+    web_search_advanced_exa: A powerful search with advanced filters for domains, data 
+                    ranges, and subpages   
+    crawling_exa: Extracts and reads the full text or contents of a specific URL 
+                    (e.g., an article, blog post, or PDF)    
+    company_research_exa: Gathers comprehensive business information, news, financial 
+                    data, and insights by crawling company websites and resources.  
+    people_search_exa: Finds people and searches for professional profiles and contacts
+    deep_researcher_start: Triggers a smart AI research agent to thoroughly investigate
+                    complex topics, read multiple sources, and begin assembling a 
+                    detailed report.
+    deep_researcher_check: Checks the status of an ongoing deep research task and 
+                           retrieves the final comprehensive report.
+
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+cd ~/
+source source /home/ashok/crewai_pjt/.venv/bin/activate
+    (OR . activate_crewai_env.sh )
+
+# 1.0.2
+
+cd /home/$USER/crewai_pjt
+rm -rf ai_research_mcp
+crewai create crew ai_research_mcp
+# crewai create crew ai_research_mcp --classic    
+
+
+
+
+#==========
+# BB. Agents
+#==========
+
+# 2.0.1 
+
+
+role=Research Analyst
+goal=Fetch web pages on AI and perform analyses
+backstory=Expert in retrieving wikipedia's articles and summarizing
+
+
+#==========
+# CC. Tasks
+#==========
+
+
+description=Fetch wiki page on Artificial Intelligence. Then summarize the fetched page content in three bullet points. You MUST use provided mcp server for the call.
+expected_output=Three bullet-point summary of the fetched page
+agent=research_agent
+
+
+
+#==========
+# DD. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+
+#====== Command Execution Completed ==========
+
+#==========
+# DD. Modify research_analyst.jsonc
+#==========#
+#
+# After the command 'crewai create crew financial_research_polygon' is 
+# fully executed, we have .jsonc files--one for every Agent and Task.
+# We may have to amend the Agent configuration file for mcp/tools. 
+# In file 'financial_analyst.jsonc', write:
+
+	# mcp server: Specify it in the following format:
+	#
+	# ["https://YOUR_SERVER/mcp?api_key=<YOUR _API_KEY#<AdvertisedTool>"],
+	
+	"mcps": ["https://mcp.exa.ai/mcp?api_key=ec0029cc-e2c1-4664-b5a8-13c0f525fbf2#web_search_exa"],
+
+#==========
+# EE. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+   
+
+#============
+# EE. Modify .env
+#==========
+
+AA1
+====
+
+	No API key to added for this example
+
+AA2
+===
+     # Write:
+     CREWAI_TRACING_ENABLED=true
+
+
+#========
+# GG. crew run
+#========
+
+# Execute:  
+		cd ai_research_mcp
+  	 	crewai run 
+
+
+#  Missing packages 
+# 	When we execute 'crewai run', It is possible 
+# 	that certain packages are found missing.
+#       Those packages need to be installed in project-root
+#       folder ie 'ai_research_mcp' folder only, as: 
+#		uv add <package1> <package2> ..
+
+
+
+
+"""    
+    
+    
+
