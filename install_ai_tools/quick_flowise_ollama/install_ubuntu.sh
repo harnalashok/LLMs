@@ -2836,6 +2836,7 @@ echo "=============="
 echo "   "
 echo "   "
 read x
+exit 1
  
 #####################
 ## langflow install
