@@ -1838,10 +1838,11 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_server.py     /home/$USER/crewai_pjt/servers/
     cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_client.py     /home/$USER/crewai_pjt/
 	#     Job data
-    mkdir /home/$USER/crewai_pjt/job_data
+	mkdir /home/$USER/crewai_pjt/job_data
+	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_data
+	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_data
 	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_profile_matching/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_profile_matching/job_data
-	
+	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_profile_matching/job_data	
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
 else
 	echo "  "
