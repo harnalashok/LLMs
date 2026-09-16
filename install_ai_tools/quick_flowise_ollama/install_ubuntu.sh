@@ -1596,7 +1596,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	# llamaindex
 	# To be installed ONLY in langchain virtual env
 	#################
-	# 1.0 LLamaindex install
+	# 1.0 LLamaindex install 
 	# Mostly openai related
 	echo "Installing llama-index"
 	echo "  "
