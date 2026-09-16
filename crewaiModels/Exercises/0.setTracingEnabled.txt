@@ -1,0 +1,6 @@
+Enable Tracing:
+│
+│  To enable tracing later, do any one of these:                                                                 │
+│  • Set tracing=True in your Crew/Flow code                                                                     │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file                                                 │
+│  • Run: crewai traces enable
