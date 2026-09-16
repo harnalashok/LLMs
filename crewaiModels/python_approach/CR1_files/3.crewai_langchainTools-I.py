@@ -21,6 +21,11 @@ ollama_llm = LLM(
                 )
 
 # 3.0 Wrap langchain class in crewai class
+"""
+SearchTool is completely a Pydantic class.Even though you are inheriting
+from BaseTool instead of BaseModel, it acts as a Pydantic class because 
+BaseTool itself inherits directly from Pydantic’s BaseModel under the hood. 
+"""
 class SearchTool(BaseTool):
     name: str = "DuckDuckGo Search"
     description: str = "Search the web with DuckDuckGo."
