@@ -1598,6 +1598,26 @@ else
     echo "  "
 fi	
 
+
+
+# Install python3.13 for crewai
+# Anaconda installs python3.14 or higher
+cd /home/$USER
+DIRECTORY=/home/$USER/anaconda3
+if [ -d "$DIRECTORY" ]; then
+	if [ ! -f /home/$USER/python3.13_installed.txt ]; then
+		# Install python3.13 for crewai
+		conda activate base
+		conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+        conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+		yes a | conda install -y python=3.13
+		echo "python3.13_installed.txt" > /home/$USER/python3.13_installed.txt
+	fi	
+else
+    echo "Directory $DIRECTORY does not exist."
+fi
+
+
 #############
 # Install llamaindex folder of examples
 # Installs the folder from github: LLM/llamaindex
