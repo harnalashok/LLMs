@@ -6,6 +6,8 @@ from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.core import Settings
 from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
 
+####### Model(s) to use ###########3 
+
 # 2.0
 llm = Ollama(model="granite4.1:8b",
              request_timeout=800.0,
@@ -19,70 +21,81 @@ embed_model = OllamaEmbedding(model_name="qwen3-embedding:0.6b")
 Settings.llm = llm
 Settings.embed_model = embed_model
 
-# Our data file
-pdf = "/home/ashok/crewai_pjt/Exercises/data/sports.pdf"
+########## Data ingestion ###############
 
+# 3.0 Our data file
+path_to_folder = "/home/ashok/crewai_pjt/Exercises/data"
+path_to_file = "/home/ashok/crewai_pjt/Exercises/data/sports.pdf"
 
-reader = SimpleDirectoryReader(input_files=[pdf])
+# 3.1
+reader = SimpleDirectoryReader(input_files=[path_to_file ])
 docs = reader.load_data()
 print(docs[1])
 
+# 4.0 dataindex is handle to vector index
+dataindex = VectorStoreIndex.from_documents(docs,
+                                            embed_model=embed_model,
+                                            )
 
-#from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+# 4.1 Attach a query engine to dataindex
+sports_query_engine = dataindex.as_query_engine(
+                                                similarity_top_k=5,
+                                                llm=llm
+                                                )
 
-index = VectorStoreIndex.from_documents(docs,
-                                        embed_model=embed_model,
-                                        )
+####### Agents desigining ###########3 
 
-query_engine = index.as_query_engine(similarity_top_k=5, llm=llm)
+# 5.0 Tools 
 
-
-
+# 5.1
+from crewai import Agent, Task, Crew, Process,LLM
 from crewai_tools import LlamaIndexTool
 
-rag_tool = LlamaIndexTool.from_query_engine(
-                                            query_engine,
-                                            name="Sports_tool",
-                                            description="Use this tool to lookup answers related to sports questions",
-                                         )
-#
-#query_tool.args_schema.schema()
+# 5.2
+sports_rag_tool = LlamaIndexTool.from_query_engine(
+                                                    sports_query_engine,
+                                                    name="Sports_tool",
+                                                    description="""
+                                                    Use this tool to lookup answers 
+                                                    related to sports questions""",
+                                                    )
 
-import os
-from crewai import Agent, Task, Crew, Process,LLM
+# 6.0 Which LLM
 local_llm = LLM(
-    model="ollama/granite4.1:8b",        # Prefix with 'ollama/' followed by your model name
-    base_url="http://localhost:11434" # Default Ollama local server URL
-)
+                model="ollama/granite4.1:8b",        # Prefix with 'ollama/' followed by your model name
+                base_url="http://localhost:11434" # Default Ollama local server URL
+                )
 
 
-# Define your agents with roles and goals
+# 7.0 Define your agents with roles and goals
 researcher = Agent(
-    role="Senior Sports Analyst",
-    goal="To uncover insights about sports from the provided tool.",
-    backstory="""You work at a sports firm. """,
-    verbose=True,
-    allow_delegation=False,
-    tools=[rag_tool],
-    llm=local_llm,
-    )
+                    role="Senior Sports Analyst",
+                    goal="To uncover insights about sports from the provided tool.",
+                    backstory="""You have won medals at Aisan games. 
+                                 You have been working at a decathlon since last 10 years. """,
+                    verbose=True,
+                    allow_delegation=False,
+                    tools=[sports_rag_tool],
+                    llm=local_llm,
+                    )
 
 
-# Create tasks for your agents
+# 7.1 Create tasks for your agents
 task1 = Task(
-    description="""Answer faithfully any {questions} asked.""",
-    expected_output="Do not answer from your own knowledge base but provided tool-output only.",
-    agent=researcher,
-)
+            description="""Answer faithfully any {questions} asked related to sports.""",
+            expected_output="Do not answer from your own knowledge base but provided tool-output only.",
+            agent=researcher,
+            )           
 
-
+# 8.0 Crew of agents
 crew = Crew(
-    agents=[researcher],
-    tasks=[task1],
-    verbose =  True,  # You can set it to 1 or 2 to different logging levels
-)
+            agents=[researcher],
+            tasks=[task1],
+            verbose =  True,  # You can set it to 1 or 2 to different logging levels
+            )
 
-# Get your crew to work!
+
+# 8.1 Get your crew to work!
 result = crew.kickoff( inputs={"questions": "Define  Physical Activity, Exercise and Training"})
 
 print("######################")
