@@ -2,6 +2,7 @@
 # Last amended: 21st May, 2026
 # My folder: D:\OneDrive\Documents\crewai\python_based
 # Using langchain toos: DuckDuckGoSearchRun    
+# Write output to file in markdown format
 
 """
 
@@ -43,13 +44,15 @@ researcher = Agent(
                     backstory='You are a master at digging up facts and details from the web and encyclopedias.',
                     tools=[SearchTool()],
                     llm = ollama_llm,
-                    verbose=True
+                    verbose=True,
                     )
 
 # Define the task
 task1 = Task(
             description='Research Quantum Computing using Wikipedia, and gather the latest news using DuckDuckGo.',
             expected_output='A 3-paragraph summary of the latest trends in Quantum Computing.',
+            markdown=True, 
+            output_file="financialOutput.md" ,  # No write tool needed. Just this line.
             agent=researcher
 )
 
