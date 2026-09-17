@@ -13,6 +13,7 @@ Question1: What does this tool do:
 
 """
 
+# 1.0
 import os
 from langchain_community.tools.polygon.financials import PolygonFinancials
 from langchain_community.utilities.polygon import PolygonAPIWrapper
@@ -34,8 +35,8 @@ local_llm = LLM(
 #     to securely access real-time stock and crypto data without hardcoding
 #     the key into your script:
 
-os.environ["POLYGON_API_KEY"] = "j0ZrkimZ53C1ZNx3cdtMXk0tE1pYL3Kx"
-os.environ["POLYGON_API_KEY"] = "FYnW3PHAEuJmys61rQnwDiQX8eO2eemz"
+#os.environ["POLYGON_API_KEY"] = "j0ZrkimZ53C1ZNx3cdtMXk0tE1pYL3Kx"
+os.environ["POLYGON_API_KEY"] = "EliteBablooFYnW3PHAEuJmys61rQnwDiQX8eO2eemz"
 
 # 3. Initialize the wrapper and the specific tool
 #    See Questions below for understanding this class
