@@ -339,7 +339,7 @@ uv tool install crewai
 
 	# Our project folder
 	rm -rf /home/$USER/crewai_pjt 
-	mkdir /home/$USER/crewai_pjt
+	mkdir -p /home/$USER/crewai_pjt/data
 	# Make it writable by any program
 	chmod -R 777 /home/$USER/crewai_pjt
     cd crewai_pjt
