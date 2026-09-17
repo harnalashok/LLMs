@@ -1,3 +1,5 @@
+# Last amended: 17th Sep, 2026
+# Accessing llamaindex RAG through agents
 # https://medium.com/the-ai-forum/build-a-financial-analyst-agent-using-crewai-and-llamaindex-6553a035c9b8
 
 # 1.0 Call libraries
