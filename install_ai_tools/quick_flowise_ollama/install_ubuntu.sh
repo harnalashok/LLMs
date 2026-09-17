@@ -422,8 +422,6 @@ else
 fi
 
 
-
-
 ##################
 # Docker installation-I
 #################
