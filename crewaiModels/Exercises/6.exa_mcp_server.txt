@@ -5,6 +5,13 @@
 # ai research using tools hosted on 
 # external MCP server
 
+# In bash first:
+
+export CREWAI_DISABLE_TELEMETRY=true
+export OTEL_SDK_DISABLED=true
+
+# And also stop anti-virus:
+smc -stop
 
 Question 4: What tools are available with exa.ai mcp    
 
