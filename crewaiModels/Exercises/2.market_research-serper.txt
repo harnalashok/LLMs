@@ -4,7 +4,13 @@
 # Build market research agent that performs 
 #   market research using Serper API
 
+# In bash first:
 
+export CREWAI_DISABLE_TELEMETRY=true
+export OTEL_SDK_DISABLED=true
+
+# And also stop anti-virus:
+smc -stop
 
 # ============
 # AA. Activate crewai_env
