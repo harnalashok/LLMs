@@ -1266,6 +1266,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	  docker exec -it ollama ollama pull granite4.1:3b
 	  echo "18. Pulling mistral:latest"
 	  docker exec -it ollama ollama pull mistral:latest
+	  echo "19. Pulling granite-embedding"
+	  docker exec -it ollama ollama pull granite-embedding
 	  echo " "
 	  #ollama list
 	  echo "models installed" > /home/$USER/models_installed.txt
@@ -1859,12 +1861,22 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	mkdir /home/$USER/crewai_pjt/servers
 	cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_server.py     /home/$USER/crewai_pjt/servers/
     cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_client.py     /home/$USER/crewai_pjt/
+	
 	#     Job data
 	mkdir /home/$USER/crewai_pjt/job_data
 	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_data
 	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_profile_matching/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_profile_matching/job_data	
+	
+	mkdir -p /home/$USER/crewai_pjt/job_data_more/jobs
+	mkdir -p /home/$USER/crewai_pjt/job_data_more/cv
+	cd       /home/$USER/crewai_pjt/job_data_more/jobs
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/jobs.csv
+	cd      /home/$USER/crewai_pjt/job_data_more/cv
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/tanvi_cv.md
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/yash_cv.md
+	cd  ~/
+
+		
 	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
 else
 	echo "  "

@@ -1334,6 +1334,8 @@ if [ ! -f /home/$USER/models_installed.txt ]; then
 	docker exec -it ollama ollama pull granite4.1:3b
 	echo "19. Pulling mistral:latest"
 	docker exec -it ollama ollama pull mistral:latest
+	echo "20. Pulling granite-embedding"
+	docker exec -it ollama ollama pull granite-embedding
 	echo " "
 	echo " "
 	#ollama list
@@ -1860,8 +1862,19 @@ if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
 	mkdir /home/$USER/crewai_pjt/job_data
 	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_data
 	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_profile_matching/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_profile_matching/job_data	wsl.exe --shutdown
+	
+    mkdir -p /home/$USER/crewai_pjt/job_data_more/jobs
+	mkdir -p /home/$USER/crewai_pjt/job_data_more/cv
+	cd       /home/$USER/crewai_pjt/job_data_more/jobs
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/jobs.csv
+	cd      /home/$USER/crewai_pjt/job_data_more/cv
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/tanvi_cv.md
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/yash_cv.md
+	cd  ~/
+
+
+	
+	wsl.exe --shutdown
 else
 	echo "  "
 fi	
