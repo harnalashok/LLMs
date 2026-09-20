@@ -1,0 +1,261 @@
+# LAst amended: 20th Sep, 2026
+# Ref: https://github.com/crewAIInc/crewAI-examples/tree/main/crews/match_profile_to_positions
+
+	Note 1: CSVSearchTool works only with OpenAI API key and not with AI models
+	Note 2: For complex structuring requirements u`se ollama cloud models. 
+	        Local models do not work. I have used 'nemotron-3-nano:30b-cloud'
+		    Its very fast.
+			Here are examples:
+			EXAMPLE 1
+				ORIGINAL
+						description:		Extract relevant information from the given CVs. Focus on skills, experience, education, 
+											and key achievements. Ensure to capture the candidate's professional summary, technical 
+											skills, work history, and educational background. CV folder: {path_to_cv_folder}.
+						expected_output:	A structured summary of the CV, including:
+												- Professional Summary
+												- Technical Skills
+												- Work History
+												- Education
+												- Key Achievements
+						
+				REPLACE WITH
+						description			Read cvs of the candidates from folder: {path_to_cv_folder}. Then summarise it.
+						expected_output  	Candidate wise summary of CVs
+					
+			EXAMPLE 2
+				ORIGINAL
+					description:			Extract job opportunities from the given CSV file. Focus on job title, required skills, 
+											responsibilities, and any qualifications listed for each position. 
+											Jobs CSV file: {path_to_jobs_csv}
+					expected_output			A structured list of job opportunities, including for each job:
+												- Job Title
+												- Required Skills
+												- Responsibilities
+												- Qualifications	
+				REPLACE WITH	
+					description			 	Use file read tool to extract job opportunities from {path_to_csv_file}
+					expected_output			A structured list of job opportunities for each job
+					
+				
+	Note 3: Try to use ollama cloud in offpeak hours. Offpeak hours are : BEfore 5:30pm or after 11:30pm	 
+
+# ============
+# AA. Activate crewai_env
+# ============
+
+# 1.0.1
+
+                    . activate_crewai_pjt.sh
+                     code .  
+       
+               When VScode is open: 
+                     i)   Open your .py file
+                     ii)  click ctrl+shift+p to open Python: Select Interpreter
+                     iii)  Python: Select Interpreter
+                     iv)   Look for crewai-pjt python environment.
+
+# 1.0.2 START HERE 
+
+	-- If on console
+	
+		cd /home/$USER/crewai_pjt
+		rm -rf  job_profile_matching      
+		crewai create crew  job_profile_matching      
+		# crewai create crew  job_profile_matching   --classic    
+
+
+# ============
+# BB. AGENTS
+# ============
+
+# 2.0.1 Agent-I
+  
+  role: 			CV Reader
+  goal: 			Read CVs of candidates and extrct information such such as skills, experience, and education.
+  backstory: 		With years of experience in HR, you excel at quickly identifying key points in resumes..
+  tools:			Directory Reader AND File reader
+  
+# 2.0.2 Agent-II
+  
+  role:				Job Opportunities Parser
+  goal:				Extract and parse job descriptions from the CSV file
+  backstory:    	A data analyst who has transitioned into HR, you have a knack for organizing and interpreting job data
+  tools:			FileReadTool
+
+# 2.0.3 Agent-III
+  
+  role:				Matcher
+  goal:				Matching CVs of candidates to job-requirements
+  backstory:    	A seasoned recruiter, you specialize in finding the perfect fit between candidates and job roles
+
+
+
+# ============
+# CC. TASKS
+# ============
+
+
+# 3.0.1 Task-I
+
+  description:		Read cvs of the candidates from folder: {path_to_cv_folder}. Then summarise it.
+  expected_output:	Candidate wise summary of CVs
+  agent:			CV Reader
+  tools: 			Diretory Read Tool and File reader
+
+
+# 3.0.2 Task-II
+
+  description:		Use file read tool to extract job opportunities from {path_to_csv_file}
+  expected_output:	A structured list of job opportunities for each job
+  agent: 			ob_opportunities_parser 
+  tools:			File Read Tool
+
+
+
+# 3.0.3 Task-III
+
+  description:		 Match the individual CVs of cndidates to the job opportunities based best judgement
+  expected_output:	 A table having two columns: candidate name against matching job
+  agent:			 matcher
+  context:			Flow from task-I and task-II
+  
+
+  
+
+# 3.0.4 
+
+    Start editing .jsonc files
+	
+	    cd job_profile_matching
+		code .
+
+# 3.0.5
+
+	Context Required?:
+	-----------------
+	    Do I need to specify 'context' for the second task.
+	    When is a context needed to be specified for a task? 
+	    For example, there are two tasks, task1 and task2, 
+	    each with the respective agents.
+	    
+	Answer:
+	------
+	    In sequential execution, if you don't specify context on task2,
+	    CrewAI defaults to giving it the output of all previously 
+	    executed tasks anyway.
+	    So task2 (Market Analyst') still receives
+	    task1's (researcher's) output automatically, since sequential
+	    tasks by default use prior tasks' outputs as context. That's 
+	    why it worked without explicit context.
+	    Explicit context is needed when you want to:
+		a.    Control which specific prior task(s) output are passed (not all previous ones)
+		b.    Use a non-sequential/parallel or hierarchical setup where default ordering context isn't guaranteed
+		c.    Explicitly exclude a task's output from context (using context=[])
+
+
+#====== Command Execution Completed ==========
+
+#==========
+# DD. Modify *.jsonc files
+#     Tools and cloud models
+#==========#
+#
+# In 'cv_reader.jsonc', 
+	# After the command 'crewai create crew job_profile_matching' is 
+	# fully executed, we have .jsonc files--one for every Agent and Task.
+	# We may have to amend the Agent configuration file for tools. 
+	# In file 'cv_reader.jsonc', check:
+
+	"tools": ["FileReadTool"],
+	
+	USe cloud model:
+
+	"llm": "ollama/nemotron-3-nano:30b-cloud",
+
+
+# In 'job_opportunities_parser', check:
+# (this tool requires OpenAI API key.)
+# (so, instead use FileReaderTool).
+
+	"tools": ["CSVSearchTool"],
+
+# In 'matcher.jsonc', check:
+	"tools": ["FileReadTool", "CSVSearchTool"],
+
+# Also in all three files: 
+#	'cv_reader, job_opportunities_parser and matcher'
+# Use ollama cloud models:
+
+	"llm": "ollama/nemotron-3-nano:30b-cloud",
+	
+
+
+#==========
+# EE. Modify crew.jsonc
+#==========#
+
+# Add the following line (look for 'embedder') to avoid memory recall error:
+
+"embedder": {
+  "provider": "ollama",
+  "config": {
+    "model_name": "granite-embedding",
+    "url": "http://localhost:11434/api/embeddings"
+  }
+},
+
+
+
+#============
+# EE. Modify .env
+#==========
+
+AA1
+====
+	# No API keys are to be written to
+
+AA2
+===
+     # Write:
+     CREWAI_TRACING_ENABLED=true
+
+    
+    
+#============
+# FF. Run
+#==========
+
+# 4.0.1
+
+	cd job_profile_matching 
+	crewai reset-memories -a`	# Reset memory`
+	crewai run
+
+# Add any missing packages to project-root
+# as:
+
+	cd  job_profile_matching 
+	uv add ollama
+	uv add <packageName1>
+
+
+
+#============
+# GG. Input data paths
+#==========
+
+	# Create data folder and copy files to 'job_profile_matching/job_data'
+	mkdir /home/$USER/crewai_pjt/job_profile_matching/job_data
+	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_profile_matching/job_data
+	cp    /home/$USER/crewai_pjt/Exercises/cv.md  /home/$USER/crewai_pjt/job_profile_matching/job_data
+	
+	Else, try 'before copying' paths also:
+	
+					path-after-copying											path-before-copying
+					------------------											--------------------
+path_to_cv:		/home/ashok/crewai_pjt/job_profile_matching/job_data/cv.md		/home/$USER/crewai_pjt/Exercises/cv.md 
+path_to_csv:	/home/ashok/crewai_pjt/job_profile_matching/job_data/jobs.csv	/home/$USER/crewai_pjt/Exercises/jobs.csv
+
+	
+################	
+
