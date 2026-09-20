@@ -245,16 +245,9 @@ AA2
 #==========
 
 	# Create data folder and copy files to 'job_profile_matching/job_data'
-	mkdir /home/$USER/crewai_pjt/job_profile_matching/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_profile_matching/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/cv.md  /home/$USER/crewai_pjt/job_profile_matching/job_data
-	
-	Else, try 'before copying' paths also:
-	
-					path-after-copying											path-before-copying
-					------------------											--------------------
-path_to_cv:		/home/ashok/crewai_pjt/job_profile_matching/job_data/cv.md		/home/$USER/crewai_pjt/Exercises/cv.md 
-path_to_csv:	/home/ashok/crewai_pjt/job_profile_matching/job_data/jobs.csv	/home/$USER/crewai_pjt/Exercises/jobs.csv
+	mkdir -p /home/$USER/crewai_pjt/job_profile_matching/job_data
+	cd       /home/$USER/crewai_pjt/job_data_more/
+    cp  -r  .  /home/$USER/crewai_pjt/job_profile_matching/job_data
 
 	
 ################	
