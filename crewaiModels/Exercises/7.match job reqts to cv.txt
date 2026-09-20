@@ -6,6 +6,15 @@
 		Its very fast.
 	Note 3: Try to use ollama cloud in offpeak hours. Offpeak hours are : BEfore 5:30pm or after 11:30pm	 
 
+
+# In bash first:
+
+export CREWAI_DISABLE_TELEMETRY=true
+export OTEL_SDK_DISABLED=true
+
+# And also stop anti-virus:
+smc -stop
+
 # ============
 # AA. Activate crewai_env
 # ============
