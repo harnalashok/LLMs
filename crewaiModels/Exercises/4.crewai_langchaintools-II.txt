@@ -8,7 +8,13 @@
 #    for a stock ticker. The input should be the ticker that you 
 #    want to get the latest fundamental financial data for
 
+# In bash first:
 
+export CREWAI_DISABLE_TELEMETRY=true
+export OTEL_SDK_DISABLED=true
+
+# And also stop anti-virus:
+smc -stop
 
 # ============
 # AA. Activate crewai_env
