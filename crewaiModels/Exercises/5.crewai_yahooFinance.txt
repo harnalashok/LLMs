@@ -7,7 +7,13 @@
 #	c) No API needed for yfinance. Only web-scarapping.
 #	d) Two tools used: one Serper Tool and another yfinance
 
+# In bash first:
 
+export CREWAI_DISABLE_TELEMETRY=true
+export OTEL_SDK_DISABLED=true
+
+# And also stop anti-virus:
+smc -stop
 
 # ============
 # AA. Activate crewai_env
