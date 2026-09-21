@@ -1,8 +1,11 @@
 """
-# Last amended: 9th June, 2026
+# Last amended: 21st Sep, 2026
 # Client: mcp_dirRead_client.py
 # No need to start mcp server beforehand. 
 #  The client will start this mcp server when needed.
+#
+# Before executing client, set:
+#    export  CREWAI_TOOLS_ALLOW_UNSAFE_PATHS=true
 """
 
 
@@ -14,7 +17,7 @@ from crewai_tools import DirectoryReadTool
 mcp = FastMCP("Directory MCP Server")
 # Which directory to read
 # Should have chmod -R 777 permissions
-dir_tool = DirectoryReadTool(directory='/home/ashok/finance_pjt')
+dir_tool = DirectoryReadTool(directory='/home/ashok/crewai_pjt')
 
 
 @mcp.tool()

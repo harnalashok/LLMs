@@ -1,5 +1,5 @@
 """
-# Last amended: 9th June, 2026
+# Last amended: 21st Sep, 2026
 # Server is: servers/mcp_dirRead_server.py
 # No need to start mcp server beforehand
 #  client will start the stdio server when needed
@@ -8,10 +8,12 @@
 # The directory should have 'chmod +x 777' permissions.
 # 
 # cd to this folder, and execute as:
+#
 #  cd <toThisFolder>
+#  export  CREWAI_TOOLS_ALLOW_UNSAFE_PATHS=true
 #  python3 mcp_dirRead_client.py
 #
-# No need to execute from VSCode
+#  No need to execute from VSCode
 
 """
 
