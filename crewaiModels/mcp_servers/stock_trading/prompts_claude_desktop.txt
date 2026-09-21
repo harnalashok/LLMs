@@ -5,7 +5,10 @@
 Prompt1:
 ========
 Here is a sample mcp server that has certain maths tools.
-I want to create a similar sample mcp server that has two tools: one to calculate Relative Strength Index and the other to create Moving Average Convergence Trend. The program gets required OHLCV data from 'Alpaca paper trading' using requisite APIs. 
+I want to create a similar sample mcp server that has two tools: 
+one to calculate Relative Strength Index and the other to create 
+Moving Average Convergence Trend. The program gets required 
+OHLCV data from 'Alpaca paper trading' using requisite APIs. 
 
 Sample MCP server:
 ===============
@@ -58,17 +61,23 @@ if __name__ == "__main__":
 Prompt2:
 ========
 Can you transform this code into three tools:
-One tool fetches data from alpaca for a specified period and for a given script and the other two tools calculate rsi and macd
+One tool fetches data from alpaca for a specified 
+period and for a given script and the other two tools
+calculate rsi and macd
 
 #### Result #######
 
-The key architectural change is the introduction of `_cache` — a simple in-memory dict (section `3.0`) that acts as the handoff point between the three tools:
+The key architectural change is the introduction of `_cache` — a simple 
+in-memory dict (section `3.0`) that acts as the handoff point between 
+the three tools:
 
-**Tool 1 — `fetch_ohlcv`** takes `symbol`, `lookback_days`, and `timeframe` as inputs, hits Alpaca, builds the DataFrame, and stores it in `_cache`. It returns a preview so you can confirm the data looks right before calculating anything.
-
-**Tool 2 — `calculate_rsi`** reads from `_cache["df"]` directly. Its only input is `period` — no symbol, no date range. The data fetch is completely decoupled.
-
-**Tool 3 — `calculate_macd`** same pattern — reads from cache, only takes `fast_period`, `slow_period`, and `signal_period`.
+**Tool 1 — `fetch_ohlcv`** takes `symbol`, `lookback_days`, and `timeframe` as inputs, 
+            hits Alpaca, builds the DataFrame, and stores it in `_cache`. It returns 
+            a preview so you can confirm the data looks right before calculating anything.
+**Tool 2 — `calculate_rsi`** reads from `_cache["df"]` directly. Its only input is `period` 
+            — no symbol, no date range. The data fetch is completely decoupled.
+**Tool 3 — `calculate_macd`** same pattern — reads from cache, only takes `fast_period`,
+           `slow_period`, and `signal_period`.
 
 **The intended call sequence is:**
 ```
@@ -77,7 +86,8 @@ fetch_ohlcv("AAPL", lookback_days=180)
     → calculate_macd(fast_period=12, slow_period=26, signal_period=9)
 ```
 
-Both indicator tools will raise a clear `RuntimeError` with a helpful message if called before `fetch_ohlcv`, rather than failing silently.
+Both indicator tools will raise a clear `RuntimeError` with a helpful message if 
+called before `fetch_ohlcv`, rather than failing silently.
 
 
 
@@ -87,7 +97,15 @@ Both indicator tools will raise a clear `RuntimeError` with a helpful message if
 
 Prompt3:
 =========
-This mcp server with the three tools: fetch_ohlcv(), calculate_rsi() and calculate_macd() works fine. Can you next help me write python code for the four crewai agent-task pairs, as: One agent-task pair fetches ohlcv data for a stock symbol from Alpaca paper data; the second agent-task pair calculates RSI from this fetched data, the third agent-task pair calculates MACD of the stock symbol from this fetched data and the last and the fourth agent-task pair analyses the output of the IInd and IIIrd agents and then writes a report either recommending the stock purchase or not.
+This mcp server with the three tools: fetch_ohlcv(), calculate_rsi() 
+and calculate_macd() works fine. Can you next help me write python 
+code for the four crewai agent-task pairs, as: One agent-task pair
+fetches ohlcv data for a stock symbol from Alpaca paper data; the 
+second agent-task pair calculates RSI from this fetched data, the 
+third agent-task pair calculates MACD of the stock symbol from this 
+fetched data and the last and the fourth agent-task pair analyses 
+the output of the IInd and IIIrd agents and then writes a report 
+either recommending the stock purchase or not.
 
 #### Result #######
 
