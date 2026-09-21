@@ -1,5 +1,5 @@
 """
-# Last amended: 30th MAy, 2026
+# Last amended: 21st Sep, 2026
 # MCP Client file
 
 # Connecting with MCP server at https://exa.ai/mcp
@@ -8,14 +8,14 @@
 #     See below for a list of tools available.
 #       Refer: https://github.com/exa-labs/exa-mcp-server
 # 
-# My folder: C:\Users\ashok\OneDrive\Documents\crewai\mcp_servers_examples
+# My folder: C:/Users/ashok/OneDrive/Documents/crewai/mcp_servers_examples
 #
 # More Examples: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 
 """
 
 # 1.0
-# uv pip install 'crewai-tools[mcp]'
+# uv add 'crewai-tools[mcp]'
 from crewai import Agent, Task, Crew, LLM
 from crewai_tools import MCPServerAdapter
 
