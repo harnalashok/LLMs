@@ -123,17 +123,27 @@ Task 2 (RSI)    Task 3 (MACD)
          Task 4 (Report)
 ```
 
-The `context=` parameter on each task is the key mechanism — it tells CrewAI what prior task outputs to inject as context before running that task. Tasks 2 and 3 both depend on Task 1; Task 4 depends on both Task 2 and Task 3.
+The `context=` parameter on each task is the key mechanism — it tells
+CrewAI what prior task outputs to inject as context before running that
+task. Tasks 2 and 3 both depend on Task 1; Task 4 depends on both 
+Task 2 and Task 3.
 
 ---
 
 ### Key design decisions
 
-**Agent 4 has no MCP tools.** The strategy agent reasons purely over the text outputs from agents 2 and 3 — no API calls needed. Giving it tools it doesn't need would just create noise.
+**Agent 4 has no MCP tools.** The strategy agent reasons purely over
+the text outputs from agents 2 and 3 — no API calls needed. Giving
+it tools it doesn't need would just create noise.
 
-**Tasks 2 and 3 run after Task 1 but are otherwise independent.** With `Process.sequential` they run one after the other, but the `context=[task_fetch_ohlcv]` on both ensures neither fires before the data is loaded into the MCP cache.
-
-**The MCP server is launched once** via `MCPServerAdapter` and its tools shared across all agents. This means the in-memory `_cache` in the MCP server persists across all three tool calls in the same session.
+**Tasks 2 and 3 run after Task 1 but are otherwise independent.
+** With `Process.sequential` they run one after the other, but 
+         the `context=[task_fetch_ohlcv]` on both ensures neither fires 
+         before the data is loaded into the MCP cache.
+**The MCP server is launched once** via `MCPServerAdapter` and 
+          its tools shared across all agents. This means the in-memory
+          `_cache` in the MCP server persists across all three tool calls
+in the same session.
 
 ---
 
