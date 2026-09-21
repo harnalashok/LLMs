@@ -7,6 +7,11 @@
 # Reads specified directory using mcp stdio protocol
 # The directory should have 'chmod +x 777' permissions.
 # 
+# cd to this folder, and execute as:
+#  cd <toThisFolder>
+#  python3 mcp_dirRead_client.py
+#
+# No need to execute from VSCode
 
 """
 
