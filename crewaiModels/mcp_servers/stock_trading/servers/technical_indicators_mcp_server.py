@@ -1,15 +1,22 @@
 """
-# Last amended: 31st May, 2026
+# Last amended: 22nd Sep, 2026
 # MCP Server
-# Keep this file in servers folder7
-# Start this server in a separate terminal:
+# Keep this file in 'servers' folder below the client program.
+
+#  stdio transport:
+#       This server is started by client. No need to start on its own.
+#           When using the stdio transport, the MCP client automatically 
+#               starts and manages the server as a subprocess.
 #
-#   python3 technical_indicators_mcp_server.py
+#   If required, start this server in a separate terminal:
+#
+#       python3 technical_indicators_mcp_server.py
 #   
-# MCP Client is: trading_crew.py
+# MCP Client is: 'trading_crew.py'
 #
-# Keep this file: 
-#       /home/ashok/finance_pjt/servers/technical_indicators_mcp_server.py
+# Keep this file, here: 
+#
+#   /home/ashok/crewai_pjt/python_approach/CR1_files/mcp_servers/stock_trading/servers/technical_indicators_mcp_server.py
 
 # Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 """
@@ -28,7 +35,7 @@ import requests
 from mcp.server.fastmcp import FastMCP
 
 # ============================================================
-# 1.0 MCP Server
+# 1.0 MCP Server name:
 # ============================================================
 mcp = FastMCP("TechnicalIndicators")
 
@@ -43,9 +50,9 @@ ALPACA_SECRET_KEY = os.environ.get("ALPACA_SECRET_KEY", "")
 ALPACA_DATA_URL   = "https://data.alpaca.markets/v2"
 
 HEADERS = {
-    "APCA-API-KEY-ID":     ALPACA_API_KEY,
-    "APCA-API-SECRET-KEY": ALPACA_SECRET_KEY,
-}
+            "APCA-API-KEY-ID":     ALPACA_API_KEY,
+            "APCA-API-SECRET-KEY": ALPACA_SECRET_KEY,
+            }
 
 # ============================================================
 # 3.0 In-memory cache
@@ -66,10 +73,10 @@ _cache: dict = {}
 # ------------------------------------------------------------
 @mcp.tool()
 def fetch_ohlcv(
-    symbol: str,
-    lookback_days: int = 180,
-    timeframe: str = "1Day",
-) -> dict:
+                symbol: str,
+                lookback_days: int = 180,
+                timeframe: str = "1Day",
+                ) -> dict:
     """
     Fetch OHLCV (Open, High, Low, Close, Volume) bars for a stock
     symbol from Alpaca paper trading and cache them for use by the
@@ -104,13 +111,13 @@ def fetch_ohlcv(
     start_dt = end_dt - timedelta(days=lookback_days)
 
     params = {
-        "symbols":   symbol,
-        "timeframe": timeframe,
-        "start":     start_dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "end":       end_dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "limit":     10_000,
-        "feed":      "iex",   # free feed; change to "sip" for a paid plan
-    }
+            "symbols":   symbol,
+            "timeframe": timeframe,
+            "start":     start_dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "end":       end_dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "limit":     10_000,
+            "feed":      "iex",   # free feed; change to "sip" for a paid plan
+        }
 
     url      = f"{ALPACA_DATA_URL}/stocks/bars"
     response = requests.get(url, headers=HEADERS, params=params, timeout=15)
@@ -120,10 +127,10 @@ def fetch_ohlcv(
 
     if not bars:
         raise ValueError(
-            f"No bar data returned for '{symbol}'. "
-            "Verify the ticker, your API credentials, and that the market "
-            "was open during the requested period."
-        )
+                            f"No bar data returned for '{symbol}'. "
+                            "Verify the ticker, your API credentials, and that the market "
+                            "was open during the requested period."
+                        )
 
     # Build DataFrame
     df = pd.DataFrame(bars)
@@ -133,29 +140,30 @@ def fetch_ohlcv(
                              "l": "low",  "c": "close", "v": "volume"})
     df = df[["open", "high", "low", "close", "volume"]]
 
+
     # Store in cache for the indicator tools
     _cache["symbol"]    = symbol
     _cache["timeframe"] = timeframe
     _cache["df"]        = df
 
     sample = (
-        df.head(3)
-          .reset_index()
-          .rename(columns={"t": "timestamp"})
-          .assign(timestamp=lambda x: x["timestamp"].astype(str))
-          .to_dict(orient="records")
-    )
+            df.head(3)
+            .reset_index()
+            .rename(columns={"t": "timestamp"})
+            .assign(timestamp=lambda x: x["timestamp"].astype(str))
+            .to_dict(orient="records")
+            )
 
     return {
-        "symbol":       symbol,
-        "timeframe":    timeframe,
-        "start":        str(df.index[0]),
-        "end":          str(df.index[-1]),
-        "bars_fetched": len(df),
-        "columns":      list(df.columns),
-        "sample":       sample,
-        "status":       "ok",
-    }
+            "symbol":       symbol,
+            "timeframe":    timeframe,
+            "start":        str(df.index[0]),
+            "end":          str(df.index[-1]),
+            "bars_fetched": len(df),
+            "columns":      list(df.columns),
+            "sample":       sample,
+            "status":       "ok",
+         }
 
 
 # ------------------------------------------------------------
@@ -192,8 +200,8 @@ def calculate_rsi(
     """
     if "df" not in _cache:
         raise RuntimeError(
-            "No data in cache. Call fetch_ohlcv first to load OHLCV data."
-        )
+                            "No data in cache. Call fetch_ohlcv first to load OHLCV data."
+                            )
 
     df     = _cache["df"]
     symbol = _cache["symbol"]
@@ -335,7 +343,9 @@ def calculate_macd(
 
 
 # ============================================================
-# 5.0 Entry point
+# 5.0 Entry point to start server
+#     When using the stdio transport, the MCP client automatically 
+#       starts and manages the server as a subprocess
 # ============================================================
 if __name__ == "__main__":
     mcp.run(transport="stdio")
@@ -350,7 +360,7 @@ Verify MCP server is running:
     # Activate the crewai python environment
     #  And execute:
 
-        uv run mcp dev maths_mcp_server.py
+        uv run mcp dev technical_indicators_mcp_server.py
     
     # The above may ask to install '@modelcontextprotocol/inspector'
     # Go ahead and install it.
