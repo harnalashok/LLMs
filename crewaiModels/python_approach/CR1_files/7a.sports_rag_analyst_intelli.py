@@ -19,6 +19,8 @@ Para 7.1 onwards there is difference
 uv add llama-index-llms-ollama
 uv add llama-index-embeddings-ollama
 cd /home/ashok/crewai_pjt/python_approach/CR1_files
+mv 7a.sports_rag_analyst_intelli.py 7c.sports_rag_analyst_intelli.py
+wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/python_approach/CR1_files/7a.sports_rag_analyst_intelli.py
 wget -Nc https://github.com/harnalashok/LLMs/blob/main/crewaiModels/Exercises/data/sports.pdf
 
 """
