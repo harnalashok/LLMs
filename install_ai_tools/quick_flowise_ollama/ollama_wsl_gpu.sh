@@ -356,6 +356,8 @@ uv tool install crewai
 	uv add ddgs duckduckgo-search
 	uv add llama-index-embeddings-ollama
     uv add llama-index-llms-ollama
+	
+	uv add ollama
 	cd /home/$USER
 	
 	# Create script to activate 'crewai_pjt' env
