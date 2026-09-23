@@ -4,11 +4,11 @@
 # Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 MCP Maths client
 =====
-    MCP Server: math_stdio_server.py
+    MCP Server: maths_stdio_server.py
     Start the server in a separate terminal
     
     It connects to tools advertised locally
-    by math_stdio_server.py. This file is in
+    by maths_stdio_server.py. This file is in
     'servers' folder, below the current folder. 
     
 """
@@ -33,7 +33,7 @@ local_llm = LLM(
 
 server_params=StdioServerParameters(
     command="python3", 
-    args=["servers/math_stdio_server.py"],
+    args=["servers/maths_stdio_server.py"],
     env={"UV_PYTHON": "3.13", **os.environ},
 )
 
