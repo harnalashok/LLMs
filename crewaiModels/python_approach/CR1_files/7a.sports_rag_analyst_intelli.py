@@ -14,6 +14,15 @@ Para 7.1 onwards there is difference
 
 """
 
+"""
+ . activate_crewai_env.sh
+uv add llama-index-llms-ollama
+uv add llama-index-embeddings-ollama
+cd /home/ashok/crewai_pjt/python_approach/CR1_files
+wget -Nc https://github.com/harnalashok/LLMs/blob/main/crewaiModels/Exercises/data/sports.pdf
+
+"""
+
 
 
 
@@ -40,9 +49,12 @@ Settings.embed_model = embed_model
 
 ########## Data ingestion ###############
 
+
+
+
 # 3.0 Our data file
 path_to_folder = "/home/ashok/crewai_pjt/Exercises/data"
-path_to_file = "/home/ashok/crewai_pjt/Exercises/data/sports.pdf"
+path_to_file = "/home/ashok/crewai_pjt/python_approach/CR1_files/sports.pdf"
 
 # 3.1
 reader = SimpleDirectoryReader(input_files=[path_to_file ])
