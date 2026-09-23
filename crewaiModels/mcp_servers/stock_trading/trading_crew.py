@@ -1,3 +1,4 @@
+# Last amended: 23rd Sep, 2026
 # This is MCP client
 # MCP Server: technical_indicators_mcp.py
 # Folder: /home/ashok/finance_pjt/
@@ -11,11 +12,11 @@
 #
 # Prerequisites
 # -------------
-#   pip install crewai crewai-tools mcp
+#   uv add crewai crewai-tools mcp
 #
-#   export ALPACA_API_KEY="your_alpaca_key"
-#   export ALPACA_SECRET_KEY="your_alpaca_secret"
-#   export OPENAI_API_KEY="your_openai_key"   # or set llm= to another provider
+#   export ALPACA_API_KEY="ElitePK2PWGW7WJEPSPOK25TFPTE564"
+#   export ALPACA_SECRET_KEY="Babloo5PSpTbpUGizk7rhBpFH27WCWMJAAsnKgxnq8ReTvKBbr"
+
 #
 # Usage
 # -----
@@ -42,9 +43,11 @@ LOOKBACK_DAYS = 180      # calendar days of OHLCV history to fetch
 TIMEFRAME     = "1Day"   # Alpaca bar size
 
 # 1.2 Path to the MCP server script
-#     Adjust this path if trading_crew.py and technical_indicators_mcp.py
-#     live in different directories.
-MCP_SERVER_PATH = "/home/ashok/finance_pjt/servers/technical_indicators_mcp.py"
+#     MCP server file lives below 'servers' folder.
+#     MCP server file need not be started beforehand 
+#       as we use stdio protocol.
+#     This file will start the server
+MCP_SERVER_PATH = "servers/technical_indicators_mcp_server.py"
 
 
 # 1.3. Define your local Ollama LLM configuration
@@ -58,119 +61,153 @@ local_llm = LLM(
 
 # ============================================================
 # 2.0 MCP Server connection
-# Launches technical_indicators_mcp.py as a subprocess and
+# Launches technical_indicators_mcp_servers.py as a subprocess and
 # exposes its three tools to all agents that need them.
 # ============================================================
-mcp_params = StdioServerParameters(
-    command="python",
-    args=[MCP_SERVER_PATH],
-    env={
-        **os.environ,                          # pass through all env vars
-        "ALPACA_API_KEY":    os.environ.get("ALPACA_API_KEY",    ""),
-        "ALPACA_SECRET_KEY": os.environ.get("ALPACA_SECRET_KEY", ""),
-    },
-)
+stdio_params = StdioServerParameters(
+                                    command="python",
+                                    args=[MCP_SERVER_PATH],
+                                    env={
+                                        **os.environ,        # pass through all env vars
+                                        "ALPACA_API_KEY":    os.environ.get("ALPACA_API_KEY",    ""),
+                                        "ALPACA_SECRET_KEY": os.environ.get("ALPACA_SECRET_KEY", ""),
+                                        },
+                                 )
+
+"""
+env={...}
+The environment variables the subprocess will
+be given when it starts. This is important — a 
+subprocess does not automatically inherit your 
+shell's or Python process's environment unless 
+you explicitly pass it (behavior can vary, but 
+relying on inheritance is fragile, so this code 
+passes it explicitly). Breaking down the dict:
+
+**os.environ — unpacks all environment variables 
+               from the current parent Python process 
+               (PATH, HOME, VIRTUAL_ENV, etc.) into this 
+               new dict, so the subprocess has a normal 
+               working environment (able to find python, 
+               locate installed packages, etc.).
+
+"""
+
+
+
 
 # 2.1
-# MCPServerAdapter wraps the MCP server and converts its tools
+# MCPServerAdapter wraps the stdio server and converts its tools
 # into CrewAI-compatible tool objects.
 #     Given 'server parameters', MCPServerAdapter 
 #       connects to MCP server(s) and makes available
 #        tools
 # Ref: https://docs.crewai.com/en/mcp/multiple-servers 
 
-mcp_adapter = MCPServerAdapter(mcp_params)
+# 2.2 Spawn the server process & set up read/write streams
+mcp_adapter = MCPServerAdapter(stdio_params)
+
+# 2.3 Get list of available tools
 mcp_tools   = mcp_adapter.tools   # list: [fetch_ohlcv, calculate_rsi, calculate_macd]
+
+# 2.4
+print(mcp_tools)
+
+
 
 # ============================================================
 # 3.0 Agents
 # ============================================================
 
 # ------------------------------------------------------------
+# AGENT-I
 # 3.1 Data Fetcher Agent
 # Responsibility: call fetch_ohlcv and confirm data arrived.
 # ------------------------------------------------------------
 data_fetcher_agent = Agent(
-    role="Market Data Fetcher",
-    goal=(
-        "Fetch historical OHLCV (Open, High, Low, Close, Volume) price data "
-        f"for {SYMBOL} from Alpaca paper trading so that downstream agents "
-        "can compute technical indicators."
-    ),
-    backstory=(
-        "You are a specialist in retrieving financial market data. "
-        "You connect to brokerage APIs, validate the returned data, "
-        "and pass clean summaries to quantitative analysts."
-    ),
-    tools=mcp_tools,
-    verbose=True,
-    llm = local_llm,
-)
+                            role="Market Data Fetcher",
+                            goal=(
+                                    "Fetch historical OHLCV (Open, High, Low, Close, Volume) price data "
+                                    f"for {SYMBOL} from Alpaca paper trading so that downstream agents "
+                                    "can compute technical indicators."
+                                  ),
+                            backstory=(
+                                        "You are a specialist in retrieving financial market data. "
+                                        "You connect to brokerage APIs, validate the returned data, "
+                                        "and pass clean summaries to quantitative analysts."
+                                       ),
+                            tools=mcp_tools,
+                            verbose=True,
+                            llm = local_llm,
+                        )
 
 # ------------------------------------------------------------
+# AGENT-II
 # 3.2 RSI Analyst Agent
 # Responsibility: call calculate_rsi and interpret the result.
 # ------------------------------------------------------------
 rsi_agent = Agent(
-    role="RSI Technical Analyst",
-    goal=(
-        f"Calculate the 14-period Relative Strength Index (RSI) for {SYMBOL} "
-        "using the OHLCV data already loaded into the MCP server cache, "
-        "and interpret whether the stock is overbought, oversold, or neutral."
-    ),
-    backstory=(
-        "You are a quantitative analyst who specialises in momentum indicators. "
-        "You compute RSI values, understand Wilder's smoothing method, and can "
-        "clearly explain what the RSI reading means for trading decisions."
-    ),
-    tools=mcp_tools,
-    verbose=True,
-    llm = local_llm,
-)
+                    role="RSI Technical Analyst",
+                    goal=(
+                            f"Calculate the 14-period Relative Strength Index (RSI) for {SYMBOL} "
+                            "using the OHLCV data already loaded into the MCP server cache, "
+                            "and interpret whether the stock is overbought, oversold, or neutral."
+                         ),
+                    backstory=(
+                                "You are a quantitative analyst who specialises in momentum indicators. "
+                                "You compute RSI values, understand Wilder's smoothing method, and can "
+                                "clearly explain what the RSI reading means for trading decisions."
+                             ),
+                    tools=mcp_tools,
+                    verbose=True,
+                    llm = local_llm,
+                )
 
 # ------------------------------------------------------------
+# AGENT-III
 # 3.3 MACD Analyst Agent
 # Responsibility: call calculate_macd and interpret the result.
 # ------------------------------------------------------------
 macd_agent = Agent(
-    role="MACD Technical Analyst",
-    goal=(
-        f"Calculate the MACD (12/26/9) for {SYMBOL} using the OHLCV data "
-        "already loaded into the MCP server cache, and interpret the MACD line, "
-        "signal line, histogram, and any crossover signal."
-    ),
-    backstory=(
-        "You are a quantitative analyst who specialises in trend-following "
-        "indicators. You compute MACD values, understand EMA mathematics, and "
-        "can clearly explain what the MACD reading means for trading decisions."
-    ),
-    tools=mcp_tools,
-    verbose=True,
-    llm = local_llm,
-)
+                    role="MACD Technical Analyst",
+                    goal=(
+                            f"Calculate the MACD (12/26/9) for {SYMBOL} using the OHLCV data "
+                            "already loaded into the MCP server cache, and interpret the MACD line, "
+                            "signal line, histogram, and any crossover signal."
+                         ),
+                    backstory=(
+                                "You are a quantitative analyst who specialises in trend-following "
+                                "indicators. You compute MACD values, understand EMA mathematics, and "
+                                "can clearly explain what the MACD reading means for trading decisions."
+                              ),
+                    tools=mcp_tools,
+                    verbose=True,
+                    llm = local_llm,
+                )
 
 # ------------------------------------------------------------
+# AGENT-IV
 # 3.4 Strategy Analyst Agent
 # Responsibility: synthesise RSI + MACD findings into a report.
 # No MCP tools needed — this agent reasons over text context only.
 # ------------------------------------------------------------
 strategy_agent = Agent(
-    role="Trading Strategy Analyst",
-    goal=(
-        f"Analyse the RSI and MACD findings for {SYMBOL} produced by the "
-        "previous agents and write a structured research report with a clear "
-        "BUY or NO BUY recommendation backed by technical reasoning."
-    ),
-    backstory=(
-        "You are a senior portfolio manager with deep expertise in technical "
-        "analysis. You synthesise multiple indicator signals, weigh conflicting "
-        "evidence, manage risk, and communicate recommendations clearly to "
-        "both technical and non-technical audiences."
-    ),
-    tools=[],    # pure reasoning — no MCP calls needed
-    verbose=True,
-    llm= local_llm,
-)
+                        role="Trading Strategy Analyst",
+                        goal=(
+                                f"Analyse the RSI and MACD findings for {SYMBOL} produced by the "
+                                "previous agents and write a structured research report with a clear "
+                                "BUY or NO BUY recommendation backed by technical reasoning."
+                             ),
+                        backstory=(
+                                    "You are a senior portfolio manager with deep expertise in technical "
+                                    "analysis. You synthesise multiple indicator signals, weigh conflicting "
+                                    "evidence, manage risk, and communicate recommendations clearly to "
+                                    "both technical and non-technical audiences."
+                                ),
+                        tools=[],    # pure reasoning — no MCP calls needed
+                        verbose=True,
+                        llm= local_llm,
+                     )
 
 # ============================================================
 # 4.0 Tasks
@@ -180,22 +217,22 @@ strategy_agent = Agent(
 # 4.1 Task 1: Fetch OHLCV data
 # ------------------------------------------------------------
 task_fetch_ohlcv = Task(
-    description=(
-        f"Use the fetch_ohlcv tool to retrieve {LOOKBACK_DAYS} calendar days "
-        f"of daily OHLCV bars for stock symbol '{SYMBOL}' from Alpaca paper "
-        f"trading (timeframe='{TIMEFRAME}'). "
-        "Confirm the fetch succeeded by reporting: "
-        "  • The symbol fetched "
-        "  • Date range covered (start → end) "
-        "  • Total number of bars returned "
-        "  • The first 3 bars as a sample "
-        "This data will be consumed by the RSI and MACD agents."
-    ),
-    expected_output=(
-        "A confirmation summary stating the symbol, date range, bar count, "
-        "and a 3-row OHLCV sample. No indicator values yet."
-    ),
-    agent=data_fetcher_agent,
+                        description=(
+                                    f"Use the fetch_ohlcv tool to retrieve {LOOKBACK_DAYS} calendar days "
+                                    f"of daily OHLCV bars for stock symbol '{SYMBOL}' from Alpaca paper "
+                                    f"trading (timeframe='{TIMEFRAME}'). "
+                                    "Confirm the fetch succeeded by reporting: "
+                                    "  • The symbol fetched "
+                                    "  • Date range covered (start → end) "
+                                    "  • Total number of bars returned "
+                                    "  • The first 3 bars as a sample "
+                                    "This data will be consumed by the RSI and MACD agents."
+                                   ),
+                        expected_output=(
+                                        "A confirmation summary stating the symbol, date range, bar count, "
+                                        "and a 3-row OHLCV sample. No indicator values yet."
+                                        ),
+                        agent=data_fetcher_agent,
 )
 
 # ------------------------------------------------------------
@@ -293,21 +330,21 @@ task_write_report = Task(
 # 5.0 Crew
 # ============================================================
 trading_crew = Crew(
-    agents=[
-        data_fetcher_agent,
-        rsi_agent,
-        macd_agent,
-        strategy_agent,
-    ],
-    tasks=[
-        task_fetch_ohlcv,
-        task_calculate_rsi,
-        task_calculate_macd,
-        task_write_report,
-    ],
-    process=Process.sequential,   # Tasks run in the order listed above
-    verbose=True,
-)
+                    agents=[
+                            data_fetcher_agent,
+                            rsi_agent,
+                            macd_agent,
+                            strategy_agent,
+                          ],
+                    tasks=[
+                            task_fetch_ohlcv,
+                            task_calculate_rsi,
+                            task_calculate_macd,
+                            task_write_report,
+                        ],
+                    process=Process.sequential,   # Tasks run in the order listed above
+                    verbose=True,
+                )
 
 # ============================================================
 # 6.0 Entry point
@@ -327,7 +364,7 @@ if __name__ == "__main__":
     
 """
 Question 1: Can I put crew.kickoff() in a for loop to evaluate, say,
-          sperformance of multiple stocks in a portfolio?
+             performance of multiple stocks in a portfolio?
           
 Answer: Yes — and there's actually a built-in method for this:
         kickoff_for_each(). Instead of a manual for loop, you can 
@@ -340,6 +377,8 @@ Answer: Yes — and there's actually a built-in method for this:
         ]
         results = my_crew.kickoff_for_each(inputs=inputs)   
 
-    This runs the crew sequentially for each item. For parallel execution, use akickoff_for_each() native async) or kickoff_for_each_async() (thread-based).        
+    This runs the crew sequentially for each item. For parallel execution,
+      use akickoff_for_each() native async) or kickoff_for_each_async() 
+      (thread-based).        
 
 """    
