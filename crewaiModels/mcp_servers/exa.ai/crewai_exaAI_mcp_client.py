@@ -1,5 +1,5 @@
 """
-# Last amended: 21st Sep, 2026
+# Last amended: 24TG Sep, 2026
 # MCP Client file
 
 # Connecting with MCP server at https://exa.ai/mcp
@@ -11,6 +11,8 @@
 # My folder: C:/Users/ashok/OneDrive/Documents/crewai/mcp_servers_examples
 #
 # More Examples: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
+
+# FAILS WITH MULTIPLE CONNECTIONS FROM A SINGLE IP
 
 """
 
