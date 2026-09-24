@@ -1,5 +1,5 @@
 """
-# Last amended: 31st May, 2026
+# Last amended: 24th Sep, 2026
 # https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
 
 MCP Maths server
@@ -23,7 +23,7 @@ Start it in a seperate terminal, as:
 from mcp.server.fastmcp import FastMCP
 
 # 1.1 Our MCP server name is: "Math" 
-mcp = FastMCP("Math")
+mcp = FastMCP("Maths Server")
 
 # 2.0 Tools. We have six tools.
 
@@ -56,23 +56,24 @@ def divide(numerator: float, denominator: float) -> float:
         raise ValueError("Cannot divide by zero")
     return numerator / denominator
 
-# 2.5
-@mcp.tool()
-def power(base: float, exponent: float) -> float:
-    """Raise base to the power of exponent (floats ok)"""
-    return base ** exponent
 
-# 2.6
-@mcp.tool()
-def sqrt(number: float) -> float:
-    """Calculate the square root of a number"""
-    if number < 0:
-        raise ValueError("Cannot calculate square root of a negative number")
-    return number ** 0.5
+# # 2.5
+# @mcp.tool()
+# def power(base: float, exponent: float) -> float:
+#     """Raise base to the power of exponent (floats ok)"""
+#     return base ** exponent
 
-# 2.7 Add a function to take log of anumber
-#     OR add a function that feeds certain features
-#      into a model and calculates, say, loan risk.
+# # 2.6
+# @mcp.tool()
+# def sqrt(number: float) -> float:
+#     """Calculate the square root of a number"""
+#     if number < 0:
+#         raise ValueError("Cannot calculate square root of a negative number")
+#     return number ** 0.5
+
+# # 2.7 Add a function to take log of anumber
+# #     OR add a function that feeds certain features
+# #      into a model and calculates, say, loan risk.
 
 
 # 3.0
@@ -86,8 +87,13 @@ Verify MCP server is running:
     # Use uv for package management, launch the inspector via the built-in CLI:
     # Activate the crewai python environment
     #  And execute:
-
-        uv run mcp dev maths_mcp_server.py
+        
+        a) Start your mcp server in a terminal: 
+            cd /home/ashok/crewai_pjt/mcp_servers/maths_stdio_server/servers
+            python3 maths_stdio_server.py
+        b) In another terminal, run the inspector: 
+            cd /home/ashok/crewai_pjt/mcp_servers/maths_stdio_server/servers
+            uv run mcp dev maths_stdio_server.py
     
     # The above may ask to install '@modelcontextprotocol/inspector'
     # Go ahead and install it.
