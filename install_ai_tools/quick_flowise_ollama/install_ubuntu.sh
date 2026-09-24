@@ -395,6 +395,7 @@ uv tool install crewai
 	uv add llama-index-embeddings-ollama
     uv add llama-index-llms-ollama
 	uv add ollama
+	uv add "mcp[cli]" pandas-ta alpaca-py
 	cd /home/$USER
 	
 	# Create script to activate 'crewai_pjt' env
