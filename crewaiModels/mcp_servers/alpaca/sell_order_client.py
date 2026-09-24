@@ -14,7 +14,8 @@ from fastmcp import Client
 from fastmcp.client.transports import PythonStdioTransport
 
 ## SERVER_SCRIPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "alpaca_trading_mcp.py")
-SERVER_SCRIPT = "/home/ashok/crewai_pjt/mcp_servers/alpaca/servers/alpaca_trading_mcp.py"
+SERVER_SCRIPT = "/home/ashok/crewai_pjt/mcp_servers/alpaca/servers/alpaca_trading_mcpServer.py"
+
 # Explicitly pass the full parent environment through to the server subprocess.
 # fastmcp/mcp's default stdio transport only forwards a restricted "safe" set of
 # env vars (PATH, HOME, etc.) unless told otherwise, so ALPACA_API_KEY /
