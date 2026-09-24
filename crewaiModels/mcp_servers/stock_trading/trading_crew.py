@@ -1,4 +1,4 @@
-# Last amended: 23rd Sep, 2026
+# Last amended: 24th Sep, 2026
 # This is MCP client
 # MCP Server: technical_indicators_mcp.py
 # Folder: /home/ashok/finance_pjt/
@@ -47,7 +47,9 @@ TIMEFRAME     = "1Day"   # Alpaca bar size
 #     MCP server file need not be started beforehand 
 #       as we use stdio protocol.
 #     This file will start the server
-MCP_SERVER_PATH = "servers/technical_indicators_mcp_server.py"
+
+MCP_SERVER_PATH = "/home/ashok/crewai_pjt/mcp_servers/stock_trading/servers/technical_indicators_mcp_server.py"
+# MCP_SERVER_PATH = "servers/technical_indicators_mcp_server.py"
 
 
 # 1.3. Define your local Ollama LLM configuration
