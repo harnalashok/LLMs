@@ -1,7 +1,8 @@
 
 """
-# Last amended: 31st May, 2026
+# Last amended: 24th Sep, 2026
 # Ref: https://github.com/tonykipkemboi/crewai-mcp-demo/tree/main
+
 MCP Maths client
 =====
     MCP Server: maths_stdio_server.py
@@ -18,12 +19,13 @@ import os
 from crewai import Agent, Task, Crew, LLM
 
 # 2.0
-from crewai_tools import MCPServerAdapter
 from mcp import StdioServerParameters
+from crewai_tools import MCPServerAdapter
 
 # 3.0 Define local Ollama LLM configuration
+
 local_llm = LLM(
-                model="ollama/qwen3:latest",     # Prefix with 'ollama/' followed by your model name
+                model="ollama/granite4.1:3b" ,      # qwen3:latest,     # Prefix with 'ollama/' followed by your model name
                 base_url="http://localhost:11434"   # Default Ollama local server URL
                 )
 
@@ -32,10 +34,11 @@ local_llm = LLM(
 #    Note that mcp server DOES NOT have a port or a url:
 
 server_params=StdioServerParameters(
-    command="python3", 
-    args=["servers/maths_stdio_server.py"],
-    env={"UV_PYTHON": "3.13", **os.environ},
-)
+                                    command="python3", 
+                                    args=["servers/maths_stdio_server.py"],
+                                    env={"UV_PYTHON": "3.13", **os.environ},
+                                    working_dir=os.path.dirname(os.path.abspath(__file__))
+                                    )
 
 # 5.0 Use the StdioServerParameters object to create a MCPServerAdapter
 #     Given 'server parameters', MCPServerAdapter 
