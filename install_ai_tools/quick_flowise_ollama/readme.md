@@ -136,3 +136,21 @@ Stop Symantic anti-virus first
    bash install_ubuntu.sh
    cd /home/$USER 
 ```
+
+## Avoiding ZoneIDentifier files in WSL ubuntu
+### For CR1 on Windows machines AND for laptops     
+
+The Fix: Use the Windows Registry      
+1. Press Win + R, type regedit, and press Enter.      
+2. Paste this path into the address bar at the top and press Enter:text     
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments      
+Use code with caution.        
+3. If you get an error that the folder doesn't exist:       
+	• Right-click the Policies folder in the left sidebar.          
+	• Choose New > Key and name it Attachments.          
+4. Right-click an empty space in the right-hand pane and select New > DWORD (32-bit) Value.            
+5. Name the new value SaveZoneInformation.          
+6. Double-click SaveZoneInformation, change its value data to 1, and click OK.         
+You will need to restart your computer for these changes to take effect.            
+
+
