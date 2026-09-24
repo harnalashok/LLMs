@@ -35,9 +35,12 @@ local_llm = LLM(
 
 server_params=StdioServerParameters(
                                     command="python3", 
-                                    args=["servers/maths_stdio_server.py"],
+                                    # Path below mcp_servers where code. is opened
+                                    # Else, replace with complete path, as:
+                                    # args = ["/home/ashok/crewai_pjt/mcp_servers/maths_stdio_server/maths_stdio_client.py"],
+                                    args=["maths_stdio_server/servers/maths_stdio_server.py"],
                                     env={"UV_PYTHON": "3.13", **os.environ},
-                                    working_dir=os.path.dirname(os.path.abspath(__file__))
+                                    #working_dir=os.path.dirname(os.path.abspath(__file__))
                                     )
 
 # 5.0 Use the StdioServerParameters object to create a MCPServerAdapter
