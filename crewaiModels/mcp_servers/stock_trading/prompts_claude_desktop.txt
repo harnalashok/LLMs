@@ -173,4 +173,25 @@ A: Market order
 Q: How should the trade size be determined?
 A: Yes $1000 per trade
 
+Prompt 5:
+=======================
+Here are the updated files that work for me on alpaca site. Two MCP client files are: i) buy_order_client.py,
+and ii) sell_order_client.py. And one mcp server file is: alpaca_trading_mcpServer.py. 
+
+Separately, I have another MCP client file that talks to alpaca site and takes decisions.
+The file is 'trading_crew.py'. It hosts crewai agents and tasks and works with the tools 
+provided by MCP server file: 'technical_indicators_mcp_server.py'. 
+
+In this very file, trading_crew.py,I want to create one more crewai agent with a corresponding
+task. This agent is the last one in the sequence to execute. This agent (and its task) call the 
+tool 'get_account_info()'  from the mcp server file 'alpaca_trading_mcpServer.py'. Thus, this
+client file will access two mcp servers: i) 'technical_indicators_mcp_server.py', ii) and the
+other 'alpaca_trading_mcpServer.py'.
+
+Also before this last agent executes, human input is sought asking if account information is desired.
+If not, this last agent and the task do not execute and the process ends. This agent and the task 
+are totally independent of the work done by the other four Agents and Tasks--no context is passed to it.
+ 
+Please give me code for the undated trading_crew.py 
+
 
