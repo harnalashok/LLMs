@@ -15,6 +15,16 @@ Para 7.1 onwards there is difference
 """
 
 """
+Execute as:
+    cd /home/ashok/crewai_pjt/python_approach/CR1_files
+    python3 7a.sports_rag_analyst_intelli.py
+
+"""
+
+
+
+
+"""
  . activate_crewai_env.sh
 uv add llama-index-llms-ollama
 uv add llama-index-embeddings-ollama
@@ -43,7 +53,7 @@ llm = Ollama(model="granite4.1:3b",
             )
 
 # 2.1 Global Embedding Model
-embed_model = OllamaEmbedding(model_name="qwen3-embedding:0.6b")
+embed_model = OllamaEmbedding(model_name="nomic-embed-text:latest")
 
 # 2.2
 Settings.llm = llm
@@ -55,7 +65,7 @@ Settings.embed_model = embed_model
 
 
 # 3.0 Our data file
-path_to_folder = "/home/ashok/crewai_pjt/Exercises/data"
+#path_to_folder = "/home/ashok/crewai_pjt/Exercises/data"
 path_to_file = "/home/ashok/crewai_pjt/python_approach/CR1_files/sports.pdf"
 
 # 3.1
@@ -133,6 +143,8 @@ task1 = Task(
     from information retrieved via the tool. Also state what question(s) 
     you asked the tool to arrive at this answer.""",
     agent=researcher,
+    markdown_output=True,
+    output_file="sports_question_answer.md"
 )
 
 # 8.0 Crew of agents
