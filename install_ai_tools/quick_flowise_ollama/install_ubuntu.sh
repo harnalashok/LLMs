@@ -396,6 +396,7 @@ uv tool install crewai
     uv add llama-index-llms-ollama
 	uv add ollama
 	uv add "mcp[cli]" pandas-ta alpaca-py
+	uv add fastmcp
 	cd /home/$USER
 	
 	# Create script to activate 'crewai_pjt' env
@@ -410,6 +411,119 @@ uv tool install crewai
 
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
 	
+
+# ########## REVISED CODE WITH pythom3.13 default #$$$$$$$$$$$$$$
+# # My code to install crewai and other required libraries is as follows (above).
+# # But this installation uses the default python which is sometimes python3.14
+# # even though python3.13 might also be installed. Please modify the code to
+# # install  python3.13 virtual env and work from there:
+
+# cd /home/$USER
+# if [ ! -f /home/$USER/crewai_installed.txt ]; then
+#     # Will try to install Node.js again
+#     nvm install --lts
+# 	nvm use --lts
+#     echo "  "
+# echo "------------"
+# echo " Will install crewai"
+# echo "----------"
+# echo " "
+# cd /home/$USER
+# sleep 2
+
+# # 1. Switch to your home directory
+# cd ~/
+
+# curl -LsSf https://astral.sh/uv/install.sh | sh
+# # Make sure uv is on PATH for the rest of this script
+# source "$HOME/.local/bin/env" 2>/dev/null || export PATH="$HOME/.local/bin:$PATH"
+
+# # 2. Make sure Python 3.13 is available to uv, regardless of system default
+# uv python install 3.13
+
+# # 3. Compile to a local temp file (which uv deletes instantly anyway)
+# #    Pin --python 3.13 so resolution matches what we'll actually run on
+# uv pip compile --python 3.13 -o ~/temp_reqs.txt -q <(cat <<EOF
+# crewai
+# crewai-tools
+# crewai-cli
+# langchain
+# langchain-cli
+# langchain-openai
+# langchain-ollama
+# langchain-community
+# langchain-experimental
+# langchain-classic
+# yfinance
+# llama-index
+# llama-index-llms-groq
+# llama-index-core
+# llama-index-readers-file
+# llama-index-embeddings-huggingface
+# llama-index-experimental
+# pandas
+# newsapi-python
+# crewai[tools]
+# crewai-tools[mcp]
+# EOF
+# )
+
+# # 4. Clean up the placeholder file
+# #rm -f ~/temp_reqs.txt
+
+# # Install the crewai CLI tool itself using 3.13 (independent of any project venv)
+# uv tool install crewai --python 3.13
+
+# # Our project folder
+# rm -rf /home/$USER/crewai_pjt
+# mkdir -p /home/$USER/crewai_pjt/data
+# # Make it writable by any program
+# chmod -R 777 /home/$USER/crewai_pjt
+# cd /home/$USER/crewai_pjt
+
+# # Pin the project to Python 3.13 — this creates .python-version and
+# # ensures `uv venv` / `uv add` below build the venv with 3.13, not whatever default python3 resolves to
+# uv init --python 3.13
+# uv venv --python 3.13
+
+# uv add crewai crewai-tools
+# # c) Now install crewai and other packages using uv
+# uv add crewai crewai-tools crewai-cli langchain langchain-cli
+# uv add langchain-openai langchain-ollama langchain-community
+# uv add langchain-experimental langchain-classic yfinance
+# uv add llama-index llama-index-llms-groq llama-index-core
+# uv add llama-index-readers-file llama-index-embeddings-huggingface
+# uv add llama-index llama-index-experimental pandas
+# uv add 'crewai[tools]' newsapi-python
+# uv add 'crewai-tools[mcp]'
+# uv add ddgs duckduckgo-search
+# uv add llama-index-embeddings-ollama
+# uv add llama-index-llms-ollama
+# uv add ollama
+# uv add "mcp[cli]" pandas-ta alpaca-py
+# uv add fastmcp
+
+# # Sanity check: confirm the venv is actually running 3.13
+# uv run python --version
+# cd /home/$USER
+	
+# 	# Create script to activate 'crewai_pjt' env
+# 	echo '#!/bin/bash'                                                         | tee     /home/$USER/activate_crewai_env.sh
+# 	echo "echo 'Execute this file as: source activate_crewai_env.sh' "         | tee -a  /home/$USER/activate_crewai_env.sh
+# 	echo "echo 'source /home/$USER/crewai_pjt/.venv/bin/activate' "            | tee -a  /home/$USER/activate_crewai_env.sh
+# 	echo "echo 'Or, as:               . activate_crewai_env.sh' "              | tee -a  /home/$USER/activate_crewai_env.sh
+# 	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/activate_crewai_env.sh
+# 	echo "echo '(To deactivate, just enter the command: deactivate)' "         | tee -a  /home/$USER/activate_crewai_env.sh
+# 	echo "source /home/$USER/crewai_pjt/.venv/bin/activate"                    | tee -a  /home/$USER/activate_crewai_env.sh
+# 	echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
+
+# 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
+
+
+
+# ##########$$$$$$$$
+
+
 	LINE="  2. crewai Installed"
 	if ! grep -qF "$LINE" "$FILE"; then
 	    echo "$LINE" >> "$FILE"
