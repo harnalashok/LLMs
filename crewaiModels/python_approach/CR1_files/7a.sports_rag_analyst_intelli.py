@@ -37,7 +37,7 @@ from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
 ####### Model(s) to use ###########3 
 
 # 2.0
-llm = Ollama(model="granite4.1:8b",
+llm = Ollama(model="granite4.1:3b",
              request_timeout=800.0,
              temperature = 0.9
             )
@@ -93,7 +93,7 @@ sports_rag_tool = LlamaIndexTool.from_query_engine(
 
 # 6.0 Which LLM
 local_llm = LLM(
-                model="ollama/granite4.1:8b",        # Prefix with 'ollama/' followed by your model name
+                model="ollama/granite4.1:3b",        # Prefix with 'ollama/' followed by your model name
                 base_url="http://localhost:11434" # Default Ollama local server URL
                 )
 
