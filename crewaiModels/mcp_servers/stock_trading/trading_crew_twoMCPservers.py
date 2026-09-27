@@ -26,8 +26,8 @@
 # Usage
 # -----
 #   cd /home/ashok/crewai_pjt/mcp_servers/stock_trading
-#   python trading_crew.py                    # analyses AAPL by default
-#   python trading_crew.py TSLA               # pass any ticker as argv[1]
+#   python trading_crew_twoMCPservers.py                  # analyses AAPL by default
+#   python trading_crew_twoMCPservers.py TSLA             # pass any ticker as argv[1]
 
 # ============================================================
 # 0.0 Imports
