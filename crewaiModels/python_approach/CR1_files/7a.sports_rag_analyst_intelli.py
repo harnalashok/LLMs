@@ -16,6 +16,7 @@ Para 7.1 onwards there is difference
 
 """
 Execute as:
+    . activate_crewai_env.sh
     cd /home/ashok/crewai_pjt/python_approach/CR1_files
     python3 7a.sports_rag_analyst_intelli.py
 
