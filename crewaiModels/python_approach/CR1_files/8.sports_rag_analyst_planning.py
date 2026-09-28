@@ -12,16 +12,12 @@
 =================
 What is different?
 ==================
-A.
-In this example instead of my asking the RAG a question,
-as in the example: 7.sports_rag_analyst.py', the question
-to RAG is framed and asked by Agent.
-Para 7.1 onwards there is difference 
-B. 
-planning is True and planning_llm is set to a different
-LLM than the one used by the agent.
-The planning LLM is used to plan the tasks for the 
-agent(s) in the crew.
+This is an improvement over 7b.sports....py
+Here planning is set to True and planning_llm 
+is set to a different LLM than the one used
+by the agent.
+This forces Agent to have a relook at Task Description(s) 
+and to make them more effective, re-word them all.
 """
 
 """
@@ -29,7 +25,7 @@ Execute as:
 
 . activate_crewai_env.sh
 cd /home/ashok/crewai_pjt/python_approach/CR1_files
-python3 9.sports_rag_analyst_planning.py
+python3 8.sports_rag_analyst_planning.py
 
 """
 
