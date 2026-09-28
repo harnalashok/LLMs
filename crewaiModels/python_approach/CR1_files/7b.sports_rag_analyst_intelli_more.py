@@ -1,4 +1,4 @@
-# Last amended: 26th Sep, 2026
+# Last amended: 28th Sep, 2026
 # Accessing llamaindex RAG through agents
 # https://medium.com/the-ai-forum/build-a-financial-analyst-agent-using-crewai-and-llamaindex-6553a035c9b8
 
@@ -7,14 +7,18 @@
 What is different?
 ==================
 
-In this example instead of my asking the RAG a question,
-as in the example: 7.sports_rag_analyst.py', the question
-to RAG is framed and asked by Agent.
-Para 7.1 onwards there is difference 
-
+This is an imporvement over 7a.sports_rag_analyst.py',
+as agent creates multiple questions and then synthesise
+an answer.
 """
 
+"""
+Execute as:
+    . activate_crewai_env.sh
+    cd /home/ashok/crewai_pjt/python_approach/CR1_files
+    python3 7b.sports_rag_analyst_intelli_more.py
 
+"""
 
 
 # 1.0 Call libraries
