@@ -12,12 +12,11 @@
 =================
 What is different?
 ==================
-This is an improvement over 7b.sports....py
-Here planning is set to True and planning_llm 
-is set to a different LLM than the one used
-by the agent.
-This forces Agent to have a relook at Task Description(s) 
-and to make them more effective, re-word them all.
+This is an improvement over 7b.sports_rag_analyst_intelli_more.py
+Here 'planning' is set to True and a 'planning_llm'  
+is set to a different LLM than the one used by the agent.
+This forces Agent to have a relook at 'Task Description(s)'   
+and to make them more effective, re-words them all.
 """
 
 """
