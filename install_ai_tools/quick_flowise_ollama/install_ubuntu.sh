@@ -67,7 +67,7 @@ cat /home/$USER/install_progerss.txt
 cd /home/$USER
 if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     cd /home/$USER/Documents
-    wget -c https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
+    #DOIT wget -c https://raw.githubusercontent.com/harnalashok/LLMs/main/install_ai_tools/misc/Types_of_LLMs.pdf
 	cd /home/$USER
     echo "  "
     echo "------------"   
@@ -78,7 +78,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     mkdir /home/$USER/stop
 	# Download test file
 	# Tests different software installation
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test.sh
+	##DOIT wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/quick_flowise_ollama/test.sh
 	
 	nvidia_driver_version=`modinfo nvidia | grep ^version`
     echo " Will update Ubuntu and also NVIDIA driver for GPU"                     
@@ -182,9 +182,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	sudo mv /home/$USER/index.html  /var/www/html/index.html
     mkdir -p /home/$USER/apache2
 	cd /home/$USER/apache2
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
-	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
+	##DOIT wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/mvIndex.sh
+	##DOIT wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/indexDownload.sh
+	##DOIT wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_pdf_to_text.py
 	chmod +x *.sh
 	cd /home/$USER
 	echo '#!/bin/bash'                                         | tee    /home/$USER/start_apache2.sh
@@ -221,7 +221,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo $password | sudo -S add-apt-repository ppa:deadsnakes/ppa
     echo $password | sudo -S apt update
     # You need both the base package and the venv tool for 3.13
-    echo $password | sudo -S apt install python3.13 python3.13-venv
+    echo $password | sudo -S apt install python3.13 python3.13-venv -y
 
 	echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
