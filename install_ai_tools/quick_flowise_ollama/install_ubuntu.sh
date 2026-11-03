@@ -222,6 +222,7 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     echo $password | sudo -S apt update
     # You need both the base package and the venv tool for 3.13
     echo $password | sudo -S apt install python3.13 python3.13-venv -y
+	python3.13 --version
 
 	echo "====NOTE====="
 	echo " NVIDIA driver ver was: $nvidia_driver_version"        
