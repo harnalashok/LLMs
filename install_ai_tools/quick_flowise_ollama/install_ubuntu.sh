@@ -11,7 +11,6 @@ password="ashok"
 
 # echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
 # echo $password | sudo -S sh -c 'echo "185.199.111.133 raw.githubusercontent.com" >> /etc/hosts'
-echo $password | sudo -S sh -c 'echo "185.199.111.133 raw.githubusercontent.com" >> /etc/hosts'
 echo "========script=============="
 echo "Will update Ubuntu and also install nodeJS"
 echo "Will install cuda toolkit"
