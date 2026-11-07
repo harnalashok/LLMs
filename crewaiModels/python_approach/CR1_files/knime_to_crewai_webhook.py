@@ -1,7 +1,11 @@
 # Last Updated: 7th November 2026
 # FastAPI server: It receives webhook data
 #                 and passes it to a CrewAI crew
-#                 for processing.
+#                 for processing. Webhook data is 
+#                 sent from a KNIME workflow.
+#                 C:\Users\ashok\OneDrive\Documents\anomaly_detection\knime_to_crewai.knwf
+# GitHub repo: LLMs/crewaiModels/python_approach/CR1_files/knime_to_crewai_webhook.py
+#   https://github.com/harnalashok/LLMs/blob/main/crewaiModels/python_approach/CR1_files/knime_to_crewai_webhook.py
 
 # Objective: This script demonstrates how to set up a FastAPI server 
 #            that listens for incoming webhook requests and passes the 
