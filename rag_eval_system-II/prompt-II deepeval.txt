@@ -43,8 +43,8 @@ Prompt Requirements:
 a. langchain environment     
 b. Gets activated as: source /home/ashok/langchain/bin/activate     
 c. Models: deepseek-r1:latest ; llama3.2, nomic-embed-text      
-d. Folder: dataFolder with markdown files  (It exists overhere in github)     
-e. MAchine IP: 192.240.1.27      
+d. Folder: dataFolder with markdown files  (It exists overhere in github alongwith markdown files)     
+e. Machine IP: 192.240.1.27      
 f. A csv file, named as 'data' file contains question-answer pairs. It exists overhere in github..       
 ---
 
