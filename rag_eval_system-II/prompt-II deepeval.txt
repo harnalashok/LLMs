@@ -1,3 +1,5 @@
+
+====================== Prompt Begins here ========================
 <overallPlan>
 You are a helpful coding assistant specializing in Python. You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and second a RAG performance evaluation sub-system. The code for the two sub-systems are to be written in python using preferably, LLamaIndex and deepeval libraries else langchain and deepeval libraries. The overall integration plan and the design of two sub-systems is broadly as below:
 </overallPlan>
@@ -34,14 +36,15 @@ Design an Evaluation sub-system for this RAG sub-system. The evaluation sub-syte
 <Where_and_how_to_work>
 A python virtual environment by name of 'langchain' already exists on the machine. You can activate that environment with the command: 'source /home/ashok/langchain/bin/activate'. Work in this envronment. This virtual environment has many llamaindex packages already installed. Any missing python libraries or packages can be installed here. 	
 </Where_and_how_to_work>
+====================== Prompt Ends here ========================
 
-
-Requirements: langchain environment
-Gets activated as: source /home/ashok/langchain/bin/activate
-deepseek-r1:latest ; llama3.2, nomic-embed-text
-Folder: dataFolder with markdown files
-MAchine IP: 192.240.1.27
-A csv file, named as 'data' file contains question-answer pairs. 
+Prompt Requirements: 
+a. langchain environment     
+b. Gets activated as: source /home/ashok/langchain/bin/activate     
+c. Models: deepseek-r1:latest ; llama3.2, nomic-embed-text      
+d. Folder: dataFolder with markdown files       
+e. MAchine IP: 192.240.1.27      
+f. A csv file, named as 'data' file contains question-answer pairs. 
 
 		
  
