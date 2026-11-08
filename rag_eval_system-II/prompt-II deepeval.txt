@@ -38,13 +38,15 @@ A python virtual environment by name of 'langchain' already exists on the machin
 </Where_and_how_to_work>
 ====================== Prompt Ends here ========================
 
+---
 Prompt Requirements: 
 a. langchain environment     
 b. Gets activated as: source /home/ashok/langchain/bin/activate     
 c. Models: deepseek-r1:latest ; llama3.2, nomic-embed-text      
-d. Folder: dataFolder with markdown files       
+d. Folder: dataFolder with markdown files  (It exists overhere in github)     
 e. MAchine IP: 192.240.1.27      
-f. A csv file, named as 'data' file contains question-answer pairs. 
+f. A csv file, named as 'data' file contains question-answer pairs. It exists overhere in github..       
+---
 
 		
  
