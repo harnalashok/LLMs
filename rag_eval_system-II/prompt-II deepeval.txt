@@ -1,6 +1,6 @@
 Execute the following prompt in 'Antigravity App' NOT 'Antigravity IDE'.
-Read this file first:
-
+Read the file, working_in_antigravity.txt, first:       
+           https://github.com/harnalashok/LLMs/blob/main/google_antigravity/working_in_antigravity.txt
 
 ====================== Prompt Begins here ========================
 <overallPlan>
