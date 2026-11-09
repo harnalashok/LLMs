@@ -1,0 +1,141 @@
+# Last amended: 9th Nov, 2026
+# Download latest 'Antigravity app' from here:
+
+App vs IDE
+---------
+The main difference is that the Antigravity App (Antigravity 2.0) 
+is a standalone desktop command center for managing and orchestrating
+autonomous AI agents across projects, while the Antigravity IDE is a 
+full code editor (forked from VS Code) built for direct, line-by-line
+software development and debugging.
+
+
+
+#############################
+##### Working in Antigravity APP #########
+#############################
+
+
+1. Start 'antigravity-app'
+
+1a. Select 'Gemini 3.8 Flash Low' instead of 'High'.	<== Important
+    'High' increases thinking and token usage.
+
+2. Create folder /home/ashok/app_workspace
+   Give this workspace permissions, as:
+   chmod -R 777 app_workspace/
+
+ 
+3. Prepare this folder with necessary files 
+   that may be specified in the prompt.   
+   We will put: 
+   
+   	i)  data.csv
+   	and
+   	ii) 'dataFolder' 
+   	with three .md files
+
+
+4. Check: Read carefully your 'Prompt Requirements' 
+   	  Check that these requirements are met.
+ 
+   		
+5. Create Project:
+	Click 'Workspace-->Create Project'
+	Select folder: /home/ashok/app_workspace
+
+	
+6. In the antigravity chat box, first write:
+	/plan and then alongside write your prompt
+	and press ENTER.
+	
+	NOTE: /plan increases token consumption	
+
+
+7. Copy the Prompt to Build chatbox in antigravity IDE
+   and begin coding with Gemini in LOW mode.
+   NOTE: Keep Gemini in LOW mode
+
+
+8. Antigravity will itself make a series of checks such as"
+	 if langchain environment exists, or,
+	 to get a list of packages in langchain environment, or,
+	 ollama models, and so on...
+	 
+9. When a question is asked: Select '3. Yes and always...'
+   It will fasten up and may reduce token usage.	 
+
+
+================== That's all for now ================	 
+	
+ What is Slash command: /plan
+	Typing /plan inside the chat box in the 'Google Antigravity App' 
+	triggers a multi-phase analysis and planning workflow instead of
+	executing code right away.
+
+	What Happens Step-by-Step
+
+	 Analysis and Discovery: The agent inspects your prompt, scans
+				  your workspace configuration, and 
+				  examines the affected files.	
+				  
+	 Clarification and Interviewing: If your request is ambiguous or has 
+	 				 multiple technical paths, the agent asks 
+	 				 targeted questions or runs a structured 
+	 				 interview to narrow down the scope.
+	 				 
+	 Implementation Plan Artifact Creation: Once requirements are clear, the
+					 agent generates a structured technical 
+					 document (an implementation_plan.md style 
+					 artifact) detailing the exact codebase changes 
+					 needed. 
+					 
+	 User Review and Approval: The plan pops up in the review pane. You can inspect
+	 			  the steps, leave inline comments or feedback, and click
+	 			  Proceed to start implementation or request
+	 			  changes				 				 			     
+
+	 When to write /plan: You should write /plan and your prompt together in
+	 		      the same message, then press send. 
+	 		      For example, you would type this all at once into the 
+	 		      chat box and hit enter:
+	 		      
+	 		      /plan refactor the authentication middleware to use JWT tokens
+	 		      
+	How the Interface Processes It
+
+		• The slash command /plan acts as a modifier: It tells the app's AI agent 
+		  how to process the text that follows it.
+		• If you just type /plan and hit enter: The app will likely ask you what 
+		  you want to plan, requiring an extra step.
+	  
+  		      
+ 
+##### Working in IDE #########3
+
+1. Check the latest release of 'Antigravity IDE' from here:
+	https://antigravity.google/releases/
+	
+2. Download from this site only: 'Linux x64 (.tar.gz)' file; copy
+   to HOME folder and unzip. 
+   
+3. Create a folder 'antigravity_workspace' and put your 'folders'
+   and 'data-files' here.
+   
+4. Double click 'antigravity-ide' to start it. You may be asked to 
+   login to your personal gmail account.
+   
+5. In antigravity IDE, click 'File-->Open Folder' 
+   and select the folder: 'antigravity_workspace'.        
+	
+6. Check that all Prompt Requirements are met.
+
+7. Copy the Prompt to Build chatbox in antigravity IDE and begin coding.
+
+8. Antigravity will itself make a series of checks such as"
+	 if langchain environment exists, or,
+	 to get a list of packages in langchain environment, or,
+	 ollama models, and so on...
+9. Finally 7
+
+		      	
