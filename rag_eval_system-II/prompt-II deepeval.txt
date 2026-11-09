@@ -1,3 +1,6 @@
+Execute the following prompt in 'Antigravity App' NOT 'Antigravity IDE'.
+Read this file first:
+
 
 ====================== Prompt Begins here ========================
 <overallPlan>
