@@ -21,7 +21,7 @@ Design an Evaluation sub-system for this RAG sub-system. The evaluation sub-syte
 	 i).  This sub-system uses DeepEval framework for evaluation. 
 	 ii). For the RAG pipeline, it evakuates: ContextualPrecisionMetric, ContextualRecallMetric, ContextualRelevancyMetric, AnswerRelevancyMetric and   FaithfulnessMetric
 	 i).  It utilizes a 'Judge LLM' for evaluation. The 'Judge LLM' functions in local ollama environment. The Judge LLM is: 'deepseek-r1:latest'. 
-	 ii). A csv file, named as 'data' file contains question-answer pairs. The csv file has three columns: text,question,idealAnswer
+	 ii). A csv file, named as 'data.csv' file contains question-answer pairs. The csv file has three columns: text,question,idealAnswer
 	iii). The 'question' column contains a series of questions, one in each row, to be fed to the RAG sub-system, one-by-one. The 'idealAnswer' column contains the corresponding expected answers or the ground-truths.	
 	 iv). Proceed as follows: One row of the  'data' file is read. Start with the top-row.
 		iv-a). The 'question' is read and fed to RAG sub-system as user-query. The context and response of RAG sub-system to this question are then noted.
@@ -41,20 +41,13 @@ A python virtual environment by name of 'langchain' already exists on the machin
 ---
 Prompt Fact Check: 
 a. langchain environment must exist    
-b. Check as:  source /home/ashok/langchain/bin/activate     
-c. Models? deepseek-r1:latest ; llama3.2, nomic-embed-text      
-d. Folder: dataFolder with markdown files  (It exists in github alongwith markdown files)     
-e. Machine IP? 192.240.1.27      
-f. A csv file, named as 'data' file contains question-answer pairs. It exists overhere in github.
-g. Start postgresql: ./start_postgres.sh
-h. \c gautam
-   \dx vector
-
-h. Ollama hosted through docker
+b. Check as:  source /home/ashok/langchain/bin/activate 
+c. Ollama hosted through docker?
+d. Ollama Models? deepseek-r1:latest ; llama3.2, nomic-embed-text      
+e. Folder? dataFolder with markdown files  (It exists in github alongwith markdown files)     
+f. Machine IP? 192.240.1.27      
+g. 'data.csv' with columns: text,question,idealAnswer 
+h. Start postgresql: ./start_postgresql.sh 
+i. Does it have a vector database:
+j.            sudo su - gautam ; psql ; \c gautam ; \dx vector
 ---
-
-		
- 
-	  	
-
-
