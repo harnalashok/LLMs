@@ -40,6 +40,7 @@ A python virtual environment by name of 'langchain' already exists on the machin
 
 ---
 Prompt Requirements: 
+My folder: C:\Users\ashok\OneDrive\Documents\research_work
 a. Does langchain environment exist?        
 b. Check as:  source /home/ashok/langchain/bin/activate 
 c. Ollama hosted through docker?
