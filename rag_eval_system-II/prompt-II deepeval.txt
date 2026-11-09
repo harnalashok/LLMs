@@ -40,7 +40,7 @@ A python virtual environment by name of 'langchain' already exists on the machin
 
 ---
 Prompt Fact Check: 
-a. langchain environment must exist    
+a. Does langchain environment exist?        
 b. Check as:  source /home/ashok/langchain/bin/activate 
 c. Ollama hosted through docker?
 d. Ollama Models? deepseek-r1:latest ; llama3.2, nomic-embed-text      
