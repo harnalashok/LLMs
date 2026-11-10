@@ -4,7 +4,7 @@ Read the file, working_in_antigravity.txt, first:
 
 ====================== Prompt Begins here ========================
 <overallPlan>
-You are a helpful coding assistant specializing in Python. You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and second a RAG performance evaluation sub-system. The code for the two sub-systems are to be written in python using preferably, LLamaIndex and deepeval libraries else langchain and deepeval libraries. The overall integration plan and the design of two sub-systems is broadly as below:
+You are a helpful coding assistant specializing in developing Retrieval Augmented Systems using LlamaIndex and langchain. You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and second a RAG performance evaluation sub-system. The code for the two sub-systems are to be written using preferably, LlamaIndex and deepeval libraries else langchain and deepeval libraries. The overall integration plan and the design of two sub-systems are broadly as below:
 </overallPlan>
 <RAGsubSystem>
 Design RAG sub-system having the following features:
@@ -22,8 +22,8 @@ Design an Evaluation sub-system for this RAG sub-system. The evaluation sub-syte
 ===============
 
 	 i).  This sub-system uses DeepEval framework for evaluation. 
-	 ii). For the RAG pipeline, it evakuates: ContextualPrecisionMetric, ContextualRecallMetric, ContextualRelevancyMetric, AnswerRelevancyMetric and   FaithfulnessMetric
-	 i).  It utilizes a 'Judge LLM' for evaluation. The 'Judge LLM' functions in local ollama environment. The Judge LLM is: 'deepseek-r1:latest'. 
+	 ii). For the RAG pipeline, it evaluates: ContextualPrecisionMetric, ContextualRecallMetric, ContextualRelevancyMetric, AnswerRelevancyMetric and   FaithfulnessMetric
+	 i).  It utilizes a 'Judge LLM' for evaluation. The 'Judge LLM' functions in local ollama environment. The Judge LLM is: qwen2.5:latest'. 
 	 ii). A csv file, named as 'data.csv' file contains question-answer pairs. The csv file has three columns: text,question,idealAnswer
 	iii). The 'question' column contains a series of questions, one in each row, to be fed to the RAG sub-system, one-by-one. The 'idealAnswer' column contains the corresponding expected answers or the ground-truths.	
 	 iv). Proceed as follows: One row of the  'data' file is read. Start with the top-row.
@@ -31,13 +31,13 @@ Design an Evaluation sub-system for this RAG sub-system. The evaluation sub-syte
 		iv-b). At the same time the corresponding 'idealAnswer' is also read. 
 		iv-c). We now have four elements: user-query, outputted RAG context, outputted RAG response and the ground-truth ie the 'idealAnswer'.
 		iv-d). You are now to use deepEval modules along with the Judge-LLM to evaluate these metrics: ContextualPrecisionMetric, ContextualRecallMetric, ContextualRelevancyMetric, AnswerRelevancyMetric and FaithfulnessMetric. 
-		iv-e). The 'Judge LLM' receives all these inputs and makes required evaluations. 
+		iv-e). The Judge LLM' receives all these inputs and makes required evaluations. 
 		iv-f). The results of these evaluations are to be written to a file, 'evaluation_results'. 
 		iv-g). After the Judge LLM has finished all evaluations, the next row of 'dataFile' is read and steps iv-a) to iv-f) are repeated till all rows of 'data' file are read. Each time evaluation results are appended to file: 'evaluation_results'.
 </RAGEvalsubSystem>
 
 <Where_and_how_to_work>
-A python virtual environment by name of 'langchain' already exists on the machine. You can activate that environment with the command: 'source /home/ashok/langchain/bin/activate'. Work in this envronment. This virtual environment has many llamaindex packages already installed. Any missing python libraries or packages can be installed here. 	
+A python virtual environment by name of 'langchain' already exists on the machine. You can activate that environment with the command: 'source /home/ashok/langchain/bin/activate'. Work in this environment. This virtual environment has many llamaindex packages already installed. Any missing python libraries or packages can be installed here. 	
 </Where_and_how_to_work>
 ====================== Prompt Ends here ========================
 
