@@ -1,5 +1,6 @@
 # My folder: C:\Users\ashok\OneDrive\Documents\research_work
 # For proper guidance see file: prompt-II deepeval.txt
+# An over-structured prompt. Avoid it.
 
 <comments>
 1. Go for ensemble of judges
