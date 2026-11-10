@@ -106,6 +106,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
 	sudo apt install pandoc  -y
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/convert_md_to_txt.sh
 	echo $password | sudo -S apt-get install libssl-dev libcurl4-openssl-dev -y
+	# Install Markdown reader
+	echo "Installing marktext markdown reader"
+	echo $password | sudo -S snap install marktext
 	echo "  "
 	echo "  "
 	echo "===="
