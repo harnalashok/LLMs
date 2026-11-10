@@ -1,5 +1,6 @@
 # My folder: C:\Users\ashok\OneDrive\Documents\research_work
-# This prompt is over-structured. Avoid it.
+# This prompt is over-structured. Avoid it.      
+# See file optimizedPrompt.md
 
 <comments>
 1. Go for ensemble of judges
