@@ -1,10 +1,11 @@
-# Execute the following prompt in 'Antigravity App' NOT 'Antigravity IDE'.
-# Read the file, 'working_in_antigravity.txt', first:       
-#           https://github.com/harnalashok/LLMs/blob/main/google_antigravity/working_in_antigravity.txt
-# This prompt was experimented with. But there is a lot of delay in implementation.      
-# Gemini 3.8 Flash has suggested revised prompt: optimizedPrompt.txt.
+Execute the following prompt in *Antigravity App* **NOT** *Antigravity IDE*.          
+Read the file, [working_in_antigravity.txt](https://github.com/harnalashok/LLMs/blob/main/google_antigravity/working_in_antigravity.txt), first:        
+      
+This prompt was experimented with. But there is a lot of delay in implementation.      
+Gemini 3.8 Flash has suggested revised prompt: <b>*[optimizedPrompt.txt](https://github.com/harnalashok/LLMs/blob/main/rag_eval_system-II/optimizedPrompt.txt)*</b>.
 
-====================== Prompt Begins here ========================
+### ====================== Prompt Begins here ========================
+<pre>
 <overallPlan>
 You are a helpful coding assistant specializing in developing Retrieval Augmented Systems using LlamaIndex and langchain. You have to design and write code for an integrated system that comprises two sub-systems: One a Retrieval-Augmented Generation (RAG) sub-system and second a RAG performance evaluation sub-system. The code for the two sub-systems are to be written using preferably, LlamaIndex and deepeval libraries else langchain and deepeval libraries. The overall integration plan and the design of two sub-systems are broadly as below:
 </overallPlan>
@@ -41,9 +42,10 @@ Design an Evaluation sub-system for this RAG sub-system. The evaluation sub-syte
 <Where_and_how_to_work>
 A python virtual environment by name of 'langchain' already exists on the machine. You can activate that environment with the command: 'source /home/ashok/langchain/bin/activate'. Work in this environment. This virtual environment has many llamaindex packages already installed. Any missing python libraries or packages can be installed here. 	
 </Where_and_how_to_work>
+</pre>	
 ====================== Prompt Ends here ========================
 
----
+### ---
 Prompt Requirements: 
 My folder: C:\Users\ashok\OneDrive\Documents\research_work
 a. Does langchain environment exist?        
@@ -58,4 +60,4 @@ g. 'data.csv' with columns: text,question,idealAnswer
 h. Start postgresql: ./start_postgresql.sh 
 i. Does it have a vector database:
 j.            sudo su - gautam ; psql ; \c gautam ; \dx vector
----
+### ---
