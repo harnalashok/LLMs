@@ -2,7 +2,7 @@ Execute the following prompt in *Antigravity App* **NOT** *Antigravity IDE*.
 Read the file, [working_in_antigravity.txt](https://github.com/harnalashok/LLMs/blob/main/google_antigravity/working_in_antigravity.txt), first:        
       
 This prompt was experimented with. But there is a lot of delay in implementation.      
-Gemini 3.8 Flash has suggested revised prompt: <b>*[optimizedPrompt.txt](https://github.com/harnalashok/LLMs/blob/main/rag_eval_system-II/optimizedPrompt.txt)*</b>.
+Gemini 3.8 Flash has suggested revised prompt: <b>*[optimizedPrompt.md](https://github.com/harnalashok/LLMs/blob/main/rag_eval_system-II/optimizedPrompt.md)*</b>.
 
 ### ====================== Prompt Begins here ========================
 <pre>
