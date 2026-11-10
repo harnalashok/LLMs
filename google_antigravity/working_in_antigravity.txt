@@ -20,6 +20,7 @@ software development and debugging.
 
 1a. Select 'Gemini 3.8 Flash Low' instead of 'High'.	<== Important
     'High' increases thinking and token usage.
+    "Low' also increase response time
 
 2. Create folder /home/ashok/app_workspace
    Give this workspace permissions, as:
