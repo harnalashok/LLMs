@@ -1,5 +1,5 @@
 NOTES: i)  This optimized prompt was suggested by Gemini Flash3.8 considering the delay in creating
-           the plan and implementation from 'prompt-II deepeval.txt'.       
+           the plan and implementation from [prompt-II deepeval.md](https://github.com/harnalashok/LLMs/blob/main/rag_eval_system-II/prompt-II%20deepeval.md).       
        ii) Study suggestions here to create better prompts.      
 
 <pre>
