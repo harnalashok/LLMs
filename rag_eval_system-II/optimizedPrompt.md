@@ -1,6 +1,6 @@
 NOTES: i)  This optimized prompt was suggested by Gemini Flash3.8 considering the delay in creating
            the plan and implementation from 'prompt-II deepeval.txt'.       
-       ii) Study suggestions here to create better prompts.
+       ii) Study suggestions here to create better prompts.      
 
 
 <overallPlan>
