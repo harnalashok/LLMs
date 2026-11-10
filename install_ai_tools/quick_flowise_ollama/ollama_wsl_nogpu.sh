@@ -127,6 +127,9 @@ if [ ! -f /home/$USER/ubuntu_updated.txt ]; then
     sudo apt -y install python3-pip python3-dev python3-venv gcc g++ make jq 
     sudo apt-get install python3-tk -y
     sudo apt-get install libssl-dev libcurl4-openssl-dev -y
+	# Install Markdown reader
+	echo "Installing marktext markdown reader"
+	sudo snap install marktext
     echo "Ubuntu is updated" > /home/$USER/ubuntu_updated.txt   # To avoid repeat updation
     # Download docker installation scripts
     #wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/ubuntu_docker1.sh -P /home/$USER
