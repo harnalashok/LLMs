@@ -2,7 +2,7 @@ NOTES: i)  This optimized prompt was suggested by Gemini Flash3.8 considering th
            the plan and implementation from 'prompt-II deepeval.txt'.       
        ii) Study suggestions here to create better prompts.      
 
-
+<pre>
 <overallPlan>
 You are an expert Python AI engineer. Build and integrate two sub-systems:
 1. A Retrieval-Augmented Generation (RAG) sub-system using LlamaIndex.
@@ -47,3 +47,4 @@ Design a high-throughput DeepEval performance evaluation sub-system:
      - Markdown report: `evaluation_results.md`
    - Include CLI options `--start-row`, `--max-rows`, and `--overwrite` to easily pause, resume, or test subset rows.
 </RAGEvalsubSystem>
+</pre>
