@@ -1,8 +1,8 @@
 # Execute the following prompt in 'Antigravity App' NOT 'Antigravity IDE'.
-# Read the file, working_in_antigravity.txt, first:       
+# Read the file, 'working_in_antigravity.txt', first:       
 #           https://github.com/harnalashok/LLMs/blob/main/google_antigravity/working_in_antigravity.txt
 # This prompt was experimented with. But there is a lot of delay in implementation.      
-# Gemini 3.8 Flash has suggested modified prompt.
+# Gemini 3.8 Flash has suggested revised prompt: optimizedPrompt.txt.
 
 ====================== Prompt Begins here ========================
 <overallPlan>
