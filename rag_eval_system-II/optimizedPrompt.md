@@ -8,7 +8,7 @@ You are an expert Python AI engineer. Build and integrate two sub-systems:
 1. A Retrieval-Augmented Generation (RAG) sub-system using LlamaIndex.
 2. A fast, automated RAG performance evaluation sub-system using DeepEval.
 3. Keep all system constants, such as, IP address, Ollama models used, chunk-size, ollama parameters, database name, its username and password, file/folder names etc as variables in a config file for ease of change or system up-gradation.
-Work in the existing virtual environment at `/home/ashok/langchain` (`source /home/ashok/langchain/bin/activate`).
+4. Work in the existing virtual environment at `/home/ashok/langchain` (`source /home/ashok/langchain/bin/activate`).
 </overallPlan>
 
 <RAGsubSystem>
