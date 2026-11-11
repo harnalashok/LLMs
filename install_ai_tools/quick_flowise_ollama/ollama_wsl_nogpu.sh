@@ -505,6 +505,78 @@ if ! command -v docker &> /dev/null; then
 fi
 
 
+
+#############
+# Install crewaiModels folder of examples
+# Installs the folder from github: LLM/crewaiModels
+############
+
+#  Download github folder 'crewaiModels' using command line
+#  Can copy and paste all at once:
+#  Creates folder Documents/crewaiModels/
+cd /home/$USER
+if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
+	cd ~/   
+	echo "  "
+	echo "   "
+	echo "Installing crewai Models"
+	sleep 3
+	
+	# Delete any folders left from previous copying
+	rm -rf /home/$USER/Documents/crewaiModels
+	rm -rf /home/$USER/Documents/crewaiExamples
+    
+	# We download files from git to 'Documents/crewaiExamples/crewaiModels'
+	echo "Downloading files"
+	mkdir -p /home/$USER/Documents/crewaiExamples
+	cd /home/$USER/Documents/crewaiExamples
+	git init
+	git remote add origin https://github.com/harnalashok/LLMs.git
+	git sparse-checkout init --cone
+	git sparse-checkout set crewaiModels
+	git pull origin main
+	find . -maxdepth 1 ! -name "crewaiModels" ! -name "." ! -name ".." -delete
+
+    # Create another crewaiModels folder but this time here 'Documents/crewaiModels'
+	# And move files from 'Documents/crewaiExamples/crewaiModels' to 'Documents/crewaiModels'
+	cd /home/$USER/Documents
+	mkdir crewaiModels
+	cd crewaiModels
+	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
+	rm -rf /home/$USER/Documents/crewaiExamples
+
+	# Next copy from 'Documents/crewaiModels' to crewai_pjt
+	cd /home/$USER
+	\cp -r /home/$USER/Documents/crewaiModels/. /home/$USER/crewai_pjt
+
+    # mcp servers
+	mkdir /home/$USER/crewai_pjt/servers
+	cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_server.py     /home/$USER/crewai_pjt/servers/
+    cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_client.py     /home/$USER/crewai_pjt/
+	
+	#     Job data
+	mkdir /home/$USER/crewai_pjt/job_data
+	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_data
+	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_data
+	
+	mkdir -p /home/$USER/crewai_pjt/job_data_more/jobs
+	mkdir -p /home/$USER/crewai_pjt/job_data_more/cv
+	cd       /home/$USER/crewai_pjt/job_data_more/jobs
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/jobs.csv
+	cd      /home/$USER/crewai_pjt/job_data_more/cv
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/tanvi_cv.md
+	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/yash_cv.md
+	cd  ~/
+
+		
+	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
+else
+	echo "  "
+fi	
+
+
+
+
 #########
 # VectorDB install
 ##########
@@ -1818,77 +1890,6 @@ if [ ! -f /home/$USER/flowiseModels_installed.txt ]; then
 else
 	echo "  "
 fi	
-
-
-#############
-# Install crewaiModels folder of examples
-# Installs the folder from github: LLM/crewaiModels
-############
-
-#  Download github folder 'crewaiModels' using command line
-#  Can copy and paste all at once:
-#  Creates folder Documents/crewaiModels/
-cd /home/$USER
-if [ ! -f /home/$USER/crewaiExamples_installed.txt ]; then
-	cd ~/   
-	echo "  "
-	echo "   "
-	echo "Installing crewai Models"
-	sleep 3
-	
-	# Delete any folders left from previous copying
-	rm -rf /home/$USER/Documents/crewaiModels
-	rm -rf /home/$USER/Documents/crewaiExamples
-    
-	# We download files from git to 'Documents/crewaiExamples/crewaiModels'
-	echo "Downloading files"
-	mkdir -p /home/$USER/Documents/crewaiExamples
-	cd /home/$USER/Documents/crewaiExamples
-	git init
-	git remote add origin https://github.com/harnalashok/LLMs.git
-	git sparse-checkout init --cone
-	git sparse-checkout set crewaiModels
-	git pull origin main
-	find . -maxdepth 1 ! -name "crewaiModels" ! -name "." ! -name ".." -delete
-
-    # Create another crewaiModels folder but this time here 'Documents/crewaiModels'
-	# And move files from 'Documents/crewaiExamples/crewaiModels' to 'Documents/crewaiModels'
-	cd /home/$USER/Documents
-	mkdir crewaiModels
-	cd crewaiModels
-	mv /home/$USER/Documents/crewaiExamples/crewaiModels/* .
-	rm -rf /home/$USER/Documents/crewaiExamples
-
-	# Next copy from 'Documents/crewaiModels' to crewai_pjt
-	cd /home/$USER
-	\cp -r /home/$USER/Documents/crewaiModels/. /home/$USER/crewai_pjt
-
-    # mcp servers
-	mkdir /home/$USER/crewai_pjt/servers
-	cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_server.py     /home/$USER/crewai_pjt/servers/
-    cp 	  /home/$USER/crewai_pjt/mcp_servers/'maths_stdio server'/maths_stdio_client.py     /home/$USER/crewai_pjt/
-	
-	#     Job data
-	mkdir /home/$USER/crewai_pjt/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/jobs.csv  /home/$USER/crewai_pjt/job_data
-	cp    /home/$USER/crewai_pjt/Exercises/cv.md     /home/$USER/crewai_pjt/job_data
-	
-	mkdir -p /home/$USER/crewai_pjt/job_data_more/jobs
-	mkdir -p /home/$USER/crewai_pjt/job_data_more/cv
-	cd       /home/$USER/crewai_pjt/job_data_more/jobs
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/jobs.csv
-	cd      /home/$USER/crewai_pjt/job_data_more/cv
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/tanvi_cv.md
-	wget -Nc https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/crewaiModels/Exercises/job_data_more/yash_cv.md
-	cd  ~/
-
-		
-	echo "crewaiExamples_installed.txt" > /home/$USER/crewaiExamples_installed.txt
-else
-	echo "  "
-fi	
-
-
 
 
 echo "   "
