@@ -374,6 +374,27 @@ uv tool install crewai
 	echo "source /home/$USER/crewai_pjt/.venv/bin/activate"                    | tee -a  /home/$USER/activate_crewai_env.sh
 	echo "cd /home/$USER/crewai_pjt"                                           | tee -a  /home/$USER/activate_crewai_env.sh
 
+	# Create script to update 'crewai' env
+	echo '#!/bin/bash'                                                         | tee     /home/$USER/update_crewai_env.sh
+	echo "echo 'Upgradation script will be executed twice.'"                   | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo 'Executing once on my own'"                                     | tee -a  /home/$USER/update_crewai_env.sh
+	echo "sleep 3"                                                             | tee -a  /home/$USER/update_crewai_env.sh
+	echo "cd /home/$USER"                                                      | tee -a  /home/$USER/update_crewai_env.sh
+	echo " uv tool install crewai --upgrade"                                   | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '========'"	                                                   | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo 'Done...first part'"                                            | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '========'"	                                                   | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '  '"	                                                       | tee -a  /home/$USER/update_crewai_env.sh
+	echo "sleep 3"                                                             | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo 'Next, change to crewai_pjt env, as: ' "                        | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '                           . activate_crewai_env.sh' "         | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '(Note the change in prompt after activating)' "                | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo 'Then, pl issue the command: ' "                                | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '                        uv tool install crewai --upgrade' "    | tee -a  /home/$USER/update_crewai_env.sh
+	echo "echo '  '"	                                                       | tee -a  /home/$USER/update_crewai_env.sh
+	
+
+
 	echo "crewai_installed.txt" > /home/$USER/crewai_installed.txt
 	
 	LINE="  2. crewai Installed"
