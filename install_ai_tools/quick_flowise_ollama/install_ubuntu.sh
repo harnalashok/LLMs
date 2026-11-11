@@ -2050,12 +2050,7 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	echo $password | sudo -S apt install /home/$USER/1234/code.deb  -y
 	cd /home/$USER
 	rm -rf /home/$USER/1234/
-	mkdir /home/$USER/Documents/vscode
-	cd /home/$USER/Documents/vscode
-	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
-	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/vscode_ollamaCoder.pdf?raw=true
-	
-    # Copy VScode keybindings file
+	# Copy VScode keybindings file
 	# ctrl+shift+q: Restart kernel; ctrl+shift+0 : Clear all outputs
 	cd  /home/$USER/.config/Code/User/
 	wget -c https://raw.githubusercontent.com/harnalashok/LLMs/refs/heads/main/install_ai_tools/misc/keybindings
@@ -2063,7 +2058,11 @@ if [ ! -f /home/$USER/vscode_installed.txt ]; then
 	mv keybindings  keybindings.json
     cd /home/$USER
 
-
+    mkdir /home/$USER/Documents/vscode
+	cd /home/$USER/Documents/vscode
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/quick_flowise_ollama/venv/vscode_help.pdf?raw=true
+	wget -c https://github.com/harnalashok/LLMs/blob/main/install_ai_tools/misc/vscode_ollamaCoder.pdf?raw=true
+	
 	echo "vscode_installed" > /home/$USER/vscode_installed.txt
 	#    
 	sleep 5
