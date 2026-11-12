@@ -1,1 +1,31 @@
 
+
+# Using OpenRouter model
+    # a.
+    # In your `.env`:, write:
+    #   MODEL=openrouter/nvidia/nemotron-3.5-super-vl:free
+    #   OPENROUTER_API_KEY=<your-api-key> (without inverted commas)
+    # b.
+    #   Model name will be the same in jsonc files ie 
+    #         openrouter/nvidia/nemotron-3.5-super-vl:free
+    
+    # c.
+    # In python, code as:
+    # ```python
+    # llm = LLM(
+    #    model="openrouter/nvidia/nemotron-3.5-super-vl:free",
+    #    base_url="https://openrouter.ai/api/v1",
+    #    api_key=OPENROUTER_API_KEY
+    #       )
+
+# Modify embedder in .jsonc files, as:
+
+"embedder": {
+  "provider": "ollama",
+  "config": {
+    "model_name": "granite-embedding",
+    "url": "http://localhost:11434/api/embeddings"
+  }
+},
+
+
