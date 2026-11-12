@@ -148,7 +148,13 @@ Answer:
 
 # Add the following line (look for embedder) to avoid memory recall error:
 
-"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+"embedder": {
+  "provider": "ollama",
+  "config": {
+    "model_name": "granite-embedding",
+    "url": "http://localhost:11434/api/embeddings"
+  }
+},
 
 
 
