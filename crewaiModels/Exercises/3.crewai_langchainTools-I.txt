@@ -4,6 +4,26 @@
 
 """
 
+# Using OpenRouter model
+    # a.
+    # In your `.env`:, write:
+    #   MODEL=openrouter/nvidia/nemotron-3.5-super-vl:free
+    #   OPENROUTER_API_KEY=<your-api-key> (without inverted commas)
+    # b.
+    #   Model name will be the same in jsonc files ie 
+    #         openrouter/nvidia/nemotron-3.5-super-vl:free
+    
+    # c.
+    # In python, code as:
+    You can also set it in code:
+    # ```python
+    # llm = LLM(
+    #    model="openrouter/nvidia/nemotron-3.5-super-vl:free",
+    #    base_url="https://openrouter.ai/api/v1",
+    #    api_key=OPENROUTER_API_KEY
+    #       )
+
+
 # In bash first:
 
 export CREWAI_DISABLE_TELEMETRY=true
@@ -108,7 +128,14 @@ agent:              researcher
 
 # Add the following line (look for embedder) to avoid memory recall error:
 
-"embedder": {"provider": "ollama", "config": { "model": "nomic-embed-text:latest"}},
+
+"embedder": {
+  "provider": "ollama",
+  "config": {
+    "model_name": "granite-embedding",
+    "url": "http://localhost:11434/api/embeddings"
+  }
+},
 
 #========
 # EE. Tools folder
