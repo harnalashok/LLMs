@@ -13,7 +13,14 @@ Do this each time WSL restarts
 ## $${\color{red}Script \space for \space \color{green} wsl \space noGPU \space }$$
 ### For CR1 and For Gurugram labs     
 Stop Symantic anti-virus first       
-(copy and paste in WSL-Ubuntu terminal)
+Windows11. Which service is listening at port 8000.      
+In Command prompt, as Administrator, write these two commands:         
+<pre>    
+Get PID of service (the rightmost number)     	
+netstat -ano | findstr :8000
+tasklist | findstr PID
+</pre>       
+(copy and paste in WSL-Ubuntu terminal)       
 ```
   # Last amended: 16th June, 2026
   # My folder: C:\Users\ashok\OneDrive\Documents\FORE_data_analytics_course\2026\agentic AI
