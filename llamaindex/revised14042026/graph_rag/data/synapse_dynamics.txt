@@ -1,0 +1,16 @@
+# Corporate Profile: Synapse Dynamics
+
+Synapse Dynamics is a Boston-based advanced robotics and artificial intelligence enterprise founded in 2019 by Dr. Kenji Sato. The company designs agile biomimetic humanoid robots for hazardous environment navigation and emergency response.
+
+## Key Personnel
+- Dr. Kenji Sato: Founder and Chief Executive Officer. Former MIT robotics laboratory faculty member. Dr. Sato is a long-time academic collaborator of Dr. Elena Vance.
+- Dr. Elena Vance: Appointed Chief Scientific Advisor in March 2024 following her sabbatical from Aurora Technologies. Dr. Vance secretly acts as the bridge architect for neural network compression.
+- Maya Lin: VP of Autonomous Systems and lead developer of the "Synapse-OS" cognitive architecture.
+
+## Technical Operations & Suppliers
+Synapse Dynamics relies on several external components:
+- Optical Communication Protocols: Exclusively licensed from Aurora Technologies under a reciprocal non-disclosure agreement.
+- Synthetic Neural Processors: Manufactured by NeuraCore Fab in Taiwan.
+- Venture Funding: Major equity investors include Helios Capital ($60M Series C) and Cambridge Innovation Capital ($15M Series A).
+
+Synapse Dynamics is the primary physical testbed for Project Nexus, integrating quantum algorithmic cores into physical robotic chassis.

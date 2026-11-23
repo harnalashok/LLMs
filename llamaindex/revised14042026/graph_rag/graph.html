@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "Aurora technologies", "label": "Aurora technologies", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "2021", "label": "2021", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Dr. elena vance", "label": "Dr. elena vance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Seattle", "label": "Seattle", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Room-temperature superconducting qubits", "label": "Room-temperature superconducting qubits", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Marcus thorne", "label": "Marcus thorne", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Quantum computing hardware company", "label": "Quantum computing hardware company", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Former chief scientist", "label": "Former chief scientist", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Co-founder", "label": "Co-founder", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Chief scientific advisor", "label": "Chief scientific advisor", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Current chief executive officer", "label": "Current chief executive officer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Philz", "label": "Philz", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Berkeley", "label": "Berkeley", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Coffee shop", "label": "Coffee shop", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "1982", "label": "1982", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Dr. aris thorne", "label": "Dr. aris thorne", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Chief hardware engineer", "label": "Chief hardware engineer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Helios capital", "label": "Helios capital", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Frontier tech fund iv", "label": "Frontier tech fund iv", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Autonomous humanoid robotics", "label": "Autonomous humanoid robotics", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "New york city", "label": "New york city", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Autonomous systems", "label": "Autonomous systems", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "22% minority stake in synapse dynamics", "label": "22% minority stake in synapse dynamics", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Quantum compression chips", "label": "Quantum compression chips", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Project nexus", "label": "Project nexus", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "$30 million in series b of aurora technologies", "label": "$30 million in series b of aurora technologies", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Deep tech", "label": "Deep tech", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Quantum infrastructure", "label": "Quantum infrastructure", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "November 2023", "label": "November 2023", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Synapse dynamics", "label": "Synapse dynamics", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "For $60 million", "label": "For $60 million", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Victoria sterling", "label": "Victoria sterling", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "15% equity stake in aurora technologies", "label": "15% equity stake in aurora technologies", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Managing partner of helios capital", "label": "Managing partner of helios capital", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Advisory board of national science innovation council", "label": "Advisory board of national science innovation council", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Founder of helios capital", "label": "Founder of helios capital", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Julian mercer", "label": "Julian mercer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Board of directors of aurora technologies", "label": "Board of directors of aurora technologies", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Helios capital\u0027s board positions", "label": "Helios capital\u0027s board positions", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Board of directors of aether labs", "label": "Board of directors of aether labs", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Neuromorphic investments", "label": "Neuromorphic investments", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Quantum investments", "label": "Quantum investments", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Technology transfer to synapse dynamics", "label": "Technology transfer to synapse dynamics", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Undisclosed ip transfers", "label": "Undisclosed ip transfers", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Technology transfer between aurora technologies and aether labs", "label": "Technology transfer between aurora technologies and aether labs", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Sofia chen", "label": "Sofia chen", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Chief legal counsel of helios capital", "label": "Chief legal counsel of helios capital", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Dr. kenji sato", "label": "Dr. kenji sato", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Maya lin", "label": "Maya lin", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Boston", "label": "Boston", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Optical communication protocols", "label": "Optical communication protocols", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Cambridge innovation capital", "label": "Cambridge innovation capital", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "2019", "label": "2019", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Aether labs", "label": "Aether labs", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Joint venture between helios capital and aurora technologies", "label": "Joint venture between helios capital and aurora technologies", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "September 2023", "label": "September 2023", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Cross-institutional initiative", "label": "Cross-institutional initiative", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Proprietary quantum neural compression", "label": "Proprietary quantum neural compression", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Confidential whistleblower memos", "label": "Confidential whistleblower memos", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Stealth mode", "label": "Stealth mode", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Construct autonomous robotic military reconnaissance units", "label": "Construct autonomous robotic military reconnaissance units", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Multi-company consortium", "label": "Multi-company consortium", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Vance", "label": "Vance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Aurora technologies\u0027 proprietary cryoqubit compression research", "label": "Aurora technologies\u0027 proprietary cryoqubit compression research", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Victoria sterling and sofia chen", "label": "Victoria sterling and sofia chen", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Anti-competitive tech consolidation", "label": "Anti-competitive tech consolidation", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Interlocking directorates", "label": "Interlocking directorates", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Founder and chief executive officer", "label": "Founder and chief executive officer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "f3e8ed24-3c34-4d28-8ab7-827b768c9844", "label": "f3e8ed24-3c34-4d28-8ab7-827b768c9844", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "c2b32c26-4b15-4558-90f7-719c6822bb40", "label": "c2b32c26-4b15-4558-90f7-719c6822bb40", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "4a1e1e58-ab88-4e12-9c80-2fd54f784f1c", "label": "4a1e1e58-ab88-4e12-9c80-2fd54f784f1c", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "e975b1ce-3834-4a7c-bef8-48b965ab1a7c", "label": "e975b1ce-3834-4a7c-bef8-48b965ab1a7c", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "Aurora technologies", "label": "Founded in", "to": "2021", "width": 1}, {"arrows": "to", "from": "Aurora technologies", "label": "Founded by", "to": "Dr. elena vance", "width": 1}, {"arrows": "to", "from": "Aurora technologies", "label": "Headquartered in", "to": "Seattle", "width": 1}, {"arrows": "to", "from": "Aurora technologies", "label": "Specializes in", "to": "Room-temperature superconducting qubits", "width": 1}, {"arrows": "to", "from": "Aurora technologies", "label": "Founded by", "to": "Marcus thorne", "width": 1}, {"arrows": "to", "from": "Aurora technologies", "label": "Is a", "to": "Quantum computing hardware company", "width": 1}, {"arrows": "to", "from": "Dr. elena vance", "label": "Is", "to": "Former chief scientist", "width": 1}, {"arrows": "to", "from": "Dr. elena vance", "label": "Is", "to": "Co-founder", "width": 1}, {"arrows": "to", "from": "Dr. elena vance", "label": "Role", "to": "Chief scientific advisor", "width": 1}, {"arrows": "to", "from": "Dr. elena vance", "label": "Collaborator", "to": "Dr. elena vance", "width": 1}, {"arrows": "to", "from": "Marcus thorne", "label": "Is", "to": "Co-founder", "width": 1}, {"arrows": "to", "from": "Marcus thorne", "label": "Is", "to": "Current chief executive officer", "width": 1}, {"arrows": "to", "from": "Philz", "label": "Founded in", "to": "Berkeley", "width": 1}, {"arrows": "to", "from": "Philz", "label": "Is", "to": "Coffee shop", "width": 1}, {"arrows": "to", "from": "Philz", "label": "Founded in", "to": "1982", "width": 1}, {"arrows": "to", "from": "Dr. aris thorne", "label": "Is", "to": "Chief hardware engineer", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Manages", "to": "Frontier tech fund iv", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Funds", "to": "Autonomous humanoid robotics", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Is based in", "to": "New york city", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Specializes in", "to": "Autonomous systems", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Acquired", "to": "22% minority stake in synapse dynamics", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Funds", "to": "Quantum compression chips", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Funds", "to": "Project nexus", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Invested", "to": "$30 million in series b of aurora technologies", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Specializes in", "to": "Deep tech", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Specializes in", "to": "Quantum infrastructure", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Acquired stake in", "to": "November 2023", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Acquired stake in", "to": "Synapse dynamics", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Acquired stake in", "to": "For $60 million", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Has managing partner", "to": "Victoria sterling", "width": 1}, {"arrows": "to", "from": "Helios capital", "label": "Holds", "to": "15% equity stake in aurora technologies", "width": 1}, {"arrows": "to", "from": "Victoria sterling", "label": "Is", "to": "Managing partner of helios capital", "width": 1}, {"arrows": "to", "from": "Victoria sterling", "label": "Sits on", "to": "Advisory board of national science innovation council", "width": 1}, {"arrows": "to", "from": "Victoria sterling", "label": "Is", "to": "Founder of helios capital", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Serves on", "to": "Board of directors of aurora technologies", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Used", "to": "Helios capital\u0027s board positions", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Serves on", "to": "Board of directors of aether labs", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Oversees", "to": "Neuromorphic investments", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Oversees", "to": "Quantum investments", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Orchestrated", "to": "Technology transfer to synapse dynamics", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Sanctioned", "to": "Undisclosed ip transfers", "width": 1}, {"arrows": "to", "from": "Julian mercer", "label": "Orchestrated", "to": "Technology transfer between aurora technologies and aether labs", "width": 1}, {"arrows": "to", "from": "Sofia chen", "label": "Previously represented", "to": "Synapse dynamics", "width": 1}, {"arrows": "to", "from": "Sofia chen", "label": "Is", "to": "Chief legal counsel of helios capital", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Founded by", "to": "Dr. kenji sato", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Has key personnel", "to": "Dr. elena vance", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Has key personnel", "to": "Maya lin", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Investor", "to": "Helios capital", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Is located in", "to": "Boston", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Relies on", "to": "Optical communication protocols", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Investor", "to": "Cambridge innovation capital", "width": 1}, {"arrows": "to", "from": "Synapse dynamics", "label": "Founded in", "to": "2019", "width": 1}, {"arrows": "to", "from": "Aether labs", "label": "Is", "to": "Joint venture between helios capital and aurora technologies", "width": 1}, {"arrows": "to", "from": "Aether labs", "label": "Established", "to": "September 2023", "width": 1}, {"arrows": "to", "from": "Project nexus", "label": "Is", "to": "Cross-institutional initiative", "width": 1}, {"arrows": "to", "from": "Project nexus", "label": "Powered by", "to": "Proprietary quantum neural compression", "width": 1}, {"arrows": "to", "from": "Project nexus", "label": "Revealed by", "to": "Confidential whistleblower memos", "width": 1}, {"arrows": "to", "from": "Project nexus", "label": "Operating in", "to": "Stealth mode", "width": 1}, {"arrows": "to", "from": "Project nexus", "label": "Objective", "to": "Construct autonomous robotic military reconnaissance units", "width": 1}, {"arrows": "to", "from": "Project nexus", "label": "Is", "to": "Multi-company consortium", "width": 1}, {"arrows": "to", "from": "Vance", "label": "Brought", "to": "Aurora technologies\u0027 proprietary cryoqubit compression research", "width": 1}, {"arrows": "to", "from": "Victoria sterling and sofia chen", "label": "Involved in", "to": "Anti-competitive tech consolidation", "width": 1}, {"arrows": "to", "from": "Victoria sterling and sofia chen", "label": "Involved in", "to": "Interlocking directorates", "width": 1}, {"arrows": "to", "from": "Dr. kenji sato", "label": "Is", "to": "Founder and chief executive officer", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+# Investigative Report: The Secret Architecture of Project Nexus
+Source: Tech Sentinel Investigative Desk
+Classification: Public Domain Investigation Summary
+
+In late 2024, confidential whistleblower memos revealed the existence of "Project Nexus", a multi-company consortium operating in stealth mode. The objective of Project Nexus is to construct autonomous robotic military reconnaissance units powered by proprietary quantum neural compression.
+
+## The Triangular Network Structure
+Our investigation reveals how three ostensibly independent entities were stitched together into Project Nexus:
+1. Dr. Elena Vance and Dr. Kenji Sato: The intellectual architects. Vance and Sato co-authored foundational papers on quantum robotics at Stanford University in 2016. Vance brought Aurora Technologies' proprietary CryoQubit compression research to the table, while Sato integrated it into Synapse Dynamics' humanoid bodies.
+2. Julian Mercer and Helios Capital: The financial and governance nexus. Julian Mercer used Helios Capital's board positions at both Aurora Technologies and Aether Labs to sanction undisclosed IP transfers.
+3. Marcus Thorne: The Aurora CEO initially resisted sharing patents with Synapse Dynamics, but relented after Helios Capital threatened to withhold tranche financing for Aether Labs.
+
+## Regulatory Scrutiny
+In October 2024, the Federal Trade Commission launched an inquiry into Victoria Sterling and Sofia Chen regarding interlocking directorates and anti-competitive tech consolidation between Helios Capital, Aurora Technologies, and Synapse Dynamics.

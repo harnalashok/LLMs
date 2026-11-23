@@ -1,0 +1,13 @@
+# Company Overview: Aurora Technologies Inc.
+
+Aurora Technologies is a pioneering quantum computing hardware company founded in 2021 by Dr. Elena Vance and Marcus Thorne. Headquartered in Seattle, Washington, Aurora specializes in room-temperature superconducting qubits.
+
+## Key Personnel and Roles
+- Dr. Elena Vance: Co-Founder and former Chief Scientist. Dr. Vance was the primary architect of the "CryoQubit" patent portfolio before her controversial sabbatical in early 2024.
+- Marcus Thorne: Co-Founder and current Chief Executive Officer. Thorne previously served as a senior director at Intel.
+- Dr. Aris Thorne: Chief Hardware Engineer and Marcus Thorne's brother. Dr. Aris Thorne leads the cryogenic fabrication laboratory in Zurich.
+
+## Strategic Partnerships & Spin-offs
+In September 2023, Aurora Technologies formed a joint venture with Helios Capital known as "Aether Labs". Under this agreement, Helios Capital injected $45 million into Aether Labs in exchange for exclusive licensing rights to Aurora's quantum compression algorithms.
+
+Furthermore, Aurora Technologies licenses optical communication protocols to Synapse Dynamics, an artificial intelligence robotics company based in Boston. Dr. Elena Vance recused herself from the Synapse Dynamics licensing vote due to undisclosed personal ties.
