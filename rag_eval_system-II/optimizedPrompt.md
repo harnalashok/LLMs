@@ -39,7 +39,8 @@ Design a high-throughput DeepEval performance evaluation sub-system:
    - Evaluate: `ContextualPrecisionMetric`, `ContextualRecallMetric`, `ContextualRelevancyMetric`, `AnswerRelevancyMetric`, and `FaithfulnessMetric`.
    - Set `async_mode=False` to prevent Ollama thread/queue contention.
 4. Execution Flow:
-   - Read `data.csv` (`text,question,idealAnswer`) row-by-row starting from row 1.
+   - If 'data.csv' is available, read it (`text,question,idealAnswer`) row-by-row starting from row 1. 
+   - If 'data.csv' is NOT available, first create one having three columns: text,question,idealAnswer. And the begin reading row-by-row starting from row 1. 
    - For each row, query RAG -> record context & response -> evaluate the 5 metrics with Judge LLM.
    - Immediately append the row results to:
      - Plain text log: `evaluation_results`
