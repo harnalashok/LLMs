@@ -786,7 +786,8 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 	echo "echo 'Ports are: 6333 and 6334.'"                    | tee -a /home/$USER/start/start_qdrant.sh
 	# echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_qdrant.sh
 	echo "echo 'Access in applications as: http://<hostIP>:6333.'"           | tee -a /home/$USER/start/start_qdrant.sh
-	echo 'docker run -d --name qdrant -p 6333:6333 -p 6334:6334 -v "$(pwd)/qdrant_storage:/qdrant/storage:z" qdrant/qdrant' | tee -a /home/$USER/start_qdrant.sh
+	#echo 'docker run -d --name qdrant -p 6333:6333 -p 6334:6334 -v "$(pwd)/qdrant_storage:/qdrant/storage:z" qdrant/qdrant' | tee -a /home/$USER/start_qdrant.sh
+	echo 'docker start qdrant'                                               | tee -a /home/$USER/start_qdrant.sh
 	echo "netstat -aunt | grep 6333"                           | tee -a /home/$USER/start_qdrant.sh 
 	# Stop script		
 	echo '#!/bin/bash'                                         | tee    /home/$USER/stop_qdrant.sh 
