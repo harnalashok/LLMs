@@ -1805,6 +1805,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U huggingface_hub
 	# To connect to postgresql
 	pip install psycopg2
+	pip install llama-index-vector-stores-qdrant
 
 	# Create script to activate 'langchain' env
 	echo "echo 'To activate langchain+llamaIndex virtual envs, activate as:' "  >  /home/$USER/activate_langchain_venv.sh
