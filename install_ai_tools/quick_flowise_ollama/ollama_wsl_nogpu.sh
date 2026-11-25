@@ -931,6 +931,39 @@ if [ ! -f /home/$USER/vectordb_installed.txt ]; then
 		fi
 	fi		
 
+    ###############
+	# Qdrant install
+	# Webui avaiable at: http://localhost:6333/dashboard
+	# Ref: https://milvus.io/docs/install_standalone-docker.md
+	################
+
+    # 1. Pull the latest Qdrant image
+    docker pull qdrant/qdrant
+
+    # 2. Run the container with persistent local storage
+    docker run -d --name qdrant \
+                  -p 6333:6333 \
+                  -p 6334:6334 \
+                  -v "$(pwd)/qdrant_storage:/qdrant/storage:z" \
+                   qdrant/qdrant
+
+    # Our qdrant start script		
+	echo '#!/bin/bash'                                         | tee    /home/$USER/start_qdrant.sh
+	echo " "                                                   | tee -a /home/$USER/start_qdrant.sh
+	echo "cd ~/"                                               | tee -a /home/$USER/start/start_qdrant.sh
+	echo "echo 'Ports are: 6333 and 6334.'"                    | tee -a /home/$USER/start/start_qdrant.sh
+	# echo "echo 'Data is in /home/$USER/volumes/milvus/'"                   | tee -a /home/$USER/start/start_qdrant.sh
+	echo "echo 'Access in applications as: http://<hostIP>:6333.'"           | tee -a /home/$USER/start/start_qdrant.sh
+	echo 'docker run -d --name qdrant -p 6333:6333 -p 6334:6334 -v "$(pwd)/qdrant_storage:/qdrant/storage:z" qdrant/qdrant' | tee -a /home/$USER/start_qdrant.sh
+	echo "netstat -aunt | grep 6333"                           | tee -a /home/$USER/start_qdrant.sh 
+	# Stop script		
+	echo '#!/bin/bash'                                         | tee    /home/$USER/stop_qdrant.sh 
+	echo " "                                                   | tee -a /home/$USER/stop_qdrant.sh 
+	echo "cd ~/"                                               | tee -a /home/$USER/stop_qdrant.sh 
+	echo "docker stop qdrant"                                  | tee -a /home/$USER/stop_qdrant.sh 
+	echo "netstat -aunt | grep 6333"                           | tee -a /home/$USER/stop_qdrant.sh 
+
+
 	##########################
 	### Install chromadb docker
 	# Ref: https://docs.trychroma.com/production/containers/docker
