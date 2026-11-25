@@ -1714,6 +1714,8 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install polars
 	# Install deepeval evaluation system
 	pip install -U deepeval
+	pip install llama-index-vector-stores-qdrant
+
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	echo "  "
 	echo "====="
