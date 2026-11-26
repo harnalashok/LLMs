@@ -1867,6 +1867,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U deepeval
 	pip install  llama-index-experimental
 	pip install polars
+	pip install pyvis
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	sleep 3
 	chmod +x /home/$USER/*.sh
