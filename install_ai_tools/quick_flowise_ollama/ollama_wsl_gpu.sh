@@ -1663,7 +1663,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install llama-index-llms-mistralai
 	pip install  llama-index-experimental
 	pip install llama-index-vector-stores-qdrant
-
+    pip install llama-index-graph-stores-neo4j
 	pip install polars
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	chmod +x /home/$USER/*.sh
