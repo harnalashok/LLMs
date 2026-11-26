@@ -1,0 +1,17 @@
+# Investment Dossier: Helios Capital Management
+
+Helios Capital is a venture capital and private equity firm based in New York City, specializing in deep tech, quantum infrastructure, and autonomous systems. Helios is managing partner for the $1.2B "Frontier Tech Fund IV".
+
+## Leadership & Key Investors
+- Victoria Sterling: Managing Partner and Founder of Helios Capital. Sterling sits on the advisory board of the National Science Innovation Council.
+- Julian Mercer: Principal Investment Director. Mercer oversees quantum and neuromorphic investments. He serves on the board of directors of Aurora Technologies and Aether Labs.
+- Sofia Chen: Chief Legal Counsel. Sofia previously represented Synapse Dynamics in its Series B fundraising round.
+
+## Portfolio & Financial Interconnections
+Helios Capital is the lead financial backer for multiple intersecting enterprises:
+1. Aurora Technologies: Helios invested $30 million in Series B and holds a 15% equity stake.
+2. Aether Labs: Joint venture between Helios Capital and Aurora Technologies established in September 2023.
+3. Synapse Dynamics: Helios acquired a 22% minority stake in Synapse Dynamics in November 2023 for $60 million.
+4. Project Nexus: An unannounced cross-institutional initiative funded covertly by Helios Capital to merge quantum compression chips with autonomous humanoid robotics.
+
+Confidential internal correspondence shows that Julian Mercer orchestrated the technology transfer between Aurora Technologies, Aether Labs, and Synapse Dynamics.
