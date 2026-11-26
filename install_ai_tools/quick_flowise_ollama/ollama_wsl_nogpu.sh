@@ -1715,7 +1715,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	# Install deepeval evaluation system
 	pip install -U deepeval
 	pip install llama-index-vector-stores-qdrant
-
+    pip install llama-index-graph-stores-neo4j
 	echo "langchain_installed.txt" > /home/$USER/langchain_installed.txt
 	echo "  "
 	echo "====="
