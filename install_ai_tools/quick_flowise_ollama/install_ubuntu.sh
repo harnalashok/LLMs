@@ -1853,6 +1853,7 @@ if [ ! -f /home/$USER/langchain_installed.txt ]; then
 	pip install -U qdrant-client llama-index-vector-stores-chroma 
 	pip install =U llama-index-vector-stores-qdrant fastembed
 	pip install -U llama-index-vector-stores-postgres
+	pip install llama-index-graph-stores-neo4j
 	# 1.3 Web access site
 	pip install tavily-python
 	# 1.4 Yahoo finance data
