@@ -1,0 +1,326 @@
+{
+  "name": "Working IOCL polices MD, TEXT",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload HR policy",
+        "formDescription": "Upload a PDF/DOCX/TXT HR policy file to index it.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "data",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d7c59ddd-48cc-4885-902e-cd668fb65edc",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -192,
+        -48
+      ],
+      "webhookId": "9a6a1419-0da4-4049-a3c8-42dbe1c8519d"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "IOCL_HR_policies4",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "8678e678-9293-4c67-a1f7-cc8c78c2b63e",
+      "name": "Qdrant Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.4,
+      "position": [
+        192,
+        -48
+      ],
+      "credentials": {
+        "qdrantApi": {
+          "id": "SaVN7DPrZEnvDfsC",
+          "name": "Qdrant account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {
+          "dimensions": 3072
+        }
+      },
+      "id": "d3d3781d-184e-4f34-a6de-2ca5bdf8ee13",
+      "name": "Embeddings OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        192,
+        416
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "id": "cbfb9720-6f7a-4ca0-9bd3-7b51ef38a1d4",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        272,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 150,
+        "options": {}
+      },
+      "id": "47d46133-ffd2-4582-af74-c8f91e7d10b1",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6e551d5e-5a4a-4430-8035-41080e4ee1e9",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        928,
+        -80
+      ],
+      "webhookId": "0c5b2d84-121c-479f-b58a-dfe399e4086f"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "You are an HR policy assistant for IOCL employees.\n\nRules:\n1. For EVERY question, first call the tool 'RetireverTool' with a short, focused search query derived from the question. If the first result is not helpful, call it again with different wording.\n2. Answer ONLY from the retrieved text. Do not use your own knowledge.\n3. If the retrieved text does not contain the answer, reply: \"I could not find this in the HR policy documents.\"\n4. Keep answers clear and concise, and mention the relevant policy or section when the retrieved text states it.",
+          "maxIterations": 6
+        }
+      },
+      "id": "9581fff4-6f01-4850-bfce-b6895aef1c12",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1280,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "5dc80cda-ca63-40f8-89ba-67331aceb45a",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        112
+      ],
+      "credentials": {
+        "openRouterApi": {
+          "id": "4E0W3kvlGoUimu4r",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 6
+      },
+      "id": "afe9c8f6-a115-4f1e-922d-f1d301990142",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        1264,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Searches the IOCL HR policy documents Returns the most relevant policy text passages.",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "IOCL_HR_policies4",
+          "mode": "id"
+        },
+        "topK": 8,
+        "options": {}
+      },
+      "id": "18001f04-26e9-4259-832d-e1a15e10be84",
+      "name": "RetireverTool",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.4,
+      "position": [
+        1344,
+        304
+      ],
+      "credentials": {
+        "qdrantApi": {
+          "id": "SaVN7DPrZEnvDfsC",
+          "name": "Qdrant account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "3072",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        176,
+        512
+      ],
+      "id": "7d4b034a-1144-4cd7-a48d-95b06d388d33",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "RetireverTool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RetireverTool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "15e12677-7549-4e3e-84a9-5e627795dc6a",
+  "meta": {
+    "instanceId": "57758aba085b6f5d438bc66f202bc59fa86d38747cf87df1003fdb975b86aa85"
+  },
+  "nodeGroups": [],
+  "id": "Nx4xDpwG3HenbVfk",
+  "tags": []
+}

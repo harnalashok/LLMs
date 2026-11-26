@@ -1,0 +1,497 @@
+{
+  "name": "FINAL",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload document",
+        "formDescription": "Choose the document type, then upload a PDF/DOCX/TXT file to index it.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2a7e905e-7101-49e9-9512-75160b388962",
+      "name": "Upload Document Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        32
+      ],
+      "webhookId": "8f3c2b64-a67b-4c6f-af57-b56f95485c5f"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "IOCL_HR_123",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "d6ad5e13-a5fc-42ca-be9f-e58ef8808339",
+      "name": "Qdrant Insert",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.4,
+      "position": [
+        384,
+        -48
+      ],
+      "credentials": {
+        "qdrantApi": {
+          "id": "SaVN7DPrZEnvDfsC",
+          "name": "Qdrant account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {
+          "dimensions": 3072
+        }
+      },
+      "id": "95decd6e-3bcd-488f-8601-15744a7b795b",
+      "name": "Embeddings - Insert",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        352,
+        384
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "doc_type",
+                "value": "={{ $('Upload Document Form').item.json['Document type'] }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "62daf58b-bab3-4796-a4b8-f59e86add2e2",
+      "name": "Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        528,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "chunkSize": 500,
+        "chunkOverlap": 150,
+        "options": {}
+      },
+      "id": "1d058412-efbd-43cd-a590-1db7652a2ee6",
+      "name": "Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        640,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "id": "5809b7fa-eba2-4685-add0-12b97e24500b",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        1152,
+        48
+      ],
+      "webhookId": "0c5b2d84-121c-479f-b58a-dfe399e4086f"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "You are an internal assistant for IOCL. You answer questions on HR policies and on operations using two tools.\n\nYou have two tools:\n- '\n- 'HRTOOL: For extracting information regarding questions on HR policy such as :leave, attendance, benefits, reimbursements, conduct, promotions, grievances, etc.\n- 'OPTOOL': For extracting information regarding operations of IOCL such as  : SOPs, operating and safety procedures, process guidelines, etc.\n\nRules:\n1. For EVERY question, first decide which tool fits and call it with a short, focused search query derived from the question. HR-related question -> 'HRTOOL'. \n    Operations-related question -> 'OPTOOL.  If the question is  unclear, try the most likely tool first, then the other.\n2. If the first result is not helpful, call the tool again with different wording.\n3. Answer ONLY from the retrieved text. Do not use your own knowledge.\n4. If neither tool returns the answer, reply: \"I could not find this in the HR policy or operations documents.\"\n5. Keep answers clear and concise. Mention which document, policy or section the answer comes from when the retrieved text states it.\n6. For greetings or small talk, reply briefly without calling a tool and say you can help with HR policy and operations questions.",
+          "maxIterations": 8
+        }
+      },
+      "id": "27eda169-7698-459f-9320-65cb9e6d1ddd",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1472,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "fad6e60c-686c-4efc-a345-ad21f79bfdf8",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        320
+      ],
+      "credentials": {
+        "openRouterApi": {
+          "id": "4E0W3kvlGoUimu4r",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 6
+      },
+      "id": "3b4f5dc5-4f70-41e9-bd9c-7261c9049be6",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        1456,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {
+          "dimensions": 3072
+        }
+      },
+      "id": "f16216aa-095e-4def-bf0d-94dced01de9e",
+      "name": "Embeddings - Retrieval",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1808,
+        560
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search the HR policy documents (leave, attendance, benefits, reimbursements, conduct, promotions, grievances and other employee policies). Use for any HR policy question. Input: a short, focused search query.",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "IOCL_HR_123",
+          "mode": "id"
+        },
+        "topK": 5,
+        "includeDocumentMetadata": false,
+        "options": {}
+      },
+      "id": "011c8e7b-ef5d-4d38-b7e6-94bade313977",
+      "name": "HRTOOL",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.4,
+      "position": [
+        1680,
+        304
+      ],
+      "credentials": {
+        "qdrantApi": {
+          "id": "SaVN7DPrZEnvDfsC",
+          "name": "Qdrant account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search the operations documents (SOPs, operating, safety and maintenance procedures, process guidelines, logistics). Use for any operations question. Input: a short, focused search query.",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "IOCL_Knowledge_Base",
+          "mode": "id"
+        },
+        "topK": 5,
+        "includeDocumentMetadata": false,
+        "options": {}
+      },
+      "id": "18b9b5bd-1eff-48d0-a62a-1aa307efc4cd",
+      "name": "OPTOOL",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.4,
+      "position": [
+        1936,
+        304
+      ],
+      "credentials": {
+        "qdrantApi": {
+          "id": "SaVN7DPrZEnvDfsC",
+          "name": "Qdrant account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Upload twice\n> First upload HR document and store it HR collection.\n> Then upload Operations document and save it in Operations collection",
+        "height": 144,
+        "width": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        192
+      ],
+      "id": "8973193d-fcd1-4bf5-a687-f32263070020",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## One database but two collections\nQdrant is in cloud. One database but two collections",
+        "height": 96,
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        368,
+        -160
+      ],
+      "id": "c9a986ea-ba2c-418d-a29c-f62d3f5d0063",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Large dimensions\nDimensions of embedding are: 3072. It is text-embedding-3-large",
+        "height": 144
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        272,
+        560
+      ],
+      "id": "21864d43-c99a-4224-80e0-d43655bee571",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "500 and 150",
+        "height": 80,
+        "width": 160
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        624,
+        592
+      ],
+      "id": "641dce50-d977-4b10-b894-bcba454ba376",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## HR Policy reader\n",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1456,
+        464
+      ],
+      "id": "8a528d4e-2033-4242-96ae-830772cb5307",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Op reader \n",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2016,
+        464
+      ],
+      "id": "dfc1afc1-38b7-4923-b470-bd0dca6d8581",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "# RAG System",
+        "height": 80,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -144
+      ],
+      "id": "5e5551f7-49a0-4084-9eaf-2f2efdf93d82",
+      "name": "Sticky Note6"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Document Form": {
+      "main": [
+        [
+          {
+            "node": "Qdrant Insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings - Insert": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Insert",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Qdrant Insert",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings - Retrieval": {
+      "ai_embedding": [
+        [
+          {
+            "node": "HRTOOL",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "OPTOOL",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HRTOOL": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OPTOOL": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9f192715-cada-453d-acd7-c58cd8b372cd",
+  "meta": {
+    "instanceId": "57758aba085b6f5d438bc66f202bc59fa86d38747cf87df1003fdb975b86aa85"
+  },
+  "nodeGroups": [],
+  "id": "1VVTw2UvcaS5MXEW",
+  "tags": []
+}

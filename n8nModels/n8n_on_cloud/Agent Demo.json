@@ -1,0 +1,159 @@
+{
+  "name": "Agent Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -320,
+        -80
+      ],
+      "id": "839fe362-d4e8-4f75-a9ea-fc61957c2a88",
+      "name": "When chat message received",
+      "webhookId": "5a67a483-a574-4033-8b34-8e3b619ffc4e"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant. For any mathematical queries, use Calculator tool and for all other queries use Wikipedia tool. Do not answer from your own knowledge base."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        96,
+        -160
+      ],
+      "id": "0143b15a-b840-49b0-8cc4-5560e7042f99",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.1-8b-instruct",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        32,
+        112
+      ],
+      "id": "889edd69-54f9-4b96-9579-b7769e0859e8",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "4E0W3kvlGoUimu4r",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        160,
+        176
+      ],
+      "id": "2c722278-7048-468b-9962-372167378754",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        464,
+        16
+      ],
+      "id": "d86df848-aae0-42fe-af3b-a465817e81f6",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        288,
+        96
+      ],
+      "id": "14acdd84-4b62-4d1e-9a5e-2a770e5be3d3",
+      "name": "Wikipedia"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a771f61a-a580-49e6-b862-56419dba429a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "57758aba085b6f5d438bc66f202bc59fa86d38747cf87df1003fdb975b86aa85"
+  },
+  "nodeGroups": [],
+  "id": "XJ0ZbDZ6QNsyd9rS",
+  "tags": []
+}
